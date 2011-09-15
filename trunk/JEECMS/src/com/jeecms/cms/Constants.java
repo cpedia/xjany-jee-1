@@ -1,7 +1,7 @@
 package com.jeecms.cms;
 
 /**
- * CMS常量
+ * CMS常量1
  * 
  * @author liufang
  * 

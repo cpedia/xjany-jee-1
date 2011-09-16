@@ -1,37 +1,175 @@
+<link rel="stylesheet" type="text/css"
+	href="http://www.sh-healthfood.com/style.css">
 <div id="header" class="box">
-  <div id="logo" class="page box">
-    <div class="logo fl" onclick="window.location.href='${base}/'"></div>
-    <div class="banner fr"><script type="text/javascript" src="${base}/adspace.jspx?id=1"></script></div>
-  </div>
-  
-  <div class="box"></div>
-  
-  <div id="menu" class="page box relative">
-    <dl id="topmenu">  
-	[@cms_channel_list]
-    <dt class="menu_first"><a href="${base}/" target="_self" class="selected" id="nav1" onmouseover="jeeNav(this,${tag_list?size+1})"><span>首 页</span></a></dt>
-	[#list tag_list as c]
-    <dt><a href="${c.url}" target="_self" id="nav${c_index+2}" onmouseover="jeeNav(this,${tag_list?size+1})"><span>${c.name}</span></a></dt>
-	[/#list]
-	[/@cms_channel_list]
-    <dd>	
-      <ul id="sub1">
-        <li><strong>滚动资讯:</strong> </li>
-        <li class="notice">[@cms_content_list styleList='2-1' titLen='16' count='9' rollCols='3' rollDisplayHeight='20' rollLineHeight='20' rollSpeed='20' rollSleepTime='100' rollRows='1' dateFormat='MM-dd' datePosition='3' dateClass='red' channelOption='1' tpl='2'/]</li>
-      </ul>
-[@cms_channel_list]
-[#list tag_list as c]	  
-      <ul class="hide" id="sub${c_index+2}">
-	    [@cms_channel_list parentId=c.id]
-        [#list tag_list as sub]
-        <li><a href='${sub.url}'>${sub.name}</a></li>
-		[/#list]
-        [/@cms_channel_list]
-      </ul>
-[/#list]
-[/@cms_channel_list]	  
-    </dd>
-  </dl>
-  </div> 
-    
+
+	<table border="0" width="100%" id="table4" cellspacing="0"
+		cellpadding="0">
+		<tr>
+			<td background="http://www.sh-healthfood.com/images/head_top_bak.jpg"
+				height="29" align="center">
+				<table border="0" width="974" id="table5" cellspacing="0"
+					cellpadding="0">
+					<tr>
+						<td width="730"></td>
+
+						<td width="38"><img border="0"
+							src="http://www.sh-healthfood.com/images/head_top_left.jpg"
+							width="38" height="29">
+						</td>
+						<td width="185"
+							background="http://www.sh-healthfood.com/images/head_top_center.jpg"
+							align="center"><a
+							onclick="window.external.AddFavorite(document.location.href,document.title)"
+							href="javascript:void(0);"><font color="#FFFFFF">收藏本站</font>
+						</a>&nbsp;<font color="#FFFFFF">|</font>&nbsp;<a
+							href="mailto:hr@sh-healthfood.com"><font color="#FFFFFF">电子邮箱</font>
+						</a> <font color="#FFFFFF">|</font> <a href="guestbook.asp"> <font
+								color="#FFFFFF">留言反馈</font>
+						</a>
+						</td>
+
+						<td width="21"><img border="0"
+							src="http://www.sh-healthfood.com/images/head_top_right.jpg"
+							width="21" height="29">
+						</td>
+					</tr>
+				</table></td>
+		</tr>
+	</table>
+
+
+	<div id="logo" class="page box">
+		<div class="logo fl" onclick="window.location.href='${base}/'"></div>
+		<div class="banner fr">
+			<script type="text/javascript" src="${base}/adspace.jspx?id=1"></script>
+		</div>
+	</div>
+	<div class="box"></div>
+	<div align="center">
+		<table border="0" width="974" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width=25><img border="0"
+					src="http://www.sh-healthfood.com/images/menu_left.jpg">
+				</td>
+
+				<td width="50"
+					background="http://www.sh-healthfood.com/images/menu_bak.jpg"></td>
+
+				<td width="100" align=center
+					background="http://www.sh-healthfood.com/images/menu_bak.jpg">
+					<table border="0" width="94" id="table1" cellspacing="0"
+						cellpadding="0">
+						<tr>
+							<td align="center" onmouseover="Move(this)"
+								onmouseout="Mout(this)" height="30"><p
+									style="line-height: 15px">
+									<a href="${base}/" class="WHS">首页</a> <br>
+									<a href="${base}/" class="MEN">HOME</a>
+								</p>
+							</td>
+						</tr>
+					</table></td>
+					
+			[@cms_channel_list]	
+				<!--  循环开始	-->
+				[#list tag_list as c]
+			
+				<td width="10" align=center
+					background="http://www.sh-healthfood.com/images/menu_bak.jpg"><img
+					src="images/menu_line.jpg">
+				</td>
+
+				<td width="100" align=center
+					background="http://www.sh-healthfood.com/images/menu_bak.jpg">
+					<table border="0" width="94" id="table1" cellspacing="0"
+						cellpadding="0">
+						<tr>
+							<td align="center" onmouseover="Move(this)"
+								onmouseout="Mout(this)" height="30"><p
+									style="line-height: 15px">
+									<a
+										href="${c.url}"
+										class="WHS">${c.name}</a> <br>
+									<a href="${c.url}" class="MEN">ABOUT US</a>
+								</p>
+							</td>
+						</tr>
+					</table></td>
+					
+				[/#list] [/@cms_channel_list]	
+				<!--  循环结束	-->	
+					
+				<td width="10" align=center
+					background="http://www.sh-healthfood.com/images/menu_bak.jpg"></td>
+
+				<td width="50"
+					background="http://www.sh-healthfood.com/images/menu_bak.jpg"></td>
+
+				<td width="*"
+					background="http://www.sh-healthfood.com/images/menu_bak.jpg"></td>
+				<td width="25"><img border="0"
+					src="http://www.sh-healthfood.com/images/menu_right.jpg">
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+	<div id="logo" class="page box">
+		<div class="logo fl" onclick="window.location.href='${base}/'"></div>
+		<div class="banner fr">
+			<script type="text/javascript" src="${base}/adspace.jspx?id=1"></script>
+		</div>
+	</div>
+
+	<div class="box"></div>
+
+	<div id="menu" class="page box relative">
+		<dl id="topmenu">
+			[@cms_channel_list]
+			<dt class="menu_first">
+				<a href="${base}/" target="_self" class="selected" id="nav1"
+					onmouseover="jeeNav(this,${tag_list?size+1})"><span>首 页</span>
+				</a>
+			</dt>
+			[#list tag_list as c]
+			<dt>
+				<a href="${c.url}" target="_self" id="nav${c_index+2}"
+					onmouseover="jeeNav(this,${tag_list?size+1})"><span>${c.name}</span>
+				</a>
+			</dt>
+			[/#list] [/@cms_channel_list]
+			<dd>
+				<ul id="sub1">
+					<li><strong>滚动资讯:</strong></li>
+					<li class="notice">[@cms_content_list styleList='2-1'
+						titLen='16' count='9' rollCols='3' rollDisplayHeight='20'
+						rollLineHeight='20' rollSpeed='20' rollSleepTime='100'
+						rollRows='1' dateFormat='MM-dd' datePosition='3' dateClass='red'
+						channelOption='1' tpl='2'/]</li>
+				</ul>
+				[@cms_channel_list] [#list tag_list as c]
+				<ul class="hide" id="sub${c_index+2}">
+					[@cms_channel_list parentId=c.id] [#list tag_list as sub]
+					<li><a href='${sub.url}'>${sub.name}</a>
+					</li> [/#list] [/@cms_channel_list]
+				</ul>
+				[/#list] [/@cms_channel_list]
+			</dd>
+		</dl>
+	</div>-->
 </div>

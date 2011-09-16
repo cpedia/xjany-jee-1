@@ -48,6 +48,7 @@
 			<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 				<property name="freemarkerVariables">
 					<map>
+						<!-- value-ref对应上面的bean blair注 -->
 						<entry key="uuid" value-ref="uuid"/>
 						<entry key="process_time" value-ref="process_time"/>
 						<entry key="text_cut" value-ref="text_cut"/>

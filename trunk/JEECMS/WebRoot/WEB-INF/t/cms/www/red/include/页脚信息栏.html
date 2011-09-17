@@ -1,8 +1,143 @@
+
+<script language=javascript >
+<!--
+	function search_enter() {
+		if(document._searchForm.search_title.value!="")
+		{
+			document._searchForm.action="/m1/product/productS3list.jsp";
+			return true;
+		}
+		else
+		{
+			alert("对不起，搜索内容不能为空！");
+			document.getElementById("searchTxt").focus();
+		}
+		return false;
+	}
+	function search_click()
+	{
+		if(document._searchForm.search_title.value!="")
+		{
+			document._searchForm.action="/m1/product/productS3list.jsp";
+			document._searchForm.submit();
+		}
+		else
+		{
+			alert("对不起，搜索内容不能为空！");
+			document.getElementById("searchTxt").focus();
+		}
+	}
+	function Marquee(){
+		if(tab2.offsetWidth-tab.scrollLeft<=0)
+			tab.scrollLeft-=tab1.offsetWidth;
+		else{
+			tab.scrollLeft++;
+		}
+	}
+	var tab=document.getElementById("demo");
+	var tablinde=document.getElementById("indemo");
+	var tab1=document.getElementById("demo1");
+	var tab2=document.getElementById("demo2");
+	tab2.innerHTML=tab1.innerHTML;
+	var speed=20;
+	var MyMar=setInterval(Marquee,speed);
+	tablinde.onmouseover=function() {clearInterval(MyMar)};
+	tablinde.onmouseout=function() {MyMar=setInterval(Marquee,speed)};
+-->
+
+
+
+    var adPlayerA = new slideBannerB();
+	function lazySlider(objIdentifier,showCellCount, alterTime, animTime,lazyTime){
+	    setTimeout(function(){
+                $(objIdentifier+" .bannerOuter a").each(function(i,o){
+                    if($(o).attr('src2'))
+                        $(o).css({"background-image":"url(" + $(o).attr('src2') + ")"});
+                        $(o).removeAttr('src2');
+                });
+		        //$(objIdentifier+" .slideNav").show();
+                adPlayerA.loading(objIdentifier, showCellCount, alterTime, animTime);
+		},lazyTime);
+	}	
+	lazySlider('.homeSlideAD1', 5, 5000, 300, 1000);
+</script>
+
+
+
+
 <!-- 底部版权开始 -->  
       <div id="box_footer"> 
-        <div xmlns="" class="columnSpace" id="elem-FrontSpecifies_show01-1288346514210" name="说明页">  
-          <div id="FrontSpecifies_show01-1288346514210" class="FrontSpecifies_show01-d1_c1"><div align="center" class="font1">
-			瑞莱全劲健康食品贸易（上海）有限公司 地址：上海市浦东新区严桥路326号3楼 邮编：200125<br />电话：86-21-5196 2822 传真：86-21-5196 2823 网址：<a href="http://www.richlife-china.com" target="_blank">www.richlife-china.com</a> <a href="http://www.miibeian.gov.cn/" target="_blank">沪ICP备08107014号</a>
+      
+      <div id="box_left_sub2"> 
+            <div xmlns="" class="columnSpace" id="elem-FrontSpecifies_show01-1288346247491" >  
+              <div style="margin-bottom: 8px;">
+	<img border="0" height="16" src="/r/cms/www/red/img/a_25.gif"  width="1000"/></div>
+            </div>
+          </div>  
+          <div id="box_left_sub3"> 
+            <div id="box_left_sub3_sub1"> 
+              <div xmlns="" class="columnSpace" id="elem-FrontSpecifies_show01-1288346459759" >  
+                <div id="FrontSpecifies_show01-1288346459759" class="FrontSpecifies_show01-d1_c1"><table border="0" cellpadding="0" cellspacing="0" width="477">
+
+		<tbody><tr><td align="left" valign="top" width="241"><img height="25" src="/r/cms/www/red/img/a_1.gif" width="241"/></td><td align="left" style="padding-left: 10px;" valign="center" width="236">社会学家研究发现，一个幸</td></tr><tr><td align="left" colspan="2" valign="top">福的人生或一个美满的家庭往往由于疾病而陷入困境，因为疾病会使人失去<br />工作能力，而昂贵的医疗费用也使家庭不堪重负。因此，健康对个人或家庭<br />而言都是至关重要的。正如人们常说的："健康就是财富"...</td></tr></tbody>
+</table></div> 
+              </div>
+            </div>  
+            <div id="box_left_sub3_sub2"> 
+              <div id="box_left_sub3_sub2_sub1">
+                <div xmlns="" class="columnSpace" id="elem-FrontSpecifies_show01-1288346565910" >
+                  <div id="FrontSpecifies_show01-1288346565910" class="FrontSpecifies_show01-d1_c1"><div align="left"><img src="/r/cms/www/red/img/a_5.gif" width="68" height="22"></div></div>
+                </div>
+
+              </div>  
+              <div id="box_left_sub3_sub2_sub2">
+                <div xmlns="" class="columnSpace" >
+<div  class="FrontProducts_generalSearch01-d2_c1"><form name="_searchForm"
+ 	method="post" target="_self"	
+	action="" onsubmit="javascript:return search_enter();">
+	 <input type="hidden" name="searchType" value="1"/> 
+	<input type="hidden"   value="2"/> 
+	<input type="hidden"   value=""/>
+	 <ul class="content">
+	 <li class="keyword">
+		<span>
+			</span> 
+		<input   name="search_title"  id="searchTxt" class="input input-gray"  type="text" value=""   maxlength="50"/>
+
+	</li>
+	<input type="hidden" name="pmcId" value=""/>
+		<input 	type="hidden"  value=""/>
+		<li class="btnarea"><span>&nbsp;</span>
+	<input type="button" onClick="javascript:search_click()" 
+		class="btn btn-com-03"
+		value="搜索"/>
+		<input type="button" 
+			align="middle"
+			class="btn btn-unimp-03"
+			value="高级搜索"
+			onClick="javascript:search_click()"/>
+	</li>
+</ul>
+</form>
+</div>
+
+                </div>
+              </div> 
+            </div>  
+            <div id="box_left_sub3_sub3"> 
+              <div xmlns="" class="columnSpace" id="elem-FrontSpecifies_show01-1288346486384" >  
+                <div id="FrontSpecifies_show01-1288346486384" class="FrontSpecifies_show01-d1_c1"><div align="left">
+	<a href=""><img border="0" height="112" src="/r/cms/www/red/img/a_8.gif" width="184"/></a></div></div> 
+              </div>
+            </div>  
+            <div class="clearBoth"></div> 
+          </div> 
+      
+      
+      
+        <div name="说明页">  
+          <div><div align="center" class="font1">
+			澳源康全劲健康食品贸易（上海）有限公司 地址：上海市浦东新区严桥路326号3楼 邮编：200125<br />电话：86-21-5196 2822 传真：86-21-5196 2823 网址：<a href="http://www.richlife-china.com" target="_blank">www.richlife-china.com</a> <a href="http://www.miibeian.gov.cn/" target="_blank">沪ICP备08107014号</a>
 [@process_time/]
 	</div></div> 
         </div>

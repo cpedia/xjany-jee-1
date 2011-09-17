@@ -3,11 +3,11 @@
 <hibernate-mapping package="com.jeecms.cms.entity.assist">
 	<class name="XjanyPicList" table="jc_piclist_xjany">
 		<meta attribute="sync-DAO">false</meta>
-		<id name="id" column="id">
+		<id name="id" type="integer" column="id">
 			<generator class="native"/>
 		</id>
-		<property name="name" column="name" type="string" not-null="true" length="150"/>
-		<property name="url" column="url" type="string" not-null="true" length="255"/>
+		<property name="name" column="name" type="string" not-null="false" length="150"/>
+		<property name="url" column="url" type="string" not-null="false" length="255"/>
 		<property name="pic" column="pic" type="string" not-null="false" length="150"/>
 	</class>
 </hibernate-mapping>

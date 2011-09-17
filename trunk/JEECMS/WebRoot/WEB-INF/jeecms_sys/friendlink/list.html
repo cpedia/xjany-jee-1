@@ -49,7 +49,7 @@ function optPriority() {
 		<a href="v_edit.do?id=${xjanyPicList.id}&pageNo=${pageNo!}" class="pn-opt"><@s.m "global.edit"/></a> | <#rt/>
 		<a href="o_delete.do?ids=${xjanyPicList.id}&pageNo=${pageNo!}" onclick="if(!confirm('<@s.m "global.confirm.delete"/>')) {return false;}" class="pn-opt"><@s.m "global.delete"/></a><#t/>
 	</@p.column><#t/>
-</@p.table>
+</@p.table> 
 <div>  
 	<input type="button" value="<@s.m "global.delete"/>" onclick="optDelete();"/>
 &nbsp; <input type="submit" value="<@s.m "global.saveOrder"/>" onclick="optPriority();"/>

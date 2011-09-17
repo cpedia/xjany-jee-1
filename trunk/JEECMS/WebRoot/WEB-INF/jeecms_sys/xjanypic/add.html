@@ -21,14 +21,16 @@ $(function() {
 	<div class="clear"></div>
 </div>
 <@p.form id="jvForm" action="o_save.do" labelWidth="15">
-<@p.text colspan="1" width="50" label="xjanyPicList.name" name="name" required="true" class="required" maxlength="150"/>
-
-
+<@p.text colspan="1" width="50" label="名字" name="name" required="true" class="required" maxlength="150"/>
+<@p.text colspan="1" width="50" label="链接" name="url" value="http://" required="true" class="required" maxlength="255" style="width:200px"/><@p.tr/>
+<@p.td id="linkLogo" label="图片" colspan="1" width="50" noHeight="true">
+<@p.text id="uploadImgPath0" name="pic" style="width:180px"/> <input type="button" value="<@s.m "imageupload.preview"/>" onclick="previewImg(0);"/><br/>
+<span id="ufc0"><input type="file" id="uploadFile0" size="14" style="width:180px"/></span><input type="hidden" id="mark0" value="false"/> <input type="button" value="<@s.m "imageupload.upload"/>" onclick="upload(0);"/><br/>
+</@p.td><@p.td colspan="1" width="50">
 <img id="preImg0" alt="<@s.m "imageupload.preview"/>" style="width:100px;height:70px;background-color:#ccc;border:1px solid #333"/>
-
-
-<@p.submit code="global.submit"/> &nbsp; <@p.reset code="global.reset"/>
+</@p.td><@p.tr/>
+<@p.td colspan="2"><@p.submit code="global.submit"/> &nbsp; <@p.reset code="global.reset"/></@p.td>
 </@p.form>
-</div> 
+</div>
 </body>
 </html>

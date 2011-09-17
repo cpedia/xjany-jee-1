@@ -84,6 +84,7 @@
 				<entry key="cms_friendlink_ctg_list" value-ref="cms_friendlink_ctg_list"/>
 				<entry key="cms_friendlink_list" value-ref="cms_friendlink_list"/>
 				<entry key="cms_advertising" value-ref="cms_advertising"/>
+				<entry key="xjany_pic_list" value-ref="xjany_pic_list"/>
 			</map>
 		</property>
 		<!--

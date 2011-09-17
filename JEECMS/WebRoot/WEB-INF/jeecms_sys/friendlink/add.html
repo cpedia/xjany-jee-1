@@ -5,38 +5,62 @@
 <title></title>
 <#include "/jeecms_sys/head.html"/>
 <script type="text/javascript">
-$(function() {
-	$("#jvForm").validate();
-});
+function getTableForm() {
+	return document.getElementById('tableForm');
+}
+function optDelete() {
+	if(Pn.checkedCount('ids')<=0) {
+		alert("<@s.m 'error.checkRecord'/>");
+		return;
+	}
+	if(!confirm("<@s.m 'global.confirm.delete'/>")) {
+		return;
+	}
+	var f = getTableForm();
+	f.action="o_delete.do";
+	f.submit();
+}
+function optPriority() {
+	getTableForm().action="o_priority.do";
+}
 </script>
 </head>
 <body>
-<#include "/common/image_upload.html"/>
 <div class="body-box">
 <div class="rhead">
-	<div class="rpos"><@s.m "global.position"/>: <@s.m "cmsFriendlink.function"/> - <@s.m "global.add"/></div>
+	<div class="rpos"><@s.m "global.position"/>: <@s.m "cmsFriendlink.function"/> - <@s.m "global.list"/></div>
 	<form class="ropt">
-		<input type="submit" value="<@s.m "global.backToList"/>" onclick="this.form.action='v_list.do';"/>
+		<input type="submit" value="<@s.m "global.add"/>" onclick="this.form.action='v_add.do';"/>
 	</form>
 	<div class="clear"></div>
 </div>
-<@p.form id="jvForm" action="o_save.do" labelWidth="15">
-<@p.text colspan="1" width="50" label="cmsFriendlink.name" name="name" required="true" class="required" maxlength="150"/>
-<@p.text colspan="1" width="50" label="cmsFriendlink.domain" name="domain" value="http://" required="true" class="required" maxlength="255" style="width:200px"/><@p.tr/>
-<@p.select colspan="1" width="50" label="cmsFriendlink.category" name="ctgId" list=ctgList listKey="id" listValue="name" required="true" class="required"/>
-<@p.text colspan="1" width="50" label="cmsFriendlink.email" name="email" maxlength="100"/><@p.tr/>
-<@p.td id="linkLogo" label="cmsFriendlink.logo" colspan="1" width="50" noHeight="true">
-<@p.text id="uploadImgPath0" name="logo" style="width:180px"/> <input type="button" value="<@s.m "imageupload.preview"/>" onclick="previewImg(0);"/><br/>
-<span id="ufc0"><input type="file" id="uploadFile0" size="14" style="width:180px"/></span><input type="hidden" id="mark0" value="false"/> <input type="button" value="<@s.m "imageupload.upload"/>" onclick="upload(0);"/><br/>
-</@p.td><@p.td colspan="1" width="50">
-<img id="preImg0" alt="<@s.m "imageupload.preview"/>" style="width:100px;height:70px;background-color:#ccc;border:1px solid #333"/>
-</@p.td><@p.tr/>
-<@p.textarea colspan="2" label="cmsFriendlink.description" name="description" cols="50" rows="3" maxlength="255"/><@p.tr/>
-<@p.text colspan="1" width="50" label="cmsFriendlink.priority" name="priority" value="10" required="true" class="required" maxlength="11" style="width:100px"/>
-<@p.text colspan="1" width="50" label="cmsFriendlink.views" name="views" value="0" required="true" class="required" maxlength="11" style="width:100px"/><@p.tr/>
-<@p.radio colspan="2" label="cmsFriendlink.enabled" name="enabled" value="true" list={"true":"global.true","false","global.false"} required="true" class="required"/><@p.tr/>
-<@p.td colspan="2"><@p.submit code="global.submit"/> &nbsp; <@p.reset code="global.reset"/></@p.td>
-</@p.form>
+<form action="v_list.do" method="post" style="padding-top:5px;">
+<@s.m "cmsFriendlink.category"/>: <@p.select name="queryCtgId" value=queryCtgId list=ctgList listKey="id" listValue="name" headerKey="" headerValue="cmsFriendlink.allCategory"/>
+<input type="submit" value="<@s.m "global.query"/>"/>
+</form>
+<form id="tableForm" method="post">
+<@p.table value=list;cmsFriendlink,i,has_next><#rt/>
+	<@p.column title="<input type='checkbox' onclick='Pn.checkbox(\"ids\",this.checked)'/>" width="20">
+		<input type='checkbox' name='ids' value='${cmsFriendlink.id}'/><#t/>
+	</@p.column><#t/>
+	<@p.column title="ID">${cmsFriendlink.id}<input type="hidden" name="wids" value="${cmsFriendlink.id}"/></@p.column><#t/>
+	<@p.column code="cmsFriendlink.name">${cmsFriendlink.name}</@p.column><#t/>
+	<@p.column code="cmsFriendlink.logo" align="center"><#if cmsFriendlink.logo??><img src="${cmsFriendlink.logo}"/><#else><@s.m "cmsFriendlink.error.noLogo"/></#if></@p.column><#t/>
+	<@p.column code="cmsFriendlink.views" align="right">${cmsFriendlink.views}</@p.column><#t/>
+	<@p.column code="cmsFriendlink.priority" align="center"><input type="text" name="priority" value="${cmsFriendlink.priority}" style="width:70px"/></@p.column><#t/>
+	<@p.column code="cmsFriendlink.enabled" align="center"><#if cmsFriendlink.enabled><@s.m "global.true"/><#else><span style="color:red"><@s.m "global.false"/></span></#if></@p.column><#t/>
+	<@p.column code="global.operate" align="center">
+		<input type="hidden" name="queryCtgId" value="${queryCtgId!}"/>
+		<a href="v_edit.do?id=${cmsFriendlink.id}&pageNo=${pageNo!}" class="pn-opt"><@s.m "global.edit"/></a> | <#rt/>
+		<a href="o_delete.do?ids=${cmsFriendlink.id}&pageNo=${pageNo!}" onclick="if(!confirm('<@s.m "global.confirm.delete"/>')) {return false;}" class="pn-opt"><@s.m "global.delete"/></a><#t/>
+	</@p.column><#t/>
+</@p.table>
+<div>
+	<input type="button" value="<@s.m "global.delete"/>" onclick="optDelete();"/>
+&nbsp; <input type="submit" value="<@s.m "global.saveOrder"/>" onclick="optPriority();"/>
 </div>
+</form>
+</div>
+<#include "/common/alert_message.html"/>
 </body>
 </html>

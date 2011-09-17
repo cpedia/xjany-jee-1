@@ -80,8 +80,10 @@
 							<td align="center" onmouseover="Move(this)"
 								onmouseout="Mout(this)" height="30"><p
 									style="line-height: 15px">
-									<a href="${c.url}" class="WHS">${c.name}</a> <br> <a
-										href="${c.url}" class="MEN">ABOUT US</a>
+									<a href="${c.url}" class="WHS">${c.name}</a> <br> 
+									[#if c.attr["englishname"]??]
+									<a href="${c.url}" class="MEN">${c.attr["englishname"]}</a>
+									[/#if]
 								</p></td>
 						</tr>
 					</table>

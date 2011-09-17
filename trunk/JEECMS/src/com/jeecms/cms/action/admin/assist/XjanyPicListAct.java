@@ -68,8 +68,8 @@ public class XjanyPicListAct {
 		}
 		bean = manager.save(bean);
 		log.info("save XjanyPicList id={}", bean.getId());
-//		cmsLogMng.operating(request, "XjanyPicList.log.save", "id="
-//				+ bean.getId() + ";name=" + bean.getName());
+		cmsLogMng.operating(request, "XjanyPicList.log.save", "id="
+				+ bean.getId() + ";name=" + bean.getName());
 		return "redirect:v_list.do";
 	}
 

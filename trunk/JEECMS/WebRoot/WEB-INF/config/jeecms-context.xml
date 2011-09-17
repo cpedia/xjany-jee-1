@@ -31,6 +31,7 @@
 	<bean id="cms_vote" class="com.jeecms.cms.action.directive.CmsVoteDirective"/>
 	<bean id="cms_friendlink_ctg_list" class="com.jeecms.cms.action.directive.CmsFriendlinkCtgListDirective"/>
 	<bean id="cms_friendlink_list" class="com.jeecms.cms.action.directive.CmsFriendlinkListDirective"/>
+	<bean id="xjany_pic_list" class="com.jeecms.cms.action.directive.XjanyPicListDirective"/>
 	<bean id="cms_lucene_list" class="com.jeecms.cms.lucene.LuceneDirectiveList"/>
 	<bean id="cms_lucene_page" class="com.jeecms.cms.lucene.LuceneDirectivePage"/>
 	<bean id="cms_advertising" class="com.jeecms.cms.action.directive.CmsAdvertisingDirective"/>
@@ -72,6 +73,7 @@
 						<entry key="cms_vote" value-ref="cms_vote"/>
 						<entry key="cms_friendlink_ctg_list" value-ref="cms_friendlink_ctg_list"/>
 						<entry key="cms_friendlink_list" value-ref="cms_friendlink_list"/>
+						<entry key="xjany_pic_list" value-ref="xjany_pic_list"/>
 						<entry key="cms_lucene_list" value-ref="cms_lucene_list"/>
 						<entry key="cms_lucene_page" value-ref="cms_lucene_page"/>
 						<entry key="cms_advertising" value-ref="cms_advertising"/>
@@ -154,6 +156,7 @@
 	<bean id="cmsVoteRecordMng" class="com.jeecms.cms.manager.assist.impl.CmsVoteRecordMngImpl"/>
 	<bean id="cmsFriendlinkCtgMng" class="com.jeecms.cms.manager.assist.impl.CmsFriendlinkCtgMngImpl"/>
 	<bean id="cmsFriendlinkMng" class="com.jeecms.cms.manager.assist.impl.CmsFriendlinkMngImpl"/>
+	<bean id="xjanyPicListMng" class="com.jeecms.cms.manager.assist.impl.XjanyPicListMngImpl"/>
 	<bean id="cmsAdvertisingSpaceMng" class="com.jeecms.cms.manager.assist.impl.CmsAdvertisingSpaceMngImpl"/>
 	<bean id="cmsAdvertisingMng" class="com.jeecms.cms.manager.assist.impl.CmsAdvertisingMngImpl"/>
 	
@@ -193,6 +196,7 @@
 	<bean id="cmsVoteRecordDao" class="com.jeecms.cms.dao.assist.impl.CmsVoteRecordDaoImpl"/>
 	<bean id="cmsFriendlinkCtgDao" class="com.jeecms.cms.dao.assist.impl.CmsFriendlinkCtgDaoImpl"/>
 	<bean id="cmsFriendlinkDao" class="com.jeecms.cms.dao.assist.impl.CmsFriendlinkDaoImpl"/>
+	<bean id="xjanyPicListDao" class="com.jeecms.cms.dao.assist.impl.XjanyPicListDaoImpl"/>
 	<bean id="cmsAdvertisingSpaceDao" class="com.jeecms.cms.dao.assist.impl.CmsAdvertisingSpaceDaoImpl"/>
 	<bean id="cmsAdvertisingDao" class="com.jeecms.cms.dao.assist.impl.CmsAdvertisingDaoImpl"/>
 	

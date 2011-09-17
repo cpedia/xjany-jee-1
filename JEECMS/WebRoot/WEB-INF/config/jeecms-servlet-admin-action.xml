@@ -49,6 +49,7 @@
 	<bean id="cmsVoteTopicAct" class="com.jeecms.cms.action.admin.assist.CmsVoteTopicAct"/>
 	<bean id="cmsFriendlinkCtgAct" class="com.jeecms.cms.action.admin.assist.CmsFriendlinkCtgAct"/>
 	<bean id="cmsFriendlinkAct" class="com.jeecms.cms.action.admin.assist.CmsFriendlinkAct"/>
+	<bean id="xjanyPicListAct" class="com.jeecms.cms.action.admin.assist.XjanyPicListAct"/>
 	<bean id="cmsAdvertisingSpaceAct" class="com.jeecms.cms.action.admin.assist.CmsAdvertisingSpaceAct"/>
 	<bean id="cmsAdvertisingAct" class="com.jeecms.cms.action.admin.assist.CmsAdvertisingAct"/>
 	

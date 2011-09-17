@@ -38,9 +38,19 @@
 			
 <div class="slideBannerA homeSlideAD1 mT10 ">
 <div class="bannerOuter ">
-<div class="moveable "><a style="background-image:url(http://www.richlife-china.com/my/images/h01.gif);" title="利维喜 '氣' 灵芝北冬虫夏草饮液 " href="http://www.zhiforenergy.com" class="cmnAD ad_100p_430" target='_blank'  ></a><a src2="http://www.richlife-china.com/my/images/h02.gif" title="利维喜 回原胶原蛋白果味饮料" href="http://www.tautforskin.com" class="cmnAD ad_100p_430"  target='_blank'   ></a><a src2="http://www.richlife-china.com/my/images/2011090615252146.gif" title="利维喜 莓果明慕精华" href="http://www.berryclearforeyes.com" class="cmnAD ad_100p_430"  target='_blank'   ></a><a src2="http://www.richlife-china.com/my/images/h05.gif" title="利维喜 Masquelier's 松树皮提取物" href="http://www.masqueliersfrenchpinebark.com" class="cmnAD ad_100p_430"  target='_blank'   ></a><a src2="http://www.richlife-china.com/my/images/h04.gif" title="健安喜 孕妇营养套装" href="http://www.richlife-china.com/m1/product/productS3head.jsp?search_title=%E5%81%A5%E5%AE%89%E5%96%9C" class="cmnAD ad_100p_430"  target='_blank'   ></a>
-</div>
-</div>
+							<div class="moveable ">
+							<!-- 图片标签开始 -->
+							[@xjany_pic_list]
+								[#list tag_list as c]
+								<a style="background-image: url(${c.pic!''});"
+									title="${c.name!''}" href="${c.url!''}"
+									class="cmnAD ad_100p_430" target='_blank'>
+								</a>
+								[/#list]
+							[/@xjany_pic_list]
+							<!-- 图片标签结束 -->
+							</div>
+						</div>
 </div>
 <div class="slideNav"><div class="tabHead">
 

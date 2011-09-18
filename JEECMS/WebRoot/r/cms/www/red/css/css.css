@@ -322,8 +322,8 @@ A:hover{
 }
 
 #logo{height:74px;}
-#logo div.logo{width:220px; height:70px; cursor:pointer;background:transparent url(../img/logo.gif) no-repeat scroll 0 0 ;}
-#logo div.banner{margin-top:10px; text-align:center;}
+#logo div.logo{width:220px; float:left; height:70px; cursor:pointer;background:transparent url(../img/logo.gif) no-repeat scroll 0 0 ;}
+#logo div.banner{margin-top:10px; float:right; text-align:center;}
 
 .fontred{
    color: #f00;

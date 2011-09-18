@@ -1328,6 +1328,7 @@ text-align: center;
 	font-weight:bold;
 	background-image: url(..img/2.jpg);
 	background-repeat: repeat-x;
+	margin-top: 25px;
 }
 .menu ul {padding:0;margin:0;list-style-type:none;float:left;position:relative;}
 .menu ul li {

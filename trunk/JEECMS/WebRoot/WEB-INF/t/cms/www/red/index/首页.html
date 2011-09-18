@@ -244,11 +244,14 @@ margin:auto;
           <div id="box_left_sub1"> 
             <div id="box_left_sub1_sub1" style="margin-top:30px;"> 
 				     <div  id="box_left_sub1_sub1_sub1_xjany" class="e2e2e2"  style="width: 450px; height: 100%;">
-				              <div > 
+				              <div> 
 				                <div xmlns="" class="columnSpace" id="elem-FrontSpecifies_show01-1288346084451" >  
-				                  <div id="FrontSpecifies_show01-1288346084451" class="FrontSpecifies_show01-d1_c1">
+				                 <div id="FrontSpecifies_show01-1288346084451" class="FrontSpecifies_show01-d1_c1"><p align="left">
+									<img border="0" height="22" src="/r/cms/www/red/img/new_company.gif" width="86"></p>
+								 </div>
+                				</div>
+                				<div style="text-align: left;">
 				                  ${site.descriptionXjany!"请先设置"}
-								  </div>
 				                </div>
 				              </div>  
 				    </div>
@@ -258,8 +261,7 @@ margin:auto;
               <div > 
                 <div xmlns="" class="columnSpace" id="elem-FrontSpecifies_show01-1288346084451" >  
                   <div id="FrontSpecifies_show01-1288346084451" class="FrontSpecifies_show01-d1_c1"><p align="left">
-
-<img border="0" height="22" src="my/images/new_product1.gif" width="86"></p></div>
+					<img border="0" height="22" src="/r/cms/www/red/img/new_product1.gif" width="86"></p></div>
                 </div>
               </div>  
      <div id="box_left_sub1_sub2_sub2" > 
@@ -279,12 +281,18 @@ margin:auto;
 
           <div class="clearBoth"></div> 
 		  <div id="box_left_sub1_sub3"   class="e2e2e2">
+				  <div xmlns="" class="columnSpace" id="elem-FrontSpecifies_show01-1288346084451" >  
+		                 <div id="FrontSpecifies_show01-1288346084451" class="FrontSpecifies_show01-d1_c1"><p align="left">
+							<img border="0" height="22" src="/r/cms/www/red/img/new_doctor.gif" width="86"></p>
+						 </div>
+		          </div>
+		  
 		  <ul class="newslist-01">
 	<li class="content column-num1">
  	<div class="newstitle">
 		<ul>
 		<!-- 新闻 -->
-		[@cms_content_list count='7' titLen='15' orderBy='8' channelOption='1']
+		[@cms_content_list count='6' titLen='30' orderBy='8' channelOption='1']
 		  [#list tag_list as a]
 			<li class="title">
 				<h3><a href="${a.url}" title="${a.title}" >[@text_cut s=a.title len=titLen append=append/]</a></h3>
@@ -311,68 +319,6 @@ margin:auto;
       
 <script src="/r/cms/www/red/js/doudoucity.js"></script>
 <script src="/r/cms/www/red/js/jquery-1.4.2.min.js"></script>
-
-<script language=javascript >
-	function search_enter() {
-		if(document._searchForm.search_title.value!="")
-		{
-			document._searchForm.action="/m1/product/productS3list.jsp";
-			return true;
-		}
-		else
-		{
-			alert("对不起，搜索内容不能为空！");
-			document.getElementById("searchTxt").focus();
-		}
-		return false;
-	}
-	function search_click()
-	{
-		if(document._searchForm.search_title.value!="")
-		{
-			document._searchForm.action="/m1/product/productS3list.jsp";
-			document._searchForm.submit();
-		}
-		else
-		{
-			alert("对不起，搜索内容不能为空！");
-			document.getElementById("searchTxt").focus();
-		}
-	}
-	function Marquee(){
-		if(tab2.offsetWidth-tab.scrollLeft<=0)
-			tab.scrollLeft-=tab1.offsetWidth;
-		else{
-			tab.scrollLeft++;
-		}
-	}
-	var tab=document.getElementById("demo");
-	var tablinde=document.getElementById("indemo");
-	var tab1=document.getElementById("demo1");
-	var tab2=document.getElementById("demo2");
-	tab2.innerHTML=tab1.innerHTML;
-	var speed=20;
-	var MyMar=setInterval(Marquee,speed);
-	tablinde.onmouseover=function() {clearInterval(MyMar)};
-	tablinde.onmouseout=function() {MyMar=setInterval(Marquee,speed)};
-
-
-
-    var adPlayerA = new slideBannerB();
-	function lazySlider(objIdentifier,showCellCount, alterTime, animTime,lazyTime){
-	    setTimeout(function(){
-                $(objIdentifier+" .bannerOuter a").each(function(i,o){
-                    if($(o).attr('src2'))
-                        $(o).css({"background-image":"url(" + $(o).attr('src2') + ")"});
-                        $(o).removeAttr('src2');
-                });
-		        //$(objIdentifier+" .slideNav").show();
-                adPlayerA.loading(objIdentifier, showCellCount, alterTime, animTime);
-		},lazyTime);
-	}	
-	lazySlider('.homeSlideAD1', 5, 5000, 300, 1000);
-</script>
-
 
 
 <!--footer_begin-->

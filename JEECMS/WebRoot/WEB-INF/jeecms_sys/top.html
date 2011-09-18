@@ -91,13 +91,13 @@ function changeSite(siteId) {
 			<img src="${base}/res/jeecms/img/admin/ico1.gif"><span id="welcome"><@s.ma code="global.admin.welcome" args=[user.username]/></span>
 			<img src="${base}/res/jeecms/img/admin/ico2.jpg"><a href="logout.do?returnUrl=index.do" target="_top" id="logout" onclick="return confirm('<@s.m "global.confirm.logout"/>');"><@s.m "global.admin.logout"/></a></td>
             <td align="right">
-            <form action="index.do" target="_top" method="get">
+            <!-- <form action="index.do" target="_top" method="get">
 			<select name="${siteParam}" onchange="this.form.submit();">
 			  <#list siteList as s>
               <option value="${s.id}"<#if s.id==site.id> selected="selected"</#if>>${s.name}</option>
               </#list>
             </select>
-            </form>
+            </form> -->
             </td>
             <td width="100">
 			&nbsp;<a id="view_index" href="${site.url}" target="_blank"><@s.m "global.admin.viewFrontIndex"/></a>
@@ -119,24 +119,25 @@ function changeSite(siteId) {
 			<@cms_perm url="/frame/content_main.do">
 			<li class="sep"></li><li id="tb_13" onclick="HoverLi(1,3,10);"><a href="frame/content_main.do" target="mainFrame"><@s.m "cms.function.content"/></a></li>
 			</@cms_perm>
-			<@cms_perm url="/frame/template_main.do">
+			<!-- <@cms_perm url="/frame/template_main.do">
 			<li class="sep"></li><li id="tb_14" onclick="HoverLi(1,4,10);"><a href="frame/template_main.do" target="mainFrame"><@s.m "cms.function.template"/></a></li>
-			</@cms_perm>
-			<@cms_perm url="/frame/resource_main.do">
+			</@cms_perm> -->
+			<!-- <@cms_perm url="/frame/resource_main.do">
 			<li class="sep"></li><li id="tb_15" onclick="HoverLi(1,5,10);"><a href="frame/resource_main.do" target="mainFrame"><@s.m "cms.function.resource"/></a></li>
-			</@cms_perm>
-			<@cms_perm url="/frame/assistant_main.do">
+			</@cms_perm> -->
+			<!-- <@cms_perm url="/frame/assistant_main.do">
 			<li class="sep"></li><li id="tb_16" onclick="HoverLi(1,6,10);"><a href="frame/assistant_main.do" target="mainFrame"><@s.m "cms.function.assistant"/></a></li>
-			</@cms_perm>
+			</@cms_perm> -->
 			<@cms_perm url="/frame/maintain_main.do">
 			<li class="sep"></li><li id="tb_17" onclick="HoverLi(1,7,10);"><a href="frame/maintain_main.do" target="mainFrame"><@s.m "cms.function.maintain"/></a></li>
 			</@cms_perm>
-			<@cms_perm url="/frame/generate_main.do">
+			<!-- <@cms_perm url="/frame/generate_main.do">
 			<li class="sep"></li><li id="tb_18" onclick="HoverLi(1,8,10);"><a href="frame/generate_main.do" target="mainFrame"><@s.m "cms.function.generate"/></a></li>
-			</@cms_perm>
-			<@cms_perm url="/frame/user_main.do">
+			</@cms_perm> -->
+			<!-- 用户管理 -->
+			<!-- <@cms_perm url="/frame/user_main.do">
 			<li class="sep"></li><li id="tb_19" onclick="HoverLi(1,9,10);"><a href="frame/user_main.do" target="mainFrame"><@s.m "cms.function.user"/></a></li>
-			</@cms_perm>
+			</@cms_perm> -->
 			<@cms_perm url="/frame/config_main.do">
 			<li class="sep"></li><li id="tb_110" onclick="HoverLi(1,10,10);"><a href="frame/config_main.do" target="mainFrame"><@s.m "cms.function.config"/></a></li>
 			</@cms_perm>

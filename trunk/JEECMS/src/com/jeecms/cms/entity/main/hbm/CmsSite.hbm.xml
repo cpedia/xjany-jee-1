@@ -24,6 +24,7 @@
 		<property name="resycleOn" column="is_recycle_on" type="java.lang.Boolean" not-null="true"/>
 		<property name="domainAlias" column="domain_alias" type="string" not-null="false" length="255"/>
 		<property name="domainRedirect" column="domain_redirect" type="string" not-null="false" length="255"/>
+		<property name="descriptionXjany" column="description_xjany" type="string" not-null="false" length="255"/>
 		<many-to-one name="uploadFtp" column="ftp_upload_id" class="com.jeecms.core.entity.Ftp" not-null="false"></many-to-one>
 		<many-to-one name="config" column="config_id" class="CmsConfig" not-null="true"></many-to-one>
 		<map name="attr" table="jc_site_attr" cascade="all-delete-orphan">

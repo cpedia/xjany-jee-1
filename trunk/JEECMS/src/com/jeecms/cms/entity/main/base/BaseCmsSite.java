@@ -123,6 +123,22 @@ public abstract class BaseCmsSite  implements Serializable {
 	private java.lang.Boolean resycleOn;
 	private java.lang.String domainAlias;
 	private java.lang.String domainRedirect;
+	
+	/*
+	 * 网站描述字段  
+	 * @author blair
+	 */
+	private java.lang.String descriptionXjany;
+
+	public java.lang.String getDescriptionXjany() {
+		return descriptionXjany;
+	}
+
+	public void setDescriptionXjany(java.lang.String descriptionXjany) {
+		this.descriptionXjany = descriptionXjany;
+	}
+
+
 
 	// many to one
 	private com.jeecms.core.entity.Ftp uploadFtp;

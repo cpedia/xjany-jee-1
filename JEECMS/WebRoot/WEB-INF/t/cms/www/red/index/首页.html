@@ -207,7 +207,7 @@ margin:auto;
 <div class="slideBannerA homeSlideAD1 mT10 ">
 <div class="bannerOuter ">
 							<div class="moveable ">
-							图片标签开始
+							<!-- 图片标签开始 -->
 							[@xjany_pic_list]
 								[#list tag_list as c]
 								<a style="background-image: url(${c.pic!''});"
@@ -216,7 +216,7 @@ margin:auto;
 								</a>
 								[/#list]
 							[/@xjany_pic_list]
-							图片标签结束
+							<!--图片标签结束 -->
 							</div>
 
 							
@@ -224,7 +224,13 @@ margin:auto;
 </div>
 <div class="slideNav"><div class="tabHead">
 
-	<label class="tabs"><a name="btnHead" href="javascript: void(0);" class="currentBtn" >1</a><a name="btnHead" href="javascript: void(0);" class="" >2</a><a name="btnHead" href="javascript: void(0);" class="" >3</a><a name="btnHead" href="javascript: void(0);" class="" >4</a><a name="btnHead" href="javascript: void(0);" class="" >5</a></label>
+	<label class="tabs">
+	[@xjany_pic_list]
+		[#list tag_list as c]
+			<a name="btnHead" href="javascript: void(0);" >${c}</a>
+		[/#list]
+	[/@xjany_pic_list]
+	</label>
 </div>
 </div>	
 	</div> 

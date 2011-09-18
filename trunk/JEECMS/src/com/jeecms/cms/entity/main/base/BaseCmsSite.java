@@ -123,7 +123,20 @@ public abstract class BaseCmsSite  implements Serializable {
 	private java.lang.Boolean resycleOn;
 	private java.lang.String domainAlias;
 	private java.lang.String domainRedirect;
-	
+	/*
+	 * 左边层
+	 */
+	private java.lang.String leftDivXjany;
+	public java.lang.String getLeftDivXjany() {
+		return leftDivXjany;
+	}
+
+	public void setLeftDivXjany(java.lang.String leftDivXjany) {
+		this.leftDivXjany = leftDivXjany;
+	}
+
+
+
 	/*
 	 * 网站描述字段  
 	 * @author blair

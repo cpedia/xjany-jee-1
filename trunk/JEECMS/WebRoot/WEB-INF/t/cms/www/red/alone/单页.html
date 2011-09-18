@@ -40,25 +40,7 @@
                 </div> 
               </div>  
               <div id="box_left_sub1_sub1_sub3"> 
-                <div xmlns="" class="columnSpace" id="elem-FrontSpecifies_show01-1283067684075" name="说明页">  
-                  <div id="FrontSpecifies_show01-1283067684075" class="FrontSpecifies_show01-d1_c1"><p>
-	&nbsp;</p>
-<table border="0" cellpadding="0" cellspacing="0" width="184">
-	<tbody>
-		<tr>
-			<td>
-
-				<img height="153" src="/r/cms/www/red/img/a_9.gif" width="182" /></td>
-		</tr>
-		<tr>
-			<td align="left" style="padding-top: 10px;">
-<span style="color: #008000;"><p><strong>咨询订购热线<br>上海:400-820-4620<br>北京:400-600-3469<br>广州:400-882-8875<br><br></p><p>团购电话<br>上海:021-51362800<br>北京:010-64319816<br>广州:020-38910750<br><br></p><p>VIP客服邮箱<br>上海:<a href='mailto:vip@richlife-china.com'><span  style="color: #008000;">vip@richlife-china.com</span></a><br>北京:<a href='mailto:vip-bj@richlife-china.com'><span  style="color: #008000;">vip-bj@richlife-china.com</span></a><br>广州:<a href='mailto:vip-gz@richlife-china.com'><span  style="color: #008000;">vip-gz@richlife-china.com</span></a><br><br></p></span><span style="color: #008000;">微博:</span><br><a href="http://weibo.com/richlifechina" target="_blank"><span style="color: #008000;">http://weibo.com/richlifechina</span></a><br/><a href="http://weibo.com/richlifechina" target="_blank"><img src="/r/cms/www/red/img/weibologo-v1.jpg"></a><br/>
-
-			</td>
-		</tr>
-		
-	</tbody>
-</table></div> 
+                ${site.leftDivXjany}
                 </div>
               </div> 
             </div>  
@@ -117,84 +99,6 @@ ${channel.txt!}
           </div> 
         <!-- 一列栏目结束 -->  
 </div>
-
-
-
-
-
-
-
-<!--body_begin
-<div id="main">
-  <div class="page"><img src="/${res}/img/banner1.jpg" /></div>
-  <div class="page2 position"> 您现在正在浏览： <a href="${base}/">首页</a> &raquo; ${channel.title!channel.name}</div>
-  <!--cjbd_begin
-  <div class="page2 box">
-    <div class="w700 fl">
-      <div class="rb_top"></div>
-      <div class="rb_mid box">
-        <div class="w96">
-           <h1 class="line">${channel.title!channel.name}</h1>
-		   <div class="content" style="min-height:800px;">
-            ${channel.txt!}
-          </div>
-        </div>
-      </div>
-      <div class="rb_low"></div>
-    </div>
-    <div class="w250 fr">
-      <!--相关文章_Begin
-      <div class="rb_right_top">
-        <h2>最新图文</h2>
-      </div>
-      <div class="rb_right_div">
-         <!--最新图文_Begin
-        <div class="w98">
-		[@cms_content_list count='4' titLen='10' typeId='2' channelOption='1']
-        <ul class="list right_pic">
-          [#list tag_list as d]
-          <li><a href="${d.url}" target="_blank"><img src="${d.typeImg!site.defImg}" alt="${d.title}" /></a><a href="${d.url}" title="${d.title}" target="_blank">[@text_cut s=d.stit len=titLen append=append/]</a></li>
-          [/#list]
-        </ul>
-        [/@cms_content_list]
-		</div>      
-        <!--最新图文_End-->
-		
-        <!--本周热门资讯排行_Begin
-        <h2><span>本周热门资讯排行</span></h2>
-        <div class="w98">
-			<ul class="order">
-			  [@cms_content_list count='10' titLen='15' orderBy='7' channelOption='1']
-			  [#list tag_list as a]
-			  <li><a href="${a.url}" title="${a.title}" target="_blank">[@text_cut s=a.title len=titLen append=append/]</a></li>
-			  [/#list]
-			  [/@cms_content_list]
-			</ul>
-        </div>
-        <!--本周热门资讯排行_End
-        <h2><span>精彩专题</span></h2>
-        <div class="w98">
-		   [@cms_topic_list count='4' descLen='30' append='...']
-		   [#list tag_list as t]
-			<dl class="list[#if t_has_next] line[#else] mt5[/#if] box">
-				<dt><a href="${base}/topic/${t.id}.jspx" target="_blank">${t.name}</a></dt>
-				<dd class="pic"><a href="${base}/topic/${t.id}.jspx"><img src="${t.titleImg!site.defImg}"/></a></dd>
-				<dd class="text">[@text_cut s=t.description len=descLen append=append/]</dd>
-			</dl>
-			[/#list]
-		   [/@cms_topic_list]
-        </div>
-      </div>
-      <div class="rb_right_low"></div>
-      <!--相关文章_End
-    </div>
-  </div>
-</div>
-<!--body_end-->
-<!--hotlink_begin
-[#include "../include/页脚友情链接栏.html"/]
-<!--hotlink_end-->
-<!--footer_begin-->
 [#include "../include/页脚信息栏.html"/]
 <!--footer_end-->
 </body>

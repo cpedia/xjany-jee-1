@@ -39,9 +39,14 @@ $(function() {
 </@p.td>
 <@p.radio colspan="1" width="50" label="cmsSite.resycleOn" name="resycleOn" value=cmsSite.resycleOn list={"true":"global.true","false":"global.false"} required="true"/><@p.tr/>
 <@p.text colspan="1" width="50" label="cmsSite.finalStep" name="finalStep" value=cmsSite.finalStep required="true" class="required digits"/>
+
 <@p.select colspan="1" width="50" label="cmsSite.afterCheck" name="afterCheck" value=cmsSite.afterCheck list={"1":"cmsSite.afterCheck.1","2":"cmsSite.afterCheck.2","3":"cmsSite.afterCheck.3"} required="required"/><@p.tr/>
+
+<@p.td><@p.editor value=cmsSite.descriptionXjany colspan="2" help="" helpPosition="" label="公司简介" name="descriptionXjany" /><@p.tr/>
+
+
 <@p.td colspan="2">
-	<@p.hidden name="id" value=cmsSite.id/><@p.submit code="global.submit"/> &nbsp; <@p.reset code="global.reset"/>
+	<@p.hidden name="id" value=cmsSite.id/><@p.submit code="global.submit"/> &nbsp; <@p.reset code="global.reset"/></@p.td>
 </@p.td>
 </@p.form>
 </div>

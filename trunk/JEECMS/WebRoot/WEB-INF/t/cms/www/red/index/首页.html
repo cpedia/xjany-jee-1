@@ -225,9 +225,11 @@ margin:auto;
 <div class="slideNav"><div class="tabHead">
 
 	<label class="tabs">
+	[#assign x = 1]
 	[@xjany_pic_list]
 		[#list tag_list as c]
-			<a name="btnHead" href="javascript: void(0);" >${c}</a>
+			<a name="btnHead" href="javascript: void(0);" >${x}</a>
+			[#assign x = x+1]
 		[/#list]
 	[/@xjany_pic_list]
 	</label>

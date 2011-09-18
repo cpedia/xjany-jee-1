@@ -1,4 +1,64 @@
 
+<script language=javascript >
+	function search_enter() {
+		if(document._searchForm.search_title.value!="")
+		{
+			document._searchForm.action="${base}/search.jspx";
+			return true;
+		}
+		else
+		{
+			alert("对不起，搜索内容不能为空！");
+			document.getElementById("searchTxt").focus();
+		}
+		return false;
+	}
+	function search_click()
+	{
+		if(document._searchForm.q.value!="")
+		{
+			document._searchForm.action="${base}/search.jspx";
+			document._searchForm.submit();
+		}
+		else
+		{
+			alert("对不起，搜索内容不能为空！");
+			document.getElementById("searchTxt").focus();
+		}
+	}
+	function Marquee(){
+		if(tab2.offsetWidth-tab.scrollLeft<=0)
+			tab.scrollLeft-=tab1.offsetWidth;
+		else{
+			tab.scrollLeft++;
+		}
+	}
+	var tab=document.getElementById("demo");
+	var tablinde=document.getElementById("indemo");
+	var tab1=document.getElementById("demo1");
+	var tab2=document.getElementById("demo2");
+	tab2.innerHTML=tab1.innerHTML;
+	var speed=20;
+	var MyMar=setInterval(Marquee,speed);
+	tablinde.onmouseover=function() {clearInterval(MyMar)};
+	tablinde.onmouseout=function() {MyMar=setInterval(Marquee,speed)};
+
+
+
+    var adPlayerA = new slideBannerB();
+	function lazySlider(objIdentifier,showCellCount, alterTime, animTime,lazyTime){
+	    setTimeout(function(){
+                $(objIdentifier+" .bannerOuter a").each(function(i,o){
+                    if($(o).attr('src2'))
+                        $(o).css({"background-image":"url(" + $(o).attr('src2') + ")"});
+                        $(o).removeAttr('src2');
+                });
+		        //$(objIdentifier+" .slideNav").show();
+                adPlayerA.loading(objIdentifier, showCellCount, alterTime, animTime);
+		},lazyTime);
+	}	
+	lazySlider('.homeSlideAD1', 5, 5000, 300, 1000);
+</script>
 
 
 
@@ -32,7 +92,7 @@
               <div id="box_left_sub3_sub2_sub2">
                 <div xmlns="" class="columnSpace" >
 <div  class="FrontProducts_generalSearch01-d2_c1"><form name="_searchForm"
- 	method="post" target="_self"	
+ target="_self"	
 	action="" onsubmit="javascript:return search_enter();">
 	 <input type="hidden" name="searchType" value="1"/> 
 	<input type="hidden"   value="2"/> 
@@ -41,20 +101,14 @@
 	 <li class="keyword">
 		<span>
 			</span> 
-		<input   name="search_title"  id="searchTxt" class="input input-gray"  type="text" value=""   maxlength="50"/>
+		<input   name="q"  id="searchTxt" class="input input-gray"  type="text" name="q"  value="${q!'请输入关键词'}" onfocus="if(this.value=='请输入关键词')this.value=''" onblur="if(this.value=='')this.value='请输入关键词'"  maxlength="50"/>
 
 	</li>
-	<input type="hidden" name="pmcId" value=""/>
 		<input 	type="hidden"  value=""/>
 		<li class="btnarea"><span>&nbsp;</span>
 	<input type="button" onClick="javascript:search_click()" 
 		class="btn btn-com-03"
 		value="搜索"/>
-		<input type="button" 
-			align="middle"
-			class="btn btn-unimp-03"
-			value="高级搜索"
-			onClick="javascript:search_click()"/>
 	</li>
 </ul>
 </form>

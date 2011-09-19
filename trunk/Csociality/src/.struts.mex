@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="default" location="0,0" size="0,0">
+    <action name="userAction_*" location="0,0" size="0,0">
+      <result name="saveUser">
+        <resourceEdge source="saveUser" routing="0" target="registerUser.jsp" />
+      </result>
+      <result name="loginUser">
+        <resourceEdge source="loginUser" routing="0" target="loginUser.jsp" />
+      </result>
+      <result name="listUser">
+        <resourceEdge source="listUser" routing="0" target="userlistManager.jsp" />
+      </result>
+      <result name="editUser">
+        <resourceEdge source="editUser" routing="0" target="editUser.jsp" />
+      </result>
+      <result name="showUser">
+        <resourceEdge source="showUser" routing="0" target="editUser.jsp" />
+      </result>
+      <result name="updateUser">
+        <resourceEdge source="updateUser" routing="0" target="userMain.jsp" />
+      </result>
+      <result name="saveManager">
+        <resourceEdge source="saveManager" routing="0" target="registerManager.jsp" />
+      </result>
+      <result name="listUsers">
+        <resourceEdge source="listUsers" routing="0" target="userlistManager.jsp" />
+      </result>
+      <result name="deleteUser" />
+      <result name="input" />
+    </action>
+    <action name="knowledgeAction_*" location="0,0" size="0,0">
+      <result name="saveKnowledge" />
+      <result name="listKnowledge" />
+      <result name="listUserKnowledge" />
+      <result name="agree" />
+      <result name="disagree" />
+      <result name="editFlag" />
+      <result name="deleteKnowledge" />
+    </action>
+  </package>
+  <webResource name="registerUser.jsp" path="/registerUser.jsp" location="0,0" size="0,0" />
+  <webResource name="loginUser.jsp" path="/loginUser.jsp" location="0,0" size="0,0" />
+  <webResource name="userlistManager.jsp" path="/userlistManager.jsp" location="0,0" size="0,0" />
+  <webResource name="editUser.jsp" path="/editUser.jsp" location="0,0" size="0,0" />
+  <webResource name="userMain.jsp" path="/userMain.jsp" location="0,0" size="0,0" />
+  <webResource name="registerManager.jsp" path="/registerManager.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

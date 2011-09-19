@@ -10,6 +10,24 @@
 <script src="${resSys}/front.js" type="text/javascript"></script>
 <link href="/${res}/css/css.css" rel="stylesheet" type="text/css"/>
 <script src="/${res}/js/common.js" type="text/javascript"></script>
+<script>
+function addBookmark(title)
+{
+	var url = location.href;
+	if(window.sidebar)
+	{
+		window.sidebar.addPanel(title, url,"");
+	}
+	else if(document.all)
+	{
+		window.external.AddFavorite(url, title);
+	}
+	else if(window.opera && window.print)
+	{
+		return true;
+	}
+}
+</script>
 
 
 
@@ -23,6 +41,6 @@
 
 
 
-<table  class="top_state" width='100%'  ><tr><td align=left width='100'><A href="javascript:addMyFavor()" style="cursor:pointer;" >收藏澳源康</a></td>
+<table  class="top_state" width='100%'  ><tr><td align=left width='100'><A href="javascript:addBookmark()" style="cursor:pointer;" >收藏澳源康</a></td>
 <td width='90%' valign=top ><div id='userDiv' align=right>您好, 欢迎您来到澳源康! 
 </div></td></tr></table>

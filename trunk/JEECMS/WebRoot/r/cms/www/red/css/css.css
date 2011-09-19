@@ -322,7 +322,7 @@ A:hover{
 }
 
 #logo{height:74px;}
-#logo div.logo{width:220px; float:left; height:70px; cursor:pointer;background:transparent url(../img/logo.gif) no-repeat scroll 0 0 ;}
+#logo div.logo{width:220px; float:left; height:70px; cursor:pointer;}
 #logo div.banner{margin-top:10px; float:right; text-align:center;}
 
 .fontred{

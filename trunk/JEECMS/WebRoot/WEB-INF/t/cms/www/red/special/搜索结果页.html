@@ -91,7 +91,7 @@
 <p><font size='5' color='green'><strong>搜索结果</strong></font><p style="line-height: 24px;"><br />
 		[#if q??]
 		 
-		 [@cms_lucene_page q=q channelId=channelId descLen='100' append='...' count='10']
+		 [@cms_lucene_page q=q channelId='44' descLen='100' append='...' count='10']
 		    <div class="search_msg">
 				您搜索的<span class="red">“${q!}”</span>， 共有 <span class="red">${tag_list?size} 条</span> 查询结果，[@process_time/]
 			</div>

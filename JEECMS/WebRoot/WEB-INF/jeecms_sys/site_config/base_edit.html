@@ -11,6 +11,7 @@ $(function() {
 </script>
 </head>
 <body>
+<#include "/common/image_upload.html"/>
 <div class="body-box">
 <div class="rhead">
 	<div class="rpos"><@s.m "global.position"/>:  <@s.m "cmsSiteConfig.function"/> - <@s.m "cmsSiteConfig.function.base"/> - <@s.m "global.edit"/></div>
@@ -42,6 +43,14 @@ $(function() {
 
 <@p.select colspan="1" width="50" label="cmsSite.afterCheck" name="afterCheck" value=cmsSite.afterCheck list={"1":"cmsSite.afterCheck.1","2":"cmsSite.afterCheck.2","3":"cmsSite.afterCheck.3"} required="required"/><@p.tr/>
 
+<!-- <@p.text colspan="1" width="50" label="Logo图片" name="logoPicXjany" value=cmsSite.logoPicXjany required="true" class="required"/><@p.tr/> -->
+<@p.td id="linkLogo" label="Logo图片地址" colspan="1" width="50" noHeight="true">
+<@p.text id="uploadImgPath0" name="logoPicXjany" value=cmsSite.logoPicXjany style="width:180px"/> <input type="button" value="<@s.m "imageupload.preview"/>" onclick="previewImg(0);"/><br/>
+<span id="ufc0"><input type="file" id="uploadFile0" size="14" style="width:180px"/></span><input type="hidden" id="mark0" value="false"/> <input type="button" value="<@s.m "imageupload.upload"/>" onclick="upload(0);"/><br/>
+</@p.td>
+<@p.td colspan="1" width="50">
+<img id="preImg0" alt="<@s.m "imageupload.preview"/>" style="width:100px;height:70px;background-color:#ccc;border:1px solid #333"/>
+</@p.td><@p.tr/>
 <@p.td><@p.tr/>
 <@p.editor value=cmsSite.leftDivXjany colspan="2" help="" helpPosition="" label="联系方式" name="leftDivXjany" /><@p.tr/>
 

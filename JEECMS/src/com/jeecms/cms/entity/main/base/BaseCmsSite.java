@@ -123,6 +123,23 @@ public abstract class BaseCmsSite  implements Serializable {
 	private java.lang.Boolean resycleOn;
 	private java.lang.String domainAlias;
 	private java.lang.String domainRedirect;
+	
+
+	
+	/*
+	 * LOGO图片
+	 */
+	private java.lang.String logoPicXjany;
+	public java.lang.String getLogoPicXjany() {
+		return logoPicXjany;
+	}
+
+	public void setLogoPicXjany(java.lang.String logoPicXjany) {
+		this.logoPicXjany = logoPicXjany;
+	}
+
+
+
 	/*
 	 * 左边层
 	 */

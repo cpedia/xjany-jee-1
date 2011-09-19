@@ -39,10 +39,10 @@ function optPriority() {
 </form> -->
 <form id="tableForm" method="post">
 <@p.table value=list;xjanyPicList,i,has_next><#rt/>
-	<@p.column title="<input type='checkbox' onclick='Pn.checkbox(\"ids\",this.checked)'/>" width="20">
+<!-- 	<@p.column title="<input type='checkbox' onclick='Pn.checkbox(\"ids\",this.checked)'/>" width="20">
 		<input type='checkbox' name='ids' value='${xjanyPicList.id}'/><#t/>
-	</@p.column><#t/>
-	<@p.column title="ID">${xjanyPicList.id}<input type="hidden" name="wids" value="${xjanyPicList.id}"/></@p.column><#t/>
+	</@p.column><#t/> -->
+	<@p.column title="ID">${i+1}<input type="hidden" name="wids" value="${xjanyPicList.id}"/></@p.column><#t/>
 	<@p.column code="xjanyPicList.name">${xjanyPicList.name}</@p.column><#t/>
 	<@p.column code="global.operate" align="center">
 		<input type="hidden" name="queryCtgId" value="${queryCtgId!}"/>

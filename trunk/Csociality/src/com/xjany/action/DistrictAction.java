@@ -11,6 +11,9 @@ import com.xjany.service.DistrictService;
 
 @Controller
 
+/*
+ * 这是一个测试的action类
+ */
 public class DistrictAction {
 
 	@Autowired

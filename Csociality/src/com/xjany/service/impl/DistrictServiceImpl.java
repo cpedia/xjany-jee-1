@@ -26,12 +26,12 @@ public class DistrictServiceImpl implements DistrictService
 
 	public void addDistrict(District district)
 	{
-		districtDAO.addDistrict(district);
+		districtDAO.save(district);
 	}
 
 	public List<District> listDistrict()
 	{
-		return districtDAO.listDistrict();
+		return districtDAO.findAll();
 	}
 
 	public District findById(int id)
@@ -41,12 +41,12 @@ public class DistrictServiceImpl implements DistrictService
 
 	public void updateDistrict(District district)
 	{
-		districtDAO.updateDistrict(district);
+		districtDAO.update(district);
 	}
 
 	public void delDistrict(District district)
 	{
-		districtDAO.delDistrict(district);
+		districtDAO.delete(district);
 	}
 
 	public List<District> findByProperty(String propertyName, Object value)

@@ -13,56 +13,8 @@ import com.xjany.dao.DistrictDAO;
 import com.xjany.entity.District;
 
 @Repository
-public class DistrictDAOImpl implements DistrictDAO
+public class DistrictDAOImpl  extends GeneriDAOImpl<District, Integer> implements DistrictDAO
 {
-
-	private SessionFactory sessionFactory;
-	private District district;
-	
-	public District getDistrict()
-	{
-		return district;
-	}
-	public void setDistrict(District district)
-	{
-		this.district = district;
-	}
-	public SessionFactory getSessionFactory()
-	{
-		return sessionFactory;
-	}
-	@Resource(name = "sessionFactory")
-	public void setSessionFactory(SessionFactory sessionFactory)
-	{
-		this.sessionFactory = sessionFactory;
-	}
-
-	public void addDistrict(District district)
-	{
-		sessionFactory.getCurrentSession().persist(district);
-	}
-	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true)
-	public List<District> listDistrict()
-	{
-		final String listDistrict = "from District";
-		return (List<District>)sessionFactory.getCurrentSession().createQuery(listDistrict).list();
-	}
-
-	public District findById(int id)
-	{
-		return (District)sessionFactory.getCurrentSession().get(District.class, id);
-	}
-
-	public void updateDistrict(District district)
-	{
-		sessionFactory.getCurrentSession().merge(district);
-	}
-
-	public void delDistrict(District district)
-	{
-		sessionFactory.getCurrentSession().delete(district);
-	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
@@ -85,7 +37,7 @@ public class DistrictDAOImpl implements DistrictDAO
 
 	public int getMaxLength()
 	{
-		return listDistrict().size();
+		return this.findAll().size();
 	}
 	
 	public int checkDistrict(String name, String province)

@@ -30,6 +30,7 @@ public class DistrictAction {
 	public String add(HttpServletRequest request, ModelMap model, District district) throws Exception {
 		if(!districtService.checkDistrict(district))
 			districtService.addDistrict(district);
+		else model.addAttribute("msg", "error");
 
 		List<District> list = districtService.listDistrict();
 

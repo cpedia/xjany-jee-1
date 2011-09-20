@@ -81,7 +81,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 	
 	
-	public boolean check(T entity, List<T> propertyName, Object[] value) {
+	public boolean check(T entity, List<T> propertyName, String[] value) {
 		Query query = null;
 		try {
 			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where a."+ propertyName.get(0) +"="+ value[0]);
@@ -102,7 +102,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 				sessionFactory.close();
 		}
 	}
-	public List<T> findByProperty(Object propertyName, Object value) {
+	public List<T> findByProperty(Object propertyName, String value) {
 		String queryString = "from "+clazz.getName()+" as a where a." + propertyName + "= ?";
 		return (List<T>) sessionFactory.getCurrentSession().createQuery(queryString).setParameter(0, value).list();
 	}

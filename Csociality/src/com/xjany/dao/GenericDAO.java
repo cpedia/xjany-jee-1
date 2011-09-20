@@ -15,6 +15,6 @@ public interface GenericDAO<T,Pk extends Serializable> {
 	public void update(T entity);
 	public void delete(T entity);
 	public void save(T entity);
-	public void delete(Serializable id);
-	public boolean check(T entity, Object propertyName, Object value);
+	public boolean delete(Serializable[] id);
+	public boolean check(T entity, List<T> propertyName, Object[] value);
 }

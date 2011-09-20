@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xjany.dao.GenericDAO;
+import com.xjany.entity.District;
 
 /*
  * @param 一个通用的dao层
@@ -61,6 +62,26 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		Session session = sessionFactory.getCurrentSession();
 		T t = (T) session.get(clazz, id);
 		session.delete(t);
+	}
+	
+	
+	public boolean checkDistrict(T entity) {
+		Query query = null;
+		try {
+			query = sessionFactory.getCurrentSession().createQuery("from "+clazz.getName()+" a where a.name=? and a.province=?");
+			query.setString(0, entity.getName());
+			query.setString(1, entity.getProvince());
+			if(query.list().size() > 0)
+				return true;
+			else 
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (sessionFactory != null)
+				sessionFactory.close();
+		}
 	}
 
 }

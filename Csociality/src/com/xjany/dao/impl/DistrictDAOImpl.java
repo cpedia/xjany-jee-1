@@ -34,23 +34,4 @@ public class DistrictDAOImpl extends GeneriDAOImpl<District, Integer> implements
 	public int getMaxLength() {
 		return this.findAll().size();
 	}
-
-	public boolean checkDistrict(District district) {
-		Query query = null;
-		try {
-			query = sessionFactory.getCurrentSession().createQuery("from District a where a.name=? and a.province=?");
-			query.setString(0, district.getName());
-			query.setString(1, district.getProvince());
-			if(query.list().size() > 0)
-				return true;
-			else 
-				return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			if (sessionFactory != null)
-				sessionFactory.close();
-		}
-	}
 }

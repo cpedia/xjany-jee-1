@@ -14,5 +14,5 @@ public interface DistrictService
 	public List<District> findByProperty(String propertyName, Object value);
 	public List<District> listMessage(int pageNo,int pageSize);
 	public int getMaxLength();
-	public boolean checkDistrict(District district, Object propertyName, Object value);
+	public boolean checkDistrict(District district, List<District> propertyName, Object[] value);
 }

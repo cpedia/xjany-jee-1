@@ -12,7 +12,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xjany.dao.GenericDAO;
-import com.xjany.entity.District;
 
 /*
  * @param 一个通用的dao层
@@ -58,18 +57,39 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		session.update(entity);
 	}
 	
-	public void delete(Serializable id){
-		Session session = sessionFactory.getCurrentSession();
-		T t = (T) session.get(clazz, id);
-		session.delete(t);
+	public boolean delete(Serializable[] id){
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			T t = (T) session.get(clazz, id[0]);
+			session.delete(t);
+			if(id.length -1 > 0)
+			{
+				for (int i = 0; i < id.length; i++)
+				{
+					t = (T) session.get(clazz, id[i+1]);
+					session.delete(t);
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally{
+			if(sessionFactory != null)
+				sessionFactory.close();
+		}
 	}
 	
 	
-	public boolean check(T entity, Object propertyName, Object value) {
+	public boolean check(T entity, List<T> propertyName, Object[] value) {
 		Query query = null;
 		try {
-				query = sessionFactory.getCurrentSession().createQuery("from "+clazz.getName()+" a where a."+ propertyName +"=?");
-				query.setString(0,(String)value);
+			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where a."+ propertyName.get(0) +"="+ value[0]);
+			for(int i = 0; i < propertyName.size(); i++)
+			{
+				sql.append(" and a."+ propertyName.get(i+1) +"="+value[i+1]);
+			}
+				query = sessionFactory.getCurrentSession().createQuery(sql.toString());
 				if(query.list().size() > 0)
 					return true;
 				else 

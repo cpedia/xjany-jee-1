@@ -11,10 +11,10 @@ import java.util.List;
 public interface GenericDAO<T,Pk extends Serializable> {
 	public List<T> findAll();
 	public T findById(Pk id);
-	public List<T> findByProperty(Object propertyName, Object value);
+	public List<T> findByProperty(Object propertyName, String value);
 	public void update(T entity);
 	public void delete(T entity);
 	public void save(T entity);
 	public boolean delete(Serializable[] id);
-	public boolean check(T entity, List<T> propertyName, Object[] value);
+	public boolean check(T entity, List<T> propertyName, String[] value);
 }

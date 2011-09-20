@@ -64,9 +64,9 @@ public class DistrictServiceImpl implements DistrictService
 		return districtDAO.getMaxLength();
 	}
 
-	public int checkDistrict(String name, String province)
+	public boolean checkDistrict(District district)
 	{
-		return districtDAO.checkDistrict(name, province);
+		return districtDAO.checkDistrict(district);
 	}
 
 }

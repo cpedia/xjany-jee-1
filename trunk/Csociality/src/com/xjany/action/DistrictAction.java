@@ -28,8 +28,9 @@ public class DistrictAction {
 
 	@RequestMapping("districtAdd.do")
 	public String add(HttpServletRequest request, ModelMap model, District district) throws Exception {
+		if(!districtService.checkDistrict(district))
+			districtService.addDistrict(district);
 
-		districtService.addDistrict(district);
 		List<District> list = districtService.listDistrict();
 
 		model.addAttribute("studentlist", list);// request保存这个对象

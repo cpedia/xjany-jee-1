@@ -65,16 +65,15 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 	
 	
-	public boolean checkDistrict(T entity) {
+	public boolean check(T entity, Object propertyName, Object value) {
 		Query query = null;
 		try {
-			query = sessionFactory.getCurrentSession().createQuery("from "+clazz.getName()+" a where a.name=? and a.province=?");
-			query.setString(0, entity.getName());
-			query.setString(1, entity.getProvince());
-			if(query.list().size() > 0)
-				return true;
-			else 
-				return false;
+				query = sessionFactory.getCurrentSession().createQuery("from "+clazz.getName()+" a where a."+ propertyName +"=?");
+				query.setString(0,(String)value);
+				if(query.list().size() > 0)
+					return true;
+				else 
+					return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -83,5 +82,10 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 				sessionFactory.close();
 		}
 	}
+	public List<T> findByProperty(Object propertyName, Object value) {
+		String queryString = "from "+clazz.getName()+" as a where a." + propertyName + "= ?";
+		return (List<T>) sessionFactory.getCurrentSession().createQuery(queryString).setParameter(0, value).list();
+	}
+
 
 }

@@ -1,0 +1,19 @@
+
+
+/usr/a*tomcat*/bin/catalina.sh stop
+
+export CVSROOT=:pserver:ltis@202.116.76.163:/cvsroot/LTISystem
+cvs login
+
+
+rm jforum* -R -f
+#cd /tmp
+#rm jforum* -R -f
+cvs export -D now -d jforum jforum
+cd jforum
+ant compile
+#cd /usr/a*tom*/webapps
+
+#cp /tmp/jforum/dist/jforum-2.1.8.war jforum.war
+
+/usr/a*tomcat*/bin/catalina.sh start

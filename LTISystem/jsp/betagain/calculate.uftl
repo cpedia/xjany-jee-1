@@ -1,0 +1,397 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<meta name="bga" content="vf_current"/>
+<meta name="tools" content="vf_current" />
+<meta name="submenu" content="tools"/>
+<title>Beta Gain Analysis[#if Parameters.symbol??] - ${Parameters.symbol}[/#if]</title>
+<script type="text/javascript" src="../images/jquery-1.3.2.min.js"></script>
+<SCRIPT src="${lti.baseUrl}/jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.js" type="text/javascript"></SCRIPT>
+<link href="${lti.baseUrl}/jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="${lti.baseUrl}/jsp/images/jquery.tablesorter/style.css" type="text/css" />
+<script type="text/javascript" src="${lti.baseUrl}/jsp/images/jquery.form/jquery.form.js"></script>
+<script type="text/javascript" src="${lti.baseUrl}/jsp/images/jquery.tablesorter/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="${lti.baseUrl}/jsp/images/jquery.tablesorter/jquery.tablesorter.pager.js"></script>
+
+<style type="text/css">
+
+fieldset{
+	margin:1em 0;
+	padding:1em;
+	border:1px solid #ccc;
+	background:#f8f8f8;
+}
+legend{
+	font-weight:bold;
+	color:black;
+	FONT-FAMILY: Arial;
+	font-size: 12pt;
+}
+input:focus{
+	background:#ffc;
+}
+input[type="text"]{
+	border-top:2px solid #999;
+	border-left:2px solid #999;
+	border-bottom:1px solid #ccc;
+	border-right:1px solid #ccc;
+	width:10em;
+	padding:0;
+	margin:0;
+}
+
+#basic-wrap label{
+	float:left;
+	width:42%;
+	font-family: Arial;
+	font-size: 12pt;
+	padding:0;
+	margin:0;
+}
+#basic-wrap span{
+	width:55%;
+	float:right;
+	text-align:left;
+	padding:0;
+	margin:0;
+}
+#basic-wrap p{
+	padding:0;
+	margin-top:20px;
+	text-align:left;
+	font-size: 12pt;
+}
+#save{
+	float:left;
+}
+.clear{
+	clear:both;
+	padding:0;
+	margin:0;
+}
+#indexParagraph input{
+	padding:1px;
+	margin-left:5px;
+	margin-top:5px;
+	font-size: 10pt;
+	width:10em;
+}
+#indexParagraph input[type="button"]{
+	padding:1px;
+	margin-left:5px;
+	margin-top:5px;
+	width:7em;
+}
+#index_table{
+	text-align:left;
+}
+#index-header a:link,#index_table a:visited{
+	padding:1px;
+	width:10em;
+	color:#000;
+	text-decoration:none;
+	background-color:#94b8e9;
+	border:1px solid black;
+	text-align:center;
+	margin-left:5px;
+	font-size: 10pt;
+	padding:1px;
+	font-family: Arial;
+	float:left;
+}
+#index-header span{
+	font-family: Arial;
+	font-size: 10pt;
+	text-decoration:none;
+}
+#index-header{
+	padding:0;
+	margin:0;
+	margin-left:10px;
+	width:65%;
+}
+#type-header{
+	float:right;
+	width:20em;
+}
+#index-header a:hover{
+	background-color:#369;
+	color:#fff;
+}
+#input-info{
+	font-size:11pt;
+	width:100%;
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+#basic-wrap{
+	width:40%;
+	float:left;
+	padding:0;
+	margin:0;
+}
+#index-wrap{
+	width:58%;
+	float:right;
+	padding:0;
+	margin:0;
+}
+#indexParagraph{
+	padding:0;
+	margin:0;
+	text-align:left;
+	display:inline;
+}
+.hidden{
+	display:none;
+}
+</style>	
+<script type="text/javascript">
+$(document).ready(function(){
+	[#if IsBetaGain?? && IsBetaGain == true]
+		[#if index??]
+			[@s.iterator value="index" status="st"]
+				var index_name = '[@s.property/]';
+				var type = [@s.property value="%{types[#st.index]}"/];
+				addNewIndex(index_name, type);
+			[/@s.iterator]
+		[#else]
+			initialCalculate();
+			$("#symbol").val("${symbol!"spy"}");
+		[/#if]
+	[#else]
+		initialCalculate();
+	[/#if]
+	[#if (IsResult?? && IsResult==true)]
+		$("#settings").removeClass('hidden');
+		$("#input-info").addClass('hidden');
+		$("#settings").toggle(function(){
+			$("#input-info").removeClass('hidden');
+		},function(){
+			$("#input-info").addClass('hidden');
+		})
+	[#else]
+		$("#settings").addClass('hidden');
+	[/#if]
+});
+var indexCount=0;
+function addNewIndex(name, type){
+	indexCount++;			
+	
+	var $pline=$(document.createElement("p"));
+	$pline.attr({id:"pline"+indexCount});
+	$pline.addClass('index');
+	var $input=$(document.createElement("input"));
+	$input.attr({type:"text"});
+	$input.attr({name:"indexArray"});
+	$input.attr({id:"index"+(indexCount)});
+	if(name!="null") $input.attr({value:name});
+	//$p.append($input);			
+	$("#indexParagraph").append($input);
+	$pline.append($input);
+	
+	var $type=$(document.createElement("input"));
+	$type.attr({type:"text"});
+	$type.attr({name:"type"});
+	$type.attr({id:"type"+indexCount});
+	$type.attr({value:type});
+	$("#indexParagraph").append($type);
+	$pline.append($type);
+	
+	var $removebutton=$(document.createElement("input"));
+	$removebutton.attr({type:"button"});
+	$removebutton.attr({id:"button"+indexCount});
+	$removebutton.attr({value:"Remove"});
+	$pline.append($removebutton);
+	
+	$("#indexParagraph").append($pline);
+				
+	$("#button"+indexCount).click(function(){
+		$("#"+$pline.attr("id")).remove();
+	})
+	
+	var index_height = $("#index_array").height();
+	var basic_height = $("#basic_table").height();
+	if(basic_height < index_height){
+		//alert(index_height);
+		$("#basic_table").css("height",index_height);
+		//alert($("#basic_table").height());
+	}
+	
+	$("#index"+(indexCount)).suggest("../ajax/GetSecuritySuggestTxt.action",
+								 { 	haveSubTokens: true,
+								 	onSelect: function(){}});
+	
+	//alert(height);
+}	
+function initialCalculate(){
+	$('#checkHistory').click(function(){
+		
+		if($('#checkHistory').attr('checked')==true){
+			$('#startDate').attr({'disabled':true});
+			$('#endDate').attr({'disabled':true});
+		}else{
+			$('#startDate').attr({'disabled':false});
+			$('#endDate').attr({'disabled':false});
+		}
+		
+
+	});
+	addNewIndex("VTSMX",1);
+	
+	var index_height = $("#index_array").height();
+	var basic_height = $("#basic_table").height();
+	if(basic_height < index_height){
+		alert(index_height);
+		$("#basic_table").css("height",index_height);
+		alert($("#basic_table").height());
+	}
+	
+	
+	jQuery("#symbol").suggest("../ajax/GetSecuritySuggestTxt.action",
+								 { 	haveSubTokens: true, 
+								 	getFactorList: true,
+									setDefaultDate: true,
+								 	onSelect: function(){}});
+	
+
+	var date_1=new Date();
+	var s_date=(date_1.getMonth()+1)+"/"+date_1.getDate()+"/"+(date_1.getFullYear()-1);
+	var e_date=(date_1.getMonth()+1)+"/"+date_1.getDate()+"/"+(date_1.getFullYear());
+	$('#startDate').val(s_date);
+	$('#endDate').val(e_date);
+	$("#symbol").val("spy");
+	$("#interval").val("64"); 
+}
+
+</script>
+</head>
+<body>
+<div style="text-align:left">
+	<a href="javascript:void(0)" id="settings">Modify Settings</a>
+</div>
+<div id="input-info">
+	[@s.form action="BetaGainTable" method="post" id="mainForm" theme="simple" namespace="/jsp/betagain"]
+		<div id="basic-wrap">
+			<fieldset>
+				<legend>[@s.text name="Fund to Analysis"/]</legend>
+				<div id="basic_table">
+					<p><label for="symbol" value="symbol">[@s.text name="symbol"/]</label><span><input type="text" id="symbol" name="symbol" value='${symbol!}'/></span></p>
+					<br class="clear"/>
+					<p><label>[@s.text name="interval(One Quarter)"/]</label><span><input type="text" id="interval" name="interval" value='64' readonly/></span></p> 
+					<br class="clear"/>
+					<p><label>[@s.text name="startingdate"/]</label><span><input type="text" name="startDate" id="startDate" value='${startDate!}'/></span></p>
+					<br class="clear"/>
+					<p><label>[@s.text name="enddate"/]</label><span><input type="text" name="endDate" id="endDate" value='${endDate!}'/></span></p>							
+					<br class="clear"/>
+					<p><label>WLS or OLS?</label><span>[@s.select list="{'WLS','OLS'}" name="LSType" theme="simple"][/@s.select]</span></p>
+					<br class="clear"/>
+					<p><label>Sigma Is One?</label><span>[@s.select list="{false,true}" name="isSigmaOne" theme="simple"][/@s.select]</span></p>
+				</div>
+			</fieldset>
+		</div>	
+		<div id="index-wrap">
+			<fieldset id="index_table">
+				<legend>[@s.text  name="index"/]</legend>
+				<div id="index_array">
+					<p id="index-header">
+						<a href="javascript:void(0)" onclick=addNewIndex('null')>Add one Index</a>
+						<span id="type-header"><label>Factor Type(price-0, return-1)</label></span>
+					</p>
+					<p class="clear"/>
+					<p id="indexParagraph">
+					</p>
+				</div>
+			</fieldset>
+		</div>
+		<br class="clear"/>	
+	 	<div style="margin-top:10px">[@s.submit cssStyle="padding:0;margin:0" key="submit" id="save" theme="simple" action="BetaGainTable"][/@s.submit]</div>
+	[/@s.form]
+</div>
+<br class="clear" />
+[#if (IsBetaGain?? && IsBetaGain==true) && (IsResult?? && IsResult==true)]
+<div id="betagaintable" style="width:100%;text-align:left">
+	[#if betaGains?? && betaGains.size()>0]
+	<table class="tablesorter" width="95%">
+		<thead>
+			<tr>
+				<th>factor</th>
+				<th>beta</th>
+			[#list betaGains as betagain]
+				[#if betagain.betaGainType == 1]
+					<th>last 1 month(%)</th>
+					<input id="gainInterval_${betagain_index}" type="hidden" name="gainInterval" value="22"/>
+				[#elseif betagain.betaGainType == 3]
+					<th>last 3 months(%)</th>
+					<input id="gainInterval_${betagain_index}" type="hidden" name="gainInterval" value="66"/>
+				[#elseif betagain.betaGainType == 6]
+					<th>last 6 months(%)</th>
+					<input id="gainInterval_${betagain_index}" type="hidden" name="gainInterval" value="132"/>
+				[#elseif betagain.betaGainType == 10]
+					<th>last 1 year(%)</th>
+					<input id="gainInterval_${betagain_index}" type="hidden" name="gainInterval" value="252"/>
+				[#elseif betagain.betaGainType == 30]
+					<th>last 3 years(%)</th>
+					<input id="gainInterval_${betagain_index}" type="hidden" name="gainInterval" value="756"/>
+				[/#if]
+			[/#list]
+			</tr>
+		</thead>
+		[#list index as factor]
+			[#assign count=factor_index] 
+			<tr>
+				<td>${factor}</td>
+				[#if (betaGains.get(0).betas[count])??]
+					<td>${(betaGains.get(0).betas[count])?string.number}</td>
+				[#else]
+					<td>NA</td>
+				[/#if]
+				[#list betaGains as betagain]
+					[#if betagain.gains[count]??]
+						<td>${betagain.gains[count]?string.number}</td>
+					[#else]
+						<td>NA</td>
+					[/#if]
+				[/#list]
+			</tr>
+		[/#list]
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		[#list betaGains as betagain]
+			<td>
+				<input type="button" value="check" id="betagains_${betagain_index}"/>
+				
+				<script type="text/javascript">
+					$("#betagains_${betagain_index}").click(function(){
+						var formString = $("#mainForm").formSerialize();
+						var gi = $("#gainInterval_${betagain_index}").val();
+						$("#result-wrap").html("loading...");
+						$("#result-wrap").load("Main.action?" + formString + "&gainInterval=" + gi+"&includeHeader=false");
+					})
+				</script>
+			</td>
+		[/#list]
+		</tr>
+	</table>
+	[#else]
+	<div style="color:red">
+	No Gain Are Available, duing to:
+	<br/>
+	${message!}
+	<br/>
+	Please Check The Input.
+	</div>
+	[/#if]
+</div>
+[/#if]
+<div id="result-wrap" style="width:100%"></div>	
+</body>
+</html>
+
+
+

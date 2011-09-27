@@ -1,0 +1,17 @@
+<digester-rules>
+	<pattern value="searchconfiguration/applicationkey">
+		<object-create-rule classname="com.lti.type.ApplicationKey"/>
+		<set-next-rule methodname="addApplicationKey" paramtype="com.lti.type.ApplicationKey"/>
+		<set-properties-rule/>
+		<bean-property-setter-rule pattern="applicationKey"/>
+		<bean-property-setter-rule pattern="site"/>
+	</pattern>
+	<pattern value="searchconfiguration/searchsite">
+		<object-create-rule classname="com.lti.type.SearchSite"/>
+		<set-next-rule methodname="addSearchSite" paramtype="com.lti.type.SearchSite"/>
+		<set-properties-rule/>
+		<bean-property-setter-rule pattern="name"/>
+		<bean-property-setter-rule pattern="address"/>
+		<bean-property-setter-rule pattern="isUsed"/>
+	</pattern>	
+</digester-rules>

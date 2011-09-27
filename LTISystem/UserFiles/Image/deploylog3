@@ -1,0 +1,5 @@
+Using CATALINA_BASE:   /usr/apache-tomcat-6.0.16/
+Using CATALINA_HOME:   /usr/apache-tomcat-6.0.16/
+Using CATALINA_TMPDIR: /usr/apache-tomcat-6.0.16//temp
+Using JRE_HOME:       /usr/java/jdk1.6.0_01
+Logging in to :pserver:ltis@202.116.76.163:2401/cvsroot/LTISystem

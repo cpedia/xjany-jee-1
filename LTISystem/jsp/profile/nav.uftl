@@ -1,0 +1,59 @@
+[#ftl]
+[#assign ind=request.requestURL?last_index_of("/")] 
+[#assign action_name=request.requestURL?substring(ind+1)]
+<div style="width:100%">
+	<div id="guidePost" style="width:100%">
+		<div class="guidepostItem" id="guidepost_decide"></div>
+		<div class="guidepostItem" id="guidepost_customize"></div>
+		<div class="guidepostItem" id="guidepost_manage"></div>
+		<div class="clearfloat"></div>
+	</div>
+</div>
+<script>
+initGuidePost();
+var links= {'guidepost_decide':'profile_edit.action?planID=0&portfolioID=0','guidepost_customize':'profile_customizeportfolio.action','guidepost_manage':'profile_manageyourportfolio.action?portfolioID=${Parameters.portfolioID!""}&planID=${Parameters.planID!""}'};
+[#if action_name=="profile_edit.action"]
+activeGuidebutton("decide");
+[#elseif action_name=="profile_customizeportfolio.action"]
+activeGuidebutton("customize");
+[#elseif action_name=="profile_customizing.action"]
+activeGuidebutton("customize");
+[#elseif action_name=="profile_customizedresult.action"]
+activeGuidebutton("customize");
+[#elseif action_name=="profile_manageyourportfolio.action"]
+activeGuidebutton("manage");
+[#--	[#if Parameters.portfolioID?? && Parameters.portfolioID!="" && Parameters.portfolioID!="0"]
+	links.guidepost_customize='profile_customizedresult.action?portfolioID=${Parameters.portfolioID!""}&planID=${Parameters.planID!""}';
+	[/#if]
+--]
+
+[/#if]
+
+$("#guidepost_decide").parent().click(function(){
+	[#if Parameters.portfolioID?? && Parameters.portfolioID!="" && Parameters.portfolioID!="0"]
+		if(confirm('Would you want to customize a new portfolio?')){
+			window.location.href=links.guidepost_decide;
+		}
+		
+	[#else]
+		window.location.href=links.guidepost_decide;
+	[/#if]
+});
+$("#guidepost_manage").parent().click(function(){
+	[#if Parameters.portfolioID?? && Parameters.portfolioID!="" && Parameters.portfolioID!="0"]
+		window.location.href=links.guidepost_manage;
+	[#else]
+		alert('Please customize your portfolio first.');
+	[/#if]	
+});
+$("#guidepost_customize").parent().click(function(){
+	[#if Parameters.portfolioID?? && Parameters.portfolioID!="" && Parameters.portfolioID!="0"]
+		if(confirm('Would you want to customize a new portfolio?')){
+			window.location.href=links.guidepost_customize;
+		}
+	[#else]
+		window.location.href=links.guidepost_customize;
+	[/#if]
+
+});
+</script>

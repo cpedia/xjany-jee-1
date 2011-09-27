@@ -1,0 +1,31 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<meta name="submenu" content="portfoliotable"/>
+<meta name="portfolios" content="vf_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>${title!"ValidFi: Portfolios"}</title>
+
+	<!-- table sorter -->
+	<link rel="stylesheet" href="../images/jquery.tablesorter/style.css" type="text/css" />
+	<script type="text/javascript" src="../images/jquery.tablesorter/jquery.tablesorter.js"></script>
+	<script type="text/javascript" src="../images/jquery.tablesorter/jquery.tablesorter.pager.js"></script>
+	<link rel="stylesheet" href="../images/jquery.tablesorter/addons/pager/jquery.tablesorter.pager.css" type="text/css" />
+	
+</head>
+<body>
+<br><br>
+<div style="margin-left:5px;margin-right:5px;">
+			[@s.action name="GetPortfolioTable" namespace="/jsp/portfolio" executeResult=true]
+			    [@s.param name="paged"]${Parameters.paged}[/@s.param]
+			    [@s.param name="size"]${Parameters.size}[/@s.param]
+			    [#if Parameters.title??][@s.param name="title"]${Parameters.title}[/@s.param][/#if]
+			    [#if Parameters.groupIDs??][@s.param name="groupIDs"]${Parameters.groupIDs}[/@s.param][/#if]
+			    [@s.param name="admin"]${Parameters.admin}[/@s.param]
+			    [@s.param name="owner"]${Parameters.owner}[/@s.param]
+			[/@s.action]
+</div>
+</body>
+</html>

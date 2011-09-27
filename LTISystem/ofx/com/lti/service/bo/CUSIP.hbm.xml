@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="CUSIP"
+		table="ltisystem_cusip"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="CUSIP"
+			column="CUSIP"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="Type"
+			column="Type"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="Symbol"
+			column="Symbol"
+			type="string"
+			not-null="true"
+		/>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,305 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>Investment Plans for Brokerage Accounts (IRA or Taxable)</title>
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="Hundreds of ETF Plans and Mutual Fund Plans for brokerage accounts are maintained by MyPlanIQ, including IRAs and taxable ones. MyPlanIQ provides tacticle strategy and strategic strategy for users to establish and manage their portfolios out of these plans.">
+<meta name="keywords" content="IRA, Brokerages, Fidelity, Schwab, TD Ameritrade, Vanguard, iShares, stocks, bonds, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+
+<style>
+#contianer input{
+	height:30px;width:500px;
+}
+#planwindow table{
+	border-collapse:collapse; border:1px solid #f0f0f0;
+}
+#planwindow th{
+     border: 1px solid #f0f0f0;
+}
+#planwindow td{
+     border: 1px solid #f0f0f0;padding:5px;
+}
+.ui-autocomplete-category {
+		padding:.2em .4em;
+		margin:.8em 0 .2em;
+}
+
+
+</style>
+
+<script  type="text/javascript" src="jsp/profile/images/GooFunc.js"></script>
+<script  type="text/javascript" src="jsp/profile/images/GooPieChart.js"></script>
+
+<script>
+
+$(document).ready(function() {
+	var cache = {};
+	$("#t1_planname").autocomplete({
+			minLength: 2,
+			source: function(request, response) {
+				if ( request.term in cache ) {
+					response( cache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "select_ajaxplanname.action?includeHeader=false&size=10",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						cache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	if(ui.item.data==false){
+			 		window.open("/LTISystem/f401k__search.action?keyword="+this.value, "_blank");
+			 	}else{
+			 		$('#t_planid').val(ui.item.id);
+			 		$('#t1_planname').val(ui.item.name);
+			 	}
+			 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}else{
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a href='javascript:void(0)'>Show all results for <b>"+item.id+"</b></a>" )
+					.appendTo( ul );
+			}
+			
+		};
+		$("#t2_planname").autocomplete({
+			minLength: 2,
+			source: function(request, response) {
+				if ( request.term in cache ) {
+					response( cache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "select_ajaxplanname.action?includeHeader=false&size=10",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						cache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	if(ui.item.data==false){
+			 		window.open("/LTISystem/f401k__search.action?keyword="+this.value, "_blank");
+			 	}else{
+			 		$('#t_planid').val(ui.item.id);
+			 		$('#t2_planname').val(ui.item.name);
+			 	}
+			 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}else{
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a href='javascript:void(0)'>Show all results for <b>"+item.id+"</b></a>" )
+					.appendTo( ul );
+			}
+			
+		};
+	initSelects("mySelect", 500);
+});
+
+
+
+function compare(){
+	var planName1=document.getElementById("t1_planname");
+	var planName2=document.getElementById("t2_planname");
+	if(planName1.value!=null && planName2.value!=null){
+		location.href="f401k_planrollover.action?from="+planName1.value+"&to="+planName2.value+"&planNameArray="+planName1.value+","+planName2.value;
+	}else
+		alert("The number of plans can not be 0!!!");
+}
+
+
+var show_SAA=false;
+function showSAA(){
+	if(show_SAA==false){
+		show_SAA=true;
+		$('#btn_showSAA').val('- SAA comparison');
+		$('#show_SAA_div').show();
+	}else{
+		show_SAA=false;
+		$('#btn_showSAA').val('+ SAA comparison');
+		$('#show_SAA_div').hide();
+	}
+}
+
+var show_TAA=false;
+function showTAA(){
+	if(show_TAA==false){
+		show_TAA=true;
+		$('#btn_showTAA').val('- TAA comparison');
+		$('#show_TAA_div').show();
+	}else{
+		show_TAA=false;
+		$('#btn_showTAA').val('+ TAA comparison');
+		$('#show_TAA_div').hide();
+	}
+}
+
+</script>
+
+<!-- JZ <script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+-->
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+</script>
+</head>
+<body>
+
+<h1 align="center">Investment Plans for Brokerage Accounts (IRA or Taxable)</h1>
+      <div style="width:100%">
+         <div class="col-1" style="width:48%">
+ 
+         <h2 align="center">Featured ETF Plans</h2>
+         <h3 align="center"><i>Applicable to ALL brokerage accounts</i></h3><br>
+          <div class="dividerTop">
+          <h2 style="text-align:center;font-size:14px;line-height:30px;"><i><font color="#66CC00">New: </font><i><a href="/LTISystem/f401k_view.action?ID=5,551">Schwab ETF Select List</a> by<strong> Our Expert User</strong></h2>
+          <div id='strategyClassTable'>
+          [@s.action name="GetPlanScoreTable" namespace="/jsp/strategy" executeResult=true]
+	          [@s.param name="includeTAAReturn"]true[/@s.param]
+	          [@s.param name="includeSAAReturn"]false[/@s.param]
+	          [@s.param name="includeCoverageScore"]false[/@s.param]
+	          [@s.param name="includeFundQualityScore"]false[/@s.param]
+	          [@s.param name="includeCapabilityScore"]false[/@s.param]
+	          [@s.param name="includeInvestmentScore"]true[/@s.param]
+	          [@s.param name="ids"]4863|1148|4904|1429|714|5551[/@s.param]
+	          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action]
+          </div>
+          
+          </div>
+
+          
+         </div>
+
+         <div class="col-2" style="width:48%">
+          <h2 align="center">Featured Brokerage Specific Mutual Fund Plans</h2>
+          <h3 align="center"><i>Only Applicable to Specific Brokerages Using No Load No Transaction Fee Mutual Funds</i></h3>
+          <div class="dividerTop">
+          <br><br>
+          <div id='strategyClassTable'>
+          
+          [@s.action name="GetPlanScoreTable" namespace="/jsp/strategy" executeResult=true]
+	          [@s.param name="includeTAAReturn"]true[/@s.param]
+	          [@s.param name="includeSAAReturn"]false[/@s.param]
+	          [@s.param name="includeCoverageScore"]false[/@s.param]
+	          [@s.param name="includeFundQualityScore"]false[/@s.param]
+	          [@s.param name="includeCapabilityScore"]false[/@s.param]
+	          [@s.param name="includeInvestmentScore"]true[/@s.param]
+	          [@s.param name="ids"]725|5393|724|1032|679|5857[/@s.param]
+	          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action]
+          <br>
+          <br>
+          </div>         
+          </div>
+
+         </div>
+    </div>
+<div class=" ">
+
+<br>
+<h1 align="center"><a href="/LTISystem/f401k__ira_brokerage.action">Click Here for More Brokerage Investment Plans and Details</a></h1>
+<div class="sidebar_box">
+  	<div style="margin-bottom:8px"><span class="sidebar_heading"><strong>Search For A Plan and Its Model Portfolios</strong><span></div>
+  			<div class=" ">
+<script type="text/javascript">
+
+</script>
+
+<table border=0>
+<tr>
+	<td width="35%">
+		<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    	<input name="groupIDs" value="${groupid}" type="hidden"></input>
+	        <input name="includeHeader" value="true" type="hidden"></input>
+	        <input name="type" value="2" type="hidden"></input>
+	        <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	        <input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)' size="18" type="text" value='${Parameters.symbolPlan!""}'>
+	        <input alt='Quote' class='submitSearch' type='submit' value=''/>
+	   </form><!-- end of form -->
+	   </span>
+	
+	</td>
+        <td align="left">
+           <ul>
+             <li><h3>For brokerage ETFs and Mutual Funds portfolios, enter your brokerage name</h3></li>
+             <li><h3>For others, enter keywords in your plan name</h3></li>
+           </ul>
+        </td>
+</tr>
+</table>
+</div>
+</div>
+<p><strong><i>NOTE:</i></strong>
+<ul>
+<li><strong>Plan:</strong> a list of funds such as ETFs or mutual funds</li>
+<li><strong>Strategies:</strong>
+  <ul>
+  <li><a href="/LTISystem/jsp/strategy/View.action?ID=771">Strategic Asset Allocation (SAA):</a> long term buy and hold with periodic re-balance</li>
+  <li><a href="/LTISystem/jsp/strategy/View.action?ID=1003">Tactical Asset Allocation (TAA):</a> dynamic changing asset mixes to avoid big loss and improve returns</li>
+  </ul>
+</li>
+<li><strong>Model Portfolios:</strong> built by SAA or TAA for various risk profiles (Growth, Moderate, Conservative).</li>
+<li><strong>TAA 5 Yr Return Annualized</strong>: TAA Moderate model portfolio's 5 yr annualized returns</li>
+<li><strong>Plan Rating:</strong> <a href="/LTISystem/f401k_news.action?PID=861">Rates effectiveness of plan investment choices</a></li>
+</ul>
+</p>
+
+</body>
+</html>

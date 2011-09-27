@@ -1,0 +1,38 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+
+<head>
+<title>Get Started -- Select a Plan</title>
+<meta name="jqueryui" content="smoothness">
+<script src="/LTISystem/jsp/template/gpl/jsuggest.js"></script>
+<script>
+	$(function(){
+		$('#planName').jsuggest({type:"plan"});
+	});
+</script>
+</head>
+
+<body>
+<table border=0 width=100% height=100%>
+<tr>
+<td valign="top" width="200px">
+	[@s.action name="select_nav" namespace="/" executeResult=true]
+    	[@s.param name="step"]1[/@s.param]
+    	[@s.param name="includeHeader"]false[/@s.param]
+	[/@s.action]
+</td>
+<td valign="top"> 
+	<div class="sidebar_box_noPadding roundHeadingGreen" style="padding-top:5px;padding-left:15px;width:710px">
+		<div class="sidebar_box_heading_white">Select a Plan</div>
+		<form action="/LTISystem/select_getstarted_2.action">
+			<p><input id="planName" name="planName" style="border: 1px solid #9FC78F;width:400px;height:30px;font-size:18px"></p>
+			<p>For example: Microsoft 401k, Cisco 401k</p>
+			<p><button type="submit" class="uiButton">Next</button></p>
+		</form>
+	</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

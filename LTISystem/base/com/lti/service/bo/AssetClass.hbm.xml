@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="AssetClass"
+		table="ltisystem_assetclass"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="Name"
+			column="NAME"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="StaticAttribute"
+			column="STATICATTRIBUTE"
+			type="com.lti.type.ParameterList"
+			not-null="false"
+		/>
+		<property
+			name="DynamicAttribute"
+			column="DYNAMICATTRIBUTE"
+			type="com.lti.type.ParameterList"
+			not-null="false"
+		/>
+		<property
+			name="ParentID"
+			column="PARENTID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="BenchmarkID"
+			column="BENCHMARKID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

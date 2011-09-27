@@ -1,0 +1,142 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+
+<p>Retirement investing is an integral part of American personal finance. 
+    With $8.9 trillion parked in over 800 thousand retirement plans such as 401K, 
+    millions of Americans will increasingly rely on their 401K accounts to fund their future retirement needs. 
+    This article is part of a series of case studies we are conducting for various 401K plans. In this article, 
+	we will discuss how participants in <a rel="nofollow"href="/LTISystem/f401k_view.action?ID=${plan.ID}">${plan.name} </a>
+	can achieve reasonable investment results using asset allocation strategies. 
+	We will also discuss how those portfolios are positioned in today&rsquo;s market environment.</p>
+<p>${plan.description}</p>
+<p>${plan.name}'s 401K plan consists of[#if candidateFunds??] ${candidateFunds?size} [/#if]funds. 
+   These funds enable participants to gain exposure to [#if planMajorAssets??]${planMajorAssets?size}[/#if] major assets: 
+   [#if planMajorAssets??]
+     [#list planMajorAssets?keys as key]
+        ${key?capitalize} 
+       [#if key_index < planMajorAssets?size-1]
+         , 
+       [/#if]
+     [/#list]
+   [/#if]
+. The list of minor asset classes covered:</p>
+<p>
+  [#if planMinorAssets??]
+     [#list planMinorAssets?keys?sort as key]
+       ${key?capitalize}:  
+       [#list planMinorAssets[key] as etflist]
+         ${etflist} 
+           [#if etflist_index < planMinorAssets[key]?size-1]
+              , 
+           [/#if]
+       [/#list]
+          <br>
+     [/#list]
+  [/#if]
+ </p>
+<p>
+  As of [#if portfolio??]${portfolio.endDate?date}[/#if], 
+  this plan investment choice is rated as 
+  [#if planScore??]<strong>[@lti.rankingmessage planScore.investmentScore ""/]</strong>[/#if] 
+  based on MyPlanIQ <a rel="nofollow" href="/LTISystem/f401k_showplanscorelist.action">Plan Rating methodology </a>
+  that was designed to measure how effective a plan's available investment funds are <strong>. </strong>
+  It has the following detailed ratings:
+</p>
+<p><span style="font-size: small;"><strong>Diversification</strong> -- Rated as [#if planScore??]<strong>[@lti.rankingmessage planScore.coverageScore ""/](${planScore.coverageScore?string.percent})</strong>[/#if]</span> <br /><span style="font-size: small;"><strong>Fund Quality</strong> -- Rated as[#if planScore??] <strong>[@lti.rankingmessage planScore.fundQualityScore ""/](${planScore.fundQualityScore?string.percent})</strong>[/#if]</span> <br /><span style="font-size: small;"><strong>Portfolio Building</strong> -- Rated as [#if planScore??]<strong>[@lti.rankingmessage planScore.capabilityScore ""/](${planScore.capabilityScore?string.percent})</strong>[/#if]</span> <br /><span style="font-size: small;"><strong>Overall Rating: [#if planScore??][@lti.rankingmessage planScore.investmentScore ""/](${planScore.investmentScore?string.percent})[/#if]</strong></span></p>
+<p>The chart and table below show the historical performance of moderate model portfolios employing strategic and tactical asset allocation strategies ( <a rel="nofollow" href="/LTISystem/jsp/strategy/View.action?ID=771">SAA </a>and <a rel="nofollow" href="/LTISystem/jsp/strategy/View.action?ID=1003">TAA </a>, both provided by MyPlanIQ). For comparison purpose, we also include the moderate model portfolios of a typical [#if planMajorAssets??]${planMajorAssets?size}[/#if] asset <a rel="nofollow" href="/LTISystem/f401k_view.action?ID=[#if sibPlan??]${sibPlan.ID}[/#if]">SIB (Simpler Is Better) plan </a>. This SIB plan has the following candidate index funds and their ETFs equivalent:</p>
+<p>
+   [#if planMajorAssets??]
+     [#list  planMajorAssets?keys as key]
+        ${key?capitalize}:( 
+         [#list  planMajorAssets[key] as etflists]
+            ${etflists} 
+            [#if etflists_index <  planMajorAssets[key]?size-1]
+                 or 
+            [/#if] 
+         [/#list]
+            ) 
+          <br>
+     [/#list]
+   [/#if]
+<br>
+Performance chart (as of  [#if portfolio??]${portfolio.endDate?date}[/#if])</p>
+<p>
+  <a rel="lightbox" href="/LTISystem/article_viewchart.action?ID=${ID}">
+  <img src="/LTISystem/article_viewchart.action?ID=${ID}" alt="" hspace="6" vspace="6" /> </a>
+</p>
+<p>Performance table (as of  [#if portfolio??]${portfolio.endDate?date}[/#if])</p>
+
+[#if performanceItems??]
+	<div id="show_Port_div" style="display:block">
+	<table id="comparetablePort" class="tablesorter" style="width: 100%;" border="0" cellspacing="1" cellpadding="0">
+	<thead>
+	<tr>
+	<th class="header" width="40%">Portfolio Name</th><th class="header" width="10%">1Yr AR</th><th class="header" width="10%">1Yr Sharpe</th><th class="header" width="10%">3Yr AR</th><th class="header" width="10%">3Yr Sharpe</th><th class="header" width="10%">5Yr AR </th><th class="header" width="10%">5Yr Sharpe</th>
+	</tr>
+	</thead>
+	<tbody>
+	[#list performanceItems as item]
+	<tr>
+
+	<td><a href="/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${item.portfolioID}"> ${item.portfolioName}</a></td>
+	<td>[#if item.AR1??]${item.AR1?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio1??]${item.sharpeRatio1?string.percent}[/#if]</td>
+	<td>[#if item.AR3??]${item.AR3?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio3??]${item.sharpeRatio3?string.percent}[/#if]</td>
+	<td>[#if item.AR5??]${item.AR5?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio5??]${item.sharpeRatio5?string.percent}[/#if]</td>
+	</tr>
+	[/#list]
+	</tbody>
+	</table>
+	</div>
+[/#if]
+
+<p>
+Currently, asset classes in 
+[#if portfolioMajorAssets?? ]
+    [#list portfolioMajorAssets?keys as key]
+      ${key?capitalize}( 
+       [#list portfolioMajorAssets[key] as etflists]
+          ${etflists} 
+           [#if etflists_index < portfolioMajorAssets[key]?size-1]
+              , 
+           [/#if] 
+       [/#list]
+       ) 
+      [#if key_index ==portfolioMajorAssets?size-2]
+         and 
+      [/#if]
+      [#if key_index < portfolioMajorAssets?size-2]
+        , 
+      [/#if]
+   [/#list] 
+[/#if]
+are doing relatively well. These asset classes are available to ${plan.name} participants.
+</p>
+<p>
+ To summarize, ${plan.name} plan participants can achieve reasonable investment returns by adopting asset allocation strategies that are tailored to their risk profiles.
+ Currently, the tactical asset allocation strategy indicates overweighing on 
+   [#if portfolioMajorAssets?? ]
+      [#list portfolioMajorAssets?keys as major]
+        ${major?capitalize} 
+         [#if major_index ==portfolioMajorAssets?size-2]
+            and 
+         [/#if]
+         [#if major_index < portfolioMajorAssets?size-2]
+            , 
+         [/#if]
+      [/#list]
+  [/#if]
+funds. <strong><br /></strong><br /><br /><strong>Disclosure: </strong></p>
+<p>
+<strong>Symbols:</strong>[#if etfs??][#list etfs as etf]${etf}[#if etf_index < etfs?size-1], [/#if][/#list][/#if]
+<br><br>
+<strong>Exchange Tickers:</strong>
+ [#if etfs??][#list etfs as etf](${etf})[#if etf_index < etfs?size-1], [/#if]
+ [/#list]
+[/#if]
+</p>
+

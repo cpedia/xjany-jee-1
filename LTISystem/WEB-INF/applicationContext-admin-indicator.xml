@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/admin/indicator/Main" class="com.lti.action.admin.indicator.MainAction"
+		singleton="false">
+		<property name="indicatorManager">
+			<ref bean="indicatorManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/indicator/Search" class="com.lti.action.admin.indicator.SearchAction"
+		singleton="false">
+		<property name="indicatorManager">
+			<ref bean="indicatorManager"/>
+		</property>
+	</bean>
+		
+	<bean name="/jsp/admin/indicator/Save" class="com.lti.action.admin.indicator.SaveAction"
+		singleton="false">
+		<property name="indicatorManager">
+			<ref bean="indicatorManager"/>
+		</property>
+	</bean>	
+
+
+	<bean name="/jsp/admin/indicator/dailydata/Main" class="com.lti.action.admin.indicator.dailydata.MainAction"
+		singleton="false">
+		<property name="indicatorManager">
+			<ref bean="indicatorManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/indicator/dailydata/Save" class="com.lti.action.admin.indicator.dailydata.SaveAction"
+		singleton="false">
+		<property name="indicatorManager">
+			<ref bean="indicatorManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/indicator/dailydata/Search" class="com.lti.action.admin.indicator.dailydata.SearchAction"
+		singleton="false">
+		<property name="indicatorManager">
+			<ref bean="indicatorManager"/>
+		</property>
+	</bean>		
+</beans>

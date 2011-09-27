@@ -1,0 +1,9 @@
+[#ftl]
+ [#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<h1 style="text-align:center">Hussman's Peak PE10 and Hussman Ratio</h1>
+<hr />
+<p></p>
+<li><a href="advanced__HussmanRatioLargeChart.action?includeHeader=false&amp;host=www.myplaniq.com">Larger Chart</a></li>
+[@lti.gchart "Hussman Peak PE10,Long Term Average" "PeakPE10Data_7145.xml" hostname][/@lti.gchart]
+ [@lti.gchart "Hussman Ratio" "HussmanRatioList_7145.xml" hostname][/@lti.gchart]

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.register" namespace="/jsp/register"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+			<result name="message" type="freemarker">/jsp/message.uftl</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="openRegister" class="/jsp/register" method="openRegister">
+			<result name="input">/jsp/register/register.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Register" class="/jsp/register" method="register">
+			<result name="success" type="redirect">/jsp/register/RegisterSuccess.action</result>
+			<result name="login" type="redirect">/jsp/register/autoLoginForSubscr.action?userName=${user.UserName}</result>
+			<result name="relogin" type="redirect">/jsp/register/openRegister.action?type=subscr&amp;errString=${eStr}</result>
+			<result name="error">/jsp/error.jsp</result>
+			<result name="input">/jsp/register/register.jsp</result>
+		</action>
+		
+		<action name="landingRegister*" class="/jsp/register" method="landingRegister">
+			<result name="success" type="redirect">/jsp/register/landing{1}Success.action</result>
+			<result name="message" type="freemarker">/jsp/message.uftl</result>
+		</action>
+		
+		<action name="autoLoginForSubscr" class="/jsp/register" method="autoLoginForSubscr">
+			<result name="success" type="redirect">/paypal_subscr.action</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="addInviteCode" class="/jsp/register" method="addInviteCode">
+			<result name="success" type="freemarker">/jsp/register/addInviteCode.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="delInvite" class="/jsp/register" method="delInvite">
+			<result name="success" type="redirect">/jsp/register/adminViewInvite.action?includeHeader=false</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="adminInsertinvite" class="/jsp/register" method="adminInsertinvite">
+			<result name="success" type="freemarker">/jsp/register/addInviteCode.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="adminViewInvite" class="/jsp/register" method="adminViewInvite">
+			<result name="success" type="freemarker">/jsp/admin/inviteCode/inviteCodeView.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="findUserbyInviteId" class="/jsp/register" method="findUserbyInviteId">
+			<result name="success" type="freemarker">/jsp/admin/inviteCode/findUserbyInviteId.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="ViewUserDetails" class="/jsp/register" method="ViewUserDetails">
+			<result name="success">/jsp/register/register.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="ViewEmailList" class="/jsp/emaillist" method="viewEmailList">
+			<result name="success">/jsp/register/emaillist.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="userMyAccount" class="com.lti.action.register.UserMyAccount">
+			<result name="success" type="freemarker">/jsp/register/user_myaccount.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="SaveEmailList" class="/jsp/emaillist" method="saveEmailList">
+			<result name="success" type="redirect">/jsp/register/ViewUserDetails.action</result>
+			<result name="error" type="redirect">/jsp/register/ViewUserDetails.action</result>
+		</action>
+		<action name="UpdateUserDetails" class="/jsp/register" method="UpdateUserDetails">
+			<result name="input">/jsp/register/register.jsp</result>
+			<result name="success" type="redirect">/jsp/register/ViewUserDetails.action</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="ForgotPassword" class="com.lti.action.register.ForgotPasswordAction">
+			<result name="input">/jsp/register/forgotpassword.jsp</result>
+			<result name="success" type="redirect">/jsp/register/Success.action</result>
+		</action>
+		<action name="PasswordReset" class="com.lti.action.register.PasswordResetAction">
+			<result name="input">/jsp/register/passwordreset.jsp</result>
+			<result name="success" type="redirect">/jsp/register/Success.action</result>
+			<result name="meassage">/jsp/register/password_message.jsp</result>
+		</action>
+		<action name="refuseMarketEmail" class="com.lti.action.register.refuseMarketEmailAction">
+			<result name="success" type="freemarker">/jsp/register/Success2.uftl</result>
+			<result name="out" type="freemarker">/jsp/register/Opt_Out.uftl</result>
+			<result name="result">/jsp/register/result.jsp</result>
+		</action>
+		<action name="FreeNewsletter" class="com.lti.action.register.FreeNewsletterAction">
+			<result name="success" type="freemarker">/jsp/register/Success.uftl</result>
+			<result name="link" type="freemarker">/jsp/register/freeNewsletter_link.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="MainPageSubscr" class="com.lti.action.register.MainPageSubscrAction">
+			<result name="login" type="redirect">/jsp/register/openRegister.action?type=subscr</result>
+			<result name="view" type="redirect">/paypal_center.action</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/register/{1}.uftl
+			</result>		
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>					
+		</action>			
+	</package>
+
+</struts>

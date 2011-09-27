@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.flash" namespace="/jsp/flash" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="OutputXML" class="/jsp/flash/result/OutputXML">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="OutputTL" class="/jsp/flash/result/OutputTL">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="OutputBeta" class="/jsp/flash/result/OutputBeta">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="OutputCompare" class="/jsp/flash/result/OutputCompare">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="Main" class="/jsp/flash/main">
+			<result name="success">/jsp/flash/main.jsp</result>
+		</action>
+		<action name="OutputMPT" class="/jsp/flash/result/OutputMPT">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="OutputBetaGain" class="/jsp/flash/result/OutputBetaGain">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="*" class="com.lti.action.flash.{1}Action">
+			<result name="success" type="freemarker">
+				/jsp/flash/{1}.ftl
+			</result>			
+		</action>	
+	</package>
+</struts>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="StrategyCode"
+		table="ltisystem_strategycode"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="StrategyID"
+			column="StrategyID"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="Date"
+			column="Date"
+			type="java.util.Date"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="Code"
+			column="Code"
+			type="com.lti.type.StringToCodeInf"
+			not-null="true"
+		/>
+	</class>	
+</hibernate-mapping>

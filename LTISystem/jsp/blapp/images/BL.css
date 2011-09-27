@@ -1,0 +1,13 @@
+#Basic div{
+	border:1px #8DB6CD solid;
+	font-family: Arial
+	font-size: 8px;
+}
+
+#ViewRef div{
+	border:1px #8DB6CD solid;
+	width: 500 px;
+	font-size: 13px;
+	padding-top: 10px;
+	padding-bottom: 5px; 
+}

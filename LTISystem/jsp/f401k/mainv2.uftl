@@ -1,0 +1,379 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<script src="/LTISystem/jsp/template/ed/js/mediaPlugin.js" type="text/javascript"></script>
+<script>
+	$(document).ready(function() {
+		setTimeout('logoRotator()', 4000);
+		
+		initTabs();
+		$("#signupemail").click(function(){
+       		if (isValidEmail($('#subemail').val())){
+       			
+       		}else{
+       			alert("Invalid email, please re-enter.");
+       			return;
+       		}
+			$.ajax({
+				url: '/LTISystem/jsp/register/FreeNewsletter.action?action=send&email='+$('#subemail').val(),
+				success: function(resulthtml){
+					alert("Thank you for signing up MyPlanIQ Newsletter.");
+				}
+			});
+		});
+		$('#flashdiv').append("<a class='mediaObject'></a>");
+		$('.mediaObject').media({ 
+				width:     618, 
+				height:    339, 
+				autoplay:  true, 
+				src:       "/LTISystem/jsp/template/ed/media/evergreen.swf"
+				//attrs:     { controller:  'true', "scale":"tofit", postdomevents:true},
+				//params:     { controller:  'true', "SCALE":"tofit", postdomevents:true}
+		}); 
+		
+		$("#flashwindow").dialog({height:369,width:638,title:"Learn More",position:"center",autoOpen:false,modal:true});
+
+		 
+		$('#slide4_tab').click(function(){
+			$("#flashwindow").dialog("open");
+		});
+	});
+	
+	function send(e){
+		var email = $('#subemail').val();
+		var k = window.event?window.event.keyCode:e.which;
+  		var src = window.event?window.event.srcElement:e.target;
+        if(k==13){
+        	if(email.trim()==''){
+				alert("Please input your email address.");
+				return;
+			}
+			else if(!isValidEmail(email)){
+				alert("Invalid email, please re-enter.");
+				return;
+			}
+        	$("#signupemail").trigger("click");
+        }
+	}
+	function isValidEmail(isText){
+		var reEmail = /^(?:\w+\.?)*\w+@(?:\w+\.?)*\w+$/;
+		return reEmail.test(isText);
+	}
+	
+ </script>
+ <script src="${lti.baseUrl}/jsp/template/ed/js/logos_v2.js" type="text/javascript"></script>
+ 
+ <title>MyPlanIQ: Retirement and Taxable Plans Investment Solutions</title>
+</head>
+<body>
+
+<div id="killzone">
+		<div class="slideArea" id="slideArea">
+			<div id="slide_3">
+				<div class="sld_title">The Only Application That Understands My IRA/401K Plans</div>
+				<div class="slideContents">
+					<div class="slideAcross"></div>
+					<div class="slideLeft width_270">
+						<!-- <p class="slide_displaytext margin_top_20">Plan Ratings and Rollover Assistance</p> -->
+                                                <p class="slide_displaytext margin_top_20">PlanRatingIQ </p>
+						<div class="horiz_divider_fade"></div>
+						<p class="slide_bullet_Item margin_bottom_5"><a href="/LTISystem/f401k_showplanscorelist.action">Rate My Plan's Investment Choices </a></p>
+						<!-- <p class="slide_displaytext_sml margin_bottom_5 margin_top_15">Help me roll over:</p> -->
+                                                <p class="slide_displaytext margin_bottom_5 margin_top_15">PlanRolloverIQ</p>
+
+						
+						<ul class="slide_bullet_ul">
+							<li class="slide_bullet_Item margin_bottom_5"><a href="/LTISystem/f401k_planrollover.action">From 401K to Another 401K/IRA</a></li>
+							<li class="slide_bullet_Item"><a href="/LTISystem/f401k_planrollover.action">From (IRA) Brokerage to Another
+								(IRA) Brokerage</a></li>
+						</ul>
+	
+						<div class="horiz_divider_fade"></div>
+					</div>
+					<div class="slideRight width_370">
+						<div class="slide2_graph margin_top_20" ><img src="${lti.baseUrl}/jsp/template/ed/images/slide3_logos.gif" alt="" width="318" height="196" /></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	
+		<div style="background-color:#fff;height:100%" >
+           <a href='/LTISystem/getstarted_pickaplan.action'>
+                       <img src='/LTISystem/jsp/images/getstarted.gif' border=0>
+                       </a>
+                       
+		</div>
+		
+		
+		
+	</div>
+<div id="kz_tab_overflow">	
+	<div id="kz_tabs">
+		<a id="slide1_tab" class="tab tabBorderRight activeTab">What We Do</a>
+		<a id="slide2_tab" class="tab tabBorderRight">Better Performance</a>
+		<a id="slide3_tab" class="tab tabBorderRight">Plan Rating &amp; Rollover</a>
+		<a id="slide4_tab" class="tab">Learn More</a>
+		<div class="clear"></div>
+	</div>
+</div>
+	<!-- CONTENT -->
+	<div class="columnBkgd">
+<!--  <div id="content">
+  		<div class="col-1  maxheight">
+
+        	<div class="inner">
+        		<h3>Time Proven Strategies</h3>
+  				<ul class="list">
+  					<li>
+  						<h4><strong>Strategic Asset Allocation:</strong> Static
+           							asset allocation based on retirement ages and risk
+						tolerance</h4>
+     				</li>
+  				</ul>
+  				<ul class="list">
+  					<li>
+  						<h4><strong>Tactical Asset Allocation:</strong> Major asset classes
+						momentum driven</h4>
+					</li>
+				</ul>
+  				<ul class="list">
+  					<li>
+  						<h4><strong>Guru (Smart Money) Directed Asset Allocation:</strong> following
+						great fund managers' asset allocation decisions</h4>
+					</li>
+  					<li class="">
+  						<h4><strong>Optimized Asset Allocation:</strong> Efficient frontier
+						optimized</h4>
+					</li>
+  				</ul>
+         	<a href="secondary.html" class="moreInCategory">More Info on Evergreen Strategies
+         	»</a></div>
+     	</div>
+      <div class="col-2 maxheight">
+        
+          
+            
+            
+            
+            
+            
+         <div class="inner">
+           	<h3>Taxable/Self-Directed Plans</h3>
+     			<ul class="list">
+     				<li>
+     					<h4><strong>Brokerage No Load No Transaction Fee Mutual Fund </strong></h4>
+     				</li>
+     				<li>
+     					<h4><strong>ETF Plans </strong></h4>
+  					</li>
+     				<li>
+     					<h4><strong>Variable Annuity and VUL Plans</strong></h4>
+     				</li>
+     				<li>
+     					<h4><strong>College Savings 529 Plans </strong></h4>
+  					</li>
+  				</ul>
+				<a href="secondary.html" class="moreInCategory">More Info »</a>
+				<div  class="logoRotation" id="logoRotation">
+					<h3 id="logoTitleText">Taxable/Self-Directed Plans</h3>
+					<div class="logoRotator"></div>
+				</div>
+         </div>
+      </div>
+      <div class="col-3 maxheight">
+        
+          
+ 
+            
+         <div class="inner">
+           	<h3>News &amp; Announcements</h3>
+     			<ul class="list">
+					<li>
+						<h4><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </strong><br />
+						<a href="secondary.html">More »</a></h4>
+					</li>
+     				<li>
+						<h4><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </strong><br />
+							<a href="secondary.html">More »</a></h4>
+  					</li>
+     				<li>
+						<h4><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </strong><br />
+							<a href="secondary.html">More »</a></h4>
+  					</li>
+     				<li>
+						<h4><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </strong><br />
+							<a href="secondary.html">More »</a></h4>
+  					</li>
+  				</ul>
+  				<p><a href="secondary.html" class="moreInCategory">More News &amp; Announcements
+  						»</a></p>
+  				<div id="decideCustomizeManage_v2"><a href="#"><img src="${lti.baseUrl}/jsp/template/ed/images/decide_v2.gif" alt="" width="272" height="48" /></a><a href="#"><img src="${lti.baseUrl}/jsp/template/ed/images/customize_v2.gif" alt="" width="272" height="56" /></a><a href="#"><img src="${lti.baseUrl}/jsp/template/ed/images/manage_v2.gif" alt="" width="272" height="61" /><img src="${lti.baseUrl}/jsp/template/ed/images/simpleToUse.gif" alt="" width="272" height="57" /></a></div>
+  				<p>&nbsp;</p>
+         </div>
+      </div>
+		
+		<div class="clearfloat"></div>
+		</div>
+-->		
+  </div>
+
+<style>
+	#menu2{
+		margin:0 auto;
+	}
+		#menu2 ul{
+			list-style:none;
+		}
+			#menu2 li{
+				list-style:none;
+				display:block;
+				float:left;
+				line-height:51px;
+				border:solid #39A673;
+				border-width:0 2px 0 2px;				
+				background:url(/LTISystem/jsp/images/menu_005_bg.jpg) repeat-x;
+				height:51px;
+				margin:3px 1px 0 0;		
+										
+			}
+				#menu2 li a{
+					display:block;
+					float:left;
+					color:#fff;
+					text-transform:uppercase;
+					font-size:11px;
+					font-weight:bold;
+					text-decoration:none;
+					padding:0 25px;
+					height:51px;	
+					width:300px;				
+				}
+					#menu2 li a:hover{
+						color:#fff;
+						background:url(/LTISystem/jsp/images/menu_005_h.jpg) repeat-x;
+					}
+				#menu2 li a.current{
+					display:block;
+					float:left;
+					background:url(/LTISystem/jsp/images/menu_005_h.jpg) repeat-x;					
+					color:#fff;
+					text-transform:uppercase;
+					font-size:11px;
+					font-weight:bold;
+					text-decoration:none;
+					padding:0 25px;	
+				}
+					#menu2 li a:hover.current{
+						color:#fff;
+					}
+
+
+
+</style>
+
+<div id="storage" style="display:none">
+	<div id="slide_1">
+		<div class="slideContents">
+			<div class="slideAcross">
+				<div id="getModelPortfolios">
+					<div class="floatleft margin_top_2"><strong>Get Asset Allocation Model Portfolios for My Plan</strong></div>
+					<div id="portfolioSearchbox">
+						<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+		            	    	<input name="groupIDS" value="8" type="hidden"></input>
+		            	        <input name="includeHeader" value="true" type="hidden"></input>
+		            	        <input name="type" value="2" type="hidden"></input>
+		            	        <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+		            	        <input id="n401k_plansearch_text" name="keyword" 
+		            	        onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)this.value="Hewlett Packard"' size="15" type="text" value='${Parameters.keyword!"Enter Keywords"}'
+								size="15" type="text">
+		            	        <input alt='Quote' class="submitSearchTop" type='submit' value=''/>
+		            	 </form>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="slideLeft">
+				 <div id="menu2">
+					 <ul>
+							<li><a href="/LTISystem/f401k__ira_brokerage.action">IRA/Brokerage ETF, Mutual Fund Portfolios</a></li>
+							<li><a href="/LTISystem/f401k__401kplans.action">Retirement 401K,&nbsp; 403B, 457</a></li>
+							<li><a href="/LTISystem/f401k__annuity_vul_colleges.action">Annuities, VULs, 529</a></li>
+							<li><a href="/LTISystem/f401k_showplanscorelist.action">Plan Rating &amp; 401K/IRA Rollover</a></li>
+						</ul>
+						[#--
+								<p class="box1">Brokerage (IRA) ETF/Mutual Fund Plans</p>
+				                 <p class="box1">Retirement 401K, 403B, 457</p>
+				                 <p class="box1">Annuities, Variable Life Insurance</p>
+				                 <p class="box1">College Savings 529</p>
+				
+								<p class="box1"><i>Easy to Use, Free or Low Cost</i> 
+								<p class="slide_bullet_Item">• Rebalance emails and brokerage linking</p>
+								</p>
+						--]
+				</div>
+			</div>
+			<div class="slideRight">
+                                
+				<div class="piechart"> <img src="${lti.baseUrl}/jsp/template/ed/images/piechart.png" alt="" width="203" height="192" /></div>
+<!--                                <p class="slide_displaytext">Smart Asset Allocation for higher returns<br />
+                                  and lower risk</p>
+                                <p class="slide_bullet_Item">• Up to 8% annual returns improvement</p>
+                                <div class="horiz_divider_fade">
+                                  <p>&nbsp;</p>
+                                </div>
+-->
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div id="slide_2">
+		<div class="sld_title">Time Proven Investment Strategies Customized to My Plans</div>
+		<div class="slideContents">
+			<div class="slideAcross"></div>
+			<div class="slideLeft width_260">
+			
+				<a href="/LTISystem/jsp/strategy/View.action?ID=1003"><p class="slide_displaytext color7BB406 margin_top_20">Tactical Asset Allocation (TAA)</p></a>
+				<p class="slide_displaytext_sml color7BB406">• Dynamically allocates assets</p>
+			
+				<div class="horiz_divider_fade height_15"></div>
+				
+				<a href="/LTISystem/jsp/strategy/View.action?ID=771"><p class="slide_displaytext colorE79115 ">Strategic Asset Allocation (SAA)</p></a>
+				<p class="slide_displaytext_sml colorE79115">• Buy and Hold with preset risk profile</p>
+				
+				<div class="horiz_divider_fade height_20	"></div>
+				<p class="slide_displaytext_sml">Smart Asset Allocation Strategies</p>
+				
+				<ul class="slide_bullet_ul">
+				<li class="slide_bullet_Item margin_bottom_5"> Diversification - stocks,bonds,real
+					estate, commodities</li>
+				<li class="slide_bullet_Item margin_bottom_5">TAA avoids
+					big losses -- adds 4-6% annual return</li>
+				<li class="slide_bullet_Item">Good fund selection -- adds 1-2% annual return</li>
+				</ul>
+				
+				
+			</div>
+			<div class="slideRight width_370">
+				<div class="slide2_graph margin_top_20" > <img src="${lti.baseUrl}/jsp/template/ed/images/slide2_graph.gif" alt="" width="369" height="211" /></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<div style="display:none">
+	<div id="flashwindow">
+		<div id="flashdiv"></div>
+	</div>
+</div>
+</body>
+</html>
+
+

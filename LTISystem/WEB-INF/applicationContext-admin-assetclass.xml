@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+
+	<bean name="/jsp/admin/assetclass/Main" class="com.lti.action.admin.assetclass.MainAction"
+		singleton="false">
+		<property name="assetClassManager">
+			<ref bean="assetClassManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/assetclass/Save" class="com.lti.action.admin.assetclass.SaveAction"
+		singleton="false">
+		<property name="assetClassManager">
+			<ref bean="assetClassManager"/>
+		</property>
+	</bean>		
+	<bean name="/jsp/admin/assetclass/FetchMenu" class="com.lti.action.admin.assetclass.FetchMenuAction"
+		singleton="false">
+		<property name="assetClassManager">
+			<ref bean="assetClassManager"/>
+		</property>
+	</bean>		
+</beans>

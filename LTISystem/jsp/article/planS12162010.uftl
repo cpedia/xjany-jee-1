@@ -1,0 +1,279 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+
+
+<p>${plan.description}</p>
+<p>
+  We report on their <a rel="nofollow"href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=${plan.ID}">${plan.name} </a>
+  We will discuss the investment choices and present the plan rating by MyPlanIQ. Current economic and market conditions 
+  are discussed in the context of the investment portfolios in the plan. We will then show how participants in
+  <a rel="nofollow"href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=${plan.ID}">${plan.name} </a>can achieve reasonable 
+  investment results using asset allocation strategies. 
+</p>
+<p>
+  Their 401K plan consists of [#if candidateFunds??]${candidateFunds?size}[/#if] funds. These funds enable participants to 
+  gain exposure to [#if planMajorAssets??]${planMajorAssets?size}[/#if] major assets: 
+  [#if planMajorAssets??]
+     [#list planMajorAssets?keys as key]
+        [#if key?contains("us")]
+          [#if key_index < planMajorAssets?size-1]${key?replace("us equity","US Equity")},[#else]${key?replace("us equity","US Equity")}.[/#if]
+        [#elseif key?contains("reits")]
+           [#if key_index < planMajorAssets?size-1]${key?replace("reits","REITs")},[#else]${key?replace("reits","REITs")}.[/#if]
+        [#else]
+           [#if key_index < planMajorAssets?size-1]${key?capitalize},[#else]${key?capitalize}.[/#if]
+        [/#if]
+    [/#list]
+  [/#if] 
+</p>
+<p>
+ <table width="50%">
+  <thead>
+   <tr>
+   <th align="left">Asset Class</th>
+   <th align="left">Ticker</th>
+   <th align="left">Name</th>
+   </tr>
+  </thead>
+  <tbody>  
+    [#if candidateFunds??]
+      [#list candidateFunds as var]
+     <tr>
+      <td width="40%">${var.assetClassName!"-"}</td>
+      <td width="20%">${var.symbol!"-"}</td>
+      <td width="40%">${var.name!"-"}</td>
+     </tr>
+      [/#list]
+    [/#if] 
+  </tbody>
+ </table>
+</p>
+<br>
+<p>
+  The list of minor asset classes covered:
+  <br>
+    [#if planMinorAssets??]
+     [#list planMinorAssets?keys?sort as key]
+       ${key?capitalize}:  
+       [#list planMinorAssets[key] as etflist]
+         [#if etflist_index < planMinorAssets[key]?size-1]${etflist?replace(" ","")},
+         [#else]${etflist}
+         [/#if]
+       [/#list]
+          <br>
+     [/#list]
+  [/#if]
+</p>
+<p>
+<table>
+  <thead>
+     <tr>
+     <th th align="left">Asset Class</th>
+     <th>Number of funds</th>
+     </tr>
+  </thead>
+  <tbody>
+  [#if majorAssetsSta??]
+  [#list majorAssetsSta?keys as key]
+  [#if !key?matches("Other")]
+  <tr>
+  <td>${key}</td>
+  <td>${majorAssetsSta[key]?size}</td>
+  </tr>
+  [/#if]
+  [/#list]
+
+    [#list majorAssetsSta?keys as key]
+  [#if key?matches("Other")]
+  <tr>
+  <td>${key}</td>
+  <td>${majorAssetsSta[key]?size}</td>
+  </tr>
+  [/#if]
+  [/#list]
+
+  
+  
+  [/#if]
+  <tr>
+   <td>Total</td>
+   <td>${candidateFunds?size}</td>
+  </tr>
+  </tbody>
+</table>
+</p>
+<p>
+  <br>
+  <br> 
+  <br>
+</p>
+
+[#macro rankingmessage scorenum]
+  [#assign score=scorenum*100]
+      [#if score == 0]
+	    unrated
+      [#elseif score<10]
+	    poor
+	[#elseif score<35]
+		below average
+	[#elseif score< 65]
+		average
+	[#elseif score< 85]
+		above average
+	[#else]
+		great
+	[/#if]
+	[/#macro]
+	
+<p>
+  As of [#if portfolio??]${portfolio.endDate?date}[/#if], 
+  this plan investment choice is rated as 
+  [#if planScore??]<strong>[@rankingmessage planScore.investmentScore /]</strong>[/#if] 
+  based on MyPlanIQ <a rel="nofollow" href="http://www.myplaniq.com/LTISystem/f401k_showplanscorelist.action">Plan Rating methodology </a>
+  that was designed to measure how effective a plan's available investment funds are <strong>. </strong>
+  It has the following detailed ratings:
+</p>
+<p>
+    <span style="font-size: small;"><strong>Diversification</strong> -- Rated as [#if planScore??]<strong>[@rankingmessage planScore.coverageScore /](${planScore.coverageScore?string.percent})</strong>[/#if]
+	</span> <br /><span style="font-size: small;"><strong>Fund Quality</strong> -- Rated as[#if planScore??] <strong>[@rankingmessage planScore.fundQualityScore /](${planScore.fundQualityScore?string.percent})</strong>[/#if]
+	</span> <br /><span style="font-size: small;"><strong>Portfolio Building</strong> -- Rated as [#if planScore??]<strong>[@rankingmessage planScore.capabilityScore /](${planScore.capabilityScore?string.percent})</strong>[/#if]
+	</span> <br /><span style="font-size: small;"><strong>Overall Rating: [#if planScore??][@rankingmessage planScore.investmentScore /](${planScore.investmentScore?string.percent})[/#if]</strong></span>
+</p>
+<br>
+<p><h2>Current Economic and Market Conditions </h2></p>
+<br>
+<p>We have experienced an uncertain 2010: plenty of worries on whether the US economy will 
+   climb out of the great recession and recover.
+   <ul>
+   <li>The Federal Reserve embarked on Quantitative Easing II (QE2) to stimulate the economy.</li>
+   <li>The housing market is still at its low but largely stabilized.</li>
+   <li>The unemployment rate is stuck at 9%.</li>
+   </ul>
+</p>
+<p>Americans continue to face an uncertain future, given (among others) the high unemployment rate, large federal and local government debts and global trade imbalance. With such an economic backdrop, 
+   the stock and debt markets are going to be volatile. Despite this, markets have been resilient and appear positioned to rebound.
+</p>
+<p>
+  In this market it is even more critical to properly diversify and respond market changes. MyPlanIQ offers two asset allocation strategies: strategic and tactical asset allocation strategies 
+  (<a rel="nofollow" href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=771">SAA </a>and <a rel="nofollow" href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=1003">TAA </a>for participants in ${plan.name}).
+</p>
+<p>
+   Strategic Asset Allocation is based on well known modern portfolio theory and its key features include: diversification, proper fund selection and periodically re-balancing.
+</p>
+<p>
+   Tactical Asset Allocation works on a diversified array of assets provided by funds in a plan and adjusts asset mixes based on market conditions such as asset price momentum utilized by TAA.
+</p>
+<br>
+<p><h2>Portfolio Discussions</h2></p>
+<br>
+<p>The chart and table below show the historical performance of moderate model portfolios employing strategic and tactical asset allocation strategies.
+   For comparison purpose, we also include the moderate model portfolios of a typical [#if comparePlanMajorAssets??]${comparePlanMajorAssets?size}[/#if] 
+   asset <a rel="nofollow" href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=[#if sibPlan??]${sibPlan.ID}[/#if]">SIB (Simpler Is Better) plan </a>. 
+   This SIB plan has the following candidate index funds and their ETFs equivalent:
+</p>
+<p>
+   [#if comparePlanMajorAssets??]
+     [#list  comparePlanMajorAssets?keys as key][#if key?contains("us")]${key?replace("us equity","US Equity")}[#elseif key?contains("reits")]${key?replace("reits","REITs")}[#else]${key?capitalize}[/#if]: [#list comparePlanMajorAssets[key] as etflists]${etflists}[#if etflists_index <  comparePlanMajorAssets[key]?size-1] or [/#if][/#list] 
+          <br>
+     [/#list]
+   [/#if]
+Performance chart (as of  [#if portfolio??]${portfolio.endDate?date}[/#if])</p>
+<p>
+  [#assign portfolioids = ""  /]
+  	[#if portfolios??]
+  		[#list portfolios as pp]
+  			[#assign portfolioids=portfolioids+"${pp.ID?string.computer}"/]
+  			[#if pp_index < portfolios?size-1]
+  			[#assign portfolioids=portfolioids+","]	
+  			[/#if]
+  		[/#list]
+  	[/#if]
+
+  	
+  <a rel="lightbox" href="http://www.myplaniq.com/LTISystem/article_viewchart.action?portfolioID=[#if portfolioids??]${portfolioids}[/#if][#if compareID??]&compareID=${compareID}[/#if]">
+  <img src="http://www.myplaniq.com/LTISystem/article_viewchart.action?portfolioID=[#if portfolioids??]${portfolioids}[/#if][#if compareID??]&compareID=${compareID}[/#if]" alt="" hspace="6" vspace="6" /> </a>
+</p>
+<p>Performance table (as of  [#if portfolio??]${portfolio.endDate?date}[/#if])</p>
+
+[#if performanceItems??]
+	<div id="show_Port_div" style="display:block">
+	<table id="comparetablePort" class="tablesorter" style="width: 100%;" border="0" cellspacing="1" cellpadding="0">
+	<thead>
+	<tr>
+	<th  width="40%">Portfolio Name</th><th  width="10%">1Yr AR</th><th  width="10%">1Yr Sharpe</th><th  width="10%">3Yr AR</th><th  width="10%">3Yr Sharpe</th><th  width="10%">5Yr AR </th><th  width="10%">5Yr Sharpe</th>
+	</tr>
+	</thead>
+	<tbody>
+	[#list performanceItems as item]
+	<tr>
+
+	<td><a href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${item.portfolioID}"> ${item.portfolioName}</a></td>
+	<td>[#if item.AR1??]${item.AR1?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio1??]${item.sharpeRatio1?string.percent}[/#if]</td>
+	<td>[#if item.AR3??]${item.AR3?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio3??]${item.sharpeRatio3?string.percent}[/#if]</td>
+	<td>[#if item.AR5??]${item.AR5?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio5??]${item.sharpeRatio5?string.percent}[/#if]</td>
+	</tr>
+	[/#list]
+	</tbody>
+	</table>
+	</div>
+[/#if]
+
+<p>
+Currently  
+[#if topMajorAssets??]
+  [#list topMajorAssets as major]
+   [#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index == topMajorAssets?size-2] 
+        and [/#if][#if major_index < topMajorAssets?size-2], [/#if]  
+  [/#list]
+[/#if]
+  are doing well.
+ 
+  [#if planTopMajorAssets??&&planTopMajorAssets?size==1]
+       Only 
+      [#list planTopMajorAssets as major]
+          [#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index == planTopMajorAssets?size-2] 
+            and [/#if][#if major_index < planTopMajorAssets?size-2], [/#if]   
+      [/#list]
+         is
+  [#elseif planTopMajorAssets??&&planTopMajorAssets?size==3]
+       These asset classes are
+  [#elseif planTopMajorAssets??&&planTopMajorAssets?size==2]
+     [#list planTopMajorAssets as major]
+         [#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index == planTopMajorAssets?size-2] 
+         and [/#if][#if major_index < planTopMajorAssets?size-2], [/#if]   
+     [/#list]
+  [#else]
+   But these asset classes are not
+[/#if]
+  available to ${plan.name} participants.
+ </p>
+ <p>
+ This plan beats the three asset benchmark by virtue of the US asset class choices. If would be a stronger plan with more fixed income choices and an additional asset class.
+ </p>
+ <p>
+ To summarize, ${plan.name} participants can achieve the best investment returns by adopting asset allocation strategies that are tailored to their risk profiles.
+ </p>
+<p>
+  ${plan.name} would do well by their employees to consider reviewing their existing funds and adding an additional asset class.
+</p>
+
+<p>
+<strong>Symbols:</strong>
+[#if etfs??]
+[#list etfs as etf]${etf}[#if etf_index < etfs?size-1], [/#if]
+ [/#list]
+[/#if]
+<br><br>
+<strong>Exchange Tickers:</strong>
+[#if etfs??]
+ [#list etfs as etf](${etf})[#if etf_index < etfs?size-1], [/#if]
+ [/#list]
+[/#if]
+</p>
+
+<p><strong>Disclosure:</strong></p>
+<p>MyPlanIQ does not have any business relationship with the company or companies mentioned in this article. It does not set up their retirement plans. The performance data of portfolios mentioned above are obtained through historical simulation and  are hypothetical.</p>

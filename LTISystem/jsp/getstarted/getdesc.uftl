@@ -1,0 +1,9 @@
+[#ftl]
+[#if plan??]
+[#assign attr="description" /]
+[#if Parameters.attr??][#assign attr=Parameters.attr /][/#if]
+[#if attr=="description"]
+${plan.description}
+[/#if]
+[#else]
+[/#if]

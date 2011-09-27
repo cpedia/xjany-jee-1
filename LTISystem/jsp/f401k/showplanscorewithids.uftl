@@ -1,0 +1,124 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<title>Retirement Plans Ranking List With IDs</title>
+<meta  name="Description" content="Get Plan Ratings with PlanIDs">
+
+</head>
+<script>
+function showplanscorewithid(){
+	$.ajax({
+		type: "post",
+		url: "f401k_showplanscorewithids.action?includeHeader=false",
+		data: "planIDArray="+$('#planIDArray').val(),
+		datatype: "html",
+		success: function(result){
+			location.reload() ;
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+}
+</script>
+<body>
+<div>
+	
+	<form action="f401k_showplanscorewithids.action?" method="post">
+		<p><label>[@s.text name="PlanIDList"/]</lable><input type="areatext" id="planIDArray" name="planIDArray" value='${planIDArray!""}'/></p>
+		<input type='submit' class='uiButton' value='Get Plan Score List With IDs'>
+	</form>
+	<br/>
+	<br/>
+	[#if planScoreListWithIDs??]
+		<h1 align="center"><span id='ranking'>Plan Ranking Statistics</span></h1>
+		<br>
+		<br>
+		<table id ="rankingtable" width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			<thead>
+				<tr>
+					<th alt="Plan Name" width="60px" class="header">Plan Name</th>
+					<th alt="TAA 5Yr Return" width="60px" class="header">TAA 5Yr Return</th>
+					<th alt="SAA 5Yr Return" width="60px" class="header">SAA 5Yr Return</th>	
+					<th alt="TAA Construction Capability" width="60px" class="header">TAA Construction Capability</th>
+					<th alt="SAA Construction Capability" width="60px" class="header">SAA Construction Capability</th>	
+					<th alt="Diversification" width="60px" class="header">Diversification</th>	
+					<th alt="Fund Quality" width="60px" class="header">Fund Quality</th>
+					<th alt="Construciton Capability" width="60px" class="header">Construciton Capability</th>
+					<th alt="Overall Investment" width="60px" class="header">Overall Investment</th>	
+				</tr>			
+			</thead>
+			<tbody>
+				[#list planScoreListWithIDs as ps]
+					[#if ps_index%2==0]
+						<tr class='odd'>
+					[/#if]
+					[#if ps_index%2==1]
+						<tr class='even'>
+					[/#if]
+							<td>[#if ps.getStatus() == 1 ]*[/#if]<a href="/LTISystem/f401k_view.action?ID=${ps.getPlanID()}">${ps.getPlanName()}</a></td>	
+							<td width=60px>[#if ps.getTAAReturn()??]${ps.getTAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getSAAReturn()??]${ps.getSAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getTAAScore()??]${ps.getTAAScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getSAAScore()??]${ps.getSAAScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getCoverageScore()??]${ps.getCoverageScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getFundQualityScore()??]${ps.getFundQualityScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getCapabilityScore()??]${ps.getCapabilityScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getInvestmentScore()??]${ps.getInvestmentScore()?string.percent}[#else]{"-"}[/#if]</td>
+						</tr>
+				[/#list]	
+			</tbody>
+		</table>
+			<br class="clear"/>
+		[#--
+			[#if planScoreListWithIDs.size() > 10]
+				<div style="posistion:static" id="rankingpager" class="pager">
+					<form>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/first.png" class="first"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/prev.png" class="prev"/>
+						<input type="text" class="pagedisplay"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/next.png" class="next"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/last.png" class="last"/>
+						<select class="pagesize">
+							<option selected="selected" value="10">10</option>
+							<option value="20">20</option>
+							[#if planScoreListWithIDs.size()> 20 ]
+							<option value="30">30</option>
+							[/#if]
+							[#if planScoreListWithIDs.size()> 30 ]
+							<option value="40">40</option>
+							[/#if]
+						</select>
+					</form>
+				</div>
+			[/#if]
+		<script type="text/javascript"> 
+		$(document).ready(function(){
+			$("#rankingtable").tablesorter({
+				widthFixed: true, 
+				widgets: ['zebra']
+			})
+			[#if planScoreListWithIDs.size() > 10]
+				.tablesorterPager({container: $("#rankingpager")});
+			[/#if]
+			}); 
+		</script>
+		--]
+		<script type="text/javascript"> 
+			$(document).ready(function(){
+				$("#rankingtable").tablesorter({
+					widthFixed: true, 
+					widgets: ['zebra']
+				})
+			}); 
+		</script>
+	[/#if]
+	
+
+</div>
+
+</body>
+</html>

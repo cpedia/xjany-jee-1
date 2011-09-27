@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.mutualfund" namespace="/jsp/mutualfund" extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/mutualfund/Main">
+			<result name="success" type="freemarker">/jsp/mutualfund/result.ftl</result>
+			<result name="input" type="freemarker">/jsp/mutualfund/result.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="PlotPie" class="/jsp/mutualfund/PlotPie">
+			<result name="success" type="freemarker">/jsp/mutualfund/pie.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Result" class="/jsp/mutualfund/Main" method="resultPage">
+			<result name="success" type="freemarker">/jsp/mutualfund/calculate.uftl</result>
+			<result name="input" type="freemarker">/jsp/mutualfund/calculate.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="SetDefaultDate" class="com.lti.action.mutualfund.SetDefaultDateAction">
+			<result name="success" type="freemarker">/jsp/mutualfund/setdefaultdate.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="getmutualFund" class="com.lti.action.mutualfund.ArticleAction" method="getmutualFund">
+		    <result name="success" type="freemarker">/jsp/mutualfund/getmutualFund.uftl</result>
+		    <result name="error">/jsp/error.jsp</result>
+		</action>	
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/mutualfund/{1}.uftl
+			</result>	
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>						
+		</action>			
+	</package>
+</struts>

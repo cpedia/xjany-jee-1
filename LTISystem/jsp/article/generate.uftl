@@ -1,0 +1,107 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<script>
+$(function(){
+	$('#selectAll').click(function(){
+		if($(this).attr("checked")==true){
+			$('.chk').each(function(){
+			  $(this).attr("checked",true);
+			});
+		}else{
+		 $('.chk').each(function(){
+			  $(this).attr("checked",false);
+			});
+		}		 
+	});
+});
+function edit(e){
+  window.open("/LTISystem/article_edit.action?articleTitle="+e);
+}
+
+function show(){
+   check();
+ $.ajax({
+	   type: "Post",
+	   url: "/LTISystem/article_showinPlan.action?includeHeader=false",
+	   data:$("#showform").serialize(),
+	   success: function(message){
+	     alert(message);
+	   },
+	  error: function(message){
+        alert($.trim(message.responseText));
+        return;
+      }
+	 });
+}
+
+function deletes(){	
+  check();
+   $.ajax({
+	   type: "Post",
+	   url: "/LTISystem/article_delete.action?includeHeader=false",
+	   data:"titleStr=" + $("#titleStr").val(),
+	   success: function(message){
+	     alert(message);
+	   },
+	  error: function(message){
+        alert($.trim(message.responseText));
+        return;
+      }
+	 });
+}
+
+function check(){
+    var boxes = document.getElementsByName("display");
+	var titleStr = "";
+	for(var i=0;i<boxes.length;++i){
+		if(titleStr != "")
+			titleStr +="#";
+		if(boxes[i].checked){
+			titleStr += document.getElementById('list_'+i).value;
+
+		}else{
+			titleStr += document.getElementById('list_'+i).value+"_";
+
+		}
+	}
+	var titleElement = document.getElementById("titleStr");
+	titleElement.value = titleStr;
+	
+}
+</script>
+</head>
+<body>
+<p>
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+<form action="/LTISystem/article_showinPlan.action" method="post" id="showform">
+<input type="checkbox" name="selectAll" id="selectAll">Select All<br>
+<input type = "hidden" name="titleStr" id = "titleStr" >
+[#if newArticleList??]
+[#list newArticleList as lists]
+<input type="hidden" id="list_${lists_index}" value="${lists}">
+<input type="checkbox" class="chk" name="display" id="checkbox_${lists_index}" >
+<a href="/LTISystem/article_view.action?articleTitle=${lists}" target="_blank">${lists}</a>
+<input type="button" class="uiButton" value="Edit" onclick="edit('${lists}')">
+<br>
+[/#list]
+[/#if]
+</form>
+</p>
+<p>
+<input type="button" class="uiButton" value="Publish to Planpage" onclick="show()">
+<input type="button" class="uiButton" value="Delete" onclick="deletes()">
+<a class="uiButton" href="/LTISystem/article_downloadlinks.action">Article Links</a>
+</p>
+<p>
+[#if info?matches("")]
+ All Plans Work.
+[#else]
+  ${info}
+ [/#if]
+</p>
+[/@authz.authorize]
+</body>
+</html>

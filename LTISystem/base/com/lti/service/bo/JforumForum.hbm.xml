@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="JforumForum"
+		table="jforum_forums"
+	>
+		<id
+			name="ID"
+			type="java.lang.Integer"
+			column="forum_id"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="CategoriesId"
+			column="categories_id"
+			type="java.lang.Integer"
+		/>
+		<property
+			name="ForumName"
+			column="forum_name"
+			type="java.lang.String"
+		/>
+		<property
+			name="ForumDesc"
+			column="forum_desc"
+			type="java.lang.String"
+		/>
+		<property
+			name="ForumOrder"
+			column="forum_order"
+			type="java.lang.Integer"
+		/>
+		<property
+			name="ForumTopics"
+			column="forum_topics"
+			type="java.lang.Integer"
+		/>
+		<property
+			name="ForumLastPostId"
+			column="forum_last_post_id"
+			type="java.lang.Integer"
+		/>
+		<property
+			name="Moderated"
+			column="moderated"
+			type="java.lang.Integer"
+		/>
+		
+	</class>	
+</hibernate-mapping>

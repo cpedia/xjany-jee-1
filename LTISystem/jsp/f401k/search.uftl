@@ -1,0 +1,36 @@
+[#ftl]
+ [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+ [#import "/jsp/lti_library_ftl.jsp" as lti]
+ [#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#setting url_escaping_charset='utf8']
+[#assign urlpre='f401k_view.action?ID=' /]
+ <html>
+ <head>
+ <title>Search for ${Parameters.q!"MyPlanIQ.com"}</title>
+<meta  name="Description" content="The results of the users' plan searching are listed on this page. Other plan suggestions are provided as well.">
+</head>
+<body>
+ <h2><span>Search keyword: </span>${Parameters.q!"myplaniq.com"}</h2>
+
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+
+[@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+	[@s.param name="includeHeader"]false[/@s.param]
+	[@s.param name="groupIDs"]${groupid}[/@s.param]
+	[@s.param name="type"]2[/@s.param]
+	[@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+	[@s.param name="q"]${Parameters.q!"nothing"}[/@s.param]
+	[@s.param name="keyword"]${Parameters.keyword!"nothing"}[/@s.param]
+	[@s.param name="includePortfolio"]false[/@s.param]
+	[@s.param name="redirect"]true[/@s.param]
+	[@s.param name="isSearch"]true[/@s.param]
+	[@s.param name="width"]910[/@s.param]
+	[@s.param name="url"]/LTISystem/f401k__search.action?cx=011203528935876500718%3Aqtlemv-pl-8&cof=FORID%3A9&ie=UTF-8&groupIDS=8&includeHeader=true&type=2&urlPrefix=%2FLTISystem%2Ff401k_view.action%3FID%3D&q=${Parameters.q!"nothing"}[/@s.param]
+[/@s.action]
+<br>
+
+ </body>
+ </html>

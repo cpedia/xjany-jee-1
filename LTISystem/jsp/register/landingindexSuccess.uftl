@@ -1,0 +1,34 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+</head>
+<body>
+
+<script language="JavaScript" type="text/javascript" src="http://conversion.7search.com/conversion/v1/conversion.js"></script>
+<noscript><img width="1" height="1" border="0" src="http://conversion.7search.com/conversion/v1/?advid=175947&urlid=14441168&type=signup&value=1&noscript=1" /></noscript>
+<!-- 7Search Code for Conversion Page (end) -->
+<script>
+$(document).ready(function(){
+	var UserName = "${Parameters.username}"
+	var PassWord = "${Parameters.password}"
+	var url = "/LTISystem/j_acegi_security_check?j_username="+UserName+"&j_password="+PassWord;
+	$.ajax({
+		url:url,
+		type:'post',
+		success:function(){
+			window.location.href="/LTISystem/f401k__landingma.action";
+		}
+	})
+});
+</script>
+    <div align="center" style="height:550px;">
+    <br>
+    <br>
+    <br>
+   <p>Congratulations!  Your registration is successful.</p>
+   <p>Auto Login now. . .</p>
+</div>
+</body>
+</html>

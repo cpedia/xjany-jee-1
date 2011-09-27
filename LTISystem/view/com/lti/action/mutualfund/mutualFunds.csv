@@ -1,0 +1,9 @@
+Symbols,PGMAX,
+Interval,30,
+IsWLSorOLS,TRUE,
+Sum=1?,TRUE,
+With Constraint,TRUE,
+SPY,0,1
+EEM,0,1
+AGG,0,1
+CASH,0,1

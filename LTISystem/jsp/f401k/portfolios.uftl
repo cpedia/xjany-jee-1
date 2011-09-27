@@ -1,0 +1,278 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign ltiauthz=JspTaglibs["/WEB-INF/lti_authz.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<title>MyPlanIQ: My Portfolio Center</title>
+<meta  name="Description" content="Users' followed portfolios, customized portfolio, private plans are displayed in My Portfolio Center. Users can manage these plans and portfolio on this page.">
+<script src="/LTISystem/widgets/framework.action?thirdPartyID=12"></script>
+<link href="/LTISystem/jsp/widgets/widget.css" rel="stylesheet" type="text/css" />
+<script>
+
+	$(document).ready(function() {
+		$("input[rel='widget_content']").colorbox({
+			opacity : 0.5,
+			width : "720px",
+			scrolling : true,
+			height : "760px",
+			inline : true,
+			overlayClose:false,
+			href : "#mpiq_widget_getstartedwidget_display_div"
+		});
+	});
+
+	function synchronizename() {
+		clearTimeout(t);
+		setTimeout(change2, 1000);
+		$("#mpiq_widget_createplanwidget_planname").val(
+				$("#StrategyName").val())
+		mpiq_widget_createplanwidget(
+				'mpiq_widget_getstartedwidget_display_div', 'noparams')
+		//$("#cboxLoadedContent").append("#mp_loading");
+		//$("#cboxLoadedContent").append("#mp_loading1");
+	}
+	
+	function widgetOn(){
+		$.ajax({
+			type:'get',
+			url:'/LTISystem/api_canCreatePlan.action?includeHeader=false&temp='+RndNum(2),
+			datatype: "html",
+			success: function(data){
+				if(data== "1" || data== "\n1\n" || data== "\r\n1\r\n" || data== "2" || data== "\n2\n" || data== "\r\n2\r\n"){
+					if(data== "2" || data == "\n2\n" || data == "\r\n2\r\n")
+						alert("You have reached the maximum number of your own plans. To create a new plan, please delete one of your plans in the 'My Portfolio' page, or subscribe as a higher level user to obtain the permission for more own plans.")
+					else
+						alert("You need to subscribe as a Expert User or a Pro User to get the permission of creating plans.");
+				}else{
+					$("#widgetOn").trigger("click")
+				}
+			}
+		});
+	}
+	
+	function RndNum(n){
+		var rnd="";
+		for(var i=0;i<n;i++)
+		rnd+=Math.floor(Math.random()*10);
+		return rnd;
+	}
+
+	var planId
+	function modifyPlan(id) {
+		clearTimeout(t2);
+		setTimeout(change, 1000);
+		planId = id;
+		mpiq_widget_createplanwidget(
+				'mpiq_widget_getstartedwidget_display_div', 'noparams', id,
+				false)
+	}
+
+	var t;
+	var t2
+	function change() {
+		$("#createmoderportolio").attr("onclick", function() {
+			return function() {
+				mpiq_widget_createplanwidget_save(planId, true, true, false);
+			}
+		});
+
+		$(".createorupdate").attr("onclick", function() {
+			return function() {
+				mpiq_widget_createplanwidget_save(planId, true, false, false);
+			}
+		});
+
+		t = setTimeout(change, 1000);
+		if ($(".createorupdate").val() == "update")
+			clearTimeout(t);
+	}
+
+	function change2() {
+		$(".createorupdate").attr(
+				"onclick",
+				function() {
+					return function() {
+						mpiq_widget_createplanwidget_save(undefined, true,
+								false, false);
+					}
+				});
+
+		$("#createmoderportolio").attr(
+				"onclick",
+				function() {
+					return function() {
+						mpiq_widget_createplanwidget_save(undefined, true,
+								true, false);
+					}
+				});
+		t2 = setTimeout(change2, 1000);
+	}
+
+	function execute() {
+		$("#executeform").submit();
+	}
+
+	function expiredportfolio() {
+		location.href = "profile_expiredportfolios.action";
+	}
+
+
+	$(document).ready(
+		function() {
+			$(":disabled").removeAttr("disabled");
+			$("#myplan h2").replaceWith(
+			"<div id='sectionTitle'><div id='TitleContent'>My Plans</div></div>");
+	});
+
+	//Cufon.replace('#sectionTitle', { fontFamily: 'Arial'});
+</script>
+
+</head>
+<body>
+<style>
+	#sectionTitle{
+		background-color: #C4DAC6;
+	    font-size: 18px;
+	    height: 40px;
+	    text-align: left;
+	}
+	#TitleContent{
+		padding-top: 10px;
+	}
+</style>
+<div style="display:none"><div id="mpiq_id123"></div></div>
+
+<!-- T -->
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+       <input onclick="widgetOn()" type="button"  value="Create a Plan">
+       <input id="widgetOn" style="display:none" rel="widget_content" onclick="synchronizename()" type="button"  value="Create a Plan">
+ <p><p><p>
+[/@authz.authorize]
+	<input type='button' id='' onclick='window.location="/LTISystem/jsp/portfolio/CompareMain.action"' class='uiButton' value='Portfolio Compare'/>
+	<input type='button' id='btn_pp_info' class="uiButton" onclick='javascript:addTransactions()' style='width:180px;text-align:left' value='+ Plan(Portfolio) Limit Info'/>
+	<div id="info_content"></div>
+	[@ltiauthz.authorize ifAnyGranted="MPIQ_E,MPIQ_P"]
+	<div id="myplan" style="border: 1px dotted #566E56;margin-top:20px;"> 
+		[@s.action name="f401k_userPlans" namespace="/" executeResult=true]
+		[@s.param name="includeHeader"]false[/@s.param]
+		[/@s.action]
+	</div>
+	[/@ltiauthz.authorize]
+<!-- T -->
+<!-- T -->
+<!--admin-->
+[@ltiauthz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+<div id="Personal" style=" margin-top: 30px;border: 1px dotted #566E56;overflow: hidden;">
+<div id="sectionTitle"><div id="TitleContent">Personal Portfolio</div></div>
+<div id="sectionContent" style="position:relative;padding: 5px;">
+<a href="/LTISystem/jsp/portfolio/EditHolding.action?operation=editbasic&ID=0&personal=true" target="_blank">Create</a>
+[@s.action name="profile_advancedlist" namespace="/" executeResult=true]
+[@s.param name="portfolioSource"]3[/@s.param]
+[/@s.action]
+</div>
+</div>
+[/@ltiauthz.authorize]
+<!-- T -->
+
+
+<!--My Basic Portfolios -->
+	
+[@ltiauthz.authorize ifNotGranted="ROLE_SUPERVISOR"]
+	<div id="Basic" style=" margin-top: 30px;border: 1px dotted #566E56;overflow: hidden;">
+		<div id="sectionTitle"><div id="TitleContent">My Basic Model Portfolios</div></div>
+		<div id="sectionContent" style="position:relative;padding: 5px;">
+		<div id='list_div' style='padding-bottom: 5px;float:left;width:100%'>
+			<br>
+			[@s.action name="profile_list" namespace="/" executeResult=true]
+			[@s.param name="portfolioSource"]0[/@s.param]
+			[/@s.action]
+			<br>
+			<br>
+			<table border=0 width=100%>
+			 <tr>	
+			   <td>
+			   </td>
+			 </tr>
+			</table>
+			[@s.action name="profile_list" namespace="/" executeResult=true]
+			[@s.param name="portfolioSource"]1[/@s.param]
+			[/@s.action]
+		</div>
+		</div>
+	</div>
+<br>
+<br>
+<!-- My Advance Model Portfolios start -->
+	[@ltiauthz.authorize ifAnyGranted="MPIQ_E,MPIQ_P,ROLE_SUPERVISOR"]
+	<div id="Advance" style="border: 1px dotted #566E56; overflow:hidden;">
+			[@ltiauthz.authorize ifAnyGranted="MPIQ_E,MPIQ_P,ROLE_SUPERVISOR"]
+			<div id='list_div' style='float:left;width:100%'>
+				<div id="sectionTitle"><div id="TitleContent">My Advance Model Portfolios</div></div>
+				<div id="sectionContent" style="position:relative;padding: 5px;">
+			[/@ltiauthz.authorize]	
+				<!--My Followed Advanced Portfolios start-->
+				[@s.action name="profile_advancedlist" namespace="/" executeResult=true]
+				[@s.param name="portfolioSource"]0[/@s.param]
+				[/@s.action]
+				<br>
+				<br>
+				<!--My Customized Advanced Portfolios-->
+				[@s.action name="profile_advancedlist" namespace="/" executeResult=true]
+				[@s.param name="portfolioSource"]1[/@s.param]
+				[/@s.action]
+			[@ltiauthz.authorize ifAnyGranted="MPIQ_E,MPIQ_P,ROLE_SUPERVISOR"]
+				</div>
+			</div>
+			[/@ltiauthz.authorize]
+	</div>
+	[/@ltiauthz.authorize]
+<!-- T -->
+<br>
+<br>
+
+<!--Customer-->
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+      <h2>Generate Customer Report</h2>
+	   <form action="article_portfolios.action" method="post" id="executeform" enctype="multipart/form-data">
+	     <table border=0 >
+	       <tr>
+	        <td><b>Upload CSV File:</b></td>
+	        <td>	    
+	   	     <input type="file" name="uploadFile" >
+	         <a rel="lightbox" href="/LTISystem/article_downloadList.action?usePlanList=false">Download Example File</a>	  
+	       </td>
+	      <tr>
+	    <td><input type="button" class="uiButton" value="Generate" onclick="execute()"></td>
+	   </tr>
+	</tr>
+	</table>
+	</form>
+	<br>
+[/@authz.authorize]
+[/@ltiauthz.authorize]
+<br>
+<!--end-->
+
+<!-- yeziboy aggregate list -->
+<!-- T -->
+[@ltiauthz.authorize ifAnyGranted="MPIQ_P"]
+<div id="aggregate" style="border: 1px dotted #566E56; overflow:hidden;margin-top:30px;">
+[@s.action name="profile_aggregatelist" namespace="/" executeResult=true]
+	[@s.param name="includeHeader"]false[/@s.param]
+[/@s.action]
+<br>
+<br>
+</div>
+[/@ltiauthz.authorize]
+<!--end-->
+<!--Inactive-->
+<div style="margin-top:20px">
+	<input type='button' class="uiButton" title="All your portfolios will become inactive when you cancel your subscription. You can re-active them from here." 
+	value='My Inactive Portfolios' onclick='expiredportfolio()'>
+</div>
+
+<!-- end -->
+</body>
+</html>

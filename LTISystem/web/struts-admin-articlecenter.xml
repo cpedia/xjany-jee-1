@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="com.lti.action.admin.articlecenter" namespace="/jsp/admin/articlecenter" extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="main" class="com.lti.action.admin.articlecenter.articlecenterAction" method="main">
+			<result name="success" type="freemarker">
+				/jsp/admin/articlecenter/main.uftl
+			</result>
+			
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="plan" class="com.lti.action.admin.articlecenter.articlecenterAction" method="plan">
+		<result name="success" type="freemarker">
+		   /jsp/admin/articlecenter/getFundsSta.uftl
+		</result>
+		<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="*" class="com.lti.action.admin.articlecenter.articlecenterAction" method="{1}">
+		     <result name="success" type="freemarker">
+				/jsp/admin/articlecenter/main.uftl
+			</result>
+			<result name="download" type="stream">
+			<param name="inputName">fis</param>
+			<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+			<param name="contentDisposition">attachment;fileName="${planName}"</param>
+			<param name="bufferSize">102400</param>
+			</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action> 
+	</package>
+</struts>	

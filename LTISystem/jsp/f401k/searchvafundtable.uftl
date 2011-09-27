@@ -1,0 +1,79 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+	<table  class="tablesorter" border="0" cellpadding="0" cellspacing="1" width="95%">
+		<thead>
+	 	<tr>
+	 		<th class="header" width="50%">
+				<b>Full Name</b>
+			</th>
+	 		<th class="header" width="50%">
+				<b>Barron Name</b>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					${fullName!}
+				</td>
+				<td>
+					${barronName!}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+<table  class="tablesorter" border="0" cellpadding="0" cellspacing="1" width="95%"> <!-- variables table -->
+	<thead>
+ 	<tr>
+ 		<th class="header" width="8%">
+			<b>Ticker</b>
+		</th>
+ 		<th class="header" width="22%">
+			<b>Asset Class</b>
+		</th>
+		<th class="header" width="20%">
+			<b>Name</b>
+		</th>
+		<th class="header" width="20%">
+			<b>MS Name</b>
+		</th>
+		<th class="header" width="25%">
+			<b>MS Link</b>
+		</th>
+		<th class="header" width="5%">
+			<b>Select</b>
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+	[#list vaFundList as vf]
+		<tr>
+			<td>
+				<input type="hidden" id="vf_${vf_index}_ticker" value="${vf.ticker!}">
+				${vf.ticker!}
+			</td>
+			<td>
+				<input type="hidden" id="vf_${vf_index}_assetname" value="${vf.assetName!}">
+				${vf.assetName!}
+			</td>
+			<td>
+				<input type="hidden" id="vf_${vf_index}_fundname" value="${vf.fundName!}">
+				${vf.fundName!}
+			</td>
+			<td>
+				<input type="hidden" id="vf_${vf_index}_msvaname" value="${vf.MSVAName!}">
+				${vf.MSVAName!}
+			</td>
+			<td>
+				<a href="${vf.MSLink!}" target="_blank"><font color="black">${vf.MSLink!}</font></a>
+			</td>
+			<td>
+				<input type='button' class="uiButton" value='Select' onclick='selectvafund(${vf_index}, ${fundIndex}, ${searchCategory})'>
+			</td>
+		</tr>		
+	[/#list]
+	</tbody>
+</table>

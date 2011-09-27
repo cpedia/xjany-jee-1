@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	
+
+	<bean id="postProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://localhost:80/jforum/remoting/PostService</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.lti.rmi.PostService</value>
+		</property>
+	</bean>
+	
+	<bean id="topicProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://localhost:80/jforum/remoting/TopicService</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.lti.rmi.TopicService</value>
+		</property>
+	</bean>
+	
+	<bean id="userProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://localhost:80/jforum/remoting/UserService</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.lti.rmi.UserService</value>
+		</property>
+	</bean>
+	
+	<bean id="forumProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://localhost:80/jforum/remoting/ForumService</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.lti.rmi.ForumService</value>
+		</property>
+	</bean>
+	
+	<bean id="categoryProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>http://localhost:80/jforum/remoting/CategoryService</value>
+		</property>
+		<property name="serviceInterface">
+			<value>com.lti.rmi.CategoryService</value>
+		</property>
+	</bean>
+</beans>

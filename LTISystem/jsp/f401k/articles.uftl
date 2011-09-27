@@ -1,0 +1,131 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title></title>
+<meta name="Blogs" content="n401k_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<script>
+$(document).ready(function(){
+	$('li').addClass('liStyle');
+});
+</script>
+<style>
+li.liStyle{
+	margin-left:0px;
+	list-style-type:none;
+}
+#creditfooter{
+	display:none;
+}
+.feedTitle{
+	padding-left:300px;
+	font-size:20pt;
+	padding-bottom:8px;
+	margin-bottom:8px;
+}
+.feedTitle a{
+	text-decoration:none;
+}
+.headline a{
+	text-decoration:none;
+}
+.date{
+	font-size:11px;
+	line-height:18px;
+}
+.headline{
+	font-size:14px;
+	font-weight:bold;
+}
+.edit_area{
+	margin-bottom:10px;
+}
+.liStyle{
+	margin-top:10px;
+}
+span{
+color:#000000;
+}
+.tab{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:18px;
+	margin:2px 0;
+	padding:7px 80px 9px 36px;
+}
+.tab1{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:1.7em;
+	margin:2px 0;
+	padding-left:30px;
+	padding-right:5px;
+}
+</style>
+</head>
+<body>
+
+<div class="col-1">
+   <div class="sidebar_box_noPadding roundHeadingGreen">
+	<div class="sidebar_box_heading_white">Announcements</div>
+	[#if jTList??]
+	<ul>
+		[#list jTList as var]
+			<li class="tab1" style="line-height:2.5em">
+				<span><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+				<!-- <p class="date">${var.topicTime?string("MM/dd/yyyy")}</p> -->
+			</li>
+			[#if var_index==9][#break][/#if]
+		[/#list]
+	</ul>
+	[/#if]
+   </div>
+   <div class="sidebar_box_noPadding roundHeadingGreen">
+	<div class="sidebar_box_heading_white">Articles</div>
+	[#if jTList??]
+	<ul>
+		[#list jTopicsOfNewsAndCommentaries.items as var]
+			<li class="tab1" style="line-height:2.5em">
+				<span><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+				<!-- <p class="date">${var.topicTime?string("MM/dd/yyyy")}</p> --->
+			</li>
+			[#if var_index==20][#break][/#if]
+		[/#list]
+	</ul>
+	[/#if]
+        <br><div style="margin:0 auto; margin-left:20px;">[@lti.pagination jTopicsOfNewsAndCommentaries "f401k_announcementsAndNews2.action" " "][/@lti.pagination]</div>
+        <br>
+   </div>
+ </div>
+<table><tr><td>
+<div class="col-2">
+<h1 align="center"><a style="text-decoration:none;"href="../jforum/forums/show/61.page">News And Articles</a></h1>
+   [#if jTopicsOfNewsAndCommentaries??]
+	<ul>
+		[#list jTopicsOfNewsAndCommentaries.items as var]
+			<li class="tab">
+				<span class="headline"><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+				<p class="date">${var.topicTime?string("MM/dd/yyyy")}</p>
+					[#if var.postText??]
+						${var.postText!''}
+						<p><a href ="../jforum/posts/list/${var.ID}.page">comments(${var.topicReplies?string.computer})</a>&nbsp;
+						<a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark"/></a><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+						</p>
+					[/#if]
+				</li>
+		[/#list]
+	</ul>
+	[/#if]
+<div style="margin:0 auto">[@lti.pagination jTopicsOfNewsAndCommentaries "f401k_announcementsAndNews2.action" " "][/@lti.pagination]</div>
+</div>
+
+</td></tr></table>	
+	
+</body>
+</html>

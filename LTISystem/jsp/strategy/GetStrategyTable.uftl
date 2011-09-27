@@ -1,0 +1,852 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<script type="text/javascript">
+var address=document.location.hostname;
+var port=document.location.port;
+if(port=="")port='80';
+window.onload = function(){
+document.getElementsByName("googleSearchFrame").height=1000;
+}
+
+function approvePlan(ID){
+   $.ajax({
+       type:"post",
+       url:"/LTISystem/jsp/strategy/GetStrategyTable_approve.action?ID="+ID,
+       datatype:"html",
+       success:function(message){
+           if(message.indexOf("success")!=-1){
+              alert("Approve Success");
+              window.location.reload();
+           }else{
+              alert("Approve Failed");
+           }
+       }
+       
+   });
+}
+
+function create(consumer){
+	var name = $('#StrategyName').val();
+	if($.trim(name)==''){
+		alert("Please input your plan name.");
+		return;
+	}
+	//查看权限
+	$.ajax({
+		type: "get",
+		url: "f401k_checkcreateplan.action?includeHeader=false&consumer="+consumer,
+		datatype: "html",
+		success: function(result){
+			if($.trim(result).indexOf("true") == -1){
+				alert(result);
+				window.location.href = "/LTISystem/paypal_subscr.action";
+				return;
+			}else{
+				//检查重名
+				$.ajax({
+					type: "get",
+					url: "f401k_checkplanname.action?includeHeader=false",
+					data: "name="+$('#StrategyName').val(),
+					datatype: "html",
+					success: function(result){
+						if($.trim(result).indexOf("true") == -1){
+							alert("The name of the plan has been used, please re-enter the name of the plan.");
+							return;
+						}else{
+							$.ajax({
+								type: "get",
+								url: "f401k_create.action?includeHeader=false&turnView=true&consumer="+consumer,
+								data: "name="+$('#StrategyName').val(),
+								datatype: "html",
+								success: function(result){
+									location.href="/LTISystem/f401k_fundtable.action?ID="+$.trim(result);
+								},
+								error:function(message){
+									alert(message.responseText);
+								}
+							});//end of ajax
+						}
+					},
+					error:function(message){
+						alert(message.responseText);
+					}
+				});//end of ajax
+			}
+		},
+		error:function(message){
+			alert(message.responseText);
+		}
+	});//end of ajax
+	
+	
+	
+}//end of create
+</script>
+<style>
+		  #cse{
+				-moz-border-radius: 4px 4px 4px 4px;
+			    background: none repeat scroll 0 0 #E8E4E1;
+			    border-bottom: 1px solid #BBBBBB;
+			    border-right: 1px solid #DDDDDD;
+			    color: #295131;
+			    overflow: hidden;
+			    line-height: 16px;
+			    margin-left: 0.8em;
+			    padding: 0.3em 0.8em;
+			    text-decoration: none;
+			    text-shadow: 0 1px 0 #FFFFFF;
+			    margin-bottom:20px;
+				}
+			.gsc-adBlockVertical{
+				margin-top: 10px;
+				float: right;
+    			width: 300px;
+			}
+			.gsc-thinWrapper{
+				margin-top: 10px;
+    			width: 560px;
+			}
+			.gs-result{
+				margin-top: 25px;
+			}
+			.gsc-search-box, .gs-watermark, .gsc-resultsHeader, .gs-visibleUrl-short{
+				display:none;
+			}
+			
+			.gsc-cursor-box {
+				 margin-top: 20px;
+				 height:30px;
+			}
+			.gsc-tabhActive{
+				font-size: 20px;
+			}
+			.gsc-cursor-page, a.gsc-trailing-more-results {
+			 	color: #bb6f02;
+			 	cursor: pointer;
+				} 
+			.gsc-cursor-current-page {
+			    background: none repeat scroll 0 0 #BB6F02;
+			    border-color: #774433 -moz-use-text-color -moz-use-text-color #885544;
+			    border-right: medium none;
+			    border-style: solid none none solid;
+			    border-width: 1px medium medium 1px;
+			    color: #FFFFFF;
+			    font-weight: bold;
+			    text-shadow: 0 1px 0 #663300;
+			}
+			.gsc-cursor-page, .gsc-cursor-current-page{
+			    -moz-border-radius: 4px 4px 4px 4px;
+			    background: none repeat scroll 0 0 #F3F3EC;
+			    border-bottom: 1px solid #BBBBBB;
+			    border-right: 1px solid #DDDDDD;
+			    float: left;
+			    line-height: 16px;
+			    margin-left: 0.8em;
+			    padding: 0.3em 0.8em;
+			    text-decoration: none;
+			    text-shadow: 0 1px 0 #FFFFFF;
+			    color:#295131;
+			    }
+                         .gs-bidi-start-align a{
+			 	cursor: pointer;
+			 	text-decoration: underline;
+			 }
+</style>
+<!-- ${lastUpdated?datetime} -->
+		
+		<script type="text/javascript" src="/LTISystem/jsp/images/jquery.tablesorter/jquery.tablesorter.js"></script>
+		<script type="text/javascript" src="/LTISystem/jsp/images/jquery.tablesorter/jquery.tablesorter.pager.js"></script>
+		
+		<script>
+			$(document).ready(function(){ 
+			        	$("#cloningtable${updateTime}").tablesorter({sorter:'num'});
+			        	[#if items?? && items?size==1 && redirect?? && redirect]
+			        		if(window.name!="${updateTime}"){
+			        			[#if urlPrefix??]
+								window.location.href='${urlPrefix}${items[0].ID}';
+								[#else]
+								window.location.href='/LTISystem/jsp/strategy/View.action?ID=${items[0].ID}';
+								[/#if]
+			        		}
+			        		window.name="${updateTime}";
+			        		
+			        	[/#if]
+			        } 
+			); 
+		</script>		    
+	
+	<div style="margin:10px;">
+		[#if title??]<span style="font-size:1.7em;">${title}</span>[/#if]
+		
+		
+		
+		
+		<!--isGoogle=false begining-->
+		[#if !isGoogleSearch?? || isGoogleSearch=false] 
+		[#if isSearch?? && isSearch=true]
+		[#if items?? && items?size >0]
+		<table id="cloningtable${updateTime}" [#if width??]style='width:${width}px'[/#if] class="tablesorter" border="0" cellpadding="0" cellspacing="1" >
+			
+			<thead>
+				<tr>
+					[#if includeID?? && includeID]
+					<th class="header">
+						ID
+					</th>	
+					[/#if]
+					<th class="header">
+						Name
+					</th>
+					[#if includeCategory?? && includeCategory]
+					<th class="header">
+						Category
+					</th>	
+					[/#if]
+					[#if !owner ||(owner && hasSubscred)]
+					[#if includePortfolio?? && includePortfolio]
+						<th class="header">
+							Portfolio
+						</th>	
+						[#if includeLastValidDate?? && includeLastValidDate]
+						<th class="header">
+							Last Valid Date
+						</th>	
+						[/#if]
+						
+						[#if includeLastTransactionDate?? && includeLastTransactionDate]
+						<th class="header">
+							Last Transaction Date
+						</th>	
+						[/#if]
+						
+						[#if year??]
+							[#if year?contains("-1")]
+								[#if mpt?contains("ar")]
+								<th class="header">
+									1 year's AR
+								</th>	
+								[/#if]
+								[#if mpt?contains("beta")]<!--
+								<th class="header">
+									1 year's Beta
+								</th>	-->
+								[/#if]
+							[/#if]
+							[#if year?contains("-3")]
+								[#if mpt?contains("ar")]
+								<th class="header">
+									3 year's AR
+								</th>	
+								[/#if]
+								[#if mpt?contains("beta")]<!--
+								<th class="header">
+									3 year's Beta
+								</th>	-->
+								[/#if]
+							[/#if]
+							[#if year?contains("-5")]
+								[#if mpt?contains("ar")]
+								<th class="header">
+									5 year's AR
+								</th>	
+								[/#if]
+								[#if mpt?contains("beta")]<!--
+								<th class="header">
+									5 year's Beta
+								</th>	-->
+								[/#if]
+							[/#if]
+						[/#if]
+					[/#if][#--end of include portfolio --]
+					[#if permission?? && permission]
+						<th class="header">
+							Permission
+						</th>	
+					[/#if]
+					[#if expired]
+						<th class="header">
+							Activate
+						</th>	
+					[/#if]
+					[/#if]		
+				</tr>			
+			</thead>
+			<tbody>
+			
+			[#list items as item]
+			[#if item_index%2==0]
+				<tr class='odd'>
+			[/#if]
+			[#if item_index%2==1]
+				<tr class='even'>
+			[/#if]
+			
+				[#if includeID?? && includeID]
+				<td>
+					${item.ID}
+				</td>	
+				[/#if]
+				<style>
+				
+				</style>
+				<td>
+					[#if urlPrefix??]
+					<div id="">
+					<!--<h4><a href='${urlPrefix}${item.ID}'>${item.name}</a></h4>
+					[#if item.portfolioName!="NA"]${item.portfolioName}...[#else]${item.name}...[/#if]
+					<h5><a href='${urlPrefix}${item.ID}'>www.myplaniq${urlPrefix}${item.ID}</a></h5>-->
+					<a href='${urlPrefix}${item.ID}'>${item.name}</a>
+					[#else]
+					<a href='/LTISystem/jsp/strategy/View.action?ID=${item.ID}'>${item.name}</a>
+					[/#if]
+					
+				</td>
+				[#if includeCategory?? && includeCategory]
+				<td>
+					${item.categoryName!""}
+				</td>	
+				[/#if]
+				[#if !owner ||(owner && hasSubscred)]
+				[#if includePortfolio?? && includePortfolio]
+					<td>
+						[#if item.portfolioName!="NA" ]<a href='/LTISystem/jsp/portfolio/Edit.action?ID=${item.portfolioID!""}'>${item.portfolioName}</a>[/#if]
+					</td>	
+					
+					[#if includeLastValidDate?? && includeLastValidDate]
+					<td>
+						${item.lastValidDate!""}
+					</td>	
+					[/#if]
+					
+					[#if includeLastTransactionDate?? && includeLastTransactionDate]
+					<td>
+						${item.lastTransactionDate!""}
+					</td>	
+					[/#if]
+					
+					[#if year??]
+						[#if year?contains("-1")]
+							[#if mpt?contains("ar")]
+							<td>
+								${item.AR1}
+							</td>	
+							[/#if]
+							[#if mpt?contains("beta")]<!--
+							<td>
+								${item.beta1}
+							</td>	-->
+							[/#if]
+						[/#if]
+						[#if year?contains("-3")]
+							[#if mpt?contains("ar")]
+							<td>
+								${item.AR3}
+							</td>	
+							[/#if]
+							[#if mpt?contains("beta")]<!--
+							<td>
+								${item.beta3}
+							</td>	 -->
+							[/#if]
+						[/#if]
+						[#if year?contains("-5")]
+							[#if mpt?contains("ar")]
+							<td>
+								${item.AR5}
+							</td>	
+							[/#if]
+							[#if mpt?contains("beta")] <!--
+							<td>
+								${item.beta5}
+							</td>	-->
+							[/#if]
+						[/#if]
+					[/#if]
+				[/#if][#--end of includeportfolio --]
+					[#if permission?? && permission]
+						<td>[#if item.public?? && item.public]Public[#else]Private[/#if]</td>
+					[/#if]
+					[#if expired]
+						<td><input type="button" class="uiButton" value="Activate" onclick="activateplan(${item.ID?string.computer})"></td>
+					[/#if]
+				[/#if][#--end of owner && hassubscred --]
+				</tr>
+			[#if size!=0 && item_index == size][#break][/#if]
+
+			[/#list]
+			[/#if]
+			</tbody>
+			
+		</table>	
+		
+		<hr style="margin-top:30px;margin-bottom:20px;" width=910px;></hr>
+		<!--google search begining-->
+		<div id="cse">Searhing...please wait</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+google.load('search', '1', {language : 'en' , "nocss" : true });
+google.setOnLoadCallback(function(){
+    var customSearchControl = new google.search.CustomSearchControl('011203528935876500718:qtlemv-pl-8');
+    customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+    customSearchControl.setLinkTarget(google.search.Search.LINK_TARGET_SELF);
+    customSearchControl.setNoResultsString('<img src="/b.gif" class="wp-smiley sm-sad">  Sorry, there is no searching result.');
+    customSearchControl.setSearchCompleteCallback(null,function() {
+        $('input.gsc-input').select();
+        var searchwords = $('input.gsc-input').val();
+        $('.p > b').text(searchwords);
+        $('a.gs-title').addClass('new').unwrap().wrap('<h3></h3>').each(function() {
+            var title = $(this).html().replace(/\|.*/g, '');
+            $(this).html(title);
+        });
+        $('b:contains("...")').contents().unwrap();
+        $('.gsc-cursor-current-page').removeClass('gsc-cursor-page');
+    });
+    customSearchControl.draw('cse');
+    var match = location.search.match(/q=([^&]*)(&|$)/);
+    if(match && match[1]){
+        var search = decodeURIComponent(match[1]);
+        customSearchControl.execute(search);
+    }
+});
+</script>
+<!--google search end-->
+		[#else]
+		<!--no change to other page-->
+		
+		[#if items?? && items?size >0]
+		<table id="cloningtable${updateTime}" [#if width??]style='width:${width}px'[/#if] class="tablesorter" border="0" cellpadding="0" cellspacing="1" >
+			
+			<thead>
+				<tr>
+					[#if includeID?? && includeID]
+					<th class="header">
+						ID
+					</th>	
+					[/#if]
+					<th class="header">
+						Name
+					</th>
+					[#if includeCategory?? && includeCategory]
+					<th class="header">
+						Category
+					</th>	
+					[/#if]
+					[#if !owner ||(owner && hasSubscred)]
+					[#if includePortfolio?? && includePortfolio]
+						<th class="header">
+							Portfolio
+						</th>	
+						[#if includeLastValidDate?? && includeLastValidDate]
+						<th class="header">
+							Last Valid Date
+						</th>	
+						[/#if]
+						
+						[#if includeLastTransactionDate?? && includeLastTransactionDate]
+						<th class="header">
+							Last Transaction Date
+						</th>	
+						[/#if]
+						
+						[#if year??]
+							[#if year?contains("-1")]
+								[#if mpt?contains("ar")]
+								<th class="header">
+									1 year's AR
+								</th>	
+								[/#if]
+								[#if mpt?contains("beta")]<!--
+								<th class="header">
+									1 year's Beta
+								</th>	-->
+								[/#if]
+							[/#if]
+							[#if year?contains("-3")]
+								[#if mpt?contains("ar")]
+								<th class="header">
+									3 year's AR
+								</th>	
+								[/#if]
+								[#if mpt?contains("beta")]<!--
+								<th class="header">
+									3 year's Beta
+								</th>	-->
+								[/#if]
+							[/#if]
+							[#if year?contains("-5")]
+								[#if mpt?contains("ar")]
+								<th class="header">
+									5 year's AR
+								</th>	
+								[/#if]
+								[#if mpt?contains("beta")]<!--
+								<th class="header">
+									5 year's Beta
+								</th>	-->
+								[/#if]
+							[/#if]
+						[/#if]
+					[/#if][#--end of include portfolio --]
+					[#if permission?? && permission]
+						<th class="header">
+							Permission
+						</th>	
+					[/#if]
+					[#if showUser?? && showUser]
+						<th class="header">
+							User ID
+						</th>	
+						<th class="header">
+							User Name
+						</th>	
+					[/#if]
+					[#if expired]
+						<th class="header">
+							Activate
+						</th>	
+					[/#if]
+					[#if includeApprove?? && includeApprove]
+					   <th class="header">
+					       Approve
+					   </th>
+					[/#if]
+					[#if includeModify?? && includeModify]
+					   <th class="header">
+					       Modify
+					   </th>
+					[/#if]
+					[/#if]		
+				</tr>			
+			</thead>
+			<tbody>
+	
+			[#list items as item]
+	
+			[#if allPlanPageSize??]
+	
+			[#if item_index &gt; page*allPlanPageSize?number-allPlanPageSize?number-1 && item_index &lt; page*allPlanPageSize?number]
+			
+			[#if item_index%2==0]
+				<tr class='odd'>
+			[/#if]
+			[#if item_index%2==1]
+				<tr class='even'>
+			[/#if]
+			
+				[#if includeID?? && includeID]
+				<td>
+					${item.ID}
+				</td>	
+				[/#if]
+				<style>
+				
+				</style>
+				<td>
+					[#if urlPrefix??]
+					<div id="">
+					<!--<h4><a href='${urlPrefix}${item.ID}'>${item.name}</a></h4>
+					[#if item.portfolioName!="NA"]${item.portfolioName}...[#else]${item.name}...[/#if]
+					<h5><a href='${urlPrefix}${item.ID}'>www.myplaniq${urlPrefix}${item.ID}</a></h5>-->
+					<a href='${urlPrefix}${item.ID}'>${item.name}</a>
+					[#else]
+					<a href='/LTISystem/jsp/strategy/View.action?ID=${item.ID}'>${item.name}</a>
+					[/#if]
+					
+				</td>
+				[#if includeCategory?? && includeCategory]
+				<td>
+					${item.categoryName!""}
+				</td>	
+				[/#if]
+				[#if !owner ||(owner && hasSubscred)]
+				[#if includePortfolio?? && includePortfolio]
+					<td>
+						[#if item.portfolioName!="NA" ]<a href='/LTISystem/jsp/portfolio/Edit.action?ID=${item.portfolioID!""}'>${item.portfolioName}</a>[/#if]
+					</td>	
+					
+					[#if includeLastValidDate?? && includeLastValidDate]
+					<td>
+						${item.lastValidDate!""}
+					</td>	
+					[/#if]
+					
+					[#if includeLastTransactionDate?? && includeLastTransactionDate]
+					<td>
+						${item.lastTransactionDate!""}
+					</td>	
+					[/#if]
+					
+					[#if year??]
+						[#if year?contains("-1")]
+							[#if mpt?contains("ar")]
+							<td>
+								${item.AR1}
+							</td>	
+							[/#if]
+							[#if mpt?contains("beta")]<!--
+							<td>
+								${item.beta1}
+							</td>	-->
+							[/#if]
+						[/#if]
+						[#if year?contains("-3")]
+							[#if mpt?contains("ar")]
+							<td>
+								${item.AR3}
+							</td>	
+							[/#if]
+							[#if mpt?contains("beta")]<!--
+							<td>
+								${item.beta3}
+							</td>	 -->
+							[/#if]
+						[/#if]
+						[#if year?contains("-5")]
+							[#if mpt?contains("ar")]
+							<td>
+								${item.AR5}
+							</td>	
+							[/#if]
+							[#if mpt?contains("beta")] <!--
+							<td>
+								${item.beta5}
+							</td>	-->
+							[/#if]
+						[/#if]
+					[/#if]
+				[/#if][#--end of includeportfolio --]
+					[#if permission?? && permission]
+						<td>[#if item.public?? && item.public]Public[#else]Private[/#if]</td>
+					[/#if]
+					[#if expired]
+						<td><input type="button" class="uiButton" value="Activate" onclick="activateplan(${item.ID?string.computer})"></td>
+					[/#if]
+					[#if includeApprove?? && includeApprove]
+					   <td><input type="button" class="uiButton" value="Approve" onclick="approvePlan(${item.ID?string.computer})"></td>
+					[/#if]
+				[/#if][#--end of owner && hassubscred --]
+				</tr>
+			[#if size!=0 && item_index == size][#break][/#if]
+			
+			[/#if]
+			[#else]
+			[#if item_index%2==0]
+				<tr class='odd'>
+			[/#if]
+			[#if item_index%2==1]
+				<tr class='even'>
+			[/#if]
+			
+				[#if includeID?? && includeID]
+				<td>
+					${item.ID}
+				</td>	
+				[/#if]
+				<style>
+				
+				</style>
+				<td>
+					[#if urlPrefix??]
+					<div id="">
+					<!--<h4><a href='${urlPrefix}${item.ID}'>${item.name}</a></h4>
+					[#if item.portfolioName!="NA"]${item.portfolioName}...[#else]${item.name}...[/#if]
+					<h5><a href='${urlPrefix}${item.ID}'>www.myplaniq${urlPrefix}${item.ID}</a></h5>-->
+					<a href='${urlPrefix}${item.ID}'>${item.name}</a>
+					[#else]
+					<a href='/LTISystem/jsp/strategy/View.action?ID=${item.ID}'>${item.name}</a>
+					[/#if]
+					
+				</td>
+				[#if includeCategory?? && includeCategory]
+				<td>
+					${item.categoryName!""}
+				</td>	
+				[/#if]
+				[#if !owner ||(owner && hasSubscred)]
+				[#if includePortfolio?? && includePortfolio]
+					<td>
+						[#if item.portfolioName!="NA" ]<a href='/LTISystem/jsp/portfolio/Edit.action?ID=${item.portfolioID!""}'>${item.portfolioName}</a>[/#if]
+					</td>	
+					
+					[#if includeLastValidDate?? && includeLastValidDate]
+					<td>
+						${item.lastValidDate!""}
+					</td>	
+					[/#if]
+					
+					[#if includeLastTransactionDate?? && includeLastTransactionDate]
+					<td>
+						${item.lastTransactionDate!""}
+					</td>	
+					[/#if]
+					
+					[#if year??]
+						[#if year?contains("-1")]
+							[#if mpt?contains("ar")]
+							<td>
+								${item.AR1}
+							</td>	
+							[/#if]
+							[#if mpt?contains("beta")]<!--
+							<td>
+								${item.beta1}
+							</td>	-->
+							[/#if]
+						[/#if]
+						[#if year?contains("-3")]
+							[#if mpt?contains("ar")]
+							<td>
+								${item.AR3}
+							</td>	
+							[/#if]
+							[#if mpt?contains("beta")]<!--
+							<td>
+								${item.beta3}
+							</td>	 -->
+							[/#if]
+						[/#if]
+						[#if year?contains("-5")]
+							[#if mpt?contains("ar")]
+							<td>
+								${item.AR5}
+							</td>	
+							[/#if]
+							[#if mpt?contains("beta")] <!--
+							<td>
+								${item.beta5}
+							</td>	-->
+							[/#if]
+						[/#if]
+					[/#if]
+				[/#if][#--end of includeportfolio --]
+					[#if permission?? && permission]
+						<td>[#if item.public?? && item.public]Public[#else]Private[/#if]</td>
+					[/#if]
+					[#if includeModify?? && includeModify]
+						<td><input type="button" class="uiButton" rel='widget_content' value="Modify" onclick="modifyPlan(${item.ID?string.computer})"></td>
+					[/#if]
+					[#if showUser?? && showUser]
+						<td>${item.userID!""}</td>
+						<td>${item.userName!""}</td>
+					[/#if]
+					[#if expired]
+						<td><input type="button" class="uiButton" value="Activate" onclick="activateplan(${item.ID?string.computer})"></td>
+					[/#if]
+					[#if includeApprove?? && includeApprove]
+					   <td><input type="button" class="uiButton" value="Approve" onclick="approvePlan(${item.ID?string.computer})"></td>
+					[/#if]
+				[/#if][#--end of owner && hassubscred --]
+				</tr>
+			[#if size!=0 && item_index == size][#break][/#if]
+			
+			[/#if]
+			[/#list]
+			[/#if]
+			</tbody>
+		</table>
+		[#if items?? && items?size >20]
+		[#if page?? && pageCount??]
+		[#if allPlanPageSize??]
+		[@lti.p page=page totalpage=pageCount url="/LTISystem/f401k__list.action" params=""]
+		[/@lti.p]
+		[/#if]	
+		[/#if]
+		[/#if]
+		[/#if]
+		<!--can't search on server,isgoogle=true begingin-->
+		[#else]
+		
+<!--google search begining-->
+<div id="cse">Searhing...</div>
+	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+	<script type="text/javascript">
+			google.load('search', '1', {language : 'en' , "nocss" : true });
+			google.setOnLoadCallback(function(){
+			    var customSearchControl = new google.search.CustomSearchControl('011203528935876500718:qtlemv-pl-8');
+			    customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+			    customSearchControl.setLinkTarget(google.search.Search.LINK_TARGET_SELF);
+			    customSearchControl.setNoResultsString('<img src="/b.gif" class="wp-smiley sm-sad"> Sorry, there is no searching result.');
+			    customSearchControl.setSearchCompleteCallback(null,function() {
+			        $('input.gsc-input').select();
+			        var searchwords = $('input.gsc-input').val();
+			        $('.p > b').text(searchwords);
+			        $('a.gs-title').addClass('new').unwrap().wrap('<h3></h3>').each(function() {
+			            var title = $(this).html().replace(/\|.*/g, '');
+			            $(this).html(title);
+			        });
+			        $('b:contains("...")').contents().unwrap();
+			        $('.gsc-cursor-current-page').removeClass('gsc-cursor-page');
+			    });
+			    customSearchControl.draw('cse');
+			    var match = location.search.match(/q=([^&]*)(&|$)/);
+			    if(match && match[1]){
+			        var search = decodeURIComponent(match[1]);
+			        customSearchControl.execute(search);
+			    }
+			});
+	</script>
+<!--google search end-->
+
+<hr></hr>
+		
+<!--can't find begining-->		
+		<br><h1 style="text-align:center;">Cannot find your plan? May we suggest:</h1>
+<ul>
+<li><strong>Check your keywords</strong></li>
+<li><strong><a href="mailto:support@myplaniq.com?subject=My company plan's investment options">Email your plan's investment options</a></strong>
+    <ul>
+     <li>Document(s) that have plan investment choices (ticker symbols preferred)</li>
+     <li>Screen shots of online rebalance choices</li>
+    </ul>
+</li>
+<li><strong><a href="/LTISystem/f401k__portfolios.action" target="_blank">My Portfolios->Create My Own Plan</a> when you become an expert subscriber</strong></li>
+</ul>
+<br>
+<h1 style="text-align:center;">Or Try MyPlanIQ popular custom plans for brokerages</h1>
+<ul>
+  <li><a href="/LTISystem/folio_foliosaa.action"><strong>Folio Investing one-click portfolio management based on MyPlanIQ ETF model portfolios</strong></a></li>
+  <li><strong>IRA/Taxable ETF plans</strong>
+      [@s.action name="GetPlanScoreTable" namespace="/jsp/strategy" executeResult=true]
+              [@s.param name="includeTAAReturn"]true[/@s.param]
+              [@s.param name="includeSAAReturn"]false[/@s.param]
+              [@s.param name="includeCoverageScore"]false[/@s.param]
+              [@s.param name="includeFundQualityScore"]false[/@s.param]
+              [@s.param name="includeCapabilityScore"]false[/@s.param]
+              [@s.param name="includeInvestmentScore"]true[/@s.param]
+              [@s.param name="ids"]1148|1094|1027|714|1026|1152|4845[/@s.param]
+              [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+      [/@s.action]
+  </li>
+  <li><strong>Brokerage No Load Mutual Fund Plans</strong>
+   [@s.action name="GetPlanScoreTable" namespace="/jsp/strategy" executeResult=true]
+              [@s.param name="includeTAAReturn"]true[/@s.param]
+              [@s.param name="includeSAAReturn"]false[/@s.param]
+              [@s.param name="includeCoverageScore"]false[/@s.param]
+              [@s.param name="includeFundQualityScore"]false[/@s.param]
+              [@s.param name="includeCapabilityScore"]false[/@s.param]
+              [@s.param name="includeInvestmentScore"]true[/@s.param]
+              [@s.param name="ids"]725|727|724|1032|679[/@s.param]
+              [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action]
+   </li>
+   <li><strong><a href="/LTISystem/f401k__ira_brokerage.action">More IRA/Taxable Brokerage Plans</a></strong></li>
+<li><h2>Try <a href="/LTISystem/f401k_planrollover.action">401K/IRA RolloverIQ if you change jobs</a></h2></li>
+<li><h2>Try <a href="/LTISystem/f401k_showplanscorelist.action">PlanRatingIQ and Plan Comparison if you want to consolidate multiple accounts</a></h2></li>
+</ul>
+<br><br>
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+<input type="text" id="StrategyName" value="Enter New Plan Name" onclick="if(this.value=='Enter New Plan Name')this.value=''" onblur="if(this.value=='')this.value='Enter New Plan Name'"> 
+<input type="button" class="uiButton" onclick="create(true)" value="Create Consumer Plan">
+[/@authz.authorize]
+[/@authz.authorize]
+
+<!--can't find end-->
+		[/#if]
+		
+<br>
+<br>
+
+</div>

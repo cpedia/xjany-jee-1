@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/admin/tradingdate/Main" class="com.lti.action.admin.tradingdate.MainAction"
+		singleton="false">
+		<property name="holidayManager">
+			<ref bean="holidayManager"/>
+		</property>
+	</bean>
+
+		
+	<bean name="/jsp/admin/tradingdate/Save" class="com.lti.action.admin.tradingdate.SaveAction"
+		singleton="false">
+		<property name="holidayManager">
+			<ref bean="holidayManager"/>
+		</property>
+	</bean>	
+	<bean name="/jsp/admin/tradingdate/Search" class="com.lti.action.admin.tradingdate.SearchAction"
+		singleton="false">
+		<property name="holidayManager">
+			<ref bean="holidayManager"/>
+		</property>
+	</bean>	
+</beans>

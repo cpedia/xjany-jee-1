@@ -1,0 +1,130 @@
+[#ftl]
+<html>
+<head>
+<title>Manage Your Portfolio -- ${portfolio.name!""}</title>
+
+
+<script>
+[#if portfolio??]
+$(function(){
+	$.ajax({type: "post",  
+        url:'/LTISystem/jsp/clonecenter/ViewHolding.action?includeHeader=false&includeJS=false&ID=${Parameters.portfolioID}&holdingDate=${portfolio.endDate?string("yyyy-MM-dd")}',
+        dataType: "html",  
+        success: function(result){
+        	$("#holdingPanel").html(result);
+        }
+    });	
+    
+    $.ajax({type: "post",  
+        url:'profile_getpiecharturl.action?includeHeader=false&portfolioID=${Parameters.portfolioID}',
+        dataType: "html",  
+        success: function(result){
+        	$('#piechart').attr({'src':'/LTISystem/jsp/ajax/FetchImage.action?ID=${Parameters.portfolioID}&isImageCache=true&imageType='+$.trim(result)});
+        }   
+    });
+    
+    	
+});
+
+function starttofollow(){
+	$.ajax({type: "post",  
+    	url:'profilehelp_starttofollow.action?includeHeader=false&portfolioID=${portfolioID?string.computer}&curDate=${portfolio.endDate?string("yyyy-MM-dd")}',
+     	dataType: "html",  
+     	success: function(result){
+     		result=result.replace(/(^\s*)|(\s*$)/g, '');
+     		alert(result);
+     	}
+ 	});
+}
+
+function watchthisportfolio(state){
+	$.ajax({type: "post",  
+    	url:'profilehelp_watchthisportfolio.action?includeHeader=false&portfolioID=${portfolioID?string.computer}&state='+state,
+     	dataType: "html",  
+     	success: function(result){
+     		result=result.replace(/(^\s*)|(\s*$)/g, '');
+     		alert(result);
+     		window
+     	}
+ 	});
+}
+
+[/#if]
+
+</script>
+
+</head>
+<body>
+[#include "nav.uftl"]
+<p>&nbsp;</p>
+<!--
+${plan.name}
+${portfolio.name}
+ -->
+
+<div class="inner">
+<h2 align="center">Manage Your Portfolio <a target="_blank" href="/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${portfolioID?string.computer}">${portfolio.name}</a> </h2>
+
+<div class="dividerTop">
+<table width=100% border=0>
+   <tr>
+	<td>
+		<b>Current Date</b>
+	</td>
+	<td>
+		${portfolio.endDate?string("yyyy-MM-dd")}
+	</td>
+   </tr>
+</table>
+
+<p>the current suggested holdings of the portfolio are as follows:</p>
+
+<h3 id='holdingTitle'>Current Holdings</h3>
+<div id='holdingPanel'>
+</div>
+<br>
+<table width=100% border=0>
+   <tr>
+	<td>
+		<h3>Current Allocation</h3>
+	</td>
+	<td>
+		<img src='' id='piechart'>
+	</td>
+   </tr>
+</table>
+<br>
+
+<div class="dividerTop">
+<div>
+[#--
+	[#if portfolio.state==1]
+		<input type="button" onclick="watchthisportfolio(0)" class="uiButton" value="Unwatch this portfolio">
+	[#else]
+		<input type="button" onclick="watchthisportfolio(1)" class="uiButton" value="Watch this portfolio">
+	[/#if]
+--]
+	<input type="button" onclick="starttofollow()" class="uiButton" value="Start to follow">
+</div>
+
+<br><br><p>Managing your account to mirror the model portfolio comprises three steps:</p>
+<ul>
+<li><p>Click on <strong>Start to follow</strong> button above to inform MyPlanIQ that you are now following the MyPlanIQ portfolio in your investment account. Once done, MyPlanIQ will track holding periods for the funds purchased to avoid redemption charges. You should <em><strong>only</strong></em> click on this button <em><strong>after</strong></em> you have made your initial investment based on the above holdings.</p></li>
+
+<li><strong>Initial Investment: </strong> <p>You can make a one-time change to your investment account to mirror the model portfolio or adopt Dollar Cost Averaging (DCA) to change your portfolio in phases to gradually adapt to the MyPlanIQ portfolio. Refer to <a href="/LTISystem/f401k__faqs.action">FAQs</a> for more on DCA and other ways to migrate towards the MyPlanIQ portfolio.</p></li>
+
+<li><strong>Periodical Rebalance: </strong><p>The MyPlanIQ portfolio is now live and monitored daily. Depending on the rebalancing frequency you set, MyPlanIQ will send out Rebalancing Email Notification. This email will only be sent when rebalancing is required. You should reflect the changes in your account as quickly as possible to keep your investment portfolio in sync with the MyPlanIQ model portfolio. </p>
+<p>Once you receive the email, you should make rebalancing transactions in your investment portfolio that mirrors this MyPlanIQ model portfolio. The percentages stated in the email should be used to make sure the allocation in your personal portfolio is consistent with that in the model portfolio.</p> 
+<p>You can manage (such as remove/setup email alert or delete a portfolio) your MyPlanIQ model portfolios on the <a target="_blank" href="/LTISystem/f401k__portfolios.action">My Portfolios</a> page. </p></li>
+
+</ul>
+
+
+</div>
+[#if portfolioID?? && portfolioID!=0]
+	[#--<input type="button" value="Back" class="uiButton" onclick="window.location.href='profile_customizedresult.action?portfolioID=${portfolioID?string.computer}&planID=${planID?string.computer}'"/>--]
+[/#if]
+</div>
+
+</body>
+</html>

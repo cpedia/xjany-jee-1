@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.customizeregion" namespace="/jsp/customizeregion" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Home" class="/jsp/customizeregion" method="Home">
+			<result name="success">/jsp/customizeregion/home.jsp</result>
+			<result name="input">/jsp/error.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="PortfolioMain" class="/jsp/customizeregion" method="PortfolioMain">
+			<result name="success">/jsp/customizeregion/portfoliomain.jsp</result>
+			<result name="input">/jsp/error.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="StrategyMain" class="/jsp/customizeregion" method="StrategyMain">
+			<result name="success">/jsp/customizeregion/strategymain.jsp</result>
+			<result name="input">/jsp/error.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+<!--		<action name="Save" class="/jsp/admin/regioncustomize/Save" method="Save">
+			<result name="input">/jsp/admin/regioncustomize/save.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Delete" class="/jsp/admin/regioncustomize/Save" method="Delete">
+			<result name="input">/jsp/admin/regioncustomize/Main.action</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		
+		<action name="Update" class="/jsp/admin/regioncustomize/Save" method="Update">
+			<result name="input">/jsp/admin/regioncustomize/save.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		
+		<action name="View" class="/jsp/admin/regioncustomize/Save" method="View">
+			<result name="input">/jsp/admin/regioncustomize/save.jsp</result>
+			<result name="success">/jsp/admin/regioncustomize/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		
+		<action name="Create" class="/jsp/admin/regioncustomize/Save" method="Create">
+			<result name="input">/jsp/admin/regioncustomize/save.jsp</result>
+		</action>-->
+	</package>
+	
+<!--	<package name="com.lti.action.regioncustomize" namespace="/jsp/regioncustomize"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/regioncustomize/Main">
+			<result name="success">/jsp/regioncustomize/content.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+
+	</package>-->
+				
+</struts>

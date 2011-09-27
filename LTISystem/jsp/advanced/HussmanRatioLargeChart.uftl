@@ -1,0 +1,31 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="smoney" content="vf_current" />
+<meta name="submenu" content="smoney" />
+<meta name="smoneyindicators" content="vf_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>Hussman's Price to Peak Earnings Ratio</title>
+<meta content="John Hussman, manager of Hussman Strategy Growth Fund (HSGFX) proposed price to peak 10 year average earnings as a long term stock market valuation metric.MyPlanIQ provides weekly update of the indicator." name="Description">
+<link rel="stylesheet" href="/LTISystem/jsp/images/vf.css" type="text/css" /> 
+<script type="text/javascript">
+function showPic(img,width,height){
+window.open("data:image/jpeg;base64,"+img,"","width="+width+",height="+height+",resizable=1");
+}
+</script>
+</head>
+<body>
+<p align-text="center"><h1>MyPlanIQ Hussman's Peak PE10 and Hussman Ratio</h1></p>
+                        <!--- I would like to add a permission check here --->
+<li><a href="/LTISystem/advanced__indicators.action">MyPlanIQ Marrket Indicators</a></li>                    
+[@lti.gchart Parameters.name!"Hussman Peak PE10,Long Term Average" Parameters.key!"PeakPE10Data_7145.xml" Parameters.host!"www.myplaniq.com"][/@lti.gchart]
+ [@lti.gchart Parameters.name!"Hussman Ratio" Parameters.key!"HussmanRatioList_7145.xml" Parameters.host!"www.myplaniq.com"][/@lti.gchart]
+
+</div>
+
+</body>
+</html>

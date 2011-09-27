@@ -1,0 +1,262 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+	<title>MyPlanIQ Newsletter: August 16, 2010</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="A retirement plan and investing newsletter">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<script>
+$(document).ready(function() {
+	alignHeight();
+});
+</script>
+<style>
+.newsletter-box {
+	height:auto;
+	overflow:hidden;
+	border: 8px solid #FAFAFA;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+}
+.newsletter-box .col-1 {
+	width:618px;
+	height: 545px;
+	overflow: hidden;
+}
+.newsletter-box .col-2 {
+	height: 545px;
+	overflow: hidden;
+	padding-left:10px;
+}
+
+</style>
+</head>
+<body>
+  <div class="borderGreen">
+  	<div class="newsletter-box" >
+  			<div>
+                         <table width="100%">
+                          <tr>
+                            <td>
+  				<br><h1 align="center"><font color="#458F51">MyPlan</font><font color="#95B5C1">IQ</font> Newsletter</h1><br>
+                        <p align="center"><strong align="center">August 16, 2010</strong></p>
+                            </td>
+                            <td align="right" width="6%">
+                              <strong align="right"><a href="http://www.myplaniq.com/LTISystem/newsletter__nllist.action"><strong><font size="5">Archive</font></strong></a></strong>
+                            <td>
+                          </tr>
+                         </table>
+  			</div>
+                      
+  			<div class="col-1">
+  			<!--- Upper Left --->
+                       <h3><a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=861">PlanRatingIQ Rates Effectiveness of Plan Investment Choices </a></h3>
+<p>MyPlanIQ recently released Plan Investment Choices PlanRatingIQ to help gauge quality of investment choices provided in vast retirement IRA, 401K, 403B, 457 plans, variable annuities, variable universal life and college savings 529 plans. Unlike other services, PlanRatingIQ looks at it from the participant’s viewpoint – what returns they could achieve with the plan.</p>
+<p>This is a significant step forward in order to help many participants evaluate various plans so as to better position and manage their investment portfolios. Returns is what they care about. Good returns are derived from minimizing the various fees charged and ensuring high quality investment choices.</p>
+<p>MyPlanIQ Plan Investment Choices PlanRatingIQ uses the following rigorous methodology: </p>
+<p><strong>Step 1:</strong> Evaluate investment fund menu in the following three key categories and derive relative scores in each category:</p>
+<p><strong>Step 2:</strong> Combine the scores in these three categories to arrive an overall rating score by assigning proper weights to scores in the categories. </p><br>
+<p><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=861">...More...</a><br></p>
+<br>
+<br>
+					
+					<!--- End Upper Left --->
+  			
+  			</div>
+  			<div class="col-2" style="width:32%; align:right;">          	
+            <!--- Upper Right --->
+<h3>ETF Plan Rating Table</h3>
+<p>Many of our users have asked us to rate popular ETF plans. With the PlanRatingIQ, it is now possible to evaluate these ETFs based plans. The following is the top ETF plans based on PlanRatingIQ.</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<thead>
+<tr>
+<th class="header">Plan </th>
+<th class="header">TAA 5Yr Annual </th>
+<th class="header">Rating</th></tr></thead>
+<tbody>
+<tr class="odd">
+<td><a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=714">Vanguard ETFs</a> </td>
+<td align="middle">15% </td>
+<td align="middle">59% </td></tr>
+<tr class="even">
+<td><a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,148">Six Core Asset ETFs</a> </td>
+<td align="middle">15% </td>
+<td align="middle">54% </td></tr>
+<tr class="odd">
+<td><a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=989">Liquid ETF Plan</a> </td>
+<td align="middle">12% </td>
+<td align="middle">52% </td></tr>
+<tr class="even">
+<td><a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=991">iShares ETFs</a> </td>
+<td align="middle">10% </td>
+<td align="middle">49% </td></tr>
+<tr class="odd">
+<td><a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,147">Six Core Asset ETFs Most Popular</a> </td>
+<td align="middle">11% </td>
+<td align="middle">47% </td></tr>
+<tr class="even">
+<td><a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,027">Fidelity Commission Efficient ETFs</a> </td>
+<td align="middle">9% </td>
+<td align="middle">46% </td></tr></tbody></table>
+<br>
+<p><a href="http://www.myplaniq.com/LTISystem/f401k__ira_brokerage.action">...More...</a></p>
+
+<!-- End Upper Right -->
+ 
+            </div>
+			</div>
+<!--				<div class="clearfloat"> </div>  -->
+  	</div>
+
+  <!-- CONTENT -->
+  <div id="content">
+    <div class=" middlebar">
+	  <div class="middleLinks" id="middleLinks">
+			<a href="/LTISystem/f401k__why.action"> Why MyPlanIQ</a>
+			<a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a>
+			<div id="searchForPlan">
+					<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    				<input name="groupIDS" value="8" type="hidden"></input>
+	        			<input name="includeHeader" value="true" type="hidden"></input>
+	        			<input name="type" value="2" type="hidden"></input>
+	       			    <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	       			    <span>Search For A Plan And Its Model Portfolios</span>
+	        			<input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)' size="15" type="text" value='${Parameters.symbolPlan!""}'>
+	       				<input alt='Quote' id='submitSearchBottom' type='submit' value=''/>
+	   				</form><!-- end of form -->
+		 	</div><!--searchForPlan -->
+	 </div>
+	 
+	 </div>
+
+      <div class="col-1 box maxheight">
+
+      	<div class="inner" style="font-size: 13px"> 
+<h3>Featured Articles</h3>
+<h4 style="font-size: 120%; font-weight: normal;"><a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=850">Products of the Pros: Index Funds</a></h4>
+<p>Jennifer Saranow Schultz of the New York Times talked to Richard Ferri, founder of Portfolio Solutions to find out
+ where he invests...</p>
+<p>
+MyPlanIQ's observation is that this is a four asset class portfolio (Bonds, US, international and real estate) with a strategic asset allocation. With our SIBs, and an agressive portfolio (20% fixed income) we would expect to see returns along the lines of:
+</p>
+<h4 style="font-size: 120%; font-weight: normal;"><a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=830">Schwab Announces three New Bond ETFs</a></h4>
+<p>Charles Schwab announced on Thursday three new, low-cost bond exchange-traded funds with no online trading commissions for Schwab clients. </p>
+
+<p>We view this is a very positive step for Schwab: our recent <a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=593">study</a> showed that, though relatively young, Schwab ETFs have mostly outperformed their counter parts offered by low cost leader Vanguard and volume leader iShares. With the fixed income bond ETFs, it is no getting closer (not completely there yet, though) for an investor to fully build an effective commission free ETF portfolio. 
+</p>
+<br>
+<a href="http://www.myplaniq.com/LTISystem/f401k_blog.action" class="moreInCategory">More Featured Articles »</a><br>
+            </div> 
+     	</div>
+      <div class="col-2  box maxheight">
+         <div class="inner" style="font-size: 13px">
+<h3>Best of The Web</h3>
+<h4 style="font-size: 120%;"><a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=862"><span
+ style="font-weight: normal;">Young Millionaires Skeptical of Need for Advisors</span><br>
+</a></h4>
+<br>
+<p>Young millionaires doubt the value of financial advisors, according to Spectrem Group.</p>
+
+<p>According to the Chicago-based company’s monthly newsletter, millionaires under the age of 45 say that they prefer self-directed investing and they find the services of a professional advisor to be too expensive.</p>
+<h4 style="font-size: 120%; font-weight: normal;"><a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=790">Cheaper Choice in 401(k)s </a></h4>
+<p>An increasing number of 401(k) plans offer investment options that look a lot like the typical mutual funds. But they're actually a whole different animal—and investors would be smart to know the difference. These alternatives are instruments from banks that are known as collective investment trusts or collective trust funds. They typically have lower expenses than funds, making them attractive to plan overseers and cost-conscious investors, who can see their returns enhanced.</p>
+<h4 style="font-size: 120%;"><a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=703"><span
+ style="font-weight: normal;">Worried about A Double-Dip </span><br>
+</a></h4>
+<p>Charles Rotblut, CFA and editor of the AAII Journal gives a sound perspective on the uncertainties in the market today. </p>
+
+<p>The estimates of second-quarter GDP growth are starting to appear. Bloomberg’s consensus forecast calls for the U.S. economy to have expanded at a 2.5% pace. The actual reported number will be revised in subsequent reports from the Commerce Department. (First-quarter GDP was 2.7%.) Many forecasts for the second half of the year call for more of the same.</p>
+<p><a href="http://www.myplaniq.com/LTISystem/f401k_blog.action"
+ class="moreInCategory">Article Archive &gt;&gt;</a></p>
+
+         </div>
+      </div>
+      <div class="col-3 box maxheight">
+         <div class="inner" style="font-size: 13px">
+	<h3>Plan Investment Choices Ranking</h3><br>
+                <h4 style="font-size:140%">Top 10 Plans With Best Overall Scores</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="1">
+			<thead>
+				<tr>
+					<th alt="Plan Name" width="60px" class="header">Plan Name</th>
+					<th alt="TAA 5 Year Return" width="60px" class="header">TAA 5Yr Return</th>
+					<th alt="Overall Rating" width="60px" class="header">Overall Rating</th>	
+				</tr>			
+			</thead>
+			<tbody>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=986">WACHOVIA SAVINGS PLAN</a></td>
+							<td width=60px>14%</td>
+							<td width=60px>92%</td>
+						</tr>
+
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=724">Schwab OneSource Select List Funds</a></td>
+							<td width=60px>17%</td>
+							<td width=60px>92%</td>
+						</tr>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=1,182">Ampac Fine Chemicals LLC Bargaining Unit 401(k) Plan</a></td>
+							<td width=60px>15%</td>
+							<td width=60px>92%</td>
+						</tr>
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=782">RETIREMENT SAVINGS PLAN OF BNY SECURITIES GROUP</a></td>
+
+							<td width=60px>14%</td>
+							<td width=60px>92%</td>
+
+						</tr>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=911">MONSTER WORLDWIDE, INC. 401(k) SAVINGS PLAN</a></td>
+							<td width=60px>12%</td>
+							<td width=60px>92%</td>
+						</tr>
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=679">TD Ameritrade Premier List No Transaction Fee Mutual Fund Plan</a></td>
+							<td width=60px>13%</td>
+							<td width=60px>90%</td>
+						</tr>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=1,009">COMPUWARE CORPORATION ESOP/401(k) PLAN</a></td>
+
+							<td width=60px>14%</td>
+							<td width=60px>88%</td>
+
+						</tr>
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=937">PEPCO HOLDINGS, INC. RETIREMENT SAVINGS PLAN</a></td>
+							<td width=60px>11%</td>
+							<td width=60px>88%</td>
+						</tr>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=985">WESTERN DIGITAL CORPORATION 401(k) PLAN</a></td>
+							<td width=60px>10%</td>
+							<td width=60px>87%</td>
+						</tr>
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=1,235">HESS CORPORATION EMPLOYEES’ SAVINGS PLAN </a></td>
+
+							<td width=60px>14%</td>
+							<td width=60px>87%</td>
+
+						</tr>
+  </tbody>
+</table>
+<br><p align="center"><a href="http://www.myplaniq.com/LTISystem/f401k_showplanscorelist.action">...More Plan Ranking...</a></p>
+
+
+  	</div>
+      </div>
+		<div class="clearfloat"></div>
+  </div>
+</body>
+</html>

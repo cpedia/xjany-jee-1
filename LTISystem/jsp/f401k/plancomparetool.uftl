@@ -1,0 +1,383 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ: Plan Comparison Tool</title>
+<meta  name="Description" content="MyPlanIQ Plan Comparison Tool help investors compare different investment plans' ratings(diversification, fund quality and portfolio construction ability). The performances of the model portfolios of these plans are compared as well.">
+<meta name="jqueryui" content="smoothness">
+<script src="/LTISystem/jsp/template/ed/js/plugins/selectmenu/ui.selectmenu.js" type="text/javascript"></script>
+<link href="/LTISystem/jsp/template/ed/js/plugins/selectmenu/ui.selectmenu.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="jsp/profile/images/GooPieChart.css"/>
+<script  type="text/javascript" src="jsp/profile/images/GooFunc.js"></script>
+<script  type="text/javascript" src="jsp/profile/images/GooPieChart.js"></script>
+
+<style>
+#contianer input{
+	height:30px;width:500px;
+}
+#planwindow table{
+	border-collapse:collapse; border:1px solid #f0f0f0;
+}
+#planwindow th{
+     border: 1px solid #f0f0f0;
+}
+#planwindow td{
+     border: 1px solid #f0f0f0;padding:5px;
+}
+.ui-autocomplete-category {
+		padding:.2em .4em;
+		margin:.8em 0 .2em;
+}
+
+
+</style>
+
+<script>
+
+$(document).ready(function() {
+	var cache = {};
+	$("#t_planname").autocomplete({
+			minLength: 2,
+			source: function(request, response) {
+				if ( request.term in cache ) {
+					response( cache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "select_ajaxplanname.action?includeHeader=false&size=10",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						cache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	if(ui.item.data==false){
+			 		window.open("/LTISystem/f401k__search.action?keyword="+this.value, "_blank");
+			 	}else{
+			 		$('#t_planid').val(ui.item.id);
+			 		$('#t_planname').val(ui.item.name);
+			 	}
+			 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}else{
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a href='javascript:void(0)'>Show all results for <b>"+item.id+"</b></a>" )
+					.appendTo( ul );
+			}
+			
+		};
+	initSelects("mySelect", 500);
+});
+
+var canplannum=0;
+
+function addPlan(){
+	var canplans=document.getElementById("planNameArray");
+	var names = canplans.value.split("\n");
+	var canplannum = 0;
+	if(names!=null){
+		for(var i=0;i<names.length;++i){
+			if(names[i]!="")
+				++canplannum;
+		}
+	}
+	if(canplannum==5)
+		alert("At most compare 5 plans!!!");
+	else{
+		var planname=document.getElementById("t_planname");
+		var canplans=document.getElementById("planNameArray");
+		if(canplannum==0)
+			canplans.value=planname.value;
+		else
+			canplans.value+="\n"+planname.value;
+		canplannum++;
+		planname.value="";
+	}
+	
+}
+
+function compare(){
+	var canplans = $('#planNameArray').val();
+	if(canplans!=null){
+		$('#plancompareform').submit();
+	}else
+		alert("The number of plans can not be 0!!!");
+	//canplans.value="";
+}
+
+
+var show_SAA=false;
+function showSAA(){
+	if(show_SAA==false){
+		show_SAA=true;
+		$('#btn_showSAA').val('- SAA comparison');
+		$('#show_SAA_div').show();
+	}else{
+		show_SAA=false;
+		$('#btn_showSAA').val('+ SAA comparison');
+		$('#show_SAA_div').hide();
+	}
+}
+
+var show_TAA=false;
+function showTAA(){
+	if(show_TAA==false){
+		show_TAA=true;
+		$('#btn_showTAA').val('- TAA comparison');
+		$('#show_TAA_div').show();
+	}else{
+		show_TAA=false;
+		$('#btn_showTAA').val('+ TAA comparison');
+		$('#show_TAA_div').hide();
+	}
+}
+function clearName(){
+	$('#planNameArray').val("");
+}
+</script>
+</head>
+
+<body>
+	<h1 align="center">Plan Comparison Tool</h1>
+	[#if ignoreNames?? && ignoreNames.size()>0]
+		<p>
+			[#list ignoreNames as name]
+			[<b>${name}</b>]  
+			[/#list]
+			 has/have not been simulated. Please contact support@myplaniq.com if you want to know the simulated result, we will set up for you in priority. It will be much appreciated if you can send us the latest investment options in your Plan. Thank you for your attention.
+		</p>
+	[/#if]
+	<div class="ui-widget" id="contianer">
+			<table border=0 width='100%'>
+				<tr>
+					<td>
+						Plan Name
+					</td>
+					<td>
+						<table width="100%">
+							<tr>
+								<td width="520">
+									<textarea class="ui-widget ui-widget-content" id="t_planname" rows="1" cols="70"></textarea>
+								</td>
+								<td>
+									<a id="btn_addplan" href="javascript:void(0)" onclick="addPlan()" class="uiButton">Add A Plan</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Candidate Plans
+					</td>
+					<td>
+						<form action="f401k_plancomparetool.action" id="plancompareform" method="post">
+							<table width="100%">
+								<tr>
+									<td width="520">
+										<textarea class="ui-widget ui-widget-content" name="planNameArray" id="planNameArray" rows="5" cols="70">${planNameArray!}</textarea>
+									</td>
+									<td>
+										<a id="btn_compare" href="javascript:void(0)" onclick="compare()" class="uiButton">Compare</a>
+										<a id="btn_clear" href="javascript:void(0)" onclick="clearName()" class="uiButton">Clear</a>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</td>
+				</tr>
+			</table>
+		<div>
+			[#if planScoreListWithIDs??]
+			<br>
+			<h3 align="center">Comparison of Plan Rating Score</h3>
+			<table id ="rankingtable" width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+				<thead>
+					<tr>
+						<th alt="Plan Name" width="40%" class="header">Plan Name</th>
+						<th alt="Diversification" width="15%" class="header">Diversification</th>	
+						<th alt="Fund Quality" width="15%" class="header">Fund Quality</th>
+						<th alt="Construciton Capability" width="15%" class="header">Portfolio Building</th>
+						<th alt="Overall Investment" width="15%" class="header">Overall Score</th>	
+					</tr>			
+				</thead>
+				<tbody>
+					[#list planScoreListWithIDs as ps]
+						[#if ps_index%2==0]
+							<tr class='odd'>
+						[/#if]
+						[#if ps_index%2==1]
+							<tr class='even'>
+						[/#if]
+								<td>[#if ps.getStatus() == 1 ]*[/#if]<a href="/LTISystem/f401k_view.action?ID=${ps.getPlanID()}">${ps.getPlanName()}</a></td>	
+								<td>[#if ps.getCoverageScore()??]${ps.getCoverageScore()?string.percent}[#else]{"-"}[/#if]</td>
+								<td>[#if ps.getFundQualityScore()??]${ps.getFundQualityScore()?string.percent}[#else]{"-"}[/#if]</td>
+								<td>[#if ps.getCapabilityScore()??]${ps.getCapabilityScore()?string.percent}[#else]{"-"}[/#if]</td>
+								<td>[#if ps.getInvestmentScore()??]${ps.getInvestmentScore()?string.percent}[#else]{"-"}[/#if]</td>
+							</tr>
+					[/#list]	
+				</tbody>
+			</table>
+			<script type="text/javascript"> 
+				$(document).ready(function(){
+					$("#rankingtable").tablesorter({
+						widthFixed: true, 
+						widgets: ['zebra']
+					})
+				}); 
+			</script>
+			[/#if]
+		</div>
+		<br>
+			<input type='button' id='btn_showSAA' class="uiButton" onclick='javascript:showSAA()' style='width:180px;text-align:left' value='+ SAA comparison'>
+				<div id='show_SAA_div' style='display:none'>
+					[#if SAAMap??]
+						<br>
+						<h3 align="center">SAA(Moderate) Performance Comparison of Plans</h3>
+						<table id="comparetableSAA" width='100%' width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+							<thead>
+								<tr>
+									<th alt="Plan Name" width="40%" class="header">Plan Name</th>
+									<th alt="One Years' Annualized Return" width="10%" class="header">1Yr AR</th>
+									<th alt="One Years' Sharpe Ratio" width="10%" class="header">1Yr Sharpe</th>
+									<th alt="Three Years' Annualized Return" width="10%" class="header">3Yr AR</th>
+									<th alt="Three Years' Sharpe Ratio" width="10%" class="header">3Yr Sharpe</th>
+									<th alt="Five Years' Annualized" width="10%" class="header">5Yr AR</td>
+									<th alt="Five Years' Sharpe Ratio" width="10%" class="header">5Yr Sharpe</th>
+								</tr>
+							</thead>
+							<tbody>
+								[#list  SAAMap?keys as planname]
+									[#if planname_index%2==0]
+										<tr class='odd'>
+									[/#if]
+									[#if planname_index%2==1]
+										<tr class='even'>
+									[/#if]
+											<td>
+												<a href='jsp/portfolio/ViewPortfolio.action?ID=${SAAMap[planname].portfolioID}' target='_blank' title="${SAAMap[planname].portfolioName}">
+												${planname}(Moderate)</a>
+											</td>
+											<td>[#if SAAMap[planname].AR1??]${SAAMap[planname].AR1?string.percent}[/#if]</td>
+											<td>[#if SAAMap[planname].sharpeRatio1??]${SAAMap[planname].sharpeRatio1?string.percent}[/#if]</td>
+											<td>[#if SAAMap[planname].AR3??]${SAAMap[planname].AR3?string.percent}[/#if]</td>
+											<td>[#if SAAMap[planname].sharpeRatio3??]${SAAMap[planname].sharpeRatio3?string.percent}[/#if]</td>
+											<td>[#if SAAMap[planname].AR5??]${SAAMap[planname].AR5?string.percent}[/#if]</td>
+											<td>[#if SAAMap[planname].sharpeRatio5??]${SAAMap[planname].sharpeRatio5?string.percent}[/#if]</td>
+										</tr>
+								[/#list]
+							</tbody>
+						</table>
+						<script type="text/javascript"> 
+							$(document).ready(function(){
+								$("#comparetableSAA").tablesorter({
+									widthFixed: true, 
+									widgets: ['zebra']
+								})
+							}); 
+						</script>
+						
+						
+						<div id="chartSAADiv" style="padding-top:60px;margin:0;">
+							[@s.url action="OutputPrice" namespace="/jsp/flash" id="urlSAA_flash_xml" escapeAmp="false"]
+							[@s.param name="indexArray"]${moderateSAANames}[/@s.param]
+							[@s.param name="startDate"]2000-12-31[/@s.param]
+							[@s.param name="endDate"]2010-07-15[/@s.param]
+							[/@s.url]
+						<!--${urlSAA_flash_xml} -->
+							[@s.action name="DisplayFlash" namespace="/jsp/flash" executeResult=true]
+								[@s.param name="chartName"]Plan SAA Compare Chart[/@s.param]
+								[@s.param name="lineNameArray"]${planNameArray?replace("\r\n", ",")}[/@s.param]
+								[@s.param name="address"]127.0.0.1[/@s.param]
+								[@s.param name="port"]8080[/@s.param]
+								[@s.param name="url"]${urlSAA_flash_xml}[/@s.param]
+								[@s.param name="currentMode"]portfolio[/@s.param]
+							[/@s.action]
+						</div>
+					[/#if]
+				</div>			
+				<br>
+				<br>
+			<input type='button' id='btn_showTAA' class="uiButton" onclick='javascript:showTAA()' style='width:180px;text-align:left' value='+ TAA comparison'>
+				<div id='show_TAA_div' style='display:none'>
+					[#if TAAMap??]
+						<br>
+						<h3 align="center">TAA(Moderate) Performance Comparison of Plans</h3>
+						<table id="comparetableTAA" width='100%' width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+							<thead>
+								<tr>
+									<th alt="Plan Name" width="40%" class="header">Plan Name</th>
+									<th alt="One Years' Annualized Return" width="10%" class="header">1Yr AR</th>
+									<th alt="One Years' Sharpe Ratio" width="10%" class="header">1Yr Sharpe</th>
+									<th alt="Three Years' Annualized Return" width="10%" class="header">3Yr AR</th>
+									<th alt="Three Years' Sharpe Ratio" width="10%" class="header">3Yr Sharpe</th>
+									<th alt="Five Years' Annualized" width="10%" class="header">5Yr AR</td>
+									<th alt="Five Years' Sharpe Ratio" width="10%" class="header">5Yr Sharpe</th>
+								</tr>
+							</thead>
+							<tbody>
+								[#list  TAAMap?keys as planname]
+									[#if planname_index%2==0]
+										<tr class='odd'>
+									[/#if]
+									[#if planname_index%2==1]
+										<tr class='even'>
+									[/#if]
+											<td>
+												<a href='jsp/portfolio/ViewPortfolio.action?ID=${TAAMap[planname].portfolioID}' target='_blank' title="${TAAMap[planname].portfolioName}">
+												${planname}(Moderate)</a>
+											</td>
+											<td>[#if TAAMap[planname].AR1??]${TAAMap[planname].AR1?string.percent}[/#if]</td>
+											<td>[#if TAAMap[planname].sharpeRatio1??]${TAAMap[planname].sharpeRatio1?string.percent}[/#if]</td>
+											<td>[#if TAAMap[planname].AR3??]${TAAMap[planname].AR3?string.percent}[/#if]</td>
+											<td>[#if TAAMap[planname].sharpeRatio3??]${TAAMap[planname].sharpeRatio3?string.percent}[/#if]</td>
+											<td>[#if TAAMap[planname].AR5??]${TAAMap[planname].AR5?string.percent}[/#if]</td>
+											<td>[#if TAAMap[planname].sharpeRatio5??]${TAAMap[planname].sharpeRatio5?string.percent}[/#if]</td>
+										</tr>
+								[/#list]
+							</tbody>
+						</table>
+						<script type="text/javascript"> 
+							$(document).ready(function(){
+								$("#comparetableTAA").tablesorter({
+									widthFixed: true, 
+									widgets: ['zebra']
+								})
+							}); 
+						</script>
+						<div id="chartSAADiv" style="padding-top:60px;margin:0;">
+							[@s.url action="OutputPrice" namespace="/jsp/flash" id="urlTAA_flash_xml" escapeAmp="false"]
+							[@s.param name="indexArray"]${moderateTAANames}[/@s.param]
+							[@s.param name="startDate"]2000-12-31[/@s.param]
+							[@s.param name="endDate"]${endDate}[/@s.param]
+							[/@s.url]
+						<!--${urlTAA_flash_xml} -->
+							[@s.action name="DisplayFlash" namespace="/jsp/flash" executeResult=true]
+								[@s.param name="chartName"]Plan TAA Compare Chart[/@s.param]
+								[@s.param name="lineNameArray"]${planNameArray?replace("\r\n", ",")}[/@s.param]
+								[@s.param name="address"]127.0.0.1[/@s.param]
+								[@s.param name="port"]8080[/@s.param]
+								[@s.param name="url"]${urlTAA_flash_xml}[/@s.param]
+								[@s.param name="currentMode"]portfolio[/@s.param]
+							[/@s.action]
+					</div>			
+					[/#if]
+				</div>
+		</div>
+</body>
+</html>

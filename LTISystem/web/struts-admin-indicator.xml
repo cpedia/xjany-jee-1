@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.admin.indicator" namespace="/jsp/admin/indicator" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/indicator/Main">
+			<result name="success">/jsp/admin/indicator/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/indicator/Save">
+			<result name="input">/jsp/admin/indicator/save.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/indicator/Search">
+			<result name="success">/jsp/admin/indicator/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+	
+	<package name="com.lti.action.admin.indicator.dailydata" namespace="/jsp/admin/indicator/dailydata" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/indicator/dailydata/Main">
+			<result name="success">/jsp/admin/indicator/dailydata/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/indicator/dailydata/Search">
+			<result name="success">/jsp/admin/indicator/dailydata/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>		
+		<action name="Save" class="/jsp/admin/indicator/dailydata/Save">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/indicator/dailydata/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+</struts>

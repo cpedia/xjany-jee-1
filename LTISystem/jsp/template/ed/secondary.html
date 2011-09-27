@@ -1,0 +1,664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/layout.css" rel="stylesheet" type="text/css" />
+
+<link href="css/tablesorter/tablesorter.css" rel="stylesheet" type="text/css" />
+
+<link href="css/jquery_UI/moss/jquery-ui-1.8.custom.css" rel="stylesheet" type="text/css" />
+
+<script src="js/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="js/jquery_UI/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+<script src="js/tablesorter/jquery.tablesorter.js" type="text/javascript"></script>
+
+<script src="js/cufon/cufon-yui.js" type="text/javascript"></script>
+<script src="js/cufon/cufon-replace.js" type="text/javascript"></script>
+<script src="js/cufon/Franklin_Gothic_Medium_Cond_400.font.js" type="text/javascript"></script>
+<script src="js/dd_roundies/dd_roundies.js" type="text/javascript"></script>
+<script src="js/initUI_elements.js" type="text/javascript"></script>
+<script>
+
+
+
+	$(document).ready(function() {
+	
+		initUI_elements();
+		
+	});
+	
+	
+	
+	
+ </script>
+
+
+<style type="text/css">
+<!--
+
+
+.evergreen_table {
+	font-size: 10px;
+	border: 1px solid #416243;
+	line-height: 1em;
+}
+.evergreen_table td {
+	padding: 1em;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #F0F0F0;
+	border-bottom-color: #F0F0F0;
+}
+.evergreen_table  th {
+	color: #FFFFFF;
+	font-weight: bold;
+	line-height: 1.1em;
+}
+-->
+</style>
+</head>
+<body id="page1">
+<div id="main">
+  <!-- HEADER -->
+  <div id="header">
+    <div class="top">
+	 
+		 
+	 	<div class="searchbar">
+	 		<div class="regSignin" id="regSignin"><img src="images/regSignin.png" alt="" width="154" height="24" /></div>
+	 		<div class="searchFields"><span>Search Site</span>
+	 					<input type="text" name="searchSite" id="searchSite" />
+	 						<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+ 						<span>Stock/Fund</span> 
+	 					<input type="text" name="stockFund" id="stockFund" />
+	 					<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+	 					<span>Plan Search</span> 
+	 					<input type="text" name="PlanSearch" id="PlanSearch" />
+	 					<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+ 				</div>
+					
+					
+					
+						<div class="clearfloat"></div>
+			</div>
+      <div class="mast"><a href="index.html"><img src="images/mast.gif" alt="" width="891" height="80" /></a></div>
+		<div class="navbar" id="navbar">
+		
+		
+			
+				<a href="index.html">HOME</a>
+				<a href="#"  class="active">RETIREMENT PLANS</a>
+				<a href="#">TAXABLE/SELF-DIRECTED</a>
+				<a href="#">MY PORTFOLIOS</a>
+				<a href="#">STRATEGIES</a>
+				<a href="#">NEWS/ARTICLES</a></div>
+    </div>
+  </div>
+  
+  <div class="borderGreen">
+  	<div id="content_tier1" class="content_tier1">
+  		<div class="columnLeft">
+  			<h1>H1 Tag: Officia deserunt mollit anim</h1>
+  			<p>The following is a list of company plans based on
+  				public filing information. If you can not find your company plans or you
+  				think they need to be updated/corrected, please email us your company plans
+  				investment options (a list of investment funds. These funds could be mutual
+  				funds (thus preferably their symbols), trusts and Separately Managed Accounts
+  				(SMAs)). You could find this information from Summary Plan Descriptions (SPD)
+  				document or through your online account. Another important information is
+  				the redemption period for each fund. By default, each plan's investment fund
+  				is set to be a 3 month period.  				</p>
+  			<h3>H3 Tag: Officia deserunt mollit anim<br />
+  				<br />
+  				</h3>
+  			<table border="0" cellpadding="0" cellspacing="0" bordercolor="#CCCCCC" class="evergreen_table tablesorter" id="exampleTable">
+				<thead >
+					<tr>
+						<th width="138"  class="header">Name</th>
+						<th width="181"  class="header">Portfolio</th>
+						<th width="55"  class="header">1 yr AR</th>
+						<!--
+								<th class="header">
+									1 yr Beta
+								</th>	-->
+						<th width="67" class="header">1 yr Sharpe</th>
+						<th width="48" class="header">3 yr AR</th>
+						<!--
+								<th class="header">
+									3 yr Beta
+								</th>	-->
+						<th width="68" class="header">3 yr Sharpe</th>
+						<th width="52" class="header">5 yr AR</th>
+						<!--
+								<th class="header">
+									5 yr Beta
+								</th>	-->
+						<th width="69" class="header">5 yr Sharpe</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a href="#">Major Asset Index for testing guru</a></td>
+						<td><a href="#">Major Asset Index for testing guru Guru Asset Allocation
+								Moderate no redemption limit</a></td>
+						<td>33.88</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>513.98</td>
+						<td>2.01</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>4.69</td>
+						<td>4.91</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>26.07</td>
+					</tr>
+					<tr>
+						<td><a href="#">Intuit 401K</a></td>
+						<td><a href="#">Intuit 401K Optimized Asset Allocation Conservative</a></td>
+						<td>21.6</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>476.8</td>
+						<td>8.8</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>91.49</td>
+						<td>9.21</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>103.41</td>
+					</tr>
+					<tr>
+						<td><a href="#">Hewlett Packard 401K</a></td>
+						<td><a href="#">Hewlett Packard 401K Guru Directed Asset Allocation Moderate</a></td>
+						<td>35.33</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>469.23</td>
+						<td>1.54</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>4.14</td>
+						<td>5.81</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>50.55</td>
+					</tr>
+					<tr>
+						<td><a href="#">TD Ameritrade Premier List No Transaction Fee Mutual Fund
+								Plan</a></td>
+						<td><a href="#">TD Ameritrade Premier List No Trasanction Fee Mutual Fund
+								Plan Optimized Asset Allocation Moderate</a></td>
+						<td>21.4</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>466.93</td>
+						<td>7.6</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>51.73</td>
+						<td>11.97</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>87.65</td>
+					</tr>
+					<tr>
+						<td><a href="#">Synfora John Hancock Retirement Plan Services</a></td>
+						<td><a href="#">Synfora John Hancock Retirement Plan Services Optimized
+								Asset Allocation Moderate</a></td>
+						<td>19.44</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>456.28</td>
+						<td>7.55</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>61.76</td>
+						<td>8.8</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>77.5</td>
+					</tr>
+					<tr>
+						<td><a href="#">Fidelity Fund Picks</a></td>
+						<td><a href="#">Fidelity Taxable Fund Picks Optimized Asset Allocation
+								Growth</a></td>
+						<td>13.49</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>453.5</td>
+						<td>6.84</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>72.11</td>
+						<td>11.13</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>113.8</td>
+					</tr>
+					<tr>
+						<td><a href="#">John Hancock Retirement Plan Services</a></td>
+						<td><a href="#">John Hancock Retirement Plan Services Optimized Asset Allocation
+								Moderate</a></td>
+						<td>17.61</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>441.48</td>
+						<td>8.18</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>75.57</td>
+						<td>11.59</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>106.91</td>
+					</tr>
+					<tr>
+						<td><a href="#">Schwab OneSource Select List Funds</a></td>
+						<td><a href="#">Schwab OneSource Select List Funds Optimized Asset Allocation
+								Moderate</a></td>
+						<td>11.57</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>429.82</td>
+						<td>5.97</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>55.59</td>
+						<td>11.33</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>105.35</td>
+					</tr>
+					<tr>
+						<td><a href="#">Western Reserve Life Insurance VUL No Profunds New</a></td>
+						<td><a href="#">Western Reserve Life Insurance VUL No Profunds New Optimized
+								Asset Allocation Conservative</a></td>
+						<td>14.09</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>416.51</td>
+						<td>6.58</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>88.49</td>
+						<td>7.09</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>87.74</td>
+					</tr>
+					<tr>
+						<td><a href="#">University of Washington Retirement Plan Vanguard</a></td>
+						<td><a href="#">University of Washington Retirement Plan Vanguard Optimized
+								Asset Allocation Conservative</a></td>
+						<td>10.85</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>386.56</td>
+						<td>6.9</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>102.87</td>
+						<td>8.2</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>107.18</td>
+					</tr>
+					<tr>
+						<td><a href="#">Fidelity Personal Retirement Annuity</a></td>
+						<td><a href="#">Fidelity Personal Retirement Annuity Optimized Asset Allocation
+								Conservative</a></td>
+						<td>20.01</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>383.5</td>
+						<td>6.47</td>
+						<!--
+							<td>
+								NA
+							</td>	 -->
+						<td>78.79</td>
+						<td>8.86</td>
+						<!--
+							<td>
+								NA
+							</td>	-->
+						<td>98.6</td>
+					</tr>
+				</tbody>
+			</table>
+  			<p>&nbsp;</p>
+  			<h2>H2 Tag: Officia deserunt mollit anim</h2>
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+  				veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+  				ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+  				voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+  				sint occaecat cupidatat non proident, sunt in culpa qui offi</p>
+  			<h3>H3 Tag: Officia deserunt mollit anim</h3>
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  				non proident, sunt in culpa qui offi</p>
+  			<h4>H4 Tag: Officia deserunt mollit anim</h4>
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  				non proident, sunt in culpa qui offi</p>
+  			<h5>H5 Tag: Officia deserunt mollit anim</h5>
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  				non proident, sunt in culpa qui offi</p>
+  			<h2>Dialog</h2>
+  			<p><a class="openDialog" href="#">Click here for dialog window</a></p>
+  			<h2>Tabs</h2>
+  			<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Nunc tincidunt</a></li>
+		<li><a href="#tabs-2">Proin dolor</a></li>
+		<li><a href="#tabs-3">Aenean lacinia</a></li>
+	</ul>
+	<div id="tabs-1">
+		<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+	</div>
+	<div id="tabs-2">
+		<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+	</div>
+	<div id="tabs-3">
+		<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+		<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+	</div>
+</div>
+  			<p>&nbsp;</p>
+  			<h2>Content with divider on top</h2>
+  			<div class="dividerTop">
+  				<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+  					praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+  					excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+  					qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
+  					harum quidem rerum facilis est et expedita distinctio. Nam libero tempore,
+  					cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod
+  					maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor
+  					repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
+  					necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae
+  					non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut
+  					aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus
+  					asperiores repellat.</p>
+  				</div>
+  			<div class="dividerTop">
+				<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+					praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+					excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+					qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
+					harum quidem rerum facilis est et expedita distinctio. Nam libero tempore,
+					cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod
+					maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor
+					repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
+					necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae
+					non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+					reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus
+					asperiores repellat.</p>
+  				</div>
+  			<p>&nbsp;</p>
+  		</div>
+  		<div class="columnRight">
+  			
+  				<div class="sidebar_box">
+  					<div style="margin-bottom:8px"><span class="sidebar_heading"><strong>Search For A Plan</strong><span></div>
+  					<div class=" ">
+  						<input type="text" name="searchPlanInput2" id="searchPlanInput2" />
+						<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+						<br />
+  				</div>
+  					</div>
+				<div class="sidebar_box_noPadding roundHeadingBlue">
+					<div class="sidebar_box_heading_white">						Buttons Using jQuery UI</div>
+					<div class="sidebar_box_content">
+						<p><a class="uiButton" href="#">button</a>
+						<a class="uiButton" href="#">button</a>
+						<a class="uiButton" href="#">button</a></p>
+					</div>
+				</div>
+  				<div class="sidebar_box_noPadding roundHeadingBlue">
+					<div class="sidebar_box_heading_white"> sidebar_box_heading_blue</div>
+  					<div class="sidebar_box_content">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim
+							ad.</p>
+						<ul>
+							<li> Minim veniam, quis nostrud exercitation ullameniam, quis nos iatrud
+							exercitation ullameniam, quis ullameniam exercitation ullameniam,
+							quis nostrud exercitation ullam</li>
+							<li> Minim veniam, quis nostrud exercitation ullam</li>
+							<li> Minim veniam, quis nostrud exercitation ullam</li>
+						</ul>
+					</div>
+				</div>
+  				<div class="sidebar_box_noPadding roundHeadingGreen">
+					<div class="sidebar_box_heading_white"> Lorem Ipsum Dolor</div>
+  					<div class="sidebar_box_content borderBottom_1px">
+  						<table id="regTableWhite" class="regTableWhite" width="187" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="24">User</td>
+								<td width="16">&nbsp;</td>
+								<td width="147"><input type="text" name="textfield3" id="textfield3" /></td>
+							</tr>
+							<tr>
+								<td>Pass</td>
+								<td>&nbsp;</td>
+								<td><input type="text" name="textfield4" id="textfield4" /></td>
+							</tr>
+						</table>
+						</div>
+					<div class="sidebar_box_content">
+						<input type="submit" name="submitButton2" id="submitButton2" value="Submit" />
+					</div>	
+				</div>
+  				<h1>H1 Tag</h1>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<h2>H2 Tag: Officia deserunt</h2>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<h3>H3 Tag: Officia deserunt mollit </h3>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<h4>H4 Tag: Officia deserunt mollit anim</h4>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<h5>H5 Tag: Officia deserunt mollit anim</h5>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<p></p>
+  				<p>&nbsp;</p>
+  				<p>&nbsp;</p>
+  				<p>&nbsp;</p>
+  		</div>
+  		<div class="clearfloat"></div>
+  		</div>
+  	</div>
+  <!-- CONTENT -->
+  <div id="content">
+    <div class=" middlebar">
+	  <div class="middleLinks" id="middleLinks">
+			<a href="#"> Why Evergreen?</a>
+			<a href="#"> Button With Text</a>
+			<a href="#"> Button With Text</a>
+			<div id="searchForPlan">Search For A Plan<span class="searchFields">
+				<input type="text" name="searchPlanInput" id="searchPlanInput" />
+			</span>
+				<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+				<span class="searchFields">				</span> </div>
+	 </div>
+	 
+	 </div>
+    
+      <div class="clearfloat"></div>
+  </div>
+  <!-- FOOTER -->
+  <div id="footer">
+  	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Company Info</a>
+		<a href="#">About Us</a>
+		<a href="#">News and Press</a>
+		<a href="#">TV and Radio Apearances</a>
+		<a href="#">Our Services</a>
+		<a href="#">Affiliate Program</a>
+		<a href="#">Invite a Friend</a>
+		<a href="#">Contact Us</a>
+  	</div>
+	
+	
+  	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Asset Alocation</a>
+		<a href="#">ETF</a>
+		<a href="#">Index Funds</a>
+		<a href="#">Vanguard Funds</a>
+		<a href="#">DFA</a></div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum Dolor Con</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+  	</div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum Dolor Con</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+  	</div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum Dolor Con</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+  	</div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum Dolor Con</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+  	</div>	
+	
+	<div class="clearfloat"></div>
+  </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>

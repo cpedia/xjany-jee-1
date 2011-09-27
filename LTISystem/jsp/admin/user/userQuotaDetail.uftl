@@ -1,0 +1,130 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+[#assign userNames="" /]
+[#if userQuotaList??]
+  [#list userQuotaList as  items]
+          [#assign userNames= userNames +"${items.get(0)}" /]
+     [#if items_index lt userQuotaList?size-1]
+        [#assign userNames = userNames+"," ]
+     [/#if]
+  [/#list]
+[/#if]
+
+<style>
+ .show_text {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 0 solid #FFFFFF;
+    width: 98%;
+    }
+ .readonly_text {
+    background: none repeat scroll 0 0 #E5E5E5;
+    border: 0 solid #FFFFFF;
+    width: 98%;
+    }
+ .edit_text {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #336699;
+    width: 98%;
+    }
+ .btn {
+    background-image: url("images/grey-bg.gif");
+    background-repeat: repeat;
+    border: 1px solid #999999;
+    color: #000000;
+    cursor: pointer;
+    font-family: Tahoma;
+    font-size: 0.9em;
+    font-weight: bold;
+    height: 22px;
+    margin: 1px 1px 1px 1px;
+    padding: 1px;
+    width: 70px;
+   }
+</style>
+<script src="${lti.baseUrl}/jsp/template/ed/js/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="${lti.baseUrl}/jsp/template/ed/js/jquery_UI/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+<script>
+  var userNames = "${userNames}";
+  function modifyAll(){
+     var maxPlanNum="";
+     var maxPortfolioNum="";
+     var maxPlanViewNum="";
+     var planItems = document.getElementsByName("maxPlanNum");
+     var portfolioItems = document.getElementsByName("maxPortfolioNum");
+     var viewItems = document.getElementsByName("maxPlanViewNum");
+     for(var i=0;i<planItems.length;i++){
+       if(i!=0) maxPlanNum = maxPlanNum+",";;
+       maxPlanNum+=planItems[i].value;
+     }
+     for(var j=0;j<portfolioItems.length;j++){
+       if(j!=0) maxPortfolioNum = maxPortfolioNum+",";;
+       maxPortfolioNum+=portfolioItems[j].value;
+     }
+     for(var k=0;k<viewItems.length;k++){
+       if(k!=0) maxPlanViewNum = maxPlanViewNum+",";;
+       maxPlanViewNum+=viewItems[k].value;
+     }
+     
+     $.ajax({
+        type:"post",
+        url:"/LTISystem/jsp/admin/user/UserQuota_modify.action?includeHeader=false&userNames="+userNames+"&maxPlanNum="+maxPlanNum+"&maxPortfolioNum="+maxPortfolioNum+"&maxPlanViewNum="+maxPlanViewNum,
+        success:function(message){
+         alert("The changes have been saved.");
+        },
+        errro:function(message){
+         alert("Save failed");
+        }
+     });
+  }
+  
+  function edit_text(element){
+		$(element).removeClass('show_text');
+		$(element).addClass('edit_text');
+	}
+	function out_text(element){
+		$(element).removeClass('edit_text');
+		$(element).addClass('show_text');
+	}
+</script>
+
+<h2>User Quota Manager</h2>
+<p>
+<br>
+<br>
+<form action="/LTISystem/jsp/admin/user/UserQuota.action" method="post">
+User Name:<input type="text" name="name">
+<input type="submit" value="Search" class="btn">
+</form>
+</p>
+
+[#if userQuotaList??]
+  <table sthle="width:100%">
+   <thead>
+      <tr> 
+        <th>User Name</th>
+        <th>Max Plans</th>
+        <th>Max Portfolios</th>
+        <th>Max Fundtables</th>
+        <th>Used Plans</th>
+        <th>Used Portfolios</th>
+        <th>Used Fundtables</th>
+      </tr>
+   </thead>
+   <tbody>
+      
+  [#list userQuotaList as items]
+     <tr>
+      <td>${items.get(0)}</td>
+      <td><input type="text" class="show_text" value="${items.get(1)}" name="maxPlanNum" onclick="edit_text(this)" onblur="out_text(this)"></td>
+      <td><input type="text" class="show_text" value="${items.get(2)}" name="maxPortfolioNum" onclick="edit_text(this)" onblur="out_text(this)"></td>
+      <td><input type="text" class="show_text" value="${items.get(3)}" name="maxPlanViewNum" onclick="edit_text(this)" onblur="out_text(this)"></td>
+      <td><input type="text" class="readonly_text" value="${items.get(4)}" name="curPlanNum" readOnly="true"></td>
+      <td><input type="text" class="readonly_text" value="${items.get(5)}" name="curPortfolioNum" readOnly="true"></td>
+      <td><input type="text" class="readonly_text" value="${items.get(6)}" name="curPlanViewNum" readOnly="true"></td>
+     </tr>
+  [/#list]
+     </tbody>
+  </table>
+  <input type="button" class="btn" onclick="javascript:modifyAll()" value="Modify">
+[/#if]

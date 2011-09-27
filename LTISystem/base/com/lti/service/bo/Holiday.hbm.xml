@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="Holiday"
+		table="ltisystem_holiday"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="Date"
+			column="Date"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Description"
+			column="Description"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="Symbol"
+			column="Symbol"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

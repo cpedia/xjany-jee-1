@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="Log"
+		table="ltisystem_log"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="Message"
+			column="Message"
+			type="string"
+			not-null="false"
+			length="20000"
+		/>		
+		<property
+			name="LogDate"
+			column="LogDate"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="StrategyID"
+			column="StrategyID"
+			type="java.lang.Long"
+			not-null="false"
+		/>		
+		<property
+			name="PortfolioID"
+			column="PORTFOLIOID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="Type"
+			column="Type"
+			type="integer"
+			not-null="false"
+			length="11"
+		/>	
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/layout.css" rel="stylesheet" type="text/css" />
+
+<link href="css/tablesorter/tablesorter.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery_UI/moss/jquery-ui-1.8.custom.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/selectmenu/ui.selectmenu.css" rel="stylesheet" type="text/css" />
+
+<script src="js/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="js/jquery_UI/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+<script src="js/tablesorter/jquery.tablesorter.js" type="text/javascript"></script>
+
+<script src="js/cufon/cufon-yui.js" type="text/javascript"></script>
+<script src="js/cufon/cufon-replace.js" type="text/javascript"></script>
+<script src="js/cufon/Franklin_Gothic_Medium_Cond_400.font.js" type="text/javascript"></script>
+<script src="js/dd_roundies/dd_roundies.js" type="text/javascript"></script>
+
+<script src="js/plugins/selectmenu/ui.selectmenu.js" type="text/javascript"></script>
+
+
+
+<script src="js/initUI_elements.js" type="text/javascript"></script>
+<script>
+
+
+
+	$(document).ready(function() {
+	
+		initUI_elements();
+		
+	});
+	
+	
+	
+	
+ </script>
+
+
+<style type="text/css">
+<!--
+
+
+.evergreen_table {
+	font-size: 10px;
+	border: 1px solid #416243;
+	line-height: 1em;
+}
+.evergreen_table td {
+	padding: 1em;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #F0F0F0;
+	border-bottom-color: #F0F0F0;
+}
+.evergreen_table  th {
+	color: #FFFFFF;
+	font-weight: bold;
+	line-height: 1.1em;
+}
+-->
+</style>
+</head>
+<body id="widgetPage">
+<div id="main">
+  <!-- HEADER -->
+  <div id="header">
+    <div class="top">
+	 
+		 
+	 	<div class="searchbar">
+	 		<div class="regSignin" id="regSignin"><img src="images/regSignin.png" alt="" width="154" height="24" /></div>
+	 		<div class="searchFields"><span>Search Site</span>
+	 					<input type="text" name="searchSite" id="searchSite" />
+	 						<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+ 						<span>Stock/Fund</span> 
+	 					<input type="text" name="stockFund" id="stockFund" />
+	 					<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+	 					<span>Plan Search</span> 
+	 					<input type="text" name="PlanSearch" id="PlanSearch" />
+	 					<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+ 				</div>
+					
+					
+					
+						<div class="clearfloat"></div>
+			</div>
+      <div class="mast"><a href="index.html"><img src="images/mast.gif" alt="" width="891" height="80" /></a></div>
+		<div class="navbar" id="navbar">
+		
+		
+			
+				<a href="index.html">HOME</a>
+				<a href="#"  class="active">RETIREMENT PLANS</a>
+				<a href="#">TAXABLE/SELF-DIRECTED</a>
+				<a href="#">MY PORTFOLIOS</a>
+				<a href="#">STRATEGIES</a>
+				<a href="#">NEWS/ARTICLES</a></div>
+    </div>
+  </div>
+  
+  <div class="borderGreen">
+  	<div id="content_tier1" class="content_tier1">
+  		<div class="columnLeft">
+  			
+  			<div id="guidePost">
+			<div class="guidepostItem" id="guidepost_decide"></div>
+  			
+  			<div class="guidepostItem" id="guidepost_customize"></div>
+  			
+  			<div class="guidepostItem" id="guidepost_manage"></div>
+				
+				<div class="clearfloat"></div>
+				</div>
+  			<p>&nbsp;</p>
+  			<h2>Slider and Date</h2>
+  			<div class="dividerTop">
+				<p>Uses jQuery UI Slider Widget and Datepicker widget. Click on date fields
+					to open Datepicker. Click on handles within the slider (or the
+					slider itself) to update datefields. Initialization of widgets
+					can be located in file &quot;initUI_elements.js&quot;.</p>
+				<div class="datesliderContainer">
+					
+					<div class="readoutContainer">
+					<div class="dateSliderYear">2010</div>
+						<table width="244" border="0" align="center" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="104">Range Start </td>
+								<td width="12">&nbsp;</td>
+								<td width="128">Range End </td>
+							</tr>
+							<tr>
+								<td><input type="text" name="startdate" id="startdate" /></td>
+								<td><div align="center">–</div></td>
+								<td><input type="text" name="enddate" id="enddate" /></td>
+							</tr>
+						</table>
+						<div  class="clearfloat"></div>
+					</div>
+					
+					<div class="sliderContainer">
+						<div id="slider1">slider</div>
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" class="slider_tick">
+							<tr>
+								<td>Jan</td>
+								<td>Feb</td>
+								<td>Mar</td>
+								<td>April</td>
+								<td>May</td>
+								<td>June</td>
+								<td>July</td>
+								<td>Aug</td>
+								<td>Sept</td>
+								<td>Oct</td>
+								<td>Nov</td>
+								<td>Dec</td>
+							</tr>
+						</table>
+					</div><div  class="clearfloat"></div>
+					</div>
+				</div>
+  			<h3><br />
+					<br />
+  			</h3>
+  			<h2>Dropdown (HTML Select Tag styled through jQuery UI)</h2>
+  			<div class="dividerTop">
+				<p>Uses jQuery to replace select elements with styled presentation list.
+					(Usual HTML select elements are notoriously unstylable). This
+					is also initialized iin &quot;initUI_elements.js&quot;</p>
+  				<p>
+					<label class="styleSelectLabel" for="dropDownSelect">Lable for Select:</label>
+					<select class="styleSelect" name="dropDownSelect" id="dropDownSelect">
+						<option value="Select Label 1">Select Label 1</option>
+						<option value="Select Label 2">Select Label 2</option>
+						<option value="Select Label 3">Select Label 3</option>
+						<option value="Select Label 4">Select Label 4</option>
+						<option value="Select Label 5">Select Label 5</option>
+						<option value="Select Label 1">Select Label 1</option>
+						<option value="Select Label 2">Select Label 2</option>
+						<option value="Select Label 3">Select Label 3</option>
+						<option value="Select Label 4">Select Label 4</option>
+						<option value="Select Label 5">Select Label 5</option>
+						<option value="Select Label 1">Select Label 1</option>
+						<option value="Select Label 2">Select Label 2</option>
+						<option value="Select Label 3">Select Label 3</option>
+						<option value="Select Label 4">Select Label 4</option>
+						<option value="Select Label 5">Select Label 5</option>
+					</select>
+					<div class="clearfloat"></div>
+  				</p>
+				
+				<p>
+					<label class="styleSelectLabel" for="dropDownSelect2">Lable for Select:</label>
+					<select class="styleSelect" name="dropDownSelect2" id="dropDownSelect2">
+						<option value="Select Label 1">Select Label 1</option>
+						<option value="Select Label 2">Select Label 2</option>
+						<option value="Select Label 3">Select Label 3</option>
+						<option value="Select Label 4">Select Label 4</option>
+						<option value="Select Label 5">Select Label 5</option>
+						<option value="Select Label 1">Select Label 1</option>
+						<option value="Select Label 2">Select Label 2</option>
+						<option value="Select Label 3">Select Label 3</option>
+						<option value="Select Label 4">Select Label 4</option>
+						<option value="Select Label 5">Select Label 5</option>
+						<option value="Select Label 1">Select Label 1</option>
+						<option value="Select Label 2">Select Label 2</option>
+						<option value="Select Label 3">Select Label 3</option>
+						<option value="Select Label 4">Select Label 4</option>
+						<option value="Select Label 5">Select Label 5</option>
+					</select>
+					<div class="clearfloat"></div>
+  				</p>
+				<p>
+					<label class="styleSelectLabel" for="dropDownSelect3">Lable for Select:</label>
+					<select class="styleSelect" name="dropDownSelect3" id="dropDownSelect3">
+						<option value="Select Label 1">Select Label 1</option>
+						<option value="Select Label 2">Select Label 2</option>
+						<option value="Select Label 3">Select Label 3</option>
+						<option value="Select Label 4">Select Label 4</option>
+						<option value="Select Label 5">Select Label 5</option>
+						<option value="Select Label 1">Select Label 1</option>
+						<option value="Select Label 2">Select Label 2</option>
+						<option value="Select Label 3">Select Label 3</option>
+						<option value="Select Label 4">Select Label 4</option>
+						<option value="Select Label 5">Select Label 5</option>
+						<option value="Select Label 1">Select Label 1</option>
+						<option value="Select Label 2">Select Label 2</option>
+						<option value="Select Label 3">Select Label 3</option>
+						<option value="Select Label 4">Select Label 4</option>
+						<option value="Select Label 5">Select Label 5</option>
+					</select>
+					<div class="clearfloat"></div>
+  				</p>
+  				</div>
+  			<p>&nbsp; </p>
+  			<h3>H3 Tag: Officia deserunt mollit anim</h3>
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  				non proident, sunt in culpa qui offi</p>
+  			<h4>H4 Tag: Officia deserunt mollit anim</h4>
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  				non proident, sunt in culpa qui offi</p>
+  			<h5>H5 Tag: Officia deserunt mollit anim</h5>
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  				non proident, sunt in culpa qui offi</p>
+  			<h2>&nbsp;</h2>
+  			<h2>Content with divider on top</h2>
+  			<div class="dividerTop">
+  				<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+  					praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+  					excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+  					qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
+  					harum quidem rerum facilis est et expedita distinctio. Nam libero tempore,
+  					cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod
+  					maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor
+  					repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
+  					necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae
+  					non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut
+  					aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus
+  					asperiores repellat.</p>
+  				</div>
+  			<div class="dividerTop">
+				<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+					praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+					excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+					qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
+					harum quidem rerum facilis est et expedita distinctio. Nam libero tempore,
+					cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod
+					maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor
+					repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
+					necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae
+					non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+					reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus
+					asperiores repellat.</p>
+  				</div>
+  			<p>&nbsp;</p>
+  		</div>
+  		<div class="columnRight">
+  			
+  				<div class="sidebar_box">
+  					<div style="margin-bottom:8px"><span class="sidebar_heading"><strong>Search For A Plan</strong><span></div>
+  					<div class=" ">
+  						<input type="text" name="searchPlanInput2" id="searchPlanInput2" />
+						<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+						<br />
+  				</div>
+  					</div>
+				<div class="sidebar_box_noPadding roundHeadingGreen">
+					<div class="sidebar_box_heading_white"> Lorem Ipsum Dolor</div>
+  					<div class="sidebar_box_content borderBottom_1px">
+  						<table id="regTableWhite" class="regTableWhite" width="187" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="24">User</td>
+								<td width="16">&nbsp;</td>
+								<td width="147"><input type="text" name="textfield3" id="textfield3" /></td>
+							</tr>
+							<tr>
+								<td>Pass</td>
+								<td>&nbsp;</td>
+								<td><input type="text" name="textfield4" id="textfield4" /></td>
+							</tr>
+						</table>
+						</div>
+					<div class="sidebar_box_content">
+						<input type="submit" name="submitButton2" id="submitButton2" value="Submit" />
+					</div>	
+				</div>
+  				<h1>H1 Tag</h1>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<h2>H2 Tag: Officia deserunt</h2>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<h3>H3 Tag: Officia deserunt mollit </h3>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<h4>H4 Tag: Officia deserunt mollit anim</h4>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<h5>H5 Tag: Officia deserunt mollit anim</h5>
+  				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+  					non proident, sunt in culpa qui offi</p>
+  				<p></p>
+  				<p>&nbsp;</p>
+  				<p>&nbsp;</p>
+  				<p>&nbsp;</p>
+  		</div>
+  		<div class="clearfloat"></div>
+  		</div>
+  	</div>
+  <!-- CONTENT -->
+  <div id="content">
+    <div class=" middlebar">
+	  <div class="middleLinks" id="middleLinks">
+			<a href="#"> Why Evergreen?</a>
+			<a href="#"> Button With Text</a>
+			<a href="#"> Button With Text</a>
+			<div id="searchForPlan">Search For A Plan<span class="searchFields">
+				<input type="text" name="searchPlanInput" id="searchPlanInput" />
+			</span>
+				<div class="submitSearch"><img src="images/searchButton.gif" alt="" width="19" height="19" /></div>
+				<span class="searchFields">				</span> </div>
+	 </div>
+	 
+	 </div>
+    
+      <div class="clearfloat"></div>
+  </div>
+  <!-- FOOTER -->
+  <div id="footer">
+  	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Company Info</a>
+		<a href="#">About Us</a>
+		<a href="#">News and Press</a>
+		<a href="#">TV and Radio Apearances</a>
+		<a href="#">Our Services</a>
+		<a href="#">Affiliate Program</a>
+		<a href="#">Invite a Friend</a>
+		<a href="#">Contact Us</a>
+  	</div>
+	
+	
+  	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Asset Alocation</a>
+		<a href="#">ETF</a>
+		<a href="#">Index Funds</a>
+		<a href="#">Vanguard Funds</a>
+		<a href="#">DFA</a></div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum Dolor Con</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+  	</div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum Dolor Con</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+  	</div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum Dolor Con</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+  	</div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum Dolor</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum Dolor Con</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+		<a href="#">Lorem Ipsum</a>
+  	</div>	
+	
+	<div class="clearfloat"></div>
+  </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>

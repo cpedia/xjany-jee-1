@@ -1,0 +1,192 @@
+[#ftl]
+<h1 style="text-align:center">MyPlanIQ Model Portfolios at <img src="/LTISystem/UserFiles/Image/foliologo.png"></h1><br>
+<p>MyPlanIQ offers the following model portfolios at Folio Investing. Folio Investing is an online brokerage designed to make it easy and inexpensive to own and manage your own investment portfolio. They offer one-click portfolio buying, selling and rebalancing, as well as a flat fee for unlimited window trading and fractional share/dollar based investing. </p>
+<p>To invest in these portfolios, just open an account at Folio Investing using one of the links below. Once open and funded, you will be able to rebalance to the target allocations in the model portfolios below. </p>
+<p>MyPlanIQ offers two types of model portfolios: 
+<ul>
+<li><strong>Strategic Allocation Model Portfolios</strong> using MyPlanIQ <a href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=771">SAA (Strategic Asset Allocation) strategy</a>. Any MyPlanIQ registered user can access these portfolios real time free of charge. </li>
+<li><strong>Tactical Allocation Model Portfolios</strong> using MyPlanIQ <a href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=1003">TAA (Tactical Asset Allocation) strategy</a>. To access these portfolios real time, you need to be a MyPlanIQ <a href="http://www.myplaniq.com/LTISystem/paypal_subscr.action">subscriber</a>. </li>
+</ul>
+</p><br>
+<p>These portfolios are customized model portfolios using ETFs in <a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,429">MyPlanIQ Allocation Folio Plan</a>. Please visit the plan page for more information on ETFs used. The portfolios have the following five different <a href="http://www.myplaniq.com/LTISystem/profile_edit.action?planID=0&portfolioID=0">risk profiles</a>:</p>
+<ul>
+<li><strong>Very Conservative:</strong> Risk profile 80. Target Allocations: 20% risk assets and 80% fixed income.</li>
+<li><strong>Conservative:</strong> Risk profile 60. Target Allocations: 40% risk assets and 60% fixed income.</li>
+<li><strong>Balanced:</strong> Risk profile 50. Target Allocations: 50% risk assets and 50% fixed income.</li>
+<li><strong>Moderate:</strong> Risk profile 40. Target Allocations: 60% risk assets and 40% fixed income.</li>
+<li><strong>Growth:</strong> Risk profile 20. Target Allocations: 80% risk assets and 20% fixed income.</li>
+</ul><br>
+<p>Investors should pay close attention to choosing an appropriate risk profile before deciding what model portfolios to follow.</p>
+<h2 style="text-align:center">MyPlanIQ Strategic Allocation Model Portfolios on FolioInvesting.com</h2><br>
+
+<table class="tablesorter" id='portfolios' border="0" cellpadding="0" cellspacing="1" bgcolor="#000000">
+<thead>
+<!-- &#34920;&#22836;&#35774;&#35745; -->
+<tr bgcolor="#FFFFFF">
+<!-- &#36825;&#37324;&#23558;&#34920;&#26684;&#20869;&#35774;&#32622;&#20026;&#21478;&#19968;&#20010;&#39068;&#33394;&#65292;&#26159;&#20135;&#29983;&#32454;&#32447;&#30340;&#37325;&#35201;&#26465;&#20214; -->
+      <th align="center">Name</s:text></th>
+
+      <th width="6%" align="center">Access FolioInvesting</th>
+      <th width="6%" align="center">Last Rebalance Date</th>
+      <th width="6%" align="center">1 Year Sharpe(%)</th>
+      <th width="6%" align="center">1 Year AR(%)</th>
+       <th width="6%" align="center">3 Year Sharpe(%)</th>
+      <th width="6%" align="center">3 Year AR(%)</th>
+      <th width="6%" align="center">5 Year Sharpe(%)</th>
+      <th width="6%" align="center">5 Year AR(%)</th>
+
+</tr>
+</thead>
+<!-- &#25353;&#29031;&#26684;&#24335;&#26174;&#31034;portfolio&#30340;&#21517;&#23383;&#65292;&#36807;&#38271;&#30340;&#37096;&#20998;&#29992;&#30465;&#30053;&#21495;&#20195;&#26367;&#65292;&#40736;&#26631;&#32463;&#36807;&#26102;&#21487;&#20197;&#30475;&#21040;&#20840;&#21517; -->
+[#list portfolios as portfolio]
+<tr>
+	<td id="shortName" title="${portfolio.portfolioName}">
+		<a href="/LTISystem/jsp/portfolio/Edit.action?ID=${portfolio.portfolioID}"><strong>${portfolio.portfolioName}</strong></a>
+	</td>
+
+	<td>
+		<a target=_blank href="http://www.folioinvesting.com/wsjsp/lp/lp.fsp?id=MYPLRS00010810N">Goto FolioInvesting</a>
+	</td>
+	<td>
+		[#if portfolio.lastTransactionDate??]
+			${portfolio.lastTransactionDate?string("MM/dd/yyyy")}
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.sharpeRatio1??]
+			${(portfolio.sharpeRatio1*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.AR1??]
+			${(portfolio.AR1*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.sharpeRatio3??]
+			${(portfolio.sharpeRatio3*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.AR3??]
+			${(portfolio.AR3*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.sharpeRatio5??]
+			${(portfolio.sharpeRatio5*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.AR5??]
+			${(portfolio.AR5*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+
+</tr>
+[/#list]
+</table>
+
+<h2 style="text-align:center">MyPlanIQ Tactical Allocation Model Portfolios on FolioInvesting.com</h2>
+<p style="text-align:center; color:green"><i>Need to be a <a href="http://www.myplaniq.com/LTISystem/paypal_subscr.action">MyPlanIQ subscriber</a> to see real time info or use <a href=" http://www.folioinvesting.com/wsjsp/lp/lp.fsp?id=MYIQRS00010810N">this link</a> to Folio Investing</i></p><br>
+
+<table class="tablesorter" id='portfolios1' border="0" cellpadding="0" cellspacing="1" bgcolor="#000000">
+<thead>
+<!-- &#34920;&#22836;&#35774;&#35745; -->
+<tr bgcolor="#FFFFFF">
+<!-- &#36825;&#37324;&#23558;&#34920;&#26684;&#20869;&#35774;&#32622;&#20026;&#21478;&#19968;&#20010;&#39068;&#33394;&#65292;&#26159;&#20135;&#29983;&#32454;&#32447;&#30340;&#37325;&#35201;&#26465;&#20214; -->
+      <th align="center">Name</s:text></th>
+
+      <th width="6%" align="center">Access FolioInvesting</th>
+      <th width="6%" align="center">Last Rebalance Date</th>
+      <th width="6%" align="center">1 Year Sharpe(%)</th>
+      <th width="6%" align="center">1 Year AR(%)</th>
+       <th width="6%" align="center">3 Year Sharpe(%)</th>
+      <th width="6%" align="center">3 Year AR(%)</th>
+      <th width="6%" align="center">5 Year Sharpe(%)</th>
+      <th width="6%" align="center">5 Year AR(%)</th>
+
+</tr>
+</thead>
+<!-- &#25353;&#29031;&#26684;&#24335;&#26174;&#31034;portfolio&#30340;&#21517;&#23383;&#65292;&#36807;&#38271;&#30340;&#37096;&#20998;&#29992;&#30465;&#30053;&#21495;&#20195;&#26367;&#65292;&#40736;&#26631;&#32463;&#36807;&#26102;&#21487;&#20197;&#30475;&#21040;&#20840;&#21517; -->
+[#list portfolios1 as portfolio]
+<tr>
+	<td id="shortName" title="${portfolio.portfolioName}">
+		<a href="/LTISystem/jsp/portfolio/Edit.action?ID=${portfolio.portfolioID}"><strong>${portfolio.portfolioName}</strong></a>
+	</td>
+
+	<td>
+		<a target=_blank href=" http://www.folioinvesting.com/wsjsp/lp/lp.fsp?id=MYIQRS00010810N">Goto FolioInvesting</a>
+	</td>
+	<td>
+		[#if portfolio.lastTransactionDate??]
+			${portfolio.lastTransactionDate?string("MM/dd/yyyy")}
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.sharpeRatio1??]
+			${(portfolio.sharpeRatio1*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.AR1??]
+			${(portfolio.AR1*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.sharpeRatio3??]
+			${(portfolio.sharpeRatio3*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.AR3??]
+			${(portfolio.AR3*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.sharpeRatio5??]
+			${(portfolio.sharpeRatio5*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+	<td>
+		[#if portfolio.AR5??]
+			${(portfolio.AR5*100)?string("0.##")}%
+		[#else]
+			NA
+		[/#if]
+	</td>
+
+</tr>
+[/#list]
+</table>
+<script>
+$('#portfolios')
+	.tablesorter();
+</script>
+<script>
+$('#portfolios1')
+	.tablesorter();
+</script>
+<br><br><br><p><i>Disclosure: Securities products and services offered through FOLIOfn Investments, Inc. Member FINRA/SIPC.</i></p>

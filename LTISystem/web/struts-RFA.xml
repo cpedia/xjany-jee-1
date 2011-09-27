@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.RFA" namespace="/jsp/RFA" extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/RFA/Main">
+			<result name="input">/jsp/RFA/main.jsp</result>
+			<result name="success">/jsp/RFA/calculate.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="PlotPie" class="/jsp/RFA/PlotPie">
+			<result name="success">/jsp/RFA/pie.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+			
+		<action name="calculate" class="com.lti.action.TemplateAction">
+			<result name="success">
+				/jsp/RFA/calculate.jsp
+			</result>						
+		</action>
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/RFA/{1}.uftl
+			</result>						
+		</action>	
+	</package>
+</struts>

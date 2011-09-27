@@ -1,0 +1,289 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+	<head>
+		<title>13F-HR Cloning Center</title>
+		<link rel="stylesheet" href="../../images/jquery.tablesorter/style.css" type="text/css" />
+		<script type="text/javascript" src="../../images/jquery-1.2.6.min.js"></script>
+		<script type="text/javascript" src="../../images/jquery.tablesorter/jquery.tablesorter.js"></script>
+		<script type="text/javascript" src="../../images/jquery.tablesorter/jquery.tablesorter.pager.js"></script>
+		<script>
+			$(document).ready(function(){ 
+			        	//$("#cloningtable").tablesorter(); 
+				$("#all_check").click(function() {
+					 if ($(this).attr("checked") == true) {
+					    $(".ids").each(function() {
+					    	$(this).attr("checked", true);
+					   });
+					 } else { 
+					    $(".ids").each(function() {
+					    $(this).attr("checked", false);
+					   });
+					 }
+				});					        	
+			        	
+			}); 
+			
+			function updatecategory(id,index){
+				[@s.url action="Clone13FCenter.action" id="update_category_url" namespace="/jsp/admin/clonecenter" includeParams="none"]
+						[@s.param name="operation"]category[/@s.param]	
+				[/@s.url]
+				
+				 $.ajax({
+				   type: "Get",
+				   url: "${update_category_url}"+"&ID="+id+"&category="+$('#category_'+index).val(),
+				   success: function(msg){
+				     alert(msg );
+				     //window.location.reload();
+				   }
+				 });
+				
+			}
+			[@s.url action="Clone13FCenter.action" id="url_main" namespace="/jsp/admin/clonecenter" includeParams="none"]
+			[/@s.url]
+			function createsingle(){
+				 $.ajax({
+				   type: "Post",
+				   url: "${url_main}",
+				   data:$("#form_create").serialize(),
+				   success: function(msg){
+				     alert(msg );
+				     window.location.reload();
+				   }
+				 });				
+			}
+			
+			function search(){
+				 $('#actionMessage').html("Please wait for server response.");
+				 $.ajax({
+				   type: "Post",
+				   url: "${url_main}",
+				   data:$("#form_search").serialize(),
+				   success: function(msg){
+				     $('#actionMessage').html("<pre>"+msg+"</pre>");
+				   }
+				 });				
+			}
+			[@s.url action="Batch13F.action" id="url_batch" namespace="/jsp/admin/clonecenter" includeParams="none"]
+			[/@s.url]
+			function batch(){
+				 $.ajax({
+				   type: "Post",
+				   url: "${url_main}",
+				   data:$("#form_batch").serialize(),
+				   success: function(msg){
+				     alert(msg);
+				     window.location.reload();
+				   }
+				 });				
+			}			
+			[@s.url action="Clone13FCenter.action" id="delete_url" namespace="/jsp/admin/clonecenter" includeParams="none"]
+					[@s.param name="operation"]del[/@s.param]	
+			[/@s.url]
+			function delete2(id){
+				var con = confirm("Are you sure to delete this portfolio?");
+				if(con == true){
+						$('#actionMessage').show();
+						$('#actionMessage').html("Please wait for the response of server, and it will take few seconds or more.");
+						 $.ajax({
+						   type: "Get",
+						   url: "${delete_url}"+"&ID="+id,
+						   success: function(msg){
+						     alert(msg );
+						     window.location.reload();
+						   }
+						 });	
+				}else{
+				
+				}
+							
+			}
+			
+			
+			function getIDs(){
+				var f_str = '';
+				$(".ids").each(function(){
+				   if($(this).attr("checked")==true){
+				    f_str += $(this).attr("value")+",";
+				   }
+				})
+				return f_str;
+			}
+			
+			
+			
+	
+			
+			
+			
+			
+			function deleteAll(){
+				var con = confirm("Are you sure to delete these portfolios?");
+				if(con == true){
+						$('#actionMessage').show();
+						$('#actionMessage').html("Please wait for the response of server, and it will take few mins or more.");
+						 $.ajax({
+						   type: "Get",
+						   url: "${url_main}?operation=deleteall&ids="+getIDs(),
+						   success: function(msg){
+						     $('#actionMessage').html("<pre>"+msg+"</pre>");
+						     if(confirm("Refresh page?")){
+						     		window.location.reload();
+						     }
+						   }
+						 });	
+				}else{
+				
+				}			
+			}
+			function monitorAll(){
+				var con = confirm("Are you sure to monitor these portfolios?\nIt will take some times, \nand the daily execution will be disabled during monitoring these portfolios.");
+				if(con == true){
+					var ip = window.location.hostname;
+					var subWin = window.open("http://"+ip+":8081/batch?portfolioID=0&ids="+getIDs());
+					$('#actionMessage').show();
+					$('#actionMessage').html("Click <a href='http://127.0.0.1:8081/executionstate.html?"+(new Date()).getTime()+"' >here</a> to see detail.");
+					
+					if(confirm("Send start request --- ok, close the opened window?")){
+						subWin.close();
+					}
+					
+				}else{
+				
+				}			
+			}			
+		</script>		    
+	</head>
+	<body>
+		<form action="${url_main}" method="post" id=form_create>
+		<input type="hidden" name="operation" value="add"/>
+		Fund Name: <input type="text" name="fundName"/>
+		13F Name: <input type="text" name="_13fName"/>
+		Starting Date: <input type="text" name="startingDate"/>
+		Category: <input type="text" name="category"/>
+		<input type="button" onclick="createsingle()" value="Create"/>
+		</form>
+		
+		<form action="${url_main}" method="post" id=form_search>
+		<input type="hidden" name="operation" value="search"/>
+		Name: <input type="text" name="fundName"/>
+		<input type="button" onclick="search()" value="Search"/>
+		</form>
+		
+		<form action="${url_batch}" method="post" id=form_batch enctype="multipart/form-data">
+		<input type="hidden" name="operation" value="batch"/>
+		File: <input type="file" name="batchFile"/>
+		<input type="submit" value="Batch"/>
+		</form>
+		
+		
+		[#if actionMessage??]
+		<a href="#" id="messageLink">Show message</a>
+		<script>
+			$('#actionMessage').hide();
+			$("#messageLink").toggle(function() {
+				$('#actionMessage').show();
+			}, function() {
+				$('#actionMessage').hide();
+			});
+		</script>
+		[/#if]
+		<div id="actionMessage">
+		<pre>${actionMessage!""}</pre>
+		</div>
+		
+		<input type="button" name="DeleteAll" onclick="deleteAll()" value="Delete all">
+		<input type="button" name="MonitorAll" onclick="monitorAll()" value="Monitor all">
+		
+		
+		<table id="cloningtable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			<thead>
+			<tr>
+				<th class="header">
+					<input type="checkbox" name="ids_all" id="all_check">check all
+				</th>
+				<th class="header">
+					Name
+				</th>	
+				<th class="header">
+					Last Valid Date
+				</th>
+				<th class="header">
+					Is Live
+				</th>		
+				<th class="header">
+					Category
+				</th>							
+				<th class="header">
+					Operation
+				</th>
+				<th>
+					Delete
+				</th>																																			
+			</tr>			
+			</thead>
+			<tbody>
+			[#if portfolios?? ]
+			[#list portfolios as item]
+			[#if item_index%2==0]
+			<tr class='odd'>
+			[/#if]
+			[#if item_index%2==1]
+			<tr class='even'>
+			[/#if]
+				
+					<td>
+						<input type="checkbox" name="ids" class="ids" value="${item.ID?string.computer}">	${item.ID}
+					</td>
+					<td>
+						[@s.url action="Edit.action" id="urladdr" namespace="/jsp/portfolio"  includeParams="none"]
+							[@s.param name="ID"]${item.ID}[/@s.param]	
+							[@s.param name="action"]view[/@s.param]			
+						[/@s.url]
+						[@s.a href=urladdr]${item.name}[/@s.a]
+					</td>
+					<td>
+						${item.endDate!"-"}
+					</td>					
+					<td>
+						[#if item.state??]
+							[#if item.state==1 ]
+								Live
+							[#else]
+								Static
+							[/#if] 
+						[#else]
+							Static
+						[/#if]
+					</td>
+					<td>
+						<input name=category_${item_index} id=category_${item_index} value='${item.categories!""}'/>
+
+						<a href="#" onclick="javascript:updatecategory(${item.ID?string.computer},${item_index})">Update</a>
+					</td>
+					<td>
+						[@s.url action="Edit.action" id="urlexecute" namespace="/jsp/portfolio"  includeParams="none"]
+							[@s.param name="ID"]${item.originalPortfolioID}[/@s.param]	
+							[@s.param name="action"]execute[/@s.param]	
+							[@s.param name="actionMessage"]execute ${item.name} by cloning center[/@s.param]		
+						[/@s.url]
+						<a href="${urlexecute}" target="_blank">Monitor</a>
+						|
+						[@s.url action="Edit.action" id="urlupdate" namespace="/jsp/portfolio"  includeParams="none"]
+							[@s.param name="ID"]${item.originalPortfolioID}[/@s.param]	
+							[@s.param name="action"]update[/@s.param]	
+							[@s.param name="actionMessage"]update ${item.name} by cloning center[/@s.param]
+						[/@s.url]
+						<a href="${urlupdate}" target="_blank">Update</a>
+					</td>	
+					<td>
+					<input type="button" onclick="delete2(${item.ID?string.computer})" value="delete"/>
+					</td>				
+				</tr>
+			[/#list]
+			[/#if]
+			</tbody>
+		</table>	
+	</body>
+</html>

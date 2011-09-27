@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.strategy" namespace="/jsp/strategy"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+			<result name="message" type="freemarker">
+					/jsp/message.uftl
+				</result>  
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="List" class="com.lti.action.strategy.EditAction" method="list">
+			<result name="success" type="freemarker">/jsp/strategy/list.ftl</result>
+		</action>
+		<action name="Edit" class="com.lti.action.strategy.EditAction" method="edit">
+			<result name="success" type="freemarker">/jsp/strategy/edit.ftl</result>
+		</action>
+		<action name="View" class="com.lti.action.strategy.EditAction" method="view">
+			<result name="success" type="freemarker">/jsp/strategy/View.uftl</result>
+		</action>
+		<action name="SaveGroups" class="com.lti.action.strategy.EditAction" method="ajaxsavegroups">
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Save" class="com.lti.action.strategy.EditAction" method="save">
+			<result name="success" type="freemarker">/jsp/strategy/save.ftl</result>
+			<result name="predelete" type="freemarker">/jsp/strategy/deleteconfirm.ftl</result>
+		</action>
+		
+		<action name="NewAttributes" class="com.lti.action.strategy.EditAction" method="newAttributes">
+			<result name="success" type="redirect">/f401k_fundtable.action?ID=${ID}</result>
+		</action>
+		
+		<action name="loadAttributes" class="com.lti.action.strategy.EditAction" method="loadAttributes">
+			<result name="message" type="freemarker">
+					/jsp/message.uftl
+			</result>
+		</action>
+		
+		
+		<action name="Delete" class="com.lti.action.strategy.EditAction" method="delete">
+			<result name="success" type="freemarker">/jsp/strategy/delete.ftl</result>
+		</action>
+		<action name="EditCode" class="com.lti.action.strategy.EditAction" method="editcode">
+			<result name="success" type="freemarker">/jsp/strategy/editcode.ftl</result>
+		</action>
+		<action name="SaveCode" class="com.lti.action.strategy.EditAction" method="savecode">
+			<result name="success" type="freemarker">/jsp/strategy/savecode.ftl</result>
+		</action>
+		<action name="Compile" class="com.lti.action.strategy.EditAction" method="compile">
+			<result name="success" type="freemarker">/jsp/strategy/savecode.ftl</result>
+		</action>
+		
+                <action name="ModelPortfolioMain" class="/jsp/strategy/modelportfolio/Main">
+                        <result name="success">/jsp/strategy/modelportfolio/main.jsp</result>
+                        <result name="input">/jsp/strategy/modelportfolio/main.jsp</result>
+                        <result name="error">/jsp/error.jsp</result>
+                </action>
+                <action name="*" class="com.lti.action.TemplateAction">
+                        <result name="success" type="freemarker">
+                                /jsp/strategy/{1}.uftl
+                        </result>
+                        <result name="withheader" >
+                                /jsp/withheader.jsp
+                        </result>
+                </action>
+                
+                <action name="Main" class="/jsp/strategy/Main">
+                        <result name="success" type="freemarker">/jsp/strategy/main.ftl</result>
+                        <result name="error">/jsp/error.jsp</result>
+                </action>
+                
+                
+                <action name="GetStrategyTable" class="/jsp/strategy/GetStrategyTable">
+                        <result name="success" type="freemarker">/jsp/strategy/GetStrategyTable.uftl</result>
+                        <result name="error">/jsp/error.jsp</result>
+                        <result name="html" type="freemarker">/jsp/strategy/cache/${htmlname}</result>
+                </action>
+                
+                <action name="GetStrategyTable_approve" class="com.lti.action.strategy.GetStrategyTableAction" method="approve">
+                        <result name="error">/jsp/error.jsp</result>
+                </action>
+                <action name="GetModelPortfolioTable" class="com.lti.action.strategy.GetModelPortfolioTableAction">
+                        <result name="success" type="freemarker">/jsp/strategy/GetStrategyTable.uftl</result>
+                        <result name="error">/jsp/error.jsp</result>
+                        <result name="html" type="freemarker">/jsp/strategy/cache/${htmlname}</result>
+                </action>
+                
+                <action name="GetPlanScoreTable" class="/jsp/strategy/GetPlanScoreTable">
+					<result name="success" type="freemarker">/jsp/strategy/GetPlanScoreTable.uftl</result>
+					<result name="error">/jsp/error.jsp</result>
+				</action>
+                
+
+	</package> 
+	<package name="com.lti.action.strategyClass" namespace="/jsp/strategyClass"
+		extends="struts-default">
+		<action name="Save" class="/jsp/strategyClass/Save">
+			<result name="success">
+			/jsp/strategy/strategyClass.jsp
+			</result>
+			<result name="view" type="redirect">
+			/jsp/strategyClass/Save.action?ID=${ID}&amp;action=view
+			</result>
+			<result name="input">/jsp/error.jsp</result>
+			</action>
+	</package>
+
+</struts>

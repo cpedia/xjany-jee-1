@@ -1,0 +1,53 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+	<fieldset>
+	<legend>Transaction Area</legend>
+	[#if userTransaction?? && userTransaction?size>0]
+	<a href='UserProfile.action?userID=${userID}&action=clearTransactions' target='_blank'>clear</a>
+	<table width="100%" align="left" border="0">
+		  		<tr class="trheader">
+		  	 		<th>UserID</th>
+	         		<!--<th>addressName</th>
+	         		<th>addressCountryCode</th>
+	         		<th>addressState</th>-->
+	         		<th>amount</th>
+	         		<th>business</th>
+	         		<!--<th>shipping</th>
+	         		<th>residenceCountry</th>-->
+	         		<th>paymentGross</th>
+	         		<th>paymentDate</th>
+	         		<th>paymentStatus</th>
+	         		<!--<th>paymentCycle</th>
+	         		<th>periodType</th>
+	         		<th>addressState</th>-->
+	         		<th>itemName</th>
+	         		<th>mcGross</th>
+	      		</tr>
+	      		[#if userTransaction??]
+	      		[#list userTransaction as sat]
+	      		<tr>
+	      			<td>${sat.userID}</td>
+	      			<!--<td>${sat.addressName}</td>
+	      			<td>${sat.addressCountryCode}</td>
+	      			<td>${sat.addressState}</td>-->
+	      			<td>${sat.amount!""}</td>
+	      			<td>${sat.business!""}</td>
+	      			<!--<td>${sat.shipping!""}</td>
+	      			<td>${sat.residenceCountry!""}</td>-->
+	      			<td>${sat.paymentGross!""}</td>
+	      			<td>[#if sat.paymentDate??]${sat.paymentDate?string("yyyy-MM-dd")}[/#if]</td>
+	      			<td>${sat.paymentStatus!""}</td>
+	      			<!--<td>${sat.paymentCycle!""}</td>
+	      			<td>${sat.periodType!""}</td>
+	      			<td>${sat.protectionEligibility!""}</td>-->
+	      			<td>${sat.itemName!""}</td>
+	      			<td>${sat.mcGross!""}</td>
+	      		[/#list]
+	      		[/#if]
+	 </table>
+	 [#else]
+	 This user do not have any transaction from Paypal!
+	 [/#if]
+	 </fieldset>

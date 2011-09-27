@@ -1,0 +1,1442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-18922257-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  
+	var ispasscheck = false;
+	var isemailcheck= false;
+	var isemailconfirmcheck = false;
+	var url = "index";
+	function checkJoin_all(){
+		if(ispasscheck == false||isemailcheck == false||isemailconfirmcheck == false){
+			return;
+		}
+		if(document.form1all.checkbox1.checked==false)
+		{
+			alert("Before Sign Up for a free account, please agree to our Terms of Use!");
+			return;
+		}
+		$.ajax({
+				url: 'localhost/LTISystem/jsp/register/landingRegister'+url+'.action?includeHeader=false&user.UserName='+$('#UserName_join').val()+'&user.Password='+$("#Password_join").val()+"&user.EMail="+$("#Email_join").val()+"&ajax=true",
+				type:"get",
+				dataType : "jsonp",
+				jsonp: 'jsoncallback',
+				success: function(data){
+					if(data.msg=="success"") window.location.href="localhost/LTISystem/jsp/register/landing"+url+"Success.action?username="+$("#UserName_join").val()+"&password="+$("#Password_join").val();
+				}
+		});
+	}
+	function out_username_all(){
+		$("#UserName_label").html("<img src='localhost/LTISystem/jsp/images/ok.gif'></img>");
+		if($("#UserName_join").val()==""||$("#UserName_join").val().length<4){
+			$("#UserName_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			return;
+		}
+		$.ajax({
+			url: 'localhost/LTISystem/jsp/register/landingRegister'+url+'.action?includeHeader=false&action=check&user.UserName='+$('#UserName_join').val()+'&user.Password='+$("#Password_join").val()+"&user.EMail="+$("#Email_join").val()+"&ajax=true",
+			type:"get",
+			dataType : "jsonp",
+			jsonp: 'jsoncallback',
+			success: function(data){
+				if(data.msg=="username") $("#UserName_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			}
+		});
+		isnamecheck = true;
+	}
+	
+	function out_password_all(){
+		$("#Password_label").html("<img src='localhost/LTISystem/jsp/images/ok.gif'></img>");
+		if($("#Password_join").val()==""||$("#Password_join").val().length<6){
+			$("#Password_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			return;
+		}
+		ispasscheck = true;
+	}
+	
+	function out_email_all(){
+		$("#Email_label").html("<img src='localhost/LTISystem/jsp/images/ok.gif'></img>");
+		if($("#Email_join").val()==""){
+			$("#Email_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			return;
+		}
+		$.ajax({
+			url: 'localhost/LTISystem/jsp/register/landingRegister'+url+'.action?includeHeader=false&action=check&user.UserName='+$('#UserName_join').val()+'&user.Password='+$("#Password_join").val()+"&user.EMail="+$("#Email_join").val()+"&ajax=true",
+			type:"get",
+			dataType : "jsonp",
+			jsonp: 'jsoncallback',
+			success: function(data){
+				if(data.msg=="email") $("#Email_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			}
+		});
+		isemailcheck=true;
+	}
+	
+	function out_email_confirm_all(){
+		$("#Email_confirm_label").html("<img src='localhost/LTISystem/jsp/images/ok.gif'></img>");
+		if($("#Email_join").val()!=$("#Email_join_con").val()){
+			$("#Email_confirm_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			return;
+		}
+		isemailconfirmcheck=true;
+	}
+  
+</script>
+
+
+	<title>MyPlanIQ: 401K, IRA, Annuity (Retirement) Investing Solutions</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<link media="screen" rel="stylesheet" href="localhost/LTISystem/jsp/template/ed/colorbox.css" />
+	<link href="localhost/LTISystem/jsp/template/ed/css/style_v2.css" rel="stylesheet" type="text/css" />
+
+	<link href="localhost/LTISystem/jsp/template/ed/css/layout_v2.css" rel="stylesheet" type="text/css" />
+	<link href="localhost/LTISystem/jsp/template/ed/css/homepage_v2.css" rel="stylesheet" type="text/css" />
+	<link href="localhost/LTISystem/jsp/template/ed/css/jquery_UI/moss/jquery-ui-1.8.custom.css" rel="stylesheet" type="text/css" />
+	<link href="localhost/LTISystem/jsp/template/ed/css/tablesorter/tablesorter.css" rel="stylesheet" type="text/css"/>
+	<script src="localhost/LTISystem/jsp/template/ed/js/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+	<script src="localhost/LTISystem/jsp/template/ed/js/jquery_UI/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+	<script src="localhost/LTISystem/jsp/template/ed/js/maxheight.js" type="text/javascript"></script>
+
+	<script src="localhost/LTISystem/jsp/template/ed/js/cufon/cufon-yui.js" type="text/javascript"></script>
+	<script src="localhost/LTISystem/jsp/template/ed/js/cufon/cufon-replace_v2.js" type="text/javascript"></script>
+	<script src="localhost/LTISystem/jsp/template/ed/js/cufon/Franklin_Gothic_Medium_Cond_400.font.js" type="text/javascript"></script>
+	<script src="localhost/LTISystem/jsp/template/ed/js/cufon/Myriad_Pro_400.font.js" type="text/javascript"></script>
+	<script src="localhost/LTISystem/jsp/template/ed/js/cufon/MyriadProBold_700.font.js" type="text/javascript"></script>
+	<script src="localhost/LTISystem/jsp/template/ed/js/cufon/Arial.js" type="text/javascript"></script>
+
+	<script src="localhost/LTISystem/jsp/template/ed/js/dd_roundies/dd_roundies.js" type="text/javascript"></script>
+	<script src="localhost/LTISystem/jsp/template/ed/js/initUI_elements.js" type="text/javascript"></script>
+	
+	<script src="localhost/LTISystem/jsp/template/ed/js/jquery.colorbox.js"></script>
+	<script src="localhost/LTISystem/jsp/template/ed/js/tablesorter/jquery.tablesorter.js" type="text/javascript"></script>
+	<script>
+		function setCookie(name, value, expires, path, domain, secure) {
+					document.cookie = name + "=" + escape(value) +
+					((expires) ? "; expires=" + expires.toGMTString() : "") +
+					((path) ? "; path=" + path : "") +
+					((domain) ? "; domain=" + domain : "") + ((secure) ? "; secure" : ""); 
+		}
+		$(document).ready(function() {
+			$.ajax({
+			type:'get',
+			url:"localhost/LTISystem/api_checkLogin.action?includeHeader=false",
+			dataType : "jsonp",
+			jsonp: 'jsoncallback',
+			success:function(data){
+				if(data.data=="success"){
+					window.location = "localhost/LTISystem/"; 
+			 	}
+		  	    }
+			});
+			//loginbox of the ColorBox event to elements
+			$("a[rel='loginbox']").colorbox({opacity:0.5,width:"720px",scrolling:false,height:"360px", inline:true, href:"#login_content"});
+			alignHeight();
+			equalizeNav();
+			$(".uiButton").button();
+			Cufon.now();
+			//DD_roundies.addRule('.sidebar_box, .sidebar_box_noPadding', '8px', true);
+			ieInputFix();
+	
+			$("#loginEntry").click(function(){
+				 $("#login_content").dialog("open");
+				 var page = window.location;
+				 setCookie("requestpage", page, null, "/", null, null);
+			});
+			
+			if($.browser.msie){
+			 	ieInputFix();
+			}
+			
+		});
+		
+		function ieInputFix() {
+			$('input').css("margin-top","-1px");
+		}
+	</script>
+	
+	<script src="localhost/LTISystem/jsp/template/ed/js/homepage_v2.js" type="text/javascript"></script>
+
+	<meta name="google-site-verification" content="QpS-rcSQ0cRCvV_Zczs0Z_x8cc6X7RHiIYU5u0Om2zs" />
+<script src="localhost/LTISystem/jsp/template/ed/js/mediaPlugin.js" type="text/javascript"></script>
+<link href='localhostlocalhost/LTISystem/jsp/api/images/lti.css' rel='stylesheet' type='text/css' />
+
+
+<meta  name="Description" content="MyPlanIQ is the only online application and information portal for retirement investing and retirement planning issues. It provides comprehensive coverage, investment choice ratings and asset allocation model portfolios on retirement plans 401K, 403B, deferred compensation plan 457, IRA (ROTH IRA), college savings plan 529, variable annuities, variable life insurance.">
+
+<meta name="keywords" content="IRA, 401K, 403B, 457, Annuity, Universal Life Insurance, 529, College Savings Plans, Retirement Plans, Employee Savings Plans, Pension Plans, Deferred Compensation Plans, Defined Contribution Plans, Brokerages, Fidelity, Schwab, TD Ameritrade, Vanguard, iShares, stocks, bonds, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+
+
+<script>
+	$(document).ready(function() {
+	if(document.cookie.indexOf("ACEGI_SECURITY_HASHED_REMEMBER_ME_COOKIE")!=-1){
+ 		window.location = "localhost/LTISystem/"
+	}
+	setTimeout('logoRotator()', 4000);
+		
+		initTabs();
+		$("#signupemail").click(function(){
+       		if (isValidEmail($('#subemail').val())){
+       			
+       		}else{
+       			alert("Invalid email, please re-enter.");
+       			return;
+       		}
+			$.ajax({
+				url: 'localhost/LTISystem/jsp/register/FreeNewsletter.action?action=send&email='+$('#subemail').val(),
+				success: function(resulthtml){
+					alert("Thank you for signing up MyPlanIQ Newsletter.");
+				}
+			});
+		});
+		$('#flashdiv').append("<a class='mediaObject'></a>");
+		$('.mediaObject').media({ 
+				width:     618, 
+				height:    339, 
+				autoplay:  true, 
+				src:       "localhost/LTISystem/jsp/template/ed/media/evergreen.swf"
+				//attrs:     { controller:  'true', "scale":"tofit", postdomevents:true},
+				//params:     { controller:  'true', "SCALE":"tofit", postdomevents:true}
+		}); 
+		
+		$("#flashwindow").dialog({height:369,width:638,title:"Learn More",position:"center",autoOpen:false,modal:true});
+
+		 
+		$('#lide4_tab').click(function(){
+			$("#flashwindow").dialog("open");
+		});
+	});
+	
+	function send(e){
+		var email = $('#subemail').val();
+		var k = window.event?window.event.keyCode:e.which;
+  		var src = window.event?window.event.srcElement:e.target;
+        if(k==13){
+        	if(email.trim()==''){
+				alert("Please input your email address.");
+				return;
+			}
+			else if(!isValidEmail(email)){
+				alert("Invalid email, please re-enter.");
+				return;
+			}
+        	$("#signupemail").trigger("click");
+        }
+	}
+	function isValidEmail(isText){
+		var reEmail = /^(?:\w+\.?)*\w+@(?:\w+\.?)*\w+$/;
+		return reEmail.test(isText);
+	}
+	var url = document.location.href;
+	url = url.replace(/.+landing/,"").replace(/\.action$/,"");
+	var ispasscheck = false;
+	var isemailcheck= false;
+	var isemailconfirmcheck = false;
+	function checkJoin(){
+		if(ispasscheck == false||isemailcheck == false||isemailconfirmcheck == false){
+			return;
+		}
+		if(document.form1.checkbox1.checked==false)
+		{
+			alert("Before Sign Up for a free account, please agree to our Terms of Use!");
+			return;
+		}
+		$.ajax({
+				url: 'localhost/LTISystem/jsp/register/landingRegister'+url+'.action?includeHeader=false&user.UserName='+$('#UserName_join').val()+'&user.Password='+$("#Password_join").val()+"&user.EMail="+$("#Email_join").val()+"&ajax=true",
+				type:"get",
+				dataType : "jsonp",
+				jsonp: 'jsoncallback',
+			    success: function(data){
+					if(data=="success") window.location.href="localhost/LTISystem/jsp/register/landing"+url+"Success.action?username="+$("#UserName_join").val()+"&password="+$("#Password_join").val();
+				}
+		});
+	}
+	function out_username(){
+		$("#UserName_label").html("<img src='localhost/LTISystem/jsp/images/ok.gif'></img>");
+		if($("#UserName_join").val()==""||$("#UserName_join").val().length<4){
+			$("#UserName_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			return;
+		}
+		$.ajax({
+			url: 'localhost/LTISystem/jsp/register/landingRegister'+url+'.action?includeHeader=false&action=check&user.UserName='+$('#UserName_join').val()+'&user.Password='+$("#Password_join").val()+"&user.EMail="+$("#Email_join").val()+"&ajax=true",
+			type:"get",
+			success: function(data){
+				if(data=="username") $("#UserName_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			}
+		});
+		isnamecheck = true;
+	}
+	
+	function out_password(){
+		$("#Password_label").html("<img src='localhost/LTISystem/jsp/images/ok.gif'></img>");
+		if($("#Password_join").val()==""||$("#Password_join").val().length<6){
+			$("#Password_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			return;
+		}
+		ispasscheck = true;
+	}
+	
+	function out_email(){
+		$("#Email_label").html("<img src='localhost/LTISystem/jsp/images/ok.gif'></img>");
+		if($("#Email_join").val()==""){
+			$("#Email_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			return;
+		}
+		$.ajax({
+			url: 'localhost/LTISystem/jsp/register/landingRegister'+url+'.action?includeHeader=false&action=check&user.UserName='+$('#UserName_join').val()+'&user.Password='+$("#Password_join").val()+"&user.EMail="+$("#Email_join").val()+"&ajax=true",
+			type:"get",
+			success: function(data){
+				if(data=="\nemail\n") $("#Email_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			}
+		});
+		isemailcheck=true;
+	}
+	
+	function out_email_confirm(){
+		$("#Email_confirm_label").html("<img src='localhost/LTISystem/jsp/images/ok.gif'></img>");
+		if($("#Email_join").val()!=$("#Email_join_con").val()){
+			$("#Email_confirm_label").html("<img src='localhost/LTISystem/jsp/images/error.gif'></img>");
+			return;
+		}
+		isemailconfirmcheck=true;
+	}
+ </script>
+ <script src="localhost/LTISystem/jsp/template/ed/js/logos_v2.js" type="text/javascript"></script>
+
+  <meta name="msvalidate.01" content="77EFD351A993AF02BA56FC876C16409C" />
+
+ 
+ <meta  name="Description" content="MyPlanIQ is the only online application and information portal for retirement investing and retirement planning issues. It provides comprehensive coverage, investment choice ratings and asset allocation model portfolios on retirement plans 401K, 403B, deferred compensation plan 457, IRA (ROTH IRA), college savings plan 529, variable annuities, variable life insurance.">
+	<style>
+	.headerSearchArea {
+		padding-top: 10px;
+		width:555px;
+	}.headerSearchArea input {
+		height: 17px;
+		font-size: 10px;
+		margin: 0px 0px 0px 6px;
+		padding-left: 4px;
+		border: 1px solid #899AA0;
+	}
+	</style>
+	</head>
+	<body id="page1">
+	<div id="main">
+	  <!-- HEADER -->
+	  <div id="header">
+
+	    <div class="top">
+	    	<div id="#topNavArea">
+	    		<div id="topNav">
+	    			<a href="localhost/LTISystem" >Home</a>
+					<a href="localhost/LTISystem/f401k__strategies.action" >Strategies</a>
+
+					<a href="localhost/LTISystem/f401k__faqs.action" >Support</a>
+					<a href="localhost/jforum" >Communities</a>
+
+					<a href="localhost/LTISystem/f401k_blog.action" >Articles</a>
+
+						
+							<a href='localhost/LTISystem/advanced__strategies.action'>Advanced</a>
+					
+
+					
+						<a href='localhost/LTISystem/jsp/register/FreeNewsletter.action?action=link'>FREE Newsletters</a>
+
+
+					     <a href="localhost/LTISystem/f401k__plancompare.action"><strong>Subscribe</strong> &nbsp;</a>
+					<div class="clear"></div>
+
+				</div>
+				
+				
+				
+				
+				
+			    
+
+
+
+
+
+				
+				<div class="login_v2">
+				
+				
+
+				<div id="fb-root"></div>
+				        <script src="http://connect.facebook.net/en_US/all.js"></script>
+				        <script>
+			               FB.init({ 
+			                 appId:'173189549388799', cookie:false, 
+			                 status:true, xfbml:true 
+			               });
+			           </script>
+			  <div style="width: 66px; float: left; margin-top: 7px;margin-right:10px;">
+				<div id="facebook">
+					<div id="login"><fb:login-button perms="email" show-faces="false" width="200" max-rows="1">Login</fb:login-button></div>
+
+					<div id="me" style="display:none"></div>
+				</div>
+			</div>
+				
+				<script>
+				var div = document.getElementById('me'),
+				showMe = function(response) {
+				    if (!response.session) {
+				        div.innerHTML = '<em>Not Connected</em>';
+				    } else {
+				        FB.api('/me',
+				        function(response) {
+				            var html = '<table>';
+				            var email = "";
+				            email = response["email"]; 
+				             <!-- alert(email);-->
+				            $.ajax({
+				                url: "localhost/LTISystem/fb_facebook.action?includeHeader=false",
+				                type: "post",
+				                data: "fbEmail=" + email,
+				                success: function(result) {
+				                    window.location.reload();
+				                    if (result.trim().length > 0) {
+				                        alert(result);
+				                    }
+				                }
+				            });
+				
+				            for (var key in response) {
+				                html += ('<tr>' + '<th>' + key + '</th>' + '<td>' + response[key] + '</td>' + '</tr>');
+				            }
+				            div.innerHTML = html;
+				        });
+				    }
+				};
+				FB.getLoginStatus(function(response) {
+				    $("#login").click(function() {
+				        showMe(response);
+				    });
+				    FB.Event.subscribe('auth.sessionChange', showMe);
+				});
+				</script>
+					<!--<div style="width: 66px; float: left; margin-top: 7px;margin-right:10px;"><div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=173189549388799&amp;xfbml=1"></script><fb:login-button show-faces="false" width="200" max-rows="1"></fb:login-button></div>-->
+			    
+						<!-- <div class="regSignin" id="loginEntry"> -->
+						<a class="regSignin" href="#" rel="loginbox">
+							<img src="localhost/LTISystem/jsp/template/ed/images/regSignin.png" alt="" width="154" height="24" />
+
+						</a>
+					
+				</div>
+				<div class="clear"></div>
+	    	</div>
+	    	<div class="mast" >
+	      	<div id="myIQ_logo_v2">
+<!--	      		<a href="localhost/LTISystem/f401k__main.action"><img src="localhost/LTISystem/jsp/template/ed/images/logo_v2.gif" alt="" width="327" height="106" /></a>
+-->
+                         <a href="localhost/LTISystem/f401k__main.action"><img src="localhost/LTISystem/jsp/template/ed/images/logo_v2.gif" alt="" width="327" height="106" /></a>
+	      	</div>
+
+	      	
+	      	<div class="headerSearchArea">
+	      		<table border=0 width=100%>
+	      		<tr><td>
+	      		<table height='100%' align="right" >
+	                	<tr>
+	                     	<td align=right valign='middle'>
+	                     		<form action='localhost/LTISystem/jsp/security/Quote.action' id='vf_quote' name="vf_quote" method='get'>
+	                           		<input id="n401k_search_text" name="symbol" size="15" type="text"
+									onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)this.value="Ticker"' size="15" type="text" value='Ticker'
+									>
+	                           		<input alt='Quote' class="submitSearchTop" type='submit' value=''/>
+
+	                         	</form><!-- end of form -->
+	                     	</td><!-- end of quote -->
+						</tr>
+					</table>
+					</td>
+										<td><div style="border: medium none; height: 21px; margin-left: 8px; padding-top: 0px; overflow: hidden; width: 80px;"><fb:like layout="button_count" href="http://www.facebook.com/myplaniq"></fb:like></div></td>
+					
+					</tr><tr>
+					<td>
+<!--								<div class="sld_title" style="margin-top:15px;margin-left:-100px;position:relative; float: left;">Smart Strategies for My (Retirement) Investments</div>
+-->
+
+<div class="sld_title" style="margin-top:15px;margin-left:-100px;position:relative;">The Best Way to Manage My (Retirement) Investments</div>
+
+
+
+
+					</td>
+					</tr>
+                                        
+				</table>
+					
+			</div>
+	      </div>
+			</div>
+
+			
+	  </div>
+	  
+			<script>
+	var submit_search = function(clicked) {
+ 		$(clicked).parents().filter('form').submit();
+	}; 
+</script>
+<style>
+	#topNav a{
+		padding-right: 14px !important;
+	}
+	a#search-submit {
+	    background-image: url("/media/img/search-btn.gif");
+	    background-position: 0 0;
+	    background-repeat: no-repeat;
+	    border: medium none;
+	    color: #FFFFFF;
+	    display: block;
+	    float: left;
+	    font-size: 13pt;
+	    font-weight: bold;
+	    height: 40px;
+	    left: 15px;
+	    padding: 9px 0 0;
+	    position: relative;
+	    text-align: center;
+	    text-decoration: none;
+	    top: 0;
+	    vertical-align: middle;
+	    width: 131px;
+	}
+	#menu2 li a{
+		width: 250px !important;
+		display: inline;
+	}
+	.input-wrap a{
+		#line-height:18px;
+		padding-top: 12px !important;
+		border:1px;width:131px;
+		height:30px;
+		background:no-repeat url('localhost/LTISystem/jsp/images/search.png')!important;
+	}
+	
+</style>
+		<div id="killzone" style="height: 450px;">
+			<div id="getModelPortfolios" style="height: 115px;width: 890px;margin: 0px auto 0 25px;background: none repeat scroll 0 0 #EBFEED;">
+			<form action="localhost/LTISystem/f401k__search.action" method="get" id="searchbox" style="margin-left: 100px;margin-top: 35px;color: black;">
+	        	<div class="input-wrap">
+	    			<input name="groupIDS" value="8" type="hidden"></input>
+
+			        <input name="includeHeader" value="true" type="hidden"></input>
+			        <input name="type" value="2" type="hidden"></input>
+	    	        <input name="urlPrefix" value="localhost/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	    	        <input style="float:left;font-size: 16pt !important;height: 40px !important;width:560px;" id="n401k_plansearch_text" name="q" 
+	    	        onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)this.value="Schwab"' size="15" type="text" value='Company 401K, IRA, Brokerage or ETF/Mutual Fund'
+					size="15" type="text">
+			        <a onclick="submit_search(this); return false;" id="search-submit" href="#">Search</a>
+				</div>
+	
+	        	<br class="clear-both" style="clear:both;">
+	        	<div class="main_directory_listing">
+
+	            	<a style="font-size: 13px;" id="ratings-link" href="localhost/LTISystem/getstarted_pickaplan.action">Find a <strong>plan</strong>&nbsp;|&nbsp;Pick/customize a <strong>portfolio</strong>&nbsp;|&nbsp;Study & Follow</a>
+	        	</div>
+	    	</form>
+		</div>
+		<div class="slideArea" id="slideArea" style="margin-top: 5px;">
+
+		
+			<div id="slide_3">
+				<div class="sld_title">The Only Application That Understands My IRA/401K Plans</div>
+				<div class="slideContents">
+					<div class="slideAcross"></div>
+					<div class="slideLeft width_270">
+						<!-- <p class="slide_displaytext margin_top_20">Plan Ratings and Rollover Assistance</p> -->
+                                                <p class="slide_displaytext margin_top_20">PlanRatingIQ </p>
+						<div class="horiz_divider_fade"></div>
+
+						<p class="slide_bullet_Item margin_bottom_5"><a href="localhost/LTISystem/f401k_showplanscorelist.action">Rate My Plan's Investment Choices </a></p>
+						<!-- <p class="slide_displaytext_sml margin_bottom_5 margin_top_15">Help me roll over:</p> -->
+                                                <p class="slide_displaytext margin_bottom_5 margin_top_15">PlanRolloverIQ</p>
+
+						
+						<ul class="slide_bullet_ul">
+							<li class="slide_bullet_Item margin_bottom_5"><a href="localhost/LTISystem/f401k_planrollover.action">From 401K to Another 401K/IRA</a></li>
+							<li class="slide_bullet_Item"><a href="localhost/LTISystem/f401k_planrollover.action">From (IRA) Brokerage to Another
+								(IRA) Brokerage</a></li>
+
+						</ul>
+	
+						<div class="horiz_divider_fade"></div>
+					</div>
+					<div class="slideRight width_370">
+						<div class="slide2_graph margin_top_20" ><img src="localhost/LTISystem/jsp/template/ed/images/slide3_logos.gif" alt="" width="318" height="196" /></div>
+					</div>
+					<div class="clear"></div>
+			
+		</div>
+			</div>
+
+		</div>
+	<style>
+	.authentication_signin{
+    border-color: #949293 #E7E7E7 #E7E7E7 #949293;
+    border-style: solid;
+    border-width: 1px;
+    height: 12px;
+    width: 185px;
+	}
+	
+	
+	#join_mp{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CACACA;
+    height: auto;
+    margin: 0 0 6px;
+    padding: 8px 0 0;
+    position: relative;
+    width: 245px !important;
+     float: right;
+      margin-right: 45px;
+      height: 220px;
+       line-height: 0.5;
+	}
+	#join_mp input{
+		background: url("localhost/LTISystem/jsp/images/txt-01.png") no-repeat scroll 0 0 transparent;
+    	border: medium none;
+    	float: left;
+    	margin-bottom: 6px;
+    	margin-right: 6px;
+    	padding: 5px;
+
+	}
+	#join_mp fieldset{
+    border: 0 none;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+    margin-left: 15px;
+}
+#join_mp span{
+	 display: block;
+    margin-bottom: 5px;
+}
+
+#joinnow{
+	background: url("localhost/LTISystem/jsp/images/joinnow.jpg") no-repeat scroll 0 0 transparent  !important;
+	width:110px;
+	height:30px;
+	border: 0 none;
+	cursor: pointer;
+}
+		
+	</style>
+		<div style="background-color:#fff;height:100%;margin-top:8px;" >
+			<div id="join_mp">
+			<form name="form1" method="post">
+			<fieldset>
+			<span>UserName:</span>
+			<input type="text" onblur="out_username();" tabindex="50" id="UserName_join" name="user.UserName" class="authentication_signin"><label id="UserName_label"></label>
+
+			</fieldset>
+			<fieldset>
+			<span>Password:</span>
+			<input type="password" onkeyup="out_password();" onblur="out_password();" tabindex="50" id="Password_join" name="user.Password" class="authentication_signin"><label id="Password_label"></label>
+			</fieldset>
+			<fieldset>
+			<span>Email Address:</span>
+			<input type="text" onblur="out_email();" tabindex="50" id="Email_join" name="user.EMail" class="authentication_signin"><label id="Email_label"></label>
+
+			</fieldset>
+			<fieldset>
+			<span>Confirm Email Address:</span>
+			<input type="text" onkeyup="out_email_confirm();" onblur="out_email_confirm();" tabindex="50" id="Email_join_con" class="authentication_signin"><label id="Email_confirm_label"></label>
+			</fieldset>
+			<fieldset>
+			<input type="checkbox" name="checkbox1" tabindex="50" id="Agree_join">I agree to the <a target="_blank" href="localhost/LTISystem/register__termuse2.action">Terms of use</a>
+
+			</fieldset>
+			</form>
+			<fieldset>
+			<button tabindex="50" value="" id="joinnow" onclick="checkJoin()"></button>
+			</fieldset>
+			</div>
+           <a href='localhost/LTISystem/getstarted_pickaplan.action'>
+                       <img src='localhost/LTISystem/jsp/images/getstartednow.gif' width="280" height="80"  style="outset #09A059;">
+          </a>
+
+		</div>
+		
+		<div style="display:none">
+						<div style="overflow: hidden;height: 160px;"> 
+						<div style="margin-top: 30px;" >
+<div class="mini_category etf_extra"
+	style="width: 230px; margin-left: 5px;">
+	<div class="red_title_bk">
+		<span class="red_title_text">Top Plans for Brokerages</span>
+	</div>
+	<div>
+
+		<table>
+			<tr>
+				<td><a href="localhost/LTISystem/f401k_view.action?ID=714">Vanguard
+						ETF</a>:</td>
+				<td>12%*</td>
+				<td class="starimg"><img src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /></td>
+			</tr>
+			<tr>
+
+				<td><a href="localhost/LTISystem/f401k_view.action?ID=1429">Diversified
+						Core</a>:</td>
+				<td>13%*</td>
+				<td class="starimg"><img src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /></td>
+			</tr>
+			<tr>
+				<td><a href="localhost/LTISystem/f401k_view.action?ID=1148">Six Core
+						Asset ETFs</a>:</td>
+
+				<td>15%*</td>
+				<td class="starimg"><img src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /></td>
+			</tr>
+
+		</table>
+		<div id="ctrlf">
+			*:5 Yr Annualized Return of TAA Moderate Portfolio<br />
+			<p align=center>
+
+				<a align="center"
+					href="localhost/LTISystem/f401k__ira_brokerage_intro.action">...More
+					Plans...</a>
+			</p>
+		</div>
+
+
+	</div>
+
+</div>
+						</div>
+					
+			            </div>
+
+			            <div style="float:left;" id="homecenter">
+								Quality Retirement Investing<br>
+								Newsletter
+							</div>
+		</div>
+		
+	</div>
+<div id="kz_tab_overflow">	
+	<div id="kz_tabs">
+		<a id="slide1_tab" class="tab tabBorderRight activeTab">What We Do</a>
+
+		<a id="slide2_tab" class="tab tabBorderRight">Higher Return Lower Risk</a>
+		<a id="slide3_tab" class="tab tabBorderRight">Plan Rating &amp; Rollover</a>
+		<a id="slide5_tab" class="tab tabBorderRight" href="localhost/LTISystem/f401k__ma.action" style="text-decoration: none;">Site Overview</a>
+		<a id="lide4_tab" class="tab">Learn More</a>
+		<div class="clear"></div>
+	</div>
+
+	
+</div>
+
+<style>
+#third_left{
+	float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 300px;
+}
+
+#third_center{
+	float: left;
+    margin-left: 40px;
+    margin-top: 20px;
+    width: 300px;
+}
+
+#third_right{
+	float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 280px;
+}
+.Apricot_yellow {
+	border-color: #3D843D;
+	border-style: solid;
+	border-width: 6px 1px 1px 0;
+	clear: both;
+	margin: 0 0 10px;
+	padding: 0;
+	width: 228px;
+	margin-left: 5px;
+	margin-top: 10px;
+}
+
+.keywords_shadow {
+	margin: 0;
+	padding: 0 8px 3px;
+}
+
+#inner_li {
+	padding-bottom: 3px;
+}
+
+#inner_li a {
+	text-decoration: none;
+	font-size: 10px;
+}
+
+.etf_extra {
+	color: #777777;
+	background: none repeat scroll 0 0 #EBFEED;
+}
+
+.mini_category {
+	clear: both;
+	margin-bottom: 25px;
+}
+
+.red_title_bk {
+	border-bottom: 2px solid #3D843D;
+	color: #000000;
+	font-size: 1.6em;
+	font-weight: 500;
+	padding-top: 5px;
+	width: 230px;
+	margin-bottom: 10px;
+	padding-bottom: 2px;
+}
+
+.red_title_bk span {
+	font-size: 13px;
+	cursor: default;
+	font-weight: bold;
+}
+
+.etf_extra_content {
+	float: left;
+	padding: 10px 0 0;
+	width: 100%;
+}
+
+.etf_extra .other {
+	margin-top: 5px;
+}
+
+inner_li a:link {
+	text-decoration: none;
+}
+
+.etf_extra td a {
+	font-size: 12px;
+}
+
+#ctrlf {
+	font-size: 12px;
+	margin-top: 10px;
+}
+</style>
+<script>				
+	Cufon.replace('#homecenter',{fontFamily: 'MyriadPro'});
+	Cufon.replace('#whatis', { fontFamily: 'Arial'});
+	Cufon.replace('#whatisContent1', { fontFamily: 'Arial'});
+	Cufon.replace('#whatisContent2', { fontFamily: 'Arial'});
+	Cufon.replace('#whatisContent3', { fontFamily: 'Arial'});
+	Cufon.replace('#whatisContent4', { fontFamily: 'Arial'});
+</script>
+<div id="killzone" style="overflow: hidden;height: 180px; "> 
+						<div id="third_left">
+<div class="mini_category etf_extra"
+	style="width: 230px; margin-left: 5px;">
+	<div class="red_title_bk">
+		<span class="red_title_text">Top Plans for Brokerages</span>
+	</div>
+
+	<div>
+		<table>
+			<tr>
+				<td><a href="localhost/LTISystem/f401k_view.action?ID=714">Vanguard
+						ETF</a>:</td>
+				<td>12%*</td>
+				<td class="starimg"><img src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /></td>
+			</tr>
+
+			<tr>
+				<td><a href="localhost/LTISystem/f401k_view.action?ID=1429">Diversified
+						Core</a>:</td>
+				<td>13%*</td>
+				<td class="starimg"><img src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /></td>
+			</tr>
+			<tr>
+				<td><a href="localhost/LTISystem/f401k_view.action?ID=1148">Six Core
+						Asset ETFs</a>:</td>
+
+				<td>15%*</td>
+				<td class="starimg"><img src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /><img
+					src="localhost/LTISystem/jsp/images/star.jpg" alt="" border="0" /></td>
+			</tr>
+
+		</table>
+		<div id="ctrlf">
+			*:5 Yr Annualized Return of TAA Moderate Portfolio<br />
+			<p align=center>
+
+				<a align="center"
+					href="localhost/LTISystem/f401k__ira_brokerage_intro.action">...More
+					Plans...</a>
+			</p>
+		</div>
+
+
+	</div>
+
+</div>
+						</div>
+					
+						<div id="third_center">
+
+							<div style="margin-top: 30px;">
+								<div style="float:left;width:75px;">
+									<img src="localhost/LTISystem/jsp/images/email.jpg" width="65px"/>
+								</div>
+								<style>
+									#homecenter{
+										font-size:18px;
+										font-weight: bold;
+									}
+								</style>
+								<div style="float: left; width: 220px;">
+									<div  id="homecenter">Free Quality Retirement <br><br>Investing Newsletter<br><br></div><br>
+
+									<!-- <div style=" margin-bottom: 10px;line-height:1.2em;margin-top: 5px;">Enter your email address to receive MyPlanIQ FREE retirement investing newsletters</div> -->
+									<input id="subemail" onblur="if(this.value=='')this.value='Email Address'" onfocus="this.value=''" name="email" value="Email Address" type="text" onkeyup="send(event)"/>
+									<input type="button" id="signupemail" value="Submit" >
+								</div>
+							</div>
+						</div>
+						
+						<div id="third_right">
+							<div style="border: 1px solid rgb(204, 204, 204); float: left; text-align: center;">
+								We Are On<br>
+
+							<a target="_blank" href="http://online.barrons.com/article/SB50001424052970203583604576271140947668536.html"><img width="235" height="54" alt="barron's" src="http://www.egan-jones.com/assets/images/barrons_logo.gif"></a>
+							<br><br>They (MyPlanIQ & others) all share the belief that good asset allocation brings the best returns.
+							<br><br>
+		   </div> 
+						</div>
+						
+ </div>
+ 
+
+	<!-- CONTENT -->
+	
+
+<style>
+	#menu2{
+		margin:0 auto;
+	}
+		#menu2 ul{
+			list-style:none;
+		}
+		#menu2{
+			width:305px;
+	    }
+			#menu2 li{
+				list-style:none;
+				display:block;
+				float:left;
+				line-height:51px;
+				border:solid #39A673;
+				border-width:0 2px 0 2px;				
+				background:url(localhost/LTISystem/jsp/images/menu_005_bg.jpg) repeat-x;
+				height:51px;
+				margin:3px 1px 0 0;		
+										
+			}
+				#menu2 li a{
+					display:block;
+					float:left;
+					//color:#D3FF6C;
+                                        color:#FFFFFF;
+	
+					font-size:16px;
+					font-weight:bold;
+					text-decoration:none;
+					padding:0 25px;
+					height:51px;	
+					width:350px;				
+				}
+					#menu2 li a:hover{
+						color:#fff;
+						background:url(localhost/LTISystem/jsp/images/menu_005_h.jpg) repeat-x;
+					}
+				#menu2 li a.current{
+					display:block;
+					float:left;
+					background:url(localhost/LTISystem/jsp/images/menu_005_h.jpg) repeat-x;					
+					color:#fff;
+
+					font-size:11px;
+					font-weight:bold;
+					text-decoration:none;
+					padding:0 25px;	
+				}
+					#menu2 li a:hover.current{
+						color:#fff;
+					}
+
+
+
+</style>
+
+<div id="storage" style="display:none">
+	<div id="slide_1" style="padding-top:0px;">
+		<div class="slideContents">
+			<div class="slideAcross">
+			</div>
+			<div class="slideLeft" style="margin-top: 10px;">
+<table border=0>
+					<tr><td>
+				 <div id="menu2">
+					 <ul>
+
+					 		
+				<li><a href="localhost/LTISystem/f401k__ira_brokerage_intro.action">ETF/Mutual Fund Portfolios</a></li>                                                       
+							<li><a href="localhost/LTISystem/f401k__401kplans.action">Retirement 401K, IRA, 403B</a></li>
+					</ul>
+					
+					<ul>
+							<li><a href="localhost/LTISystem/f401k__annuity_vul_colleges.action">Variable Annuities, VULs, 529</a></li>
+							<li><a href="localhost/LTISystem/f401k_showplanscorelist.action">Plan Rating, 401K/IRA Rollover</a></li>
+					</ul>
+
+					
+		            
+						
+				</div>
+				
+</td>
+				<td style="padding-left: 20px;">
+					<div id="menu2"  style=" font-size: 15px;line-height: 1.5em;">
+						<p><p><div style="line-height: 50px;"><strong style="font-size: 20px;"> The Only </strong><strong><em><img width= 50px src="localhost/LTISystem/jsp/images/FREE.png"/></em></strong> <strong style="font-size: 20px;"> Site for </strong></div>
+  &nbsp;&nbsp;Diversified Model Portfolios Tailored to<br />
+
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;401K, IRA, Brokerage Plans<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Personal Risk<br />
+  &nbsp;&nbsp;Monthly Portfolio Re-balance Emails<br />
+
+  &nbsp;&nbsp;Plan Rating for 401k/IRA Rollover<br />
+  &nbsp;&nbsp;Fund Ranking in a Plan<br />
+<!--
+  &nbsp;&nbsp;Plan Rating for 401k/IRA Rollover<br />
+  &nbsp;&nbsp;Fund Ranking in a Plan<br />
+  &nbsp;&nbsp;Realtime Diversified Model Portfolios<br />
+  &nbsp;&nbsp;Customize Portfolios to Personal Risk<br />
+  <sup><strong><em style="vertical-align:text-top; color:red; font-size:9px; font-family:Arial, Helvetica, sans-serif;
+margin:10px 0px 0px 0px">&nbsp;&nbsp;&nbsp;&nbsp;new</em></strong></sup><em>Use Guru/Lazy  Portfolio Templates</em><br />
+ &nbsp;&nbsp;&nbsp;Monthly Rebalance Emails<br />
+-->
+
+<strong style="font-size: 18px;">Low Premium Tactical Portfolios</strong><br />
+   &nbsp;&nbsp;<em>Avoid Big Loss</em><br />
+   &nbsp;&nbsp;<em>30 Day Free Trial</em><br />
+				    </div>
+				</td>
+				</tr>
+				</table>
+			</div>
+
+			<div class="slideRight">
+                                
+				<!--                                <p class="slide_displaytext">Smart Asset Allocation for higher returns<br />
+                                  and lower risk</p>
+                                <p class="slide_bullet_Item">??Up to 8% annual returns improvement</p>
+                                <div class="horiz_divider_fade">
+                                  <p>&nbsp;</p>
+                                </div>
+-->
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div id="slide_2">
+		<div class="sld_title">Time Proven Investment Strategies Customized to My Plans</div>
+
+		<div class="slideContents">
+		
+			<div class="slideAcross"></div>
+			<div class="slideLeft width_260">
+				<a href="localhost/LTISystem/jsp/strategy/View.action?ID=1003"><p class="slide_displaytext color7BB406 margin_top_20">Tactical Asset Allocation (TAA)</p></a>
+				<p class="slide_displaytext_sml color7BB406">Dynamically allocates assets</p>
+			
+				<div class="horiz_divider_fade height_15"></div>
+				
+				<a href="localhost/LTISystem/jsp/strategy/View.action?ID=771"><p class="slide_displaytext colorE79115 ">Strategic Asset Allocation (SAA)</p></a>
+
+				<p class="slide_displaytext_sml colorE79115">Buy and Hold with preset risk profile</p>
+				
+				<div class="horiz_divider_fade height_20	"></div>
+				<p class="slide_displaytext_sml">Smart Asset Allocation Strategies</p>
+
+				<ul class="slide_bullet_ul">
+				<li class="slide_bullet_Item margin_bottom_5"> Diversification - stocks,bonds,real
+					estate, commodities</li>
+				<li class="slide_bullet_Item margin_bottom_5">TAA avoids
+					big losses -- adds 4-6% annual return</li>
+
+				<li class="slide_bullet_Item">Good fund selection -- adds 1-2% annual return</li>
+				</ul>
+				
+				
+			</div>
+			<div class="slideRight width_370">
+				<div class="slide2_graph margin_top_20" > <img src="localhost/LTISystem/jsp/template/ed/images/slide2_graph.gif" alt="" width="369" height="211" /></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+	</div>
+	
+	
+	<div id="slide_3">
+				<div class="sld_title">The Only Application That Understands My IRA/401K Plans</div>
+				<div class="slideContents">
+					<div class="slideAcross"></div>
+					<div class="slideLeft width_270">
+						<!-- <p class="slide_displaytext margin_top_20">Plan Ratings and Rollover Assistance</p> -->
+                                                <p class="slide_displaytext margin_top_20">PlanRatingIQ </p>
+
+						<div class="horiz_divider_fade"></div>
+						<p class="slide_bullet_Item margin_bottom_5"><a href="localhost/LTISystem/f401k_showplanscorelist.action">Rate My Plan's Investment Choices </a></p>
+						<!-- <p class="slide_displaytext_sml margin_bottom_5 margin_top_15">Help me roll over:</p> -->
+                                                <p class="slide_displaytext margin_bottom_5 margin_top_15">PlanRolloverIQ</p>
+
+						
+						<ul class="slide_bullet_ul">
+							<li class="slide_bullet_Item margin_bottom_5"><a href="localhost/LTISystem/f401k_planrollover.action">From 401K to Another 401K/IRA</a></li>
+							<li class="slide_bullet_Item"><a href="localhost/LTISystem/f401k_planrollover.action">From (IRA) Brokerage to Another
+								(IRA) Brokerage</a></li>
+
+						</ul>
+	
+						<div class="horiz_divider_fade"></div>
+					</div>
+					<div class="slideRight width_370">
+						<div class="slide2_graph margin_top_20" ><img src="localhost/LTISystem/jsp/template/ed/images/slide3_logos.gif" alt="" width="318" height="196" /></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				</div>
+
+				
+				
+				
+	
+</div>
+<div style="display:none">
+	<div id="flashwindow">
+		<div id="flashdiv"></div>
+	</div>
+</div>
+<!-- Start Quantcast tag -->
+<script type="text/javascript">
+_qoptions={
+qacct:"p-1eBO57wiwyzVw"
+};
+</script>
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+<noscript>
+<img src="http://pixel.quantserve.com/pixel/p-1eBO57wiwyzVw.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+
+<!-- End Quantcast tag -->
+
+
+  <!-- FOOTER -->
+  <div id="footer">
+        <div class="footerColumn">
+                <a href="#" class="footerColumnHeading">@ 2010 LTI Systems, Inc.</a>
+        </div> 
+  	<div class="footerColumn">
+  		<a href="localhost/LTISystem" class="footerColumnHeading">Company Info</a>
+
+		<a href="localhost/LTISystem/f401k__about.action">About Us</a>
+                <a href="localhost/LTISystem/f401k__why.action">Why MyPlanIQ</a>
+<!--		<a href="secondary.html">News and Press</a>
+		<a href="secondary.html">Contact Us</a>
+		<a href="secondary.html">TV and Radio Apearances</a>
+		<a href="secondary.html">Our Services</a>
+		<a href="secondary.html">Affiliate Program</a>
+		<a href="secondary.html">Invite a Friend</a>
+-->
+  	</div>
+	
+	
+  	<div class="footerColumn">
+  		<a href="localhost/LTISystem/f401k__faqs.action" class="footerColumnHeading">Support</a>
+		<a href="localhost/LTISystem/profile__getstarted.action">Get Started</a>
+
+                <a href="localhost/LTISystem/f401k__faqs.action">FAQs</a>
+		<a href="localhost/LTISystem/f401k__glossary.action">Glossary</a>
+		<a href="localhost/LTISystem/f401k__strategies.action">Asset Allocation Strategies</a>
+	</div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Legal</a>
+		<a href="localhost/LTISystem/jsp/register/privacy.action">Privacy Policy</a>
+
+		<a href="localhost/LTISystem/jsp/register/termuse2.action">Terms of Service</a>
+		<a href="localhost/LTISystem/jsp/register/disclaimer.action">Disclaimer</a>
+<!--		<a href="secondary.html">Lorem Ipsum Dolor Con</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+-->
+  	</div>	
+	
+	<div class="footerColumn">
+  		<a href="localhost/LTISystem/f401k__ma.action" class="footerColumnHeading">Site Overview</a>
+<!--		<a href="secondary.html">Lorem Ipsum Dolor</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum Dolor Con</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+-->
+  	</div>	
+	
+	<div class="footerColumn">
+
+  		<a href="/jforum/rss/forumTopics/82.page" class="footerColumnHeading">RSS Feed  <img border="0" alt="[XML]" src="/jforum/templates/default/images/xml_button.gif"></a>
+<!--		<a href="secondary.html">Lorem Ipsum Dolor</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum Dolor Con</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+-->
+  	</div>	
+	
+<!--	<div class="footerColumn">
+  		<a href="secondary.html" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="secondary.html">Lorem Ipsum Dolor</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum Dolor Con</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+  	</div>	
+-->	
+	<div class="clearfloat"></div>
+     <div>
+        <p></br><br><font color="#B4D377" size="1.9pt"><b>Disclaimer:</b> Any investment in securities including mutual funds, ETFs, closed end funds, stocks and any other securities could lose money over any period of time. All investments involve risk. Losses may exceed the principal invested. Past performance is not an indicator of future performance. There is no guarantee for future results in your investment and any other actions based on the information provided on the website including but not limited strategies, portfolios, articles, performance data and results of any tools.</font><br></p>
+
+<p><font color="#B4D377" size="1.9pt">The website is not operated by a broker, a dealer, a registered financial planner or a registered investment adviser.</font><br></p>
+
+<p><font color="#B4D377" size="1.9pt">Investment strategies, results and any other information presented on the website are for education and research purpose only. They do not represent financial planning and investment advice. MyPlanIQ does not provide tax or legal advice. They are generic in nature and do not take into account your detailed and complete personal financial facts and needs. You alone are responsible for evaluating the information provided and to decide which securities and strategies are suitable for your own financial risk profile and expectations.</font><br></p>
+
+<p><font color="#B4D377" size="1.9pt">Information provided by the website could be time-sensitive and out of date. There is no guarantee for accuracy and completeness for the contents on the website. Contents are subject to change without notice.</font><br></p>
+
+<p><font color="#B4D377" size="1.9pt">All rights are reserved and enforced. By accessing the website, you agree not to copy and redistribute the information provided herein without the explicit consent from MyPlanIQ.</font><br></p>
+   </div>
+  </div>
+</div>
+
+<style>
+	
+#login_content #join_mp_all{
+	    background: none repeat scroll 0 0 #FCF1D4;
+	    margin: 0 0 6px;
+	    padding: 8px 0 0;
+	    position: relative;
+	    width: 245px !important;
+	    float: right;
+	    height: 320px;
+	    line-height: 0.5;
+	    margin-right: 5px;
+	}
+	
+#login_content #login_mp{
+	    background: none repeat scroll 0 0 #FBF5E6;
+	    margin: 0 0 6px;
+	    padding: 8px 0 0;
+	    position: relative;
+	    width: 245px !important;
+	    float: right;
+	    height: 320px;
+	    line-height: 0.5;
+	}
+	
+#login_content #login_left_mp{
+	    margin: 0 0 6px;
+	    padding: 8px 0 0;
+	    position: relative;
+	    width: 200px !important;
+	    float: right;
+	    height: 320px;
+	    line-height: 0.5;
+	    margin-right: 5px;
+	    color: #959595;
+    	font-size: 1.06em;
+    	font-weight: bold;
+    	line-height: 1.45em;
+	}
+	
+#login_content #join_mp_all fieldset,#login_mp fieldset{
+    border: 0 none;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+#login_content #join_mp_all span,#login_mp span{
+	 display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    padding: 0 0 1px;
+}
+
+#login_content #joinnow{
+	background: url("localhost/LTISystem/jsp/images/joinnow.jpg") no-repeat scroll 0 0 transparent  !important;
+	width:110px;
+	height:30px;
+	border: 0 none;
+	cursor: pointer;
+}
+.input_login{
+	display: block;
+    float: none;
+    font-size: 14px;
+    height: 18px;
+    padding: 3px 5px;
+    width: 185px;
+    border-color: #919191 #E1E1E1 #E1E1E1 #919191;
+    border-style: solid;
+    border-width: 1px;
+    float: left;
+}
+#login_content h3{
+	color: #234B27;
+    font-family: arial,helvetica,clean,sans-serif !important;
+    font-size: 20px;
+    margin-bottom: 21px;
+    padding-left: 10px;
+}
+	
+	</style>
+
+<div style="display:none;padding:0;margin:0">
+	<div id="login_content" class="flora">
+		<div id="login_mp">
+		<h3>Member sign in:</h3>
+		<form id="form" action="localhost/LTISystem/j_acegi_security_check" method="POST">
+			<fieldset>
+				<span>UserName:</span>
+				<input class="input_login" id="username" name='j_username' type='text' maxlength="40">
+
+			</fieldset>
+			<fieldset>
+				<span>Password:</span>
+				<input class="input_login" id="password" type='password' name='j_password' maxlength="20" />
+				<input type="hidden" name='tolanding' value="tolanding"/>
+			</fieldset>
+			<fieldset>
+				<input type="checkbox" name="_acegi_security_remember_me" checked>
+
+				Keep me signed in for two weeks
+			</fieldset>
+				<input id="login"  type="submit" name="Submit" value="Login"   class="uiButton"/>
+			<div  style="margin-top: 20px;">Did you forget your password?</div>
+			<div  style="margin-top: 10px;"><a href="localhost/LTISystem/jsp/register/ForgotPassword.action" style="color: #2d45a1;text-decoration: none">Recover it here.</a></div>
+		</form>
+		</div>
+		<div id="join_mp_all">
+
+		<h3>Join now (it's free):</h3>
+			<form name="form1all" method="post">
+			<fieldset>
+			<span>UserName:</span>
+			<input class="input_login" type="text" onblur="out_username_all();" tabindex="50" id="UserName_join" name="user.UserName"><label id="UserName_label"></label>
+			</fieldset>
+			<fieldset>
+			<span>Password:</span>
+
+			<input class="input_login" type="password" onkeyup="out_password_all();" onblur="out_password();" tabindex="50" id="Password_join" name="user.Password"><label id="Password_label"></label>
+			</fieldset>
+			<fieldset>
+			<span>Email Address:</span>
+			<input class="input_login" type="text" onblur="out_email_all();" tabindex="50" id="Email_join" name="user.EMail"><label id="Email_label"></label>
+			</fieldset>
+			<fieldset>
+			<span>Confirm Email Address:</span>
+
+			<input class="input_login" type="text" onkeyup="out_email_confirm_all();" onblur="out_email_confirm_all();" tabindex="50" id="Email_join_con"><label id="Email_confirm_label"></label>
+			</fieldset>
+			<fieldset>
+			<input type="checkbox" name="checkbox1" tabindex="50" id="Agree_join">I agree to the <a target="_blank" href="localhost/LTISystem/register__termuse2.action">Terms of use</a>
+			</fieldset>
+			</form>
+			<fieldset>
+			<button tabindex="50" value="" id="joinnow" onclick="checkJoin_all()"></button>
+
+			</fieldset>
+		</div>
+		<div id="login_left_mp">
+		<h3>Members enjoy Free features:</h3>
+		Follow or create real time portfolios within minutes
+		Receive monthly or quarterly re-balance emails.
+		Quality retirement investing newsletter emails
+		Fund ranking and selection for your plans
+		
+		</div>
+	</div>   <!--login_content -->
+</div>
+<!-- Start Quantcast tag -->
+
+<script type="text/javascript">
+_qoptions={
+qacct:"p-1eBO57wiwyzVw"
+};
+</script>
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+<noscript>
+<img src="http://pixel.quantserve.com/pixel/p-1eBO57wiwyzVw.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+<!-- End Quantcast tag -->
+</body>
+</html>

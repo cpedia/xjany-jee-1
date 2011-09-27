@@ -1,0 +1,401 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-store, must-revalidate"> 
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT"> 
+<META HTTP-EQUIV="expires" CONTENT="0"> 
+<meta name="admin" content="vf_current" />
+<title>MyPlanIQ Admin Center</title>
+<meta  name="Description" content="MyPlanIQ monitor tools and plans are listed on his page.">
+<style>
+.button_new {background:url('jsp/f401k/images/add.jpg');border:0px;width:18px;height:18px;cursor:pointer}
+.button_remove {background:url('jsp/f401k/images/remove.jpg');border:0px;width:18px;height:18px;cursor:pointer}
+</style>
+<script>
+function updateMainStrategyID(){
+	$.ajax({
+		type: "get",
+		url: "f401k_updatemainstrategyid.action?includeHeader=false",
+		data: "ID="+$('#StrategyID').val()+"&MainStrategyID="+$('#MainStrategyID').val(),
+		datatype: "html",
+		success: function(result){
+			alert(result);
+			location.reload() ;
+		},
+		error:function(){
+			alert("error");
+		}
+	});//end of ajax
+}//end of update main strategy id
+
+function create(){
+	$.ajax({
+		type: "get",
+		url: "f401k_create.action?includeHeader=false",
+		data: "name="+$('#StrategyName').val(),
+		datatype: "html",
+		success: function(result){
+			alert(result);
+			location.reload() ;
+		},
+		error:function(){
+			alert("error");
+		}
+	});//end of ajax
+}//end of create
+function updatevariables(){
+	$.ajax({
+		type: "post",
+		url: "f401k_updatevariables.action?includeHeader=false",
+		data: $('#updateForm').serialize(),
+		datatype: "html",
+		success: function(result){
+			alert(result);
+			location.reload() ;
+		},
+		error:function(){
+			alert("error");
+		}
+	});//end of ajax
+}
+
+function removeMainStrategyID(ID){
+	$.ajax({
+		type: "get",
+		url: "f401k_updatemainstrategyid.action?includeHeader=false",
+		data: "ID="+ID+"&MainStrategyID=-1",
+		datatype: "html",
+		success: function(result){
+			alert(result);
+			location.reload() ;
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+}
+
+
+function edit_text(element){
+	if($(element).val()=='Click here'){
+		$(element).val('');
+	}
+	$(element).removeClass('show_text');
+	$(element).addClass('edit_text');
+}
+function out_text(element){
+	$(element).removeClass('edit_text');
+	$(element).addClass('show_text');
+}
+[#-- the orignal number of the parameters. --]
+[#assign parameterSize=0]
+[#if variables??]
+	[#assign parameterSize=variables?size]
+[/#if]
+var nameArray=['portfolioName','portfolioID'];
+var tipsArray=['Click here','0'];
+
+[#-- the size of parameters--]
+var parameterSize=${parameterSize};
+[#-- record which row has been deleted--]
+var parameterArray={};
+
+function getId(pos,name){
+	return 'variables_'+pos+'_'+name;
+}
+function getName(pos,name){
+	return 'variables['+pos+'].'+name;
+}
+function newParameter() {
+	var flag=checkParameters();
+	if(flag==0){
+		alert("Please check your input.");
+		return;
+	}
+	var parameter_delete='parameter_delete'+parameterSize;
+	
+	var $pane=$('#parametersTable');		
+  	var $tr,$td;
+  	$tr=$(document.createElement("tr"));
+    $tr.attr({id:'parameter'+parameterSize,'style':'background:#ffffff'});
+	$pane.append($tr);
+
+  	for(var i=0;i<nameArray.length;i++){
+		$td=$(document.createElement("td"));
+		$td.html(
+			"<input type=text value='"+tipsArray[i]+"' id="+getId(parameterSize,nameArray[i])+" name="+getName(parameterSize,nameArray[i])+" class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>"
+		);
+		$tr.append($td);
+  	}
+  	
+ 
+	$td=$(document.createElement("td"));
+	$td.html("<input type=button  onclick=deleteParameter("+parameterSize+") class='button_remove' id=" + parameter_delete + " >");
+  
+	$tr.append($td);
+	
+	parameterSize++;
+	
+	return 0;
+}
+
+function checkParameters(){
+	for(var i=0;i<parameterSize;i++){
+		if(parameterArray[i]==1)continue;
+		for(var j=0;j<nameArray.length;j++){
+			var tmp = document.getElementById(getId(i,nameArray[j]));
+			if(tmp.value=='Click here')return 0;
+			if(tmp.value.indexOf('#')>=0)return 0;
+		}
+		var nonemptyarray=['portfolioID','portfolioName'];
+		for(var j=0;j<nonemptyarray.length;j++){
+			var tmp = document.getElementById(getId(i,nameArray[j]));
+			if(tmp.value=='')return 0;
+		}
+	}
+	return 1;
+}
+function deleteParameter(pointer) {
+	var parameterID = "parameter"+pointer;
+	var parameter = document.getElementById(parameterID);
+	parameter.style.display = 'none' ;
+	
+	parameterArray[pointer]=1;
+	
+	for(var i=0;i<nameArray.length;i++){
+		var tmp = document.getElementById(getId(pointer,nameArray[i]));
+		tmp.value='';
+	}
+	   
+}
+function admin(comm){
+	if(confirm('Are you sure to '+comm+' all portfolios?')){
+		$('#adminmessage').html('please wait...');
+		$.ajax({
+		type: "get",
+		url: "f401k_admin"+comm+".action?includeHeader=false",
+		datatype: "html",
+		success: function(result){
+			$('#adminmessage').html(result);
+			$('#adminmessage').show();
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+	}
+}
+function adminbatchplans(comm){
+	if(confirm('Are you sure to '+comm+' specific plans?')){
+		$('#adminmessage').html('please wait...');
+		$.ajax({
+		type: "get",
+		url: "f401k_adminbatch"+comm+"plans.action?includeHeader=false",
+		data:'planIDs='+$('#planIDs').val(),
+		datatype: "html",
+		success: function(result){
+			$('#adminmessage').html(result);
+			$('#adminmessage').show();
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+	}
+}
+
+function planrollover(){
+	location.href="f401k_planrollover.action";
+}
+function plancompare(){
+	location.href="f401k_plancomparetool.action";
+}
+
+function getfastupdatereport(){
+	location.href="f401k_getfastupdatereport.action?dateStr=" + $('#dateStr').val() + "&updateNum=" + $('#updateNum').val();
+}
+
+function getdatabasesecurityreport(){
+	location.href="f401k_getdatabasesecurityreport.action?dateStr=" + $('#dateStr').val();
+}
+
+function getdatabaseportfolioreport(){
+	location.href="f401k_getdatabaseportfolioreport.action?dateStr=" + $('#dateStr').val();
+}
+
+function getdailyexecutionreport(){
+	location.href="f401k_getdailyexecutionreport.action?dateStr=" + $('#dateStr').val();
+}
+
+function getdatabasesecuritymptreport(){
+	location.href="f401k_getdatabasesecuritymptreport.action?dateStr=" + $('#dateStr').val();
+}
+
+function getsecuritymptreport(){
+	location.href="f401k_getsecuritymptreport.action?dateStr=" + $('#dateStr').val();
+}
+
+$(function() {
+	$('#dateStr').datepicker({ dateFormat: "yy-mm-dd"});
+});
+</script>
+</head>
+<body>
+
+	<div id="n401k_mainFrame">
+	<div class="n401k_content">
+	<div class="n401k_contentright">
+		<input type='button' onclick='admin("batchgenerate")' class='uiButton' value='Batch generate'>
+		<input type='button' onclick='admin("batchdelete")' class='uiButton' value='Batch delete'>
+		<input type='button' onclick='admin("batchexecute")' class='uiButton' value='Batch update'>
+		<input type='button' onclick='admin("batchmonitor")' class='uiButton' value='Batch monitor'>
+		<input type='button' onclick='admin("batchstop")' class='uiButton' value='Batch stop'>
+		<input type='button' onclick='admin("batchpublic")' class='uiButton' value='Batch public'>
+		<input type='button' onclick='admin("batchprivate")' class='uiButton' value='Batch private'>
+		<input type='button' onclick='admin("batchfix")' class='uiButton' value='Batch fix'>
+		<input type='button' onclick='admin("batchfixvf")' class='uiButton' value='Batch fix vf'>
+		<br><br>
+		<input type='text' id='planIDs' value=''>
+		<input type='button' onclick='adminbatchplans("execute")' class='uiButton' value='Batch update plans'>
+		<input type='button' onclick='adminbatchplans("monitor")' class='uiButton' value='Batch monitor plans'>
+		<br><br>
+		<input type='button' onclick='plancompare()' class='uiButton' value='Plan Comparison'>
+		<input type='button' onclick='planrollover()' class='uiButton' value='Plan Rollover'>
+		<br><br>
+		<input type='text' id='dateStr' name='dateStr' value=''/>
+		<select name='updateNum' id='updateNum' value='1'>
+			<option value='1'>1</option>
+			<option value='2'>2</option>
+		</select>
+		<input type='button' onclick='getfastupdatereport()' class='uiButton' value='Fast Update Detail Status'/>
+		<input type='button' onclick='getdatabasesecurityreport()' class='uiButton' value='DataBase Security Status'/>
+		<input type='button' onclick='getdatabaseportfolioreport()' class='uiButton' value='DataBase Portfolio Status'/>
+		<input type='button' onclick='getdailyexecutionreport()' class='uiButton' value='Daily Execution Status'/>
+		<input type='button' onclick='getdatabasesecuritymptreport()' class='uiButton' value='Database Security MPT Status'/>
+		<input type='button' onclick='getsecuritymptreport()' class='uiButton' value='Security MPT Update Status'/>
+		<div id='adminmessage' style='display:nones'>
+		</div>
+		<br><br>
+		<a href='/LTISystem/jsp/strategy/View.action?ID=${centerplan.ID?string.computer}'>go to strategy page</a>
+		<form action="f401k_updatemainstrategyid.action">
+			Strategy ID:<input type="text" id="StrategyID"> <input type="button"  class="uiButton" onclick="updateMainStrategyID()" value="Add">
+			<input type="hidden" id="MainStrategyID" value="${centerplan.ID?string.computer}">
+		</form>
+		401K Strategies
+		<table border=0> 
+			[#list strategies as strategy]
+				<tr>
+					<td>
+						<a href='/LTISystem/jsp/strategy/View.action?ID=${strategy.ID?string.computer}'>
+							${strategy.name}
+						</a>
+					</td>
+					<td>
+						<input type="button" class="uiButton" onclick="removeMainStrategyID(${strategy.ID?string.computer})" value="Remove">
+					</td>
+				</tr>
+			[/#list]
+		</table> 
+		<br>
+		<br>
+		<br>
+		<p>Template portfolios belong to 401k</p>
+		[@s.action name="ModelPortfolioMain" namespace="/jsp/strategy" executeResult=true]
+			[@s.param name="strategyID"]${centerplan.ID?string.computer}[/@s.param]
+			[@s.param name="size"]0[/@s.param]
+			[@s.param name="includeHeader"]false[/@s.param]
+			[@s.param name="includeJS"]false[/@s.param]
+		[/@s.action]
+		<br>
+		<br>
+		<br>
+		<form id="updateForm" action="f401k_updatevariables.action?includeHeader=false">
+			<table  bgcolor="#999999" border="0" cellpadding="0" cellspacing="1" width="95%" id="parametersTable"> <!-- variables table -->
+			 	<tr bgcolor="#fefeed" >
+			 		<td>
+						<b>PortfolioName</b>
+					</td>
+					<td>
+						<b>PortfolioID</b>
+					</td>
+					<td>
+						<input type='button' value='' onclick='newParameter()' class='button_new'>
+					</td>
+				</tr>
+				[#if variables??]
+					[#list variables as var]
+					    <tr bgcolor="#ffffff" id='parameter${var_index}'>
+							<td>
+								<input type='text' id='variables_${var_index}_portfolioName' name='variables[${var_index}].portfolioName' value='${var.portfolioName!""}' class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+							</td>
+							<td>
+								<input type='text' id='variables_${var_index}_portfolioID' name='variables[${var_index}].portfolioID' value='[#if var.portfolioID??]${var.portfolioID?string.computer}[/#if]' class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+							</td>
+							<td>
+								<input type='button' value='' onclick='deleteParameter(${var_index})' class='button_remove'>
+							</td>
+						</tr>
+					[/#list]
+				[/#if]
+			 </table><!-- variables table -->
+			 <input type="hidden" value="${centerplan.ID?string.computer}" name="ID">
+			 <input type="button" class="uiButton" value="Update" onclick='updatevariables()'>
+		</form>
+		<br>
+		<br>
+		<br>
+		401K Plans<br>
+		Name:<input type="text" id="StrategyName"> <input type="button" class="uiButton" onclick="create()" value="Create">
+		<table cellspacing=1 cellpadding=2 width='100%' bgcolor='#000'> 
+			[#if plans??]
+			[#list plans as plan]
+				<tr bgcolor='#fff'>
+					<td>
+						<a href='f401k_view.action?ID=${plan.ID?string.computer}'>
+							${plan.name}
+						</a>
+						
+					</td>
+					<td>
+						<a href='jsp/strategy/View.action?ID=${plan.ID?string.computer}'>
+							View as strategy
+						</a>
+					</td>
+				</tr>
+			[/#list]
+			[/#if]
+		</table> 
+	</div>
+  </div>
+</div>
+<div>
+	<br>
+	<br>
+	<form action="f401k_showplanscorewithids.action?" method="post">
+		PlanIDList:<input type="areatext" id="planIDArray" name="planIDArray" value='${planIDArray!""}'/>
+		<input type='submit' class='uiButton' value='Get Plan Score List With IDs'>
+	</form>
+	<br>
+	<br>
+	<form action="f401k_createfundtableindex.action?" method="post">
+		PlanIDList:<input type="areatext" id="planIDArray" name="planIDArray" value='${planIDArray!""}'/>
+		<input type='submit' class='uiButton' value='create fund table index'>
+	</form>
+	<br>
+	<br>
+	<form action="f401k_addfundtableindex.action?" method="post">
+		PlanIDList:<input type="areatext" id="planIDArray" name="planIDArray" value='${planIDArray!""}'/>
+		<input type='submit' class='uiButton' value='add fund table index'>
+	</form>
+	<br>
+	<br>
+	<form action="f401k_deletefundtableindex.action?" method="post">
+		PlanIDList:<input type="areatext" id="planIDArray" name="planIDArray" value='${planIDArray!""}'/>
+		<input type='submit' class='uiButton' value='delete fund table index'>
+	</form>
+</div>
+</body>
+</html>

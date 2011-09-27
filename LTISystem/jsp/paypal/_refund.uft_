@@ -1,0 +1,15 @@
+<center>
+<font size=2 color=black face=Verdana><b>Refund Transaction</b></font>
+<br><br>
+<b>Transaction refunded!</b><br><br>
+<table width=400>
+	<tr>
+		<td>Transaction ID:</td>
+		<td>${transaction.transactionID}</td>
+	</tr>
+	<tr>
+		<td>Gross Refund Amount:</td>
+		<td>USD ${transaction.grossAmount!""}</td>
+	</tr>
+</table>
+</center>   

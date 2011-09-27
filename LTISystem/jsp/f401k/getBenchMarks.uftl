@@ -1,0 +1,125 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<style>
+#process_div select{
+ border:0px solid #369;
+ background:#fff;
+ width:98%;
+ color:blue;
+}
+
+#process_div input{
+ border:0px solid #369;
+ background:#fff;
+ width:98%;
+ color:blue;
+}
+
+#process_div select option{
+ color:black;
+}
+</style>
+<script>
+$(function() {
+	$('select').change(function (){
+		var id=$(this).attr('id');
+		var i=id.indexOf("_");
+		var pre=id.substring(0,i);
+		var suff=id.substring(i+1,id.length);
+		$('#'+pre+'_0')[0].selectedIndex = this.selectedIndex;
+		$('#'+pre+'_1')[0].selectedIndex = this.selectedIndex;
+		$('#'+pre+'_2')[0].selectedIndex = this.selectedIndex;
+	});
+});
+</script>
+<script>
+	function getMessage(symbol_index){
+		id = "i"+symbol_index+"_0";
+		jQuery.post('f401k_getBenchMarksByAssertClass.action?includeHeader=false',
+			"symbolsStr="+$('#'+id+' option:selected').val(),
+			function(result){
+			//	alert(result);
+				var lines = result.split('|');
+				for(var i=1;i<lines.length;i++){
+					if(i==4){
+						continue;
+					}
+					else{
+					$('#i'+symbol_index+'_'+i).val(lines[i]);
+					}
+				}
+			}
+		);
+	}
+</script>
+<div align="left" style="padding-left:25px;margin-bottom:25px;line-height:0.7em;font-size:16px;">
+	There still are ${arraySymbol?size} un-recognize funds in the table.<br><br>
+ 	You can assign the Asset Classes they belong to and their benchmarks will be used in the simulatiion,otherwise they will be ignored.
+</div>
+<table  bgcolor="#999999" border="0" cellpadding="0" cellspacing="1" width="95%" id="parametersTable"> <!-- variables table -->
+ 	<tr bgcolor="#ffffff" >
+ 		<td width='22%'>
+			<b>Asset Class</b>
+		</td>
+		<td width='8%'>
+			<b>Ticker</b>
+		</td>
+		<td width='25%'>
+			<b>Name</b>
+		</td>
+		<td width='2%'>
+			<b>Redemption</b>
+		</td>
+		<td width="38%">
+			<b>Description</b>
+		</td>
+		<td width='5%'>
+			<b>*</b>
+		</td>
+	</tr>
+	[#list arraySymbol as symbol]
+		[#assign vsize = symbol?length /]
+		<tr bgcolor="#ffffff" >
+			<td>
+				[#assign id="i"+symbol_index+"_0"/]
+				<select id='${id}' onChange="getMessage('${symbol_index}')">
+					<option value='-1.NotFound'>--Asset Class</option>
+					<option value='1.EQUITY'>--EQUITY</option><option value='8. EQUITY ->US EQUITY'>&nbsp;&nbsp;&nbsp;&nbsp;++US EQUITY</option><option value='48. EQUITY -> US EQUITY ->US Large Cap'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+US Large Cap</option><option value='129. EQUITY -> US EQUITY -> US Large Cap ->LARGE VALUE'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LARGE VALUE</option><option value='197. EQUITY -> US EQUITY -> US Large Cap ->LARGE BLEND'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LARGE BLEND</option><option value='202. EQUITY -> US EQUITY -> US Large Cap ->LARGE GROWTH'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LARGE GROWTH</option><option value='49. EQUITY -> US EQUITY ->US Mid Cap'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+US Mid Cap</option><option value='204. EQUITY -> US EQUITY -> US Mid Cap ->MID-CAP VALUE'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MID-CAP VALUE</option><option value='205. EQUITY -> US EQUITY -> US Mid Cap ->MID-CAP BLEND'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MID-CAP BLEND</option><option value='226. EQUITY -> US EQUITY -> US Mid Cap ->Mid-Cap Growth'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mid-Cap Growth</option><option value='52. EQUITY -> US EQUITY ->US Small Cap'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+US Small Cap</option><option value='207. EQUITY -> US EQUITY -> US Small Cap ->SMALL VALUE'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SMALL VALUE</option><option value='208. EQUITY -> US EQUITY -> US Small Cap ->SMALL BLEND'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SMALL BLEND</option><option value='231. EQUITY -> US EQUITY -> US Small Cap ->Small Growth'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Small Growth</option><option value='57. EQUITY -> US EQUITY ->Micro Cap'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Micro Cap</option><option value='172. EQUITY -> US EQUITY ->US Equity Moderate Allocation'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;US Equity Moderate Allocation</option><option value='9. EQUITY ->INTERNATIONAL EQUITY'>&nbsp;&nbsp;&nbsp;&nbsp;++INTERNATIONAL EQUITY</option><option value='10. EQUITY -> INTERNATIONAL EQUITY ->Foreign Small Cap'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+Foreign Small Cap</option><option value='63. EQUITY -> INTERNATIONAL EQUITY -> Foreign Small Cap ->Foreign Small Value'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foreign Small Value</option><option value='58. EQUITY -> INTERNATIONAL EQUITY ->Developed Countries'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+Developed Countries</option><option value='201. EQUITY -> INTERNATIONAL EQUITY -> Developed Countries ->EUROPE STOCK'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EUROPE STOCK</option><option value='232. EQUITY -> INTERNATIONAL EQUITY -> Developed Countries ->Greece Equity'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Greece Equity</option><option value='233. EQUITY -> INTERNATIONAL EQUITY -> Developed Countries ->Europe Large-Cap Blend Equity'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Europe Large-Cap Blend Equity</option><option value='243. EQUITY -> INTERNATIONAL EQUITY -> Developed Countries ->JAPAN STOCK'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAPAN STOCK</option><option value='61. EQUITY -> INTERNATIONAL EQUITY ->Emerging Market'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+Emerging Market</option><option value='62. EQUITY -> INTERNATIONAL EQUITY -> Emerging Market ->China Equity'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;China Equity</option><option value='214. EQUITY -> INTERNATIONAL EQUITY -> Emerging Market ->DIVERSIFIED EMERGING MKTS'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DIVERSIFIED EMERGING MKTS</option><option value='229. EQUITY -> INTERNATIONAL EQUITY -> Emerging Market ->Latin America Stock'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latin America Stock</option><option value='192. EQUITY -> INTERNATIONAL EQUITY ->Foreign Small/Mid Cap'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+Foreign Small/Mid Cap</option><option value='130. EQUITY -> INTERNATIONAL EQUITY -> Foreign Small/Mid Cap ->Foreign Small/Mid Value'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foreign Small/Mid Value</option><option value='206. EQUITY -> INTERNATIONAL EQUITY -> Foreign Small/Mid Cap ->FOREIGN SMALL/MID GROWTH'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN SMALL/MID GROWTH</option><option value='193. EQUITY -> INTERNATIONAL EQUITY ->Pacific/Asia Equity'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+Pacific/Asia Equity</option><option value='239. EQUITY -> INTERNATIONAL EQUITY -> Pacific/Asia Equity ->DIVERSIFIED PACIFIC/ASIA'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DIVERSIFIED PACIFIC/ASIA</option><option value='240. EQUITY -> INTERNATIONAL EQUITY -> Pacific/Asia Equity ->PACIFIC/ASIA EX-JAPAN STK'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PACIFIC/ASIA EX-JAPAN STK</option><option value='194. EQUITY -> INTERNATIONAL EQUITY ->Foreign Large Cap'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+Foreign Large Cap</option><option value='118. EQUITY -> INTERNATIONAL EQUITY -> Foreign Large Cap ->Foreign Large Growth'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foreign Large Growth</option><option value='127. EQUITY -> INTERNATIONAL EQUITY -> Foreign Large Cap ->Foreign Large Blend'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foreign Large Blend</option><option value='132. EQUITY -> INTERNATIONAL EQUITY -> Foreign Large Cap ->Foreign Large Value'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foreign Large Value</option><option value='198. EQUITY -> INTERNATIONAL EQUITY ->WORLD STOCK'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WORLD STOCK</option><option value='2. FIXED INCOME'>--FIXED INCOME</option><option value='11. FIXED INCOME ->US MUNICIPAL BONDS'>&nbsp;&nbsp;&nbsp;&nbsp;++US MUNICIPAL BONDS</option><option value='84. FIXED INCOME -> US MUNICIPAL BONDS ->Muni National Interm'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni National Interm</option><option value='86. FIXED INCOME -> US MUNICIPAL BONDS ->Muni National Short'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni National Short</option><option value='87. FIXED INCOME -> US MUNICIPAL BONDS ->Muni Single State Interm'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni Single State Interm</option><option value='88. FIXED INCOME -> US MUNICIPAL BONDS ->Muni California Interm/Short'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni California Interm/Short</option><option value='89. FIXED INCOME -> US MUNICIPAL BONDS ->Muni Pennsylvania'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni Pennsylvania</option><option value='90. FIXED INCOME -> US MUNICIPAL BONDS ->Muni Ohio'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni Ohio</option><option value='92. FIXED INCOME -> US MUNICIPAL BONDS ->Muni New Jersey'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni New Jersey</option><option value='94. FIXED INCOME -> US MUNICIPAL BONDS ->Muni New York Interm/Short'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni New York Interm/Short</option><option value='96. FIXED INCOME -> US MUNICIPAL BONDS ->Muni Single State Short'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni Single State Short</option><option value='101. FIXED INCOME -> US MUNICIPAL BONDS ->Muni Massachusetts'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni Massachusetts</option><option value='103. FIXED INCOME -> US MUNICIPAL BONDS ->Muni New York Long'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni New York Long</option><option value='104. FIXED INCOME -> US MUNICIPAL BONDS ->Muni Single State Long'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni Single State Long</option><option value='105. FIXED INCOME -> US MUNICIPAL BONDS ->Muni National Long'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni National Long</option><option value='106. FIXED INCOME -> US MUNICIPAL BONDS ->Muni Minnesota'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni Minnesota</option><option value='114. FIXED INCOME -> US MUNICIPAL BONDS ->Muni California Long'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muni California Long</option><option value='139. FIXED INCOME -> US MUNICIPAL BONDS ->High Yield Muni'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High Yield Muni</option><option value='12. FIXED INCOME ->US CORPORATE BONDS'>&nbsp;&nbsp;&nbsp;&nbsp;++US CORPORATE BONDS</option><option value='26. FIXED INCOME -> US CORPORATE BONDS ->INVESTMENT GRADE'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INVESTMENT GRADE</option><option value='27. FIXED INCOME -> US CORPORATE BONDS ->High Yield Bond'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High Yield Bond</option><option value='83. FIXED INCOME -> US CORPORATE BONDS ->Intermediate-Term Bond'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Intermediate-Term Bond</option><option value='215. FIXED INCOME -> US CORPORATE BONDS ->Long-Term Bond'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Long-Term Bond</option><option value='221. FIXED INCOME -> US CORPORATE BONDS ->Short-Term Bond'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short-Term Bond</option><option value='247. FIXED INCOME -> US CORPORATE BONDS ->ULTRASHORT BOND'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ULTRASHORT BOND</option><option value='13. FIXED INCOME ->INTERNATIONAL BONDS'>&nbsp;&nbsp;&nbsp;&nbsp;++INTERNATIONAL BONDS</option><option value='28. FIXED INCOME -> INTERNATIONAL BONDS ->Foreign Goverment Bonds'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foreign Goverment Bonds</option><option value='29. FIXED INCOME -> INTERNATIONAL BONDS ->Foreign Corporate Bonds'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foreign Corporate Bonds</option><option value='30. FIXED INCOME -> INTERNATIONAL BONDS ->Foreign High Yield Bonds'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foreign High Yield Bonds</option><option value='195. FIXED INCOME -> INTERNATIONAL BONDS ->WORLD BOND'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WORLD BOND</option><option value='220. FIXED INCOME -> INTERNATIONAL BONDS ->Emerging Markets Bond'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emerging Markets Bond</option><option value='41. FIXED INCOME ->US TREASURY BONDS'>&nbsp;&nbsp;&nbsp;&nbsp;++US TREASURY BONDS</option><option value='199. FIXED INCOME -> US TREASURY BONDS ->SHORT GOVERNMENT'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SHORT GOVERNMENT</option><option value='200. FIXED INCOME -> US TREASURY BONDS ->LONG GOVERNMENT'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LONG GOVERNMENT</option><option value='224. FIXED INCOME -> US TREASURY BONDS ->Intermediate Government'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Intermediate Government</option><option value='64. FIXED INCOME ->Money Market'>&nbsp;&nbsp;&nbsp;&nbsp;Money Market</option><option value='136. FIXED INCOME ->Bank Loan'>&nbsp;&nbsp;&nbsp;&nbsp;Bank Loan</option><option value='218. FIXED INCOME ->Multisector Bond'>&nbsp;&nbsp;&nbsp;&nbsp;Multisector Bond</option><option value='234. FIXED INCOME ->Inflation-Protected Bond'>&nbsp;&nbsp;&nbsp;&nbsp;Inflation-Protected Bond</option><option value='3.CASH ASSET'>--CASH ASSET</option><option value='15. CASH ASSET ->CASH'>&nbsp;&nbsp;&nbsp;&nbsp;CASH</option><option value='16. CASH ASSET ->CD'>&nbsp;&nbsp;&nbsp;&nbsp;CD</option><option value='4.HYBRID ASSETS'>--HYBRID ASSETS</option><option value='17. HYBRID ASSETS ->BALANCE FUND'>&nbsp;&nbsp;&nbsp;&nbsp;++BALANCE FUND</option><option value='65. HYBRID ASSETS -> BALANCE FUND ->Moderate Allocation'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Moderate Allocation</option><option value='66. HYBRID ASSETS -> BALANCE FUND ->Conservative Allocation'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservative Allocation</option><option value='99. HYBRID ASSETS -> BALANCE FUND ->World Allocation'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World Allocation</option><option value='133. HYBRID ASSETS -> BALANCE FUND ->Retirement Income'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retirement Income</option><option value='138. HYBRID ASSETS -> BALANCE FUND ->Target Date 2000-2010'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Date 2000-2010</option><option value='141. HYBRID ASSETS -> BALANCE FUND ->Target Date 2011-2015'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Date 2011-2015</option><option value='142. HYBRID ASSETS -> BALANCE FUND ->Target Date 2016-2020'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Date 2016-2020</option><option value='143. HYBRID ASSETS -> BALANCE FUND ->Target Date 2021-2025'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Date 2021-2025</option><option value='144. HYBRID ASSETS -> BALANCE FUND ->Target Date 2031-2035'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Date 2031-2035</option><option value='145. HYBRID ASSETS -> BALANCE FUND ->Target Date 2041-2045'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Date 2041-2045</option><option value='146. HYBRID ASSETS -> BALANCE FUND ->Target Date 2026-2030'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Date 2026-2030</option><option value='147. HYBRID ASSETS -> BALANCE FUND ->Target Date 2036-2040'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Date 2036-2040</option><option value='149. HYBRID ASSETS -> BALANCE FUND ->Target Date 2050+'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Date 2050+</option><option value='19. HYBRID ASSETS ->PREFERRED SECURITIES'>&nbsp;&nbsp;&nbsp;&nbsp;PREFERRED SECURITIES</option><option value='20. HYBRID ASSETS ->CONVERTIBLE SECURITIES'>&nbsp;&nbsp;&nbsp;&nbsp;CONVERTIBLE SECURITIES</option><option value='209. HYBRID ASSETS ->Convertibles'>&nbsp;&nbsp;&nbsp;&nbsp;Convertibles</option><option value='5.REAL ESTATE'>--REAL ESTATE</option><option value='21. REAL ESTATE ->US Real Estate'>&nbsp;&nbsp;&nbsp;&nbsp;US Real Estate</option><option value='22. REAL ESTATE ->Non-US Real Estate'>&nbsp;&nbsp;&nbsp;&nbsp;Non-US Real Estate</option><option value='140. REAL ESTATE ->Global Real Estate'>&nbsp;&nbsp;&nbsp;&nbsp;Global Real Estate</option><option value='6.COMMODITIES'>--COMMODITIES</option><option value='246. COMMODITIES ->COMMODITIES BROAD BASKET'>&nbsp;&nbsp;&nbsp;&nbsp;COMMODITIES BROAD BASKET</option><option value='7.HEDGES'>--HEDGES</option><option value='78.Long-Short'>--Long-Short</option><option value='159.Alternative'>--Alternative</option><option value='79. Alternative ->Bear Market'>&nbsp;&nbsp;&nbsp;&nbsp;Bear Market</option><option value='97. Alternative ->Currency'>&nbsp;&nbsp;&nbsp;&nbsp;Currency</option><option value='160. Alternative ->Market Neutral'>&nbsp;&nbsp;&nbsp;&nbsp;Market Neutral</option><option value='162.SECTOR EQUITY'>--SECTOR EQUITY</option><option value='91. SECTOR EQUITY ->Precious Metals'>&nbsp;&nbsp;&nbsp;&nbsp;Precious Metals</option><option value='107. SECTOR EQUITY ->Miscellaneous'>&nbsp;&nbsp;&nbsp;&nbsp;Miscellaneous</option><option value='108. SECTOR EQUITY ->Utilities'>&nbsp;&nbsp;&nbsp;&nbsp;Utilities</option><option value='112. SECTOR EQUITY ->Health'>&nbsp;&nbsp;&nbsp;&nbsp;Health</option><option value='120. SECTOR EQUITY ->Communications'>&nbsp;&nbsp;&nbsp;&nbsp;Communications</option><option value='121. SECTOR EQUITY ->Natural Resources'>&nbsp;&nbsp;&nbsp;&nbsp;Natural Resources</option><option value='126. SECTOR EQUITY ->Technology'>&nbsp;&nbsp;&nbsp;&nbsp;Technology</option><option value='137. SECTOR EQUITY ->Financial'>&nbsp;&nbsp;&nbsp;&nbsp;Financial</option><option value='187. SECTOR EQUITY ->Consumer Staples'>&nbsp;&nbsp;&nbsp;&nbsp;Consumer Staples</option><option value='188. SECTOR EQUITY ->Consumer Discretionary'>&nbsp;&nbsp;&nbsp;&nbsp;Consumer Discretionary</option><option value='189. SECTOR EQUITY ->Industrials'>&nbsp;&nbsp;&nbsp;&nbsp;Industrials</option><option value='190. SECTOR EQUITY ->Energy'>&nbsp;&nbsp;&nbsp;&nbsp;Energy</option><option value='196. SECTOR EQUITY ->SPECIALTY-REAL ESTATE'>&nbsp;&nbsp;&nbsp;&nbsp;SPECIALTY-REAL ESTATE</option><option value='222. SECTOR EQUITY ->Equity Energy'>&nbsp;&nbsp;&nbsp;&nbsp;Equity Energy</option><option value='235. SECTOR EQUITY ->SPECIALTY-UTILITIES'>&nbsp;&nbsp;&nbsp;&nbsp;SPECIALTY-UTILITIES</option><option value='236. SECTOR EQUITY ->SPECIALTY-FINANCIAL'>&nbsp;&nbsp;&nbsp;&nbsp;SPECIALTY-FINANCIAL</option><option value='237. SECTOR EQUITY ->SPECIALTY-HEALTH'>&nbsp;&nbsp;&nbsp;&nbsp;SPECIALTY-HEALTH</option><option value='238. SECTOR EQUITY ->EQUITY PRECIOUS METALS'>&nbsp;&nbsp;&nbsp;&nbsp;EQUITY PRECIOUS METALS</option><option value='241. SECTOR EQUITY ->SPECIALTY-TECHNOLOGY'>&nbsp;&nbsp;&nbsp;&nbsp;SPECIALTY-TECHNOLOGY</option><option value='242. SECTOR EQUITY ->SPECIALTY-NATURAL RES'>&nbsp;&nbsp;&nbsp;&nbsp;SPECIALTY-NATURAL RES</option><option value='244. SECTOR EQUITY ->SPECIALTY-COMMUNICATIONS'>&nbsp;&nbsp;&nbsp;&nbsp;SPECIALTY-COMMUNICATIONS</option><option value='245. SECTOR EQUITY ->SPECIALTY-PRECIOUS METALS'>&nbsp;&nbsp;&nbsp;&nbsp;SPECIALTY-PRECIOUS METALS</option><option value='248. SECTOR EQUITY ->MISCELLANEOUS SECTOR'>&nbsp;&nbsp;&nbsp;&nbsp;MISCELLANEOUS SECTOR</option><option value='225.Capital Protected'>--Capital Protected</option>
+				</select>
+			</td>
+			[#if vsize == 3]
+				<td bgcolor="#ff0000">
+			[#else]
+				<td bgcolor="#ffffff" >
+			[/#if]
+			[#if vsize < 7 ]
+				[#assign id="i"+symbol_index+"_1"/]
+	 				<input id='${id}' value='${symbol}'>
+	 		[#else]
+	 			[#assign id="i"+symbol_index+"_1"/]
+	 				<input id='${id}' value='NotFound'>
+	 		[/#if]
+			</td>
+			<td>
+				[#assign id="i"+symbol_index+"_2"/]
+	 				<input id='${id}' value='NotFound'>
+			</td>
+			<td>
+				[#assign id="i"+symbol_index+"_3"/]
+	 				<input id='${id}' value='3'>
+			</td>
+			<td>
+				[#assign id="i"+symbol_index+"_4"/]
+	 				<input id='${id}' value='${symbol}'>
+			</td>
+			<td>
+				[#assign id="i"+symbol_index+"_5"/]
+	 				<input id='${id}' value='n'>
+			</td>
+		</tr>		
+	[/#list]
+</table>
+<script>
+	p_symbol_number=${arraySymbol?size};
+</script>

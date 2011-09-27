@@ -1,0 +1,9 @@
+[#ftl]
+<html>
+<head>
+<title>Name Change</title>
+</head>
+<body>
+<p>${message}</p>
+</body>
+</html>

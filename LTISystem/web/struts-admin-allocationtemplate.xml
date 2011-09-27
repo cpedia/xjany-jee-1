@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="com.lti.action.admin.allocationtemplate" namespace="/jsp/admin/allocationtemplate" extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="main" class="com.lti.action.admin.allocationtemplate.allocationtemplateAction">
+		      <result name="success" type="freemarker">/jsp/admin/allocationtemplate/main.uftl</result>
+		      <result name="error">/jsp/admin/error.jsp</result>
+		      <result name="message" type="freemarker">/jsp/message.uftl</result> 
+		</action>
+		<action name="*" class="com.lti.action.admin.allocationtemplate.allocationtemplateAction" method="{1}">
+		   <result name="error">/jsp/admin/error.jsp</result>
+		   <result name="message" type="freemarker">/jsp/message.uftl</result> 
+		</action>
+	</package>
+</struts>

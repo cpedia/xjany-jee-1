@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.clonecenter" namespace="/jsp/clonecenter" extends="struts-default">
+			<global-results>
+				<result name="exception">/jsp/exception.jsp</result>
+			</global-results>
+			<global-exception-mappings>
+				<exception-mapping result="exception" exception="java.lang.Exception">
+				</exception-mapping>
+			</global-exception-mappings> 
+		
+			<action name="detailHolding" class="com.lti.action.clonecenter.ViewHoldingAction" method="detailHoding">
+				<result name="success" type="freemarker">
+					/jsp/clonecenter/ViewHolding.uftl
+				</result>
+				<result name="actionMessage" type="freemarker">
+					/jsp/clonecenter/actionMessage.uftl
+				</result>
+			</action>
+			<action name="detailTransaction" class="com.lti.action.clonecenter.ViewTransactionAction" method="detailTransaction">
+				<result name="success" type="freemarker">
+					/jsp/clonecenter/ViewTransaction.uftl
+				</result>
+				<result name="actionMessage" type="freemarker">
+					/jsp/clonecenter/actionMessage.uftl
+				</result>
+			</action>
+			<action name="*" class="com.lti.action.clonecenter.{1}Action">
+				<result name="success" type="freemarker">
+					/jsp/clonecenter/{1}.uftl
+				</result>	
+				<result name="actionMessage" type="freemarker">
+					/jsp/clonecenter/actionMessage.uftl
+				</result>								
+			</action>
+			
+	</package>
+</struts>

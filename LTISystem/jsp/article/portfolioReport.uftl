@@ -1,0 +1,109 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<script type="text/javascript">
+var endDate = '${rPortfolio.endDate?string("yyyy-MM-dd")}';
+function getholdingtable() {
+		$.ajax({type: "post",  
+         	url:'/LTISystem/jsp/clonecenter/ViewHolding.action?includeHeader=false&includeJS=false&usePrice=false&ID=${rPortfolio.ID}&holdingDate='+endDate,  
+         	dataType: "html",  
+         	success: function(result){
+         		$("#holdingPanel").html(result);
+         	}
+     	});
+	}
+
+function ReImgSize() {
+    var await = document.getElementById("chart"); 
+    var imgall = await.getElementsByTagName("img"); 
+    for (i = 0; i < imgall.length; i++) {
+        if (imgall[i].height > 100) 
+        {
+            var oWidth = imgall[i].width; 
+            var oHeight = imgall[i].height;
+            var num = oWidth/oHeight; 
+            imgall[i].width = 100*num; 
+            imgall[i].height = "100"; 
+        }
+    }
+}	
+	$(function() {
+		getholdingtable();
+	})
+	$(function(){ ReImgSize();});
+</script>
+</head>
+<body>
+<p>
+ <table width="100%">
+ <tr>
+ <td width="55%" style="line-height:25px">
+ <div id="chart">
+  <img alt="" src='/LTISystem/${user.logo!""}' border=0>
+  </div>
+  <font size="5">${clientName}<br>
+  ${clientAddr}<br>
+  ${clientAddrCity}, ${clientAddrState} ${clientAddrZip}<br>
+  ${clientAddrCountry}</font>
+ </td>
+ <td width="45" style="line-height:25px">
+  <font size="5">Prepared By<br>
+   ${user.userName!"Not Know"}<br>
+   ${user.company!"Not Know"}<br>
+   ${user.address!"Not Know"}<br>
+   ${user.addressCity!"Not Know"}, ${user.addressState!"Not Know"} ${user.addressZip!"Not Know"}<br> 
+   ${user.addressCountry!"Not Know"}</font>
+ </td>
+ </tr>
+</table>
+ </p>
+ 
+ <div>
+ [@s.action name="article_economy" namespace="/" executeResult=true]
+    [@s.param name="includeHeader"]"false"[/@s.param]
+    [@s.param name="reportID"]${rPortfolio.ID?string.computer}[/@s.param]
+	[/@s.action]
+ </div>
+  
+  <div  style="width:100%;text-align:center" >
+     <h2 align="center">Holdings Info on ${pc.lastLegalDate?string("MM/dd/yyyy")}</h2>
+			<div class="dividerTop">
+				[#if pc.hasRealtimeRole()]
+				<img src='/LTISystem/jsp/ajax/DownloadImage.action?ID=${rPortfolio.ID?string.computer}&isImageCache=true&imageType=2' border=0>
+				[#else]
+				<img src='/LTISystem/jsp/ajax/DownloadImage.action?ID=${rPortfolio.ID?string.computer}&isImageCache=true&imageType=3' border=0>
+				[/#if]
+			</div>
+      </div>
+   <div  style="width:100%">
+   <div id="holdingPanel">   
+   </div>
+   </div> 
+  <div id="mptpanel" align="left" style="overflow:auto;display:block;margin:10px;">
+     <h2 align="center">Performance Info </h2>
+     <div class="dividerTop">
+      [@s.action name="profile_getperformance" namespace="/" executeResult=true]
+		 [@s.param name='includeHeader']false[/@s.param]
+		 [@s.param name='portfolioID']${rPortfolio.ID?string.computer}[/@s.param]
+		 [/@s.action]
+  </div>
+  <div>
+  <br>
+  <img width=800 src='/LTISystem/article_viewchart.action?portfolioID=${rPortfolio.ID?string.computer}&securityID=1144,91&width=800&height=600&Type=0' border=0>
+  </div>
+</div> 
+
+<div>
+  <h3 style="text-align:center">Portfolio Analytics</h3>
+    [@s.action name="MPTMain" namespace="/jsp/portfolio" executeResult=true ignoreContextParams=true]
+	[@s.param name="portfolioID"]${rPortfolio.ID?string.computer}[/@s.param]
+	[@s.param name="basicunit"]true[/@s.param]
+    [/@s.action]
+  </div>
+
+  
+</body>
+</html>

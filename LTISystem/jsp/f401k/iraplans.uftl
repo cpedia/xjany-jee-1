@@ -1,0 +1,105 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>Self-Directed Brokerage Investment Plans</title>
+<meta  name="Description" content="Some Self-Directed Brokerage Investment Plans are listed here.">
+<meta name="home" content="vf_current" />
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=8]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+</script>
+</head>
+<body>
+
+
+
+          [#assign groupid=1]
+          [@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+          [#assign groupid=8]
+          [/@authz.authorize] 
+ 
+          <h3>General ETF Plans</h3>
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]true[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="ids"]989|1026|1027|735[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>
+
+          <h3>Variable Annuities and VULs Plans</h3>
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]false[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="ids"]1025|1029|1030|1031[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>
+          
+          [#assign groupid=1]
+          [@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+          [#assign groupid=8]
+          [/@authz.authorize] 
+ 
+          <h3>Brokerage No Load No Transaction Fee Plans</h3>
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]true[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="ids"]725|727|724|1032|679[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>         
+
+         <h3>College Savings 529 Plans</h3>
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]true[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="ids"]717[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>         
+</body>
+</html>

@@ -1,0 +1,103 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+
+<head>
+<title>Get Started -- Select a Plan</title>
+<meta name="jqueryui" content="smoothness">
+<script src="/LTISystem/jsp/template/gpl/jsuggest.js"></script>
+<script>
+	$(function(){
+		$('#planName').jsuggest({type:"plan"});
+	});
+</script>
+</head>
+
+<body>
+<table border=0 width=100% height=100%>
+<tr>
+<td valign="top" width="200px">
+	[@s.action name="select_nav" namespace="/" executeResult=true]
+    	[@s.param name="step"]2[/@s.param]
+    	[@s.param name="includeHeader"]false[/@s.param]
+	[/@s.action]
+</td>
+<td valign="top"> 
+	<div class="sidebar_box_noPadding roundHeadingGreen" style="padding-top:5px;padding-left:15px;width:710px">
+		<div class="sidebar_box_heading_white">Select a Portfolio</div>
+		<form action="/LTISystem/select_getstarted_2.action">
+			[#if modelPortfoliosBeans??]
+					[#list modelPortfoliosBeans as item]
+						[#if item.modelPortfolios?? && item.modelPortfolios?size>0]
+						<table width='100%' style='' cellspacing='1' border=0 bgcolor='#DDDDDD'>
+							<tr bgcolor='#ffffff' style=''>
+								<td>
+									<h3><i><b><a class='n401k_text2' href='jsp/strategy/View.action?ID=${item.strategyID}' target='_blank' title="${item.strategyName}">${item.strategyName}</a></b></i></h3>
+								</td>
+								<td alt="One Years' Annualized Return" width="40px">1Yr AR</td>
+								<td alt="One Years' Sharpe Ratio" width="40px">1Yr Sharpe</td>
+								<td alt="Three Years' Annualized Return" width="40px">3Yr AR</td>
+								<td alt="Three Years' Sharpe Ratio" width="40px">3Yr Sharpe</td>
+								<td alt="Five Years' Annualized" width="40px">5Yr AR</td>
+								<td alt="Five Years' Sharpe Ratio" width="40px">5Yr Sharpe</td>
+								<td></td>
+							</tr>
+							[#assign s1=20 /]
+							[#assign s2=20 /]
+							[#assign s3=20 /]
+							[#assign s4=20 /]
+							[#assign s5=20 /]
+							[#list item.modelPortfolios as iitem]
+								[#if iitem.portfolioName?lower_case?contains("growth")]
+									[#assign s1=iitem_index /]
+								[#elseif iitem.portfolioName?lower_case?contains("moderate")]
+									[#assign s2=iitem_index /]
+								[#elseif iitem.portfolioName?lower_case?contains("balanced")]
+									[#assign s3=iitem_index /]
+								[#elseif iitem.portfolioName?lower_case?contains("very conservative")]
+									[#assign s5=iitem_index /]
+								[#elseif iitem.portfolioName?lower_case?contains("conservative")]
+									[#assign s4=iitem_index /]
+								[#else]
+								[/#if]
+							[/#list]
+							
+							[#assign seqs=[s1,s2,s3,s4,s5] /]
+							[#list seqs as s]
+							[#if s<item.modelPortfolios?size]
+							[#assign iitem=item.modelPortfolios[s] /]
+							
+							<tr bgcolor='#ffffff'>
+								<td style=''>
+									<a href='jsp/portfolio/ViewPortfolio.action?ID=${iitem.portfolioID}' target='_blank' title="${iitem.portfolioName}">
+										[#assign namearr=iitem.portfolioName?split(" ") /]
+										[#list namearr as n]
+											[#if n_index>namearr?size-5]${n} [/#if]
+										[/#list]
+									</a>
+								</td>
+								<td width=40px>[#if iitem.AR1??]${iitem.AR1?string.percent}[/#if]</td>
+								<td width=40px>[#if iitem.sharpeRatio1??]${iitem.sharpeRatio1?string.percent}[/#if]</td>
+								<td width=40px>[#if iitem.AR3??]${iitem.AR3?string.percent}[/#if]</td>
+								<td width=40px>[#if iitem.sharpeRatio3??]${iitem.sharpeRatio3?string.percent}[/#if]</td>
+								<td width=40px>[#if iitem.AR5??]${iitem.AR5?string.percent}[/#if]</td>
+								<td width=40px>[#if iitem.sharpeRatio5??]${iitem.sharpeRatio5?string.percent}[/#if]</td>
+								<td><a id="idcustomize" class="uiButton" href="select_entry.action?portfolioID=${iitem.portfolioID}">Select</a></td>
+							</tr>
+							[/#if]
+							[/#list]
+						</table>
+						[#else]
+						No portfolios of the strategy '${item.strategyName}' for this plan.
+						[/#if]
+						[#if size?? && size!=0 && item_index == size][#break][/#if]
+					<br>
+				[/#list]
+			[/#if]
+		</form>
+	</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

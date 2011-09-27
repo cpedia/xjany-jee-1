@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping package="com.lti.service.bo">
+
+	<class
+		name="ShillerSP500"
+		table="ltisystem_shillersp500"
+	>
+	<id
+		name="ID"
+		type="java.lang.Long"
+		column="ID"
+	>
+	<generator class="native"/>
+	</id>
+		<property
+			name="SPDate"
+			column="SPDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		
+		<property
+			name="Comp"
+			column="COMP"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="Dividend"
+			column="DIVIDEND"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="Earnings"
+			column="EARNINGS"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="CPI"
+			column="CPI"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="CPIRatio"
+			column="CPIRATIO"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="DateFraction"
+			column="DATEFRACTION"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="LongInterestRate"
+			column="LONGINTERESTRATE"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="RealPrice"
+			column="REALPRICE"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="RealDividend"
+			column="REALDIVIDEND"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="RealEarnings"
+			column="REALEARNINGS"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="PriceEarningsRatio"
+			column="PRICEEARNINGSRATIO"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="AvgEarnings10"
+			column="AVGEARNINGS10"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="AvgRealEarnings10"
+			column="AVGREALEARNINGS10"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="AvgPriceEarnings"
+			column="AVGPRICEEARNINGS"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="PeakEarnings10"
+			column="PEAKEARNINGS10"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="PeakRealEarnings10"
+			column="PEAKREALEARNINGS10"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="PricePeakEarnings10"
+			column="PRICEPEAKEARNINGS10"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="AvgPricePeakEarnings"
+			column="AVGPRICEPEAKEARNINGS"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

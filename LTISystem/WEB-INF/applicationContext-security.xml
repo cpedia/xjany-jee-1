@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/security/Main" class="com.lti.action.security.MainAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/security/Search" class="com.lti.action.security.SearchAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="assetClassManager">
+			<ref bean="assetClassManager"/>
+		</property>
+	</bean>
+		
+	<bean name="/jsp/security/Save" class="com.lti.action.security.SaveAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+	
+	<bean name="/jsp/security/Screening" class="com.lti.action.security.ScreeningAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/security/Quote" class="com.lti.action.security.QuoteAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/security/UploadSecurity" class="com.lti.action.security.UploadSecurityAction" singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/security/dailydata/Main" class="com.lti.action.security.dailydata.MainAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/security/dailydata/Save" class="com.lti.action.security.dailydata.SaveAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/security/dailydata/Search" class="com.lti.action.security.dailydata.SearchAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>		
+	
+</beans>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="CompanyFund"
+		table="ltisystem_companyfund"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="MSName"
+			column="MSName"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Ticker"
+			column="Ticker"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="MSLink"
+			column="MSLink"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Category"
+			column="Category"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Company"
+			column="Company"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="MSFullName"
+			column="MSFullName"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="TickerName"
+			column="TickerName"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="AssetName"
+			column="AssetName"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="StartDate"
+			column="StartDate"
+			type="java.util.Date"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

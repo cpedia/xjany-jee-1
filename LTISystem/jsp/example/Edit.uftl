@@ -1,0 +1,7 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign pageTitle="Test"]
+[#include "../header.ftl"]
+
+[#include "../footer.ftl"]

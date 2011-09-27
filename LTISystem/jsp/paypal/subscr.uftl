@@ -1,0 +1,1426 @@
+[#ftl]
+[#setting url_escaping_charset='utf8']
+<HTML>
+<HEAD>
+
+	<title>MyPlanIQ Subscription page</title>
+<meta  name="Description" content="MyPlanIQ has different subscription levels. The features and the charge of these subscription levels are displayed on this page. Users can choose and pay through their PayPal accounts.">
+
+	<script>
+		var host=window.location.href;
+		if(host.indexOf('validfi')!=-1||host.indexOf('127.0.0.1')!=-1){
+			window.location.href='paypal_vf_subscr.action';
+		}
+	</script>
+</HEAD>
+<BODY>
+<h2 align="center">Subscription Plan Details and Comparison</h2>
+<table class="tablesorter" border="0" cellpadding="0" cellspacing="1"  width=100%>
+		<thead>
+		   <tr>
+		       <th class="header" rowspan=2>
+		       &nbsp;
+		       </th> 
+		       <th class="header" colspan=3>
+		       Delayed Time Info
+		       </th> 
+		       <th class="header" colspan=3>
+		         Follow/Customize
+		       </th>
+		       <th class="header" rowspan=2>
+		          Create<br>plan
+		       </th>
+		       <th class="header" colspan=4>
+		         Analysis Tool
+		       </th>
+		       <th class="header" rowspan=2>
+		       Cost
+		       </th>
+		   </tr>
+		   <tr>
+		       <th class="header">
+		         SAA
+		       </th>
+		       <th class="header">
+		         TAA
+		       </th>
+		       <th class="header">
+		         Adv
+		       </th>
+		       <th class="header">
+		         SAA
+		       </th>
+		       <th class="header">
+		         TAA
+		       </th>
+		       <th class="header">
+		         Adv
+		       </th>
+		       <th class="header">
+		        PC1
+		       </th>
+		       <th class="header">
+		        PC2
+		       </th>
+		       <th class="header">
+		        PR
+		       </th>
+		       <th class="header">
+		        CR
+		       </th>
+		   </tr>
+		</thead>
+		<tbody>
+		    <tr class='odd' valign='top'>
+		        <td>
+		         Anonymous
+		        </td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td>&nbsp;</td>
+		        <td>&nbsp;</td>
+		        <td>&nbsp;</td>
+		        <td>&nbsp;</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td>&nbsp;</td>
+		        <td align="center">NA</td>
+		    </tr> 
+		    <tr class='even' valign='top'>
+		        <td>
+		         Register
+		        </td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td>&nbsp;</td>
+		        <td>&nbsp;</td>
+		        <td>&nbsp;</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td>&nbsp;</td>
+		        <td align="center">NA</td>
+		    </tr> 
+		    <tr class='odd' valign='top'>
+		        <td>
+		         Basic
+		        </td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td>&nbsp;</td>
+		        <td>&nbsp;</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td>&nbsp;</td>
+		        <td align="center">$9.95 Monthly($99.5 Annual)<sup>1</sup></td>
+		    </tr> 
+		    <tr class='even' valign='top'>
+		        <td>
+		         Expert
+		        </td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">&nbsp;</td>
+		        <td align="center">$29.95 Monthly ($299.5 Annual)</td>
+		    </tr>
+		    <tr class='odd' valign='top'>
+		        <td>
+		         Pro
+		        </td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">Y</td>
+		        <td align="center">$49.95 Monthly ($499.5 Annual)</td>
+		    </tr>  
+		</tbody>
+		
+		</table>
+		<p>Note:1. Promotion rate, regular $14.95/month ($149.5/year)
+		        <br><span style="padding-left:30px">2. Real time information will be shown once you follow or customize a portfolio	
+		        <br><span style="padding-left:30px">3. PC1=Portfolio Comparison; PC2=Plan Comparison; PR=Plan Rollover; CR=Customer Report
+		        	           
+		</p>
+		<h2 align="center">Quantitative Restrictions</h2>
+		<table class="tablesorter" border="0" cellpadding="0" cellspacing="1"  width=100%>
+		<thead>
+		  <tr>
+		   <th class="header">
+		   &nbsp;
+		   </th>
+		   <th class="header">
+		    Anonymous
+		   </th>
+		   <th class="header">
+		   Register
+		   </th>
+		   <th class="header">
+		   Basic
+		   </th>
+		   <th class="header">
+		   Expert
+		   </th>
+		   <th class="header">
+		    Pro
+		   </th>
+		 </tr>
+		</thead>
+		<tbody>
+		    <tr class='odd' valign='top'>
+		      <td>Delayed Time Info</td>
+		      <td align="center">No Limit</td>
+		      <td align="center">No Limit</td>
+		      <td align="center">No Limit</td>
+		      <td align="center">No Limit</td>
+		      <td align="center">No Limit</td>
+		    </tr>
+		    <tr class='even' valign='top'>
+		      <td>Follow/Customize(Portfolio)<sup>1</sup></td>
+		      <td align="center">0</td>
+		      <td align="center">5</td>
+		      <td align="center">5</td>
+		      <td align="center">10</td>
+		      <td align="center">20</td>
+		    </tr>
+		    <tr class='odd' valign='top'>
+		      <td>Follow/Customize(Plan)</td>
+		      <td align="center">0</td>
+		      <td align="center">5</td>
+		      <td align="center">5</td>
+		      <td align="center">10</td>
+		      <td align="center">20</td>
+		    </tr>
+		    <tr class='even' valign='top'>
+		      <td>Create Plans</td>
+		      <td align="center">0</td>
+		      <td align="center">0</td>
+		      <td align="center">0</td>
+		      <td align="center">5</td>
+		      <td align="center">10</td>
+		    </tr>
+		    <tr class='odd' valign='top'>
+		      <td>View Fund Tables</td>
+		      <td align="center">0</td>
+		      <td align="center">30</td>
+		      <td align="center">30</td>
+		      <td align="center">30</td>
+		      <td align="center">30</td>
+		    </tr>
+		</tbody>
+		</table>
+		<p>
+		Note:1. There are restrictions on the number of portfolios which you are keeping on track. When you reach the maximum, one of the existing portfolios has to be removed before you follow or customize another portfolio.
+		</p>
+		<br><br>
+		
+		
+	
+	
+	
+	
+[#if status=="normal"]
+	You have subscribed to this service already, the expiration date is: ${endDate?string("MM/dd/yyyy")}.
+	<br>
+	TO change your subscription, please cancle the current subscription and then subscribe to the new one. 
+	We are sorry for the inconvenience.
+	<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+         <IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+        </A>
+
+	<br>
+	<a href="/LTISystem/paypal__howtocancel.action">How to cancel this service by yourself?</a>
+	<br>
+
+[#else]
+	[#if status=="waiting"]
+		Please wait for us to confirm the payment information from Paypal. If you still have a problem, please contact us.
+		<br>
+		<script>
+		function change_to_inactive(){
+			$.ajax({
+			  url: 'paypal_changetonowaiting.action?includeHeader=false',
+			  cache: false,
+			  async: false,
+			  success: function(data) {
+			    window.location.href='paypal_subscr.action';
+			  }
+			});
+			
+		}
+		</script>
+		<a href="mailto:support@myplaniq.com">Support</a><br>
+		<a href="#" onclick="change_to_inactive()">continue any way.</a>
+	[#elseif status=="locked"]
+Your account status is 'locked'. Please cancel your subscription and re-subscribe to an immediate plan. <br><br><br>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Basic Immediate Monthly 
+                                        <br>$9.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Basic Immediate Annual
+                                        <br>$99.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="P75XH68HN9NDG">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="W3GRXG8EWAUT6">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+			<tr>
+                                <td>
+                                        MyPlanIQ Expert Immediate Monthly 
+                                        <br>$29.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Expert Immediate Annual
+                                        <br>$299.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="UWLMA4C3FSL5U">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id"  value="BB7D2GREBF4GU">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+
+			<tr>
+                                <td>
+                                        MyPlanIQ Pro Immediate Monthly 
+                                        <br>$49.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Pro Immediate Annual
+                                        <br>$499.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="C4VNLJ8W5JMHY">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7PNWVSE3QE3GS">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+
+
+		</table>
+<br>
+	[#elseif status=="expired"]
+	Your account status is 'expired'. Please re-subscribe to an immediate plan. <br>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Basic Immediate Monthly 
+                                        <br>$9.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Basic Immediate Annual
+                                        <br>$99.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="P75XH68HN9NDG">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="W3GRXG8EWAUT6">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+			<tr>
+                                <td>
+                                        MyPlanIQ Expert Immediate Monthly 
+                                        <br>$29.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Expert Immediate Annual
+                                        <br>$299.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="UWLMA4C3FSL5U">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id"  value="BB7D2GREBF4GU">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+
+			<tr>
+                                <td>
+                                        MyPlanIQ Pro Immediate Monthly 
+                                        <br>$49.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Pro Immediate Annual
+                                        <br>$499.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="C4VNLJ8W5JMHY">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7PNWVSE3QE3GS">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+
+
+		</table>
+
+<br>
+[#--This status is the state after the user cancel!below paypal button with no type of Free Trial--]
+	[#elseif status=="cancel"]
+		<script>
+		function go_to_paypal(){
+			var flag=false;
+			$.ajax({
+			  url: 'paypal_changetowaiting.action?includeHeader=false',
+			  cache: false,
+			  async: false,
+			  success: function(data) {
+			    //alert(data);
+			    if($.trim(data)=="ok"){
+			    	flag=true;
+			    }
+			  },
+			  error:function(){
+			  	alert('Sorry, please try again.');
+			  }
+			});
+			
+			return flag;
+		}
+		</script>
+                
+                
+<div align="center">
+<!-- Begin Official PayPal Seal --><a href="https://www.paypal.com/us/verified/pal=jzhong%40ltisystem%2ecom" target="_blank"><img src="https://www.paypal.com/en_US/i/icon/verification_seal.gif" border="0" alt="Official PayPal Seal"></A><!-- End Official PayPal Seal -->
+<br><br>
+<p align="left">At MyPlanIQ, we take our customers' sensitive information seriously. We decided to use Paypal credit card payment flow as in this flow, all of our customers' credit card information including your address, credit number etc. are stored at Paypal site and MyPlanIQ does not have access to this information. Rest assured that your security is not compromised.</p>
+<br>
+                </div>
+                
+                [#--begining--]
+[#if isInvite==0]
+		<div style='margin:10px'>
+		
+                <h1 align="center">MyPlanIQ Basic Subscription</h1>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Basic Monthly 
+                                        <br>1 Month Free Trial, $9.95 Monthly Afterward
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Basic Annual
+                                        <br>1 Month Free Trial, $99.95 Annual Afterward
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<!--                                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="Z2CGAAZ3W8USN">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+		</table>
+		
+<br>
+
+                <h2 align="center">Or if you already had a free trial, use the following immediate basic subscription plans</h2>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Basic Immediate Monthly 
+                                        <br>$9.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Basic Immediate Annual
+                                        <br>$99.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<!--                                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="P75XH68HN9NDG">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="W3GRXG8EWAUT6">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+		</table>
+ 	[#--basic END--]
+<br><br>
+
+                <h1 align="center">MyPlanIQ Expert Subscription</h1>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Expert Monthly 
+                                        <br>2 Week Free Trial, $29.95 Monthly Afterward
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Expert Annual 
+                                        <br>2 Week Free Trial, $299.95 Annual Afterward
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<!--                                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="V4PGEJT4H7X7E">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="JUAVZ559ALL58">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+		</table>
+<br>
+
+                <h2 align="center">Or if you already had a free trial, use the following immediate expert subscription plans</h2>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Expert Immediate Monthly 
+                                        <br>$29.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Expert Immediate Annual
+                                        <br>$299.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="UWLMA4C3FSL5U">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id"  value="BB7D2GREBF4GU">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+                    </table>
+
+		
+	[#--Exp END--]
+	
+	
+	
+<br><br>
+
+
+	 
+                <h1 align="center">MyPlanIQ Pro Subscription</h1>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Pro Monthly
+                                        <br>2 Week Free Trial, $49.95 Monthly Afterward
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Pro Annual 
+                                        <br>2 Week Free Trial, $499.95 Annual Afterward
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<!--                                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="BGJARGB4E25WS">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="CTSN65B63MKYA">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+		</table>
+<br>
+
+                <h2 align="center">Or if you already had a free trial, use the following immediate pro subscription plans</h2>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Pro Immediate Monthly 
+                                        <br>$49.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Pro Immediate Annual
+                                        <br>$499.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="C4VNLJ8W5JMHY">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7PNWVSE3QE3GS">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+
+
+		</table>
+		</div>
+		[#--PRO END--]
+		
+		[#--Here insert princeitem--]
+		[#elseif isInvite=1]
+		This is the princeitem of subscribe page 1,please insert 
+		[#elseif isInvite=2]
+		This is the princeitem of subscribe page 2
+		[#elseif isInvite=3]
+		This is the princeitem of subscribe page 3
+		[#elseif isInvite=4]
+		This is the princeitem of subscribe page 4
+		[#elseif isInvite=5]
+		This is the princeitem of subscribe page 5
+		[#elseif isInvite=6]
+		This is the princeitem of subscribe page 6
+		[/#if]
+		[#--Insert end--]
+		<br>
+		
+<div>
+<!--
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" onsubmit="return go_to_paypal()">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="return" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_center.action">
+					<input type="hidden" name="hosted_button_id" value="J5TJC8BRFPBSE">
+					<input type="hidden" name="notify_url" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_success.action?username=${username?url}&sandbox=true">
+					<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+					<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" onsubmit="return go_to_paypal()">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="XVFTK553QXHDY">
+					<input type="hidden" name="return" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_success.action?username=${username?url}&sandbox=true">
+					<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+					<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" onsubmit="return go_to_paypal()">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="KYWYBNU3ZGBVQ">
+					<input type="hidden" name="return" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_success.action?username=${username?url}&sandbox=true">
+					<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+-->
+
+</div>
+
+	[#--END status=="cancel" --]
+	[#--Start status=="inactive"--]
+	[#else]
+	<script>
+		function go_to_paypal(){
+			var flag=false;
+			$.ajax({
+			  url: 'paypal_changetowaiting.action?includeHeader=false',
+			  cache: false,
+			  async: false,
+			  success: function(data) {
+			    //alert(data);
+			    if($.trim(data)=="ok"){
+			    	flag=true;
+			    }
+			  },
+			  error:function(){
+			  	alert('Sorry, please try again.');
+			  }
+			});
+			
+			return flag;
+		}
+		</script>
+                
+                
+<div align="center">
+<!-- Begin Official PayPal Seal --><a href="https://www.paypal.com/us/verified/pal=jzhong%40ltisystem%2ecom" target="_blank"><img src="https://www.paypal.com/en_US/i/icon/verification_seal.gif" border="0" alt="Official PayPal Seal"></A><!-- End Official PayPal Seal -->
+<br><br>
+<p align="left">At MyPlanIQ, we take our customers' sensitive information seriously. We decided to use Paypal credit card payment flow as in this flow, all of our customers' credit card information including your address, credit number etc. are stored at Paypal site and MyPlanIQ does not have access to this information. Rest assured that your security is not compromised.</p>
+<br>
+                </div>
+                
+                [#--begining--]
+[#if isInvite==0]
+		<div style='margin:10px'>
+		
+                <h1 align="center">MyPlanIQ Basic Subscription</h1>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Basic Monthly 
+                                        <br>1 Month Free Trial, $9.95 Monthly Afterward
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Basic Annual
+                                        <br>1 Month Free Trial, $99.95 Annual Afterward
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<!--                                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="Z2CGAAZ3W8USN">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+		</table>
+		
+<br>
+
+                <h2 align="center">Or if you already had a free trial, use the following immediate basic subscription plans</h2>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Basic Immediate Monthly 
+                                        <br>$9.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Basic Immediate Annual
+                                        <br>$99.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<!--                                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="P75XH68HN9NDG">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="W3GRXG8EWAUT6">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+		</table>
+ 	[#--basic END--]
+<br><br>
+
+                <h1 align="center">MyPlanIQ Expert Subscription</h1>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Expert Monthly 
+                                        <br>2 Week Free Trial, $29.95 Monthly Afterward
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Expert Annual 
+                                        <br>2 Week Free Trial, $299.95 Annual Afterward
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<!--                                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="V4PGEJT4H7X7E">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="JUAVZ559ALL58">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+		</table>
+<br>
+
+                <h2 align="center">Or if you already had a free trial, use the following immediate expert subscription plans</h2>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Expert Immediate Monthly 
+                                        <br>$29.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Expert Immediate Annual
+                                        <br>$299.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="UWLMA4C3FSL5U">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id"  value="BB7D2GREBF4GU">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+                    </table>
+	[#--Exp END--]
+	
+	
+	
+<br><br>
+
+
+	 
+                <h1 align="center">MyPlanIQ Pro Subscription</h1>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Pro Monthly
+                                        <br>2 Week Free Trial, $49.95 Monthly Afterward
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Pro Annual 
+                                        <br>2 Week Free Trial, $499.95 Annual Afterward
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<!--                                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="WC69P7YGGRSQL">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="BGJARGB4E25WS">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="CTSN65B63MKYA">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+		</table>
+<br>
+
+                <h2 align="center">Or if you already had a free trial, use the following immediate pro subscription plans</h2>
+                <table border=0 width="80%">
+			<tr>
+                                <td>
+                                        MyPlanIQ Pro Immediate Monthly 
+                                        <br>$49.95 Monthly
+                                        <br>
+                                </td>
+                                <td>
+                                        MyPlanIQ Pro Immediate Annual
+                                        <br>$499.95 Annual
+                                        <br>
+                                </td>
+				<td>
+                                        Unsubscribe MyPlanIQ
+				</td>
+			</tr>
+			<tr>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="C4VNLJ8W5JMHY">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+                                <td>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7PNWVSE3QE3GS">
+<input type="hidden" name="return" value="http://www.myplaniq.com:80/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://www.myplaniq.com:80/LTISystem/paypal_success.action?username=${username?url}">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+                                </td>
+				<td>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+<IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
+				</td>
+			</tr>
+
+
+		</table>
+		</div>
+		[#--PRO END--]
+		
+		[#--Here insert princeitem--]
+		[#elseif isInvite=1]
+		This is the princeitem of subscribe page 1,please insert 
+		[#elseif isInvite=2]
+		This is the princeitem of subscribe page 2
+		[#elseif isInvite=3]
+		This is the princeitem of subscribe page 3
+		[#elseif isInvite=4]
+		This is the princeitem of subscribe page 4
+		[#elseif isInvite=5]
+		This is the princeitem of subscribe page 5
+		[#elseif isInvite=6]
+		This is the princeitem of subscribe page 6
+		[/#if]
+		[#--Insert end--]
+		<br>
+		
+<div>
+<!--
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" onsubmit="return go_to_paypal()">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="return" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_center.action">
+					<input type="hidden" name="hosted_button_id" value="J5TJC8BRFPBSE">
+					<input type="hidden" name="notify_url" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_success.action?username=${username?url}&sandbox=true">
+					<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+					<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" onsubmit="return go_to_paypal()">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="XVFTK553QXHDY">
+					<input type="hidden" name="return" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_success.action?username=${username?url}&sandbox=true">
+					<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+					<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" onsubmit="return go_to_paypal()">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="KYWYBNU3ZGBVQ">
+					<input type="hidden" name="return" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_center.action">
+					<input type="hidden" name="notify_url" value="http://${serverName}:${port?string.computer}/LTISystem/paypal_success.action?username=${username?url}&sandbox=true">
+					<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+-->
+
+</div>
+	[#--END --]
+	[/#if]
+	
+[/#if]
+<br>
+<br>
+</BODY>
+</HTML>

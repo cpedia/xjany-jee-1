@@ -1,0 +1,40 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>Why Evergreen Plans</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="investment strategies in retirement plans 401(k), 403(b), self-directed IRAs, Variable Universal Life (VULs), taxable brokerage mutual fund and ETF investments based on tactical asset allocation, smart money (GURU) directed asset allocations and modern portfolio theory (MPT) based strategic asset allocations. Optimized (Mean Variance Optimization) efficient frontiers">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<script src="jsp/images/jquery.tablesorter/jquery.tablesorter.js" type="text/javascript"></script>
+<script src="jsp/images/jquery.tablesorter/jquery.tablesorter.pager.js" type="text/javascript"></script>
+<style type="text/css">
+ p{color: black}
+</style>
+</head>
+<body>
+<div id="n401k_mainFrame">
+<div class="n401k_content" style="height: 500px;">
+<div class="n401k_contentright" style="width: 100%;">
+<div class="myBox2" style="background-color:#FEFEFE; border-color:#FEFEFE; height:500px;">
+<div class="n401k_main" style="width: 98%;">
+<div class="n401k_mainblock" style="height:auto !important;height:500px;min-height:500px;">
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="900" height="500">
+  <param name="movie" value="/LTISystem/jsp/images/why3.swf" />
+  <param name="quality" value="high" />
+  <embed src="/LTISystem/jsp/images/why3.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="900" height="500"></embed>
+</object>
+
+</div>
+<div style="font: 0px/0px sans-serif;clear: both;display: block"> </div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

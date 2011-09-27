@@ -1,0 +1,38 @@
+<script>
+	function upload2(){
+		var var1 = document.getElementById("upload").value;
+		if(var1==""){
+			alert("Please select a file to be uploaded.");
+			return;
+		}
+	    var var2 = document.getElementById("fileName");
+	    var2.value = var1;
+	    var form = document.getElementById("updateForm");
+	    form.submit();	
+    }
+</script>
+<style>
+body{
+	font-size:12px;
+	margin:0px;
+	padding:0px;
+}
+input{
+	font-size:12px;
+}
+</style>
+
+<table border=0 width=100% >
+<form action="/LTISystem/common_upload.action?includeHeader=false&tinymce=true" method="post" id="updateForm" enctype="multipart/form-data">
+	<tr>
+		<td>
+			<input type='button' value='upload' onclick='upload2()'>
+		</td>
+		<td>
+			<input id="upload" type="file" name="upload" /><br>
+			<input id="fileName" value='' name="fileName" type="hidden">
+		</td>
+	</tr>
+</form>
+</table>
+

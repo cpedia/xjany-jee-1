@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean name="/jsp/admin/group/Main" class="com.lti.action.admin.group.MainAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/group/Search" class="com.lti.action.admin.group.SearchAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>
+		
+	<bean name="/jsp/admin/group/Save" class="com.lti.action.admin.group.SaveAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>	
+	<bean name="/jsp/admin/group/FetchNames" class="com.lti.action.admin.group.FetchNamesAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>				
+	</bean>	
+
+	<bean name="/jsp/admin/group/portfolio/Main" class="com.lti.action.admin.group.portfolio.MainAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/group/portfolio/Search" class="com.lti.action.admin.group.portfolio.SearchAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>	
+
+	<bean name="/jsp/admin/group/portfolio/Save" class="com.lti.action.admin.group.portfolio.SaveAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>	
+		
+	<bean name="/jsp/admin/group/strategy/Main" class="com.lti.action.admin.group.strategy.MainAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/group/strategy/Search" class="com.lti.action.admin.group.strategy.SearchAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>	
+
+	<bean name="/jsp/admin/group/strategy/Save" class="com.lti.action.admin.group.strategy.SaveAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/group/user/Main" class="com.lti.action.admin.group.user.MainAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/group/user/Search" class="com.lti.action.admin.group.user.SearchAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/group/user/Save" class="com.lti.action.admin.group.user.SaveAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>					
+	</bean>	
+	
+   <bean name="/jsp/admin/group/emails/Main" class="com.lti.action.admin.group.emails.MainAction"
+		singleton="false">
+	     <property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>				
+	</bean>	
+	<bean name="/jsp/admin/group/emails/InsertPortfolio" class="com.lti.action.admin.group.emails.InsertPortfolioAction"
+		singleton="false">
+	     <property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>				
+	</bean>	
+	<bean name="/jsp/admin/group/role/Main" class="com.lti.action.admin.group.role.MainAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/group/role/Save" class="com.lti.action.admin.group.role.SaveAction"
+		singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+	</bean>		
+
+</beans>

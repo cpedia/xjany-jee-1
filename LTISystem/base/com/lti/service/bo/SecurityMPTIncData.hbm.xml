@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping package="com.lti.service.bo">
+
+	<class
+		name="SecurityMPTIncData"
+		table="ltisystem_securitympt_incdata"
+	>
+	<id
+		name="ID"
+		type="java.lang.Long"
+		column="ID"
+	>
+	<generator class="native"/>
+	</id>
+		<property
+			name="SecurityID"
+			column="SECURITYID"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		
+		<property
+			name="Year"
+			column="YEAR"
+			type="java.lang.Integer"
+			not-null="true"
+		/>
+		
+		<property
+			name="SigmaS"
+			column="SIGMAS"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="SigmaB"
+			column="SIGMAB"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="SigmaSS"
+			column="SIGMASS"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="SigmaBB"
+			column="SIGMABB"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="SigmaSB"
+			column="SIGMASB"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="SigmaR"
+			column="SIGMAR"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="SigmaLS"
+			column="SIGMALS"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="SigmaLSS"
+			column="SIGMALSS"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="DrawDownHigh"
+			column="DRAWDOWNHIGH"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="DrawDown"
+			column="DRAWDOWN"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="DataLastDate"
+			column="DATALASTDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		
+		<property
+			name="DataStartDate"
+			column="DATASTARTDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		
+		<property
+			name="Size"
+			column="SIZE"
+			type="java.lang.Integer"
+			not-null="false"
+		/>
+		
+		<property
+			name="IntervalDays"
+			column="INTERVALDAYS"
+			type="java.lang.Integer"
+			not-null="false"
+		/>
+		
+		
+	</class>	
+</hibernate-mapping>

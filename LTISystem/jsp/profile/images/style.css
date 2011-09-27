@@ -1,0 +1,32 @@
+.btn {
+	font-family: Tahoma;
+	font-size: 1.0em;
+	color: #000000;
+	background-image: url(/LTISystem/jsp/portfolio/images/grey-bg.gif);
+	border: 1px solid #999999;
+	cursor: pointer;
+	background-repeat: repeat;
+	padding: 1px;
+	margin-top: 1px;
+	margin-right: 1px;
+	margin-bottom: 1px;
+	margin-left: 2px;
+	width:200px;
+}
+.btn2 {
+	font-family: Tahoma;
+	font-size: 1.0em;
+	color: #000000;
+	background-image: url(/LTISystem/jsp/portfolio/images/grey-bg.gif);
+	border: 1px solid #999999;
+	cursor: pointer;
+	background-repeat: repeat;
+	padding: 1px;
+	margin-top: 1px;
+	margin-right: 1px;
+	margin-bottom: 1px;
+	margin-left: 2px;
+	width:150px;
+	text-align:left;
+}
+.expandable,.divhref {  font-weight: bold;cursor: pointer;padding: 7px 160px 9px 36px; font-size: 11px; line-height: 18px; border-bottom: 1px solid #e2e2e2; border-top: 1px solid #e2e2e2; margin: 2px 0; background: #fafafa url(/LTISystem/jsp/template/ed/images/faq_c.png) 0px 9px no-repeat; }

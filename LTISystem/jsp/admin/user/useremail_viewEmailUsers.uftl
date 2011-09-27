@@ -1,0 +1,64 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+	<head>
+	<script type="text/javascript">
+	function showPortfolio(tID,uName){
+		var table = document.getElementById(tID);
+		var userName = document.getElementById(uName);
+		var stable=table.getElementsByTagName("table");
+		var thText = document.getElementById("title_name");
+		for(var i = 0 ;i < stable.length; i++)
+			stable[i].style.display = "none";
+ 		for(var i = 0 ;i < stable.length; i++){
+			if(stable[i].getAttribute("id")==uName){	
+ 				userName.style.display = "block";	
+ 			}	
+ 			else{
+ 				stable[i].style.display = "none";
+ 			}	
+ 		}
+	}
+	</script>
+	</head>
+	<body>
+	<div align="left">
+	<table width="80%" align="left">
+	     [#if userPortfolios??]
+	     <table rules="rows"  align="left" width="20%" border="0" style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid">
+		  		<tr class="trheader">
+	         		<th>User Name</th>
+	      		</tr>
+	      		[#list userPortfolios?keys as user]
+	      		<tr>
+	      			<td align="middle"><a href="javascript:void(0);" onclick="showPortfolio('user_portfolio','${user}')">${user}</a></td>
+	      		</tr>
+	      		[/#list]	
+	     </table>
+	     <table  id="user_portfolio" align="left" width="80%" border="0" style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid">
+	      		<tr class="trheader">
+	         		<th id="title_name">User's Portfolios</th>
+	      		</tr>	
+	      		<tr>
+	      			<td align="middle">
+	      				[#list userPortfolios?keys as user]
+	      				[#if user_index==0]
+	      				<table id="${user}" style="display:block">
+	      				[#else]
+	      				<table id="${user}" style="display:none">
+	      				[/#if]
+	      					<tr><td><strong>${user}'s Portfolios</strong></td></tr>
+	      					[#list userPortfolios[user] as ups]
+	      					<tr><td>${ups_index+1}.<a href="/LTISystem/jsp/portfolio/Edit.action?ID=${ups.ID}" target="_blank">${ups.getName()}</td></tr>
+	      					[/#list]
+	      				</table>
+	      				[/#list]
+	      			</td>		
+	      		</tr>
+	     </table>
+	     [/#if]
+	</table>    
+	</div>
+	</body>
+</html>

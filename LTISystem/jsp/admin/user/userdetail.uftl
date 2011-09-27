@@ -1,0 +1,123 @@
+[#ftl]
+<link href="../images/style.css" rel="stylesheet" type="text/css" />
+	<table class="nav" width="100%">
+			<td width="20%">
+				[@s.url action="Main.action" id="url_main" namespace="/jsp/admin/user"]
+				[/@s.url]
+				[@s.a href="%{url_main}"]User Manager[/@s.a]			
+			</td>		
+			<td width="20%">
+				[@s.url action="Save.action" id="url_create" namespace="/jsp/admin/user"  includeParams="none"]
+					[@s.param name="action"]create[/@s.param]
+				[/@s.url]
+				[@s.a href="%{url_create}"]Create A New User[/@s.a]			
+			</td>
+			<td width="20%">
+				[@s.url action="UserEmail_reportStatistics.action" id="url_reportStatistics" namespace="/jsp/admin/user"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_reportStatistics}"]EmailNotification Report[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="UserProfile.action" id="url_userprofile" namespace="/jsp/admin/user"  includeParams="none"]
+				[/@s.url]
+				[@s.a href="%{url_userprofile}"]User Profile[/@s.a]	
+			</td>
+			<td width="20%">
+				[@s.url action="UserProfile.action" id="url_userprofile" namespace="/jsp/admin/user"  includeParams="none"]
+					[@s.param name="action"]payitem[/@s.param]
+				[/@s.url]
+				[@s.a href="%{url_userprofile}"]User PayItem[/@s.a]	
+			
+			</td>
+		</table>	
+<br>
+<p class="title">User Detail:</p>
+	<table class="nav" width="100%">
+		<tr class="trHeader">
+				<td>
+					ID
+				</td>
+				<td>
+					Name
+				</td>	
+				<td>
+					password
+				</td>		
+				<td>
+					enabled
+				</td>		
+				<td>
+					authority
+				</td>		
+				<td>
+					address
+				</td>	
+				<td>
+					city
+				</td>	
+				<td>
+					state
+				</td>
+				<td>
+					ZIP/Postal Code
+				</td>
+				<td>
+					country
+				</td>	
+				<td>
+					QQ
+				</td>	
+				<td>
+					telephone
+				</td>
+				<td>
+					EMail
+				</td>
+				
+		</tr>
+		<tr>
+		[#if user??]
+				<td>
+					${user.ID?string.computer}
+				</td>
+				<td>
+					<a href="Save.action?ID=${user.ID?string.computer}&action=view">${user.userName}
+				</td>	
+				<td>
+					${user.password?string}
+				</td>		
+				<td>
+					${user.enabled?string}
+				</td>		
+				<td>
+					${user.authority!""}
+				</td>			
+				<td>
+					${user.address?string}
+				</td>	
+				<td>
+					${user.addressCity!""}
+				</td>	
+				<td>
+					${user.addressState!""}
+				</td>
+				<td>
+					${user.addressZip!""}
+				</td>
+				<td>
+					${user.addressCountry!""}
+				</td>
+				<td>	
+					${user.QQ!""}
+				</td>
+				<td>
+					${user.telephone!""}
+				</td>
+				<td>
+					${user.EMail!""}
+				</td>
+			[#else]
+			<td><h3>no such user!!!</h3></td>
+			[/#if]
+		</tr>
+	</table>

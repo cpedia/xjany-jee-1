@@ -1,0 +1,1 @@
+<#if jsoncallback??>${jsoncallback}(${json!"{}"});<#elseif callback??>${callback}(${json!"{}"});<#else>(${json!"{}"})</#if>

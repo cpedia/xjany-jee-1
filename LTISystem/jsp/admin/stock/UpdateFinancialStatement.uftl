@@ -1,0 +1,86 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+      <head>
+      <title>Download Financial Statement</title>
+      <link href="../images/style.css" rel="stylesheet" type="text/css" />
+      [@s.url action="UpdateConfiguration.action" id="url_main" namespace="/jsp/admin/stock" includeParams="none"]
+	  [/@s.url]
+      <script type="text/javascript" src="../images/jquery-1.2.6.min.js"></script>
+      
+      </head>
+      <body>
+      <table class="nav" width="100%">
+      <td width="15%">
+                [@s.url value="DownloadUpdateLog.action" id="url_1"]
+				[/@s.url]
+				[@s.a href="%{url_1}"]Download Log[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="UpdateConfiguration.action" id="url_2"]
+				[/@s.url]
+				[@s.a href="%{url_2}"]Update Configuration[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="FinancialInfo.action" id="url_3"]
+				[/@s.url]
+				[@s.a href="%{url_3}"]Financial Statements[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="FinancialStatement.action?action=view" id="url_4"]
+				[/@s.url]
+				[@s.a href="%{url_4}"]Update Financial Statements[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="ExecutionFinan.action" id="url_5"]
+				[/@s.url]
+				[@s.a href="%{url_5}"]Financial Statements Update State[/@s.a]
+	  </td>
+	  </table>  
+	  <h1>${"Update Financial Statement"}</h1>
+	  <table width="80%">
+	  <tr><td>
+      <form action="UpdateFinancialStatement.action?" method="post">
+      <table style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid; height:auto" cellSpacing=0 cellPadding=3 width="50%" align="left">
+      Update Financial Statement Independently:
+      <input type="hidden" name="action" value="update"/>
+      <input type="submit"  value="update"/>   
+      </table>
+      </form> 
+      </td></tr>
+      <tr><td>
+      <form action="StopFinancialStatement.action?" method="post">
+      <table style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid; height:auto" cellSpacing=0 cellPadding=3 width="50%" align="left">
+      Stop Financial Statement update:
+      <input type="hidden" name="action" value="stop"/>
+      <input type="submit"  value="stop"/>  
+      </table> 
+      </form>
+      </tr></td>
+      </table>
+     
+      <h1>${"Update Yearly Financial Statement"}</h1>
+	  <table width="80%">
+	  <tr><td>
+      <form action="UpdateFinancialStatement.action?" method="post">
+      <table style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid; height:auto" cellSpacing=0 cellPadding=3 width="50%" align="left">
+      Update <font style="color:red">Yearly</font> Financial Statement Independently:
+      <input type="hidden" name="action" value="updateYearly"/>
+      <input type="submit"  value="update"/ disable="disabled">   
+      </table>
+      </form>   
+      </td></tr>
+      <tr><td>
+      <form action="StopFinancialStatement.action?" method="post">
+      <table style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid; height:auto" cellSpacing=0 cellPadding=3 width="50%" align="left">
+      Stop <font style="color:red">Yearly</font> Financial Statement update:
+      <input type="hidden" name="action" value="stopYearly"/>
+      <input type="submit"  value="stop"/ disable="disabled">   
+      </table>
+      </form>
+      </tr></td>
+      </table>
+      </body>
+</html>
+      

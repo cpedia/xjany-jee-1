@@ -1,0 +1,1737 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+
+<html>
+<head>
+<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-store, must-revalidate"> 
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT"> 
+<META HTTP-EQUIV="expires" CONTENT="0"> 
+<title>MyPlanIQ: Fund table of ${plan.name}</title>
+<meta  name="Description" content="The candidate funds of the investment plans maintained by MyPlanIQ are listed on this page. The information of the funds'asset classes, redemption limits, roundtrip limits are listed as well. ">
+<link href="jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.css" rel="stylesheet" type="text/css" />
+<SCRIPT src="jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.dimensions.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.ajaxContent.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.bgiframe.js" type="text/javascript"></SCRIPT>
+<script src="${lti.baseUrl}/jsp/template/ed/js/jquery/jquery.processing.js" type="text/javascript"></script>
+
+<!--${isOwner?string} ${plan.userID} ${userID} -->
+[#if plan.userID==userID]
+	[#assign isOwner=true/]
+[/#if]
+[#-- the orignal number of the parameters. --]
+[#assign parameterSize=0]
+[#if variables??]
+	[#assign parameterSize=variables?size?string.computer]
+[/#if]
+<style>
+</style>
+<script  type="text/javascript">
+	[#if admin || isOwner]
+	function generate(){
+		if(confirm('Are you sure to generate?')){
+			$.ajax({
+    			url:'f401k_generate.action?includeHeader=false&ID=${plan.ID?string.computer}',
+    			success:function(mes){
+    				$("#more_portfolio_div_message").html(mes);
+    			}
+    		});
+		}
+    }
+    
+    function update(){
+    	var host=window.location.host;
+		if($('#run_in_local_flag').attr('checked')){
+			host='localhost';
+		}    
+    	if(confirm('Are you sure to execute?')){
+    		//ignore if can not be updated
+    		var surl='f401k_execute.action?includeHeader=false&ID=${plan.ID?string.computer}&portfolioUpdate=3&host='+host;
+    		$.ajax({
+    			url:surl,
+    			success:function(mes){
+    				var execFrame=document.getElementById("execFrame"); 
+    				//alert(mes);
+					execFrame.src=$.trim(mes);
+					alert("Updating command has been sent to the execution engine.");
+    			}
+    		});
+    	}
+    }
+    
+    function monitor(){
+		var host=window.location.host;
+		if($('#run_in_local_flag').attr('checked')){
+			host='localhost';
+		}
+    
+    	if(confirm('Are you sure to execute?')){
+    		//force monitor
+    		var surl='f401k_execute.action?includeHeader=false&ID=${plan.ID?string.computer}&portfolioUpdate=1&host='+host;
+    		$.ajax({
+    			url:surl,
+    			success:function(mes){
+    				var execFrame=document.getElementById("execFrame"); 
+					execFrame.src=$.trim(mes);
+				//	alert("Monitoring command has been sent to the execution engine.");
+    			}
+    		});
+    	}
+    }
+    
+    function execute(){
+    	var host=window.location.host;
+		if($('#run_in_local_flag').attr('checked')){
+			host='localhost';
+		}    
+    	if(confirm('Are you sure to execute?')){
+    		//monitor if can not be updated
+    		var surl='f401k_execute.action?includeHeader=false&ID=${plan.ID?string.computer}&portfolioUpdate=2&host='+host;
+    		$.ajax({
+    			url:surl,
+    			success:function(mes){
+    				var execFrame=document.getElementById("execFrame"); 
+					execFrame.src=$.trim(mes);
+					alert("Executing command has been sent to the execution engine.");
+    			}
+    		});
+    	}
+    }
+    
+    function sendRequest2(link){
+		var s = document.createElement("SCRIPT");
+	    s.id="request_node"; 
+	    document.getElementsByTagName("HEAD")[0].appendChild(s);
+		s.src=link+"&function=stopProcess";
+	}
+	function stopProcess(){
+	}
+    function stop(){
+    	var host=window.location.host;
+		if($('#run_in_local_flag').attr('checked')){
+			host='localhost';
+		}    
+    	
+    	var link='http://'+host+':8081/StopPlan?planID=${plan.ID?string.computer}';
+		sendRequest2(link);
+		alert("Stopping command has been sent to the execution engine.");
+    }
+    function deleted(){
+    	if(confirm('Are you sure to delete object data?')){
+    		$.ajax({
+    			url:'f401k_removedata.action?includeHeader=false&ID=${plan.ID?string.computer}',
+    			success:function(mes){
+					alert($.trim(mes));
+    			}
+    		});
+    	}
+    }
+    var isIncludeAllETFTrue;
+    var isAllowSectorFundTrue;
+    function newattributesAnddeleted(name,boole){
+    	$.ajax({
+    			url:'f401k_removedata.action?includeHeader=false&ID=${plan.ID?string.computer}',
+    			success:function(mes){
+    				newattributes(name,boole)
+    				if(name=="IncludeAllETF" && isIncludeAllETFTrue == true)
+    					alert("Small volume ETFs and volatile funds are now excluded in portfolio simulation.");
+					if(name=="IncludeAllETF" && isIncludeAllETFTrue == false)
+						alert("The restrictions on trading volume and volatility have been relaxed.");
+    				if(name == "AllowSectorFund" && isAllowSectorFundTrue == true)
+    					alert("Sector funds are now excluded in portfolio simulation.");
+					if(name == "AllowSectorFund" && isAllowSectorFundTrue == false)
+						alert("The restrictions on trading sector funds have been relaxed.");
+    			}
+    		});
+    	
+    }    
+	$(document).ready(function()
+    {
+    	var url = '/LTISystem/jsp/strategy/loadAttributes.action?ID=${plan.ID?string.computer}&name=IncludeAllETF&includeHeader=false&tempNum='+tempNum(2);
+    	$.ajax({
+    		type:"get",
+    		url:url,
+    		success:function(data){
+    			var state = '<span>Allow trading ETFs with small volumn and large volatility :<span style="font-family:verdana;font-size:130%;color:green">'+data+'</span></span>';
+    			
+    			$("#loadAttributes").append(state);
+    			if(data == "\r\nfalse\r\n"){
+    				isIncludeAllETFTrue = false;
+    			}else{
+    				isIncludeAllETFTrue = true;
+    			}
+    		}
+    	});
+    	
+    	var url2 = '/LTISystem/jsp/strategy/loadAttributes.action?ID=${plan.ID?string.computer}&name=AllowSectorFund&includeHeader=false&tempNum='+tempNum(2);
+    	$.ajax({
+    		type:"get",
+    		url:url2,
+    		success:function(data){
+    			var state = '<span>Allow trading sector funds :<span style="font-family:verdana;font-size:130%;color:green">'+data+'</span></span>';
+    			
+    			$("#loadAllowSectorFund").append(state);
+    			if(data == "\r\nfalse\r\n"){
+    				isAllowSectorFundTrue = false;
+    			}else{
+    				isAllowSectorFundTrue = true;
+    			}
+    		}
+    	});
+    });
+	function tempNum(n){
+		var rnd="";
+		for(var i=0;i<n;i++)
+		rnd+=Math.floor(Math.random()*10);
+		return rnd;
+	}
+	
+    function newattributes(name,boole){
+    	location.href='/LTISystem/jsp/strategy/NewAttributes.action?ID=${plan.ID?string.computer}&name='+name+'&boole='+boole;
+    }
+    function applyUpdateparameter(){
+		window.location.href = 'f401k_applyUpdateparameter.action?ID=${plan.ID?string.computer}';
+    }
+
+	[/#if]
+	[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+    function updateparameter(){
+    	if(confirm('Are you sure to update parameter?')){
+			window.location.href = 'f401k_adminupdateparameter.action?ID=${plan.ID?string.computer}';
+		}
+    }
+    function deletep(){
+    	if(confirm('Are you sure to delete?')){
+    		location.href='f401k_admindelete.action?ID=${plan.ID?string.computer}';
+    	}
+    }
+    
+    
+    function editasstrategy(){
+    	location.href='/LTISystem/jsp/strategy/Edit.action?ID=${plan.ID?string.computer}';
+    }
+    
+    [/@authz.authorize]
+    
+    function downLoadSAAFollower(){
+    	location.href='/LTISystem/f401k_downLoadSAAFollower.action?ID=${plan.ID?string.computer}';
+    }
+    function downLoadTAAFollower(){
+    	location.href='/LTISystem/f401k_downLoadTAAFollower.action?ID=${plan.ID?string.computer}';
+    }
+    function downLoadCustomizedSAA(){
+    	location.href='/LTISystem/f401k_downLoadCustomizedSAA.action?ID=${plan.ID?string.computer}';
+    }
+    function downLoadCustomizedTAA(){
+    	location.href='/LTISystem/f401k_downLoadCustomizedTAA.action?ID=${plan.ID?string.computer}';
+    }
+    function adminpublic(){
+    	if(confirm('Are you sure to make it public?')){
+    		location.href='/LTISystem/f401k_makepublic.action?ID=${plan.ID?string.computer}';
+    	}
+    }
+    function adminprivate(){
+    	if(confirm('Are you sure to make it private?')){
+    		location.href='/LTISystem/f401k_makeprivate.action?ID=${plan.ID?string.computer}';
+    	}
+    }
+    
+    
+	var nameArray=['assetClassName','symbol','name','redemption','description','memo','roundtripLimit','waitingPeriod','startDate','endDate'];
+	var tipsArray=['Click here','Click here','Click here','3','','','','','',''];
+	
+	[#-- the size of parameters--]
+	var parameterSize=${parameterSize};
+	[#-- record which row has been deleted--]
+	var parameterArray={};
+	function getId(pos,name){
+		return 'variables_'+pos+'_'+name;
+	}
+	function getName(pos,name){
+		return 'variables['+pos+'].'+name;
+	}
+	[#-- Add ajax suggest to the pos-th row --]
+	function suggest(pos){
+		var symbolId='#'+getId(pos,'symbol');
+		var acId='#'+getId(pos,'assetClassName');
+		var nameId='#'+getId(pos,'name');
+		var startDate='#'+getId(pos,'startDate');
+		var endDate='#'+getId(pos,'endDate');
+		jQuery(symbolId).suggest("jsp/ajax/GetSecuritySuggestTxt.action?considerLength=1",
+			{
+				maxShowSize:10
+				,haveSubTokens: true
+				,afterSelect: true
+				,afterFunc:function(){
+					jQuery.get('jsp/ajax/GetAssetClassSuggestTxt.action?q='+$(symbolId).val()
+						,function(result){
+							$(acId).val(result);
+						}
+					);
+					jQuery.get('jsp/ajax/GetSecurityName.action?symbol='+$(symbolId).val()
+						,function(result){
+							$(nameId).val(result);
+						}
+					);
+					jQuery.get('jsp/ajax/GetSecurityStartDate.action?symbol='+$(symbolId).val()
+						,function(result){
+							$(startDate).val(result);
+						}
+					);
+					jQuery.get('jsp/ajax/GetSecurityEndDate.action?symbol='+$(symbolId).val()
+						,function(result){
+							$(endDate).val(result);
+						}
+					);
+				}//end after func, function
+			}//end JQuery
+		)
+	
+		jQuery(acId).suggest("jsp/ajax/GetAssetClassListSuggestTxt.action",
+			{
+				maxShowSize:10
+				,haveSubTokens: true
+				,afterSelect: true
+				,afterFunc:function(){
+					if(confirm('Change the fund to the benchmark of the asset class?')){
+						jQuery.get('jsp/ajax/GetBenchmarkSuggestTxt.action?q='+$(acId).val()
+							,function(result){
+								$(symbolId).val(result);
+								jQuery.get('jsp/ajax/GetSecurityName.action?symbol='+$(symbolId).val()
+									,function(result){
+										$(nameId).val(result);
+									}
+								);//end JQuery
+								jQuery.get('jsp/ajax/GetSecurityStartDate.action?symbol='+$(symbolId).val()
+									,function(result){
+										$(startDate).val(result);
+									}
+								);//end JQuery
+								jQuery.get('jsp/ajax/GetSecurityEndDate.action?symbol='+$(symbolId).val()
+									,function(result){
+										$(endDate).val(result);
+									}
+								);//end JQuery
+							}
+						);//end JQuery
+						
+					}//end if
+					
+				}//end afterFunc
+			}//end options
+		)//end suggest
+	}
+	
+	
+	function secondSearch(pos){
+		//根据discription
+		var symbolId='#'+getId(pos,'symbol');
+		var acId='#'+getId(pos,'assetClassName');
+		var nameId='#'+getId(pos,'name');
+		var descriptionId = '#'+getId(pos,'description');
+		$.ajax({
+			type: "post",
+			url: "jsp/ajax/SearchTicker.action?includeHeader=false",
+			data: "query="+$(descriptionId).val(),
+			datatype: "html",
+			success: function(result){
+				if(result==""){
+					$(acId).val("");
+					$(symbolId).val("");
+				}else{
+					var r = result.split("#");
+					$(acId).val(r[0]);
+					$(symbolId).val(r[1]);
+					$(nameId).val(r[2]);
+				}
+			
+					
+				//location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	}
+	
+	function addtoindex(){
+		$.ajax({
+			type: "post",
+			url: "f401k_addfundtableindex.action?includeHeader=false",
+			data: "planIDArray="+${plan.ID?string.computer},
+			datatype: "html",
+			success: function(result){
+				alert(result);
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	}
+	
+	function checksecurity(){
+		$.ajax({
+			type: "post",
+			url: "f401k_checksecurity.action?includeHeader=false",
+			data: "ID="+${plan.ID?string.computer},
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				location.reload();
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	}
+	function newParameter() {
+		var flag=checkParameters();
+		
+		if(flag==0){
+			alert("Please check your input, make sure that asset class / fund / redemption are not null or do not include '#'.");
+			return;
+		}
+		
+		var parameter_delete='parameter_delete'+parameterSize;
+		var parameter_search='parameter_search'+parameterSize;
+		var $pane=$('#parametersTable');		
+      	var $tr,$td;
+      	$tr=$(document.createElement("tr"));
+	    $tr.attr({id:'parameter'+parameterSize,'style':'background:#ffffff'});
+		$pane.append($tr);
+      	for(var i=0;i<nameArray.length-2;i++){
+			$td=$(document.createElement("td"));
+			$td.html(
+				"<input type=text value='"+tipsArray[i]+"' id="+getId(parameterSize,nameArray[i])+" name="+getName(parameterSize,nameArray[i])+" class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>"
+			);
+			$tr.append($td);
+      	}
+      	for(var j=nameArray.length-2;j<nameArray.length;j++)
+      	{
+      		$td=$(document.createElement("td"));
+			$td.html(
+				"<input type=text value='"+tipsArray[j]+"' id="+getId(parameterSize,nameArray[j])+" name="+getName(parameterSize,nameArray[j])+" class='show_text' onclick='edit_text(this)' onblur='out_text(this)' readOnly=true>"
+			);
+			$tr.append($td);
+      	}
+		$td=$(document.createElement("td"));
+		$td.html("<input type='button'  onclick=deleteParameter("+parameterSize+")  value='delete' id=" + parameter_delete + " >");
+		$tr.append($td);
+		
+		[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+		$td=$(document.createElement("td"));
+		$td.html("<input type='button'  onclick=secondSearch("+parameterSize+")  value='search' id=" + parameter_search + " >");
+      	[/@authz.authorize]
+		$tr.append($td);
+		
+		suggest(parameterSize);
+		
+		parameterSize++;
+		return 0;
+	}
+	
+    function checkParameters(){
+    	for(var i=0;i<parameterSize;i++){
+    		if(parameterArray[i]==1)continue;
+    		for(var j=0;j<nameArray.length;j++){
+    			var tmp = document.getElementById(getId(i,nameArray[j]));
+    			if(tmp.value=='Click here')return 0;
+    			if(tmp.value.indexOf('#')>=0)return 0;
+    		}
+    		var nonemptyarray=['assetClassName','symbol','name','redemption'];
+    		for(var j=0;j<nonemptyarray.length;j++){
+    			var tmp = document.getElementById(getId(i,nameArray[j]));
+    			if(tmp.value=='')return 0;
+    		}
+		}
+		return 1;
+		
+    }
+    function deleteParameter(pointer) {
+		var parameterID = "parameter"+pointer;
+		var parameter = document.getElementById(parameterID);
+		parameter.style.display = 'none' ;
+		
+		parameterArray[pointer]=1;
+		
+		for(var i=0;i<nameArray.length;i++){
+			var tmp = document.getElementById(getId(pointer,nameArray[i]));
+			tmp.value='';
+		}
+		   
+    }
+    
+    [#-- translate all parameters of all the rows to singal string--]
+    function getValueString(){
+    	return getValueString(false);
+    }
+    function getValueString(flag){
+    	var valueString='';
+    	for(var pointer=0;pointer<parameterSize;pointer++){
+    		if(parameterArray[pointer]==1)continue;
+    		for(var j=0;j<nameArray.length;j++){
+    			var tmp = document.getElementById(getId(pointer,nameArray[j]));
+				valueString+=tmp.value;
+				if(j==0&&flag){
+					valueString+='*';
+				}
+				if(j!=nameArray.length-1)valueString+='#';
+				else valueString+='\n';
+    		}
+    	}
+    	return valueString;
+    }
+    
+    $(function() {
+    	for(var i=0;i<parameterSize;i++){
+    		suggest(i);
+    	}
+    });
+    
+    
+    function edit_text(element){
+    	if($(element).val()=='Click here'){
+    		$(element).val('');
+    	}
+		$(element).removeClass('show_text');
+		$(element).addClass('edit_text');
+	}
+	function out_text(element){
+		$(element).removeClass('edit_text');
+		$(element).addClass('show_text');
+	}
+</script>
+<script>
+	function assignValue(pointer,values){
+		for(var i=0;i<values.length;i++){
+			if(i==0){
+				$('#'+getId(pointer,nameArray[i])).val(values[i].replace(/\*/g,""));
+			}else{
+				$('#'+getId(pointer,nameArray[i])).val(values[i]);
+			}
+			
+		}
+ 	}
+ 	$(function() {
+    	$("#process_window").dialog({'height':400,'width':1200,'title':'Result','autoOpen':false,'position':'top'});
+    });
+    
+    [@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+	function p_append(){
+		
+		var content=$('#parameter_message').val().replace(/\t/g,"#").replace(/\\S{2,10}/g,"#");
+		var lines=content.split('\n');
+		for(var i=0;i<lines.length;i++){
+			var line=lines[i];
+			var four_v=line.split('#');
+			if(four_v.length!=6)continue;
+			newParameter();
+			assignValue(parameterSize-1,four_v);
+		}
+		p_setnameasdesc();
+	}
+	var upload_show=false;
+	function p_upload(){
+		if(upload_show==false){
+			$('#upload_div').show();
+			$('#upload_btn').val('Hide');	
+			upload_show=true;
+		}else{
+			$('#upload_div').hide();
+			$('#upload_btn').val('Upload From File');	
+			upload_show=false;
+		}
+	}
+	
+	function p_uploadfromsource(){
+		if(upload_show==false){
+			$('#upload_div_source').show();
+			$('#upload_btn').val('Hide');	
+			upload_show=true;
+		}else{
+			$('#upload_div_source').hide();
+			$('#upload_btn').val('Upload From File');	
+			upload_show=false;
+		}
+	}
+	
+	function uploadfromsourcefile(){
+	   var var1 = document.getElementById("upload").value;
+	   var var2 = document.getElementById("fileNameOfOldFile");
+	   var2.value = var1;
+	   var form = document.getElementById("uploadfromsourcefile");
+	   form.submit();	
+    }
+    
+    function p_uploadmatchingrulefile(){
+		if(upload_show==false){
+			$('#upload_div_matchrule').show();
+			$('#upload_btn').val('Hide');	
+			upload_show=true;
+		}else{
+			$('##upload_div_matchrule').hide();
+			$('#upload_btn').val('Upload From File');	
+			upload_show=false;
+		}
+	}
+	
+	function uploadmatchrulefile(){
+		var form = document.getElementById("uploadmatchrulefile");
+	   	form.submit();	
+	}
+    
+	
+	function p_replace(){
+		for(var i=0;i<parameterSize;i++){
+			deleteParameter(i);
+		}
+		var content=$('#parameter_message').val().replace(/\t/g,"#").replace(/\\S{2,10}/g,"#");
+		var lines=content.split('\n');
+		for(var i=0;i<lines.length;i++){
+			var line=lines[i];
+			var four_v=line.split('#');
+			if(four_v.length!=6)continue;
+			newParameter();
+			assignValue(parameterSize-1,four_v);
+		}
+		p_setnameasdesc();
+	}
+	function p_reedit(){
+		$('#parameter_message').val(getValueString(true).replace(/#/g,"\t"));
+	}
+	[/@authz.authorize]
+	
+	var p_line_number=0;
+	function p_paste(){
+		var str='';
+		for(var i=0;i<p_line_number;i++){
+			for(var j=0;j<6;j++){
+				str+=$('#i'+i+'_'+j).val();
+				if(j==0)str+="*";
+				if(j!=5)str+='\t';
+			}
+			str+='\n';
+		}
+		$('#parameter_message').val(str);
+			
+		$('#process_window').dialog("close");
+	}
+	function p_process(){
+		jQuery.post('f401k_getparsedvariables.action?includeHeader=false',
+			$('#parameter_message_form').serialize(),
+			function(result){
+				$('#process_div').html(result);
+				$('#process_div').append("<input type='button' onclick='p_paste()' value='Paste' style='width:50px;border:1px solid #369;background:#fff;'>");
+				$('#process_window').dialog("open");
+			}
+		);
+	}
+	function p_setnameasdesc(){
+		for(var i=0;i<parameterSize;i++){
+			var desc=$('#'+getId(i,'description')).val().trim();
+			var symbol=$('#'+getId(i,'symbol')).val();
+			var name=$('#'+getId(i,'name')).val();
+			if(symbol.toLowerCase()==desc.toLowerCase()&&name!="" && name!='NotFound' && name!='unknow'){
+				$('#'+getId(i,'description')).val(name);
+			}
+    		if((symbol=="null" || symbol=='unknow' || symbol=='NotFound' || symbol=="") && desc.length<6)
+    			$('#' + getId(i,'symbol')).val(desc);
+    	}
+
+	}
+	function p_resetredemption(){
+		var newName=prompt('Please input a new value of redemption','3');
+    		if(newName==null)return;
+    		for(var i=0;i<parameterSize;i++){
+    			$('#'+getId(i,'redemption')).val(newName);
+    		}
+	}
+	
+	function p_resetroundtriplimit(){
+		var newName=prompt('Please input a new value of roundtripLimit','60');
+    	if(newName==null)return;
+    	for(var i=0;i<parameterSize;i++){
+    		$('#'+getId(i,'roundtripLimit')).val(newName);
+    	}
+	}
+	
+	function p_resetwaitingperiod(){
+		var newName=prompt('Please input a new value of waitingPeriod','0');
+    	if(newName==null)return;
+    	for(var i=0;i<parameterSize;i++){
+    		$('#'+getId(i,'waitingPeriod')).val(newName);
+    	}
+	}
+
+    
+	function p_processall(){
+		jQuery.post('f401k_getparsedvariables.action?includeHeader=false',
+			$('#parameter_message_form').serialize(),
+			function(result){
+				$('#process_div').html(result);
+				var str='';
+				for(var i=0;i<p_line_number;i++){
+					for(var j=0;j<6;j++){
+						str+=$('#i'+i+'_'+j).val();
+						if(j==0)str+="*";
+						if(j!=5)str+='\t';
+					}
+					str+='\n';
+				}
+				//$('#parameter_message').val(str);
+				//alert(str);
+				for(var i=0;i<parameterSize;i++){
+					deleteParameter(i);
+				}
+				var content=str.replace(/\t/g,"#").replace(/\\S{2,10}/g,"#");
+				//alert(content);
+				var lines=content.split('\n');
+				for(var i=0;i<lines.length;i++){
+					var line=lines[i];
+					var four_v=line.split('#');
+					if(four_v.length!=6)continue;
+					newParameter();
+					assignValue(parameterSize-1,four_v);
+				}
+				p_setnameasdesc();
+			}
+		);
+	}
+	function p_processrepl(){
+		jQuery.post('f401k_getparsedvariables.action?includeHeader=false',
+			$('#parameter_message_form').serialize(),
+			function(result){
+				$('#process_div').html(result);
+				var str='';
+				for(var i=0;i<p_line_number;i++){
+					for(var j=0;j<6;j++){
+						str+=$('#i'+i+'_'+j).val();
+						if(j==0)str+="*";
+						if(j!=5)str+='\t';
+					}
+					str+='\n';
+				}
+				var content=str.replace(/\t/g,"#").replace(/\\S{2,10}/g,"#");
+				var lines=content.split('\n');
+				for(var i=0;i<lines.length;i++){
+					var line=lines[i];
+					var four_v=line.split('#');
+					if(four_v.length!=6)continue;
+					newParameter();
+					assignValue(parameterSize-1,four_v);
+				}
+				p_setnameasdesc();
+			}
+		);
+	}
+
+	function p_processreAdd(){
+		jQuery.post('f401k_getparsedvariables.action?includeHeader=false',
+			$('#parameter_message_form').serialize(),
+			function(result){
+				$('#process_div').html(result);
+				var str='';
+				var symbolsStr='';
+				for(var i=0;i<p_line_number;i++){
+					for(var j=0;j<6;j++){
+						if($('#i'+i+'_1').val()=='NotFound'||$('#i'+i+'_1').val()=='null'||$('#i'+i+'_2').val()=='NotFound'){
+							if(j==1){
+								if(symbolsStr!=''){
+									symbolsStr+="|";
+								}
+								symbolsStr +=$('#i'+i+'_4').val();
+							}
+						}else{
+							str+=$('#i'+i+'_'+j).val();
+							if(j==0)str+="*";
+							if(j!=5)str+='\t';
+							if(j==5)str+='\n';
+						}
+					}//END OF FOR
+				}//END OF FOR
+				if(symbolsStr!=''){
+					var notFounds = symbolsStr.split('|'); 
+						var flag=false;
+  						$(document).progressDialog.showDialog("<br><br>There are "+notFounds.length+" un-know tickers in the table. Checking...Please Waiting!");
+						jQuery.post('f401k_checkSymbol.action?includeHeader=false',
+							"symbolsStr="+symbolsStr,
+							function(result){
+								flag=true;
+								if(flag==true){
+									$(document).progressDialog.hideDialog();
+								} 
+								var r = result.split("#");
+								if(r[0]!=''){
+									var content=r[0].replace(/\t/g,"#").replace(/\\S{2,10}/g,"#");
+									var lines=content.split('\n');
+									for(var i=0;i<lines.length;i++){
+										var line=lines[i];
+										var four_v=line.split('#');
+										if(four_v.length!=6)continue;
+										newParameter();
+										assignValue(parameterSize-1,four_v);
+									}
+									p_setnameasdesc();
+								}
+								if(r[1]!=''){
+									jQuery.post('f401k_getBenchMarks.action?includeHeader=false',
+										"symbolsStr="+r[1],
+										function(result){
+											$('#process_div').html(result);
+											$('#process_div').append("<input type='button' onclick='paste_symbol()' value='Add' style='width:50px;border:1px solid #369;background:#fff;'>");
+											$('#process_window').dialog("open");
+										}
+									);//END OF JQUERY
+								}
+							});
+				}		
+				var content=str.replace(/\t/g,"#").replace(/\\S{2,10}/g,"#");
+				var lines=content.split('\n');
+				for(var i=0;i<lines.length;i++){
+					var line=lines[i];
+					var four_v=line.split('#');
+					if(four_v.length!=6)continue;
+					newParameter();
+					assignValue(parameterSize-1,four_v);
+				}
+				p_setnameasdesc();
+			}
+		);
+	}
+	function paste_symbol(){
+		var str='';
+		for(var i=0;i<p_symbol_number;i++){
+			for(var j=0;j<6;j++){
+				if(j==0){
+					var ad = $('#i'+i+'_0').val().split('.')
+					var ac = ad[ad.length-1].split('->');
+					str+=ac[ac.length-1];
+					str+="*";
+					str+='\t';
+				}else{
+					str+=$('#i'+i+'_'+j).val();
+					if(j!=5)str+='\t';
+				}
+			}
+		str+='\n';
+		}
+		var content=str.replace(/\t/g,"#").replace(/\\S{2,10}/g,"#");
+		var lines=content.split('\n');
+		for(var i=0;i<lines.length;i++){
+			var line=lines[i];
+			var four_v=line.split('#');
+			if(four_v.length!=6)continue;
+			newParameter();
+			assignValue(parameterSize-1,four_v);
+		}
+			p_setnameasdesc();
+			$('#process_window').dialog("close");
+	}
+</script>
+<script>
+
+	function updateplantype(){
+		$.ajax({
+			type: "post",
+			url: "f401k_updateplantype.action?includeHeader=false",
+			data: "ID="+${plan.ID?string.computer}+"&planType="+$('#planType').val(),
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				//location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+	}
+	
+	
+	function updateplanstatus(){
+		$.ajax({
+			type: "post",
+			url: "f401k_updateplanstatus.action?includeHeader=false",
+			data: "ID="+${plan.ID?string.computer}+"&status="+$('#status').val(),
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				//location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+	}
+	
+	function updateplanticker(){
+		if($('#ticker').val()== null)
+			$('#ticker').val("");
+		$.ajax({
+			type: "post",
+			url: "f401k_updateplanticker.action?includeHeader=false",
+			data: "ID="+${plan.ID?string.computer}+"&ticker="+$('#ticker').val(),
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				//location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+	}
+	
+	function recalculatecoverage(){
+		$.ajax({
+			type: "post",
+			url: "f401k_recalculatecoverage.action?includeHeader=false",
+			data: "ID="+${plan.ID?string.computer},
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				//location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+	}
+	function recalculatefundquality(){
+		$.ajax({
+			type: "post",
+			url: "f401k_recalculatefundquality.action?includeHeader=false",
+			data: "ID="+${plan.ID?string.computer},
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				//location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+	}
+	function getfundstatistic(){
+	$.ajax({
+			type: "post",
+			url: "f401k_gettickerlist.action?includeHeader=false",
+			data: "ID="+${plan.ID?string.computer},
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				//location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+	}
+
+	var more_info=false;
+	var haschanged=false;
+    function batchfund(){
+        haschanged = true;
+    	if(more_info==false){
+			$('#btc_info').val('- Input Funds');
+			$('#btc_area').show();
+			more_info=true;
+		}else{
+			$('#btc_info').val('+ Input Funds');
+			$('#btc_area').hide();
+			more_info=false;
+		}
+    }
+    function batchInputFund(){
+        haschanged = true;
+    	if(more_info==false){
+			$('#btc_input_info').val('+ Batch Input Funds');
+			$('#btc_area_input').hide();
+			more_info=true;
+		}else{
+			$('#btc_input_info').val('- Batch Input Funds');
+			$('#btc_area_input').show();
+			more_info=false;
+		}
+    }
+    function customize(){
+    	if(haschanged==true){
+     		if(!confirm("Please assure that you have saved your fund table before you customize portfolios, otherwise it will fail to apply the funds in your customized portfolio. \n Continue to customize?")){
+     			return;
+    		}
+    	}
+    	window.open("/LTISystem/select_entry.action?portfolioID=${9309}&name=${plan.name}","_blank");
+    }
+    function setDefaultRTAndWP(){
+    	for(var i=0;i<parameterSize;++i){
+    		var rt = document.getElementById(getId(i, 'roundtripLimit'));
+    		var wp = document.getElementById(getId(i, 'waitingPeriod'));
+    		if(rt.value == null || rt.value == "")
+    			rt.value = 60;
+    		if(wp.value == null || wp.value == "")
+    			wp.value = 0;
+    	}
+    }
+    var show_operation_div = false;
+    function moreoperation(){
+    	if(show_operation_div == false){
+    		show_operation_div = true;
+    		$('#advance_operation_div').show();
+    		$('#btn_advance').val('- Advanced Operations')
+    	}else{
+    		show_operation_div = false;
+    		$('#advance_operation_div').hide();
+    		$('#btn_advance').val('+ Advanced Operations')
+    	}
+    }
+    var more_portfolio_div = false;
+    function morePortfolioOperation(){
+    	if(more_portfolio_div == false){
+    		more_portfolio_div = true;
+    		$('#more_portfolio_div').show();
+    		$('#more_portfolio_btn').val('- More Buttons on Model Portfolio')
+    	}else{
+    		more_portfolio_div = false;
+    		$('#more_portfolio_div').hide();
+    		$('#more_portfolio_btn').val('+ More Buttons on Model Portfolio')
+    	}
+    }
+    var more_plan_div = false;
+    function morePlanOperation(){
+    	if(more_plan_div == false){
+    		more_plan_div = true;
+    		$('#more_plan_div').show();
+    		$('#more_plan_btn').val('- More Buttons on Plan')
+    	}else{
+    		more_plan_div = false;
+    		$('#more_plan_div').hide();
+    		$('#more_plan_btn').val('+ More Buttons on Plan')
+    	}
+    }
+    
+    var more_tabledate_div = false;
+    function moreTableDateOperation()
+    {
+    	if(more_tabledate_div == false){
+    		more_tabledate_div = true;
+    		$('#more_tableDate_div').show();
+    		$('#more_tableDate_btn').val('- More Buttons on Table Data')
+    	}else{
+    		more_tabledate_div = false;
+    		$('#more_tableDate_div').hide();
+    		$('#more_tableDate_btn').val('+ More Buttons on Table Data')
+    	}
+    }
+    var downLoad_csv_div = false;
+    function downLoadCSV(){  
+    	if(downLoad_csv_div == false){
+    		downLoad_csv_div = true;
+    		$('#downLoad_csv_div').show();
+    		$('#downLoad_csv_btn').val('- Statistrc of user following this plan')
+    	}else{
+    		downLoad_csv_div = false;
+    		$('#downLoad_csv_div').hide();
+    		$('#downLoad_csv_btn').val('+ Statistrc of user following this plan')
+    	}
+    }
+    function saveandremovedata(){
+    	var flag=checkParameters();
+		if(flag==0){
+			alert("Please check your input, make sure that asset class / fund / redemption are not null or do not include '#'.");
+			return;
+		}
+		setDefaultRTAndWP();
+    	$('#name_hidden').val($('#name').val());
+    	$('#startingdate_hidden').val($('#startingdate').val());
+    	$('#variables').val(getValueString());
+    	$.ajax({
+			type: "post",
+			url: "f401k_saveandremovedata.action?includeHeader=false",
+			data: $('#updateForm').serialize(),
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+    }
+    
+    function save(){
+    	var flag=checkParameters();
+		if(flag==0)
+		{
+			alert("Please check your input, make sure that asset class / fund / redemption are not null or do not include '#'.");
+			return;
+		}
+		setDefaultRTAndWP();
+    	$('#name_hidden').val($('#name').val());
+    	$('#startingdate_hidden').val($('#startingdate').val());
+    	$('#variables').val(getValueString());
+    	$.ajax({
+			type: "post",
+			url: "f401k_updatevariables.action?includeHeader=false",
+			data: $('#updateForm').serialize(),
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				window.location.href=window.location.href;
+				window.location.reload; 
+				//window.location.reload();
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+    }
+    
+    function saveModel(){
+    	var flag=checkParameters();
+		if(flag==0){
+			alert("Please check your input, make sure that asset class / fund / redemption are not null or do not include '#'.");
+			return;
+		}
+		setDefaultRTAndWP();
+    	$('#name_hidden').val($('#name').val());
+    	$('#startingdate_hidden').val($('#startingdate').val());
+    	$('#variables').val(getValueString());
+    	$.ajax({
+			type: "post",
+			url: "f401k_updatevariables.action?includeHeader=false",
+			data: $('#updateForm').serialize(),
+			datatype: "html",
+			success: function(result){
+				$.ajax({
+					type:"post",
+					url:"f401k_generate.action?includeHeader=false",
+					data:"ID="+${plan.ID?string.computer},
+					datatype:"html",
+					success:function(data){
+						monitor();
+					}
+				});
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+    }
+    function saveModelPublic(){
+    	var flag=checkParameters();
+		if(flag==0){
+			alert("Please check your input, make sure that asset class / fund / redemption are not null or do not include '#'.");
+			return;
+		}
+		setDefaultRTAndWP();
+    	$('#name_hidden').val($('#name').val());
+    	$('#startingdate_hidden').val($('#startingdate').val());
+    	$('#variables').val(getValueString());
+    	$.ajax({
+			type: "post",
+			url: "f401k_updatevariables.action?includeHeader=false",
+			data: $('#updateForm').serialize(),
+			datatype: "html",
+			success: function(result){
+				$.ajax({
+					type:"post",
+					url:"f401k_generate.action?includeHeader=false",
+					data:"ID="+${plan.ID?string.computer},
+					datatype:"html",
+					success:function(reulst){
+						$.ajax({
+							type:"post",
+							url:"/LTISystem/f401k_makepublic.action?includeHeader=false",
+							data:"ID="+${plan.ID?string.computer},
+							datatype:"html",
+							success:function(data){
+								monitor();
+							}
+						});
+					}
+				});
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+    }
+    
+     function saveUpdateParameters(){
+    	var flag=checkParameters();
+		if(flag==0){
+			alert("Please check your input, make sure that asset class / fund / redemption are not null or do not include '#'.");
+			return;
+		}
+		setDefaultRTAndWP();
+    	$('#name_hidden').val($('#name').val());
+    	$('#startingdate_hidden').val($('#startingdate').val());
+    	$('#variables').val(getValueString());
+    	$.ajax({
+			type: "post",
+			url: "f401k_updatevariables.action?includeHeader=false",
+			data: $('#updateForm').serialize(),
+			datatype: "html",
+			success: function(result){
+				//$("#allDiv").append(data);
+				updateparameter();
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+    }
+    function applyPortfolios(){
+    	var flag=checkParameters();
+		if(flag==0){
+			alert("Please check your input, make sure that asset class / fund / redemption are not null or do not include '#'.");
+			return;
+		}
+		var flag1 = confirm("The current fund table will be applied to the afterward update of the existing portfolios and to the whole simulation period of the new portfolios. The historical simulation result of the existing portfolios won’t be changed. Are you sure to apply the current fund table?");
+		if(flag1==true){
+			setDefaultRTAndWP();
+    		$('#name_hidden').val($('#name').val());
+    		$('#startingdate_hidden').val($('#startingdate').val());
+    		$('#variables').val(getValueString());
+    		$.ajax({
+				type: "post",
+				url: "f401k_saveandremovedata.action?includeHeader=false",
+				data: $('#updateForm').serialize(),
+				datatype: "html",
+				success: function(result){
+					applyUpdateparameter();
+				},
+				error:function(){
+					alert("error");
+				}
+			});//end of ajax
+		}
+    }
+    function applyPortfolios(){
+    	var flag=checkParameters();
+		if(flag==0){
+			alert("Please check your input, make sure that asset class / fund / redemption are not null or do not include '#'.");
+			return;
+		}
+		var flag1 = confirm("The current fund table will be applied to the afterward update of the existing portfolios and to the whole simulation period of the new portfolios. The historical simulation result of the existing portfolios won’t be changed. Are you sure to apply the current fund table?");
+		if(flag1==true){
+			setDefaultRTAndWP();
+    		$('#name_hidden').val($('#name').val());
+    		$('#startingdate_hidden').val($('#startingdate').val());
+    		$('#variables').val(getValueString());
+    		$.ajax({
+				type: "post",
+				url: "f401k_saveandremovedata.action?includeHeader=false",
+				data: $('#updateForm').serialize(),
+				datatype: "html",
+				success: function(result){
+					applyUpdateparameter();
+				},
+				error:function(){
+					alert("error");
+				}
+			});//end of ajax
+		}
+    }
+    function createModelPortfolios(){
+    	var flag=checkParameters();
+		if(flag==0){
+			alert("Please check your input, make sure that asset class / fund / redemption are not null or do not include '#'.");
+			return;
+		}
+		var flag1=confirm("One moderate SAA portfolio and one moderate TAA portfolio will be created. They are public and not counted in your portfolio quota unless you follow them. The plan rating will be generated one or two days after creating the model portfolios. The portfolio simulation process will run in the background and take a few minutes or even a few hours depending on the size of the fund table. Are you sure to create them?");
+		if(flag1==true){
+			setDefaultRTAndWP();
+    		$('#name_hidden').val($('#name').val());
+    		$('#startingdate_hidden').val($('#startingdate').val());
+    		$('#variables').val(getValueString());
+    		$.ajax({
+				type: "post",
+				url: "f401k_updatevariables.action?includeHeader=false",
+				data: $('#updateForm').serialize(),
+				datatype: "html",
+				success: function(result){
+					$.ajax({
+						type:"post",
+						url:"f401k_generate.action?includeHeader=false",
+						data:"ID="+${plan.ID?string.computer},
+						datatype:"html",
+						success:function(reulst){
+							$.ajax({
+								type:"post",
+								url:"/LTISystem/f401k_makepublic.action?includeHeader=false&portfolioFlag=false",
+								data:"ID="+${plan.ID?string.computer},
+								datatype:"html",
+								success:function(data){
+									var host=window.location.host;
+									if($('#run_in_local_flag').attr('checked')){
+										host='localhost';
+									}
+									var surl='f401k_execute.action?includeHeader=false&ID=${plan.ID?string.computer}&portfolioUpdate=1&host='+host;
+    								$.ajax({
+    									url:surl,
+    									success:function(mes){
+    									var execFrame=document.getElementById("execFrame"); 
+										execFrame.src=$.trim(mes);
+    									}
+    								});
+								}
+							});
+						}
+					});
+				},
+				error:function(){
+					alert("error");
+				}
+			});//end of ajax
+		}
+    }
+    
+    
+    [@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+    function upload(){
+    	
+    	$.ajax({
+			type: "post",
+			url: "f401k_updatevariables.action?includeHeader=false",
+			data: $('#updateForm').serialize(),
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+    }
+    [/@authz.authorize]
+</script>
+</head>
+<body>
+<div style="width:100%" id="allDiv">
+	
+	<div style="margin:10px">
+		<h1 align="center"><a href="/LTISystem/f401k_view.action?ID=${ID}" style="text-decoration:none">${plan.name}</a> [#if public](public)[#else](private)[/#if]</h1>
+		 <h3 align="center">Available Investment Funds or SMAs</h3>
+		
+		 <br/>
+		 [@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+		 Update Record:
+		  <form id="fundfile" action="f401k_filecontent.action" method='post'>
+			<select onchange=fileName.value=this.options[this.selectedIndex].value>
+			<option value="null">Please Choose File</option>
+			 [#if fileList??] 
+			 		[#list fileList as fvar]
+				 		<option value="${fvar}">
+							${fvar}
+						</option>
+			 		[/#list]
+			 [/#if]
+			</select>
+			[#if fileList??]
+			<input type="submit" class="uiButton"name="button" value="GO">
+			[#else]
+			<input type="submit" name="button" value="GO" disabled="true">
+			[/#if]
+			<input type="hidden" name="ID" value="${ID?string.computer}">
+			<input type="hidden" name="fileName">
+		</form>
+		
+		Plan Type: <select name="planType" id="planType" value="${planType!}}">
+			<option value="0" [#if planType == 0]selected[/#if]>0. Default</option>
+			<option value="1" [#if planType == 1]selected[/#if]>1. Retirement 401k Plan</option>
+			<option value="2" [#if planType == 2]selected[/#if]>2. Retirement 403b Plan</option>
+			<option value="3" [#if planType == 3]selected[/#if]>3. Retirement 457 Plan</option>
+			<option value="4" [#if planType == 4]selected[/#if]>4. IRA/Taxable ETF Plan</option>
+			<option value="5" [#if planType == 5]selected[/#if]>5. Brokerage Mutual Fund Plan</option>
+			<option value="6" [#if planType == 6]selected[/#if]>6. Lazy Portfolio Plan</option>
+			<option value="7" [#if planType == 7]selected[/#if]>7. Variable Annuities</option>
+			<option value="8" [#if planType == 8]selected[/#if]>8. Variable Universal Life Plan</option>
+			<option value="9" [#if planType == 9]selected[/#if]>9. College Savings 529 Plan</option>
+		</select>
+		<input type='button' class="uiButton" value='Update Plan Type' onclick='updateplantype()'>
+		<br>
+		Plan Status: <select name="status" id="status" value="${status!}}">
+			<option value="0" [#if status == 0]selected[/#if]>0. Default</option>
+			<option value="1" [#if status == 1]selected[/#if]>1. No Options</option>
+			<option value="2" [#if status == 2]selected[/#if]>2. Unmatched</option>
+			<option value="3" [#if status == 3]selected[/#if]>3. Matched</option>
+			<option value="4" [#if status == 4]selected[/#if]>4. Ready to generate</option>
+			<option value="5" [#if status == 5]selected[/#if]>5. Live</option>
+		</select>
+		<input type='button' class="uiButton" value='Update Plan Status' onclick='updateplanstatus()'>
+		<br>
+		Plan Ticker: <input type="text" name="ticker" id="ticker" value="${ticker!}"><input type='button' class="uiButton" value='Update Plan ticker' onclick='updateplanticker()'>
+		<br>
+		[/@authz.authorize]		 
+		 <strong>R*:</strong> Redemption (Minimum months to hold). <strong>M*: </strong>Mark (p: proxy, n: not used). <br><strong>RT: </strong>Round Trip (number of times allowed to buy/sell in trailing 12 months). <strong>WP: </strong>Waiting Period (minimum months to wait before buy again).
+		 <form id="updateForm" action="f401k_updatevariablesfor401k.action?includeHeader=false" method='post'>
+	 	 <table  class="tablesorter" border="0" cellpadding="0" cellspacing="1" width="95%" id="parametersTable"> <!-- variables table -->
+	 	 	<thead>
+	 	 	<tr>
+	 	 		<th class="header" width="20%">
+					<b>Asset Class</b>
+				</th>
+				<th class="header" width="10%">
+					<b>Ticker</b>
+				</td>
+				<th class="header" width="30%">
+					<b>Name</b>
+				</th>
+				<th class="header" width="3%">
+					[#if admin || isOwner]<input type='button' class="uiButton" value='R*' onclick='p_resetredemption()'>[#else]<b>R*</b>[/#if]
+				</th>
+				<th class="header" width="30%">
+					<b>Description</b>
+				</th>
+				<th class="header" width="2%">
+					<b>M*</b>
+				</th>
+				<th class="header" width="3%">
+					[#if admin || isOwner]<input type='button' class="uiButton" value='RT' onclick='p_resetroundtriplimit()'>[#else]<b>RT</b>[/#if]
+				</th>
+				<th class="header" width="3%">
+					[#if admin || isOwner]<input type='button' class="uiButton" value='WP' onclick='p_resetwaitingperiod()'>[#else]<b>WP</b>[/#if]
+				</th>
+				
+				[#if admin || isOwner]
+				<th class="header" width="25%">
+					<b>Start Date</b>	
+				</th>
+				[/#if]
+				[#if admin || isOwner]
+				<th class="header" width="25%">
+					<b>End Date</b>	
+				</th>
+				[/#if]
+				<th class="header">
+					[#if admin || isOwner]
+					<input type='button' value='' onclick='newParameter()' class='button_new'>
+					[/#if]
+				</th>
+				[#if admin]
+				<th class="header" width="5%">
+					[#if admin]
+					<input type='button' value='' onclick='newParameter()' class='button_new'>
+					[/#if]
+				</th>
+				[/#if]
+			</tr>
+			</thead>
+			<tbody>
+			[#if variables??]
+				[#list variables as var]
+				[#if admin || isOwner]				
+					[#if var_index%2==0]
+						<tr class='odd' id='parameter${var_index}'>
+					[/#if]
+					[#if var_index%2==1]
+						<tr class='even' id='parameter${var_index}'>
+					[/#if]
+						<td>
+							<input type='text' id='variables_${var_index}_assetClassName' name='variables[${var_index}].assetClassName' value='${var.assetClassName!""}' class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+						</td>
+						<td>
+							<input type='text' id='variables_${var_index}_symbol' name='variables[${var_index}].symbol' value='${var.symbol!""}' class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+						</td>
+						<td>
+							<input type='text' id='variables_${var_index}_name' name='variables[${var_index}].name' value='${var.name!""}' class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+						</td>
+						<td>
+							<input type='text' id='variables_${var_index}_redemption' name='variables[${var_index}].redemption' value='${var.redemption!""}'  class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+						</td>
+						<td>
+							<input type='text' id='variables_${var_index}_description' name='variables[${var_index}].description' value='${var.description!""}' class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+						</td>
+						<td>
+							<input type='text' id='variables_${var_index}_memo' name='variables[${var_index}].memo' value='${var.memo!""}' class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+						</td>
+						<td>
+							<input type='text' id='variables_${var_index}_roundtripLimit' name='variables[${var_index}].roundtripLimit' [#if var.roundtripLimit != 60] value='${var.roundtripLimit!""}' [/#if] class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+						</td>
+						<td>
+							<input type='text' id='variables_${var_index}_waitingPeriod' name='variables[${var_index}].waitingPeriod' [#if var.waitingPeriod != 0] value='${var.waitingPeriod!""}' [/#if] class='show_text' onclick='edit_text(this)' onblur='out_text(this)'>
+						</td>
+						<td>
+							<input type='text' id='variables_${var_index}_startDate' name='variables[${var_index}].startDate' value='${var.startDate!""}' class='show_text' onclick='edit_text(this)' onblur='out_text(this)' readOnly="true">
+						</td>
+						<td>
+							<input type='text' id='variables_${var_index}_endDate' name='variables[${var_index}].endDate' value='${var.endDate!""}' class='show_text' onclick='edit_text(this)' onblur='out_text(this)' readOnly="true">
+						</td>
+						<td>
+							<input type='button' value='delete' onclick='deleteParameter(${var_index})' class='button_remove'>
+						</td>
+						[#if admin]
+						<td>
+							<input type='button' value='search' onclick='secondSearch(${var_index})' class='button_remove'>
+						</td>
+						[/#if]
+					</tr>
+				[#else]
+					[#if var_index%2==0]
+						<tr class='odd' id='parameter${var_index}'>
+					[/#if]
+					[#if var_index%2==1]
+						<tr class='even' id='parameter${var_index}'>
+					[/#if]
+						<td>
+							${var.assetClassName!""}
+						</td>
+						<td>
+							${var.symbol!""}
+						</td>
+						<td>
+							${var.name!""}
+						</td>
+						<td>
+							${var.redemption!""}
+						</td>
+						<td>
+							${var.description!""}
+						</td>
+						<td>
+							${var.memo!""}
+						</td>
+						<td>
+							${var.roundtripLimit!""}
+						</td>
+						<td>
+							${var.waitingPeriod!""}
+						</td>
+						<td>
+						</td>
+					</tr>
+				[/#if]
+				[/#list]
+			[/#if]
+			</tbody>
+		 </table><!-- variables table -->
+		 <br>
+		 [#if isOwner && !admin]
+		 <input title="Edit/Input Available Funds" type='button' id='btc_info' class="uiButton" value='+ Input Funds' onclick='batchfund()'>
+		 [/#if]
+		 [#if admin]
+		 <input type='button' value='Add One Line' onclick='newParameter()' class='uiButton'>
+		 [/#if]
+		 [#if isOwner || admin]
+		 <input type="hidden" name="ID" value='${ID?string.computer}'>
+		 <input type="hidden" name="description" id="description_hidden" value=''>
+		 <input type="hidden" name="reference" id="reference_hidden" value=''>
+		 <input type="hidden" name="shortDescription" id="shortdescription_hidden" value=''>
+		 <input type="hidden" name="name" id="name_hidden" value=''>
+		 <input type="hidden" name="startingdate" id="startingdate_hidden" value=''>
+		 [/#if]
+		 [#if admin]
+		 	<input type='button' value='Check and Import Symbols’ data' onclick='checksecurity()' class='uiButton'>
+		 [/#if]
+		 [#if isOwner && !admin]
+		 <!--
+		 <input type='button' class="uiButton" value='Save' onclick='saveandremovedata()'>
+		 -->
+		 <input type='button' class="uiButton" value='Save' onclick='save()'>
+		 <input type='button' class="uiButton" value='Apply to the Relative Portfolios' onclick='applyPortfolios()' title='to make the customized portfolios and the created model portfolios of this plan to utilize the above fund table in their afterward update'>
+		 <input type='button' class="uiButton" value='Customize A Portfolio' onclick='customize()'>
+		 [/#if] 
+		 [#if admin]
+		 <br>
+		 <br>
+		 	<input type='button' value='- Batch Input Funds' onclick='batchInputFund() ' id='btc_input_info' class='uiButton'>
+		 	<input type='button' value='Save Fund Table' onclick='save()' class='uiButton'>
+		 	<input type='button' value='Save + model' onclick='saveModel()' class='uiButton'>
+		 	<input type='button' value='Save + model + public' onclick='saveModelPublic() ' class='uiButton'>
+		 	<input type='button' value='Save + update parameters' onclick='saveUpdateParameters()' class='uiButton'> 
+		 <br>
+		 <br>
+		 [/#if]
+		 [#if isOwner && !admin]
+		 <br>
+		 <br>
+		 <input type='button' class="uiButton" id='btn_advance' value='+ Advanced Operations' onclick='moreoperation()'>
+		 <br>
+		 <br>
+		 [/#if]
+		 <div style='display:none' id='advance_operation_div'>
+		 	 [#if isOwner && !admin]
+		 	 	<input type='button' class="uiButton" value='Create Model Portfolios' onclick='createModelPortfolios()' title='to create two moderate portfolios of TAA strategy and SAA strategy for this plan'>
+		 	 	<input type='button' class="uiButton" value='Make Public' onclick='adminpublic()'>
+			 	<input type='button' class="uiButton" value='Make Private' onclick='adminprivate()'>
+		 	 [/#if]
+		 	 [#if isOwner || admin]
+		 	 	<br><br>
+		 		<input type='button' class="uiButton" value='Estimate Fund Quality' onclick='recalculatefundquality()'>
+		 		<input type='button' class="uiButton" value='Estimate Diversification' onclick='recalculatecoverage()'>		 		
+		 	[/#if]
+		 	[#if isOwner && !admin]
+		 	<br>
+		 	<br>
+		 	<span id="loadAttributes"></span>
+		 	<input type='button' class="uiButton" value='Change' onclick="newattributesAnddeleted('IncludeAllETF','true')">
+		 	<br>
+		 	<br>
+		 	<span id="loadAllowSectorFund"></span>
+		 	<input type='button' class="uiButton" value='Change' onclick="newattributesAnddeleted('AllowSectorFund','true')">
+		 	<br>
+		 	[/#if]
+                [#if admin]
+                 <input type='button' class="uiButton" value='Get Fund Statistic' onclick='getfundstatistic()'>
+                [/#if]
+		 </div>
+		 </form>
+	</div>	
+	[#if isOwner && !admin]<div id='btc_area' style="margin:10px;display:none">
+	[#elseif admin]<div id='btc_area_input' style="margin:10px;display:block">
+	[#else]<div style="margin:10px">
+	[/#if] 
+		 [#if isOwner || admin]
+		 <br>
+		 <b>Edit/Input available funds in the following box</b>
+		 <br>
+                 [#if isOwner && !admin]
+                 <b>In the following text box, input a list of fund ticker symbols, one per line</b><br><br>
+                 VFINX<br>
+                 VEIEX<br>
+                 VBMFX<br>
+                 CASH<br>
+                 <br>
+                 [/#if]
+		 <form id='parameter_message_form'>
+		 <textarea id='parameter_message' name='originalString' style='width:95%;height:120px'></textarea>
+		 
+		 <div style="width:100%" align="center">
+		[#if isOwner || admin]
+			<br>
+			<!--
+			<input type='button' class="uiButton" value='Add Candidate Funds' onclick='p_processrepl()'>
+			-->
+			<input type='button' class="uiButton" value='Add Candidate Funds' onclick='p_processreAdd()'>
+			<input type='button' class="uiButton" value='Replace Candidate Funds' onclick='p_processall()'>
+		[/#if]
+	   </div>
+	   
+		 [@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+		 <br>
+		 <input type='button' class="uiButton" value='Process' onclick='p_process()'>
+		 <input type='button' class="uiButton" value='Append' onclick='p_append()'>
+		 <input type='button' class="uiButton" value='Replace' onclick='p_replace()'>
+		 <input type='button' class="uiButton"  value='Re-Edit' onclick='p_reedit()'>
+		 <!-- 
+		 <input type='button' class="uiButton" value='Reset Redemption' onclick='p_resetredemption()'>
+		 -->
+		 [/@authz.authorize]
+		 </form>	
+		 [/#if]
+	</div>
+	
+	<div style='display:none' id='upload_div'>
+		<form action="f401k_updatevariablesfromfile.action?includeHeader=false" method="post" enctype="multipart/form-data">
+		 File: <input type="file" name="upload" /><br>
+		<input value="Upload" type="submit"  />
+		<input type='hidden' name='ID' value='${ID?string.computer}'>
+		</form>
+	</div>
+	<div style='display:none' id='upload_div_source'>
+		<form id="uploadfromsourcefile" action="f401k_uploadfromsourcefile.action?ID=${ID}" method="post" enctype="multipart/form-data">
+			 File: <input id="upload" type="file" name="upload" /><br>
+			<input id="fileNameOfOldFile" value='' name="fileNameOfOldFile" type="hidden">
+			<input type='hidden' name='ID' value='${ID?string.computer}'>
+		</form>
+		<input  class="uiButton" type='button' value='upload' onclick='uploadfromsourcefile()'>
+	</div>
+	
+	<div style='display:none' id='upload_div_matchrule'>
+		<form id="uploadmatchrulefile" action="f401k_uploadmatchingrulefile.action" method="post" enctype="multipart/form-data">
+			 File: <input id="upload" type="file" name="upload" /><br>
+		</form>
+		<input  class="uiButton" type='button' value='upload' onclick='uploadmatchrulefile()'>
+	</div>
+	
+	<div style="width:100%">
+			[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+			
+			<br>
+			<input type='button' class="uiButton" id='more_portfolio_btn' value='+ More Buttons on Model Portfolio' onclick='morePortfolioOperation()'>
+			<br>
+			<br>
+			<div style='display:none' id='more_portfolio_div'>
+		 	 	<input type='button' class="uiButton" value='Generate' onclick='generate()'>
+			 	<input type='button' class="uiButton" value='Update' onclick='update()'>
+			 	<input type='button' class='uiButton' value='Stop Monitor' onclick='stop()'> 
+			 	<input type='button' class="uiButton" value='Remove Data Object of Simulation' onclick='deleted()'>
+			 	<input type='button' class="uiButton" value='Monitor' onclick='monitor()'>
+			 	<input type='checkbox' id='run_in_local_flag'>run on local
+			 	<div id="more_portfolio_div_message">
+		 		</div>
+		 	</div>
+		 	[/@authz.authorize]
+		 	[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+			<br>
+			<input type='button' class="uiButton" id='more_plan_btn' value='+ More Buttons on Plan' onclick='morePlanOperation()'>
+			<br>
+			<br>
+			<div style='display:none' id='more_plan_div'>
+				<input type='button' class="uiButton" value='Make Public' onclick='adminpublic()'>
+			 	<input type='button' class="uiButton" value='Make Private' onclick='adminprivate()'>
+			 	<input type='button' class="uiButton" value='Estimate Diversification' onclick='recalculatecoverage()'>
+			 	<input type='button' class="uiButton" value='Estimate Fund Quality' onclick='recalculatefundquality()'>
+			 	<input type='button' class="uiButton" value='GetFund Table Statistic' onclick='getfundstatistic()'>
+		 		<input type='button' class="uiButton" value='Edit as strategy' onclick='editasstrategy()'>
+		 	</div>
+		 	<br>
+		 	<input type='button' class="uiButton" id='more_tableDate_btn' value='+ More Buttons on Table Data' onclick='moreTableDateOperation()'>
+		 	<br>
+		 	<br>
+		 	<div style='display:none' id='more_tableDate_div'>
+				<input type='button' class="uiButton" value='Upload From Source File' onclick='p_uploadfromsource()'>
+				<input type='button' class="uiButton" value='Upload From File' onclick='p_upload()'>
+				<input type='button' class="uiButton" value='Add Table To the Search Index' onclick='addtoindex()'>
+				<input type='button' class="uiButton" value='Upload Matching rules' onclick='p_uploadmatchingrulefile()'>	
+				<input type='button' class="uiButton" value='Delete' onclick='deletep()'>			
+		 	</div>
+		 	<br>
+		 	<input type='button' class="uiButton" id='downLoad_csv_btn' value='+ Statistics of user following this plan' onclick='downLoadCSV()'><br>
+		 	<br>
+		 	
+		 	<div style='display:none' id='downLoad_csv_div'>
+				<input type='button' class="uiButton" value='DownLoad SAA followers' onclick='downLoadSAAFollower()'>
+				<input type='button' class="uiButton" value='DownLoad TAA followers' onclick='downLoadTAAFollower()'>
+				<input type='button' class="uiButton" value='DownLoad Customized SAA followers' onclick='downLoadCustomizedSAA()'>
+				<input type='button' class="uiButton" value='DownLoad Customized TAA followers' onclick='downLoadCustomizedTAA()'>	
+		 	</div>
+		 	<br>
+		 	<span id="loadAttributes"></span>
+		 	<input type='button' class="uiButton" value='Change' onclick="newattributesAnddeleted('IncludeAllETF','true')">
+		 	<br>
+		 	<br>
+		 	<span id="loadAllowSectorFund"></span>
+		 	<input type='button' class="uiButton" value='Change' onclick="newattributesAnddeleted('AllowSectorFund','true')">
+		 	<br>
+			<!--
+			<input type='button' class="uiButton" value='Execute' onclick='execute()'>
+			<input type='button' class="uiButton" value='Update Parameter' onclick='updateparameter()'>
+			-->
+			[/@authz.authorize]
+			<br>
+	</div>
+	<div id='process_window' style='display:none'>
+		<div id='process_div' style='height:250;' align="center">
+		</div>
+		<!--
+		[#if admin && !isOwner]
+		<div align='center' style='margin:10px'><input type='button' onclick='p_paste()' value='Paste' style='border:1px solid #369;background:#fff;'></div>		
+		[/#if]
+		[#if isOwner && !admin]
+		<div align='center' style='margin:10px'><input type='button' onclick='paste_symbol()' value='Add' style='border:1px solid #369;background:#fff;'></div>		
+		[/#if]
+		-->		
+	</div>
+	<div id="dataContent">${dataContent!""}</div>
+	<br>
+	<a href="f401k_downloadPlanFile.action?planName=${planName!""}">${planName!""}</a>
+</div>
+<iframe src='' id='execFrame' style="display:none"></iframe>
+</body>
+</html>

@@ -1,0 +1,190 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>Decide Risk Profile</title>
+
+<script>
+var canvas;
+var property={
+	con_width:350,
+	con_height:300,
+	canvas_width:250,
+	canvas_height:250,
+	canvas_top:20,
+	canvas_left:40,
+	core_x:140,
+	core_y:140,
+	radius:110
+}
+//you can change the color of pie chart here
+var dataKind={
+	note_width:250,
+	note_height:40,
+	note_top:3,
+	note_left:5,
+	sort_type:"v",
+	text_color:"#",
+	items:[
+		{id:"c1",color:"#008800",label:"Fixed Income Target Allocation"},
+		{id:"c2",color:"#0099CC",label:"Risky Target Allocation"}
+	],
+	data:[]
+};
+  var data=[
+	{id:"c1",num:50},
+	{id:"c2",num:50}
+  ];
+  
+	function edit_text(element){
+    	if($(element).val()=='Click here'){
+    		$(element).val('');
+    	}
+		$(element).removeClass('show_text');
+		$(element).addClass('edit_text');
+	}
+	function out_text(element){
+		$(element).removeClass('edit_text');
+		$(element).addClass('show_text');
+	}
+	
+	var years=new Array(40,35,30,25,20,15,10,5,0,-5,-10,-12,-15);
+	var numbers=new Array(88,85,84,83,76,70,62,52,49,44,22,20,10);
+	function restore(){
+		var ytr=$('#ytr').val();
+		if(ytr==''||isNaN(ytr)){
+			ytr=40;
+			$('#ytr').val('40');
+		}
+		$('#profile_yearstoretire2').val(ytr);
+		$('#profile_attitude2').val($('#ay option:selected').text());
+		var factor=$('#ay option:selected').val();
+		var number=12;
+		var index=0;
+		if(ytr>=years[0])index=0;
+		else if(ytr<=years[years.length-1])index=years.length-1;
+		else{
+			for(var i=0;i<years.length;i++){
+				if(ytr==years[i]){
+					index=i;
+					break;
+				}
+				if(ytr<years[i]){
+					index=i;
+				}
+			}
+		}
+		
+		if(ytr==years[index])number=numbers[index];
+		else{
+			if(ytr>=years[0]||index==years.length-1)number=numbers[index];
+			else {
+				number=(numbers[index]-numbers[index+1])*1.0*(ytr-years[index+1])/(years[index]-years[index+1])  +numbers[index+1];
+				
+			}
+		}
+		number=100-number;
+		number=parseInt(number*factor);
+		if(number<0)number=0;
+		if(number>100)number=100;
+		$('#rta').val(number);
+		$('#profile_risknumber2').val(number);
+		
+		plotchart();
+		
+	}
+	function afterchangern(){
+		$('#profile_risknumber2').val($('#rta').val());
+		plotchart();
+	}
+	function plotchart(){
+		var risknumber=$('#profile_risknumber2').val();
+		
+		var rta=$('#rta').val();
+		if(rta==''||isNaN(rta)){
+			$('#rta').val('');
+			return;
+		}
+		$("#mycanvas").html('');
+		canvas=$.createGooPieChart($("#mycanvas"),property);
+		canvas.setTitle("Risk Profile","%");
+		data[0]["num"]=rta*1;
+		data[1]["num"]=(100-rta)*1;
+		dataKind.data=data;
+		canvas.setDataKind(dataKind);
+		canvas.loadPieData(data,"num","");
+	}
+	
+	function view(){
+		[#if operation=="create"]
+			alert("you don't created any profile before.");
+			return;
+		[#else]
+			$('#view_window').dialog('open');
+		[/#if]
+	}
+	$(function() {
+	 	plotchart();
+	 	$('#btnsave').button();
+	 	$('#btncancel').button();
+	 	initSelects("aSelect", 200);
+	 });
+</script>
+</head>
+<body>
+<div class="ui-widget">
+	<br>
+	<table width='100%' border=0>
+		<tr>
+			<td>Years to your retirement [@lti.questionmark "What's the expected number of years to your retirement?" "" /]</td>
+			<td>
+				<input type='text' id='ytr' value='${profile.yearsToRetire!"40"}' class="ui-widget ui-widget-content ui-corner-all" style="width:200px" onblur='restore()'>
+			</td>
+		</tr>
+		<tr>
+			<td>Investment risk tolerance [@lti.questionmark "What's your investment risk tolerance?" "" /]</td>
+			<td>
+				<select id='ay' name='ay' onchange='restore()' class="aSelect">
+					<option value='1.2' [#if profile.attitude=="Very Conservative"]selected[/#if]>Very Conservative</option>
+					<option value='1.1' [#if profile.attitude=="Conservative"]selected[/#if]>Conservative</option>
+					<option value='1' [#if profile.attitude=="Moderate"]selected[/#if]>Moderate</option>
+					<option value='0.9' [#if profile.attitude=="Aggressive"]selected[/#if]>Aggressive</option>
+					<option value='0.8' [#if profile.attitude=="Very Aggressive"]selected[/#if]>Very Aggressive</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Your Risk Profile Number [@lti.questionmark "You could overwrite here" "" /]</td>
+			<td>
+				<input type='text' id='rta' value='${profile.riskNumber!"0"}' class="ui-widget ui-widget-content ui-corner-all" style="width:200px" onblur='afterchangern()'>
+			</td>
+		</tr>
+	</table>
+			                                          
+	<div style="margin-left:20px;margin-top:20px;width:400px;"><div id="mycanvas"></div></div>
+						
+				
+			<button onclick='save()' id='btnsave'>Save</button>
+			<button onclick='cancel()' id='btncancel'>Cancel</button>
+			<form action='profile_edit.action' method='post' style='display:none'>
+				<input type='hidden' name='operation' value='create'>
+				<input type='submit' value='Create'>
+			</form>
+			<form action='profile_delete.action' method='post'  style='display:none'>
+				<input type='hidden' name='operation' value='delete'>
+						<input type='hidden' name='profile.portfolioID' value='${profile.portfolioID!""}'>
+						<input type='hidden' name='profile.userID' value='${profile.userID!""}'>
+						<input type='hidden' name='profile.planID' value='${profile.planID!""}'>
+				<input type='submit' value='Delete'>
+			</form>
+			<form id='profile_form2' action='profile_edit.action' method='post'  style='display:none'>
+				<input type='hidden' id='profile_portfolioid2' name='profile.portfolioID' value='0'>
+				<input type='hidden' id='profile_planid2' name='profile.planID' value='0'>
+				<input type='hidden' id='profile_risknumber2' name='profile.riskNumber' value='${profile.riskNumber!""}'>
+				<input type='hidden' id='profile_attitude2' name='profile.attitude' value='${profile.attitude!""}'>						
+				<input type='hidden' id='profile_yearstoretire2' name='profile.yearsToRetire' value='${profile.yearsToRetire!"0"}'>
+				<input type='hidden' name='operation' value='save'>
+			</form>
+</div>
+</body>
+</html>

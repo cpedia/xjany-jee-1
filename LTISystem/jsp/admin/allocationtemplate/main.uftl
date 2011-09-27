@@ -1,0 +1,262 @@
+[#ftl]
+
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign recordSize = 0]
+[#assign current = -1]
+[#if templateList??]
+[#assign recordSize = templateList?size]
+[#assign current = templateList?size-1]
+[/#if]
+
+<style>
+.btn {
+    background-image: url("images/grey-bg.gif");
+    background-repeat: repeat;
+    border: 1px solid #999999;
+    color: #000000;
+    cursor: pointer;
+    font-family: Tahoma;
+    font-size: 0.9em;
+    font-weight: bold;
+    height: 22px;
+    margin: 1px 1px 1px 1px;
+    padding-bottom: 1px;
+   }
+   
+ .template{
+    border:1px solid #4D4D4D;
+    paddding:10px 10px 10px 10px;
+    margin-top:20px;
+ }
+</style>
+
+<link href="${lti.baseUrl}/jsp/template/ed/css/jquery_UI/smoothness/jquery-ui-1.8.custom.css" rel="stylesheet" type="text/css" />
+<script src="${lti.baseUrl}/jsp/template/ed/js/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="${lti.baseUrl}/jsp/template/ed/js/jquery_UI/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+<script>
+
+
+var recordSize = ${recordSize};
+function edit(num){
+  var $div = $("#template_"+num);
+  var i =0;
+  if($div.css("display")=="none"){
+     for(i =0;i<recordSize;i++){
+        if($("#template_"+i).css("display")!="none"){
+           $("#template_"+i).hide(0,function(){
+                    $div.show();
+           });
+           
+           break;
+        }
+     }
+     if(i == recordSize){
+        $div.show();
+     }
+     
+  }else{
+     $div.hide();
+  }
+    
+}
+
+function deleteItem(index){
+ if(confirm("Are you sure to delete this template?")){
+     var templateName = $("#title_"+index).val();
+     $.ajax({
+          url:"/LTISystem/jsp/admin/allocationtemplate/deleteTemplate.action?includeHeader=false&templateName="+templateName,
+          type:"post",
+          success:function(message){
+             alert("Delete this allocation Template success.");
+             window.location.reload();
+          },
+          error:function(message){
+            alert("Delete Failed");
+          }
+     });
+ }else 
+      return;
+ 
+}
+
+function deleteLine(tableNum,trNum){
+   $("#"+tableNum+"_tr_"+trNum).remove();
+}
+
+function addOneLine(index){
+   var trSize = $("#tb_"+index+" tr").length-1;
+   var $pane = $("#tb_"+index);
+   var $tr,$td;
+   $tr = $(document.createElement("tr"));
+   $tr.attr({id:index+'_tr_'+trSize});
+   $pane.append($tr);
+   $td = $(document.createElement("td"));
+   $td.html("<input type='text' name='asset_"+index+"'>");
+   $tr.append($td);
+   $td = $(document.createElement("td"));
+   $td.html("<input type='text' name='percent_"+index+"'>");
+   $tr.append($td);
+   $td = $(document.createElement("td"));
+   $td.html("<input type='button' class='btn' value='Delete' onclick='deleteLine("+index+","+trSize+")'>");
+   $tr.append($td);
+}
+
+ var current= ${current};
+function updateRecord(index,option){
+
+  var $name = $("#title_"+index).val();
+     if($name=="")return;
+     if(option == 'save'){
+       $.ajax({
+         url:"/LTISystem/jsp/admin/allocationtemplate/checkName.action?includeHeader=false&templateName="+$name,
+         type:"post",
+         success:function(message){
+          if(message.length!=0){
+             alert("The templateName is exist, please input another name");
+             return;
+          }
+          
+         }
+   });
+   }
+    
+  var $des = document.getElementById("des_"+index).value;
+  var assetClass = "";
+  var percents = "";
+  var assetItems = document.getElementsByName("asset_"+index);
+  var percentItems = document.getElementsByName("percent_"+index);
+  for(var i=0;i<assetItems.length;i++){
+      if(i!= 0){
+        assetClass +=",";
+      }
+      assetClass+= assetItems[i].value;
+  }
+  
+  for(var j=0;j<percentItems.length;j++){
+     if(j!=0){
+       percents+=",";
+     }
+     percents +=percentItems[j].value;
+  }
+  
+  $.ajax({
+        url:"/LTISystem/jsp/admin/allocationtemplate/updateTemplate.action?includeHeader=false&templateName="+$name+"&description="+$des+"&assetClassName="+assetClass+"&percentages="+percents,
+        type:"post",
+        success:function(message){
+           alert("update or sava success");
+           if(index > current){
+
+              $("#newTemplate").html("Template Name:<input type='text' style='width:300px' id='title_"+recordSize+"' onblur='checkName("+recordSize+")'><br>Description<br><textarea id='des_"+recordSize+"' wrap='virtual' cols='50' rows='5'></textarea><table id='tb_"+recordSize+"'><thead><tr><th>Asset Class</th><th>Percentage</th><th></th></tr></thead><tbody><tr id='"+recordSize+"_tr_0'><td><input type='text' name='asset_"+recordSize+"'></td><td><input type='text' name='percent_"+recordSize+"'></td><td><input type='button' class='btn' value='Delete' onclick='deleteLine("+recordSize+",0)'></td></tr></tbody></table><input type='button' class='btn' value='Add' onclick='addOneLine("+recordSize+")'> <input type='button' class='btn' value='Submit' onclick='updateRecord("+recordSize+")'>");
+           }
+           window.location.reload();
+        }
+  });
+  
+   
+}
+
+function checkName(index){
+   var $name = $("#title_"+index).val();
+   if($name=="")return;
+   $.ajax({
+         url:"/LTISystem/jsp/admin/allocationtemplate/checkName.action?includeHeader=false&templateName="+$name,
+         type:"post",
+         success:function(message){
+          if(message.length!=0){
+             alert("The templateName is exist, please input another name");
+          }
+          
+         }
+   });
+}
+
+var flag = false;
+function showAddTemplate(){
+   if(!flag){
+     $("#newTemplate").show();
+     $("#showaddmore").val("- Add a Template");
+     flag = true;
+   }else{
+    $("#newTemplate").hide();
+    $("#showaddmore").val("+ Add a Template");
+    flag = false;
+   }
+}
+
+</script>
+
+<p>
+   [#if templateList?? && templateList?size!=0]
+   <div class="template">
+   <table>        
+         [#list templateList as items]
+         <tr>
+            <td>${items.templateName}</td>
+            <td><input type="button" value="Edit" class="btn" onclick="edit(${items_index})"></td>
+            <td><input type="button" value="Delete" class="btn" onclick="deleteItem(${items_index})"></td>
+         </tr>           
+         [/#list]
+   </table> 
+   </div>  
+   [#else]
+      <span> There is no allocation template yet.</span>
+   [/#if]
+</p>
+<p>
+[#if templateList??]
+   [#list templateList as items]
+      <div id="template_${items_index}" style="display:none">
+      Template Name:<input type="text" id="title_${items_index}" style="width:300px" value="${items.templateName}" readOnly="true"><br>
+      Description<br><textarea id="des_${items_index}" wrap="virtual" cols="50" rows="5">${items.description}</textarea>
+      <table id="tb_${items_index}">
+      <thead>
+        <tr>
+          <th>Asset Class</th>
+          <th>Percentage(%)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      [#list assetClassList.get(items_index) as list]
+          <tr id="${items_index}_tr_${list_index}">
+            <td><input type="text" name="asset_${items_index}" value="${list}"></td>
+            <td><input type="text" name="percent_${items_index}" value="${percentageList.get(items_index).get(list_index)}"></td>
+            <td><input type="button" class="btn" value="Delete" onclick="deleteLine(${items_index},${list_index})"></td>
+          </tr>
+      [/#list]    
+      </tbody>
+         
+      </table>
+       <input type="button" class="btn" value="Add" onclick="addOneLine(${items_index})">
+       <input type="button" class="btn" value="Submit" onclick="updateRecord(${items_index},'update')">
+      </div>
+   [/#list]
+[/#if]
+
+</p>
+
+<p>
+  <input type="button" class="btn" id="showaddmore" value="+ Add a Template" onclick="showAddTemplate()">
+  <div id="newTemplate" style="display:none">
+  Template Name:<input type="text" id="title_${recordSize}" style="width:300px" onblur="checkName(${recordSize})"><br>
+  Description<br><textarea id="des_${recordSize}" wrap="virtual" cols="50" rows="5" ></textarea>
+      <table id="tb_${recordSize}">
+       <thead>
+         <tr>
+           <th>Asset Class</th>
+           <th>Percentage(%)</th>
+           <th></th>
+         </tr>
+       </thead>
+       <tbody>
+       <tr id="${recordSize}_tr_0">
+         <td><input type="text" name="asset_${recordSize}"></td>
+         <td><input type="text" name="percent_${recordSize}"></td>
+         <td><input type="button"  class="btn" value="Delete" onclick="deleteLine(${recordSize},0)"></td>
+       </tr>
+       </tbody>
+      </table>
+       <input type="button" class="btn" value="Add" onclick="addOneLine(${recordSize})">
+       <input type="button" class="btn" value="Submit" onclick="updateRecord(${recordSize},'save')">
+  </div>
+</p>

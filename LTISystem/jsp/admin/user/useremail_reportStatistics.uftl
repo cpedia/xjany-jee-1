@@ -1,0 +1,328 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+	<head>
+	<title>User Profile Page</title>
+	<SCRIPT src="../images/common.js" type=text/javascript></SCRIPT>
+	<link href="../images/style.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+	ul{
+ 		margin:0;
+ 		padding:0;
+ 		list-style-type:none;
+	 	height:24px;
+	}
+	ul li{
+ 		float:left;
+ 		display:inline;
+	}
+	ul a{
+ 		text-decoration: none;
+ 		border-top:1px solid #ddd;
+ 		border-bottom:1px solid #ccc;  
+ 		border-left:1px solid #ddd;
+ 		border-right:1px solid #ddd;
+ 		display: block;
+ 		padding: 5px 0 3px;
+ 		margin-left:-1px;
+ 		width:180px;
+ 		font-weight: bold;
+ 		text-align:center;
+ 		line-height:15px;
+ 		color: #11449E;
+	}
+	a.on,a.on:hover{ 
+ 		padding-top: 6px;
+ 		padding-bottom:3px;
+ 		width:180px;
+ 		border: 1px solid #ccc;
+ 		border-bottom: 0;
+ 		background:#DEEBFF;
+	}
+	</style>
+	<script type="text/javascript">
+	function findContentDIV(obj){
+        TagDiv=obj.childNodes;
+        var arrDiv = new Array;
+        for(i=0;i<TagDiv.length;i++){
+            var objDiv = TagDiv[i];
+            var re = /div/i;
+            var arr = re.exec(objDiv.tagName);
+            if(arr != null){
+                if(arr.index == 0){
+                  	arrDiv.push(objDiv);
+                }
+           	}    
+        }
+        return arrDiv;
+	}	
+	function chShift(tabs,DivID){
+        var div=document.getElementById(tabs);  
+        var ul=document.getElementById("uls");   
+        var tA=ul.getElementsByTagName("a");   
+        var tDIV=findContentDIV(div);
+        for(i=0;i<tA.length;i++){ 
+            tA[i].className= null;   
+            tDIV[i].style.display="none";
+            if(DivID==tDIV[i].getAttribute("id")){
+               tA[i].className="on";
+               tDIV[i].style.display="block";
+               if(DivID=="user_list"){
+               	  showUser(DivID);
+               }
+            }
+            
+        }
+	}
+	function showDetail(DivId){
+		var pane = document.getElementById(DivId);
+		pane.style.display = (pane.style.display =="none")? "block" : "none";
+	}
+	
+	function createXmlHttpRequest(){
+		if(window.ActiveXObject){
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		else if(window.XMLHttpRequest){
+			xmlHttp = new XMLHttpRequest();
+		}
+	}
+	function setInnerHTML(el, htmlCode) {   
+ 		var ua = navigator.userAgent.toLowerCase();   
+ 		if (ua.indexOf('msie') >= 0 && ua.indexOf('opera') < 0) {  
+ 			htmlCode = '<div style="display:none">for IE</div>' + htmlCode;   
+ 			htmlCode = htmlCode.replace(/<script([^>]*)>/gi,'<script$1 defer="true">');   
+ 			el.innerHTML = htmlCode;   
+ 			el.removeChild(el.firstChild);   
+ 		}   
+ 		else {   
+ 			var el_next = el.nextSibling;   
+ 			var el_parent = el.parentNode;   
+ 			el_parent.removeChild(el);   
+ 			el.innerHTML = htmlCode;   
+ 			if (el_next) {   
+ 				el_parent.insertBefore(el, el_next)   
+ 			} 
+ 			else {   
+ 				el_parent.appendChild(el);   
+ 			}   
+ 		}   
+	}  
+	var xmlHttp=null;
+	var gDIVId="";
+	function showUser(DivId){
+		//var pane = document.getElementById(DivId);
+		//pane.style.display = (pane.style.display =="none")? "block" : "none";
+		var url="UserEmail_viewEmailUsers.action";
+		createXmlHttpRequest();
+		gDIVId=DivId;
+		xmlHttp.onreadystatechange = handleStateChange;
+		xmlHttp.open("GET",url,true);
+		xmlHttp.send(null);
+	}	
+	function handleStateChange(){
+		if(xmlHttp.readyState == 4){
+			if(xmlHttp.status == 200){
+				document.getElementById(gDIVId).innerHTML ="Please wait..."
+				document.getElementById(gDIVId).innerHTML = xmlHttp.responseText;
+				setInnerHTML(document.getElementById(gDIVId), xmlHttp.responseText);
+			}
+		}
+	}
+	</script>
+	</head>
+	<body>
+	<table class="nav" width="100%">
+			<td width="20%">
+				[@s.url action="Main.action" id="url_main" namespace="/jsp/admin/user"]
+				[/@s.url]
+				[@s.a href="%{url_main}"]User Manager[/@s.a]			
+			</td>		
+			<td width="20%">
+				[@s.url action="Save.action" id="url_create" namespace="/jsp/admin/user"  includeParams="none"]
+					[@s.param name="action"]create[/@s.param]
+				[/@s.url]
+				[@s.a href="%{url_create}"]Create A New User[/@s.a]			
+			</td>
+			<td width="20%">
+				[@s.url action="UserEmail_reportStatistics.action" id="url_reportStatistics" namespace="/jsp/admin/user"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_reportStatistics}"]EmailNotification Report[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="UserProfile.action" id="url_userprofile" namespace="/jsp/admin/user"  includeParams="none"]
+				[/@s.url]
+				[@s.a href="%{url_userprofile}"]User Profile[/@s.a]	
+			</td>
+			<td width="20%">
+				[@s.url action="UserProfile.action" id="url_userprofile" namespace="/jsp/admin/user"  includeParams="none"]
+					[@s.param name="action"]payitem[/@s.param]
+				[/@s.url]
+				[@s.a href="%{url_userprofile}"]User PayItem[/@s.a]	
+			
+			</td>
+		</table>	
+		<p class="title">Email Notification Report</p>
+		<fieldset>
+		<legend>Statistics Area</legend>
+		<table align="left" width="70%" border="0">
+		<tr class="trheader">
+			<th align="left">Statistics Description</th>
+			<th align="left">Stattistics Value</th>
+		</tr>
+		<tr><td>The number of the transactions begin on today</td><td>${transNums!"0"}</td></tr>
+		<tr><td>The number of the users</td><td>${userNums!"0"}</td></tr>
+		<tr><td>The number of the portfolios which is planed to send emails</td><td>${portNums!"0"}</td></tr>
+		<tr><td>The number of the correct portfolios <strong>(lastSentDate equal lastTransactionDate or REINVEST after lastSentDate)</strong></td><td>${portNums-eportNums-dportNums!"0"}</td></tr>
+		<tr><td>The number of the error portfolios <strong>(lastSentDate after lastTransactionDate)</strong></td><td>${eportNums!"0"}</td></tr>
+		<tr><td>The number of the delay portfolios <strong>(lastSentDate before lastTransactionDate)</strong></td><td>${dportNums!"0"}</td></tr>
+		<tr><td>The number of the portfolios which has the scheduled trsnsactions</td><td>${scheduled!"0"}</td></tr>
+		<tr><td colspan="2"><a href="javascript:void(0);" onclick="showDetail('show_detial')">Learn More...</a></td></tr>
+		</table>
+		</fieldset>
+		<fieldset id="show_detial" style="display:none">
+		<legend>Detailed Statistics Information</legend>
+		<div id="tabs">
+			<ul id="uls">
+            	<li onclick="javascript:chShift('tabs','port_list')"><a class="on">Correct Portfolio List</a></li>
+            	<li onclick="javascript:chShift('tabs','de_port_list')"><a>Delay Portfolio List</a></li>
+            	<li onclick="javascript:chShift('tabs','er_port_list')"><a>Error Portfolio List</a></li>
+            	<li onclick="javascript:chShift('tabs','sh_port_list')"><a>Scheduled Transaction List</a></li>
+            	<li onclick="javascript:chShift('tabs','daily_trans')"><a>Daily Transaction List</a></li>
+            	<li onclick="javascript:chShift('tabs','user_list')"><a>User List</a></li>
+       	 	</ul>
+	     <div id="port_list" style="display:block">
+	     	<table align="left" width="100%" border="0">
+	     	<tr class="trheader">
+	     		<th>Portfolio Name</th>
+	     		<th>LastSentDate</th>
+	     		<th>LastTransactionDate</th>
+	     		<th>Transaction<th>
+	     	</tr>
+	     	[#if portfolios??]
+	     	[#list portfolios as ps]
+	     	<tr>
+	     		<td width="40%">
+	     		<a href="/LTISystem/jsp/portfolio/Edit.action?ID=${ps.ID}" target="_blank">${ps. getName()}[#if ps.getState()==1]<font color="red">(live)</font>[/#if]</a>
+				</td>
+	     		<td>${ps.lastSentDate?string("yyyy/MM/dd")}</td>
+	     		<td>${ps.getLastTransactionDate()?string("yyyy/MM/dd")}[#if ps.getState()==7](REINVEST)[/#if]</td>
+	     		<td><a href="javascript:void(0);" onclick="javascript:window.open('UserEmail_viewPortTrans.action?portfolioID=${ps.ID}','Transactions','width=800,height=500,toolbar=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+	     			Transactions</a></td>
+	     	</tr>
+	     	[/#list]
+	     	[/#if]
+	     	</table>
+	     </div>
+	     <div id="de_port_list" style="display:none">
+	     	<table align="left" width="100%" border="0">
+	     	<tr class="trheader">
+	     		<th>Portfolio Name</th>
+	     		<th>LastSentDate</th>
+	     		<th>LastTransactionDate</th>
+	     		<th>Transaction<th>
+	     	</tr>
+	     	[#if dePortfolios??]
+	     	[#list dePortfolios as ed]
+	     	<tr>
+	     		<td width="40%">
+					<a href="/LTISystem/jsp/portfolio/Edit.action?ID=${ed.ID}" target="_blank">${ed.getName()}[#if ed.getState()==1]<font color="red">(live)</font>[/#if]</a>
+				</td>
+	     		<td>${ed.lastSentDate?string("yyyy/MM/dd")}</td>
+	     		<td>${ed.getLastTransactionDate()?string("yyyy/MM/dd")}</td>
+	     		<td><a href="javascript:void(0);" onclick="javascript:window.open('UserEmail_viewPortTrans.action?portfolioID=${ed.ID}','Transactions','width=800,height=500,toolbar=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+	     			Transactions</a></td>
+	     	</tr>
+	     	[/#list]
+	     	[/#if]
+	     	</table>
+	     </div>
+	     <div id="er_port_list" style="display:none">
+	     	<table align="left" width="100%" border="0">
+	     	<tr class="trheader">
+	     		<th>Portfolio Name</th>
+	     		<th>LastSentDate</th>
+	     		<th>LastTransactionDate</th>
+	     		<th>Transaction<th>
+	     	</tr>
+	     	[#if errorPortfolios??]
+	     	[#list errorPortfolios as es]
+	     	<tr>
+	     		<td width="40%">
+					<a href="/LTISystem/jsp/portfolio/Edit.action?ID=${es.ID}" target="_blank">${es. getName()}[#if es.getState()==1]<font color="red">(live)</font>[/#if]</a>
+				</td>
+	     		<td>[#if es.lastSentDate??]${es.lastSentDate?string("yyyy/MM/dd")}[#else]${"-"}[/#if]</td>
+	     		<td>[#if es.getLastTransactionDate()??]${es.getLastTransactionDate()?string("yyyy/MM/dd")}[#else]${"-"}[/#if]</td>
+	     		<td><a href="javascript:void(0);" onclick="javascript:window.open('UserEmail_viewPortTrans.action?portfolioID=${es.ID}','Transactions','width=800,height=500,toolbar=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+	     			Transactions</a></td>
+	     	</tr>
+	     	[/#list]
+	     	[/#if]
+	     	</table>
+	     </div>
+	     <div id="sh_port_list" style="display:none">
+	     <table width="100%" align="left">
+	     	<table align="left" width="100%" border="0">
+	     	<tr class="trheader">
+	     		<th>Portfolio Name</th>
+	     		<th>LastSentDate</th>
+	     		<th>LastTransactionDate</th>
+	     		<th>Transaction<th>
+	     	</tr>
+	     	[#if sHoldingPortfolios??]
+	     	[#list sHoldingPortfolios as hs]
+	     	<tr>
+	     		<td width="40%">
+	     		<a href="/LTISystem/jsp/portfolio/Edit.action?ID=${hs.ID}" target="_blank">${hs. getName()}[#if hs.getState()==1]<font color="red">(live)</font>[/#if]</a>
+				</td>
+	     		<td>${hs.lastSentDate?string("yyyy/MM/dd")!"-"}</td>
+	     		<td>${hs.getLastTransactionDate()?string("yyyy/MM/dd")!"-"}</td>
+	     		<td><a href="javascript:void(0);" onclick="javascript:window.open('UserEmail_viewPortTrans.action?portfolioID=${hs.ID}','Transactions','width=800,height=500,toolbar=no,status=no,menubar=no,resizable=yes,scrollbars=yes');">
+	     			Transactions</a></td>
+	     	</tr>
+	     	[/#list]
+	     	[#else]
+	     	 <tr colspan="3"><td>There is no portfolio which has scheduled transactions!</td></tr>
+	     	[/#if]
+	     	</table>
+	     </div>
+	     <div id='daily_trans' style="display:none" align="left">
+       	 	<table width="100%" id="stransaction" align="left" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			<thead>
+				<tr class="trheader">
+					<th width="16%">Transaction</th>
+					<th width="16%">Date</th>	
+					<th width="16%">Amount</th>
+					<th width="20%">Portfolio Percentage(%)</th>
+					<th width="16%">Symbol</th>	
+					<th width="16%">Asset Name</th>
+				</tr>			
+			</thead>
+			[#list transactions as item]
+			<tr>
+				<td>${item.operation!"-"}</td>
+				<td>${item.date?string("MM/dd/yyyy")!"-"}</td>
+				<td>${item.amount!"-"}</td>
+				<td>[#if item.percentage??][#assign p=item.percentage*100]${p?string("0.00")}%[/#if]</td>
+				<td>
+					[@s.url action="View.action" id="urladdr" namespace="/jsp/fundcenter" includeParams="false"]
+						[@s.param name="symbol"]${item.symbol!"-"}[/@s.param]
+						[@s.param name="includeHeader"]true[/@s.param]
+						[@s.param name="title"]${item.symbol!"-"}[/@s.param]
+					[/@s.url]
+					<a href="${urladdr}" target="_TOP" style="color:#2B60DE">${item.symbol!""}</a>
+				</td>
+				<td>${item.assetName!"-"}</td>
+			</tr>
+			[/#list]
+		</table>
+		</table>
+	     </div>
+	     <div id="user_list" style="display:none" align="left">
+	     </div>
+       </div>
+       </fieldset>
+	</body>
+</html>
+	

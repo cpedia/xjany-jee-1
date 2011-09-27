@@ -1,0 +1,120 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+  <head>
+    <style>    
+   .mpiq_mod_tabletitle{
+     	background-color:#EDF2F5;
+     	border:1px solid #A1A1A1;
+     	padding-bottom:5px;
+     	padding-left:6px;
+     	padding-top:5px;
+     	border-bottom:none;
+     	}
+     	
+    .mpiq_modtitle{
+        background:none repeat scroll 0 0 transparent;
+        padding-top:10px;
+        padding-bottom:10px;
+        text-align: left;
+       }
+        
+  .mpiq_datalable{
+	  padding:3px 8px;
+	  background:none repeat scroll 0 0 #F7F7F7;
+	  white-space:nowrap;
+	  width:1%;
+	}
+	
+  .mpiq_tabledata{
+	  padding:3px 8px;
+	  background:none repeat scroll 0 0 #fff;
+	  text-align: left;
+	}
+  .mpiq_datamoddata{
+       padding:3px 8px;
+       background:none repeat scroll 0 0 #fff;
+       white-space:normal;
+       text-align:left;
+     }
+  .mpiq_tablehead{
+      background:#EEE;
+      padding:3px 8px;
+      font-weight:normal;
+    }
+        
+  .mpiq_datamodoutline{
+      background:none repeat scroll 0 0 #A1A1A1;
+    }
+    
+  .mpiq_tableout{
+    background:none repeat scroll 0 0 #A1A1A1;
+    }
+
+  a{
+    color:#1A5488;text-decoration:none;
+  }
+  a:hover{
+  text-decoration:underline;
+  }
+table.mpiq_modtitle td{padding-top:10px;padding-bottom:10px;}
+table.mpiq_modtitle th{padding-top:10px;padding-bottom:10px;}
+table.mpiq_mod_tabletitle td,table.mpiq_mod_tabletitle th{padding-left:6px;padding-top:5px;padding-bottom:5px;}
+     	
+   </style>   
+  </head>
+   <body>
+      <p>
+        ${table}
+      </p>
+      <p><big><b>Management Information</b></big></p>
+      <p>
+        ${management}
+      </p>
+      <p><big><b>Fund Summary</b></big></p>
+      <p>
+        ${summary}
+      </p>
+   [#if portMap??]
+      <p><big><b>Portfolio Performance Comparison</b></big></p>
+      <p>
+       <table id="comparetablePort" width='100%' width='100%'  class="mpiq_tableout"  cellpadding="0" cellspacing="1">
+				<thead>
+					<tr>
+						<th alt="Plan Name" width="40%" class="mpiq_tablehead">Portfolio/Fund Name</th>
+						<th alt="One Years' Annualized Return" width="10%" class="mpiq_tablehead">1Yr AR</th>
+						<th alt="One Years' Sharpe Ratio" width="10%" class="mpiq_tablehead">1Yr Sharpe</th>
+						<th alt="Three Years' Annualized Return" width="10%" class="mpiq_tablehead">3Yr AR</th>
+						<th alt="Three Years' Sharpe Ratio" width="10%" class="mpiq_tablehead">3Yr Sharpe</th>
+						<th alt="Five Years' Annualized" width="10%" class="mpiq_tablehead">5Yr AR</td>
+						<th alt="Five Years' Sharpe Ratio" width="10%" class="mpiq_tablehead">5Yr Sharpe</th>
+					</tr>
+				</thead>
+				<tbody>
+						[#list   portMap?keys as portfname]
+						[#if portfname_index%2==0]
+							<tr class='odd'>
+						[/#if]
+						[#if portfname_index%2==1]
+							<tr class='even'>
+						[/#if]
+							<td class="mpiq_tabledata">${portfname}</td>
+							<td class="mpiq_tabledata">[#if portMap[portfname].AR1??]${portMap[portfname].AR1?string.percent}[/#if]</td>
+							<td class="mpiq_tabledata">[#if portMap[portfname].sharpeRatio1??]${portMap[portfname].sharpeRatio1?string.percent}[/#if]</td>
+							<td class="mpiq_tabledata">[#if portMap[portfname].AR3??]${portMap[portfname].AR3?string.percent}[/#if]</td>
+							<td class="mpiq_tabledata">[#if portMap[portfname].sharpeRatio3??]${portMap[portfname].sharpeRatio3?string.percent}[/#if]</td>
+							<td class="mpiq_tabledata">[#if portMap[portfname].AR5??]${portMap[portfname].AR5?string.percent}[/#if]</td>
+							<td class="mpiq_tabledata">[#if portMap[portfname].sharpeRatio5??]${portMap[portfname].sharpeRatio5?string.percent}[/#if]</td>
+							</tr>
+						[/#list]
+				</tbody>
+				</table>
+      </p>
+    [/#if]
+     [#if fundCompareLink??] <p><a href="${fundCompareLink}"><big><b>Portfolio Compare Link</b></big></a></p>[/#if]
+     
+     <p><big><b>Three Year Chart</b></big></p>
+		     <a rel="lightbox" href="/LTISystem/article_viewchart2.action?[#if portfolioID??]portfolioID=${portfolioID}[/#if][#if securityID??]&securityID=${securityID}[/#if]&yearNum=3">
+		     <img src="/LTISystem/article_viewchart2.action?[#if portfolioID??]portfolioID=${portfolioID}[/#if][#if securityID??]&securityID=${securityID}[/#if]&yearNum=3" alt="" hspace="6" vspace="6" /></a>
+   </body>
+</html>

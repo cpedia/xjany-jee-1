@@ -1,0 +1,59 @@
+[#ftl]
+[#if plans?? && plans?size >0]
+	[#if Parameters.inner?? && Parameters.inner=="true"]
+		<style type="text/css">
+		.btn {
+			font-family: Tahoma;
+			font-size: 1.0em;
+			color: #000000;
+			background-image: url(jsp/portfolio/images/grey-bg.gif);
+			border: 1px solid #999999;
+			cursor: pointer;
+			background-repeat: repeat;
+			padding: 1px;
+			margin-top: 1px;
+			margin-right: 1px;
+			margin-bottom: 1px;
+			margin-left: 2px;
+			width:200px;
+		}
+		.btn2 {
+			font-family: Tahoma;
+			font-size: 1.0em;
+			color: #000000;
+			background-image: url(jsp/portfolio/images/grey-bg.gif);
+			border: 1px solid #999999;
+			cursor: pointer;
+			background-repeat: repeat;
+			padding: 1px;
+			margin-top: 1px;
+			margin-right: 1px;
+			margin-bottom: 1px;
+			margin-left: 2px;
+			width:150px;
+			text-align:left;
+		}
+		
+		</style>
+		[/#if]
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor='#DDDDDD'>
+			<tbody>
+			[#list plans as item]
+					<tr class='even'  bgcolor='#ffffff' height=25px>
+						<td>
+								<a href='f401k_view.action?ID=${item[1]}'>${item[0]}</a>
+						</td>	
+						<td align='center'  width=120px >
+							[#if Parameters.inner?? && Parameters.inner=="true"]
+								<input type='button' value='Select' class='btn' style="width:95%;height:80%" onclick='self.opener.selectplan(${item[1]?string.computer},"${item[0]}");opener.focus();window.close();');
+							[#else]
+								<input type='button' value='Select' class='btn' style="width:95%;height:80%" onclick='selectplan(${item[1]?string.computer},"${item[0]}")');
+							[/#if]
+						</td>	
+					</tr>
+				[#if size?? && size!=0 && item_index == size][#break][/#if]
+			[/#list]
+			</tbody>
+		</table>
+	
+[/#if]

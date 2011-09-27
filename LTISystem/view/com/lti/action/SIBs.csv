@@ -1,0 +1,18 @@
+,Plan ID,TAA Moderate,SAA Moderate,US Equity,Foreign Equity,Fixed Income,REITs,Emerging Market Equity,Commodity
+Three core,5463,31628,31631,1,0,0,0,0,0
+Three core,5463,31628,31631,1,1,0,0,0,0
+Three core,5463,31628,31631,1,0,1,0,0,0
+Three core,5463,31628,31631,1,0,0,1,0,0
+Three core,5463,31628,31631,1,0,0,0,1,0
+Three core,5463,31628,31631,1,0,0,0,0,1
+Three core,5463,31628,31631,1,1,1,0,0,0
+Three core,5463,31628,31631,1,0,1,1,0,0
+Three core,5463,31628,31631,1,0,1,0,1,0
+Three core,5463,31628,31631,1,0,1,0,0,1
+Four core REITs,1160,17611,17617,1,1,1,1,0,0
+Four core REITs,1160,17611,17617,1,0,1,1,1,0
+Four core REITs,1160,17611,17617,1,1,1,1,0,1
+Four core emerging market,5458,31601,31604,1,1,1,0,1,0
+Four core emerging market,5458,31601,31604,1,1,1,0,1,1
+Five core ,5453,31570,31573,1,1,1,1,1,0
+Six core,5464,31641,31644,1,1,1,1,1,1

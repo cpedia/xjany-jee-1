@@ -1,0 +1,61 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<title>MyPlanIQ Plans</title>
+<meta  name="Description" content="All MyPlanIQ Plans are listed here.">
+</head>
+<body>
+<div class=" ">
+<div class="sidebar_box">
+  	<div style="margin-bottom:8px"><span class="sidebar_heading"><strong>Search For A Plan</strong><span></div>
+  			<div class=" ">
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=8]
+[/@authz.authorize]
+
+</script>
+
+<table border=0>
+<tr>
+	<td>
+		<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    	<input name="groupIDS" value="8" type="hidden"></input>
+	        <input name="includeHeader" value="true" type="hidden"></input>
+	        <input name="type" value="2" type="hidden"></input>
+	        <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	        <input id="n401k_plansearch_text" name="q" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)' size="15" type="text" value='${Parameters.symbolPlan!""}'>
+	        <input alt='Quote' class='submitSearch' type='submit' value=''/>
+	   </form><!-- end of form -->
+	   </span>
+	
+	</td>
+</tr>
+</table>
+</div>
+</div>
+
+<p>The following is a list of company plans based on public filing information. If you can not find your company plans or you think they need to be updated/corrected, please email us your company plans investment options (a list of investment funds. These funds could be mutual funds (thus preferably their symbols), trusts and Separately Managed Accounts (SMAs)). You could find this information from Summary Plan Descriptions (SPD) document or through your online account. Another important information is the redemption period for each fund. By default, each plan's investment fund is set to be a 3 month period. </p>
+<p><strong><a href="mailto:support@myplaniq.com?subject=My company plan's investment options">Email your plan's investment options</a></strong></p>
+
+<div id='strategyClassTable'>
+[@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+	 [@s.param name="includePortfolio"]true[/@s.param]
+	 [@s.param name="groupIDs"]${groupid}[/@s.param]
+	 [@s.param name="type"]2[/@s.param]
+	 [@s.param name="allPlanPageSize"]20[/@s.param]
+	 [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+[/@s.action]
+</div>
+[#--	 [@s.param name="includeCategory"]true[/@s.param]
+	 [@s.param name="includeClass"]true[/@s.param]
+--]
+
+</div>
+
+</body>
+</html>

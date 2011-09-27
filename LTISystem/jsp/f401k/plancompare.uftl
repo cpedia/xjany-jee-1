@@ -1,0 +1,201 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ: Subscription Plan Comparison </title>
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="The available service and the charge of different subscription levels of MyPlanIQ are listed on this page.">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<script>
+$(function(){
+	$("#ta").tablesorter(); 
+});
+</script>
+</head>
+
+<body>
+	
+<table border=0 width=100% style="margin-left:-10px">
+<tr>
+<td valign="top" width=200>
+   
+   <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">Support</div>
+	 <div class="sidebar_box_content">
+           <ul class="list">
+           <li><strong>General Support Issues: </strong><a href="/jforum/forums/show/81.page">Support Forum</a></li>
+           <li><strong>Email (only for account/personal related issues): </strong><a href="mailto:support@MyPlanIQ.com">support@MyPlanIQ.com</a></li>
+           <li><strong>Phone: </strong>510-279-3131</li>
+           </ul>
+         </div>
+   </div>
+    <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">More Info</div>
+	 <div class="sidebar_box_content">
+         <ul class="list">
+          <li><a href="/LTISystem/f401k__why.action">Why MyPlanIQ</a></li>
+          <li><a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a></li>
+          <li><a href="/LTISystem/UserFiles/tutorial.pdf">Tutorial</a></li>
+          <li><a href="/LTISystem/f401k__faqs.action">FAQs</a></li>
+          <li><a href="/LTISystem/f401k__glossary.action">Glossary</a></li>
+         </ul>
+         </div>
+    </div>
+<!-- 
+    <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">How It Work?</div>
+	 <div class="sidebar_box_content">
+           <p>See <a href="jsp/images/guide1/guide1.html">a tutorial</a></p>
+         </div>
+    </div>
+-->
+</div>
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+
+[@authz.authorize ifAllGranted="ROLE_ANONYMOUS"]
+    <h1 align="center">To subscribe: <a href="/LTISystem/jsp/register/openRegister.action"><strong>Register an account</strong></a> or <a href="/LTISystem/acegilogin.jsp"><strong>Sign in</strong></a></h1></br>
+[/@authz.authorize]
+    <h1 align="center">Subscription Plan Comparison</h1>
+
+	<table  class="tablesorter" border="0" cellpadding="0" cellspacing="1" id="ta">
+		<thead>
+			<tr>
+				<th class="header">
+						Plan
+				</th>	
+				<th class="header">
+						<a href="/LTISystem/jsp/strategy/View.action?ID=771"><span>SAA Portfolios</span></a>
+				</th>	
+				<th class="header">
+						<a href="/LTISystem/jsp/strategy/View.action?ID=1003"><span>TAA Portfolios</span></a>
+				</th>
+                                <th class="header">
+						Customize
+				</th>
+                                <th class="header">
+                                                Number of Plans (Portfolios)
+                                </th>
+                                <th class="header">
+                                                Create<br> Your<br> Own<br> Plan
+                                </th>
+                                <th class="header">
+                                                Advanced Strategies
+                                </th>
+                                <th class="header">
+                                                Cost
+                                </th>
+			</tr>			
+		</thead>
+		<tbody>
+                        <tr class='odd' valign='top'>
+                               <td>
+                                <strong>Unregistered<br> User</strong>
+                               </td>
+                               <td>
+                                Two Months Delayed
+                               </td>
+                               <td>
+                                Two Months Delayed
+                               </td>
+                               <td>
+                                No
+                               </td>
+                               
+                               <td> No</td>
+                               <td> No </td>
+                               <td> No </td>
+                               <td> NA </td>
+                       </tr>
+                        <tr class='even' valign='top'>
+                               <td>
+                                <strong>Registered<br> User</strong>
+                               </td>
+                               <td>
+                                Realtime<br>Rebalance Email
+                               </td>
+                               <td>
+                                Two Months Delayed<br>No Email
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                            
+                               <td> 5(5)</td>
+                               <td> No</td>
+                               <td>Two Months Delayed</td>
+                               <td>NA</td>
+                               
+                       </tr>
+                       <tr class='odd' valign='top'>
+                               <td>
+                                <strong>Subscription Basic</strong>
+                               </td>
+                               <td>
+                                Realtime<br>Rebalance Email
+                               </td>
+                               <td>
+                                Realtime<br>Rebalance Email
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                               
+                               <td>5(5)</td>
+                               <td>No</td>
+                               <td>Two Months Delayed</td>
+                               <td>$9.95 Monthly($99.5 Annual)<sup>1</sup></td>
+                       </tr>
+                       <tr class='odd' valign='top'>
+                               <td>
+                                <strong>Subscription Expert</strong>
+                               </td>
+                               <td>
+                                Realtime<br>Rebalance Email
+                               </td>
+                               <td>
+                                Realtime<br>Rebalance Email
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                               
+                               <td>10(10)</td>
+                               <td>5</td>
+                               <td>Realtime<br>Rebalance Email</td>
+                               <td>$29.95 Monthly ($299.5 Annual)
+                       </tr>
+                       <tr class='odd' valign='top'>
+                               <td>
+                                <strong>Subscription Pro</strong>
+                               </td>
+                               <td>
+                                Realtime<br>Rebalance Email
+                               </td>
+                               <td>
+                                Realtime<br>Rebalance Email
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                              
+                               <td>20(20)<sup>2</sup></td>
+                               <td>10<sup>2</sup></td>
+                               <td>Realtime<br>Rebalance Email</td>
+                               <td>$49.95 Monthly ($499.5 Annual)
+                       </tr>
+               </tbody>
+          </table>
+          <br><br><p><sup>1</sup>: Promotion rate, regular $14.95/month ($149.5/year)</p>
+                  <p><sup>2</sup>: Contact us for volume discount if more plans/portfolios are needed.</p> 
+                  <p><sup>3</sup>: Please register and login before subscription.</p>                
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,112 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ 360 Degree Market Overview</title>
+<meta name="home" content="vf_current" />
+<meta content="'MyPlanIQ Market Overview' gives the investors a full picture of the market trend, including Major Asset Classes Trend, Fixed Income Assets Trend, Global Stocks Trend, Dividend Stock ETF Trend, Commodities Trend, Currencies Trend, US Equity Style Trend and US Sectors Trend." name="Description">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+
+<!-- <script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+-->
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+</script>
+</head>
+
+<body>
+<div>
+ [@s.action name="advanced__left" namespace="/" executeResult=true]
+ [/@s.action]
+<div class="col-2">
+    <h1 align="center">MyPlanIQ 360 Degree Market Overview</h1>
+    <p align="center">Other than indicated, performance data are based on daily closing prices</p>
+
+                        <h2><span>Major Asset Classes Trend</span></h2>
+                         <span>${readGlobalObject("MajorAssetReturnTable.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "MajorAssets" readGlobalObject("MajorAssetReturnTable") false/]
+	    		</div>
+
+	    		<h2><span>Fixed Income Assets Trend</span></h2>
+                            <span>${readGlobalObject("FixedIncomeReturnTable.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "FixedIncome" readGlobalObject("FixedIncomeReturnTable") false/]
+	                </div>
+
+
+	    		<h2>Global Stocks Trend</h2>
+                            <span>${readGlobalObject("CountryReturnTable.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "Country"  readGlobalObject("CountryReturnTable") false/]
+			</div>
+
+                         <h2><span>Dividend Stock ETF Trend</span></h2>
+                             <span>${readGlobalObject("HighDividendReturnTableWed.time")}</span>
+                        <p align="center">Performance data are based on closing prices on last Wednesday</p>
+	    		<div class="dividerTop">
+	    		[@lti.table "DividendStocks" readGlobalObject("HighDividendReturnTableWed") false/]
+			</div>
+			
+	    		<h2>Commodities Trend</h2>
+                            <span>${readGlobalObject("CommodityReturnTable.time")}</span>
+                        <p align="center">Performance data are based on closing prices on last Friday</p>
+	    		<div class="dividerTop">
+	    		[@lti.table "Commodities" readGlobalObject("CommodityReturnTable") false/]
+	    		</div>
+
+
+	    		<h2><span>Currencies Trend</span></h2>
+                           <span>${readGlobalObject("CurrencyReturnTableWed.time")}</span>
+                        <p align="center">Performance data are based on closing prices on last Wednesday</p>
+	    		<div class="dividerTop">
+	    		[@lti.table "Currencies" readGlobalObject("CurrencyReturnTableWed") false/]
+	    		</div>
+
+                        <h2><span>US Equity Style Trend</span></h2>
+                            <span>${readGlobalObject("USStyleReturnTable.time")}</span>
+                        <p align="center">Performance data are based on closing prices on last Friday</p>
+	    		<div class="dividerTop">
+	    		[@lti.table "USStyle" readGlobalObject("USStyleReturnTable") false/]
+			</div>
+
+	    		<h2><span>US Sectors Trend</span></h2>
+                            <span>${readGlobalObject("USSectorReturnTable.time")}</span>
+                        <p align="center">Performance data are based on closing prices on last Friday</p>
+	    		<div class="dividerTop">
+	    		[@lti.table "USSectors" readGlobalObject("USSectorReturnTable") false/]
+			</div>
+                        <br>
+                        
+
+
+</div>
+
+</div>
+</body>
+</html>

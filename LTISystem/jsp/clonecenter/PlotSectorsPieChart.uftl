@@ -1,0 +1,3 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<img src='${lti.baseUrl}${filePath}'>

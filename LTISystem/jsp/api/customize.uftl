@@ -1,0 +1,217 @@
+[#ftl] [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]] [#assign
+authz=JspTaglibs["/WEB-INF/authz.tld"]] [#import
+"/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ Widgets</title>
+<meta name="Description"
+	content="MyPlanIQ provides free widgets of various market trend data and MyPlanIQ articles. You can generate HTML code on this page and put them on your own website to get up-to-date tracking data.">
+<script>
+
+
+//What you need to do is to change this json data, if there is no bug.
+var _data={"length":8,
+		   "data":
+			[
+                        {"id":"mp_majorassets","url":"MajorAssetReturnTableWidget","title":"<a href='http://www.myplaniq.com/LTISystem/advanced__markets.action'> Weekly Asset Trends: Asset Classes in One Table</a> ","type":1,"width":"300","height":"800"},
+                        {"id":"mp_fixedincome","url":"FixedIncomeReturnTableWidget","title":"<a href='http://www.myplaniq.com/LTISystem/advanced__markets.action'> Weekly Fixed Income Asset Trends in One Table</a>","type":1,"width":"300","height":"800"},
+                        {"id":"mp_usstyle","url":"USStyleReturnTableWidget","title":"<a href='http://www.myplaniq.com/LTISystem/advanced__markets.action'> Weekly U.S. Stock Style Trends in One Table</a>","type":1,"width":"300","height":"600"},
+
+//                        {"id":"mp_commodity","url":"CommodityReturnTable","title":"US Sectors","type":1,"width":"300","height":"900"},
+			{"id":"mp_dividendETF","url":"HighDividendReturnTableWidget","title":"<a href='http://www.myplaniq.com/LTISystem/advanced__markets.action'> Weekly Dividend ETF Trends</a> ","type":1,"width":"300","height":"900"},
+//                        {"id":"mp_fixedincome","url":"FixedIncomeReturnTable","title":"Fixed Income Assets","type":1,"width":"300","height":"900"},
+//			{"id":"mp_dividendstocks1","url":"USSectorReturnTable1","title":"Dividend stocks(error test)","type":1,"width":"500","height":"250"},
+                        {"id":"mp_articles","url":'${"http://pipes.yahoo.com/pipes/pipe.run?_id=58483b95125a0d6fa5bdaf4156098c37&_render=json"?url("utf8")}',"title":"MyPlanIQ News and Articles","type":2,"width":"200","height":"300"},
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+//                        {"id":"mp_support","url":'${"http://pipes.yahoo.com/pipes/pipe.run?_id=f74b2c13c4f359ae9e8f39405ef4e662&_render=json"?url("utf8")}',"title":"MyPlanIQ Support and Announcements","type":2,"width":"200","height":"300"},
+                        {"id":"mp_support","url":'${"http://pipes.yahoo.com/pipes/pipe.run?_id=f9ad43d77f35594a7df0f965d754987e&_render=json"?url("utf8")}',"title":"MyPlanIQ Support and Announcements","type":2,"width":"200","height":"300"},
+[/@authz.authorize]
+			{"id":"mp_news","url":'${"http://pipes.yahoo.com/pipes/pipe.run?_id=aac761131cd69e854f4f7db68d8782ae&_render=json"?url("utf8")}',"title":"MyPlanIQ News and Articles","type":2,"width":"200","height":"300"},
+			{"id":"mp_chart_example","url":'${"http://www.myplaniq.com/LTISystem/jsp/api/images/line-star.txt"?url("utf8")}',"title":"Chart Example","type":3,"width":"200","height":"300"},
+			{"id":"mp_chart_example2","url":'${"http://www.myplaniq.com/LTISystem/jsp/api/images/data-files/bar-3d.txt"?url("utf8")}',"title":"Chart Example2","type":3,"width":"200","height":"300"}
+		  
+		  ]};
+		  
+
+
+$(function(){
+	var _tr="<tr><td><input type='checkbox' id='_id' value='_url'></td><td>_title</td><td>width:<input id='_id_w' type='text' size=4 value='_width'> height: <input id='_id_h' type='text' size=4 value='_height'></td></tr>";
+	var i=0;
+	for(i=0;i<_data.length;i++){
+		var tr=_tr.replace(/_id/g,_data.data[i].id);
+		tr=tr.replace("_url",_data.data[i].url);
+		tr=tr.replace("_title",_data.data[i].title);
+		tr=tr.replace("_width",_data.data[i].width);
+		tr=tr.replace("_height",_data.data[i].height);
+		$("#itable").append(tr);
+		//alert(i);
+	}
+});
+
+
+[#assign host="www.myplaniq.com" /]
+[#assign host2="http://"+host /]
+
+function check(){
+	if(state!="success"){
+		[@authz.authorize ifAllGranted="ROLE_ANONYMOUS"]
+			authz();
+			$("#assetmore").dialog('open');
+		[/@authz.authorize]
+		[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+		 	generate();
+		[/@authz.authorize]
+	}
+}
+	
+function generate(){
+	
+	$("#content").hide();
+	var html="";
+	var host="${host}";
+	
+	html+="<lin";
+	html+="k href='http://www.myplaniq.com/LTISystem/jsp/api/images/lti.css' rel='stylesheet' type='text/css' /";
+	html+=">\r\n";
+	
+	var div="";
+	var reqparam="";
+	
+	var flag=false;
+	for(i=0;i<_data.length;i++){
+		var d =_data.data[i];
+		if($("#"+d.id).attr("checked")==true){
+			reqparam+=d.id+'|';
+			if(d.type==1){
+				reqparam+='${host2?url("utf8")}%2FLTISystem%2Fapi__etfwatch.action%3FincludeHeader%3Dfalse%26callback%3D%3F%26jsoncallback%3D%3F%26id%3Dussectors%26tablename='+d.url+'|';
+			}else{
+				reqparam+=d.url+'|';
+			}
+			reqparam+=d.type+'|';
+			var w=$("#"+d.id+"_w").val();
+			var h=$("#"+d.id+"_h").val();
+			
+			var style="";
+			if(w!="")style+="width:"+w+";overflow-x:auto;";
+			if(h!="")style+="height:"+h+";overflow-y:auto;";
+			else style+="overflow-y:hidden;";
+			
+			
+			div+='<div id="'+d.id+'" style="'+style+'"><table style="border:1px solid #ccc;width:100%;height:100%" border=0><tr><td align="center" valign="middle"><img border=0 src="http://www.myplaniq.com/LTISystem/jsp/api/images/loading.gif"></td></tr></table></div><div class="powerMessage" style="text-align:right;height:15px;width:'+w+'">Powered by <a href="http://www.myplaniq.com/">MyPlanIQ.com</a></div></div>\r\n';
+			
+			if(w=="")w=-1;
+			if(h=="")h=-1;
+			reqparam+=w+'|';
+			reqparam+=h+'|';
+			reqparam+=escape(d.title)+'%23';
+			flag=true;
+		}
+	
+	}
+	if(!flag){
+		alert("You must check one widget at least.");
+		return;
+	}
+	
+	
+	html+="<script type=\"text/javascript\" src=\"http://"+host+"/LTISystem/api_widget.action?includeHeader=false&reqparam=";
+	html+=reqparam;
+	html+="\"><";
+	html+="/script>\r\n";
+	html+=div;
+	
+	
+	$("#res").val(html);
+	$("#content").show();
+	
+}
+
+
+
+var state;
+function authz()
+{
+    $("#assetmore").dialog({
+			resizable: false,
+			autoHeight: true,
+			autoOpen:false,
+			modal: true,
+			title:"Please fill in your email and website!",
+			buttons: {
+				'Close': function() {
+					$(this).dialog('close');
+				},
+    			'Enter':function(){
+    				var email = $("#email").val();
+    				var website = $("#website").val();
+    				if(email==""||website==""){
+    					alert("Can't be Empty");
+    					return;
+    				}
+    				$.ajax({
+    					type:'post',
+    					url:"/LTISystem/api_widgetUser.action?email="+email+"&website="+website+"&includeHeader=false",
+    					success:function(data){
+    						alert(data);
+    						$("#assetmore").dialog('close');
+    						state = "success";
+    						generate();
+    					}
+    				});
+    			}
+			}
+		});
+}
+</script>
+
+</head>
+<body>
+
+	<table border=0>
+		<tr>
+			<td>
+				<h2>MyPlanIQ Widgets: check a box, press build and copy the
+					HTML code to your web page</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table border=0 width=100% id="itable">
+
+				</table>
+			</td>
+
+		</tr>
+		<tr>
+			<td><a href="javascript:void(0)" onclick="check()"
+				class="uiButton" style="width: 100px">Build</a><br>
+				<div id="assetmore" style="display: none">
+					<table>
+						<tr>
+							<td>Your Email:</td>
+							<td><input type="text" name="email" id="email" />
+							</td>
+						</tr>
+						<tr>
+							<td>Website:</td>
+							<td><input type="text" name="website" id="website" />
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+
+	</table>
+
+
+
+	<div id="content" style="display: none">
+		<textarea style="width: 60%; height: 300px" id="res">
+	</textarea>
+
+	</div>
+
+</body>
+
+</html>

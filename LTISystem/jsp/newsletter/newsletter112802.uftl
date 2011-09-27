@@ -1,0 +1,203 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+	<title>MyPlanIQ Newsletter: March 2011</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="A retirement plan and investing newsletter">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<script>
+$(document).ready(function() {
+	alignHeight();
+});
+</script>
+<style>
+.newsletter-box {
+<!--	height:545px; -->
+	overflow:hidden;
+	border: 8px solid #FAFAFA;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+}
+.newsletter-box .col-1 {
+	width:618px;
+	height: 545px;
+	overflow: hidden;
+}
+.newsletter-box .col-2 {
+	height: 545px;
+	overflow: hidden;
+	padding-left:10px;
+}
+
+</style>
+</head>
+<body>
+  <div class="borderGreen">
+  
+
+
+<!-- <STYLE>
+
+ .headerTop { background-color:#FFCC66; border-top:0px solid #000000; border-bottom:1px solid #FFFFFF; text-align:center; }
+
+ .adminText { font-size:10px; color:#996600; line-height:200%; font-family:verdana; text-decoration:none; }
+
+ .headerBar { background-color:#FFFFFF; border-top:0px solid #333333; border-bottom:10px solid #FFFFFF; }
+
+ .title { font-size:20px; font-weight:bold; color:#CC6600; font-family:arial; line-height:110%; }
+
+ .subTitle { font-size:11px; font-weight:normal; color:#666666; font-style:italic; font-family:arial; }
+
+ .defaultText { font-size:12px; color:#000000; line-height:150%; font-family:trebuchet ms; }
+
+ .footerRow { background-color:#FFFFCC; border-top:10px solid #FFFFFF; }
+
+ .footerText { font-size:10px; color:#996600; line-height:100%; font-family:verdana; }
+
+ a { color:#FF6600; color:#FF6600; color:#95b5c1; }
+
+</STYLE>
+
+-->
+
+<div class="newsletter-box">
+
+
+
+<table width="100%" cellpadding="10" cellspacing="0" class="backgroundTable" >
+
+<tr>
+
+<td valign="top" align="center">
+
+
+
+
+
+<table width="550" cellpadding="0" cellspacing="0">
+
+
+
+<tr>
+
+
+</tr>
+
+</table>
+
+
+
+
+
+<table width="550" cellpadding="20" cellspacing="0">
+
+<tr>
+
+<td valign="top" style="font-size:12px;color:#000000;line-height:150%;font-family:trebuchet ms;">
+
+
+
+<p>
+
+<table width="100%">
+  <tbody>
+    <tr>
+    </tr>
+    <tr>
+      <td>
+      <h2 align="center"><font color="#458f51">MyPlan</font><font
+ color="#95b5c1">IQ</font> <p> Investment Newsletter</h2>
+      <p align="center"><strong align="center">March 28 2011</strong></p>
+      </td>
+      <td align="right" width="6%"> <align="right"><a
+ href="http://www.myplaniq.com/LTISystem/newsletter__nllist.action"><strong><font
+ size="3">Archive</font></strong></a></strong> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This is a biweekly newsletter with quantitative data from thousands of plans. 
+
+We believe that good asset allocation brings the best returns.</p>
+
+<p><span style="font-weight: bold;">A Review of Q1 Portfolios</p></span>
+
+<a href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ComparePortfolio.action?portfolioString=Six%20Core%20Asset%20ETF%20Benchmark%20Tactical%20Asset%20Allocation%20Moderate,Six%20Core%20Asset%20ETF%20Benchmark%20Strategic%20Asset%20Allocation%20Moderate,Three%20Core%20Asset%20ETF%20Benchmark%20Tactical%20Asset%20Allocation%20Moderate,Three%20Core%20Asset%20ETF%20Benchmark%20Strategic%20Asset%20Allocation%20Moderate"><img src="http://www.myplaniq.com/LTISystem/UserFiles/13011645881223-28-11-portfolios.jpg" width="866" height="306" alt="" title="" border="0" /></a>
+
+
+<p>As we come to the end of the first quarter, it's time to review four portfolios against each other and 
+against the US Stock market based on the ETF VTI.</p>
+
+<p>The US government continues to back Wall Street and with initial signs of recovery, the market continues its upward push but there are increasing indications that equities are overpriced.</p>
+
+<p> In addition, recent events in Japan, North Africa and the Middle East have had a significant impact on the market that are visible in the volatility shown by VTI.
+</p><p>
+The Six Core ETF benchmarks have kept pace with the US market but with lower volatility as there are more opportunities to find asset classes that do well especially in times of stress.
+</-><p>
+Tactical asset allocation is currently doing better than strategic asset allocation. During 2010 SAA portfolios did better, and we expect  TAA will do better this year. The three asset class benchmarks are struggling to keep up as international equities and fixed income are currently struggling.
+</p>
+<p> 
+It is time to check the returns from your 401K investments. Many 401K plans only have three asset classes 
+and you should look at using an IRA to provide overall balance.</p>
+
+One of the most glaring holes in our education system is retirement investing. 
+Retirement investing is a long term proposition and is similar to looking after your health - do what is sensible and 
+have occasional checkups that become more frequent as you age.
+<br><br>
+
+
+<p><span style="font-weight: bold;"><a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=5,551">Introducing Kevin Carr</a></span></p>
+
+Kevin Carr is a <span style="font-weight: bold;">MyPlanIQ ACE.</span> We are encouraging expert users to provide plans for others. We will 
+be adding more over the coming year.
+
+<br><br>
+<p><span style="font-weight: bold;"><a href="http://askingfordirection.com/jigsaw-pieces/">Jigsaw Pieces</a></span></p> 
+
+Jenny Hollingworth is continuing her Blog <a href="http://askingfordirection.com/jigsaw-pieces/">Asking For Directions</a> 
+-- One woman's journey through the world of Personal Finance.
+
+<p><a href="http://askingfordirection.com/jigsaw-pieces/">I concluded last week that short term savings options don't come close to matching the rate of inflation.   
+Two weeks ago, I established that I might do best to look at an online brokerage, perhaps with a view to investing in index funds.  
+So this week, I thought I would take a closer look at the options for doing that....</a></p>
+
+
+<p><span style="font-weight: bold;"><a target="_blank" href="http://www.myplaniq.com/LTISystem/f401k_blog.action">Articles of the week</a>
+</span></p>
+<ul>
+<li><span><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=2872">Tactically
+Manage An Income Producing Portfolio With Commodity Exposure</a></span>
+</li>
+<li><span><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=2848">Fund
+Advice Gives Sound Advice</a></span> </li>
+<li><span><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=2838">Earthquakes
+and Wars Call for Diversification and Tactical Asset Allocation in
+Investing</a></span> </li>
+<li><span><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=2833">RWO,
+RWR Replace VNQ in the Six Asset Portfolio</a></span> </li>
+<li><span><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=2825">Swensen
+Six Asset Lazy Portfolio Review Exhibits Different Q1 Behavior</a></span>
+</li>
+</ul>
+
+
+
+</div>
+<div><a rel="nofollow" href="../../../../jforum/rss/forumTopics/61.page" target="_blank">RSS Feed <img src="../../../../jforum/templates/default/images/xml_button.gif" alt="[XML]" /></a></div>
+<div><br />
+<p><span><strong>Disclaimer:</strong> </span></p>
+<p><span>Any investment in securities including mutual funds,  ETFs, closed end funds, stocks and any other securities could lose  money over any period of time. All investments involve risk. Losses may  exceed the principal invested. Past performance is not an indicator of  future performance. There is no guarantee for future results in your  investment and any other actions based on the information provided on  the website including, but not limited to, strategies, portfolios,  articles, performance data and results of any tools.</span></p>
+<p><span>All rights are reserved and enforced. By accessing  the website, you agree not to copy and redistribute the information  provided herein without the explicit consent from MyPlanIQ.</span></p>
+</div>
+<br /></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

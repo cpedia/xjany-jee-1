@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.example" namespace="/jsp/example" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/example/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Test" class="/jsp/example/Test">
+			<result name="success" type="freemarker">/jsp/example/welcome.ftl</result>
+			<result name="error">/jsp/example/error.jsp</result>
+		</action>
+		<action name="TestValidate" class="/jsp/example/TestValidate">
+			<result name="success">/jsp/example/testvalidate.jsp</result>
+			<result name="input">/jsp/example/testvalidate.jsp</result>
+		</action>
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/example/{1}.uftl
+			</result>		
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>					
+		</action>			
+	</package>
+	
+</struts>

@@ -1,0 +1,138 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<style>
+#process_div select{
+ border:0px solid #369;
+ background:#fff;
+ width:98%;
+ color:blue;
+}
+
+#process_div input{
+ border:0px solid #369;
+ background:#fff;
+ width:98%;
+ color:blue;
+}
+
+#process_div select option{
+ color:black;
+}
+</style>
+<script>
+
+$(function() {
+	$('select').change(function (){
+		var id=$(this).attr('id');
+		var i=id.indexOf("_");
+		var pre=id.substring(0,i);
+		var suff=id.substring(i+1,id.length);
+		$('#'+pre+'_0')[0].selectedIndex = this.selectedIndex;
+		$('#'+pre+'_1')[0].selectedIndex = this.selectedIndex;
+		$('#'+pre+'_2')[0].selectedIndex = this.selectedIndex;
+	});
+});
+</script>
+[#macro multiopt id opts]
+	[#if opts?contains("|")]
+		<select id='${id}'>
+			[#list opts?split("|") as opt]		
+			<option>${opt}</option>
+			[/#list]
+		</select>
+	[#else]
+		<input id='${id}' value='${opts?html}'>
+	[/#if]
+[/#macro]
+<table  bgcolor="#999999" border="0" cellpadding="0" cellspacing="1" width="95%" id="parametersTable"> <!-- variables table -->
+ 	<tr bgcolor="#ffffff" >
+ 		<td width='22%'>
+			<b>Asset Class</b>
+		</td>
+		<td width='8%'>
+			<b>Fund</b>
+		</td>
+		<td width='25%'>
+			<b>Name</b>
+		</td>
+		<td width='2%'>
+			<b>Redemption</b>
+		</td>
+		<td width="38%">
+			<b>Description</b>
+		</td>
+		<td width='5%'>
+			<b>*</b>
+		</td>
+	</tr>
+	[#list variables as vs]
+		[#assign vsize = vs.symbol?split("|")?size /]
+		<tr bgcolor="#ffffff" >
+			<td>
+				[#assign id="i"+vs_index+"_0"/]
+				[#if vs.assetClassName?? && vs.assetClassName!='null|null']
+	 				[@multiopt id vs.assetClassName]
+	 				[/@multiopt]
+	 			[#else]
+	 				<input id='${id}' value='NotFound'>
+	 			[/#if]
+			</td>
+			[#if vsize == 3]
+				<td bgcolor="#ff0000">
+			[#else]
+				<td bgcolor="#ffffff" >
+			[/#if]
+				[#assign id="i"+vs_index+"_1"/]
+				[#if vs.symbol?? && vs.symbol!='null|null']
+	 				[@multiopt id vs.symbol]
+	 				[/@multiopt]
+	 			[#else]
+	 				[#if vs.description?? && vs.description?length < 6]
+	 					<input id='${id}' value='${vs.description}'>
+	 				[#else]
+	 					<input id='${id}' value='NotFound'>
+	 				[/#if]
+	 			[/#if]
+			</td>
+			<td>
+				[#assign id="i"+vs_index+"_2"/]
+				[#if vs.name?? && vs.name!='null|null']
+	 				[@multiopt id vs.name]
+	 				[/@multiopt]
+	 			[#else]
+	 				<input id='${id}' value='NotFound'>
+	 			[/#if]
+			</td>
+			<td>
+				[#assign id="i"+vs_index+"_3"/]
+				[#if vs.redemption??]
+	 				<input id='${id}' value='${vs.redemption}'>
+	 			[#else]
+	 				<input id='${id}' value='NotFound'>
+	 			[/#if]
+			</td>
+			<td>
+				[#assign id="i"+vs_index+"_4"/]
+				[#if vs.description??]
+	 				[@multiopt id vs.description]
+	 				[/@multiopt]
+	 			[#else]
+	 				<input id='${id}' value='NotFound'>
+	 			[/#if]
+			</td>
+			<td>
+				[#assign id="i"+vs_index+"_5"/]
+				[#if vs.memo??]
+	 				[@multiopt id vs.memo]
+	 				[/@multiopt]
+	 			[#else]
+	 				<input id='${id}' value=''>
+	 			[/#if]
+			</td>
+		</tr>		
+	[/#list]
+</table>
+<script>
+	p_line_number=${variables?size};
+</script>

@@ -1,0 +1,11 @@
+[#ftl]
+
+<div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=162544773766318&amp;xfbml=1"></script>
+<h1>comments test<h1>
+<fb:comments xid="http://www.myplaniq.com/LTISystem/article__comments.action[#if Parameters.id??]id=${Parameters.id}[/#if]" width="425"></fb:comments>
+<br>
+
+<h1>login test</h1>
+<fb:login-button show-faces="true"></fb:login-button>
+
+<iframe src="http://www.facebook.com/plugins/live_stream_box.php?app_id=162544773766318&amp;width=400&amp;height=500&amp;via_url&amp;always_post_to_friends=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:400px; height:500px;" allowTransparency="true"></iframe>

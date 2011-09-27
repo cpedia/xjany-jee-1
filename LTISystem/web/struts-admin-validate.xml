@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.admin.validate" namespace="/jsp/admin/validate" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/validate/Main">
+			<result name="success">/jsp/admin/validate/validate.jsp</result>
+		</action>	
+		<action name="DownloadTotalReturns" class="/jsp/admin/validate/DownloadTotalReturns">
+			<result name="input">/jsp/admin/validate/validate.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="CheckAllSecurity" class="/jsp/admin/validate/CheckAllSecurity">
+			<result name="input">/jsp/admin/validate/validate.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="CheckSingleSecurity" class="/jsp/admin/validate/CheckSingleSecurity">
+			<result name="input">/jsp/admin/validate/validate.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="ImportDataFile" class="/jsp/admin/validate/ImportDataFile">
+			<result name="input">/jsp/admin/validate/validate.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>		
+		<action name="StorePortfolioInfor" class="/jsp/admin/validate/StorePortfolioInfor">
+			<result name="input">/jsp/admin/validate/validate.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="CheckPortfolio" class="/jsp/admin/validate/CheckPortfolio">
+			<result name="input">/jsp/admin/validate/validate.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+			
+		<action name="CheckMptLog" class="/jsp/admin/validate/CheckMptLog">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${name}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+	</package>
+	
+
+</struts>

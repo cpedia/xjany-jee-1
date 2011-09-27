@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+
+	<bean name="/jsp/admin/strategy/Main" class="com.lti.action.admin.strategy.MainAction"
+		singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>			
+	</bean>
+
+	<bean name="/jsp/admin/strategy/Search" class="com.lti.action.admin.strategy.SearchAction"
+		singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+	</bean>
+	
+	<bean name="/jsp/admin/strategy/SimilarIssues" class="com.lti.action.admin.strategy.SimilarIssuesAction"
+		singleton="false">
+	</bean>		
+
+	<bean name="/jsp/admin/strategy/AssignAdminPlanToUser" class="com.lti.action.admin.strategy.AssignAdminPlanToUserAction"
+		singleton="false">
+	</bean>		
+
+	<bean name="/jsp/admin/strategy/modelportfolio/Main" class="com.lti.action.admin.strategy.modelportfolio.MainAction"
+		singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/admin/strategy/UserChange" class="com.lti.action.admin.strategy.user.SaveAction"
+		singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>	
+				
+</beans>

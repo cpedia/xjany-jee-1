@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.ajax" namespace="/jsp/ajax" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="GetClassTxt" class="/jsp/ajax/GetClassTxt">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="GetClassTxt" class="/jsp/ajax/GetClassTxt">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="GetValidStartDate" class="/jsp/ajax/GetValidStartDate">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		
+		<action name="GetPortfolioState" class="/jsp/ajax/GetPortfolioState">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="SetPortfolioState" class="/jsp/ajax/SetPortfolioState">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetPortfolioMessage" class="/jsp/ajax/GetPortfolioMessage">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetResourceSuggestTxt" class="/jsp/ajax/GetResourceSuggestTxt">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetSecuritySuggestTxt" class="/jsp/ajax/GetSecuritySuggestTxt">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetAssetClassSuggestTxt" class="/jsp/ajax/GetAssetClassSuggestTxt">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetBenchmarkSuggestTxt" class="/jsp/ajax/GetBenchmarkSuggestTxt">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetAssetClassListSuggestTxt" class="/jsp/ajax/GetAssetClassListSuggestTxt">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetStrategyParameter" class="/jsp/ajax/GetStrategyParameter">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="GetStrategySuggestTxt" class="/jsp/ajax/GetStrategySuggestTxt">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>		
+		<action name="GetTransactionTxt" class="/jsp/ajax/GetTransactionTxt">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="GetPrice" class="/jsp/ajax/GetPrice">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetAssetClassName" class="/jsp/ajax/GetAssetClassName">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetSecurityName" class="/jsp/ajax/GetSecurityName">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="GetSecurityStartDate" class="/jsp/ajax/GetSecurityStartDate">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		
+		<action name="GetSecurityEndDate" class="/jsp/ajax/GetSecurityEndDate">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		
+		<action name="CodeExecutor" class="/jsp/ajax/CodeExecutor">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="CustomizePage" class="/jsp/ajax/CustomizePage">
+			<result name="success">/jsp/ajax/result.jsp</result>
+			<result name="header">/jsp/ajax/withheader.jsp</result>
+		</action>
+		<action name="PutNews" class="/jsp/ajax/PutNews">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="StopExecution" class="/jsp/ajax/StopExecution">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>	
+		<action name="GetStrategyID" class="/jsp/ajax/GetStrategyID">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>		
+		<action name="ViewSourceFile" class="/jsp/ajax/ViewSourceFile">
+			<result name="success">/jsp/ajax/sourcefile.jsp</result>
+		</action>		
+		<action name="GetImportSecurityDataMessage" class="/jsp/ajax/GetImportSecurityDataMessage">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="GetUpdateAdjustCloseMessage" class="/jsp/ajax/GetUpdateAdjustCloseMessage">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		
+		<action name="GetLoadSecurityDataMessage" class="/jsp/ajax/GetLoadSecurityDataMessage">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="SearchTicker" class="/jsp/ajax/SearchTicker">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="Email" class="/jsp/ajax/Emailalert" method="email">
+			<result name="success">/jsp/ajax/result.jsp</result>	
+		</action>
+		<action name="EmailRemove" class="/jsp/ajax/Emailalert" method="emailRemove">
+			<result name="success">/jsp/ajax/result.jsp</result>	
+		</action>
+		<action name="DownloadFile*" class="/jsp/ajax/DownloadFile">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${name}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		
+		<action name="DownloadForUpdate" class="/jsp/ajax/DownloadForUpdate">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${name}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		
+		<action name="DownloadImage*" class="/jsp/ajax/DownloadFile">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">image/jpeg</param> 
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		<action name="FetchImage*" class="/jsp/ajax/DownloadFile">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">image/jpeg</param> 
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/ajax/{1}.uftl
+			</result>	
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>			
+		</action>								
+	</package>
+</struts>

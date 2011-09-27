@@ -1,0 +1,236 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+	<title>MyPlanIQ: Retirement and Taxable Plans Investment Solutions</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="investment strategies in retirement plans 401(k), 403(b), self-directed IRAs, Variable Universal Life (VULs), taxable brokerage mutual fund and ETF investments based on tactical asset allocation, smart money (GURU) directed asset allocations and modern portfolio theory (MPT) based strategic asset allocations. Optimized (Mean Variance Optimization) efficient frontiers">
+<meta name="keywords" content="401K Retirement Plans, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<script src="/LTISystem/jsp/template/ed/js/logos.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/mediaPlugin.js" type="text/javascript"></script>
+
+	<script>
+	$(document).ready(function() {
+		logoRotator();
+		alignHeight();
+		
+		
+		if($.browser.msie){
+		 	ieInputFix();
+		}
+		
+		$('#flashdiv').append("<a class='mediaObject'></a>");
+		$('.mediaObject').media({ 
+				width:     618, 
+				height:    339, 
+				autoplay:  true, 
+				src:       "/LTISystem/jsp/template/ed/media/evergreen.swf"
+				//attrs:     { controller:  'true', "scale":"tofit", postdomevents:true},
+				//params:     { controller:  'true', "SCALE":"tofit", postdomevents:true}
+		}); 
+		
+		
+	});
+	
+	
+	function ieInputFix() {
+		$('input').css("margin-top","-1px");
+	}
+	
+ </script>
+<style>
+ .feedburnerFeedBlock ul li span a{
+ 	font-size:0.8em;
+ 	line-height:3.0em;
+ }
+ .feedburnerFeedBlock{
+ margin-top:-10px;
+ padding:0px;
+ }
+ <!--
+#flashdiv {
+	border: 1px solid #C0C0C0;
+	height: 337px;
+	width: 616px;
+}
+-->
+.feedburnerFeedBlock ul li {
+	background:url(/LTISystem/jsp/template/ed/images/listBullet.gif) no-repeat left 0.4em;
+	padding-bottom:8px;
+	margin-bottom:8px;
+	padding-left: 15px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #8bac76;
+}
+ 
+ .feedburnerFeedBlock{
+ font:10pt/14pt Arial,Helvetica,sans-serif;
+}
+.feedburnerFeedBlock ul{
+	list-style-type:none;
+}
+
+.feedburnerFeedBlock ul li div p span a{
+	font-size:1.0em;
+}
+.feedburnerFeedBlock p a{
+/*font-size:0.8em;*/
+	text-decoration:none;
+}
+#creditfooter{
+	display:none;
+}
+.feedTitle{
+	font-size:2.0em;
+ 	line-height:1.5em;
+ 	
+}
+ </style>
+</head>
+<body>
+  <div class="borderGreen">
+  	<div class="featured-box">
+  			<div class="col-1" id="flashdiv"></div>
+  			<div class="col-2">          	
+  				<div id="decide"><a href="/LTISystem/profile_edit.action?planID=0&portfolioID=0"><img src="/LTISystem/jsp/template/ed/images/decide.gif" alt="" width="341" height="99" /></a></div>
+				<div class="customize"><a href="/LTISystem/profile_customizeportfolio.action"><img src="/LTISystem/jsp/template/ed/images/customize.gif" alt="" width="341" height="75" /></a></div>
+				<div id="manage"><a href="/LTISystem/profile_manageyourportfolio.action?planID=0&portfolioID=14838"><img src="/LTISystem/jsp/template/ed/images/manage.gif" alt="" width="341" height="87" /></a></div>
+				<div id="getStartedNow"><a href="/LTISystem/profile__getstarted.action"><img src="/LTISystem/jsp/template/ed/images/getStarted.gif" alt="" width="341" height="79" /></a></div>
+			</div>
+				<div class="clearfloat"> </div>
+  		</div>
+  	</div>
+
+  <!-- CONTENT -->
+  <div id="content">
+    <div class=" middlebar">
+	  <div class="middleLinks" id="middleLinks">
+			<a href="/LTISystem/f401k__why.action"> Why MyPlanIQ</a>
+			<a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a>
+			<div id="searchForPlan">
+					<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    				<input name="groupIDS" value="8" type="hidden"></input>
+	        			<input name="includeHeader" value="true" type="hidden"></input>
+	        			<input name="type" value="2" type="hidden"></input>
+	       			    <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	       			    <span>Search For A Plan</span>
+	        			<input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)' size="15" type="text" value='${Parameters.symbolPlan!""}'>
+	       				<input alt='Quote' id='submitSearchBottom' type='submit' value=''/>
+	   				</form><!-- end of form -->
+		 	</div><!--searchForPlan -->
+	 </div>
+	 
+	 </div>
+    
+      <div class="col-1 box maxheight">
+
+        	<div class="inner">
+                        <h3>News &amp; Announcements</h3>
+     			[@lti.Newsfor401kHomePage "article"]
+			[/@lti.Newsfor401kHomePage]
+  		<a href="../jforum/forums/show/61.page" class="moreInCategory">More News &amp; Announcements »</a>
+<!--        		<a href='/LTISystem/f401k__strategies.action'><h3>Time Proven Strategies</h3></a>
+  				<ul class="list">
+  					<li>
+  						<h4><strong>Strategic Asset Allocation (SAA):</strong> 
+                                                   <ul class="list">
+                                                     <li>Modern Portfolio Theory Based</li>
+                                                     <li>Superior Fund Selection Algorithm</li>
+                                                     <li>Built upon Personal Tolerance and Retirement Ages</li>
+                                                     <li>Periodically Rebalancing</li>
+                                                   </ul>
+                                                 </h4>
+
+     				</li>
+  				</ul>
+  				<ul class="list">
+  					<li>
+  						<h4><strong>Tactical Asset Allocation (TAA):</strong> 
+                                                   <ul class="list">
+                                                    <li>Major Asset Trends Based</li>
+                                                    <li>Dynamic Allocation</li>
+                                                    <li>Much Higher Return and Acceptable Risk</li>
+                                                    <li>Practiced by Major Wealth Managers</li>
+                                                   </ul>
+
+					</li>
+				</ul>
+ 				<ul class="list">
+  					<li>
+  						<h4><strong>Guru (Smart Money) Directed Asset Allocation:</strong> following
+						great fund managers' asset allocation decisions</h4>
+					</li>
+  					<li class="">
+  						<h4><strong>Optimized Asset Allocation:</strong> Efficient frontier
+						optimized</h4>
+					</li>
+  				</ul>
+
+         	<a href="/LTISystem/f401k__strategies.action" class="moreInCategory">More Info on Evergreen Strategies »</a>
+
+                <br><br><p><span><a title="Click for Strategy Performance" href="jsp/images/Why4.pdf" target=_blank><img style="border:6px outset #545565;" width="260" height="145" src="jsp/images/why.png"></a></span></p>
+-->
+              </div>
+     	</div>
+      <div class="col-2  box maxheight">
+         <div class="inner">
+        	<a href='/LTISystem/f401k__strategies.action'><h3>Time Proven Strategies</h3></a>
+                   <ul class="list">
+                     <li><h4 style="font-size: 150%">Dynamic and Strategic Allocation</h4></li>
+                     <li><h4 style="font-size: 150%">Superior Fund Selection</h4></li>
+                     <li><h4 style="font-size: 150%">Much Higher Return and Acceptable Risk</h4></li>
+                     <li><h4 style="font-size: 150%">Practiced by Major Wealth Managers</h4></li>
+                   </ul>     
+                 <a href="/LTISystem/f401k__strategies.action" class="moreInCategory">More Info on Strategies »</a>    
+<!--           	<h3>Comprehensive Coverage of Plans</h3>
+     			<ul class="list">
+                                <li>    
+                                        <h4><strong>401(k) Retirement Plans</strong></h4>
+                                </li>
+                                <li>    
+                                        <h4><strong>403(b) Nonprofit Retirement Plans</strong></h4>
+                                </li>
+                                <li>    
+                                        <h4><strong>Brokerage ETF Plans (IRA/Taxable)</strong></h4>
+                                </li>
+     				<li>
+     					<h4><strong>Brokerage No Load No Transaction Fee Mutual Fund </strong></h4>
+     				</li>
+     				<li>
+     					<h4><strong>Variable Annuities and VUL Plans</strong></h4>
+     				</li>
+     				<li>
+     					<h4><strong>529 College Savings Plans </strong></h4>
+  					</li>
+  				</ul>
+-->
+				
+				<div  class="logoRotation" id="logoRotation">
+					<h3 id="logoTitleText">Comprehensive Plan Coverage</h3>
+					<div class="logoRotator"></div>
+				</div>
+                                <a href="/LTISystem/f401k__plans.action" class="moreInCategory">More Info on Plans »</a>
+         </div>
+      </div>
+      <div class="col-3 box maxheight">
+            
+         <div class="inner">
+           	<h3>Easy to Use and Low Cost</h3>
+                <ul class="list">
+                 <li><h4 style="font-size: 150%">MyPlanIQ gives you both Strategic and Tactical allocation strategies, mapped directly to your plan</h4></li>
+
+<li><h4 style="font-size: 150%">MyPlanIQ allows you to explore multiple alternatives based on personal profile, plan and strategy</h4></li>
+
+<li><h4 style="font-size: 150%">MyPlanIQ sends you regular email instructions to keep your portfolio optimally tuned</h4></li>
+
+<li><h4 style="font-size: 150%">MyPlanIQ costs less than $10 a month</h4></li>
+                </ul>
+
+  	</div>
+      </div>
+		<div class="clearfloat"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,559 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ Glossary</title>
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="MyPlanIQ Glossary and the explanations are listed on this page, which will help users to understand the investment ideas anf the service provided by MyPlanIQ.">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+
+</head>
+
+<body>
+	<script>
+		$(function() {
+			$('.tab').each(function(){
+				//$(this).click(function(){
+				//	$(this).children('.answer').toggle(
+				//	);
+				//});
+				$(this).children('.question').toggle(
+						function(){
+							$(this).parent().children('.answer').show();
+							$(this).parent().css({ background: '#fff url(/LTISystem/jsp/template/ed/images/faq_s.png) 0px 9px no-repeat' });
+						},
+						function(){
+							$(this).parent().children('.answer').hide();
+							$(this).parent().css({ background: '#fafafa url(/LTISystem/jsp/template/ed/images/faq_c.png) 0px 9px no-repeat' });
+						}
+				
+				);
+			});
+		});
+	</script>
+
+<div class="col-1">
+
+   <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">Support</div>
+	 <div class="sidebar_box_content">
+           <ul class="list">
+           <li><strong>General Support Issues: </strong><a href="/jforum/forums/show/81.page">Support Forum</a></li>
+           <li><strong>Email (only for account/personal related issues): </strong><a href="mailto:support@MyPlanIQ.com">support@MyPlanIQ.com</a></li>
+           <li><strong>Phone: </strong>510-279-3131</li>
+           </ul>
+         </div>
+   </div>
+    <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">More Info</div>
+	 <div class="sidebar_box_content">
+         <ul class="list">
+          <li><a href="f401k__why.action">Why MyPlanIQ</a></li>
+          <li><a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a></li>
+          <li><a href="/LTISystem/UserFiles/tutorial.pdf">Tutorial</a></li>
+          <li><a href="f401k__faqs.action">FAQs</a></li>
+          <li><a href="f401k__plancompare.action">Subscription Plan Comparison</a></li>
+         </ul>
+         </div>
+    </div>
+   
+</div>
+<div class="col-2">
+    <h1 align="center">Glossary</h1>
+       
+   <div id='faqs'>
+       <div class="tab">
+			<div class="question">Financial Planning</div>
+			<div class="answer">
+				<p>
+					As with any successful endeavor, planning is always the foremost important step to begin with. Factors to consider and put into perspective include retirement needs, estate planning, pensions, social security income, mortgage payments, credit card payments, regular spending. We suggest you consider the following two steps:
+                      <ul>
+                       <li>Expectation (goal): retirement and estate expectation, lifestyle. </li>
+                       <li>Cash Flow: divide your projections into two parts: income and expenses. </li>
+                      </ul>
+For a thorough plan, you could either use some online tools, Excel or just plain tables or consult with a financial adviser. Rules of thumb then could be derived and reviewed regularly. A popular rule of thumb for a retiree’s spending, for example, would be to spend 4% of your savings annually. Those are subject to further investigation but are good a starting point. 
+
+				</p>
+			</div>
+		</div>
+       
+        <div class="tab">
+			<div class="question">Investment: capital growth and preservation</div>
+			<div class="answer">
+				<p>
+					 Once you derive your reasonable financial expectation, you now could start to plan out your investment. The key part of the investment process is the asset allocation. You should consider all of your assets in a holistic portfolio. The assets include your houses, savings, retirement plans, annuities, life insurance, and taxable brokerage accounts. A proper asset allocation is the key to maintain the long term growth and stability. Diversification across various assets is the key to achieve such goals. 
+                               </p>
+			</div>
+		</div>
+		
+		<div class="tab">
+			<div class="question">Assets (Classes)</div>
+			<div class="answer">
+				<p>
+					Categories investment securities belong to. 
+	           </p>
+			</div>
+		</div>
+
+
+	<div class="tab">
+			<div class="question">Major Asset (Classes)</div>
+			<div class="answer">
+				<p>
+				In MyPlanIQ, we consider the following as the major asset classes: 
+                                 <ul>
+                                   <li>US Equities, represented by Wilshire 5000 total return index (^DWC), S&P 500 index (^GSPC or ETF SPY). </li>
+                                   <li>International Equities, represented by MSCI EAFE Index (EFA). </li>
+                                   <li>Emerging Market Equities, represented by MSCI Emerging Markets Index (EEM) or Vanguard Emerging Market ETF (VWO).</li>
+                                   <li>Real Estate Investment Trusts, represented by Dow Jones US Real Estate (IYR) and Dow Jones International Real Estate (RWX).</li>
+                                   <li>Commodities, represented by S&P Goldman Sachs Commodity Index (GSG) or DB commodity Index Tracking (DBC).</li>
+                                   <li>US Fixed Income, represented by Barclays Aggregate Bond Index (AGG). </li>
+                                   <li>International Fixed Income, represented by Barclays Capital International Treasury Bond Index (BWX).</li>
+                                  </ul>
+				</p>
+			</div>
+		</div>
+		
+		<div class="tab">
+			<div class="question">Sub Asset Classes </div>
+			<div class="answer">
+				<p>
+					In each major asset class, one could further decompose a major asset class into sub asset classes. For example, US Equities include Large Cap Blend, Large Cap Growth, Large Cap Value, Mid Cap Blend, Mid Cap Growth, Mid Cap Value, Small Cap Blend, Small Cap Growth, Small Cap Value and Micro Cap. We recommend users to refer to Morningstar’s categories for a more complete taxonomy. 
+             	</p>
+			</div>
+		</div>
+		
+		<div class="tab">
+			<div class="question">Investment Securities </div>
+			<div class="answer">
+				<p>
+					 A tradable instrument representing financial value. They are further classified into debt securities (such as bonds), equity securities (such as common stocks) and derivative contracts. Sometimes, mutual funds, ETFs and other financial instruments are also called securities. 
+             	</p>
+			</div>
+		</div>
+		
+		
+		<div class="tab">
+			<div class="question">Mutual Fund </div>
+			<div class="answer">
+				<p>
+					is a professionally managed type of collective investment scheme that pools money from many investors and invests it in stocks, bonds, short-term money market instruments, and/or other securities.
+             </p>
+			</div>
+		</div>
+
+		<div class="tab">
+			<div class="question">ETF (Exchange Traded Fund)</div>
+			<div class="answer">
+				<p>
+					 is an investment fund traded on stock exchanges, much like stocks.[citation needed] An ETF holds assets such as stocks or bonds and trades at approximately the same price as the net asset value of its underlying assets over the course of the trading day. Popular ETFs include SPDR SPY that tracks S&P 500 index or AGG that tracks the total bond index. 
+            </p>
+			</div>
+		</div>
+		
+		<div class="tab">
+			<div class="question">Index Fund</div>
+			<div class="answer">
+				<p>
+					
+				A mutual fund or an ETF that tracks a standard index such as S&P 500 index. 
+				 </p>
+			</div>
+		</div>
+
+
+		<div class="tab">
+			<div class="question">Separately Managed Account (SMA) </div>
+			<div class="answer">
+				<p>
+					
+				is an individual investment account offered typically by a brokerage firm through one of their brokers or financial consultants and managed by independent investment management firms (often called money managers for short) and have varying fee structures. 
+				 </p>
+			</div>
+		</div>
+
+
+		<div class="tab">
+			<div class="question">Commingled Fund</div>
+			<div class="answer">
+				<p>
+					A mutual fund that includes assets from severalaccounts, pooled together, to reduce management and administration costs; it is also called pooled fund. It is mostly used in a retirement plan such as 401K or life insurance investment products such as VULs. 
+				
+				 </p>
+			</div>
+		</div>
+
+        <div class="tab">
+			<div class="question">Portfolio</div>
+			<div class="answer">
+				<p>
+				
+				An investment collection/account which consists of investment securities and funds. 
+                
+				 </p>
+			</div>
+		</div>  
+		
+		
+		<div class="tab">
+			<div class="question">Asset Allocation  </div>
+			<div class="answer">
+				<p>
+				Securities in a portfolio are classified into asset classes. For each asset class, the percentage of its market value over the total portfolio market value is used to measure the asset class allocation in the portfolio. 
+				 </p>
+			</div>
+		</div>
+		
+		
+		<div class="tab">
+			<div class="question">Target Allocation </div>
+			<div class="answer">
+				<p>
+				
+					For each asset (class) in a portfolio, a pre-determined percentage for the asset’s allocation in the portfolio.
+				</p>
+			</div>
+		</div>
+		
+		
+		<div class="tab">
+			<div class="question">Modern Portfolio Theory (MPT) </div>
+			<div class="answer">
+				<p>
+				
+					
+					A portfolio construction theory that tries to maximize returns while minimizing risks by investing in an array of diversified assets with proper percentage allocations. It is widely practiced in the investment industry. Several of its creators won a Nobel Prize for the theory. 
+        		</p>
+			</div>
+		</div>
+
+                <div class="tab">
+			<div class="question">Mean Variance Optimization (MVO) </div>
+			<div class="answer">
+				<p>
+A portfolio optimization method that tries to derive optimal solutions to maximize return while minimizing standard deviation, commonly known as risk. 
+        		</p>
+			</div>
+		</div>
+
+                <div class="tab">
+			<div class="question">Efficient Frontiers  </div>
+			<div class="answer">
+				<p>
+A set of solutions from mean variance optimization that are optimal.
+        		</p>
+			</div>
+		</div>
+
+                <div class="tab">
+			<div class="question">Correlation  </div>
+			<div class="answer">
+				<p>
+Asset correlation is usually a number between -1 to 1 that expresses the amount of similarity or dissimilarity in behavior between two asset classes. A -1 correlation means the two assets are completely inversely related while a 1 correlation means a perfect correlation. 0 means no correlation. In general, one would try to invest in asset classes that are relatively uncorrelated and that have reasonable expected returns. 
+        		</p>
+			</div>
+		</div>
+
+                 <div class="tab">
+			<div class="question">Strategic Asset Allocation  </div>
+			<div class="answer">
+				<p>
+An asset allocation which is decided based on the investment policy, usually determined based on various factors including return expectation and risk tolerance. Strategic asset allocation generally adheres to this pre determined allocation mix for a long period of time, unless some major events such as life events like retirement happen. The only change during this period is the asset rebalance, which tends to bring the allocation back to the pre-determined allocation mix. It is thus sometimes called buy and hold. 
+        		</p>
+			</div>
+		</div>
+
+                <div class="tab">
+			<div class="question">Tactical Asset Allocation  </div>
+			<div class="answer">
+				<p>
+An asset allocation method that could dynamically change the asset mix  based on short and intermediate term’s economic conditions in order to capitalize on investment opportunities. It is a moderately active strategy since the overall strategic asset mix is returned to or adhered to when short-term opportunities have been exploited. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Momentum/Trend  </div>
+			<div class="answer">
+				<p>
+Often referred to the rate of acceleration of a security’s (such as an ETF) price or earnings. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Trend Following  </div>
+			<div class="answer">
+				<p>
+An investment strategy that tries to identify a intermediate/long term rising or falling trend of a market (such as US stock market as a whole or US Treasury bond market) and invests accordingly. 
+        		</p>
+			</div>
+		</div>
+		<div class="tab">
+			<div class="question">Cross Asset Trend  </div>
+			<div class="answer">
+				<p>
+Ranking of various assets based on their relative price or earnings momentum. This is sometimes called 'relative strength' in stock trading. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Standard Deviation  </div>
+			<div class="answer">
+				<p>
+A statistical measure of variability or so called dispersion. The standard deviation of a portfolio or a security is a measure of variability of returns from the average return or so called ‘expected return’. Intuitively, standard deviation measures how much fluctuation the return of a portfolio or a security is.  MyPlanIQ uses annualized standard deviation for a portfolio or a security.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Volatility   </div>
+			<div class="answer">
+				<p>
+Commonly the standard deviation is used to measure how volatile a portfolio or a security is. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Drawdown   </div>
+			<div class="answer">
+				<p>
+A percentage drop from a peak to a trough that occurs after the peak.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Maximum Drawdown   </div>
+			<div class="answer">
+				<p>
+Maximum percentage drop from a peak to a trough after the peak within a period. Maximum drawdown is sometimes called 'ulcer index' as it intuitively represents the severity of wealth loss in a portfolio in a period.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">R-Square </div>
+			<div class="answer">
+				<p>
+In statistics, R-Square is the coefficient of determination used to measure the variability in a data set that is accounted by a statistical model, often a linear regression model. In investment, the R-Square of a portfolio or a security return is used to predict how meaningful the other parameters such as Alpha, Beta and Standard Deviation are with respect to the benchmark used. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">AR or Annualized Return </div>
+			<div class="answer">
+				<p>
+Also known as Compound Annual Growth Rate (CAGR), is a geometric mean of annual returns within a period such as last one year, three years or five years. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Internal Rate of Return (IRR)  </div>
+			<div class="answer">
+				<p>
+An annualized return for a portfolio with its cash inflow or outflow being taken into account. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Sharpe Ratio   </div>
+			<div class="answer">
+				<p>
+A ratio developed by Nobel laureate William F. Sharpe to measure risk-adjusted performance. The Sharpe ratio is calculated by subtracting the risk-free rate - such as that of the 3-month U.S. Treasury bill - from the rate of return for a portfolio and dividing the result by the standard deviation of the portfolio returns.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Treynor Ratio </div>
+			<div class="answer">
+				<p>
+Treynor ratio, like Sharpe ratio, is used to measure how much excess return with respect to risk-free rate - such as that of the 3-month U.S. treasury bill - could be earned per unit of Beta. It is mostly meaningful if R-Square is close to 1. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Sortino Ratio </div>
+			<div class="answer">
+				<p>
+Sortino ratio is a modification of Sharpe ratio. Unlike Sharpe ratio, it measures only the risk-adjusted performance using downside risk or downside volatility only. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Alpha  </div>
+			<div class="answer">
+				<p>
+A measure of performance on a risk-adjusted basis. Alpha takes the volatility (price risk) of a portfolio or a mutual fund and compares its risk-adjusted performance to a benchmark index. The excess return of the portfolio or the fund relative to the return of the benchmark index is its alpha.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Beta</div>
+			<div class="answer">
+				<p>
+A measure of the volatility, or systematic risk, of a security or a portfolio in comparison to the market as a whole or a standard benchmark index. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Risk</div>
+			<div class="answer">
+				<p>
+Often referred to a portfolio's volatility or maximum drawdown. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Risk Aversion </div>
+			<div class="answer">
+				<p>
+An investor's attitude in dealing with risk. The higher the risk aversion, the more an investor shuns away from risky assets. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Risk Profile  </div>
+			<div class="answer">
+				<p>
+A personal profile that represents an investor’s risk aversion. MyPlanIQ uses a number between 0-100 as risk profile. The higher the risk profile is, the higher the investor would prefer to invest in stable assets such as fixed income or cash. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Target Date Fund   </div>
+			<div class="answer">
+				<p>
+A mutual fund in the hybrid category that automatically resets the asset mix (stocks, bonds, cash equivalents) in its portfolio according to a selected time frame that is appropriate for a particular investor. It is expected that a target date fund will reduce its exposure in risky assets gradually as the target date is approaching. A target-date fund is similar to a life-cycle fund except that a target-date fund is structured to address some date in the future, such as retirement.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Life-Cycle Fund  </div>
+			<div class="answer">
+				<p>
+A special category of balanced, or asset-allocation, mutual fund in which the proportional representation of an asset class in a fund's portfolio is automatically adjusted during the course of the fund's time horizon. The automatic portfolio adjustment run from a position of higher risk to one of lower risk as the investor ages and/or nears retirement. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">401(k) Retirement Plan </div>
+			<div class="answer">
+				<p>
+An employer sponsored plan that an employee has a tax-deferred account in which she may contribute pre-tax earnings, and in many cases, some portion of the contribution is matched by the employer.  A variety of investments including mutual funds, commingled funds, separately managed accounts can be chosen for a 401(k) plan. Some employers recently started to offer self-directed investment choice to allow participants to choose investments from a wider array of funds in a brokerage. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">403(b) Retirement Plan  </div>
+			<div class="answer">
+				<p>
+Similar to a 401(k) plan but for non-profit organizations (such as public schools, state and local government employees, hospitals, and charitable organizations).
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">529 College Savings Plan </div>
+			<div class="answer">
+				<p>
+Named for Section 529 of the Internal Revenue Service Code, College Savings Plans are qualified tuition programs designed to help parents save and invest to pay for their children's college education. 529 plans are created by state or local governments to let parents pre-pay the cost of tuition at an in-state or municipal university. A variety of investments can be chosen for 529 plans, with the money growing tax-deferred as long as funds are kept in the plan.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Taxable Account  </div>
+			<div class="answer">
+				<p>
+An investment account that you are required to pay taxes each year on any income (dividends and interests) and capital gains (the realized asset appreciation after you sell). 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Tax Deferred Account  </div>
+			<div class="answer">
+				<p>
+An investment account is tax-deferred if you are not required to pay taxes each year, but rather only pay when you withdraw money after a specified date. The most common tax-deferred accounts are IRAs, 401(k)s, and 403(b)s. There are penalties associated with taking money out of these accounts before a specified date.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Variable Annuity (VA) </div>
+			<div class="answer">
+				<p>
+A variable annuity is a contract between you and an insurance company, under which you make a lump-sum payment or series of payments. In return, the insurer agrees to make periodic payments to you beginning immediately or at some future date. You can choose to invest your purchase payments in a range of investment options, which are typically mutual funds.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Variable Universal Life Insurance (VUL) </div>
+			<div class="answer">
+				<p>
+A form of whole life insurance which combines some features of universal life insurance, such as premium and death benefit flexibility, with some features of variable life insurance, such as more investment choices. Variable universal life adds to the flexibility of universal life by allowing the holder to choose among investment vehicles for the savings portion of the account. The differences between this arrangement and investing individually are the tax advantages and fees that accompany the insurance policy.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">No Load Mutual Fund </div>
+			<div class="answer">
+				<p>
+A mutual fund which doesn't impose a sales or redemption charge, selling and redeeming its shares at net asset value. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Load Mutual Fund </div>
+			<div class="answer">
+				<p>
+A mutual fund that charges a load that is a fee when you buy or sell the units of a fund. When you buy the units of a fund, you pay a percentage of it as a fee. This is known as the entry load. Generally, if funds charge an entry load, they will not charge an exit load and vice versa. Only one of the loads is charged. The load is a percentage of the NAV.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">No Transaction Fee Fund </div>
+			<div class="answer">
+				<p>
+A mutual fund that is offered to investors by a brokerage firm without any form of commission charged for the transaction. This structure is advantageous to the investor because it allows him or her to purchase the mutual fund without incurring an up-front commission fee on the trade. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Holding Period </div>
+			<div class="answer">
+				<p>
+A minimum period that a mutual fund must be held to avoid redemption fee charged. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Redemption Fee </div>
+			<div class="answer">
+				<p>
+A fee charged by a fund if the minimum holding period is not met. 
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Defined Benefit Plan </div>
+			<div class="answer">
+				<p>
+An employer-sponsored retirement plan where employee benefits are sorted out based on a formula using factors such as salary history and duration of employment. Investment risk and portfolio management are entirely under the control of the company. There are also restrictions on when and how you can withdraw these funds without penalties.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Defined Contribution Plan </div>
+			<div class="answer">
+				<p>
+A plan in which an employee’s benefits during retirement depend on the contributions made to and the investment performance of the assets in his or her account, rather than on the employee’s years of service or earnings history. Like a typical savings account, a defined-contribution account contains a specific balance at any given time, which is equal to the market value of the assets accumulated in the account. Unlike with a defined-benefit plan, employees have substantial control over how the contributions to their plan are invested and may generally choose from an assortment of stocks (often including company stock), bonds, mutual funds, and other investment vehicles. Examples of defined-contribution plans include 401(k) plans, 403(b) plans, and 457 plans, all of which share similar characteristics.
+        		</p>
+			</div>
+		</div>
+                <div class="tab">
+			<div class="question">Deferred Compensation Plan  </div>
+			<div class="answer">
+				<p>
+A deferred compensation plan is an arrangement whereby an employee or owner defers some portion of their current income until a specified future date. Wages earned in one period are actually paid at a later date. A deferred compensation plan could be further classified as qualified or nonqualified. A qualified plan receives certain tax preferences. 
+        		</p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

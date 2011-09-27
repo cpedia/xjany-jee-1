@@ -1,0 +1,63 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+	<head>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#signupemail").click(function(){
+       		if (isValidEmail($('#subemail').val())){
+       			
+       		}else{
+       			alert("The email seems invalid, please enter a new one.");
+       			return;
+       		}
+			$.ajax({
+				url: '/LTISystem/jsp/register/FreeNewsletter.action?action=send&email='+$('#subemail').val(),
+				success: function(resulthtml){
+					alert("Thank you for signing up MyPlanIQ Newsletter.");
+					location.href="${lti.baseUrl}";
+				}
+			});
+		});
+		
+	});
+	function send(e){
+		var email = $('#subemail').val();
+		var k = window.event?window.event.keyCode:e.which;
+  		var src = window.event?window.event.srcElement:e.target;
+        if(k==13){
+        	if(email.trim()==''){
+				alert("Please input your email address.");
+				return;
+			}
+			else if(!isValidEmail(email)){
+				alert("Invalid email, please re-enter.");
+				return;
+			}
+        	$("#signupemail").trigger("click");
+        }
+	}
+	function isValidEmail(isText){
+		var reEmail = /^(?:\w+\.?)*\w+@(?:\w+\.?)*\w+$/;
+		return reEmail.test(isText);
+	}
+	</script>
+	</head>
+	<body>
+	<div style="height:550px;">
+	Please enter your email address to receive MyPlanIQ newsletters FREE of charge<br><br> 
+	<p>
+		<label><strong>Enter Your Email Address:</strong></label>
+		<input id="subemail" name="email" type="text" onkeyup="send(event)"/>
+	</p>
+	<div align="right" style="width:298px;">
+		<input type="button" id="signupemail" class="uiButton" value="Submit" >
+		&nbsp;<input type="reset" class="uiButton" name="reset" value="Reset">
+	</div>	
+        <br/><br/><br/>
+        <a href="/LTISystem/newsletter__main.action"><h1>Click Here for Online Newsletter Archive</h1></a>
+        <br/>
+	</div>
+	</body>
+</html>

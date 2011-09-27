@@ -1,0 +1,18 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<table width="100%" border="1">
+	<tr>
+		<td>ID</td>
+		<td>Name</td>
+	</tr>
+	[#if portfolios?? && portfolios.items??]
+		[#list portfolios.items as item]
+			<tr>
+				<td>${item.ID}</td>
+				<td>${item.name}</td>
+			</tr>
+		[/#list]
+	[/#if]
+</table>
+[@lti.pagination portfolios][/@lti.pagination]
+

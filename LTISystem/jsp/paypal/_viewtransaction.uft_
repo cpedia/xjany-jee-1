@@ -1,0 +1,78 @@
+    <center>
+	    <span id=apiheader>Transaction Details</span>
+	    <br><br>
+	    
+	    <table width =400>
+	        
+	        <tr>
+	            <td >
+	                Payer:
+	            </td>
+	            <td>
+	                ${transaction.payer!""}</td>
+	        </tr>
+	        <tr>
+	            <td >
+	                Payer ID:
+	            </td>
+	            <td>
+	                ${transaction.payerID!""}</td>
+	        </tr>
+	        <tr>
+	            <td >
+	                First Name:
+	            </td>
+	            <td>
+	                ${transaction.firstName!""}</td>
+	        </tr>
+	        <tr>
+	            <td >
+	                Last Name:
+	            </td>
+	            <td>
+	                 ${transaction.lastName!""}</td>
+	        </tr>
+	        <tr>
+	            <td >
+	                Transaction ID:
+	            </td>
+	            <td>
+	                ${transaction.transactionID!""}</td>
+	        </tr>
+	        <tr>
+	            <td >
+	                Parent Transaction ID (if any):
+	            </td>
+	            <td>
+	               ${transaction.parentTransactionID!""}</td>
+	        </tr>
+	        <tr>
+	            <td >
+	                Gross Amount:
+	            </td>
+	            <td>
+	                ${transaction.grossAmount!""}</td>
+	        </tr>
+	        <tr>
+			    <td >
+				Pending Reason:</td>
+			    <td>${transaction.pendingreason!""}</td>
+		        </tr>
+		        <tr>
+			    <td >
+				ProtectionEligibility:</td>
+			    <td>${transaction.protectionEligibility!""}</td>
+	        </tr>
+	        <tr>
+	            <td >
+	                Payment Status:
+	            </td>
+	            <td>
+	                ${transaction.paymentStatus!""}</td>
+	        </tr>
+	        <tr>
+				   <td align="center" colspan="3">
+	            </td>
+	        </tr>
+	    </table>
+	    

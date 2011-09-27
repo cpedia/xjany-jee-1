@@ -1,0 +1,68 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#if Parameters.includeJS?? && Parameters.includeJS=='false']
+[#else]
+		<link rel="stylesheet" href="../images/jquery.tablesorter/style.css" type="text/css" />
+		<script type="text/javascript" src="../images/jquery.tablesorter/jquery.tablesorter.js"></script>
+		<script type="text/javascript" src="../images/jquery.tablesorter/jquery.tablesorter.pager.js"></script>
+[/#if]
+		<script>
+			$(document).ready(function(){ 
+			        	$("#cloningtable").tablesorter(); 
+			        } 
+			); 
+			    
+		</script>		    
+
+
+		<h1>${categories!"Clone center"}</h1>
+		<table id="cloningtable" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			[#if items?? ]
+			[#list items as item]
+			[#if item_index==0]
+			<thead>
+				<tr>
+					[#list item as i]
+					<th class="header">
+						${i!"NA"}
+					</th>	
+					[/#list]
+							
+				</tr>			
+			</thead>
+			[#else]
+			[#if item_index==1]
+			<tbody>
+			[/#if]
+			
+			[#if item_index%2==0]
+				<tr class='odd'>
+			[/#if]
+			[#if item_index%2==1]
+				<tr class='even'>
+			[/#if]
+					[#list item as i]
+					<td>
+						[#if i_index==1]
+						[@s.url action="Edit.action" id="urladdr" ]
+							[@s.param name="ID"]${item[0]}[/@s.param]
+							[@s.param name="includeHeader"]true[/@s.param]
+							[@s.param name="title"]${i}[/@s.param]	
+						[/@s.url]
+						[#--[@s.a href=urladdr]${i}[/@s.a]--]
+                        <a href='${urladdr}' target='_top'>${i}</a>
+						[#else]
+						${i!""}
+						[/#if]
+						
+					</td>	
+					[/#list]			
+				</tr>
+				
+			[/#if]
+			[/#list]
+			[/#if]
+			
+			</tbody>
+		</table>	

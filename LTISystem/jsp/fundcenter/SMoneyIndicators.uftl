@@ -1,0 +1,56 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="smoney" content="vf_current" />
+<meta name="submenu" content="smoney" />
+<meta name="smoneyindicators" content="vf_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>ValidFi Smart Money Indicators</title>
+<link rel="stylesheet" href="/LTISystem/jsp/images/vf.css" type="text/css" /> 
+<script type="text/javascript">
+function showPic(img,width,height){
+window.open("data:image/jpeg;base64,"+img,"","width="+width+",height="+height+",resizable=1");
+}
+</script>
+</head>
+<body>
+<div id="vf_wrap">
+	<div id="vf_content-wrap">
+			<div id ="vf_main" style="min-height:0;">
+                        <h1>Smart Money Indicator</h1>
+                        <hr />
+                        <p>ValidFi's smart money indicator is derived based on comprehensive analysis of top asset allocation Gurus' recent asset exposure. Currently, it tracks the aggregate asset exposure on US equities and bonds.
+                        </p>
+                        <p>&nbsp; &nbsp; </p>
+ 
+                        </div> <!--- end of vf_main --->
+			<div id="vf_rightbar" style="min-height:0;">
+			<h1><span>Pro Money Indicator</span></h1>
+	    		<hr />
+                        <p>ValidFi's pro money indicator is derived based on comprehensive analysis of 481 moderate asset allocation mutual funds' recent asset exposure. Currently, it tracks the aggregate asset exposure on US equities and bonds. 
+                        </p>
+                        <p>&nbsp; &nbsp; </p>
+                	</div> <!--- end of rigthbar -->
+                        <p> &nbsp; &nbsp; 
+                        <h1 style="text-align:center">Weekly Smart Money Asset Allocation Chart</h1>
+                        <hr />
+                        </p>
+                        <!--- I would like to add a permission check here --->
+                        <p><a href="../fundcenter/SMoneyTop.action?includeHeader=false" target="_blank">Larger Chart</a></p>
+                        [@lti.chart "US Equity,US Bonds" "Moderate3.xml" "www.validfi.com"][/@lti.chart]
+
+                        <p>&nbsp; &nbsp; </p>
+                        <h1 style="text-align:center">Weekly Pro Money Asset Allocation Chart</h1>
+                        <hr />
+                        <!--- This is not premium --->
+                        <p><a href="../fundcenter/SMoneyPro.action?includeHeader=false" target="_blank">Larger Chart</a></p>
+                        [@lti.chart "US Equity,US Bonds" "Moderate0.xml" "www.validfi.com"][/@lti.chart]
+
+       </div> <!-- end of vf_content_wrap -->
+</div>
+</body>
+</html>

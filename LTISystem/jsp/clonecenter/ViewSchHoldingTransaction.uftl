@@ -1,0 +1,346 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#if Parameters.includeJS?? && Parameters.includeJS=='false']
+[#else]
+[/#if]
+[#if !sportfolio??||!scheduletransactions??]
+<div style="display:none">${message}</div>
+[/#if]
+[#if sportfolio??&&scheduletransactions??]
+<div style="display:none">${message}</div>
+[#assign stateType=false]
+[#assign tranType=false]
+<div><span style='font-weight: bold;'><a title="Download the scheduled holdings into CSV file." href="/LTISystem/jsp/portfolio/OutputSchHolding.action?ID=${sportfolio.ID}&folio=false">Download to CSV</a></span>
+<span style='font-weight: bold;'><a title="Download the scheduled holdings into CSV file." href="/LTISystem/jsp/portfolio/OutputSchHolding.action?ID=${sportfolio.ID}&folio=true">Download to Folio CSV</a></span>
+</div>
+<span style='font-weight: bold;'>Expected Holdings After Scheduled Transactions</span>
+<div id="schedule_holdingPanel">
+[#if stateType==true]
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".tabs").tabs();
+  });  
+</script>
+[/#if]
+	[#if stateType==true]
+	<div class="tabs">
+	<ul>
+        <li><a href="#ASHoldings"><span>Suggested Holdings</span></a></li>
+        <li><a href="#AAHoldings"><span>Actual Holdings</span></a></li>
+    </ul>
+	[/#if]
+	<div id="ASHoldings">
+		[#if stateType==true]
+		<table id="ssposition" class="evergreen_table tablesorter" border="0" cellpadding="0" cellspacing="1" width="100%"><!-- class="tablesorter" -->
+			<thead>
+			<tr>
+				<th class="header">Asset</th>
+				<th class="header">Fund Description</th>			
+				<th class="header">Percentage</th>
+			</tr>			
+			</thead>
+			[[#assign index=0]
+			[#if sportfolio??]
+			
+			
+			[#if sportfolio.assets??]
+			[#list sportfolio.assets as ast]
+			
+			
+			
+			[#if ast.securityItems??]
+			[#list ast.securityItems as security]
+			
+			[#-- list position start --]
+			[#if index%2==0]
+			<tr class='odd'>
+			[/#if]
+			[#if index%2==1]
+			<tr class='even'>
+			[/#if]
+			[#assign index=index+1]
+				<td>
+					${ast.name!"-"}
+				</td>
+				<td>
+					[@s.url action="View.action" id="urladdr" namespace="/jsp/fundcenter" includeParams="false"]
+							[@s.param name="symbol"]${security.symbol!"-"}[/@s.param]
+							[@s.param name="title"]${security.symbol!"-"}[/@s.param]
+					[/@s.url]
+					<a href="${urladdr}" target="_TOP" style="color:#2B60DE">
+					[#if security.description401k??]${security.description401k}[#else]${security.symbol!"-"}[/#if]</a>					
+				</td>			
+				<td>
+                 [#if security.totalAmount??]
+                     [#assign p=security.totalAmount/total*100]
+                     ${p?string("0.00")}%
+                 [/#if]
+				</td>
+			</tr>
+			[#-- list position end --]
+			
+			[/#list]
+			[/#if]
+			
+			[/#list]
+			[/#if]
+			[/#if]
+		</table>	
+		<script>
+			$("#ssposition").tablesorter(); 
+		</script>
+		[/#if]
+		</div>
+		<div id="AAHoldings">
+		<table id="sposition" class="evergreen_table tablesorter" border="0" cellpadding="0" cellspacing="1" width="100%">
+			<thead>
+			<tr>
+				<th class="header">Asset</th>
+				<th class="header">Security</th>	
+				<th class="header">Percentage</th>
+			</tr>			
+			</thead>
+			[#assign index=0]
+			[#if sportfolio??]
+			
+			
+			[#if sportfolio.assets??]
+			[#list sportfolio.assets as ast]
+			
+			
+			
+			[#if ast.securityItems??]
+			[#list ast.securityItems as security]
+			
+			[#-- list position start --]
+			[#if index%2==0]
+			<tr class='odd'>
+			[/#if]
+			[#if index%2==1]
+			<tr class='even'>
+			[/#if]
+			[#assign index=index+1]
+				<td>
+					${ast.name!"-"}
+				</td>
+				<td>
+					[@s.url action="View.action" id="urladdr" namespace="/jsp/fundcenter" includeParams="false"]
+							[@s.param name="symbol"]${security.symbol!"-"}[/@s.param]
+							[@s.param name="title"]${security.symbol!"-"}[/@s.param]
+					[/@s.url]
+					<a href="${urladdr}" target="_TOP" style="color:#2B60DE">${security.symbol!"-"} (${security.getSecurityName()!"-"})</a>						
+				</td>	
+				<td>
+                 [#if security.totalAmount??]
+                     [#assign p=security.totalAmount/total*100]
+                     ${p?string("0.00")}%
+                 [/#if]
+				</td>
+			</tr>
+			[#-- list position end --]
+			
+			[/#list]
+			[/#if]
+			
+			[/#list]
+			[/#if]
+			[/#if]
+		</table>	
+		<script>
+			$("#sposition").tablesorter({sorter:'num'}); 
+		</script>
+		</div>
+		[#if stateType==true]
+		</div>
+		[/#if]
+
+</div>
+<br/>
+<span style='font-weight: bold;'>Scheduled Transactions</span>
+<div id="schedule_transactionPanel">
+[#if tranType==true]
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".tran_tabs").tabs();
+  });
+</script>
+[/#if]
+
+[#if tranType==true]
+<div class="tran_tabs">
+	<ul>
+        <li><a href="#ASTransactions"><span>Suggested Transactions</span></a></li>
+        <li><a href="#AATransactions"><span>Actual Transactions</span></a></li>
+    </ul>
+[/#if]
+<div id="ASTransactions">
+[#if tranType==true]
+[#if scheduletransactions?? && scheduletransactions?size>0]
+	<table id="sctransaction" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+		<thead>
+		<tr>
+			<th class="header" width="10%">Transaction</th>
+			<th class="header" width="10%">Date</th>
+			<th class="header" width="20%">Fund Description</th>	
+			<th class="header" width="10%">Amount</th>
+			<th class="header" width="11%">Portfolio Percentage(%)</th>
+		</tr>			
+		</thead>
+		[#assign index=0]
+		
+		[#list scheduletransactions as sitem]
+	
+		[#-- list scheduletransactions start --]
+		[#if index%2==0]
+		<tr class='odd'>
+		[/#if]
+		[#if index%2==1]
+		<tr class='even'>
+		[/#if]
+		[#assign index=index+1]
+			<td>${sitem.operation!"-"}</td>
+			<td>${sitem.date?string("MM/dd/yyyy")!"-"}</td>
+			<td>[@s.url action="View.action" id="urladdr" namespace="/jsp/fundcenter" includeParams="false"]
+					[@s.param name="symbol"]${sitem.symbol!"-"}[/@s.param]
+					[@s.param name="title"]${sitem.symbol!"-"}[/@s.param]
+				[/@s.url]
+				<a href="${urladdr}" target="_TOP" style="color:#2B60DE">${sitem.description401k!""}</a>
+			</td>
+			<td>${sitem.amount!"-"}</td>
+			<td>[#if sitem.percentage??]
+				[#assign sp=sitem.percentage*100]
+	            ${sp?string("0.00")}%							
+				[/#if]
+			</td>	
+		</tr>
+		[#-- list position end --]
+		[/#list]
+	</table>
+	[#if scheduletransactions.size() > 30]
+	<br class="clear"/>
+	<div style="posistion:static;font-size:10px" id='pager' class="pager">
+		<form>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/first.png" class="first"/>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/prev.png" class="prev"/>
+			<input type="text" class="pagedisplay"/>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/next.png" class="next"/>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/last.png" class="last"/>
+			<select class="pagesize">
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option selected="selected" value="30">30</option>
+				<option value="40">40</option>
+			</select>
+		</form>
+	</div>
+	[/#if]
+	<script>
+	$(document).ready(function(){
+		$("#stransaction").tablesorter({
+			widthFixed: true, 
+			widgets: ['zebra']
+		})
+		[#if scheduletransactions.size() > 30]
+		.tablesorterPager({container: $("#pager"),size: 30});
+		[/#if]
+	})
+	</script>
+[#else]
+No Suggested Transactions!
+[/#if]
+[/#if]
+</div>
+<div id="AATransactions">
+[#if scheduletransactions?? && scheduletransactions?size>0]
+	<table id="sstransaction" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+		<thead>
+		<tr>
+			<th class="header" width="9%">Transaction</th>
+			<th class="header" width="8%">Date</th>	
+			<th class="header" width="10%">Amount</th>
+			<th class="header" width="13%">Portfolio Percentage(%)</th>
+			<th class="header" width="18%">Symbol</th>	
+			[#if ID??]	
+			<th class="header" width="7%">History</th>		
+			[/#if]
+			<th class="header" width="10%">Asset Name</th>
+		</tr>			
+		</thead>
+		[#assign index=0]
+		
+		[#list scheduletransactions as item]
+	
+		[#-- list scheduletransactions start --]
+		[#if index%2==0]
+		<tr class='odd'>
+		[/#if]
+		[#if index%2==1]
+		<tr class='even'>
+		[/#if]
+		[#assign index=index+1]
+			<td>${item.operation!"-"}</td>
+			<td>${item.date?string("MM/dd/yyyy")!"-"}</td>
+			<td>${item.amount!"-"}</td>
+			<td>[#if item.percentage??]
+				[#assign p=item.percentage*100]
+	            ${p?string("0.00")}%							
+				[/#if]
+			</td>
+			<td>[@s.url action="View.action" id="urladdr" namespace="/jsp/fundcenter" includeParams="false"]
+					[@s.param name="symbol"]${item.symbol!"-"}[/@s.param]
+					[@s.param name="title"]${item.symbol!"-"}[/@s.param]
+				[/@s.url]
+				<a href="${urladdr}" target="_TOP" style="color:#2B60DE">${item.symbol!""}(${item.getSecurityName()!""})</a>
+			</td>[#if ID??]
+			<td>
+				<a href="/LTISystem/jsp/clonecenter/ViewTransaction.action?symbol=${item.symbol!""}&includeHeader=true&includeJS=true&title=${item.symbol!"unknown security"}'s history&ID=${ID}" target="_blank">check</a>
+			</td>		
+			[/#if]	
+			<td>${item.assetName!"-"}</td>
+		</tr>
+		[#-- list position end --]
+		
+		[/#list]
+	</table>
+	[#if scheduletransactions.size() > 30]
+	<br class="clear"/>
+	<div style="posistion:static;font-size:10px" id='pager' class="pager">
+		<form>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/first.png" class="first"/>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/prev.png" class="prev"/>
+			<input type="text" class="pagedisplay"/>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/next.png" class="next"/>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/last.png" class="last"/>
+			<select class="pagesize">
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option selected="selected" value="30">30</option>
+				<option value="40">40</option>
+			</select>
+		</form>
+	</div>
+	[/#if]
+	<script>
+	$(document).ready(function(){
+		$("#sstransaction").tablesorter({
+			widthFixed: true, 
+			widgets: ['zebra']
+		})
+		[#if scheduletransactions.size() > 30]
+		.tablesorterPager({container: $("#pager"),size: 30});
+		[/#if]
+	})
+	</script>
+[#else]
+No Actual Transactions!
+[/#if]
+</div>
+[#if tranType==true]
+</div>
+[/#if]
+</div>
+[/#if]
+	
+	
+

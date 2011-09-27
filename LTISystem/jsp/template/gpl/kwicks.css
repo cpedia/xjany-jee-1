@@ -1,0 +1,27 @@
+.returnToKwicks {
+	display:block;
+	border:1px dashed #888;
+	padding:5px;
+	float:right;
+}
+.returnToKwicks:hover {
+	background-color: #5e5e76;
+	text-decoration: none;
+	color: #aaa;
+}
+
+/* defaults for all examples */
+.kwicks {
+	list-style: none;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+.kwicks li{
+	display: block;
+	overflow: hidden;
+	padding: 0;
+	cursor: pointer;
+}
+
+

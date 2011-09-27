@@ -1,0 +1,47 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+<head>
+<script>
+	function getPlanSaaAndTaa(){
+		window.location.href = '/LTISystem/CountPlanSaaOrTaa_getPlanSaaAndTaa.action?ids='+document.getElementById('ids').value;
+	}
+	function dcpf(){
+		window.location.href = '/LTISystem/CountPlanSaaOrTaa_downloadFile.action';
+	}
+</script>
+</head>
+<body>
+ <p>
+  <form action="/LTISystem/CountPlanSaaOrTaa_uploadFile.action" method="post" id="form" enctype="multipart/form-data">
+  <table width="100%" style="margin:10px">
+  <tr>
+  <td>
+  <b>UpLoad File</b>
+  </td>
+  <td>
+  <input type="file" name="uploadFile">
+  	<input type="submit" value="Upload a new planID file">
+  	<input type='button' class="uiButton" value='Download current planID File' onclick='dcpf()'>
+  </td>
+  </tr>
+  <tr>
+  <td width="100px">
+  <b>IDs</b>
+  </td>
+  <td>
+  <input type='text' name='ids' id='ids'>
+  <br>
+  If Plan IDs is empty, we will use current planID file as default
+  <br>
+  If Plan IDs is -1,we will use all planID
+  </td>
+  </tr>
+  </table>
+  </form>
+ </p>
+  <p>
+ <input type='button' class="uiButton" value='DownLoad' onclick='getPlanSaaAndTaa()'> 
+  </p>
+ </body>
+</html>

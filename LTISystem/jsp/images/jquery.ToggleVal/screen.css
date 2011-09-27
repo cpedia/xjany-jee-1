@@ -1,0 +1,15 @@
+.form-fields {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 1em 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.form-fields INPUT {
+	COLOR: #666
+}
+.form-fields INPUT.special {
+	BORDER-RIGHT: #666 3px double; BORDER-TOP: #666 3px double; BORDER-LEFT: #666 3px double; COLOR: #c00; BORDER-BOTTOM: #666 3px double; BACKGROUND-COLOR: #ffc
+}
+.form-fields INPUT.active {
+	FONT-WEIGHT: bold; COLOR: #7da7d9; BACKGROUND-COLOR: transparent; 
+	BORDER-RIGHT: #666 3px double; BORDER-TOP: #666 3px double; 
+	BORDER-LEFT: #666 3px double; COLOR: #c00; BORDER-BOTTOM: #666 3px double; 
+	BACKGROUND-COLOR: #ffc;
+}

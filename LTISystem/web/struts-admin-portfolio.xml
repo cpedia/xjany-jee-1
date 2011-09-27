@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.admin.portfolio" namespace="/jsp/admin/portfolio" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/portfolio/Main">
+			<result name="success">/jsp/admin/portfolio/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="MonitorMain" class="/jsp/admin/portfolio/MonitorMain">
+			<result name="success">/jsp/admin/portfolio/monitormain.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="ViewState" class="/jsp/admin/portfolio/ViewState">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/portfolio/viewstate.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="ExecutionState" class="/jsp/admin/portfolio/ExecutionState">
+			<result name="success">/jsp/admin/portfolio/executionstate.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>		
+		<action name="ExecuteCommand" class="/jsp/admin/portfolio/ExecuteCommand">
+			<result name="success">/jsp/ajax/result.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>			
+		<action name="Search" class="/jsp/admin/portfolio/Search">
+			<result name="success">/jsp/admin/portfolio/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="RecoverPortfolio" class="/jsp/admin/portfolio/RecoverPortfolio">
+			<result name="success">/jsp/ajax/result.jsp</result>
+			<result name="input">/jsp/admin/portfolio/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		
+		<action name="CheckPortfolio" class="/jsp/admin/portfolio/CheckPortfolio">
+			<result name="message" type="freemarker">/jsp/message.uftl</result>
+		</action>
+		
+		<action name="UploadExecutionBatchPlanFile" class="/jsp/admin/portfolio/UploadExecutionBatchPlanFile">
+			<result name="success">/jsp/admin/portfolio/result.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		
+		<action name="DownLoadExecutionBatchPlanFile" class="/jsp/admin/portfolio/DownLoadExecutionBatchPlanFile">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">text/comma-separated-values;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		
+		<action name="DownLoadUnSendPortfolioIDFile" class="/jsp/admin/portfolio/DownLoadUnSendPortfolioIDFile">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">text/comma-separated-values;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		
+	</package>
+
+	<package name="com.lti.action.admin.portfolio.dailydata" namespace="/jsp/admin/portfolio/dailydata" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/portfolio/dailydata/Main">
+			<result name="success">/jsp/admin/portfolio/dailydata/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/portfolio/dailydata/Search">
+			<result name="success">/jsp/admin/portfolio/dailydata/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/portfolio/dailydata/Save">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/portfolio/dailydata/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>	
+			
+	</package>	
+	
+	<package name="com.lti.action.admin.portfolio.log" namespace="/jsp/admin/portfolio/log" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/portfolio/log/Main">
+			<result name="success">/jsp/admin/portfolio/log/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/portfolio/log/Search">
+			<result name="success">/jsp/admin/portfolio/log/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/portfolio/log/Save">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/portfolio/log/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>	
+	</package>		
+
+	<package name="com.lti.action.admin.portfolio.transaction" namespace="/jsp/admin/portfolio/transaction" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/portfolio/transaction/Main">
+			<result name="success">/jsp/admin/portfolio/transaction/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/portfolio/transaction/Search">
+			<result name="success">/jsp/admin/portfolio/transaction/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/portfolio/transaction/Save">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/portfolio/transaction/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>	
+	</package>		
+	<package name="com.lti.action.admin.portfolio.state" namespace="/jsp/admin/portfolio/state" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Save" class="/jsp/admin/portfolio/state/Save">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/portfolio/state/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>	
+	</package>
+	
+	<package name="com.lti.action.admin.portfolio.keywords" namespace="/jsp/admin/portfolio/keyword" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="View" class="/jsp/admin/portfolio/keyword/Save" method="view">
+			<result name="success">/jsp/admin/portfolio/keywords/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>	
+		<action name="Save" class="/jsp/admin/portfolio/keyword/Save" method="save">
+			<result name="success" type="redirect">
+				/jsp/admin/portfolio/keyword/View.action?portfolioID=${portfolioID}&amp;action=view
+			</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+
+	</package>	
+	<package name="com.lti.action.admin.portfolio.trashykeywords" namespace="/jsp/admin/portfolio/trashykeyword" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="View" class="/jsp/admin/portfolio/trashykeyword/Save" method="view">
+			<result name="success">/jsp/admin/portfolio/trashykeywords/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>	
+		<action name="Save" class="/jsp/admin/portfolio/trashykeyword/Save" method="save">
+			<result name="success" type="redirect">
+				/jsp/admin/portfolio/trashykeyword/View.action?portfolioID=${portfolioID}&amp;action=view
+			</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+
+	</package>	
+	<package name="com.lti.action.admin.portfolio.user" namespace="/jsp/admin/portfolio/user" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="View" class="/jsp/admin/portfolio/UserChange" method="view">
+			<result name="success">/jsp/admin/portfolio/user/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>	
+		<action name="Save" class="/jsp/admin/portfolio/UserChange" method="save">
+			<result name="success">
+				/jsp/admin/portfolio/user/save.jsp
+			</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+
+	</package>	
+	
+	<package name="com.lti.action.admin.portfolio.updatemode" namespace="/jsp/admin/portfolio/updatemode" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Save" class="/jsp/admin/portfolio/UpdateModeChange" method="save">
+			<result name="success" type="redirect">
+				/jsp/admin/portfolio/Main.action?startIndex=${startIndex}&amp;portfolioMode=${portfolioMode}
+			</result>
+			<result name="input">/jsp/admin/error.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>	
+</struts>

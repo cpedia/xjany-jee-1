@@ -1,0 +1,53 @@
+[#ftl]
+<html>
+<head>
+<title>Get started</title>
+</head>
+<body>
+[#include "nav.uftl"]
+
+				<div class="sidebar_box_noPadding roundHeadingBlue" style="width:32%;height:400px;float:left">
+					<div class="sidebar_box_heading_white">Step 1: Decide Your Risk Profile: </div>
+  					<div class="sidebar_box_content">
+						<p>Your risk profile, a number between 0-100, represents the target percentage allocation of fixed income. It is derived based on your expected number of years to retirement and risk tolerance.</p>
+						<p>Skip this step if you already know or have a risk profile.</p>
+					</div>
+				</div>
+
+
+				<div class="sidebar_box_noPadding roundHeadingGreen" style="width:32%;margin-left:9px;height:400px;float:left">
+					<div class="sidebar_box_heading_white">Step 2: Customize a Model Portfolio:</div>
+					<div class="sidebar_box_content">
+						<p>Customize a model portfolio based on the following inputs:</p>
+						<ul>
+							<li>Your Risk Profile</li>
+							<li>Plan: the 401K or other plan of your personal portfolio.</li>
+							
+							<li>Strategy: the available investment strategies provided for this plan.</li>
+							<li>Strategy Specific Parameters: such as rebalancing frequencies and other preferences. </li>
+						</ul>
+					</div>
+				</div>
+  				
+  				<div class="sidebar_box_noPadding roundHeadingBlue" style="width:32%;margin-left:9px;height:400px;float:left">
+					<div class="sidebar_box_heading_white">Step 3: Manage Your Portfolio:</div>
+					<div class="sidebar_box_content">
+						<p>This step gives you instructions on how to manage your personal portfolio based on the rebalancing instructions from the model portfolio.</p>
+					</div>	
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

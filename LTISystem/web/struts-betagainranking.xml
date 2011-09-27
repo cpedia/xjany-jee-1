@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.betagainranking" namespace="/jsp/betagainranking" extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		
+		
+		<action name="Main" class="com.lti.action.betagainranking.MainAction">
+			<result name="success" type="freemarker">/jsp/betagainranking/main.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="GetDetails" class="com.lti.action.betagainranking.GetDetailsAction">
+			<result name="success" type="freemarker">/jsp/betagainranking/getDetails.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="HistoricalRankingTable" class="com.lti.action.betagainranking.HistoricalRankingTableAction">
+			<result name="success" type="freemarker">/jsp/betagainranking/historicalRankingTable.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="GetRankingByAssetClass" class="com.lti.action.betagainranking.GetRankingByAssetClassAction">
+			<result name="success" type="freemarker">/jsp/betagainranking/getRankingByAssetClass.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="SecurityRankingTable" class="com.lti.action.betagainranking.SecurityRankingTableAction">
+			<result name="success" type="freemarker">/jsp/betagainranking/securityRankingTable.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="FactorDetailsTable" class="com.lti.action.betagainranking.FactorDetailsTableAction">
+			<result name="success" type="freemarker">/jsp/betagainranking/factorDetailsTable.ftl</result>
+			<result name="error" type="freemarker">/jsp/betagainranking/error.ftl</result>
+		</action>
+		
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/betagain/{1}.uftl
+			</result>
+		</action>	
+	</package>
+</struts>

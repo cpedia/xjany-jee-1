@@ -1,0 +1,42 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+</head>
+
+<body>
+    <div align="center" style="height:550px;">
+    <br>
+    <p>Successfully!</p>
+	<form name=loading> 
+　	<p align=center> <font color="#0066ff" size="2">It is turning to main page,please wait</font><font color="#0066ff" size="2" face="Arial">...</font>
+　　	<input type=text name=chart size=46 style="font-family:Arial; font-weight:bolder; color:#0066ff; background-color:#fef4d9; padding:0px; border-style:none;"> 
+　　<input type=text name=percent size=5 style="color:#0066ff; text-align:center; border-width:medium; border-style:none;"> 
+　　<script>　 
+	var bar=0　 
+	var line="||"　 
+	var amount="||"　 
+	count()　 
+	function count(){　 
+		bar=bar+2　 
+		amount =amount + line　 
+		document.loading.chart.value=amount　 
+		document.loading.percent.value=bar+"%"　 
+		if (bar<99){
+			setTimeout("count()",60);}　 
+		else{
+			window.location = "${lti.baseUrl}";
+		}　 
+	}
+	</script> 
+　	</p> 
+	</form> 
+	<p align="center"> If your browser does not support this,<a style="text-decoration: none" href="${lti.baseUrl}"><font color="#FF0000">click here</font></a>.</p>
+</body>
+</html>
+
+     </div>
+</body>
+</html>

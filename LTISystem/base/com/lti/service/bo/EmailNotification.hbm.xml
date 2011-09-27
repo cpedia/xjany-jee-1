@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="EmailNotification"
+		table="ltisystem_emailnotification"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="UserID"
+			column="UserID"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="PortfolioID"
+			column="PortfolioID"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+
+		<property
+			name="Span"
+			column="Span"
+			type="java.lang.Integer"
+			not-null="true"
+			length="20"
+		/>	
+		<property
+			name="LastSentDate"
+			column="LastSentDate"
+			type="timestamp"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

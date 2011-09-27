@@ -1,0 +1,483 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ Get Started: Pick A Portfolio of ${planName}</title>
+<meta  name="Description" content="For each investment plan, MyPlanIQ has pre-built model portfolios for the strategic strategy and the tactical strategy. Users can pick one of them to follow or customize another portfolio tailored for his risk profile. The rating and construction of the plan are displayed as well.  ">
+
+<meta name="jqueryui" content="smoothness">
+<script src="/LTISystem/jsp/portfolio/images/jquery.timer.js" type="text/javascript"></script>
+
+<script src="/LTISystem/jsp/template/gpl/jprocess.js"></script>
+<script>
+	
+	
+	
+	function showMessage(html){
+		$("#leftnav").fadeOut('slow', function() {
+			$("#leftnav").html(html);
+			$("#leftnav").fadeIn();
+		});
+	}
+	
+	
+	$(function() {
+		
+		$(".tip").click(function(){
+			$(".tip").css("background-color","#FFFFFF");
+			$(this).css("background-color","#EFFBC6");
+			showMessage($(this).next().children().html());
+		});
+		
+		$("#btn").click(function(){
+			[@authz.authorize ifAllGranted="ROLE_ANONYMOUS"]
+			alert('You need to login to build your own portfolios. You can either pick a pre-builded portfolio or register for free to build your own portfolios.');
+			$("#loginEntry").trigger("click");
+			return;	
+			[/@authz.authorize]
+			[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+			if(!confirm("Are you sure to build a new portfolio?")){
+				return;
+			}
+			
+			if(!checkname()){
+				alert("The name has been used, please use another one.");
+				return;
+			}
+			
+			showMessage("Building...");
+			generate();
+			$("#btn").hide();
+			
+				
+			$("#wnd").dialog({
+				title:"Building",
+				modal:true,
+				width:500,
+				height:300,
+				beforeClose: function(event, ui) {
+					//alert("Please wait for the simulation finish.");
+					return false; 
+				}
+			
+			});
+			[/@authz.authorize]
+			
+		});
+		
+	});
+	
+	
+	function checkname(){
+		var selected=false;
+		if($.trim($('#portfolioName').val())==""){
+			return selected;
+		}
+		$.ajax({
+		    url: 'profile_checkname.action?includeHeader=false',
+		    type: 'POST',
+		    async: false,
+		    data: 'profile.portfolioName='+$('#portfolioName').val()+"&date="+(new Date()).getTime(),
+		    error: function(){
+		        alert('Error loading XML document');
+		    },
+		    success: function(result){
+		    	if(result.indexOf('true')!=-1){
+		    		selected=true;
+		    	}else{
+		    		selected=false;
+		    	}
+		    }
+		});
+		return selected;
+	}
+	
+$(document).ready(function() {
+        $("#helpwindow").dialog({
+			resizable: false,
+			height:500,
+			width:820,
+			autoOpen:false,
+			modal: true,
+			title:"More on Risk Profile",
+			buttons: {
+				'Close': function() {
+					$(this).dialog('close');
+				}
+				
+			}
+	});
+	
+	$("#help").click(function(){
+    	$("#helpwindow").dialog('open');
+        })
+});
+	function generate(){
+		
+		[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+		var get = false;
+		$.ajax({
+		    url: 'getstarted_generate.action?includeHeader=false',
+		    type: 'POST',
+		    data: $('#cform').serialize(),
+		    error: function(message){
+		        alert($.trim(message.responseText));
+		        window.location.reload();
+		        return;
+		    },
+		    success: function(result){
+		    	var portfolioID = $.trim(result);
+		    		window.onbeforeunload = function(){ return "Are you sure to leave this page, and you will lose the data."; }
+		    		$('#process_bar').jprocess({
+						id:portfolioID,
+						onChange:function(result){
+							if(result<0){
+								$('#process_message').html('try to get simulation information['+_jprocess_error_times+']');
+							}
+							if(_jprocess_error_times>40){
+								$('#process_message').html('the execution may be unsuccessful.<a href="/LTISystem/jsp/portfolio/ViewPortfolio.action?ID='+portfolioID+'">Click here the view the portfolio</a>');
+							}else if(result!=100){
+								$('#process_message').html('Performing Historical Simulation on the Portfolio ... '+result+'%');
+								
+							}
+							if(result==100&&!get){
+								get = true;
+								$('#process_message').html('Simulation Finish.');
+								if(jQuery.browser.msie){
+									window.onbeforeunload = function(){ event.cancelBubble=true;  };
+								}else{
+									window.onbeforeunload = function(event){ event.cancelBubble=true;  };
+								}
+									$.ajax({
+									    url: 'getstarted_getallowcount.action?includeHeader=false',
+									    type: 'POST',
+									    success: function(result){
+									        alert(result);
+									        window.location.href='/LTISystem/getstarted_follow.action?portfolioID='+portfolioID;
+									    }
+									}); 
+							}
+						}
+					});
+		    		return;
+		    	
+		    }
+		});
+		[/@authz.authorize]
+	}
+	
+	function select(portfolioID){
+		window.location.href='/LTISystem/getstarted_follow.action?portfolioID='+portfolioID+"&type=1";
+	}
+</script>
+</head>
+
+<body>
+
+<div id="wnd" style="display:none;height:300px;width:500px">
+	<div id='process_bar' style=''></div><div id='process_message'></div>	
+</div>
+
+<style>
+#ctbl input{
+	width:500px;
+	height:30px;
+	color:#333;
+	font-size:100%;
+	border:1px solid #ccc;
+}
+#ctbl select{
+	width:502px;
+	height:30px;
+	color:#333;
+	font-size:100%;
+	margin:1px 0;
+	padding:1px 0 0;
+	border:1px solid #ccc;
+}
+#ctbl td{
+	height:40px;
+}
+</style>
+<table border=0 wdith=100% bgcolor="#ffffff" style="margin-left:1px;">
+	<tr>
+		<td style="width:248px;float:left;background-color:#ffffff" valign=top>
+			<div>
+				<div style="background-color:#E78E31;height:35px;width:243px;padding-left:5px;padding-top:15px;">
+					<span style="font-size:1.5em;color:#ffffff;">Useful Tips</span>
+				</div>
+				<div style="background-color:#F7F7FF;height:400px;width:243px;padding-left:5px;padding-top:15px; margin-right:15px">
+<h3>Strategies</h3>
+<ul class="list">
+<li><b>SAA:</b> <a target=_blank href='/LTISystem/jsp/strategy/View.action?ID=771'>Strategic Asset Allocation</a></li>
+<li><b>TAA:</b> <a target=_blank href='/LTISystem/jsp/strategy/View.action?ID=1003'>Tactical Asset Allocation</a></li>
+</ul>
+<h3>Makeup of Pre-built Model Portfolios</h3>
+
+<!--<ul class="list">
+<li><strong>Growth:</strong> 80% Risk Assets, 20% Fixed Income</li>
+<li><strong>Moderate:</strong> 60% Risk Assets, 40% Fixed Income</li>
+<li><strong>Conservative:</strong> 40% Risk Assets, 60% Fixed Income</li>
+</ul>
+-->
+<table border=0>
+<tr>
+<td></td>
+<td>Risk Assets</td>
+<td>Fixed Income</td>
+</tr>
+<tr>
+<td><b>Growth</b></td>
+<td align="center">80%</td>
+<td align="center">20%</td>
+</tr>
+<tr>
+<td><b>Moderate</b></td>
+<td align="center">60%</td>
+<td align="center">40%</td>
+</tr>
+<tr>
+<td><b>Conservative</b></td>
+<td align="center">40%</td>
+<td align="center">60%</td>
+</tr>
+</table>
+
+</p><br>
+<p>Click on a portfolio link for more info.</p>
+<p><strong>Risk Profile [@lti.questionmark "Click here for more Risk Profile explanation" "help" /]:</strong> minimum percentage allocated to fixed income.</p>
+
+
+			            <div id="leftnav">
+
+						</div>
+				</div>
+			</div>
+		</td>
+		<td width="730" valign="top">
+			[#include "nav.uftl"]
+			<br>
+<!--			<b>You have selected the plan:</b> -->
+			<a href='javascript:history.go(-1);' class="uiButton" style="height:25px;width:80px;font-size:0.8em">Go back</a>
+			
+			<table>
+				<tr>
+					<td><h2>${planName}</h2></td>
+					<td><a href='/LTISystem/f401k_view.action?ID=${plan.ID?string.computer}' target='_blank' class="qButton" style="height:20px;width:20px">Click here to visit this plan page</a></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<h3>Investment Menu Rating: [#if ranksize!=0][#list 1..ranksize as i]<img border=0 src="/LTISystem/jsp/images/star.jpg">[/#list][/#if][#if ranksize!=5][#list ranksize..4 as i][/#list][/#if]</h3>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<br>
+			<p>
+				[#if plan.shortDescription?? && !plan.shortDescription?matches("")]
+				  ${plan.shortDescription}
+				<br>
+				[/#if]
+			    [#if plan.similarIssues?? && !plan.similarIssues?matches("")]
+				    ${plan.similarIssues!""}			   
+				[#elseif plan.variablesFor401k??]
+					This plan consists of ${plan.variablesFor401k?size} funds, some of them are:
+					[#list plan.variablesFor401k as var]
+						${var.symbol}[#if var_index==5][#break][/#if][#if var_index!=plan.variablesFor401k?size-1],[/#if]
+					[/#list].
+				[/#if]				
+			</p>
+			<br>
+			<!-- <span><font size="3"><b>We provide two investment strategies for the plan. To see the simulation result, please: </b></font></span>
+			<br> 
+			<br> -->
+			<h3><font size="+1">A.</font> Pick one of the pre-built model portfolios to follow</h3>
+			[@s.action name="getstarted_getmodelportfolios" namespace="/" executeResult=true]
+			  [@s.param name="ids"]${planID?string.computer}[/@s.param]
+			  [@s.param name="includeHeader"]false[/@s.param]
+			[/@s.action]
+			<br>
+			<br>
+			<font size="+1"><b>B.</b></font> <button class="uiButton"  onmouseover="$(this).next().fadeIn();"><b>Or click here to customize your own portfolio</b></button>
+			<div style="display:none">
+			<br>
+			<button class="uiButton" onclick="$(this).parent().toggle();" style="height:20px;width:40px;font-size:0.7em">Hide</button>
+			<br>
+			<br>
+			<table border=0 width='100%' id="ctbl">
+				<form id="cform">
+				
+				<tr>
+					<td width="210">
+						Portfolio Name
+					</td>
+					<td>
+						<input type="text" id="portfolioName" name="portfolioName" value="${user.userName}'s Portfolio of ${plan.name}">
+						<input type="hidden" name="planID" value="${planID?string.computer}">
+					</td>
+					<td>
+					<a alt="Click here to see detail" href='javascript:void(0)' onmouseover="$(this).parent().parent().next().fadeIn()" onmouseout="$(this).parent().parent().next().fadeOut()" class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see detail</a>
+					
+					</td>
+				</tr>
+				<tr style="display:none">
+					<td colspan="3">
+						<div>
+						Please input a name for the new portfolio
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Strategy
+					</td>
+					<td>
+						<select  value='Tactical Asset Allocation' id="strategyID" name="strategyID">
+								<option value="771" >Strategic Asset Allocation(SAA)</option>
+								<option value="1003" selected>Tactical Asset Allocation(TAA)</option>
+						</select>
+					</td>
+					<td>
+					<a alt="Click here to see more detail" href='javascript:void(0)' onmouseover="$(this).parent().parent().next().fadeIn()" onmouseout="$(this).parent().parent().next().fadeOut()" class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see more detail</a>
+					
+					</td>
+					
+				</tr>
+				<tr style="display:none">
+					<td colspan="3">
+						<div>
+						Please select a strategy
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Risk Profile
+					</td>
+					<td>
+						<input type="text" id="riskNumber" name="riskNumber"  value='28'>
+					</td>
+					<td>
+					<a alt="Click here to see more detail" href='javascript:void(0)' onmouseover="$(this).parent().parent().next().fadeIn()" onmouseout="$(this).parent().parent().next().fadeOut()" class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see more detail</a>
+					
+					</td>
+				</tr>
+				<tr style="display:none">
+					<td colspan="3">
+						<div>
+						Please input a risk profile
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Rebalance Frequency
+					</td>
+					<td>
+						<select id="frequency" name="frequency" value='monthly'>
+							[#if spc.isAdvancedUser()]
+								<option value="weekly" >Weekly</option>
+							[/#if]
+								<option value="monthly" selected>Monthly</option>
+								<option value="quarterly" >Quarterly</option>
+								<option value="annually" >Annually</option>
+						</select>
+						
+					</td>
+					<td>
+					<a alt="Click here to see more detail" href='javascript:void(0)' onmouseover="$(this).parent().parent().next().fadeIn()" onmouseout="$(this).parent().parent().next().fadeOut()" class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see more detail</a>
+					
+					</td>
+				</tr>
+				<tr style="display:none">
+					<td colspan="3">
+						<div>
+						Please select a rebalance frequency
+						</div>
+					</td>
+				</tr>
+				
+				</form>
+			</table>
+					
+			<a id="btn" href="javascript:void(0)" class="uiButton">Build</a>			
+			<br></div>
+			<br>
+			<br>
+			<br>
+		</td>
+	</tr>
+
+</table>
+
+
+<div id="helpwindow" style="display:none">
+				<p>All assets are classified to two classes: risky assets and fixed income (stable) assets.</p>
+<p>Risky assets include the following assets:
+							<ul>
+							 <li><strong>Equities (stocks): </strong>US, international and emerging market stocks,</li>
+							 <li><strong>REITs: </strong>US and international Real Estate Investment Trusts,</li>
+							 <li><strong>Commodities: </strong>Industrial Metals, Gold, Oil, Agricultural, .. etc.,</li>
+							 <li><strong>High Yield (Junk) Bonds: </strong>Low grade corporate bonds </li>
+							</ul>
+							<p><br>Fixed income assets include</p>
+							<ul>
+							<li><strong>Government bonds: </strong>short, intermediate and long term treasury bonds and GNMA,</li>
+							<li><strong>Investment Grade bonds: </strong>short, intermediate and long term investment corporate bonds,</li>
+							<li><strong>International bonds: </strong>Sovereign and corporate investment grade bonds,</li>
+							<li><strong>Cash: </strong>Money markets</li>
+							</ul>
+							</p>
+							<p><br>The Risk Profile number represents the target percentage allocation of fixed income in your portfolio. For example, the default risk profile number is 18. That means 18% should be allocated to fixed income and 82% should be allocated to risky assets</p>
+							<p>Your Risk Profile is determined based on your expected years to retirement and risk tolerance. The risk tolerance could be one of the following:
+							<ul>
+							<li><strong>Very Conservative</strong></li>
+							<li><strong>Conservative</strong></li>
+							<li><strong>Moderatge</strong></li>
+							<li><strong>Aggressive</strong></li>
+							<li><strong>Very Aggressive</strong></li>
+							</ul>
+							<p><br>The more aggressive you are, the more will be allocated to risky assets. The longer you expect to retire, the more will be allocated to risky assets too.</p>
+							<p>Your risk profile number will be adjusted every year.</p>
+							<p>You could always overwrite the risk profile number when customizing a model portfolio.</p>
+							<p>The following chart illustrates the meaning of the risk profile number:
+											<br/><br/>
+											<img border=0 src='jsp/profile/images/barchart.png'>
+											<br/>
+							</p>
+							<p>For more information on how to determine proper asset allocation, consult your financial adviser or use popular retirement planning tools provided by Fidelity, Vanguard or T.Rowe Price. Or you could find out more asset allocation information on target date funds such as <a target="_blank" href="http://personal.fidelity.com/products/funds/content/DesignYourPortfolio/freedomfunds.shtml.cvsr">Fidelity Freedom Target Date Funds</a>. 
+							</p> 
+							
+							<br/>
+							<br/>
+					</p>
+</div>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+       
+
+
+

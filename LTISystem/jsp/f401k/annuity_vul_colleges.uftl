@@ -1,0 +1,262 @@
+[#ftl]
+ [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+ [#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+ [#import "/jsp/lti_library_ftl.jsp" as lti]
+ <title>Variable Annuities, Variable Universal Life and College Savings 529 Plans</title> 
+<meta  name="Description" content="Hundreds of variable annuities and 529 colledge saving plans are maintained by MyPlanIQ. MyPlanIQ provides tacticle strategy and strategic strategy for users to establish and manage their portfolios out of these plans.">
+
+ <!-- #contianer input{ 	height:30px;width:500px; } #planwindow table{ 	border-collapse:collapse; border:1px solid #f0f0f0; } #planwindow th{      border: 1px solid #f0f0f0; } #planwindow td{      border: 1px solid #f0f0f0;padding:5px; } .ui-autocomplete-category { 		padding:.2em .4em; 		margin:.8em 0 .2em; } -->
+<script src="jsp/profile/images/GooFunc.js" type="text/javascript"></script>
+<script src="jsp/profile/images/GooPieChart.js" type="text/javascript"></script>
+<script type="text/javascript"><!--
+$(document).ready(function() {
+	var cache = {};
+	$("#t1_planname").autocomplete({
+			minLength: 2,
+			source: function(request, response) {
+				if ( request.term in cache ) {
+					response( cache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "select_ajaxplanname.action?includeHeader=false&size=10",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						cache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	if(ui.item.data==false){
+			 		window.open("/LTISystem/f401k__search.action?keyword="+this.value, "_blank");
+			 	}else{
+			 		$('#t_planid').val(ui.item.id);
+			 		$('#t1_planname').val(ui.item.name);
+			 	}
+			 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}else{
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a href="javascript:void(0)" mce_href="javascript:void(0)">Show all results for <b>"+item.id+"</b></a>" )
+					.appendTo( ul );
+			}
+			
+		};
+		$("#t2_planname").autocomplete({
+			minLength: 2,
+			source: function(request, response) {
+				if ( request.term in cache ) {
+					response( cache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "select_ajaxplanname.action?includeHeader=false&size=10",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						cache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	if(ui.item.data==false){
+			 		window.open("/LTISystem/f401k__search.action?keyword="+this.value, "_blank");
+			 	}else{
+			 		$('#t_planid').val(ui.item.id);
+			 		$('#t2_planname').val(ui.item.name);
+			 	}
+			 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}else{
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a href="javascript:void(0)" mce_href="javascript:void(0)">Show all results for <b>"+item.id+"</b></a>" )
+					.appendTo( ul );
+			}
+			
+		};
+	initSelects("mySelect", 500);
+});
+
+
+
+function compare(){
+	var planName1=document.getElementById("t1_planname");
+	var planName2=document.getElementById("t2_planname");
+	if(planName1.value!=null && planName2.value!=null){
+		location.href="f401k_planrollover.action?from="+planName1.value+"&to="+planName2.value+"&planNameArray="+planName1.value+","+planName2.value;
+	}else
+		alert("The number of plans can not be 0!!!");
+}
+
+
+var show_SAA=false;
+function showSAA(){
+	if(show_SAA==false){
+		show_SAA=true;
+		$('#btn_showSAA').val('- SAA comparison');
+		$('#show_SAA_div').show();
+	}else{
+		show_SAA=false;
+		$('#btn_showSAA').val('+ SAA comparison');
+		$('#show_SAA_div').hide();
+	}
+}
+
+var show_TAA=false;
+function showTAA(){
+	if(show_TAA==false){
+		show_TAA=true;
+		$('#btn_showTAA').val('- TAA comparison');
+		$('#show_TAA_div').show();
+	}else{
+		show_TAA=false;
+		$('#btn_showTAA').val('+ TAA comparison');
+		$('#show_TAA_div').hide();
+	}
+}
+// --></script>
+<!-- JZ <mce:script src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js" mce_src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js" type="text/javascript"></mce:script> <mce:script type="text/javascript"><!  /* IE only */ DD_roundies.addRule('.myBox', '20px'); DD_roundies.addRule('.myBox1', '20px'); DD_roundies.addRule('.myBox2', '20px'); DD_roundies.addRule('.myBox3', '20px'); DD_roundies.addRule('.myBox4', '20px'); // -->
+<script type="text/javascript"><!--
+[#assign groupid=1]
+
+
+
+
+
+
+
+
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+
+
+
+
+
+
+
+
+[#assign groupid=Session["groups"]]
+
+
+
+
+
+
+
+
+[/@authz.authorize]
+
+
+
+
+
+
+
+
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+
+
+
+
+
+
+
+
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+
+
+
+
+
+
+
+
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+// --></script>
+<h1>Variable Annuities, Variable Universal Life and College Savings 529 Plans</h1>
+<div style="width: 100%; height: 300px;">
+<div class="col-1" style="width: 48%; height: 300px;">
+<p>A variable annuity offers a range of investment options. The value of your investment as a variable annuity owner will vary depending on the performance of the investment options you choose. The investment options for a variable annuity are typically mutual funds that invest in stocks, bonds, money market instruments, or some combination of the three.</p>
+<p>Similarly, Variable Life insurance products such as Variable Universal Life (VULs) offer a range of investment options. Investors manage their accounts by investing in these available funds.</p>
+<p>MyPlanIQ constructs investment plans using the investment choices either found from public disclosures or from users' requests.</p>
+</div>
+<div class="col-2" style="width: 48%; height: 300px;">
+<h2>Compare Variable Annuities or VULs<sup><span style="color: #ffa500;"><em>new</em></span></sup></h2>
+<p>Use MyPlanIQ <a href="../../../f401k_plancomparetool.action"><strong>Plan Compare</strong></a> (or visit your plan and find the plan's score) to compare multiple variable annuities or VULs. Or just simply use <a href="../../../f401k_planrollover.action">RolloverIQ</a> to compare two plans. <a href="../../../f401k_planrollover.action">Test drive it here!</a></p>
+<br />
+<p>&nbsp;</p>
+<h3>Do not see your variable annuity or VUL plans? Send us <strong><a href="mailto:support@myplaniq.com?subject=Variable Annuity or VUL Plan Request">Email.</a></strong> We will set them up!</h3>
+<p>&nbsp;</p>
+</div>
+</div>
+<div style="width: 100%;">
+<div class="col-1" style="width: 48%;">
+<h2>Variable Annuity or Variable Life Plans</h2>
+<div class="dividerTop">
+<div id="strategyClassTable">[@s.action name="GetPlanScoreTable" namespace="/jsp/strategy" executeResult=true]
+ [@s.param name="includeTAAReturn"]true[/@s.param]
+ [@s.param name="includeSAAReturn"]false[/@s.param]
+ [@s.param name="includeCoverageScore"]false[/@s.param]
+ [@s.param name="includeFundQualityScore"]false[/@s.param]
+ [@s.param name="includeCapabilityScore"]false[/@s.param]
+ [@s.param name="includeInvestmentScore"]true[/@s.param]
+ [@s.param name="ids"]1025|1029|1030|1031|1505|1507|1058|1055|1508|1045|1046|4581|4660|1056[/@s.param]
+ [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+ [/@s.action]
+</div>
+</div>
+</div>
+<div class="col-2" style="width: 48%;">
+<h2>College Savings 529 Plans</h2>
+<div class="dividerTop">
+<div id="strategyClassTable">[@s.action name="GetPlanScoreTable" namespace="/jsp/strategy" executeResult=true]
+ [@s.param name="includeTAAReturn"]true[/@s.param]
+ [@s.param name="includeSAAReturn"]false[/@s.param]
+ [@s.param name="includeCoverageScore"]false[/@s.param]
+ [@s.param name="includeFundQualityScore"]false[/@s.param]
+ [@s.param name="includeCapabilityScore"]false[/@s.param]
+ [@s.param name="includeInvestmentScore"]true[/@s.param]
+ [@s.param name="ids"]717|4727|4728|4729|4730|4731|4732|4735|4737|4738|4739|4740|4741|4747|4748|4750|4751|4752|4772|4781|4783|4787|4788|4789|4790|4791|4792|4796|4802|4804|4805|4806|4809|4810|4811|4814|4815|4816|4817|4818|4886|5271|5821[/@s.param]
+ [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+ [/@s.action]
+</div>
+</div>
+</div>
+</div>

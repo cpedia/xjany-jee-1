@@ -1,0 +1,270 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<title>PlanRatingIQ</title>
+</head>
+<!--
+<script>
+function calculatePlanRanking(){
+	$.ajax({
+		type: "post",
+		url: "f401k_calculateplanscore.action?includeHeader=false",
+		data: "securityAlphaWeight="+$('#securityAlphaWeight').val()
+			+"&securityTreynorWeight="+$('#securityTreynorWeight').val()
+			+"&securityARWeight="+$('#securityARWeight').val()
+			+"&portfolioARWeight="+$('#portfolioARWeight').val()
+			+"&portfolioSortinoWeight="+$('#portfolioSortinoWeight').val()
+			+"&portfolioSharpeWeight="+$('#portfolioSharpeWeight').val()
+			+"&portfolioTreynorWeight="+$('#portfolioTreynorWeight').val()
+			+"&portfolioDrawDownWeight="+$('#portfolioDrawDownWeight').val()
+			+"&portfolioWinningWeight="+$('#portfolioWinningWeight').val()
+			+"&planTAAWeight="+$('#planTAAWeight').val()
+			+"&planSAAWeight="+$('#planSAAWeight').val()
+			+"&planFundQualityWeight="+$('#planFundQualityWeight').val()
+			+"&planCoverageWeight="+$('#planCoverageWeight').val()
+			+"&planCapabilityWeight="+$('#planCapabilityWeight').val(),
+		datatype: "html",
+		success: function(result){
+			alert(result);
+			location.reload() ;
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+}
+</script>
+-->
+<body>
+<h1 align="center">MyPlanIQ Investment Choices Ranking and Rollover Assistance</h1>
+<div style="width:100%; height:540px;">
+<div class="col-1" style="width:48%; height:540px;">
+
+<h2 align="center">PlanRatingIQ: Investment Choices Ranking</h2>
+<p>PlanRatingIQ gauges quality of investment choices provided in vast retirement IRA, 401K, 403B, 457 plans, variable annuities, variable universal life and college savings 529 plans. </p>
+
+<p>Unlike other services, PlanRatingIQ looks at it from the participant’s viewpoint – what returns they could achieve with the plan. Returns is what investors/participants care about. Good returns are derived from minimizing the various fees charged and ensuring high quality investment choices.</p>
+<p>Read <a href="/LTISystem/f401k_news.action?PID=861">PlanRatingIQ article</a> for more details. </p>
+</div>
+
+<div class="col-2" style="width:48%; height:540px;">
+<h2 align="center">Plan Comparison<sup><font color="orange"><i>new</i></font></sup></h2>
+<p>Use MyPlanIQ <a href="/LTISystem/f401k_plancomparetool.action"><strong>Plan Compare</strong></a> (or visit your plan and find the plan's score) to compare multiple plans including </p>
+<ul>
+<li>Which brokerage ETFs/Mutual Fund IRA or taxable plans are best: See <a href="/LTISystem/f401k__ira_brokerage.action">Brokerage Plan Page</a>.</li>
+<li>Multiple retirement 403(b), 457 or 401(k) plans provided by an organization or a company: See <a href="/LTISystem/f401k__401kplans.action">401K/403B Plan Page</a>.</li>
+<li>Multiple variable annuities or VULs presented by your brokers or insurance agents: See <a href="/LTISystem/f401k__annuity_vul_colleges.action">Annuity Page</a>.</li>
+<li>Which college 529 has the best investment choices: See <a href="/LTISystem/f401k__annuity_vul_colleges.action">529 Page</a>.</li>
+</ul>
+
+<br>
+<h2 align="center">Plan RolloverIQ<sup><font color="orange"><i>new</i></font></sup></h2>
+
+<p>Use <a href="/LTISystem/f401k_planrollover.action">RolloverIQ</a> to decide </p>
+<ul>
+<li>401K => 401K rollover: due to job change. See <a href="/LTISystem/f401k__401kplans.action">401K/403B Plan Page</a>.</li>
+<li>401K => IRA rollover: due to job change. See <a href="/LTISystem/f401k__ira_brokerage.action">Brokerage Page</a>.</li>
+<li>IRA => IRA rollover: find the best brokerage for your IRA. See <a href="/LTISystem/f401k__ira_brokerage.action">Brokerage Page</a>.</li>
+</ul>
+
+<br>
+</div>
+</div>
+      <div style="width:100%">
+         <div class="col-1" style="width:48%">
+	[#if planScoreTopList??]
+		<h1 align="center"><span id='topranking'>PlanRatingIQ Top 20 Plans</span></h1>
+		<br>
+		<table id ="toprankingtable" width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			<thead>
+				<tr>
+					<th alt="Plan Name" width="60px" class="header">Plan Name</th>
+					<th alt="TAA 5 Year Return" width="60px" class="header">TAA 5Yr Return</th>
+					<th alt="SAA 5 Year Return" width="60px" class="header">SAA 5Yr Return</th>
+					<th alt="Diversification" width="60px" class="header">Diversification</th>	
+					<th alt="Fund Quality" width="60px" class="header">Fund Quality</th>
+					<th alt="Portfolio Construction" width="60px" class="header">Portfolio Construction</th>
+					<th alt="Overall Rating" width="60px" class="header">Overall Rating</th>	
+				</tr>			
+			</thead>
+			<tbody>
+				[#list planScoreTopList as ps]
+					[#if ps_index%2==0]
+						<tr class='odd'>
+					[/#if]
+					[#if ps_index%2==1]
+						<tr class='even'>
+					[/#if]
+							<td><a href="/LTISystem/f401k_view.action?ID=${ps.getPlanID()}">${ps.getPlanName()}</a></td>
+							<td width=60px>[#if ps.getTAAReturn()??]${ps.getTAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getSAAReturn()??]${ps.getSAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getCoverageScore()??]${ps.getCoverageScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getFundQualityScore()??]${ps.getFundQualityScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getCapabilityScore()??]${ps.getCapabilityScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getInvestmentScore()??]${ps.getInvestmentScore()?string.percent}[#else]{"-"}[/#if]</td>
+						</tr>
+				[/#list]	
+			</tbody>
+		</table>
+			<!-- <br class="clear"/> -->
+                <br>
+		<!--
+			[#if planScoreTopList.size() > 10]
+				<div style="posistion:static" id="toprankingpager" class="pager">
+					<form>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/first.png" class="first"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/prev.png" class="prev"/>
+						<input type="text" class="pagedisplay"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/next.png" class="next"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/last.png" class="last"/>
+						<select class="pagesize">
+							<option selected="selected" value="10">10</option>
+							<option value="20">20</option>
+							[#if planScoreList.size()> 20 ]
+							<option value="30">30</option>
+							[/#if]
+							[#if planScoreList.size()> 30 ]
+							<option value="40">40</option>
+							[/#if]
+						</select>
+					</form>
+				</div>
+			[/#if]
+		<script type="text/javascript"> 
+		$(document).ready(function(){
+			$("#toprankingtable").tablesorter({
+				widthFixed: true, 
+				widgets: ['zebra']
+			})
+			[#if planScoreList.size() > 10]
+				.tablesorterPager({container: $("#toprankingpager")});
+			[/#if]
+			}); 
+		</script>
+		-->
+		<script type="text/javascript"> 
+			$(document).ready(function(){
+				$("#toprankingtable").tablesorter({
+					widthFixed: true, 
+					widgets: ['zebra']
+				})
+			}); 
+		</script>
+	[/#if]
+	
+        </div>
+        <div class="col-2" style="width:48%">
+	[#if planScoreBottomList??]
+		
+		<h1 align="center"><span id='bottomranking'>PlanRatingIQ Bottom 20 Plans</span></h1>
+		<br>
+		<table id ="bottomrankingtable" width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			<thead>
+				<tr>
+					<th alt="Plan Name" width="60px" class="header">Plan Name</th>
+					<th alt="TAA 5 Year Return" width="60px" class="header">TAA 5Yr Return</th>
+					<th alt="SAA 5 Year Return" width="60px" class="header">SAA 5Yr Return</th>
+					<th alt="Diversification" width="60px" class="header">Diversification</th>	
+					<th alt="Fund Quality" width="60px" class="header">Fund Quality</th>
+					<th alt="Portfolio Construction" width="60px" class="header">Portfolio Construction</th>
+					<th alt="Overall Rating" width="60px" class="header">Overall Rating</th>	
+				</tr>			
+			</thead>
+			<tbody>
+				[#list planScoreBottomList as ps]
+					[#if ps_index%2==0]
+						<tr class='odd'>
+					[/#if]
+					[#if ps_index%2==1]
+						<tr class='even'>
+					[/#if]
+							<td><a href="/LTISystem/f401k_view.action?ID=${ps.getPlanID()}">${ps.getPlanName()}</a></td>
+							<td width=60px>[#if ps.getTAAReturn()??]${ps.getTAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getSAAReturn()??]${ps.getSAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getCoverageScore()??]${ps.getCoverageScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getFundQualityScore()??]${ps.getFundQualityScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getCapabilityScore()??]${ps.getCapabilityScore()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getInvestmentScore()??]${ps.getInvestmentScore()?string.percent}[#else]{"-"}[/#if]</td>
+						</tr>
+				[/#list]	
+			</tbody>
+		</table>
+		<!--	<br class="clear"/> -->
+                <br>
+		<!--
+			[#if planScoreBottomList.size() > 10]
+				<div style="posistion:static" id="bottomrankingpager" class="pager">
+					<form>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/first.png" class="first"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/prev.png" class="prev"/>
+						<input type="text" class="pagedisplay"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/next.png" class="next"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/last.png" class="last"/>
+						<select class="pagesize">
+							<option selected="selected" value="10">10</option>
+							<option value="20">20</option>
+							[#if planScoreList.size()> 20 ]
+							<option value="30">30</option>
+							[/#if]
+							[#if planScoreList.size()> 30 ]
+							<option value="40">40</option>
+							[/#if]
+						</select>
+					</form>
+				</div>
+			[/#if]
+		<script type="text/javascript"> 
+		$(document).ready(function(){
+			$("#bottomrankingtable").tablesorter({
+				widthFixed: true, 
+				widgets: ['zebra']
+			})
+			[#if planScoreList.size() > 10]
+				.tablesorterPager({container: $("#bottomrankingpager")});
+			[/#if]
+			}); 
+		</script>
+		-->
+		<script type="text/javascript"> 
+			$(document).ready(function(){
+				$("#bottomrankingtable").tablesorter({
+					widthFixed: true, 
+					widgets: ['zebra']
+				})
+			}); 
+		</script>
+	[/#if]
+	<!--
+	<br>
+	<div>
+		<p><label>[@s.text name="securityAlphaWeight"/]</lable><input type="text" id="securityAlphaWeight" value='${securityAlphaWeight!}'/></p>
+		<p><label>[@s.text name="securityTreynorWeight"/]</lable><input type="text" id="securityTreynorWeight" value='${securityTreynorWeight!}'/></p>
+		<p><label>[@s.text name="securityARWeight"/]</lable><input type="text" id="securityARWeight" value='${securityARWeight!}'/></p>
+		
+		<p><label>[@s.text name="portfolioARWeight"/]</lable><input type="text" id="portfolioARWeight" value='${portfolioARWeight!}'/></p>
+		<p><label>[@s.text name="portfolioSortinoWeight"/]</lable><input type="text" id="portfolioSortinoWeight" value='${portfolioSortinoWeight!}'/></p>
+		<p><label>[@s.text name="portfolioSharpeWeight"/]</lable><input type="text" id="portfolioSharpeWeight" value='${portfolioSharpeWeight!}'/></p>
+		<p><label>[@s.text name="portfolioTreynorWeight"/]</lable><input type="text" id="portfolioTreynorWeight" value='${portfolioTreynorWeight!}'/></p>
+		<p><label>[@s.text name="portfolioDrawDownWeight"/]</lable><input type="text" id="portfolioDrawDownWeight" value='${portfolioDrawDownWeight!}'/></p>
+		<p><label>[@s.text name="portfolioWinningWeight"/]</lable><input type="text" id="portfolioWinningWeight" value='${portfolioWinningWeight!}'/></p>
+		
+		<p><label>[@s.text name="planTAAWeight"/]</lable><input type="text" id="planTAAWeight" value='${planTAAWeight!}'/></p>
+		<p><label>[@s.text name="planSAAWeight"/]</lable><input type="text" id="planSAAWeight" value='${planSAAWeight!}'/></p>
+		
+		<p><label>[@s.text name="planFundQualityWeight"/]</lable><input type="text" id="planFundQualityWeight" value='${planFundQualityWeight!}'/></p>
+		<p><label>[@s.text name="planCoverageWeight"/]</lable><input type="text" id="planCoverageWeight" value='${planCoverageWeight!}'/></p>
+		<p><label>[@s.text name="planCapabilityWeight"/]</lable><input type="text" id="planCapabilityWeight" value='${planCapabilityWeight!}'/></p>
+		
+		<input type='button' onclick='calculatePlanRanking()' class='uiButton' value='Calculate Plan Ranking'>
+	</div>
+	<br>
+	-->
+        </div>
+       </div>
+
+
+</body>
+</html>

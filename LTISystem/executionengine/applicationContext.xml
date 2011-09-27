@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd"><beans default-lazy-init="false" default-autowire="no" default-dependency-check="none">
+	
+  
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    <property name="driverClass">
+      <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property name="jdbcUrl" value="jdbc:mysql://192.168.163.1:3306/ltisystem?useUnicode=true&amp;characterEncoding=utf8"/>
+    
+
+   <property name="user" value="ltiadmin" />
+   <property name="password" value="vfglsql9002" />
+   <property name="minPoolSize" value="5" />
+   <property name="maxPoolSize" value="20"/>  
+   <property name="initialPoolSize" value="5"/>
+   
+   <property name="acquireIncrement" value="2"/>
+   
+   
+   <property name="maxIdleTime" value="14400"/>
+   <property name="idleConnectionTestPeriod" value="3600"/>
+   <property name="testConnectionOnCheckout" value="true"/>
+   <property name="preferredTestQuery" value="SELECT 1"/>    
+  </bean>
+  
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" lazy-init="default" autowire="default" dependency-check="default">
+    <property name="dataSource">
+      <ref bean="dataSource"/>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect"> com.lti.system.LTIMySQLDialect</prop>
+        <prop key="hibernate.show_sql"> false </prop>
+        <prop key="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</prop> 
+         <prop key="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</prop>
+      </props>
+    </property>
+    <property name="mappingResources">
+      <list>
+        <value>com/lti/service/bo/PortfolioInf.hbm.xml</value>
+        <value>com/lti/service/bo/AssetClass.hbm.xml</value>
+		<value>com/lti/service/bo/ConfidenceCheck.hbm.xml</value>		
+        <value>com/lti/service/bo/StrategyCode.hbm.xml</value>
+        <value>com/lti/service/bo/Portfolio.hbm.xml</value>
+        <value>com/lti/service/bo/PortfolioDailyData.hbm.xml</value>
+        <value>com/lti/service/bo/Security.hbm.xml</value>
+        <value>com/lti/service/bo/SecurityDailyData.hbm.xml</value>
+        <value>com/lti/service/bo/Strategy.hbm.xml</value>
+        <value>com/lti/service/bo/StrategyClass.hbm.xml</value>
+        <value>com/lti/service/bo/Transaction.hbm.xml</value>
+        <value>com/lti/service/bo/User.hbm.xml</value>
+        <value>com/lti/service/bo/JforumPost.hbm.xml</value>
+        
+        <value>com/lti/service/bo/Holiday.hbm.xml</value>
+        <value>com/lti/service/bo/Indicator.hbm.xml</value>
+        <value>com/lti/service/bo/Indicatordailydata.hbm.xml</value>
+        <value>com/lti/service/bo/Group.hbm.xml</value>
+        <value>com/lti/service/bo/GroupUser.hbm.xml</value>
+        <value>com/lti/service/bo/Log.hbm.xml</value>
+        <value>com/lti/service/bo/TradingDate.hbm.xml</value>
+        <value>com/lti/service/bo/PortfolioState.hbm.xml</value>
+        <value>com/lti/service/bo/PortfolioMPT.hbm.xml</value>
+        <value>com/lti/service/bo/Role.hbm.xml</value>
+        <value>com/lti/service/bo/GroupRole.hbm.xml</value>
+        <value>com/lti/service/bo/CustomizePage.xml</value>
+        <value>com/lti/service/bo/RegionCustomize.hbm.xml</value>
+		<value>com/lti/service/bo/CustomizeRegion.hbm.xml</value>
+		<value>com/lti/service/bo/Pages.hbm.xml</value>
+		<value>com/lti/service/bo/SecurityMPT.hbm.xml</value>
+		<value>com/lti/service/bo/MutualFund.hbm.xml</value>
+		<value>com/lti/service/bo/MutualFundDailyBeta.hbm.xml</value>
+		<value>com/lti/service/bo/SystemLog.hbm.xml</value>
+		<value>com/lti/service/bo/GlobalObject.hbm.xml</value>
+		<value>com/lti/service/bo/SecurityType.hbm.xml</value>
+		<value>com/lti/service/bo/BalanceStatement.hbm.xml</value>
+		<value>com/lti/service/bo/CashFlow.hbm.xml</value>
+		<value>com/lti/service/bo/IncomeStatement.hbm.xml</value>
+		<value>com/lti/service/bo/Company.hbm.xml</value>	
+		<value>com/lti/service/bo/EmailNotification.hbm.xml</value>	
+		<value>com/lti/service/bo/CUSIP.hbm.xml</value>
+		<value>com/lti/service/bo/CompanyIndex.hbm.xml</value>
+		<value>com/lti/service/bo/RelativeStrength.hbm.xml</value>
+		<value>com/lti/service/bo/YearlyBalanceStatement.hbm.xml</value>
+		<value>com/lti/service/bo/YearlyCashFlow.hbm.xml</value>
+		<value>com/lti/service/bo/YearlyIncomeStatement.hbm.xml</value>
+		<value>com/lti/service/bo/SecurityRanking.hbm.xml</value>
+		<value>com/lti/service/bo/FactorBetaGain.hbm.xml</value>
+		<value>com/lti/service/bo/SecurityMPTIncData.hbm.xml</value>
+		<value>com/lti/service/bo/ShillerSP500.hbm.xml</value>
+		<value>com/lti/service/bo/CacheStrategyItem.hbm.xml</value>
+		<value>com/lti/service/bo/CachePortfolioItem.hbm.xml</value>
+		<value>com/lti/service/bo/Profile.hbm.xml</value>
+		<value>com/lti/service/bo/VariableFor401k.hbm.xml</value>
+		<value>com/lti/service/bo/UserFundTable.hbm.xml</value>
+		<value>com/lti/service/bo/PlanArticle.hbm.xml</value>
+		<value>com/lti/service/bo/ThirdParty.hbm.xml</value>
+		<value>com/lti/service/bo/UserProfile.hbm.xml</value>
+		<value>com/lti/service/bo/UserResource.hbm.xml</value>
+		<value>com/lti/service/bo/UserOperation.hbm.xml</value>
+		<value>com/lti/service/bo/UserTransaction.hbm.xml</value>
+		<value>com/lti/service/bo/UserPayItem.hbm.xml</value>
+		<value>com/lti/service/bo/HoldingItem.hbm.xml</value>
+		<value>com/lti/service/bo/PortfolioFollowDate.hbm.xml</value>
+		<value>com/lti/service/bo/UserMarket.hbm.xml</value>
+		<value>com/lti/service/bo/PlanScore.hbm.xml</value>
+		<value>com/lti/service/bo/JforumForum.hbm.xml</value>
+		<value>com/lti/service/bo/JforumPostText.hbm.xml</value>
+		<value>com/lti/service/bo/JforumTopics.hbm.xml</value>
+		<value>com/lti/service/bo/Symbol.hbm.xml</value>
+		<value>com/lti/service/bo/ThirdPartyResource.hbm.xml</value>
+		
+		<value>com/lti/service/bo/HoldingRecord.hbm.xml</value>
+		
+		<value>com/lti/service/bo/PortfolioPerformance.hbm.xml</value>
+      	<value>com/lti/service/bo/GroupPermission.hbm.xml</value>
+		<value>com/lti/service/bo/UserPermission.hbm.xml</value>
+		<value>com/lti/service/bo/AllocationTemplate.hbm.xml</value>
+      </list>
+    </property>
+  </bean>
+
+  <!-- CompanyIndexManager -->
+  <bean id="companyIndexManager" class="com.lti.service.impl.CompanyIndexManagerImpl" lazy-init="default" autowire="default" dependency-check="default">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+  <!-- CUSIPManager -->
+   <bean id="cusipManager" class="com.lti.service.impl.CUSIPManagerImpl" lazy-init="default" autowire="default" dependency-check="default">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>  
+ 
+ <!--
+ <bean id="profileCaller" class="com.paypal.sdk.services.NVPCallerServices" lazy-init="default" autowire="default" dependency-check="default">
+    <property name="APIProfile">
+      <ref local="profile"/>
+    </property>
+  </bean>  
+ factory-bean="profileFactory"
+  <bean id="profile" class="com.paypal.sdk.profiles.APIProfile"  factory-method="com.paypal.sdk.profiles.ProfileFactory.createSSLAPIProfile">
+    <property name="APIUsername">
+      <value>s1_1268640638_biz_api1.foolishb.com</value>
+    </property>
+	<property name="APIPassword">
+      <value>1268640646</value>
+    </property>
+	<property name="signature">
+      <value>AYT5fUKfJD2wKfKSkfU4SEBF3Er.A4dKL3i8IGz8ZWxGPr9gG-mP02Ik</value>
+    </property>
+	<property name="environment">
+      <value>sandbox</value>
+    </property>  
+  </bean>
+  <bean id="profileFactory" class="com.paypal.sdk.profiles.ProfileFactory" lazy-init="default" autowire="default" dependency-check="default">
+  </bean>-->
+  
+  <!-- AssetClassManager -->
+	
+	
+  
+  <bean id="assetClassManager" class="com.lti.service.impl.AssetClassManagerImpl" lazy-init="default" autowire="default" dependency-check="default">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+	
+	
+ <!-- JforumManager -->
+  <bean id="JforumManager" class="com.lti.service.impl.JforumManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+  
+   
+  <!-- BaseFormulaManager -->
+	
+	
+  
+  <bean id="baseFormulaManager" class="com.lti.service.impl.BaseFormulaManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+  </bean>
+  
+  <bean id="customizePageManager" class="com.lti.service.impl.CustomizePageManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+	<property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>	
+  </bean>
+	
+  
+  <!-- IndicatorManager -->
+	
+	
+  
+  <bean id="indicatorManager" class="com.lti.service.impl.IndicatorManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+  <!-- DataManager -->
+	
+	
+  
+  <bean id="dataManager" class="com.lti.service.impl.DataManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="securityManager">
+      <ref local="securityManager"/>
+    </property>
+    <property name="assetClassManager">
+      <ref local="assetClassManager"/>
+    </property>
+    <property name="indicatorManager">
+      <ref local="indicatorManager"/>
+    </property>
+    <property name="portfolioManager">
+      <ref local="portfolioManager"/>
+    </property>
+  </bean>
+	
+	
+  
+  <!-- GroupManager -->
+	
+	
+  
+  <bean id="groupManager" class="com.lti.service.impl.GroupManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+	
+	
+  
+  <!-- HolidayManager -->
+	
+	
+  
+  <bean id="holidayManager" class="com.lti.service.impl.HolidayManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+	
+	<bean id="mutualFundManager" class="com.lti.service.impl.MutualFundManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory"/>
+		</property>
+	</bean>
+	
+  
+  <!-- PortfolioManager -->
+	
+	
+  
+  <bean id="portfolioManager" class="com.lti.service.impl.PortfolioManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+	
+  <!-- PortfolioHoldingManager -->
+  <bean id="portfolioHoldingManager" class="com.lti.service.impl.PortfolioHoldingManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+    <property name="baseFormulaManager">
+      <ref local="baseFormulaManager"/>
+    </property>
+  </bean>
+	
+  
+  <!-- SecurityManager -->
+  <bean id="securityManager" class="com.lti.service.impl.SecurityManagerImplWithYearCache" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+	
+	<!--
+	<bean id="securityManagerInterceptor" class="com.lti.aop.SecurityManagerInterceptor"/>
+	
+	<bean id="securityManager" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.lti.service.SecurityManager</value>
+		</property>
+		<property name="target">
+			<ref local="securityManagerImpl"/>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>securityManagerInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	-->
+  
+	
+	
+  
+  <!-- StrategyClassManager -->
+	
+	
+  
+  <bean id="strategyClassManager" class="com.lti.service.impl.StrategyClassManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+	
+	  <!-- UserManager -->
+	
+	
+  
+  <bean id="financialStatementManager" class="com.lti.service.impl.FinancialStatementManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+  
+  <!-- UserManager -->
+	
+	
+  
+  <bean id="userManager" class="com.lti.service.impl.UserManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+    <property name="groupManager">
+	      <ref local="groupManager"/>
+	</property>
+	<property name="portfolioManager">
+	      <ref local="portfolioManager"/>
+	</property>
+	<property name="strategyManager">
+	      <ref local="strategyManager"/>
+	</property>
+  </bean>
+	
+	
+  
+  
+  <!-- StrategyManager -->
+  <bean id="strategyManager" class="com.lti.service.impl.StrategyManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+    <property name="sessionFactory">
+      <ref local="sessionFactory"/>
+    </property>
+  </bean>
+	
+	
+  
+    
+    	<!-- Email Sender -->
+	<bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	 	<property name="host" value="70.38.112.178" />
+		<property name="username" value="support@myplaniq.com" />
+		<property name="password" value="supp0861" />
+		<property name="javaMailProperties">
+		    <props>
+		    	<prop key="mail.smtp.auth">true</prop>
+		    </props>
+	    </property>
+    
+	</bean>
+    
+</beans>
+
+

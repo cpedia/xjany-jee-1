@@ -1,0 +1,310 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+	<title>MyPlanIQ Newsletter: April 2011</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="A retirement plan and investing newsletter">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<script>
+$(document).ready(function() {
+	alignHeight();
+});
+</script>
+<style>
+.newsletter-box {
+	height:auto;
+	overflow:hidden;
+	border: 8px solid #FAFAFA;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+}
+.newsletter-box .col-1 {
+	width:618px;
+	height: 545px;
+	overflow: hidden;
+}
+.newsletter-box .col-2 {
+	height: 545px;
+	overflow: hidden;
+	padding-left:10px;
+}
+
+</style>
+</head>
+<body>
+  <div class="borderGreen">
+  
+
+
+<!-- <STYLE>
+
+ .headerTop { background-color:#FFCC66; border-top:0px solid #000000; border-bottom:1px solid #FFFFFF; text-align:center; }
+
+ .adminText { font-size:10px; color:#996600; line-height:200%; font-family:verdana; text-decoration:none; }
+
+ .headerBar { background-color:#FFFFFF; border-top:0px solid #333333; border-bottom:10px solid #FFFFFF; }
+
+ .title { font-size:20px; font-weight:bold; color:#CC6600; font-family:arial; line-height:110%; }
+
+ .subTitle { font-size:11px; font-weight:normal; color:#666666; font-style:italic; font-family:arial; }
+
+ .defaultText { font-size:12px; color:#000000; line-height:150%; font-family:trebuchet ms; }
+
+ .footerRow { background-color:#FFFFCC; border-top:10px solid #FFFFFF; }
+
+ .footerText { font-size:10px; color:#996600; line-height:100%; font-family:verdana; }
+
+ a { color:#FF6600; color:#FF6600; color:#95b5c1; }
+
+</STYLE>
+
+-->
+
+<div class="newsletter-box">
+
+
+
+<table width="100%" cellpadding="10" cellspacing="0" class="backgroundTable" >
+
+<tr>
+
+<td valign="top" align="center">
+
+
+
+
+
+<table width="550" cellpadding="0" cellspacing="0">
+
+
+
+<tr>
+
+
+</tr>
+
+</table>
+
+
+
+
+
+<table width="550" cellpadding="20" cellspacing="0">
+
+<tr>
+
+<td valign="top" style="font-size:12px;color:#000000;line-height:150%;font-family:trebuchet ms;">
+
+
+
+<p>
+
+<table width="100%">
+  <tbody>
+    <tr>
+    </tr>
+    <tr>
+      <td>
+      <h2 align="center"><font color="#458f51">MyPlan</font><font
+ color="#95b5c1">IQ</font> <p> Investment Newsletter</h2>
+      <p align="center"><strong align="center">April 11 2011</strong></p>
+      </td>
+      <td align="right" width="6%"> <align="right"><a
+ href="http://www.myplaniq.com/LTISystem/newsletter__nllist.action"><strong><font
+ size="3">Archive</font></strong></a></strong> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This is a biweekly newsletter with quantitative data from thousands of plans. 
+
+We believe that good asset allocation brings the best returns.</p>
+
+
+<p><span style="font-weight: bold;">Blogger Uses MyPlanIQ for the First Time</span>
+<p> Originally from the UK, <a href="http://askingfordirection.com/about/">Jenny Hollingworth</a> lives with her husband and two sons in Northern California.  She is a wife, mother, writer, theater director, coffee drinker, avid reader, keen walker, movie watcher, Jane Austen lover and observer of life, in no particular order.</p>
+<p>OK, we cut to the chase this week.&nbsp; Last week I invested my $5,000 online.&nbsp; Here is what I
+ did to kick off the process. I began by using the website of a company called MyPlanIQ <a href="http://askingfordirection.com/new-steps/">more..</a>
+
+
+
+
+<p><span style="font-weight: bold;"><a href="www.myplaniq.com/LTISystem/jsp/fundcenter/SecurityMPTChart.action?includeHeader=false&amp;symbol=Portfolio+Comparison+Chart&amp;chartName=Portfolio+Comparison+Chart&amp;symbolList[0]=P_31641&amp;symbolList[1]=P_31644&amp;symbolList[2]=VGSTX&amp;symbolList[3]=&amp;symbolList[4]">Six Asset Benchmark Beats Vanguards Star Fund</a></span></p>
+
+<a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/SecurityMPTChart.action?includeHeader=false&amp;symbol=Portfolio+Comparison+Chart&amp;chartName=Portfolio+Comparison+Chart&amp;symbolList[0]=P_31641&amp;symbolList[1]=P_31644&amp;symbolList[2]=VGSTX&amp;symbolList[3]=&amp;symbolList[4]="><img
+ alt=""
+ src="http://www.myplaniq.com/LTISystem/UserFiles/13023093589956sib-vgstx.jpg"
+ style="border: 0px solid ; width: 842px; height: 306px;"></a><br>
+<p>For those who want to track how well the SIB Benchmark funds are performing against industry standards we have provided a graph of SAA and TAA performance against 
+ The Vanguard Star Investment Fund (VGSTX). You can click on the graph and change the time horizon to compare. This shows how effective a six asset class portfolio can be 
+  when managed systematically.
+
+
+<p><span style="font-weight: bold;">Did You Know....</p></span>
+<p> Here are some key capabilities you may have overlooked</p>
+<ul>
+<li><a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=4,904">This is a high dividend portfolio that has high yield and low volatility</a>.
+</li><li> 
+
+<a href="http://www.myplaniq.com/LTISystem/f401k_showplanscorelist.action">We have plan rating and plan comparison to allow you to see comparative historical returns</a>
+</li><li> 
+<a href="http://www.myplaniq.com/LTISystem/f401k__annuity_vul_colleges.action">Do you have a Variable Annuity, Variable Universal Life or College Savings 529 Plan</a>
+</li><li>
+Here is a new <a target="_blank"
+ href="http://www.myplaniq.com/LTISystem/f401k__ma.action">landing page</a> that you can provide to your clients to explain what good asset allocation can provide
+</li>
+</ul>
+<br><br>
+
+<p><span style="font-weight: bold;"><a href="http://www.myplaniq.com/LTISystem/advanced__moneySmart.action" title="SmartMoney Summary">SmartMoneyIQ</a> -- Free Access to what the leading money managers are doing</p>
+
+</span>
+<p>
+SmartMoneyIQ provides insight into the asset allocation of thirty two 
+ top money managers. SmartMoneyIQ uses cloning proven technique used in cloning hedge 
+funds by asset management companies such as <a href="http://www.morganstanley.com/about/press/articles/5259.html">Morgan Stanley</a>.
+The technique is based on statistical regression that uses proxy funds 
+for each asset class in the plan and uses the proxies to create 
+equivalent behavior 
+used for cloning is found <a href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=623">more...</a></p>
+<p class="MsoNormal"><br>
+<a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=HSGFX&amp;type=4">HSGFX</a></p>
+<div style="text-align: left;"> 
+<table class="MsoNormalTable" style="width: 4in; text-align: left; margin-left: 0px; margin-right: auto;" border="0" cellpadding="0" cellspacing="1" width="384">
+<thead> <tr style="">
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><b><span style="font-size: 11pt;">Date</span></b></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><b><span
+ style="font-size: 11pt;">CASH</span></b></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><b><span
+ style="font-size: 11pt;">USBond</span></b></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><b><span
+ style="font-size: 11pt;">USStk</span></b></p>
+</td>
+</tr>
+</thead> <tbody>
+<tr style="">
+<td style="padding: 0in;">
+<p class="MsoNormal"><span style="font-size: 11pt;">2011-03-11 </span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">2.96</span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">97.04</span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">0</span></p>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0in;">
+<p class="MsoNormal"><span style="font-size: 11pt;">2011-03-18 </span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">0</span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">100</span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">0</span></p>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0in;">
+<p class="MsoNormal"><span style="font-size: 11pt;">2011-03-25 </span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">0</span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">100</span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span 
+style="font-size: 11pt;">0</span></p>
+</td>
+</tr>
+<tr style="">
+<td style="padding: 0in;">
+<p class="MsoNormal"><span style="font-size: 11pt;">2011-04-01 </span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">0</span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">100</span></p>
+</td>
+<td style="padding: 0in;">
+<p class="MsoNormal" style="text-align: center;" align="center"><span
+ style="font-size: 11pt;">0</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In this example the past price series of the Hussman Strategic Growth Fund (HSGFX) is analyzed (three months 
+or 1 month) using linear regression. The best fit coefficients related to the index CASH, US Bond Index and US Stocks Index are derived. The 
+coefficients indicate the correlation between the fund and the indices. MyPlanIQ has tested over 100 funds using this technique 
+and found that the derived coefficients are a good approximation for the actual allocation percentages.</p>
+
+<p> If you have any questions or comments, we would love to hear from you -- send us an <a href="mailto:smartmoneyiq@myplaniq.com">email</a>
+<br>
+<br>
+<p><span style="font-weight: bold;"><a target="_blank" href="http://www.myplaniq.com/LTISystem/f401k_blog.action">Articles of the week</a>
+</span></p>
+<ul><li>
+<div><a target="_blank"
+href="http://seekingalpha.com/article/261649-leuthold-core-investment-fund-bullish-on-u-s-and-emerging-market-stocks">Luthold Core Investment Fund: Bullish on U.S. and Emerging Market Stocks</a>
+</div>
+</li>
+<li>
+<div>
+<div> <a target="_blank" href="http://seekingalpha.com/article/262287-broad-based-commodity-etfs-gcc-and-dbc-are-king-of-the-hill">Broad-Based Commodity ETFs GCC and DBC Are King of the Hill</a></div>
+</div></li><li><div> <a target="_blank"
+href="http://seekingalpha.com/article/261966-major-asset-trends-risk-assets-buoyant-while-smart-money-flees-treasury-bonds">Major Asset Trends: Risk Assets Buoyant While Smart Money Flees Treasury Bonds</a></div>
+</li><li><div> <a target="_blank" href="http://seekingalpha.com/article/261958-does-greene-s-gone-fishin-portfolio-stand-the-test-of-time">Does Greene's Gone Fishin' Portfolio' Stand the Test of Time?</a></div>
+</li><li><div> <a target="_blank" href="http://seekingalpha.com/article/261621-vanguard-vs-ishares-battle-of-intermediate-corporate-bond-etfs">Vanguard vs. iShares: Battle of Intermediate Corporate Bond ETFs</a>
+</div></li><li><div> <a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=2976">Japan Disaster -- Prevention is Better Than Cure -- How Does that Apply to Investing?</a> </li>
+<li> <a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=2957">Smart U.S. Money Managers Dumped Long Term Treasury Bonds, Who Are Holding The Bag?</a> </li>
+<li> <a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=2933">MidAmerican Energy 401K Plan: More Diversification Needed</a> </li>
+<li> <a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=2921">Relax: Doing Less With Your Investments</a> </li>
+</ul>
+</div>
+<br><br>
+</div>
+<div><a rel="nofollow" href="../../../../jforum/rss/forumTopics/61.page" target="_blank">RSS Feed <img src="../../../../jforum/templates/default/images/xml_button.gif" alt="[XML]" /></a></div>
+<div><br />
+<p><span><strong>Disclaimer:</strong> </span></p>
+<p><span>Any investment in securities including mutual funds,  ETFs, closed end funds, stocks and any other securities could lose  money over any period of time. All investments involve risk. Losses may  exceed the principal invested. Past performance is not an indicator of  future performance. There is no guarantee for future results in your  investment and any other actions based on the information provided on  the website including, but not limited to, strategies, portfolios,  articles, performance data and results of any tools.</span></p>
+<p><span>All rights are reserved and enforced. By accessing  the website, you agree not to copy and redistribute the information  provided herein without the explicit consent from MyPlanIQ.</span></p>
+</div>
+<br /></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

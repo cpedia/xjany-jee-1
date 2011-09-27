@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+
+	<bean name="/jsp/admin/strategyclass/Main" class="com.lti.action.admin.strategyclass.MainAction"
+		singleton="false">
+		<property name="strategyClassManager">
+			<ref bean="strategyClassManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/strategyclass/Save" class="com.lti.action.admin.strategyclass.SaveAction"
+		singleton="false">
+		<property name="strategyClassManager">
+			<ref bean="strategyClassManager"/>
+		</property>
+	</bean>	
+	<bean name="/jsp/admin/strategyclass/FetchMenu" class="com.lti.action.admin.strategyclass.FetchMenuAction"
+		singleton="false">
+		<property name="strategyClassManager">
+			<ref bean="strategyClassManager"/>
+		</property>
+	</bean>				
+</beans>

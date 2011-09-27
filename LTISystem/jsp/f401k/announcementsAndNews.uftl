@@ -1,0 +1,78 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title></title>
+<meta name="Blogs" content="n401k_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<script>
+$(document).ready(function(){
+	$('li').addClass('liStyle');
+});
+</script>
+<style>
+li.liStyle{
+	margin-left:0px;
+	list-style-type:none;
+}
+#creditfooter{
+	display:none;
+}
+.feedTitle{
+	padding-left:300px;
+	font-size:20pt;
+	padding-bottom:8px;
+	margin-bottom:8px;
+}
+.feedTitle a{
+	text-decoration:none;
+}
+.headline a{
+	text-decoration:none;
+}
+.date{
+	font-size:13px;
+	border-top-width: 1px;
+	border-top-style: dotted;
+	border-top-color: #8bac76;
+}
+.headline{
+	font-size:14pt;
+}
+.edit_area{
+	margin-bottom:10px;
+}
+.liStyle{
+	margin-top:10px;
+}
+span{
+color:#000000;
+}
+</style>
+</head>
+<body>
+<table><tr><td>
+<p class="feedTitle"><a href="../jforum">Announcements And News</a></p>
+
+	[#if jTopics??]
+	<ul>
+		[#list jTopics.items as var]
+			<li class="liStyle">
+				<span class="headline"><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+				<p class="date">${var.topicTime?string("MM/dd/yyyy")}</p>
+					[#if var.postText??]
+						${var.postText!''}
+						<p><a href ="../jforum/posts/list/${var.ID}.page">comments(${var.topicReplies?string.computer})</a>&nbsp;
+						<a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark"/></a><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+						</p>
+					[/#if]
+				</li>
+		[/#list]
+	</ul>
+	[/#if]
+
+[@lti.pagination jTopics "f401k_announcementsAndNews.action" " "][/@lti.pagination]
+</td></tr></table>
+</body>
+</html>

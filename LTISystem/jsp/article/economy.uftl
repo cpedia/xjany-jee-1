@@ -1,0 +1,203 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<p>
+  <h2>Economy and Market</h2>
+  <div class="dividerTop">
+ This and Portfolio Discussion should be from a CurrentReport.uftl that can be changed 
+ every month. We should also have an archive for MonthlyReports (different from our current 
+ </div> 
+</p>
+
+<h2>Portfolio Discussion: </h2>
+  <div class="dividerTop">
+  [#if isTAA]    
+  <b>Favorable asset classes: </b> 
+   [#if rankTable??]
+     [#list rankTable?keys as key]
+     [#if key?contains("us")]
+         [#if key_index < rankTable?size-1]${key?replace("us equity","US Equity")},[#else]${key?replace("us equity","US Equity")}.[/#if]
+     [#elseif key?contains("reits")]
+           [#if key_index < rankTable?size-1]${key?replace("reits","REITs")},[#else]${key?replace("reits","REITs")}.[/#if]
+     [#else]
+        [#if key_index < rankTable?size-1]${key?capitalize},[#else]${key?capitalize}.[/#if]
+     [/#if]
+     [/#list]
+     [/#if]    
+  [/#if]
+ <p>
+   <b>Favorable investments: </b>
+   <br>
+   [#if rankTable??]
+     [#list rankTable?keys as key]
+       [#if key?contains("us")]
+         ${key?replace("us equity","US Equity")}:
+         [#elseif key?contains("reits")]
+           ${key?replace("reits","REITs")}:
+           [#else]
+        ${key?capitalize}: 
+        [/#if] 
+       [#list rankTable[key] as etflist]
+         [#if etflist_index < rankTable[key]?size-1]${etflist?replace(" ","")},
+         [#else]${etflist}
+         [/#if]
+       [/#list]
+          <br>
+     [/#list]
+  [/#if]
+  </div>
+ </p>
+ 
+ [#if plan??]
+ <p>${plan.description}</p>
+  
+ <!-- funds statistic  -->
+ <h2>Plan Composition</h2>
+ <p>${plan.similarIssues}</p>
+ 
+ <!-- minor assets and etfs -->   
+   <p>
+     The list of minor asset classes covered:
+  [#if planMinorAssets??]
+     [#list planMinorAssets?keys?sort as key]
+       ${key?capitalize}:  
+       [#list planMinorAssets[key] as etflist]
+         [#if etflist_index < planMinorAssets[key]?size-1]${etflist?replace(" ","")},
+         [#else]${etflist}
+         [/#if]
+       [/#list]
+          <br>
+     [/#list]
+  [/#if]
+ </p>
+<p>
+<table>
+  <thead>
+     <tr>
+     <th th align="left">Asset Class</th>
+     <th>Number of funds</th>
+     </tr>
+  </thead>
+  <tbody>
+  [#if majorAssetsSta??]
+  [#list majorAssetsSta?keys as key]
+  [#if !key?matches("Other")]
+  <tr>
+  <td>${key}</td>
+  <td>${majorAssetsSta[key]?size}</td>
+  </tr>
+  [/#if]
+  [/#list]
+  [#if containOther&& tickerList?size==candidateFunds?size]
+    [#list majorAssetsSta?keys as key]
+  [#if key?matches("Other")]
+  <tr>
+  <td>${key}</td>
+  <td>${majorAssetsSta[key]?size}</td>
+  </tr>
+  [/#if]
+  [/#list]
+  [/#if]
+  
+  [#if tickerList?size!=candidateFunds?size]
+  <tr>
+    <td>Other</td>
+    <td>${candidateFunds?size-tickerList?size}</td>
+  </tr>
+  [/#if]
+  
+  [/#if]
+  <tr>
+   <td>Total</td>
+   <td>${candidateFunds?size}</td>
+  </tr>
+  </tbody>
+</table>
+</p>
+
+ 
+<!-- planScore --> 
+  [#macro rankingmessage scorenum]
+  [#assign score=scorenum*100]
+      [#if score == 0]
+	    unrated
+      [#elseif score<10]
+	    poor
+	[#elseif score<35]
+		below average
+	[#elseif score< 65]
+		average
+	[#elseif score< 85]
+		above average
+	[#else]
+		great
+	[/#if]
+	[/#macro]
+	
+<p>
+  As of [#if portfolio??]${portfolio.endDate?date}[/#if], 
+  this plan investment choice is rated as 
+  [#if planScore??]<strong>[@rankingmessage planScore.investmentScore /]</strong>[/#if] 
+  based on MyPlanIQ <a rel="nofollow" href="/LTISystem/f401k_showplanscorelist.action">Plan Rating methodology </a>
+  that was designed to measure how effective a plan's available investment funds are <strong>. </strong>
+  It has the following detailed ratings:
+</p>
+<p>
+    <span style="font-size: small;"><strong>Diversification</strong> -- Rated as [#if planScore??]<strong>[@rankingmessage planScore.coverageScore /](${planScore.coverageScore?string.percent})</strong>[/#if]
+	</span> <br /><span style="font-size: small;"><strong>Fund Quality</strong> -- Rated as[#if planScore??] <strong>[@rankingmessage planScore.fundQualityScore /](${planScore.fundQualityScore?string.percent})</strong>[/#if]
+	</span> <br /><span style="font-size: small;"><strong>Portfolio Building</strong> -- Rated as [#if planScore??]<strong>[@rankingmessage planScore.capabilityScore /](${planScore.capabilityScore?string.percent})</strong>[/#if]
+	</span> <br /><span style="font-size: small;"><strong>Overall Rating: [#if planScore??][@rankingmessage planScore.investmentScore /](${planScore.investmentScore?string.percent})[/#if]</strong></span>
+</p>
+ <!-- compare plan major assets and etfs -->
+<p>The chart and table below show the historical performance of moderate model portfolios employing strategic and tactical asset allocation strategies (<a rel="nofollow" href="/LTISystem/jsp/strategy/View.action?ID=771">SAA </a>and <a rel="nofollow" href="/LTISystem/jsp/strategy/View.action?ID=1003">TAA </a>, both provided by MyPlanIQ). For comparison purpose, we also include the moderate model portfolios of a typical [#if comparePlanMajorAssets??]${comparePlanMajorAssets?size}[/#if] asset <a rel="nofollow" href="/LTISystem/f401k_view.action?ID=[#if sibPlan??]${sibPlan.ID}[/#if]">SIB (Simpler Is Better) plan </a>. This SIB plan has the following candidate index funds and their ETFs equivalent:</p>
+<p>
+   [#if comparePlanMajorAssets??]
+     [#list  comparePlanMajorAssets?keys as key][#if key?contains("us")]${key?replace("us equity","US Equity")}[#elseif key?contains("reits")]${key?replace("reits","REITs")}[#else]${key?capitalize}[/#if]: [#list comparePlanMajorAssets[key] as etflists]${etflists}[#if etflists_index <  comparePlanMajorAssets[key]?size-1] or [/#if][/#list] 
+          <br>
+     [/#list]
+   [/#if]
+<br>
+</p>
+
+ <!-- current major assets --> 
+  <p>
+Currently  
+[#if topMajorAssets??]
+  [#list topMajorAssets as major]
+   [#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index == topMajorAssets?size-2] 
+        and [/#if][#if major_index < topMajorAssets?size-2], [/#if]  
+  [/#list]
+[/#if]
+  are doing well.
+ 
+  [#if planTopMajorAssets??&&planTopMajorAssets?size==1]
+       Only 
+      [#list planTopMajorAssets as major]
+          [#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index == planTopMajorAssets?size-2] 
+            and [/#if][#if major_index < planTopMajorAssets?size-2], [/#if]   
+      [/#list]
+         is
+  [#elseif planTopMajorAssets??&&planTopMajorAssets?size==3]
+       These asset classes are
+  [#elseif planTopMajorAssets??&&planTopMajorAssets?size==2]
+     [#list planTopMajorAssets as major]
+         [#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index == planTopMajorAssets?size-2] 
+         and [/#if][#if major_index < planTopMajorAssets?size-2], [/#if]   
+     [/#list]
+  [#else]
+   But these asset classes are not
+[/#if]
+  available to ${plan.name} participants.
+  
+ <!-- holding  --> 
+  <p>
+ To summarize, ${plan.name} plan participants can achieve reasonable investment returns by adopting asset allocation strategies that are tailored to their risk profiles.
+ Currently, the tactical asset allocation strategy indicates overweighing on 
+   [#if portfolioMajorAssets?? ]
+      [#list portfolioMajorAssets?keys as major][#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index ==portfolioMajorAssets?size-2]
+       and [/#if][#if major_index < portfolioMajorAssets?size-2], [/#if][/#list]
+  [/#if]
+funds. <strong><br /></strong><br /><br /></p>
+
+[/#if]

@@ -1,0 +1,23 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<meta name="submenu" content="portfoliotable"/>
+<meta name="portfoliotable" content="vf_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>Portfolio Main Page</title>
+<link rel="stylesheet" href="/LTISystem/jsp/images/vf.css" type="text/css" /> 
+
+<link rel="stylesheet" href="/LTISystem/jsp/images/jquery.ui.theme/redmond/jquery-ui-1.7.1.custom.css" type="text/css" />
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery.ui/1.7.1/ui.core.js"></script>
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery.ui/1.7.1/ui.dialog.js"></script>
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery.form/jquery.form.js"></script>
+
+
+</head>
+<body>
+
+</body>
+</html>

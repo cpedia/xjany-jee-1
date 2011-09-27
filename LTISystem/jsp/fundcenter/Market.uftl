@@ -1,0 +1,85 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="markets" content="vf_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>360 Degree Market View</title>
+<link rel="stylesheet" href="/LTISystem/jsp/images/vf.css" type="text/css" /> 
+
+</head>
+<body>
+<div id="vf_wrap">
+	<div id="vf_content-wrap">
+		<div id="vf_sidebar">
+			[@lti.Articlesfeed2 "article"]
+
+		 	[/@lti.Articlesfeed2]
+		</div>
+		<div id="vf_contentright"style="float:left;">
+					<h1 align=center><span class="green">ValidFi<sup style="color:red"><em>Beta</em></sup>:</span> 360 Degree Market View</h1>
+<!--                                        <p align=center><img src="/LTISystem/UserFiles/Image/thanksgiving.jpg" border=none></p>
+                                        <p align=center><font size="5"><b>Happy <span class="green">Thanksgiving!</span></b></font></p>
+-->
+			<p align=center>All performance data are on Friday 6/4/2010</p>
+			<hr/>
+			<div class="clear">&nbsp;&nbsp;&nbsp;</div>
+			<p>&nbsp;</p>
+			
+			<div id ="vf_main">
+				<h1><span>Indicators</span></h1>
+	    		<hr />
+                         <p>Read the <a href="http://www.validfi.com/LTISystem/jsp/news/2009/11/john-hussman-peak-pe-ratios-as-long.html">John Hussman's Peak PE ratio as a Long Term Timing Indicator article</a>.</p>
+                         <p>Read the <a href="http://www.validfi.com/LTISystem/jsp/news/2009/10/robert-shillers-cyclically-adjusted.html">Robert Shiller's Cyclically Adjusted Price Earning Ratio as a Long Term Timing Indicator article</a>.</p>
+                        <p>Read the <a href="http://www.validfi.com/LTISystem/jsp/news/2009/09/buffett-stock-market-indicator-simple.html">simple yet effective Warren Buffett Stock Market Valuation Indicator article</a>.</p>
+                        <p>Read the <a href="http://www.validfi.com/LTISystem/jsp/news/2009/09/market-timing-strategies-based-on.html">summary article on ValidFi's various financial, economic and sentiment indicators</a>. </p>
+                       <ul>
+                         <li><strong>Buffet Stock Market Indicator: </strong><a target="_top" href="../strategy/View.action?ID=613&action=view">Warren Buffett Total Stock Market Value to GNP Ratio Strategy</a>. On <em>Friday June 4, 2010</em>, the ratio of the total stock market capitalization to GNP is <strong>77.4%</strong>. US stock market is <span class="orange">Fairly Valued</span>. </li>
+                         <li><strong>Shiller CAPE10: </strong><a target="_top" href="../strategy/View.action?ID=629&action=view">Shiller Cyclically Adjusted PE 10 Stock Market Timing Strategy</a>. On <em>Friday June 4, 2010</em>, the ratio of Real Price to the average of last 10 year Real Earnings(CAPE10)(<em>19.71</em>) to its long term average (<em>16.36</em>) is <strong>1.2</strong>. US stock market is <span class="orange">20% Over Valued</span>. </li>
+                         <li><strong>Hussman Peak PE: </strong><a target="_top" href="../strategy/View.action?ID=638&action=view">Hussman Peak PE Market Timing Strategy</a>. On <em>Friday June 4, 2010</em>, the ratio of Real Price to the average of last 10 year Peak Real Earnings(<em>11.94</em>) to its long term average (<em>11.93</em>) is <strong>1.0</strong>. US stock market is <span class="orange">0% Fairly Valued</span>. </li>
+                         <li><strong>Bond Equity Yield Relative Value:</strong> <a href="../portfolio/Edit.action?ID=4980" target="_top">Bond Equity Yield Strategy</a></li>
+                         <li><strong>Credit Spread (TED Spread):</strong> <a href="../portfolio/Edit.action?ID=4782" target="_top">Credit Spread Strategy</a> <a href="http://www.bloomberg.com/apps/cbuilder?ticker1=.TEDSP%3AIND" target="_top"><span class="orange">TED Spread Chart</span></a></li>
+                         <li><strong>Long Term Interest Rate:</strong> <a href="../portfolio/Edit.action?ID=4694" target="_top">Long Term Interest Rate Strategy</a> <a href="../fundcenter/SecurityMPTChart.action?symbol=TLT&amp;includeHeader=true" target="_top"><span class="orange">Chart</span></a></li>
+                         <li><strong>CBOE Equity Put/Call Ratio:</strong> <a href="../portfolio/Edit.action?ID=5130" target="_top">Equity Put/Call Ratio Strategy</a> <a href="http://www.schaeffersresearch.com/streetools/market_tools/cboe_eqpcr.aspx" target="_top"><span class="orange">Chart</span></a></li>
+                         <li><strong>CBOE S&amp;P 500 Volatility (VIX):</strong> <a href="../portfolio/Edit.action?ID=4870" target="_top">CBOE S&amp;P 500 Volatility (VIX) Strategy</a> <a href="../fundcenter/SecurityMPTChart.action?symbol=^VIX&amp;includeHeader=true" target="_top"><span class="orange">Chart</span></a></li>
+                         <li><strong>Consumer Price Index (CPI):</strong> <a href="http://research.stlouisfed.org/fred2/graph/fredgraph.png?&amp;chart_type=line&amp;graph_id=0&amp;category_id=&amp;recession_bars=On&amp;width=630&amp;height=378&amp;bgcolor=%23B3CDE7&amp;graph_bgcolor=%23FFFFFF&amp;txtcolor=%23000000&amp;preserve_ratio=true&amp;id=CPIAUCSL,&amp;transformation=lin,&amp;scale=Left,&amp;range=Max,&amp;cosd=1934-01-01,&amp;coed=2009-08-01,&amp;line_color=%230000FF,&amp;link_values=,&amp;mark_type=NONE,&amp;line_style=Solid,&amp;vintage_date=2009-09-15,&amp;revision_date=2009-09-15,&amp;mma=0,&amp;nd=,&amp;ost=,&amp;oet=," target="_top"><span class="orange">Fed Seasonal Adjusted CPI Chart</span></a></li>
+                         <li><strong>U. Michigan Consumer Confidence Index:</strong> <a href="http://research.stlouisfed.org/fred2/graph/fredgraph.png?&amp;chart_type=line&amp;graph_id=0&amp;category_id=&amp;recession_bars=On&amp;width=630&amp;height=378&amp;bgcolor=%23B3CDE7&amp;graph_bgcolor=%23FFFFFF&amp;txtcolor=%23000000&amp;preserve_ratio=true&amp;id=UMCSENT,&amp;transformation=lin,&amp;scale=Left,&amp;range=Max,&amp;cosd=1934-01-01,&amp;coed=2009-08-01,&amp;line_color=%230000FF,&amp;link_values=,&amp;mark_type=NONE,&amp;line_style=Solid,&amp;vintage_date=2009-09-15,&amp;revision_date=2009-09-15,&amp;mma=0,&amp;nd=,&amp;ost=,&amp;oet=," target="_top"><span class="orange">Chart</span></a></li>
+                         <li><strong>ISM Manufacturing: PMI Composite Index :</strong> <a href="http://research.stlouisfed.org/fred2/graph/fredgraph.png?&amp;chart_type=line&amp;graph_id=0&amp;category_id=&amp;recession_bars=On&amp;width=630&amp;height=378&amp;bgcolor=%23B3CDE7&amp;graph_bgcolor=%23FFFFFF&amp;txtcolor=%23000000&amp;preserve_ratio=true&amp;id=NAPM,&amp;transformation=lin,&amp;scale=Left,&amp;range=Max,&amp;cosd=1934-01-01,&amp;coed=2009-08-01,&amp;line_color=%230000FF,&amp;link_values=,&amp;mark_type=NONE,&amp;line_style=Solid,&amp;vintage_date=2009-09-15,&amp;revision_date=2009-09-15,&amp;mma=0,&amp;nd=,&amp;ost=,&amp;oet=," target="_top"><span class="orange">Chart</a></span></li>
+                        <li><strong>Unemployment Rate :</strong> <a href="http://research.stlouisfed.org/fred2/graph/fredgraph.png?&amp;chart_type=line&amp;graph_id=0&amp;category_id=&amp;recession_bars=On&amp;width=630&amp;height=378&amp;bgcolor=%23B3CDE7&amp;graph_bgcolor=%23FFFFFF&amp;txtcolor=%23000000&amp;preserve_ratio=true&amp;id=UNRATE,&amp;transformation=lin,&amp;scale=Left,&amp;range=Max,&amp;cosd=1934-01-01,&amp;coed=2009-08-01,&amp;line_color=%230000FF,&amp;link_values=,&amp;mark_type=NONE,&amp;line_style=Solid,&amp;vintage_date=2009-09-15,&amp;revision_date=2009-09-15,&amp;mma=0,&amp;nd=,&amp;ost=,&amp;oet=," target="_top"><span class="orange">Chart</span></a></li>
+                     </ul>
+                        <p>&nbsp;</p>
+	    		<h1><span>Fixed Income Assets Trend</span></h1>
+	    		<hr />
+	    		[@lti.table "FixedIncome" readObject("FixedIncomeReturnTable") true/]
+	
+	    		<h1>Global Stocks Trend</h1>
+	    		<hr />
+	    		[@lti.table "Country" readObject("CountryReturnTable") true/]
+			</div>
+			<div id="vf_rightbar">
+				<h1><span>Major Asset Classes Trend</span></h1>
+	    		<hr />
+	    		[@lti.table "MajorAssets" readObject("MajorAssetReturnTable") true/]
+	    		<br></br>
+	    		<h1>Commodities Trend</h1>
+	    		<hr />
+	    		[@lti.table "Commodities" readObject("CommodityReturnTable") true/]
+	    		<br></br>
+	    		<h1><span>Currencies Trend</span></h1>
+	    		<hr />
+	    		[@lti.table "Currencies" readObject("CurrencyReturnTable") true/]
+	    		<br></br>
+	    		<h1><span>US Sectors Trend</span></h1>
+	    		<hr />
+	    		[@lti.table "USSectors" readObject("USSectorReturnTable") true/]
+			</div>
+			<div class="clear">&nbsp;&nbsp;&nbsp;</div>
+			<p>&nbsp;&nbsp;</p>
+	</div>
+	</div>
+</div>
+</body>
+</html>

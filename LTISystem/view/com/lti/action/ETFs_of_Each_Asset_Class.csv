@@ -1,0 +1,141 @@
+Class ID,Class Name,iShares,Vanguard,SPDR,PowerShare,WisdomTree,Rydex,ProShares,Other,
+0,ROOT,,,,,,,,,root
+1,EQUITY,,"VTI,VT",,,,,,,equity
+2,FIXED INCOME,AGG,BND,LAG,,,,,,fixed income
+3,US EQUITY,"IVV,IYY,IWV","VTI,VV",SPY,,DLN,RSP,,SCHX,us equity
+4,HYBRID ASSETS,,,,,,,,,hybrid assets
+5,REAL ESTATE,"IYR,ICF",VNQ,,,,,,,real estate
+6,COMMODITIES,GSG,,,DBC,,,,,commodities
+7,HEDGES,,,,,,,,QAI,hedges
+8,US EQUITY,"IVV,IYY,IWV","VTI,VV",SPY,,DLN,RSP,,SCHX,us equity
+9,INTERNATIONAL EQUITY,,"VEU,VT",GWL,,,,,SCHF,international equity
+10,Foreign Small Cap,,,,,,,,,foreign small cap
+11,US MUNICIPAL BONDS,MUB,,TFI,PZA,,,,MLN,us municipal bonds
+12,US CORPORATE BONDS,"CIU,AGG","BIV,VCIT",,,,,,,us corporate bonds
+13,INTERNATIONAL BONDS,IGOV,,"BWX,WIP",,,,,,international bonds
+15,CASH,,,,,,,,,cash
+16,CD,,,,,,,,,cd
+17,BALANCE FUND,AOM,,,,,,,,balance fund
+19,PREFERRED SECURITIES,PFF,,,,,,,,preferred securities
+20,CONVERTIBLE SECURITIES,,,CWB,,,,,,convertible securities
+21,US Real Estate,IYR,VNQ,,,,,,,us real estate
+22,Non-US Real Estate,,,,,,,,,non-us real estate
+26,INVESTMENT GRADE,,,,,,,,,investment grade
+27,High Yield Bond,HYG,,JNK,PHB,,,,,high yield bond
+28,Foreign Goverment Bonds,IGOV,,BWX,,,,,,foreign goverment bonds
+29,Foreign Corporate Bonds,,,,,,,,,foreign corporate bonds
+30,Foreign High Yield Bonds,,,,,,,,,foreign high yield bonds
+41,US TREASURY BONDS,IEI,VGIT,ITE,,,,,,us treasury bonds
+48,US Large Cap,"IVV,IYY,IWV","VTI,VV",SPY,,DLN,RSP,,SCHX,us large cap
+49,US Mid Cap,"IJH,IWR,JKG",VO,"MDY,EMM",PJG,"DON,EZM",,MVV,,us mid cap
+52,US Small Cap,"IJR,IWM,JKJ",VB,DSC,PJM,DES,,"SAA,UWM",SCHA,us small cap
+57,Micro Cap,IWC,,,,,,,,micro cap
+58,Developed Countries,,,,,,,,ADRD,developed countries
+61,Emerging Market,EEM,,GMM,PXH,DEM,,,SCHE,emerging market
+62,China Equity,FCHI,,,,,,,,china equity
+63,Foreign Small Value,,,,,,,,,foreign small value
+64,Money Market,,,,,,,,,money market
+65,Moderate Allocation,AOM,,,,,,,,moderate allocation
+66,Conservative Allocation,AOK,,,,,,,,conservative allocation
+78,Long-Short,,,,,,,,,long-short
+79,Bear Market,,,,,,,,,bear market
+83,Intermediate-Term Bond,"AGG,CIU","BIV,BND",,,,,,,intermediate-term bond
+84,Muni National Interm,,,,,,,,ITM,muni national interm
+86,Muni National Short,SUB,,SHM,PVI,,,,SMB,muni national short
+87,Muni Single State Interm,,,,,,,,,muni single state interm
+88,Muni California Interm/Short,CMF,,CXA,PWZ,,,,,muni california interm/short
+89,Muni Pennsylvania,,,,,,,,,muni pennsylvania
+90,Muni Ohio,,,,,,,,,muni ohio
+91,Precious Metals,,,,DBP,,,,GDX,precious metals
+92,Muni New Jersey,,,,,,,,,muni new jersey
+94,Muni New York Interm/Short,NYF,,INY,PZT,,,,,muni new york interm/short
+96,Muni Single State Short,,,,,,,,,muni single state short
+97,Currency,,,,,,,,,currency
+99,World Allocation,AOR,AOA,,,,,,,world allocation
+101,Muni Massachusetts,,,,,,,,,muni massachusetts
+103,Muni New York Long,NYF,,INY,PZT,,,,,muni new york long
+104,Muni Single State Long,,,,,,,,,muni single state long
+105,Muni National Long,MUB,,TFI,PZA,,,,MLN,muni national long
+106,Muni Minnesota,,,,,,,,,muni minnesota
+107,Miscellaneous,,,,,,,,,miscellaneous
+108,Utilities,,,GII,PUI,DBU,RYU,UPW,,utilities
+112,Health,"IYH,IXJ",VHT,XBI,PBE,DBR,RYH,,,health
+114,Muni California Long,CMF,,CXA,PWZ,,,,,muni california long
+118,Foreign Large Growth,EFG,,,,,,,,foreign large growth
+120,Communications,IXP,,,PTE,DGG,,LTL,,communications
+121,Natural Resources,"IYM,IGE",VAW,"XLB,XME",PYZ,DBN,RTM,UYM,,natural resources
+126,Technology,,,MTK,PTF,DBT,RYT,ROM,,technology
+127,Foreign Large Blend,EFA,VEU,GWL,PFA,,,,,foreign large blend
+129,LARGE VALUE,"IVE,IWW,JKF",VTV,ELV,PWV,,RPV,,SCHV,large value
+130,Foreign Small/Mid Value,SCZ,,,,,,,,foreign small/mid value
+132,Foreign Large Value,EFV,,,PID,DWM,,,,foreign large value
+133,Retirement Income,,,,,,,,,retirement income
+136,Bank Loan,,,,,,,,,bank loan
+137,Financial,IYF,VFH,IPF,PFI,DRF,RYF,,,financial
+138,Target Date 2000-2010,TZD,,,,,,,,target date 2000-2010
+139,High Yield Muni,,,,,,,,,high yield muni
+140,Global Real Estate,IFGL,,RWX,,,,,,global real estate
+141,Target Date 2011-2015,TZE,,,,,,,,target date 2011-2015
+142,Target Date 2016-2020,TZG,,,,,,,,target date 2016-2020
+143,Target Date 2021-2025,TZI,,,,,,,,target date 2021-2025
+144,Target Date 2031-2035,TZO,,,,,,,,target date 2031-2035
+145,Target Date 2041-2045,,,,,,,,,target date 2041-2045
+146,Target Date 2026-2030,TZL,,,,,,,,target date 2026-2030
+147,Target Date 2036-2040,TZV,,,,,,,,target date 2036-2040
+149,Target Date 2050+,,,,,,,,,target date 2050+
+159,Alternative,,,,,,,,,alternative
+160,Market Neutral,,,,,,,,,market neutral
+162,SECTOR EQUITY,,,,,,,,,sector equity
+172,US Equity Moderate Allocation,AOM,,,,,,,,us equity moderate allocation
+187,Consumer Staples,KXI,VDC,,PSL,DPN,RHS,,,consumer staples
+188,Consumer Discretionary,RXI,VCR,,,,,,,consumer discretionary
+189,Industrials,"IYJ,EXI",VIS,,,,,,,industrials
+190,Energy,"ITE,IXC",,IPW,DBE,,,RYE,DKA,energy
+192,Foreign Small/Mid Cap,,,,,,,,,foreign small/mid cap
+193,Pacific/Asia Equity,EPP,VPL,GMF,PAF,,,,,pacific/asia equity
+194,Foreign Large Cap,"EFV,EFG",,,PID,DWM,,,,foreign large cap
+195,WORLD BOND,IGOV,,"BWX,WIP",,,,,,world bond
+196,SPECIALTY-REAL ESTATE,,,RWR,PSR,,,URE,,specialty-real estate
+197,LARGE BLEND,"IVV,IYY,IWV","VTI,VV",SPY,,DLN,RSP,,SCHX,large blend
+198,WORLD STOCK,IOO,VT,,,,,,,world stock
+199,SHORT GOVERNMENT,"SHY,SHV",VGSH,,PLK,USY,,,,short government
+200,LONG GOVERNMENT,"TLT,TLH,IEF","EDV,VGLT",TLO,PLW,,,,,long government
+201,EUROPE STOCK,IEV,VGK,,PEF,DEB,,,,europe stock
+202,LARGE GROWTH,"IVW,IWZ,JKE",VUG,ELG,QQQQ,,RPG,,SCHG,large growth
+204,MID-CAP VALUE,"IJJ,IWS,JKI",VOE,EMV,PWP,,RFV,UVU,,mid-cap value
+205,MID-CAP BLEND,"IJH,IWR,JKG",VO,"MDY,EMM",PJG,"DON,EZM",,MVV,,mid-cap blend
+206,FOREIGN SMALL/MID GROWTH,IFSM,VSS,,,,,,SCHC,foreign small/mid growth
+207,SMALL VALUE,"IJS,IWN,JKL",VBR,DSV,PWY,,RZV,UVT,,small value
+208,SMALL BLEND,"IJR,IWM,JKJ",VB,DSC,PJM,DES,,"SAA,UWM",SCHA,small blend
+209,Convertibles,,,CWB,,,,,,convertibles
+214,DIVERSIFIED EMERGING MKTS,EEM,,GMM,PXH,DEM,,,SCHE,diversified emerging mkts
+215,Long-Term Bond,"CLY,LQD","BLV,VCLT",,,,,,,long-term bond
+218,Multisector Bond,"AGG,GBF",BND,LAG,,,,,,multisector bond
+220,Emerging Markets Bond,,,,PCY,,,,,emerging markets bond
+221,Short-Term Bond,CSJ,"BSV,VCSH",,,,,,,short-term bond
+222,Equity Energy,"ITE,IXC",,IPW,DBE,,,RYE,DKA,equity energy
+224,Intermediate Government,IEI,VGIT,ITE,,,,,,intermediate government
+225,Capital Protected,,,,,,,,,capital protected
+226,Mid-Cap Growth,"IJK,IWP",VOT,EMG,PWJ,,RFG,UKW,,mid-cap growth
+229,Latin America Stock,ILF,,GML,,,,,,latin america stock
+231,Small Growth,"IJT,IWO,JKK",VBK,DSG,PWT,,RZG,UKK,,small growth
+232,Greece Equity,,,,,,,,,greece equity
+233,Europe Large-Cap Blend Equity,IEV,VGK,,,,,,,europe large-cap blend equity
+234,Inflation-Protected Bond,TIP,,,,,,,,inflation-protected bond
+235,SPECIALTY-UTILITIES,,,GII,PUI,DBU,RYU,UPW,,specialty-utilities
+236,SPECIALTY-FINANCIAL,IYF,VFH,IPF,PFI,DRF,RYF,,,specialty-financial
+237,SPECIALTY-HEALTH,"IYH,IXJ",VHT,XBI,PBE,DBR,RYH,,,specialty-health
+238,EQUITY PRECIOUS METALS,,,,DBP,,,,,equity precious metals
+239,DIVERSIFIED PACIFIC/ASIA,EPP,VPL,GMF,PAF,,,,,diversified pacific/asia
+240,PACIFIC/ASIA EX-JAPAN STK,"EPP,AAXJ",,GMF,PAF,DND,,,,pacific/asia ex-japan stk
+241,SPECIALTY-TECHNOLOGY,,,MTK,PTF,DBT,RYT,ROM,,specialty-technology
+242,SPECIALTY-NATURAL RES,"IYM,IGE",VAW,"XLB,XME",PYZ,DBN,RTM,UYM,,specialty-natural res
+243,JAPAN STOCK,EWJ,,JPP,PJO,DXJ,,,,japan stock
+244,SPECIALTY-COMMUNICATIONS,IXP,,,PTE,DGG,,LTL,,specialty-communications
+245,SPECIALTY-PRECIOUS METALS,,,,DBP,,,,GDX,specialty-precious metals
+246,COMMODITIES BROAD BASKET,GSG,,,DBC,,,,,commodities broad basket
+247,ULTRASHORT BOND,,,BIL,,,,,,ultrashort bond
+248,MISCELLANEOUS SECTOR,,,,,,,,,miscellaneous sector
+250,rt,,,,,,,,,rt
+253,,,,,,,,,,
+254,"ull,",,,,,,,,,"ull,"

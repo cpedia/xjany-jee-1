@@ -1,0 +1,321 @@
+<p>
+<table border=0 width="100%">
+	<tr>
+		<td>
+			Portfolio Name
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="mpiq_widget_${widgetName}_t_portfolioname" class="ui-widget ui-widget-content ui-corner-all" style="font-size:0.8em;width:350">
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Strategy
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select class="mySelect ui-selectmenu ui-widget ui-state-default ui-selectmenu-dropdown ui-state-active ui-corner-top"  id="mpiq_widget_${widgetName}_t_strategyid" style="font-size:0.8em">
+								<option value="771" selected>Strategic Asset Allocation(SAA)</option>
+						</select>
+					</td>
+						
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+	   <td>
+	   </td>
+	   <td>
+	     <input type="button" class="uiButton ui-button ui-state-default ui-corner-all" style="font-weight: bold;font-size:0.8em;font-family: Verdana,Arial,sans-serif;padding:0.2em 0.4em;display:none;background: none repeat-x scroll 50% 50% #DFF1DF" value=" Choose an allocation template" id="mpiq_widget_${widgetName}_choosetemplate" onclick="mpiq_widget_${widgetName}_showSAA()">
+	   </td>
+	</tr>
+	<tr>
+		<td>
+			Plan
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="mpiq_widget_${widgetName}_t_planname" class="ui-widget ui-widget-content ui-corner-all" style="font-size:0.8em;width:350">
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Risk Profile
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="mpiq_widget_${widgetName}_t_riskprofile"  class="ui-widget ui-widget-content ui-corner-all" style="font-size:0.8em" onblur="mpiq_changeriskprofile()">
+					</td>
+				</tr>
+			</table>
+			
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Rebalance Frequency
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select id="mpiq_widget_${widgetName}_t_frequency" class="mySelect ui-selectmenu ui-widget ui-state-default ui-selectmenu-dropdown ui-state-active ui-corner-top" style="font-size:0.8em">
+
+								<option value="weekly">Weekly</option>
+								<option value="monthly" selected>Monthly</option>
+								<option value="quarterly">Quarterly</option>
+								<option value="annually">Annually</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+
+	<tr id="mpiq_widget_${widgetName}_funds_in_risky" style="display:none">
+		<td>
+			Funds in Each Risky Asset
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select id="mpiq_widget_${widgetName}_t_maxOfRiskyAsset" class="mySelect ui-selectmenu ui-widget ui-state-default ui-selectmenu-dropdown ui-state-active ui-corner-top" >
+								<option value="1">1</option>
+								<option value="2" selected>2</option>
+								<option value="3">3</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr id="mpiq_widget_${widgetName}_number_of_risky" style="display:none">
+		<td>
+			Number of Risky Assets
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select id="mpiq_widget_${widgetName}_t_numberOfMainRiskyClass" class="mySelect">
+								<option value="1">1</option>
+								<option value="2" selected>2</option>
+								<option value="3">3</option>
+						</select>
+					</td>					
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+</table>
+<br>
+<input title="" type="button" id="mpiq_widget_${widgetName}_btn_customize" class="uiButton ui-button ui-state-default ui-corner-all" style="font-weight: bold;width:240px;font-family: Verdana,Arial,sans-serif;background: none repeat-x scroll 50% 50% #DFF1DF" value="Build the Customized Portfolio" onclick="mpiq_widget_${widgetName}_customize_portfolio()">
+<br>
+<div id="mpiq_widget_${widgetName}_message"></div>
+<table border=0 id="mpiq_widget_${widgetName}_progresstable" style="display:none">
+<tr>
+	<td style="width:30px;height:20px"><div id="mpiq_widget_${widgetName}_number" style="width:30px;height:20px">0%</div></td>
+	<td style="width:300px;height:20px"><div id="mpiq_widget_${widgetName}_progressbar" style="width:300px;height:20px"></div></td>
+</tr>
+</table>
+<div id="mpiq_widget_${widgetName}_SAA" style="display:none">
+  <div id="mp_lista" sytle="background-color:#317931"><a class="collArrow"><b> Asset Allocation Template</b></a></div>
+   <div id="mpiq_widget_${widgetName}_instruction">
+           <h4>Instruction</h4>
+              <p style="text-indent:2em;font-size:0.8em">In default, Strategic Asset Allocation(SAA) will equally invest in the available major asset classes in the plan. Alternatively, you can choose one of our pre-set Asset Allocation Templates from below or modify the target allocations in your favor, in which cases please be sure that you have clicked "Apply" before building the portfolio.<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If some asset classes of the template are not available in your plan, you can either click "Scale to Others" to scale the percentage to the other assets or double-click the asset class column to choose another asset class from the pull-down menu.<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the advance options, you can also set the transaction thresholds to avoid fragmental tradings.
+	       </p>
+   </div>
+   
+   <input type="button" id="mpiq_widget_${widgetName}_btn_showAllFundtable" class="uiButton ui-button ui-state-default ui-corner-all" style="font-weight: bold;font-family: Verdana,Arial,sans-serif" value="+ Investment Option" onclick="mpiq_widget_${widgetName}_showAllFundtable()">
+   <div id="mpiq_widget_${widgetName}_investment" style="display:none">
+   </div>
+   
+   <h4>Asset Allocation Template:</h4>
+   <div id="mpiq_widget_${widgetName}_template">
+   </div>
+   
+   <h4>Risk Assets:</h4>
+   <table id="mpiq_widget_${widgetName}_tb_risky">
+          <thead>
+            <tr>
+             <th style="font-size:0.9em;width:180px">Asset Class</th>
+             <th style="font-size:0.9em;width:100px"># of Available Funds</th>
+             <th width="15px"></th>
+             <th style="font-size:0.9em;width:100px">Target Allocation(%)</th>
+             <th></th>
+             <th></th>
+             <th></th>
+            </tr>
+          </thead>
+          <tbody id="mpiq_widget_${widgetName}_risky_asset">  
+          </tbody>
+   </table>
+          
+  <table id="mpiq_widget_${widgetName}_tb_riskyFund">
+  </table>
+          
+  <table>          
+     <tr>
+       <td style="width:85px"><input type="button" style="font-weight: bold;font-family: Verdana,Arial,sans-serif" class="uiButton ui-button ui-state-default ui-corner-all" value="Add" onclick="mpiq_addRiskyLine()"></td>
+       <td style="text-align:right;width:235px;font-size:0.8em">Total Risky Percentage:</td>
+       <td style="width:100px"><input type="text" id="mpiq_widget_${widgetName}_totalrisky" class="ui-widget ui-widget-content ui-corner-all mpiq_uitext" style="font-size:0.8em;width:100px" onblur="mpiq_changeTotalRiskyPercent()"></td>
+       <td></td>
+       <td></td>
+       </tr>
+  </table>  
+  
+  <h4>Fixed Income Assets:</h4> 
+          <table id="mpiq_widget_${widgetName}_tb_stable">
+          <thead>
+            <tr>
+             <th style="font-size:0.9em;width:200px">Asset Class</th>
+             <th style="font-size:0.9em;width:100px"># of Available Funds</th>
+             <th width="15px"></th>
+             <th style="font-size:0.9em;width:100px">Target Allocation(%)</th>
+             <th></th>
+             <th></th>
+             <th></th>
+            </tr>
+          </thead>
+          <tbody id="mpiq_widget_${widgetName}_stable_asset"> 
+          </tbody>
+          </table>
+          
+          <table id="mpiq_widget_${widgetName}_tb_stableFund">
+          </table>
+          
+          <table>
+          <tr>
+            <td style="width:85px;padding-right:0px"><input type="button" style="font-weight: bold;font-family: Verdana,Arial,sans-serif" class="uiButton ui-button ui-state-default ui-corner-all" value="Add" onclick="mpiq_addStableLine()"></td>
+            <td style="text-align:right;width:235px;font-size:0.8em">Total Stable Percentage(Risk Profile<a onclick="mpiq_helpriskprofile()" href="javascript:void(0)" title="Click here for more Risk Profile explanation"><img border=0 height="15px" width="15px" src="/LTISystem/jsp/template/ed/images/newhelp.png" alt="Click here for more Risk Profile explanation"></a>):</td>
+            <td style="width:100px"><input type="text" id="mpiq_widget_${widgetName}_totalstable" style="font-size:0.8em;width:100px" class="mpiq_uitext ui-widget ui-widget-content ui-corner-all"  onblur="mpiq_changeTotalStablePercent()"></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </table>
+          <br>
+          <input type="button" id="mpiq_widget_${widgetName}_btn_singleFund" style="font-weight: bold;font-family: Verdana,Arial,sans-serif" class="uiButton ui-button ui-state-default ui-corner-all" value="+ Add Single Fund" onclick="mpiq_widget_${widgetName}_showSingleFund()">
+          <div id="mpiq_widget_${widgetName}_singleFund" style="display:none">
+             <table>
+               <thead>
+                 <tr>
+                   <th style="font-size:0.9em">Ticker</th>
+                   <th style="font-size:0.9em">Target Allocation(%)</th>
+                 </tr>
+               </thead>
+             	<tbody id="mpiq_widget_${widgetName}_single_fund">
+                  <tr>
+                  <td><input type="text" style="font-size:0.8em" class="ui-widget ui-widget-content ui-corner-all" id="mpiq_widget_${widgetName}_single_ticker"></td>
+                  <td><input type="text" style="font-size:0.8em" class="ui-widget ui-widget-content ui-corner-all" id="mpiq_widget_${widgetName}_single_percent"></td>
+                  <td><input type="button" id="mpiq_widget_${widgetName}_btn_addfund" style="font-weight: bold;font-size:0.8em;font-family: Verdana,Arial,sans-serif;padding:0.2em 0.4em" class="uiButton ui-button ui-state-default ui-corner-all" value="Add" onclick="mpiq_addSingleFund()"></td>
+                  </tr>
+             	</tbody>
+             </table> 
+           </div>
+          <br><br>
+          <input type="button" id="mpiq_widget_${widgetName}_btn_advance" style="font-weight: bold;font-family: Verdana,Arial,sans-serif" class="uiButton ui-button ui-state-default ui-corner-all" value="+ Advance Option" onclick="mpiq_widget_${widgetName}_showAdvance()"><br>
+          <div id="mpiq_widget_${widgetName}_Advance" style="display:none">
+          <br>
+            <span style="font-size:0.8em">BuyThreshold(%)</span> <input type="text" id="mpiq_widget_${widgetName}_t_BuyThreshold" style="font-size:0.8em" class="mpiq_uitext ui-widget ui-widget-content ui-corner-all" value="1.0">
+            <span style="font-size:0.8em">SellThreshold(%)</span> <input type="text" id="mpiq_widget_${widgetName}_t_SellThreshold" style="font-size:0.8em" class="mpiq_uitext ui-widget ui-widget-content ui-corner-all" value="1.0">
+          </div>
+          <br>
+          <input type="button" style="font-weight: bold;font-family: Verdana,Arial,sans-serif" class="uiButton ui-button ui-state-default ui-corner-all" value="Apply" onclick="mpiq_saveTemplate()">
+
+<div id="mpiq_widget_${widgetName}_dialog" height="250px" style="display:none;font-size:0.8em">
+	  <div id="mpiq_widget_${widgetName}_fundtable_dialog" title="Funds" align="left" style="text-align: left">
+	  </div>
+</div>
+
+<div id="mpiq_widget_${widgetName}_helpwindow" style="display:none;font-size:0.7em">
+				<p>All assets are classified to two classes: risky assets and fixed income (stable) assets.</p>
+				<p>Risky assets include the following assets:
+							<ul>
+							 <li><strong>Equities (stocks): </strong>US, international and emerging market stocks,</li>
+							 <li><strong>REITs: </strong>US and international Real Estate Investment Trusts,</li>
+							 <li><strong>Commodities: </strong>Industrial Metals, Gold, Oil, Agricultural, .. etc.,</li>
+							 <li><strong>High Yield (Junk) Bonds: </strong>Low grade corporate bonds </li>
+							</ul>
+							<p><br>Fixed income assets include</p>
+							<ul>
+							<li><strong>Government bonds: </strong>short, intermediate and long term treasury bonds and GNMA,</li>
+							<li><strong>Investment Grade bonds: </strong>short, intermediate and long term investment corporate bonds,</li>
+							<li><strong>International bonds: </strong>Sovereign and corporate investment grade bonds,</li>
+							<li><strong>Cash: </strong>Money markets</li>
+							</ul>
+							</p>
+							<p><br>The Risk Profile number represents the target percentage allocation of fixed income in your portfolio. For example, the default risk profile number is 18. That means 18% should be allocated to fixed income and 82% should be allocated to risky assets</p>
+							<p>Your Risk Profile is determined based on your expected years to retirement and risk tolerance. The risk tolerance could be one of the following:
+							<ul>
+							<li><strong>Very Conservative</strong></li>
+							<li><strong>Conservative</strong></li>
+							<li><strong>Moderatge</strong></li>
+							<li><strong>Aggressive</strong></li>
+							<li><strong>Very Aggressive</strong></li>
+							</ul>
+							<p><br>The more aggressive you are, the more will be allocated to risky assets. The longer you expect to retire, the more will be allocated to risky assets too.</p>
+							<p>Your risk profile number will be adjusted every year.</p>
+							<p>You could always overwrite the risk profile number when customizing a model portfolio.</p>
+							<p>The following chart illustrates the meaning of the risk profile number:
+											<br/><br/>
+											<img border=0 id="mpiq_widget_${widgetName}_helpimg" src="/LTISystem/jsp/profile/images/barchart.png">
+											<br/>
+							</p>
+							<p>For more information on how to determine proper asset allocation, consult your financial adviser or use popular retirement planning tools provided by Fidelity, Vanguard or T.Rowe Price. Or you could find out more asset allocation information on target date funds such as <a target="_blank" href="http://personal.fidelity.com/products/funds/content/DesignYourPortfolio/freedomfunds.shtml.cvsr">Fidelity Freedom Target Date Funds</a>. 
+							</p> 
+							
+							<br/>
+							<br/>
+					</p>
+			</div>
+
+ </div>
+
+</p>
+<form id="profile_form" action="mpiq_widget_${widgetName}_profile_edit.action" method="post"  style="display:none">
+	<input type="hidden" id="mpiq_widget_${widgetName}_profile_portfolioid" name="profile.portfolioID" value="0">
+	<input type="hidden" id="mpiq_widget_${widgetName}_profile_portfolioname" name="profile.portfolioName" value="New Portfolio">
+	<input type="hidden" id="mpiq_widget_${widgetName}_strategyid" name="strategyID" value="-1">
+	<input type="hidden" id="mpiq_widget_${widgetName}_frequency" name="frequency" value="monthly">
+	<input type="hidden" id="mpiq_widget_${widgetName}_maxOfRiskyAsset" name="maxOfRiskyAsset" value="2">
+	<input type="hidden" id="mpiq_widget_${widgetName}_numberOfMainRiskyClass" name="numberOfMainRiskyClass" value="2">
+	<input type="hidden" id="mpiq_widget_${widgetName}_profile_planid" name="profile.planID" value="0">
+
+	<input type="hidden" id="mpiq_widget_${widgetName}_profile_planname" name="profile.planName" value="STATIC">
+	<input type="hidden" id="mpiq_widget_${widgetName}_profile_risknumber" name="profile.riskNumber" value="18">
+	<input type="hidden" id="mpiq_widget_${widgetName}_profile_attitude" name="profile.attitude" value="Moderate">						
+	<input type="hidden" id="mpiq_widget_${widgetName}_profile_yearstoretire" name="profile.yearsToRetire" value="24">
+	
+	<input type="hidden" name="MainAssetClass" id="mpiq_widget_${widgetName}_MainAssetClass" value="">
+	<input type="hidden" name="MainAssetClassWeight" id="mpiq_widget_${widgetName}_MainAssetClassWeight" value="">
+	<input type="hidden" name="AssetFundString" id="mpiq_widget_${widgetName}_AssetFundString" value="">
+	<input type="hidden" name="BuyThreshold" id="mpiq_widget_${widgetName}_BuyThreshold" value="3.0">
+	<input type="hidden" name="SellThreshold" id="mpiq_widget_${widgetName}_SellThreshold" value="3.0">
+	<input type="hidden" name="SpecifyAssetFund" id="mpiq_widget_${widgetName}_SpecifyAssetFund" value="false">
+	<input type="hidden" name="UseDataObject" id="mpiq_widget_${widgetName}_UseDataObject" value="true">
+	
+</form>

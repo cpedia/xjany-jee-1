@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="SecurityType"
+		table="ltisystem_securitytype"
+		batch-size="200"
+	>
+		
+	<id
+		name="ID"
+		type="java.lang.Integer"
+		column="ID"
+	>
+		<generator class="native"/>
+	</id>
+
+	<property
+		name="Name"
+		column="Name"
+		type="java.lang.String"
+		not-null="false"
+	/>
+	<property
+		name="Description"
+		column="Description"
+		type="java.lang.String"
+		not-null="false"
+	/>
+	
+
+	</class>	
+</hibernate-mapping>

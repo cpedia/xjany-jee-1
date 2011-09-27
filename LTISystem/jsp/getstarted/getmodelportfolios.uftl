@@ -1,0 +1,123 @@
+[#ftl]
+[#if SAAPortfolios?? && SAAPortfolios?size>0]
+<table width=100% cellspacing="5">
+	<tr [#if planpage?? && planpage]style="font-weight:bold;"[/#if]>
+		<td>
+		<!--
+			<b>Strategic Asset Allocation</b>
+			<a alt="Click here to see this strategy description" href='/LTISystem/jsp/strategy/View.action?ID=771' target='_blank' class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this strategy description</a>
+		-->
+		</td>
+		<td alt="One Years' Annualized Return" width="40px">1Yr<br> AR</td>
+		[#--<td alt="One Years' Sharpe Ratio" width="40px">1Yr Sharpe</td>--]
+
+		<td alt="Three Years' Annualized Return" width="40px">3Yr<br> AR</td>
+		[#--<td alt="Three Years' Sharpe Ratio" width="40px">3Yr Sharpe</td>--]
+		<td alt="Five Years' Annualized" width="40px">5Yr<br> AR</td>
+		[#--<td alt="Five Years' Sharpe Ratio" width="40px">5Yr Sharpe</td>--]
+		<td></td>
+	</tr>
+	[#list SAAPortfolios as p]
+	<tr>
+		<td>
+			[#if useFollow]
+			<!--
+				<a alt="Click here to see this portfolio description" href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID?string.computer}' target='_blank' class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this portfolio description</a>
+				<a onclick="select(${p.portfolioID?string.computer})" href="javascript:void(0)" >${p.portfolioName}</a>
+			-->
+				<a alt="Click here to see this strategy description" href='/LTISystem/jsp/strategy/View.action?ID=771' target='_blank' class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this strategy description</a>
+				<a onclick="select(${p.portfolioID?string.computer})" href="javascript:void(0)" >Strategic Asset Allocation Moderate</a>
+			[#else]
+			<!--
+				<a alt="Click here to see this portfolio description" href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID?string.computer}&follow=true'  class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this portfolio description</a>
+				<a href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID?string.computer}&follow=true' >${p.portfolioName}</a>
+			-->
+				<a alt="Click here to see this strategy description" href='/LTISystem/jsp/strategy/View.action?ID=771' target='_blank' class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this strategy description</a>
+				<a href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID?string.computer}&follow=true' >Strategic Asset Allocation Moderate</a>
+			[/#if]
+		</td>
+		<td width=40px>[#if p.AR1??]${p.AR1?string.percent}[/#if]</td>
+		[#--<td width=40px>[#if p.sharpeRatio1??]${p.sharpeRatio1?string.percent}[/#if]</td>--]
+		<td width=40px>[#if p.AR3??]${p.AR3?string.percent}[/#if]</td>
+		[#--<td width=40px>[#if p.sharpeRatio3??]${p.sharpeRatio3?string.percent}[/#if]</td>--]
+		<td width=40px>[#if p.AR5??]${p.AR5?string.percent}[/#if]</td>
+		[#--<td width=40px>[#if p.sharpeRatio5??]${p.sharpeRatio5?string.percent}[/#if]</td>--]
+		[#if useFollow]
+		<td width=100px valign="top">
+			<button onclick="select(${p.portfolioID?string.computer})" style="width:80px;border:1px solid #ccc;background-color:#DEDFDE;cursor:pointer" onmouseout="this.style.backgroundColor='#DEDFDE';" onmouseover="this.style.backgroundColor='#CED3CE'">Follow or Customize</button>
+		</td>
+		[#else]
+		<td width=100px valign="top">
+		<a id="idcustomize" class="uiButton" href="/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID}&follow=true" >Follow or Customize</a>
+		</td>		
+		[/#if]
+	</tr>
+	[/#list]
+</table>
+[/#if]
+<br>
+
+[#assign showh=true /]
+[#if planpage?? && planpage]
+	[#if SAAPortfolios?? && SAAPortfolios?size>0]
+		[#assign showh=false /]
+	[/#if]
+[/#if]
+[#if TAAPortfolios?? && TAAPortfolios?size>0]
+<table width=100% cellspacing="5">
+[#if showh]
+	<tr>
+		<td>
+		<!--
+			<b>Tactical Asset Allocation</b>
+			<a alt="Click here to see this strategy description" href='/LTISystem/jsp/strategy/View.action?ID=1003' target='_blank' class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this strategy description</a>
+		-->
+		</td>
+	<td alt="One Years' Annualized Return" width="40px">1Yr<br> AR</td>
+	[#--<td alt="One Years' Sharpe Ratio" width="40px">1Yr Sharpe</td>--]
+
+	<td alt="Three Years' Annualized Return" width="40px">3Yr<br> AR</td>
+	[#--<td alt="Three Years' Sharpe Ratio" width="40px">3Yr Sharpe</td>--]
+	<td alt="Five Years' Annualized" width="40px">5Yr<br> AR</td>
+	[#--<td alt="Five Years' Sharpe Ratio" width="40px">5Yr Sharpe</td>--]
+	<td></td>
+</tr>
+[/#if]
+	[#list TAAPortfolios as p]
+	<tr>
+		<td>
+			[#if useFollow]
+			<!--
+				<a alt="Click here to see this portfolio description" href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID?string.computer}' target='_blank' class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this portfolio description</a>
+				<a onclick="select(${p.portfolioID?string.computer})" href="javascript:void(0)" >${p.portfolioName}</a>
+			-->
+				<a alt="Click here to see this strategy description" href='/LTISystem/jsp/strategy/View.action?ID=1003' target='_blank' class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this strategy description</a>
+				<a onclick="select(${p.portfolioID?string.computer})" href="javascript:void(0)" >Tactical Asset Allocation Moderate</a>
+			[#else]
+			<!--
+				<a alt="Click here to see this portfolio description" href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID?string.computer}&follow=true'  class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this portfolio description</a>
+				<a href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID?string.computer}&follow=true' >${p.portfolioName}</a>
+			-->
+				<a alt="Click here to see this strategy description" href='/LTISystem/jsp/strategy/View.action?ID=1003' target='_blank' class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see this strategy description</a>
+				<a href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID?string.computer}&follow=true' >Tactical Asset Allocation Moderate</a>
+			[/#if]
+		</td>
+		<td width=40px>[#if p.AR1??]${p.AR1?string.percent}[/#if]</td>
+		[#--<td width=40px>[#if p.sharpeRatio1??]${p.sharpeRatio1?string.percent}[/#if]</td>--]
+		<td width=40px>[#if p.AR3??]${p.AR3?string.percent}[/#if]</td>
+		[#--<td width=40px>[#if p.sharpeRatio3??]${p.sharpeRatio3?string.percent}[/#if]</td>--]
+		<td width=40px>[#if p.AR5??]${p.AR5?string.percent}[/#if]</td>
+		[#--<td width=40px>[#if p.sharpeRatio5??]${p.sharpeRatio5?string.percent}[/#if]</td>--]
+		[#if useFollow]
+		<td width=100px valign="top">
+			<button onclick="select(${p.portfolioID?string.computer})" style="width:80px;border:1px solid #ccc;background-color:#DEDFDE;cursor:pointer" onmouseout="this.style.backgroundColor='#DEDFDE';" onmouseover="this.style.backgroundColor='#CED3CE'">Follow or Customize</button>
+		</td>
+		[#else]
+		<td width=100px valign="top">
+		<a id="idcustomize" class="uiButton" href="/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${p.portfolioID}&follow=true" >Follow or Customize</a>
+		</td>		
+		[/#if]
+	</tr>
+	[/#list]
+</table>
+[/#if]

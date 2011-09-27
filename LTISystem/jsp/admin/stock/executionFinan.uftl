@@ -1,0 +1,234 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+      <head>
+      <title>Download Financial Statement</title>
+      <meta http-equiv="refresh" content="60">
+      <link href="../images/style.css" rel="stylesheet" type="text/css" />
+      [@s.url action="UpdateConfiguration.action" id="url_main" namespace="/jsp/admin/stock" includeParams="none"]
+	  [/@s.url]
+      <script type="text/javascript" src="../images/jquery-1.2.6.min.js"></script>
+      
+      </head>
+      <body onload="setTimeout( this.location.reload(); ,6000);">
+      <table class="nav" width="100%">
+      <td width="15%">
+                [@s.url value="DownloadUpdateLog.action" id="url_1"]
+				[/@s.url]
+				[@s.a href="%{url_1}"]Download Log[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="UpdateConfiguration.action" id="url_2"]
+				[/@s.url]
+				[@s.a href="%{url_2}"]Update Configuration[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="FinancialInfo.action" id="url_3"]
+				[/@s.url]
+				[@s.a href="%{url_3}"]Financial Statements[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="FinancialStatement.action?action=view" id="url_4"]
+				[/@s.url]
+				[@s.a href="%{url_4}"]Update Financial Statements[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="ExecutionFinan.action" id="url_5"]
+				[/@s.url]
+				[@s.a href="%{url_5}"]Financial Statements Update State[/@s.a]
+	  </td>
+	  </table>  
+	  <h1>${"Financial Statements Update State"}</h1>
+	  
+      <br>
+      FinancialStatement Update Process<br>
+		<table width="50%" border="0">
+		<tr>
+			<td>
+				<table  id="processtable" border="1" cellpadding="0" cellspacing="1" width="100%">
+					<thead>
+						<tr>
+							<th>
+								Process
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						[#list stateList as st]
+							[#if st_index%2==0]
+								<tr class='odd'>
+							[/#if]
+							[#if st_index%2==1]
+								<tr class='even'>
+							[/#if]
+						<td>
+							${st.toString()}
+						</td>
+						</tr>	
+						[/#list]	
+					</tbody> 
+				</table>
+			</td>
+			<td>
+				<table  id="statetable" border="1" cellpadding="0" cellspacing="1" width="100%">
+					<thead>
+						<tr>
+							<th>
+								State
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						[#list processState as ps]
+							[#if ps_index%2==0]
+								<tr class='odd'>
+							[/#if]
+							[#if ps_index%2==1]
+								<tr class='even'>
+							[/#if]
+						<td>
+							${ps.toString()}
+						</td>
+						</tr>	
+						[/#list]
+					</tbody> 
+				</table>
+			</td>
+		</tr>
+		</table>
+      
+      <br><br>
+      FinancialStatement Update State<br>
+		<table id="logtable"  border="1" cellpadding="0" cellspacing="1"width="50%">
+			<thead>
+			<tr>
+				<th>Name</th><th>Value</th>	
+			</tr>			
+			</thead>
+			<tbody>
+				<tr>
+					<td>Is updating</td>
+					<td>${isUpdating.toString()}</td>
+				</tr>
+				<tr>
+					<td>Start Date</td>
+					<td>${updateDBStartDate}</td>
+				</tr>
+				<tr>
+					<td>Updating period</td>
+					<td>${updateDBPeriod }mins</td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td>${state}</td>
+				</tr>
+				<tr>
+					<td>Total size</td>
+					<td>${totalCount }</td>
+				</tr>
+				<tr>
+					<td>Current pos</td>
+					<td>${currentCount }</td>
+				</tr>
+			</tbody>
+		</table>
+		<br><br>
+		
+		<h1>${"Yearly Financial Statements Update State"}</h1>
+	  
+      <br>
+      <font style="color:red">Yearly</font> FinancialStatement Update Process<br>
+		<table width="50%" border="0">
+		<tr>
+			<td>
+				<table  id="processytable" border="1" cellpadding="0" cellspacing="1" width="100%">
+					<thead>
+						<tr>
+							<th>
+								Process
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						[#list stateYList as sty]
+							[#if sty_index%2==0]
+								<tr class='odd'>
+							[/#if]
+							[#if sty_index%2==1]
+								<tr class='even'>
+							[/#if]
+						<td>
+							${sty.toString()}
+						</td>
+						</tr>	
+						[/#list]	
+					</tbody> 
+				</table>
+			</td>
+			<td>
+				<table  id="statetyable" border="1" cellpadding="0" cellspacing="1" width="100%">
+					<thead>
+						<tr>
+							<th>
+								State
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						[#list processYState as psy]
+							[#if psy_index%2==0]
+								<tr class='odd'>
+							[/#if]
+							[#if psy_index%2==1]
+								<tr class='even'>
+							[/#if]
+						<td>
+							${psy.toString()}
+						</td>
+						</tr>	
+						[/#list]
+					</tbody> 
+				</table>
+			</td>
+		</tr>
+		</table>
+      
+      <br><br>
+      <font style="color:red">Yearly</font> FinancialStatement Update State<br>
+		<table id="logytable"  border="1" cellpadding="0" cellspacing="1"width="50%">
+			<thead>
+			<tr>
+				<th>Name</th><th>Value</th>	
+			</tr>			
+			</thead>
+			<tbody>
+				<tr>
+					<td>Is updating</td>
+					<td>${isYUpdating.toString()}</td>
+				</tr>
+				<tr>
+					<td>Start Date</td>
+					<td>${updateYDBStartDate}</td>
+				</tr>
+				<tr>
+					<td>Updating period</td>
+					<td>${updateYDBPeriod }mins</td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td>${stateY}</td>
+				</tr>
+				<tr>
+					<td>Total size</td>
+					<td>${totalYCount }</td>
+				</tr>
+				<tr>
+					<td>Current pos</td>
+					<td>${currentYCount }</td>
+				</tr>
+			</tbody>
+		</table>
+      </body>
+</html>
+      

@@ -1,0 +1,221 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#import "/jsp/mp_left_div.ftl" as left]
+<html>
+<head>
+<title>MyPlanIQ: ${jforumTopic.topicTitle!''}</title>
+
+<style>
+li.liStyle{
+	margin-left:0px;
+	list-style-type:none;
+}
+.content_tier1 li {
+	color:#3B4446;
+	line-height:1.4em;
+	list-style-type:none;
+	margin-left:0px;
+}
+#mpcenterright li{
+	list-style: disc outside none;
+}
+.col-2 li{
+    color:#3B4446;
+	line-height:1.4em;
+	list-style-type:disc;
+	margin-left:15px;
+}
+.headline a{
+	text-decoration:none;
+}
+
+.feedTitle a{
+	text-decoration:none;
+        line-height:30px;
+}
+.date{
+	font-size:13px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #8bac76;
+}
+.date1{
+	font-size:13px;
+	border-bottom-width: 1px;
+	border-bottom-color: #8bac76;
+}
+
+.headline{
+	font-size:14px;
+	font-weight:bold;
+}
+.edit_area{
+	margin-bottom:10px;
+}
+.liStyle{
+	margin-top:10px;
+}
+span{
+color:#000000;
+}
+.tab{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:18px;
+	margin:2px 0;
+	padding:7px 80px 9px 36px;
+}
+.tab1{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:1.7em;
+	margin:2px 0;
+	padding-left:30px;
+	padding-right:5px;
+}
+</style>
+<script>
+$("span").css("color","red");
+</script>
+</head>
+<body>
+			<!--mpleft begining-->
+			<div id="mpleft" style="float:left;width:250px;">
+				<div style="width:250px; margin-right:9px;">
+								<!--leftfirst-->
+                                   [@left.TopPlans /]
+								
+								<script type="text/javascript"><!--
+								google_ad_client = "ca-pub-9404629437169860";
+								/* PlanPort_SmallSquare */
+								google_ad_slot = "8527794289";
+								google_ad_width = 200;
+								google_ad_height = 200;
+								//-->
+								</script>
+								<script type="text/javascript"
+								src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+								</script>
+								[@s.action  name="f401k_allblog" namespace="/" executeResult=true]
+									[@s.param  name="formusCategories"]Retirement Investing News and Articles[/@s.param]
+									[@s.param  name="setPageSize"]5[/@s.param]
+									[@s.param  name="isMain"]false[/@s.param]
+									[@s.param  name="isprePage"]true[/@s.param]
+								[/@s.action]
+								<script type="text/javascript"><!--
+google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_SmallSquare */
+google_ad_slot = "8527794289";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>  
+								
+								[@s.action  name="f401k_allblog" namespace="/" executeResult=true]
+									[@s.param  name="formusCategories"]News and Commentaries[/@s.param]
+									[@s.param  name="setPageSize"]3[/@s.param]
+									[@s.param  name="isMain"]false[/@s.param]
+									[@s.param  name="isprePage"]true[/@s.param]
+								[/@s.action]
+								<script type="text/javascript"><!--
+google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_Left_Skycraper */
+google_ad_slot = "7605014472";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+								
+								
+								<!--firstend-->
+				</div>		   
+			</div>
+                        <!-- mpleft end --->
+<style>
+.recommend_num{
+    background: url("/LTISystem/jsp/images/recommend_num_article_toolbar.gif") no-repeat scroll 0 0 transparent;
+    color: #2D2D2D;
+    display: inline;
+    float: right;
+    height: 15px;
+    padding: 3px 3px 0 10px;
+}
+.right_close {
+    background: url("/LTISystem/jsp/images/recommend_num_article_toolbar_right.gif") no-repeat scroll 0 0 transparent;
+    display: inline;
+    float: right;
+    height: 18px;
+    width: 1px;
+    margin-right: 5px;
+}
+.facebook_small{
+	background: url("/LTISystem/jsp/images/facebook_small.gif") no-repeat scroll 0 0 transparent;
+    float: right;
+}
+.fb_link_button_count {
+    float: right;
+    height: 18px;
+    min-width: 83px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin-left: 15px;
+}
+.share_text_fb {
+    margin-left: -400px;
+    text-decoration: none;
+}
+.comment_button{
+	color: #FFFFFF;
+    float: right;
+    font-size: 14px;
+    height: 20px;
+    min-width: 70px;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+}
+.recommend{
+	background: url("/LTISystem/jsp/images/mp_comment.jpg") no-repeat scroll 0 0 transparent;
+    float: right;
+    margin-top: -2px;
+}
+</style>
+<div id="mpcenterright" style="margin- left:5px;float:left;width:651px;margin-left: 10px;">
+	[#if jforumTopic??]
+		<h1 align="center" class="feedTitle"><a href="../jforum/posts/list/${jforumTopic.ID?string.computer}.page">${jforumTopic.topicTitle!''}</a></h1>
+		<p class="date">${jforumTopic.topicTime?string("MM/dd/yyyy")}  
+		<span class="facebook_small"><a href="javascript:window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(document.location.href)+'&amp;t='+encodeURIComponent(document.title));void(0)" name="fb_share" class="fb_link_button_count"><span class="share_text_fb">Share</span></a></span>
+		<span class="right_close"></span><span class="recommend_num">${jforumTopic.topicReplies?string.computer}</span>
+		<span class="recommend"><a href="../jforum/posts/list/${jforumTopic.ID?string.computer}.page" class="comment_button">comments</a></span>
+		</p>
+			${jforumTopic.postText!' '}
+		<br>
+		<br>
+		<span class="recommend" style="float:left"><a href = "../jforum/posts/list/${jforumTopic.ID?string.computer}.page" class="comment_button"  style="float: left;">comments</a></span>
+		<span class="recommend_num" style="float: left;">${jforumTopic.topicReplies?string.computer}</span>
+		<span class="right_close" style="float: left;"></span>&nbsp;
+		<a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark"/></a><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+	[/#if]
+</div>
+[#if PID?? && PID=1634 || PID = 1633 || PID=1635  || PID = 1637]
+</div>
+[/#if]
+[#if PID?? && PID=1636]
+</div>
+</div>
+[/#if]
+</body>
+</html>

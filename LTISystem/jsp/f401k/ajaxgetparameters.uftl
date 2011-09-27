@@ -1,0 +1,12 @@
+[#ftl]
+[#if attributes??]
+{"total":${attributes?size},"rows":${"["}
+	[#list attributes as p]
+	{"parameterid":"${p_index}","pre":"${p.pre}","post":"${p.post}"}
+		[#if p_index!=attributes?size-1]
+		,
+		[/#if]
+	[/#list]
+${"]"}}
+[/#if]
+

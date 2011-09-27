@@ -1,0 +1,12 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head></head>
+<body>
+<div>
+${fundContent!"no contents"}
+</div>
+</body>
+</html>

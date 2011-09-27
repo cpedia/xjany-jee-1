@@ -1,0 +1,128 @@
+[#ftl]
+[#setting url_escaping_charset='utf8']
+<HTML>
+<HEAD>
+	<title>Billing Management Center</title>
+	<script>
+		var host=window.location.host;
+		$(function(){
+			host="www.myplaniq.com";
+			var suf=host.replace(/WWW./i,"");
+			$('#link').attr({'href':'mailto:support@'+suf});
+		});
+	</script>
+</HEAD>
+<BODY>
+<div id='popup_window' style='display:none;text-align:left;'>
+
+</div>
+
+<h1>Subscription Center</h1>
+<div style="margin:10px; font-size:130%;">
+	Your subscription status: <b>${status}</b> 
+	<a href='javascript:void(0);' onclick='javascript:openurl("/LTISystem/paypal__faq.action?includeHeader=false&status=${status}")'><img width="15px" height="15px" alt="Click here for more Risk Profile explanation" src="/LTISystem/jsp/template/ed/images/newhelp.png"></a>
+	<br>
+[#if status=="normal"]
+	<!--[#if startDate??]
+		[${startDate?string("MM/dd/yyyy")}]
+	[/#if]-->
+	You have subscribed to this service already, the expiration date is: 
+	[#if endDate??]
+		${endDate?string("MM/dd/yyyy")}
+	[/#if]
+	.
+	<br>
+	Your subscription item is ${message}
+	<br>
+	<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=3R6HTU5SPDD5Y">
+         <IMG SRC="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+        </A>
+	<br>
+	<a href='/LTISystem/paypal__howtocancel.action'>How to cancel this service by yourself?</a>
+	<br>
+	<br>
+	[#--<script>
+	function cancel(){
+		$.ajax({
+		  url: '/LTISystem/paypal_cancel.action?includeHeader=false',
+		  cache: false,
+		  async: false,
+		  success: function(data) {
+		    alert(data);
+		    window.location.href='/LTISystem/paypal_center.action';
+		  }
+		});
+		
+	}
+	</script>
+	<a href="#" onclick="cancel()">cacnel and issue a refund by MyPlanIQ</a>--]
+[#elseif status=="waiting_for_cancel"]
+	[#if startDate??]
+		[${startDate?string("MM/dd/yyyy")}]
+	[/#if]
+	You have subscribed this service already, the subscription expiration date is: 
+	[#if endDate??]
+		${endDate?string("MM/dd/yyyy")}
+	[/#if]
+	.
+	<br>
+	detail: ${message}
+	<br>
+	Waiting for MyPlanIQ to cancel this service.
+	<br>
+	<br>
+[#elseif status=="waiting"]
+	Please wait for a moment, we need some time to confirm the payment information with PayPal. If you still have a problem, please contact MyPlanIQ.
+	<a href='' id='link'>Support</a>.
+	<br>
+	<script>
+	function change_to_inactive(){
+		$.ajax({
+		  url: '/LTISystem/paypal_changetonowaiting.action?includeHeader=false',
+		  cache: false,
+		  async: false,
+		  success: function(data) {
+		    window.location.href='/LTISystem/paypal_subscr.action';
+		  }
+		});
+		
+	}
+	</script>
+	<a href="#" onclick="change_to_inactive()">Go to subscribe page any way.</a>
+[#elseif status=="locked"]
+	You may have subscribed our free trial service before. Our policy is that your subscription will not be available until the free trial period runs out. You can re-subscribe our service by choosing an immediate subscription plan.
+	<br>how to make this status to normal?
+	<br>1. cancel this subscription, please click <a href='/LTISystem/paypal__howtocancel.action'>here</a>.
+	<br>2. subscribe a service without free trial.  
+        <br><a style="font-size:150%" href="/LTISystem/paypal_subscr.action">Go to subscribe page.</a>
+[#elseif status=="expired"]
+	Your member-ship expire, please re-subscribe this service by choosing an immediate subscription plan. 
+	<br>how to make this status to normal?
+	<br>1. check your status of your Paypal account.
+	<br>2. want to cancel this subscription? please click <a href='/LTISystem/paypal__howtocancel.action'>here</a>.
+	<br>Have any problem? please contact us.
+        <br><a style="font-size:150%" href="/LTISystem/paypal_subscr.action">Go to subscribe page.</a>
+	<br><a href='' id='link'>Support</a>
+[#else]
+	You have no subscriptions from us right now. 
+	<a style="font-size:150%" href="/LTISystem/paypal_subscr.action">Go to subscribe page.</a>
+	<br>Have any problems?,please contact us.
+	<a href='' id='link'>Support</a>
+[/#if]
+
+<p style="font-size:150%"><br>See <a href="/LTISystem/f401k__plancompare.action">Subscription Plan Comparison</a></p>
+</div>
+<br>
+<br>
+<script>
+$(function(){
+$('#popup_window').dialog( {"autoOpen": false });	
+});
+	
+	function openurl(url){
+		$('#popup_window').load(url);
+		$('#popup_window').dialog('open');
+	}
+</script>
+</BODY>
+</HTML>

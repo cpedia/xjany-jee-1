@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="PortfolioState"
+		table="ltisystem_portfoliostate"
+	>
+		<id
+			name="PortfolioID"
+			type="java.lang.Long"
+			column="PortfolioID"
+		>
+			<generator class="assigned"/>
+		</id>
+
+
+		<property
+			name="State"
+			column="State"
+			type="java.lang.Integer"
+			not-null="true"
+		/>
+		<property
+			name="UpdateTime"
+			column="UpdateTime"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>	
+		<property
+			name="PersistentBytes"
+			column="PersistentBytes"
+			type="com.lti.type.ByteArrayUserType"
+			not-null="false"
+		/>		
+		<property
+			name="DelayChart"
+			column="DelayChart"
+			type="com.lti.type.ByteArrayUserType"
+			not-null="false"
+		/>	
+		<property
+			name="DelayPieChart"
+			column="DelayPieChart"
+			type="com.lti.type.ByteArrayUserType"
+			not-null="false"
+		/>	
+		<property
+			name="RealtimeChart"
+			column="RealtimeChart"
+			type="com.lti.type.ByteArrayUserType"
+			not-null="false"
+		/>	
+		<property
+			name="RealtimePieChart"
+			column="RealtimePieChart"
+			type="com.lti.type.ByteArrayUserType"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

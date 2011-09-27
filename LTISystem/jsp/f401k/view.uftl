@@ -1,0 +1,1548 @@
+[#ftl] [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]] [#import
+"/jsp/lti_library_ftl.jsp" as lti] [#assign
+authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/mp_left_div.ftl" as left]
+
+<html>
+<head>
+<title>MyPlanIQ Plan Page: ${plan.name}</title>
+<meta name="description" content="[#if plan.description!=""]${shortDescription}[#else]${plan.name}[/#if]">
+<meta name="keywords"
+	content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<link href="/LTISystem/jsp/widgets/widget.css" rel="stylesheet" type="text/css" />
+<script src="/LTISystem/jsp/portfolio/images/jquery.timer.js"
+	type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/gpl/jprocess.js"></script>
+<link href='/LTISystem/jsp/api/images/lti.css'
+	rel='stylesheet' type='text/css' />
+<script type="text/javascript"
+	src="http://www.myplaniq.com/LTISystem/api_widget.action?includeHeader=false&reqparam=mp_majorassets|http%3A%2F%2Fwww.myplaniq.com%2FLTISystem%2Fapi__etfwatch.action%3FincludeHeader%3Dfalse%26callback%3D%3F%26jsoncallback%3D%3F%26id%3Dussectors%26tablename=MajorAssetReturnTableWidget|1|300|600|%3C/a%3E%23mp_articles|http%3A%2F%2Fpipes.yahoo.com%2Fpipes%2Fpipe.run%3F_id%3Dd68a2e1378f0a246eb9a8fdac63a8b72%26_render%3Djson|2|200|300|%23mp_support|http%3A%2F%2Fpipes.yahoo.com%2Fpipes%2Fpipe.run%3F_id%3Df74b2c13c4f359ae9e8f39405ef4e662%26_render%3Djson|2|200|300"></script>
+<meta name="jqueryui" content="smoothness">
+
+<style type="text/css">
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+.page {
+	margin: 10px auto;
+	text-align: left;
+}
+
+.tab_mo {
+	border: 1px solid #ccc;
+	border-top: none;
+	padding: 10px;
+}
+
+.tabe {
+	border-bottom: 1px solid #204A24;
+	height: 25px;
+	margin: 0;
+	padding: 0;
+}
+
+.tabe li {
+	display: inline;
+	float: left;
+	list-style-type: none;
+	margin-right: 2px;
+}
+
+.tabe li a {
+	background: none repeat scroll 0 0 #AEBEAF;
+	border-color: #CBDDE6 #FFFFFF #FFFFFF;
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #FFFFFF;
+	border-style: solid;
+	border-width: 0 1px 2px;
+	color: #204A24;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	padding: 4px 8px;
+	text-decoration: none;
+}
+
+.tabe li a:hover {
+	color: #FCFCFC;
+	text-decoration: none;
+}
+
+.tabe li.no a {
+	background: none repeat scroll 0 0 #224C27;
+	border-color: #CBDDE6 -moz-use-text-color #244E2A;
+	border-left: medium none;
+	border-right: medium none;
+	border-style: solid none;
+	border-width: 0 medium 2px;
+	color: #FCFCFC;
+}
+
+.odd {
+	background: none repeat scroll 0 0 transparent;
+}
+
+.even {
+	background: none repeat scroll 0 0 #E8EFF2;
+}
+
+#allDiv h1 {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+#helpme{
+	cursor: pointer;
+    margin-top: -5px;
+}
+</style>
+
+<script type="text/javascript">
+var planId;
+function modifyPlan(id1,id2,id3){
+	if(id2 != undefined ){
+		id1 = ''+id1+id2;
+		if(id3 != undefined)
+			id1 = id1+id3;
+	}
+	planId=id1;
+	$("#cboxLoadedContent").html("<input class=\"createorupdate\" type=\"button\" value=\"Save\" onclick=\"transter()\">");
+	mpiq_widget_createplanwidget('mpiq_widget_getstartedwidget_display_div','noparams',id1);
+	
+}
+var t;
+function change(){
+	$(".createorupdate").attr("onclick", function() {
+        return function() {
+        	mpiq_widget_createplanwidget_save(planId,true,false,true);
+        }
+    });
+	$("#createmoderportolio").attr("onclick", function() {
+        return function() {
+        	mpiq_widget_createplanwidget_save(planId,true,true,true);
+        }
+    });
+	t = setTimeout(change,1000);
+	if($(".createorupdate").val()=="update")
+		clearTimeout(t);
+}
+
+setTimeout(change,1000);
+
+function transter(){
+	alert("dd");
+	//mpiq_widget_createplanwidget_save();
+}
+
+$(function(){
+    $("#tablediv tr:even").addClass("even"); 
+	$("#tablediv tr:odd").addClass("odd");
+});
+function tab(a,b,c) {
+	for(i=1;i<=b;i++){ 
+		if(c==i){ 
+			document.getElementById(a+"_mo_"+i).style.display = "block";
+			document.getElementById(a+"_to_"+i).className = "no";
+		} 
+		else{ 
+			if(document.getElementById(a+"_mo_"+i)&&document.getElementById(a+"_to_"+i)){
+				document.getElementById(a+"_mo_"+i).style.display = "none";
+				document.getElementById(a+"_to_"+i).className = "q";
+			}
+		} 
+	} 
+}
+
+
+$(document).ready(function() {
+	tab('tab',4,1);
+		//$("#footer").appendTo("#main");
+        $("#helpwindow").dialog({
+			resizable: false,
+			height:500,
+			width:820,
+			autoOpen:false,
+			modal: true,
+			title:"More on Risk Profile",
+			buttons: {
+				'Close': function() {
+					$(this).dialog('close');
+				}
+				
+			}
+	});
+        
+        $("#helpmewindow").dialog({
+			resizable: false,
+			height:400,
+			width:500,
+			autoOpen:false,
+			modal: true,
+			title:"Help",
+			buttons: {
+				'Close': function() {
+					$(this).dialog('close');
+				}
+				
+			}
+	});
+	
+	$("#help").click(function(){
+    	$("#helpwindow").dialog('open');
+        })
+    $("#helpme").click(function(){
+    	$("#helpmewindow").dialog('open');
+        })
+});
+
+	[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+    function saveAs(){
+    	if(!confirm('Are you sure all the data have been saved before?')){
+    		return;
+    	}
+    	
+   		var newName=prompt('Please input a new name',"Copy of ${plan.name}");
+    	if(newName==null)return;
+    	
+    	if(newName==''||newName=="${plan.name}"){
+    		alert('Name is illegal.');
+    		return;
+    	}
+    	location.href="f401k_saveas.action?ID=${plan.ID?string.computer}&name="+newName;
+    	
+    }
+    [/@authz.authorize]
+    
+     function modify(){
+    	if(!confirm('Are you sure all the data have been saved before?')){
+    		return;
+    	}
+    	
+   		//var newName=prompt('Please input a new name',"Copy of ${plan.name}");
+    	//if(newName==null)return;
+    	
+    	//if(newName==''||newName=="${plan.name}"){
+    	//	alert('Name is illegal.');
+    	//	return;
+    	//}
+    	location.href="f401k_modify.action?ID=${plan.ID?string.computer}&name=";
+    	
+    }
+    
+	[#if isOwner?? && isOwner]
+    function save(){
+    	if(editing){
+    		alert('Please save your content of the rich text area first.');
+    		return;
+    	}
+    	
+    	$('#description_hidden').val($('#description').val());
+    	$('#reference_hidden').val($('#reference').val());
+    	$('#shortdescription_hidden').val($('#shortDescription').val());
+    	$('#name_hidden').val($('#name').val());
+    	$('#startingdate_hidden').val($('#startingdate').val());
+    	$("#updateForm").submit();
+    }
+    
+	[/#if]    
+
+    
+</script>
+
+
+<script type="text/javascript" src="jsp/images/tiny_mce/tiny_mce.js"></script>
+
+<script type="text/javascript">  
+$(document).ready(
+		function(){
+			$("a[rel='widget_content']").colorbox({opacity:0.5,width:"720px",overlayClose:false,scrolling:true,height : "760px", inline:true, href:"#mpiq_widget_getstartedwidget_display_div"});
+			
+		});
+var editing=false;
+tinyMCE.init({
+    mode : "none",
+    theme : "advanced",
+    plugins : "pagebreak,style,layer,table,save,advhr,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist",
+
+	// Theme options
+	theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+	theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+	theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+	theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
+	
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_statusbar_location : "bottom",
+	save_onsavecallback : "save_for_mce"
+});
+
+function save_for_mce(ed){
+	var id=$(ed).attr('id');
+	if (tinyMCE.getInstanceById(id)){
+		tinyMCE.execCommand('mceFocus', false, id);                    
+		tinyMCE.execCommand('mceRemoveControl', false, id);
+		$('#'+id+'_span').html($('#'+id).val());
+		$('#'+id+'_span').show();
+		$('#'+id+'_tag').html('*');
+		$('#'+id).hide();
+		$('#'+id+'_hidden').val($('#'+id).val());
+	} 
+	editing=false;
+}
+
+
+function add_processbar_css(element, score){
+	score = score*100;
+	$('#'+element).progressbar({
+			value: score
+	});
+	$('#'+element).css({ 'background': 'white' , 'height' : '18px'});
+	$('#'+element).removeClass('ui-corner-all');
+	$('#'+ element +' > div').removeClass('ui-corner-left');
+	$('#'+ element +' > div').removeClass('ui-corner-right');
+	if(score<10){
+		$('#'+ element +' > div').css({ 'background': 'rgb(255,0,0)' });
+	}else if(score<35){
+		$('#'+ element +' > div').css({ 'background': 'rgb(255,148,40)'});
+	}else if(score<65){
+		$('#'+ element +' > div').css({ 'background': 'rgb(160,66,255)'});
+	}else if(score<85){
+		$('#'+ element +' > div').css({ 'background': 'rgb(0,128,255)'});
+	}else{
+		$('#'+ element +' > div').css({ 'background': 'rgb(158,255,62)'});
+	}
+}
+$(function() {
+	
+	[#if planScore??]
+		add_processbar_css("diversification", ${planScore.getCoverageScore()});
+		add_processbar_css("fundquality", ${planScore.getFundQualityScore()});
+		add_processbar_css("portfoliobuilding", ${planScore.getCapabilityScore()});
+		add_processbar_css("overallinvestment", ${planScore.getInvestmentScore()});
+		$('#poor').progressbar( {value: 9} );
+		$('#poor').css({ 'background': 'white' , 'height' : '14px'});
+		$('#poor > div').css({ 'background': 'rgb(255,0,0)' });
+		$('#belowaverage').progressbar( {value: 34} );
+		$('#belowaverage').css({ 'background': 'white' , 'height' : '14px'});
+		$('#belowaverage > div').css({ 'background': 'rgb(255,148,40)' });
+		$('#average').progressbar( {value: 64} );
+		$('#average').css({ 'background': 'white' , 'height' : '14px'});
+		$('#average > div').css({ 'background': 'rgb(160,66,255)' });
+		$('#aboveaverage').progressbar( {value: 84} );
+		$('#aboveaverage').css({ 'background': 'white' , 'height' : '14px'});
+		$('#aboveaverage > div').css({ 'background': 'rgb(0,128,255)' });
+		$('#great').progressbar( {value: 100} );
+		$('#great').css({ 'background': 'white' , 'height' : '14px'});
+		$('#great > div').css({ 'background': 'rgb(158,255,62)' });
+	[/#if]
+	
+	
+	$('#description').hide();
+	$('#description_span').dblclick(
+		function(){
+			edit('description');
+		}
+	);
+	
+		
+		
+		
+	$('#reference').hide();
+	$('#reference_span').dblclick(
+		function(){
+			edit('reference');
+		}
+	);
+	
+	$('#shortdescription').hide();
+	$('#shortdescription_span').dblclick(
+		function(){
+			edit('shortdescription');
+		}
+	);
+	//tinyMCE.execCommand('mceAddControl', false, 'parameter_message');  
+	$('#parameter_message').val('');
+	
+	
+	$("#btnmoredesc").toggle(function(){$("#divmoredesc").fadeIn()},function(){$("#divmoredesc").fadeOut()});
+});
+
+
+function recalculaterating(){
+	$.ajax({
+			type: "post",
+			url: "f401k_recalculaterating.action?includeHeader=false",
+			data: "ID="+${plan.ID?string.computer},
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+}
+
+function clear_mce(){
+	$('.orieditor').each(function (){
+		save_for_mce(this);
+	});
+}
+
+function edit(id){
+	clear_mce();
+	editing=true;
+	$('#'+id).val($('#'+id+'_span').html());
+	$('#'+id).show();
+	$('#'+id+'_span').hide();
+	tinyMCE.execCommand('mceAddControl', false, id);  	
+}
+
+function planDiscussion(){
+	window.location.href="../jforum/posts/list/${topicID?string.computer}.page";
+    }
+ 
+function del(){
+	window.location.href='/LTISystem/jsp/strategy/Save.action?operation=predelete&ID=${plan.ID}';
+}
+
+$(function() {		
+	$("#moreinfo").toggle(
+		function(){
+			$('#divmoredesc').fadeIn();
+			$(this).val("Hide");
+		},
+		function(){
+			$('#divmoredesc').fadeOut();
+			$(this).val("More Detail Plan Info");
+		}
+	
+	);
+	
+	$('#fund').click(function(){
+		$("#dialog-confirm").dialog({
+			//autoOpen: false,
+			//resizable: true,
+			height:300,
+			width: 600,
+			modal: true,
+			buttons: {
+				Cancel: function() {
+					$(this).dialog('close');
+				},
+				'Continue Your Operation': function() {
+					location.href="f401k_fundtable.action?ID=${plan.ID}";
+				}
+				}
+		});
+		$("#dialog-confirm").dialog("open");
+	});
+});	
+
+
+
+
+
+</script>
+
+<style>
+.ui-button-text {
+	font-size: 12px;
+	padding: 0.4em 1em;
+}
+
+.button_edit {
+	background: url('/LTISystem/jsp/f401k/images/edit.jpg');
+	border: 0px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+}
+
+div#leftSub {
+	padding-left: 40px;
+}
+</style>
+<script src="/LTISystem/widgets/framework.action?thirdPartyID=12"></script>
+</head>
+<body>
+<div style="display:none"><div id="mpiq_id123"></div></div>
+	<table border=0 wdith=100% cellsapcing="5px" bgcolor="#ffffff"
+		style="margin-left: 1px;">
+		<tr>
+			<td style="width: 248px; float: left; background-color: #ffffff"
+				valign=top>
+
+				<style>
+.Apricot_yellow {
+	border-color: #3D843D;
+	border-style: solid;
+	border-width: 6px 1px 1px 0;
+	clear: both;
+	margin: 0 0 10px;
+	padding: 0;
+	width: 228px;
+	margin-left: 5px;
+	margin-top: 10px;
+}
+
+.keywords_shadow {
+	margin: 0;
+	padding: 0 8px 3px;
+}
+
+#inner_li {
+	padding-bottom: 3px;
+}
+
+#inner_li a {
+	text-decoration: none;
+	font-size: 10px;
+}
+
+.etf_extra {
+	color: #777777;
+	background: none repeat scroll 0 0 #EBFEED;
+}
+
+.mini_category {
+	clear: both;
+	margin-bottom: 25px;
+}
+
+.red_title_bk {
+	border-bottom: 2px solid #3D843D;
+	color: #000000;
+	float: left;
+	font-size: 1.6em;
+	font-weight: 500;
+	padding-top: 5px;
+	width: 230px;
+	margin-bottom: 10px;
+	padding-bottom: 2px;
+}
+
+.red_title_bk span {
+	font-size: 13px;
+	cursor: default;
+	font-weight: bold;
+}
+
+.etf_extra_content {
+	float: left;
+	padding: 10px 0 0;
+	width: 100%;
+}
+
+.etf_extra .other {
+	margin-top: 5px;
+}
+
+inner_li a:link {
+	text-decoration: none;
+}
+
+.etf_extra td a {
+	font-size: 12px;
+}
+
+#ctrlf {
+	font-size: 12px;
+	margin-top: 10px;
+}
+</style>
+
+				<div class="mini_category etf_extra"
+					style="width: 230px; margin-left: 5px;">
+					[#if plan.userID!=1 && isOwner]
+					<div style="display: none" id="wnd_usercontent">
+						<form id="form_usercontent">
+							<textarea id="userContent" name="userContent"
+								style="width: 580px; height: 300px">[#if plan.userContent??]${plan.userContent?html}[/#if]</textarea>
+						</form>
+						<br> <a href='javascript:void(0)'
+							onclick='updateusercontent();' class="uiButton">Update</a>
+					</div>
+					<script>
+					$(function(){
+						$("#wnd_usercontent").dialog({autoOpen:false,width:700,height:420,title:"Edit your plan content"});
+						tinyMCE.execCommand('mceAddControl', false, "userContent");
+					});
+					function editusercontent(){
+						$("#wnd_usercontent").dialog("open");
+					}
+					function updateusercontent(){
+						$("#userContent").val($(tinyMCE.getInstanceById("userContent").getBody()).html());
+						$.ajax({
+						   type: "post",
+						   url: "/LTISystem/f401k_updateusercontent.action?ID=${plan.ID?string.computer}&includeHeader=false",
+						   data:$("#form_usercontent").serialize(),
+						   success: function(msg){
+						     //alert(msg );
+						     
+						     window.location.reload();
+						   },
+						   error:function(){
+						   	alert("Sorry, please try it again later.");
+						   }
+						 });
+					}
+				</script>
+					[/#if] [#if plan.userID==1 || !plan.userContent?exists ||
+					plan.userContent=="" || plan.userContent=="
+					<p></p>
+					" || plan.userContent=="
+					<p>
+						<br mce_bogus=\"1\">
+					</p>
+					"] <span>[#if plan.userID!=1 && isOwner] <a
+						href='javascript:void(0)' onclick='editusercontent();'>Edit</a>[/#if]</span>
+
+
+					<div id="leftnav"></div>
+					<!---					<div class="red_title_bk">
+						<span>Useful Tips[#if plan.userID!=1 && isOwner] <a
+							href='javascript:void(0)' style="font-size: 0.5em;"
+							onclick='editusercontent();'>Edit</a>[/#if]</span>
+					</div>
+					<div
+						style="padding-left: 5px; padding-top: 15px; margin-right: 15px;">
+
+						<h3 style="font-size: 13px;margin-bottom: 5px;">Strategies</h3>
+						<ul class="list">
+							<li><b>SAA:</b> <a target=_blank
+								href='/LTISystem/jsp/strategy/View.action?ID=771'>Strategic
+									Asset Allocation</a></li>
+							<li><b>TAA:</b> <a target=_blank
+								href='/LTISystem/jsp/strategy/View.action?ID=1003'>Tactical
+									Asset Allocation</a></li>
+						</ul>
+						<h3 style="font-size: 12px; font-weight: bold;">Makeup of Pre-built Model Portfolios</h3>
+--->
+					<!--<ul class="list">
+						<li><strong>Growth:</strong> 80% Risk Assets, 20% Fixed Income</li>
+						<li><strong>Moderate:</strong> 60% Risk Assets, 40% Fixed Income</li>
+						<li><strong>Conservative:</strong> 40% Risk Assets, 60% Fixed Income</li>
+						</ul>
+						-->
+					<!---						<table border=0 style="font-size: 10px;">
+							<tr>
+								<td></td>
+								<td>Risk Assets</td>
+								<td style="padding-left: 10px;">Fixed Income</td>
+							</tr>
+							<tr>
+								<td><b>Growth</b></td>
+								<td align="center">80%</td>
+								<td align="center">20%</td>
+							</tr>
+							<tr>
+								<td><b>Moderate</b></td>
+								<td align="center">60%</td>
+								<td align="center">40%</td>
+							</tr>
+							<tr>
+								<td><b>Conservative</b></td>
+								<td align="center">40%</td>
+								<td align="center">60%</td>
+							</tr>
+						</table>
+
+						</p>
+						<br>
+						<p>Click on a portfolio link for more info.</p>
+						<p>
+							<strong>Risk Profile [@lti.questionmark "Click here for
+								more Risk Profile explanation" "help" /]:</strong> minimum percentage
+							allocated to fixed income.
+						</p>
+
+
+						<div id="leftnav"></div>
+					</div>
+-->
+					[#else] [#if plan.userID!=1 && isOwner] <a
+						href='javascript:void(0)' onclick='editusercontent();'>Edit</a>[/#if]
+					${plan.userContent} [/#if]
+
+				</div>
+
+
+				<div style="margin-top: 10px;">
+					<!-- top plans -->
+						[@left.TopPlans /]
+					[#if showArticles?? && showArticles?size> 0]
+					<div class="mini_category etf_extra"
+						style="width: 230px; margin-left: 5px;">
+						<div class="red_title_bk">
+							<span class="red_title_text">News & Reports</span>
+						</div>
+						<div>
+
+							[#list showArticles as article]
+							<div id="inner_li">
+								<a
+									href="/LTISystem/article_view.action?articleTitle=${article.articleTitle}"
+									target="_blank">${article.articleTitle}</a>
+							</div>
+							[/#list]
+
+
+						</div>
+
+					</div>
+					[/#if]
+					
+					
+					
+				</div>
+
+				<div>
+					<div class="Apricot_yellow">
+						<span style="float: none; background-color: #3D843D;"
+							class="keywords_shadow"><strong><font
+								color="#ffffff">Support and Announcements </font> </strong> </span>
+						<div
+							style="width: 220px; border-top: 1px solid rgb(153, 153, 153); margin-top: 10px; padding-top: 5px; padding-bottom: 5px;">
+							<div id="mp_support"
+								style="width: 200; overflow-x: auto; height: 180px; overflow-y: auto;">
+								<table style="border: 1px solid #ccc; width: 100%; height: 100%"
+									border=0>
+									<tr>
+										<td align="center" valign="middle"><img border=0
+											src="http://www.myplaniq.com/LTISystem/jsp/api/images/loading.gif">
+										</td>
+									</tr>
+								</table>
+							</div>
+							
+						</div>
+					</div>
+
+				</div>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_SmallSquare */
+google_ad_slot = "8527794289";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+				
+				<div>
+					<div class="Apricot_yellow">
+						<span style="float: none; background-color: #3D843D;"
+							class="keywords_shadow"><strong><font
+								color="#ffffff">MyPlanIQ News and Articles</font> </strong> </span>
+						<div
+							style="width: 220px; border-top: 1px solid rgb(153, 153, 153); margin-top: 10px; padding-top: 5px; padding-bottom: 5px;">
+							<div id="mp_articles"
+								style="width: 200; overflow-x: auto; height: 180px;; overflow-y: auto;">
+								<table style="border: 1px solid #ccc; width: 100%; height: 100%"
+									border=0>
+									<tr>
+										<td align="center" valign="middle"><img border=0
+											src="http://www.myplaniq.com/LTISystem/jsp/api/images/loading.gif">
+										</td>
+									</tr>
+								</table>
+							</div>
+							
+						</div>
+					</div>
+
+				</div>
+				</div> 
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_SmallSquare */
+google_ad_slot = "8527794289";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+				</div>
+			</td>
+
+			<td width="730" valign="top">
+
+				<form id="updateForm" action="f401k_save.action?includeHeader=false"
+					method='post'>
+					<input type="hidden" name="ID" value='${ID?string.computer}'>
+					<input type="hidden" name="description" id="description_hidden"
+						value=''> <input type="hidden" name="reference"
+						id="reference_hidden" value=''> <input type="hidden"
+						name="shortDescription" id="shortdescription_hidden" value=''>
+					<input type="hidden" name="name" id="name_hidden" value=''>
+
+					<input type="hidden" name="startingdate" id="startingdate_hidden"
+						value=''>
+					<table border=0 width='100%'>
+						<tr>
+							<td align="left" style="display: none;"><span
+								id='reference_span' style='width: 100%; height: 100%'>[#if
+									plan.reference?? &&
+									plan.reference?length!=0]${plan.reference}[#else]<img
+									border='0' src='images/401K__ValidF_23330.gif' />[/#if]</span> <textarea
+									class="orieditor"
+									style='display: none; width: 100%; height: 100%; align: left;'
+									id='reference'>[#if plan.reference?? && plan.reference?length!=0]${plan.reference?html}[#else]<img
+										border='0' src='images/401K__ValidF_23330.gif' />[/#if]</textarea>
+							</td>
+							<td style="display: none;">[#if isOwner?? && isOwner] <input
+								type='button' onclick='edit("reference")' class='button_edit'>
+								[/#if]</td>
+							<td align="center">[#if isOwner?? && isOwner] <textarea
+									id='name' value='${plan.name}' class='show_text'
+									style='font-size: 1.5em; margin: 10px'></textarea> [#else] <span
+								style='align: center; height: 100%; width: 100%; font-size: 1.5em; margin: 5px; line-height: 2.0em'>${plan.name}</span>
+								[/#if] [#if planScore?? && planScore.investmentScore!=0 ]
+								<h3>
+									Investment Menu Rating: [#if ranksize!=0][#list 1..ranksize as
+									i]<img border=0 src="/LTISystem/jsp/images/star.jpg">[/#list][/#if][#if
+									ranksize!=5][#list ranksize..4 as i][/#list][/#if] <input
+										type='button' id='btn_show_detailed_ranking' class="uiButton"
+										onclick='javascript:showdetailedrank()'
+										style='width: 100px; font-size: 0.6em; text-align: left; margin-left: 10px'
+										value='+ Detailed Rating'>
+								</h3>
+								<div class="sidebar_box_noPadding roundHeadingBlue"
+									id='show_detailed_ranking_div'
+									style='display: none; text-align: left'>
+									<div class="sidebar_box_heading_white">
+										This Plan's investment choice is rated as <font size='4'>[@lti.rankingmessage
+											planScore.investmentScore ""/]</font>. Its Overall score is
+										${(planScore.investmentScore*100 +0.5)?int} out of 100
+									</div>
+									<br> [#if admin || isOwner] <input type='button'
+										class="uiButton" value='Recalculate Rating Scores'
+										onclick='recalculaterating()'> [@lti.questionmark
+									"Notice: The \'ReCalculate\' button here will only generate a
+									rough estimation. The precise rating scores will be shown in
+									the next work day." ""/] <br> [/#if]
+									<div id=leftSub>
+										<table width='70%' style='' cellspacing='1' border=0
+											bgcolor='#DDDDDD'>
+											<tr bgcolor='#ffffff'>
+												<td width="35%" align="left">[@lti.questionmark
+													"Diversification measures the plan's coverage of asset
+													classes and the size of the candidate fund pool" ""/]<font
+													size="3"><Strong>Diversification</Strong> </font>
+												</td>
+												<td width="40%" align="center"><div
+														id="diversification"></div>
+												</td>
+												<td width="10%" align="center"><font size="3"><strong>(${planScore.coverageScore?string.percent})</strong>
+												</font>
+												</td>
+												<td width="15%" align="center"><font size="3"><strong>[@lti.rankingmessage
+															planScore.coverageScore ""/]</strong> </font>
+												</td>
+											</tr>
+											<tr bgcolor='#ffffff'>
+												<td width="35%" align="left">[@lti.questionmark "Fund
+													Quality measures the historical performance and the risk
+													charactor of the candidate funds in the plan" ""/]<font
+													size="3"><Strong>Fund Quality</Strong> </font>
+												</td>
+												<td width="40%" align="center"><div id="fundquality"></div>
+												</td>
+												<td width="10%" align="center"><font size="3"><strong>(${planScore.fundQualityScore?string.percent})</strong>
+												</font>
+												</td>
+												<td width="15%" align="center"><font size="3"><strong>[@lti.rankingmessage
+															planScore.fundQualityScore ""/]</strong> </font>
+												</td>
+											</tr>
+											<tr bgcolor='#ffffff'>
+												<td width="35%" align="left">[@lti.questionmark
+													"Portfolio Building measures the plan's ability to achieve
+													ideal risk adjusted return using MyPlanIQ's investment
+													strategies" ""/]<font size="3"><Strong>Portfolio
+															Building</Strong> </font>
+												</td>
+												<td width="40%" align="center"><div
+														id="portfoliobuilding"></div>
+												</td>
+												<td width="10%" align="center"><font size="3"><strong>(${planScore.capabilityScore?string.percent})</strong>
+												</font>
+												</td>
+												<td width="15%" align="center"><font size="3"><strong>[@lti.rankingmessage
+															planScore.capabilityScore ""/]</strong> </font>
+												</td>
+											</tr>
+											<tr bgcolor='#ffffff'>
+												<td width="35%" align="left">[@lti.questionmark
+													"Overall Score comprehends the plan's Diversification, Fund
+													Quarlity, Portfolio Building Ability" ""/]<font size="3"><Strong>Overall
+															Score</Strong> </font>
+												</td>
+												<td width="40%" align="center"><div
+														id="overallinvestment"></div>
+												</td>
+												<td width="10%" align="center"><font size="3"><strong>(${planScore.investmentScore?string.percent})</strong>
+												</font>
+												</td>
+												<td width="15%" align="center"><font size="3"><strong>[@lti.rankingmessage
+															planScore.investmentScore ""/]</strong> </font>
+												</td>
+											</tr>
+										</table>
+										<br>
+										<hr width="70%" align="center" />
+										<table align="center" width="70%" border="0" cellpadding="0"
+											cellspacing="1">
+											<tr>
+												<td width="5%"><div id="great"></div>
+												</td>
+												<td width="15%" align="left"><font color="#2A5333">great</font>
+												</td>
+												<td width="5%"><div id="aboveaverage"></div>
+												</td>
+												<td width="15%" align="left"><font color="#2A5333">above
+														average</font>
+												</td>
+												<td width="5%"><div id="average"></div>
+												</td>
+												<td width="15%" align="left"><font color="#2A5333">average</font>
+												</td>
+												<td width="5%"><div id="belowaverage"></div>
+												</td>
+												<td width="15%" align="left"><font color="#2A5333">below
+														average</font>
+												</td>
+												<td width="5%"><div id="poor"></div>
+												</td>
+												<td width="15%" align="left"><font color="#2A5333">poor</font>
+												</td>
+											</tr>
+										</table>
+									</div>
+									[#else] <Strong>This Plan is unrated.</Strong> [/#if]
+							</td>
+						</tr>
+					</table>
+				</form>
+
+
+
+				<div class="page">
+					<ul class="tabe">
+						<li id="tab_to_1" class="no"><a href="#"
+							onclick="tab('tab',4,1)">Overview</a>
+						</li>
+						<li id="tab_to_2"><a href="#" onclick="tab('tab',4,2)">Description</a>
+						</li>
+						<li id="tab_to_3"><a href="#" onclick="tab('tab',4,3)">Investment
+								Options</a></li>
+					</ul>
+
+
+
+					<div class="tab_mo">
+
+
+						<div id="tab_mo_1">
+
+
+							[#if haveFundtable?? && haveFundtable==false]
+
+							<style>
+#havenotfund li {
+	list-style: disc inside none;
+	margin-left: 20px;
+}
+</style>
+							<script>
+							$('#name').val('${plan.name}');
+							$('#name').click(function(){
+								$('#name').attr({'style':'width:100%;font-size:2.5em;margin:5px;border:1px solid #369;'});
+							});
+							$('#name').blur(function(){
+								$('#name').attr({'style':'width:100%;font-size:2.5em;margin:5px;'});
+							});
+							
+							
+						</script>
+							<div id="havenotfund"
+								style="margin-bottom: 50px; margin-top: 10px;">
+
+								<p align="left" style="margin-bottom: 1px;">
+									This plan's investment options have not been imported into
+									MyPlanIQ. If you have dependable information on it, please <a
+										href="mailto:support@myplaniq.com?subject=My%20company%20plan%27s%20investment%20options"><strong>email
+											us the plan's investment options</strong> </a> to help complete this plan.
+									We appreciate your contribution. The information could be:
+								</p>
+								<ul style="margin-bottom: 20px;">
+									<li>Document(s) that have plan investment options (ticker
+										symbols preferred)</li>
+									<li>Screen shots of online rebalance choices</li>
+								</ul>
+								<p>
+									To find out what MyPlanIQ will provide based on the investment
+									options you sent, you could have a look at our simplest <a
+										href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,148">six
+										core ETFs plan</a> and our five-star <a
+										href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=724">Schwab
+										OneSource plan</a>.
+								</p>
+							</div>
+							<p>[#else]
+							<div id='logo_div' style='width: 100%'>
+								<p>
+									[#if plan.shortDescription?? &&
+									!plan.shortDescription?matches("")] ${plan.shortDescription} <br>
+									[/#if] [#if plan.similarIssues?? &&
+									!plan.similarIssues?matches("")] ${plan.similarIssues!""}
+									[#elseif plan.variablesFor401k??] This plan consists of
+									${plan.variablesFor401k?size} funds, some of them are: [#list
+									plan.variablesFor401k as var] ${var.symbol}[#if
+									var_index==5][#break][/#if][#if
+									var_index!=plan.variablesFor401k?size-1],[/#if] [/#list].
+									[/#if]
+								<p>
+									[#if plan.description!=""]${shortDescription} <a
+										style="color: #0042FF;" href="#" onclick="tab('tab',4,2)">...more...</a>[#else]<a
+										href="java">more...</a>[/#if]
+								<h2 style="line-height: 1.5em">Some Funds in this Plan</h2>
+								<table border="0" cellpadding="2" cellspacing="1">
+									<tr class='even'>
+										<td width="20%">Asset Class</td>
+										<td width="30%">Description(Ticker)</td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr noshade>
+										</td>
+									</tr>
+									[#if variables??] [#list variables as var] [#if var_index%2==0]
+									<tr class='odd'>[/#if] [#if var_index%2==1]
+									<tr class='even'>
+										[/#if]
+										<td>${var.assetClassName!""}</td>
+										<td>${var.description!""}(${var.symbol!""})</td>
+									</tr>
+									[#if var_index==2][#break][/#if] [/#list] [/#if]
+								</table>
+								<br> [#if rflag==true] [#if !admin && isOwner] <a
+									href='f401k_fundtable.action?ID=${plan.ID}'>Edit Candidate
+									Fund Table</a> [#else] [#if planIDAndName?keys?size==29] <a
+									href="javascript:void(0);" id="fund">...Complete Fund List
+									and Redemption Info</a> [#else] <a style="color: #0042FF;" href="#"
+									onclick="tab('tab',4,3)">...Complete Fund List and
+									Redemption Info</a> [/#if] [/#if] [#else] [#if
+								planIDAndName?keys?size==29] <a style="color: #0042FF;"
+									href="javascript:void(0);" id="fund">...Complete Fund List
+									and Redemption Info</a> [#else] <a style="color: #0042FF;" href="#"
+									onclick="tab('tab',4,3)">...Complete Fund List and
+									Redemption Info</a> [/#if] [/#if] <br>
+								<div id="FUNDTABLE" height="250px" style="display: none">
+
+									<div id="dialog-confirm"
+										title="Notice for Complete List of Funds" align='left'>
+										<p>
+											<span class="ui-icon ui-icon-alert"
+												style="float: left; margin: 0 7px 20px 0;"></span> <b>You
+												have the permission to open only <font style='color: red'>30</font>
+												complete fundtable lists. Once you open one, your operation
+												will be recorded by Our System.</b> [#assign
+											planNum=planIDAndName?keys?size] [#if planIDAndName?size!=0]
+											<b>The plans which you have opened their fundtables as
+												follows:</b> <br>
+										<table border="0" cellpadding="0" cellspacing="1">
+											[#list planIDAndName?keys as pin]
+											<tr>
+												<td align='left'><b>${pin_index+1}.</b>
+												</td>
+												<td></td>
+												<td align='left'><a
+													href='/LTISystem/f401k_view.action?ID=${pin}'>${planIDAndName[pin]}</a>
+												</td>
+											</tr>
+											[/#list]
+										</table>
+										[#else] <b>[@s.text name="You did not open any funtable
+											before!"][/@s.text]</b> [/#if] <b>You have <font
+											style='color: red'>${30-planNum}</font> chances to open a new
+											funtable.</b>
+										</p>
+									</div>
+								</div>
+
+
+							</div>
+
+							<p>
+
+
+								<script>
+		var show_detailed_ranking=false;
+		function showdetailedrank(){
+			if(show_detailed_ranking==false){
+				show_detailed_ranking=true;
+				$('#btn_show_detailed_ranking').val('- Detailed Rating');
+				$('#show_detailed_ranking_div').show();
+			}else{
+				show_detailed_ranking=false;
+				$('#btn_show_detailed_ranking').val('+ Detailed Rating');
+				$('#show_detailed_ranking_div').hide();
+			}
+		}
+	</script>
+							<div class="sidebar_box_content" style="line-height: 2.5em;">
+							</div>
+
+							[#assign startingdate="Start Date: 12/31/2000" /] [#if
+							plan.attributes?? && plan.attributes["startingdate"]?? ] [#assign
+							startingdate="Start Date: "+ plan.attributes["startingdate"] /]
+							[/#if] [#if admin || isOwner]
+
+							<h3>
+								Model Portfolios <img id="helpme" src="/LTISystem/jsp/images/help.jpg"></img>
+							</h3>
+							<input id='startingdate' value='${startingdate}'
+								class='show_text'
+								style='width: 94%; font-size: 1.0em; margin: 10px'>
+							[#else]
+							<h3>
+								Model Portfolios <img id="helpme" src="/LTISystem/jsp/images/help.jpg"></img>&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;${startingdate}
+							</h3>
+							[/#if]
+							<script>
+							$('#name').val('${plan.name}');
+							$('#name').click(function(){
+								$('#name').attr({'style':'width:100%;font-size:2.5em;margin:5px;border:1px solid #369;'});
+							});
+							$('#name').blur(function(){
+								$('#name').attr({'style':'width:100%;font-size:2.5em;margin:5px;'});
+							});
+							
+							$('#startingdate').val('${startingdate}');
+							$('#startingdate').click(function(){
+								$('#startingdate').attr({'style':'width:94%;font-size:1.0em;margin:5px;border:1px solid #369;'});
+							});
+							$('#startingdate').blur(function(){
+								$('#startingdate').attr({'style':'width:94%;font-size:1.0em;margin:5px;'});
+							});
+						</script>
+							<div
+								style="background: none repeat scroll 0 0 #EBFEED; margin-bottom: 20px; margin-top: 5px;">
+								[@s.action name="getstarted_getmodelportfolios" namespace="/"
+								executeResult=true] [@s.param
+								name="planID"]${plan.ID?string.computer}[/@s.param] [@s.param
+								name="includeHeader"]false[/@s.param] [@s.param
+								name="useFollow"]false[/@s.param] [@s.param
+								name="planpage"]true[/@s.param] [/@s.action] <br>
+								[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+								<!-- <form action='f401k_createplan.action?ID=${ID?string.computer}' name='vf_createplan' method='post'>
+	     <input class="uiButton" value='Create Your Own Plan' type='submit'/>
+		 </form>end of form -->
+								[/@authz.authorize] <br> [@authz.authorize
+								ifAnyGranted="ROLE_SUPERVISOR"] [@s.action
+								name="planportfolio_list" namespace="/" executeResult=true]
+								[@s.param name="planID"]${plan.ID?string.computer}[/@s.param]
+								[@s.param name="includeHeader"]false[/@s.param] [/@s.action] <br>
+								[/@authz.authorize]
+							</div>
+							[/#if]
+							<div class="sidebar_box_noPadding roundHeadingBlue">
+								<div class="sidebar_box_heading_white">Plan Discussions</div>
+								<div class="sidebar_box_content">
+									<div id="comments" style="width: 100%"></div>
+									<script>
+					$(document).ready(
+						function(){
+						$("#comments").load("/jforum/posts/comments/${plan.ID?string.computer}-${plan.name?url}.page");
+						});
+					</script>
+								</div>
+							</div>
+							<!--<div class="sidebar_box_noPadding roundHeadingBlue">
+								<div class="sidebar_box_heading_white">Regular Report</div>
+								<div class="sidebar_box_content">
+									<div id="dialog-confirm" align='right'>
+										[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"] <strong><a
+											href="/LTISystem/article_articleList.action?ID=${ID}"
+											target="_blank"> All Articles</a> </strong> [/@authz.authorize]
+									</div>
+									[#if showArticles?? && showArticles?size> 0] [#list
+									showArticles as article] <a
+										href="/LTISystem/article_view.action?articleTitle=${article.articleTitle}"
+										target="_blank">${article.articleTitle}</a> <br> [/#list]
+									[/#if]
+								</div>
+							</div>-->
+							<div style="width: 100%" align="center">
+								<br> [#if isOwner?? && isOwner] <input class="uiButton"
+									type='button' value='Save' onclick='save()'> <input
+									class="uiButton" type="button" onclick="del()" value='Delete' />
+								[/#if] [#if admin] <input class="uiButton" type='button'
+									value='Save As' onclick='saveAs()'> [/#if] <br>
+									[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+									<a href="/LTISystem/jsp/admin/email/ViewPlanMail.action?planID=${ID?string.computer}" target="_blank">Send Mail</a>
+									
+									[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+									<input class="uiButton" type='button'
+									value='Modify' onclick='modify()'>
+									[/@authz.authorize]
+									[/@authz.authorize]
+							</div>
+
+						</div>
+
+
+						<div id="tab_mo_2" style="display: none">
+							<style>
+tr.header,tr.form-5500-total {
+	background: none repeat scroll 0 0 #224C27;
+	color: #FFFFFF;
+	font-weight: bold;
+	height: 25px;
+}
+
+tr.header td {
+	padding-left: 5px;
+}
+
+table.table-form-5500-info,.table-form-5500-info table {
+	border-collapse: collapse;
+	font-size: 11px;
+}
+
+td.form-5500-label,.form-5500-label {
+	font-weight: bold;
+	text-align: left;
+}
+
+table.table-form-5500-info,table.table-form-5500-section {
+	width: 100%;
+}
+
+.narrow-width-container {
+	padding: 0 12%;
+	width: 75%;
+}
+
+td.form-5500-left-column {
+	padding-right: 5px;
+	width: 50%;
+}
+
+td.half-width {
+	width: 50%;
+}
+
+td.long-width {
+	width: 75%;
+}
+
+#tableleft,#tableright {
+	float: left;
+	width: 50%;
+}
+
+#clear {
+	clear: both;
+}
+</style>
+							[#if showData5500??]
+
+							<div id="tablediv" style="font-size: 11px;">
+								<div id="tableleft">
+									<table class="table-form-5500-section">
+										<tbody>
+											<tr class="header">
+												<td colspan="2">Plan Sponsor Information</td>
+											</tr>
+											<tr>
+												<td class="form-5500-label">Sponsor Name</td>
+												<td>${showData5500.SPONSOR_DFE_NAME}</td>
+											</tr>
+											<tr>
+												<td class="form-5500-label half-width">Address</td>
+												<td>${showData5500.SPONS_DFE_LOC_US_ADDRESS1} [#if
+													showData5500.SPONS_DFE_LOC_US_ADDRESS2??]
+													${showData5500.SPONS_DFE_LOC_US_ADDRESS2}<br> [/#if]
+													[#if
+													showData5500.SPONS_DFE_LOC_US_CITY??&&showData5500.SPONS_DFE_LOC_US_CITY!=""]
+													${showData5500.SPONS_DFE_LOC_US_CITY},&nbsp; [/#if]
+													${showData5500.SPONS_DFE_LOC_US_STATE}&nbsp;${showData5500.SPONS_DFE_LOC_US_ZIP}
+												</td>
+											</tr>
+
+											<tr>
+												<td class="form-5500-label">Telephone</td>
+												<td>${showData5500.SPONS_DFE_PHONE_NUM}</td>
+											</tr>
+
+
+											<tr>
+												<td class="form-5500-label">EIN</td>
+												<td>${showData5500.SPONS_DFE_EIN}</td>
+											</tr>
+
+
+											<tr>
+												<td class="form-5500-label">Named Administrator</td>
+												<td>${showData5500.SPONS_SIGNED_NAME}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div id="tableright">
+									<table class="table-form-5500-section">
+										<tbody>
+											<tr class="header">
+												<td colspan="2">Plan Administrator</td>
+											</tr>
+											<tr>
+												<td class="form-5500-label half-width">Administrator
+													Name</td>
+												<td>${showData5500.ADMIN_NAME}</td>
+											</tr>
+
+											<tr>
+												<td class="form-5500-label">Address</td>
+												<td>${showData5500.ADMIN_US_ADDRESS1} [#if
+													showData5500.ADMIN_US_ADDRESS2??]
+													${showData5500.ADMIN_US_ADDRESS2}<br> [/#if] [#if
+													showData5500.ADMIN_US_CITY??&&showData5500.ADMIN_US_CITY!=""]
+													${showData5500.ADMIN_US_CITY},&nbsp; [/#if]
+													${showData5500.ADMIN_US_STATE}&nbsp;${showData5500.ADMIN_US_ZIP}
+												</td>
+											</tr>
+
+
+											<tr>
+												<td class="form-5500-label">Telephone</td>
+												<td>${showData5500.ADMIN_PHONE_NUM}</td>
+											</tr>
+
+
+											<tr>
+												<td class="form-5500-label">EIN</td>
+												<td>${showData5500.ADMIN_EIN}</td>
+											</tr>
+
+
+											<tr>
+												<td class="form-5500-label">Named Administrator</td>
+												<td>${showData5500.ADMIN_SIGNED_NAME}</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+							[/#if]
+							<div id="clear"></div>
+
+
+
+
+
+
+
+
+
+
+							<div id="mdescription" style="margin-top: 20px;">
+								<h2>
+									Description[#if plan.ticker??](Ticker:<a
+										href="jsp/fundcenter/View.action?symbol=${plan.ticker}"
+										target='_blank'>${plan.ticker}</a>)[/#if]
+								</h2>
+								<hr style="margin-top: 8px;">
+								<div id='desc_div' style='width: 100%;'>
+									<table border=0 width='100%'>
+										<tr>
+											<td><h3>
+													<span id='description_tag'></span>[#if isOwner?? &&
+													isOwner]
+													<button onclick='edit("description")' class='button_edit'>
+														<img src="/LTISystem/jsp/f401k/images/edit.jpg" alt="" />
+													</button>
+													[/#if]
+												</h3>
+											</td>
+										</tr>
+										<tr>
+											<td valign='top'><span id='description_span'
+												style='width: 100%; height: 100%;'>${plan.description!"-"}</span>
+												<textarea class="orieditor"
+													style='width: 100%; height: 100%' id='description'>[#if plan.description?? && plan.description?length!=0]${plan.description?html}[#else]${"--"}[/#if]
+												</textarea>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+
+
+							<div style="width: 100%" align="center">
+								<br> [#if isOwner?? && isOwner] <input class="uiButton"
+									type='button' value='Save' onclick='save()'> <input
+									class="uiButton" type="button" onclick="del()" value='Delete' />
+								[/#if] [#if admin] <input class="uiButton" type='button'
+									value='Save As' onclick='saveAs()'> [/#if] <br>
+							</div>
+						</div>
+						<style>
+#helpmewindow li {
+	margin: 10px;
+}
+
+#helpmewindow ul {
+	list-style: disc outside none;
+}
+.even{
+  background:none repeat scroll 0 0 #FFFFFF;
+}
+
+.odd{
+  background:none repeat scroll 0 0 #E5E5E5;
+}
+
+.assetTitle{
+  background:none repeat scroll 0 0 #FFEFD5;
+}
+</style>
+
+						<div id="helpmewindow" style="display: none;">
+							<ul>
+								<li><strong>Model portfolios:</strong> built from available
+									funds in this plan using strategic and tactical asset
+									allocation. Their risk is moderate (risk profile 40)</li>
+								<li><strong><u><a
+											href="/LTISystem/jsp/strategy/View.action?ID=771">Strategic
+												Asset Allocation</a>:</u> </strong> Buy and Hold and Periodically Rebalance
+									with Fund Selection</li>
+								<li><strong><u><a
+											href="/LTISystem/jsp/strategy/View.action?ID=1003">Tactical
+												Asset Allocation</a>:</u> </strong><u> </u>Dynamic Asset Mix</li>
+								<li><strong>Risk Profile[@lti.questionmark "Click
+										here for more Risk Profile explanation" "help" /]: </strong><strong>
+								</strong>fixed income target allocation percentage (ex. 40 means 40% in
+									fixed income at least).</li>
+								<li><strong>Customize:</strong> Input your own risk profile
+									and generate a new portfolio</li>
+								<li><strong>Follow:</strong> Simply follow the existing
+									model portfolios, receive monthly re-balance emails.</li>
+								<li><strong>Manage: </strong>Mirror model portfolio
+									holdings and manage your accounts yourself.</li>
+							</ul>
+
+						</div>
+
+						<div id="tab_mo_3" style="display: none">
+						
+					 [@s.action name="f401k_fundtable_old" namespace="/"
+							executeResult=true] [@s.param name="ID"]${plan.ID}[/@s.param]
+							[@s.param name="includeHeader"]false[/@s.param] [/@s.action]
+							 <a href="/LTISystem/f401k_fundtable.action?ID=${plan.ID}"
+											class="uiButton">Edit</a>
+										<a class="uiButton" onclick="modifyPlan(${plan.ID})"
+											rel="widget_content">Modify</a>
+						
+									</div>
+					</div>
+				</div></td>
+
+
+
+
+
+
+		</tr>
+
+	</table>
+
+	<div id="helpwindow" style="display: none;">
+		<p>All assets are classified to two classes: risky assets and
+			fixed income (stable) assets.</p>
+		<p>Risky assets include the following assets:
+		<ul>
+			<li><strong>Equities (stocks): </strong>US, international and
+				emerging market stocks,</li>
+			<li><strong>REITs: </strong>US and international Real Estate
+				Investment Trusts,</li>
+			<li><strong>Commodities: </strong>Industrial Metals, Gold, Oil,
+				Agricultural, .. etc.,</li>
+			<li><strong>High Yield (Junk) Bonds: </strong>Low grade
+				corporate bonds</li>
+		</ul>
+		<p>
+			<br>Fixed income assets include
+		</p>
+		<ul>
+			<li><strong>Government bonds: </strong>short, intermediate and
+				long term treasury bonds and GNMA,</li>
+			<li><strong>Investment Grade bonds: </strong>short, intermediate
+				and long term investment corporate bonds,</li>
+			<li><strong>International bonds: </strong>Sovereign and
+				corporate investment grade bonds,</li>
+			<li><strong>Cash: </strong>Money markets</li>
+		</ul>
+		</p>
+		<p>
+			<br>The Risk Profile number represents the target percentage
+			allocation of fixed income in your portfolio. For example, the
+			default risk profile number is 18. That means 18% should be allocated
+			to fixed income and 82% should be allocated to risky assets
+		</p>
+		<p>Your Risk Profile is determined based on your expected years to
+			retirement and risk tolerance. The risk tolerance could be one of the
+			following:
+		<ul>
+			<li><strong>Very Conservative</strong>
+			</li>
+			<li><strong>Conservative</strong>
+			</li>
+			<li><strong>Moderatge</strong>
+			</li>
+			<li><strong>Aggressive</strong>
+			</li>
+			<li><strong>Very Aggressive</strong>
+			</li>
+		</ul>
+		<p>
+			<br>The more aggressive you are, the more will be allocated to
+			risky assets. The longer you expect to retire, the more will be
+			allocated to risky assets too.
+		</p>
+		<p>Your risk profile number will be adjusted every year.</p>
+		<p>You could always overwrite the risk profile number when
+			customizing a model portfolio.</p>
+		<p>
+			The following chart illustrates the meaning of the risk profile
+			number: <br /> <br /> <img border=0
+				src='jsp/profile/images/barchart.png'> <br />
+		</p>
+		<p>
+			For more information on how to determine proper asset allocation,
+			consult your financial adviser or use popular retirement planning
+			tools provided by Fidelity, Vanguard or T.Rowe Price. Or you could
+			find out more asset allocation information on target date funds such
+			as <a target="_blank"
+				href="http://personal.fidelity.com/products/funds/content/DesignYourPortfolio/freedomfunds.shtml.cvsr">Fidelity
+				Freedom Target Date Funds</a>.
+		</p>
+
+		<br /> <br />
+		</p>
+	</div>
+	
+</body>
+</html>
+

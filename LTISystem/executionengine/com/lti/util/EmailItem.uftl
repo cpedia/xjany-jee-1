@@ -1,0 +1,182 @@
+[#ftl]
+
+[#assign urlprefix="www.myplaniq.com" /]
+[#if !isMPIQ]
+[#assign urlprefix="www.validfi.com" /]
+[/#if]
+
+
+[#if sendVirtualMail]
+<h3><a href='http://${urlprefix}/LTISystem/jsp/portfolio/Edit.action?ID=${portfolio.ID}'>${portfolio.name}</a></h3>
+This portfolio does not need to be rebalanced this month.<br><br>
+[#else]
+<h3><a href='http://${urlprefix}/LTISystem/jsp/portfolio/Edit.action?ID=${portfolio.ID}'>${portfolio.name}</a></h3>
+
+[#if scheduletransactions?? && scheduletransactions?size!=0]
+<b>Scheduled Transactions</b>
+<table bgcolor='#999999' border='0' cellpadding='0' cellspacing='1' width='100%'>
+	<tr style="color:#3A5FCD;background-color: #DDDDDD;" align="left">
+		<td>
+			Transaction
+		</td>
+		<td>
+			Scheduled Date
+		</td>
+		<td>
+			Fund in this portfolio
+		</td>
+		<td>
+			Original Fund Description
+		</td>
+		<td>
+			Percentage
+		</td>
+	</tr>
+	[#list scheduletransactions as sct]
+	<tr style="color:#3A5FCD;background-color: white;">
+		<td>
+			${sct.operation}
+		</td>
+		<td>
+			${sct.date?string("MM/dd/yyyy")}
+		</td>
+		<td>
+			<a href='http://${urlprefix}/LTISystem/jsp/fundcenter/View.action?symbol=${sct.symbol}&includeHeader=true'>${sct.symbol}</a>
+			[#if sct.description401k??](${sct.description401k})[/#if]
+		</td>
+		<td>
+			[#if sct.securityName??]${sct.securityName}[/#if]
+		</td>
+		<td>
+			[#if sct.percentage??][#assign tp=sct.percentage*100]${tp?string("0.00")}%[#else]-[/#if]
+		</td>
+	</tr>
+	[/#list]
+</table><br><br>[/#if]
+
+[#if scheduleholdingitems?? && scheduleholdingitems?size>0 && scheduletransactions?? && scheduletransactions?size!=0]
+<b>Expected Holdings of ${scheduletransactions[0].date?string("MM/dd/yyyy")}</b>
+<table bgcolor='#999999' border='0' cellpadding='0' cellspacing='1' width='100%'>
+	<thead>
+		<tr style="color:#3A5FCD;background-color: #DDDDDD;" align="left">
+			<td>
+				Asset
+			</td>
+			<td>
+				Fund in this portfolio
+			</td>	
+			<td>
+				Original Fund Description
+			</td>
+			<td>
+				Percentage
+			</td>
+		</tr>			
+	</thead>
+	[#list scheduleholdingitems as security]
+	<tr style="color:#3A5FCD;background-color: white;">
+		<td>
+			${security.assetName!"-"}
+		</td>
+		<td>
+			<a href='http://${urlprefix}/LTISystem/jsp/fundcenter/View.action?symbol=${security.symbol}&includeHeader=true'>${security.symbol}</a>
+			[#if security.fundDescription??](${security.fundDescription})[/#if]				
+		</td>			
+		<td>
+			[#if security.description??]${security.description}[/#if]
+		</td>
+		<td>
+			[#if security.percentage??]${(security.percentage*100)?string("0.00")}%[/#if]
+		</td>
+	</tr>
+	[/#list]
+</table><br><br>[/#if]
+
+[#if transactions?? && transactions?size!=0]
+<b>Completed Transactions</b>
+<table bgcolor='#999999' border='0' cellpadding='0' cellspacing='1' width='100%'>
+	<tr style="color:#3A5FCD;background-color: #dddddd;" align="left">
+		<td>
+			Transaction
+		</td>
+		<td>
+			Date
+		</td>
+		<td>
+			Fund in this portfolio
+		</td>
+		<td>
+			Original Fund Description
+		</td>
+		<td>
+			Percentage
+		</td>
+	</tr>
+	[#list transactions as t]
+	<tr style="color:#3A5FCD;background-color: white;">
+		<td>
+			${t.operation}
+		</td>
+		<td>
+			${t.date?string("MM/dd/yyyy")}
+		</td>
+		<td>
+			<a href='http://${urlprefix}/LTISystem/jsp/fundcenter/View.action?symbol=${t.symbol}&includeHeader=true'>${t.symbol}</a>
+			[#if t.description401k??](${t.description401k})[/#if]
+		</td>
+		<td>
+			[#if t.securityName??]${t.securityName}[/#if]
+		</td>
+		<td>
+			[#if t.percentage??][#assign tp=t.percentage*100]${tp?string("0.00")}%[#else]-[/#if]
+		</td>
+	</tr>
+	[/#list]
+</table><br><br>[/#if]
+
+[#if holdingitems?? && holdingitems?size>0]
+[#if scheduletransactions?? && scheduletransactions?size!=0]
+<b>Holdings of ${holdingitems[0].date?string("MM/dd/yyyy")} Before Transactions</b>
+[#else]
+<b>Holdings of ${holdingitems[0].date?string("MM/dd/yyyy")} After Transactions</b>
+[/#if]
+<table bgcolor='#999999' border='0' cellpadding='0' cellspacing='1' width='100%'>
+	<thead>
+		<tr style="color:#3A5FCD;background-color: #DDDDDD;" align="left">
+			<td>
+				Asset
+			</td>
+			<td>
+				Fund in this portfolio
+			</td>	
+			<td>
+				Original Fund Description
+			</td>
+			<td>
+				Percentage
+			</td>
+		</tr>			
+	</thead>
+	[#list holdingitems as security]
+	<tr style="color:#3A5FCD;background-color: white;">
+		<td>
+			${security.assetName!"-"}
+		</td>
+		<td>
+			<a href='http://${urlprefix}/LTISystem/jsp/fundcenter/View.action?symbol=${security.symbol}&includeHeader=true'>${security.symbol}</a>
+			[#if security.fundDescription??](${security.fundDescription})[/#if]				
+		</td>			
+		<td>
+			[#if security.description??]${security.description}[/#if]
+		</td>
+		<td>
+			[#if security.percentage??]${(security.percentage*100)?string("0.00")}%[/#if]
+		</td>
+	</tr>
+	[/#list]
+</table><br><br>
+
+
+
+[/#if]
+[/#if]

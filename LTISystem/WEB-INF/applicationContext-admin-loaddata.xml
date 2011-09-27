@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/admin/loaddata/Main" class="com.lti.action.admin.loaddata.MainAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/ExportEcnomicData" class="com.lti.action.admin.loaddata.ExportEcnomicDataAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/ExportSecurityData" class="com.lti.action.admin.loaddata.ExportSecurityDataAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/ExportPortfolioData" class="com.lti.action.admin.loaddata.ExportPortfolioDataAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/UpdatePortfolioData" class="com.lti.action.admin.loaddata.UpdatePortfolioDataAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/ImportEcnomicData" class="com.lti.action.admin.loaddata.ImportEcnomicDataAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/ImportEcnomicDatas" class="com.lti.action.admin.loaddata.ImportEcnomicDatasAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/ImportSecurityData" class="com.lti.action.admin.loaddata.ImportSecurityDataAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/UpdateAdjustClose" class="com.lti.action.admin.loaddata.UpdateAdjustCloseAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/LoadSecurityData" class="com.lti.action.admin.loaddata.LoadSecurityDataAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/UpdateSecurityDailyData" class="com.lti.action.admin.loaddata.UpdateSecurityDailyDataAction"	singleton="false"/>
+	<bean name="/jsp/admin/loaddata/DownloadLog" class="com.lti.action.admin.loaddata.DownloadLogAction"	singleton="true"/>	
+	<bean name="/jsp/admin/loaddata/StopUpdateDailyData" class="com.lti.action.admin.loaddata.StopUpdateDailyDataAction"	singleton="false"/>
+</beans>

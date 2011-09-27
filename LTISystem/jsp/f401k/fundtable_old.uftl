@@ -1,0 +1,177 @@
+[#ftl] [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]] [#import
+"/jsp/lti_library_ftl.jsp" as lti] [#assign
+authz=JspTaglibs["/WEB-INF/authz.tld"]]
+
+
+	<div style="width: 100%" id="allDiv">
+
+		<div style="margin: 10px">
+			<h1 align="center">
+				<a href="/LTISystem/f401k_view.action?ID=${ID}"
+					style="text-decoration: none">${plan.name}</a> [#if
+				public](public)[#else](private)[/#if]
+			</h1>
+			<h3 align="center">Available Investment Funds or SMAs</h3>
+
+			<br />
+			<strong>R*:</strong> Redemption (Minimum months to hold). <strong>M*:
+			</strong>Mark (p: proxy, n: not used). <br>
+			<strong>RT: </strong>Round Trip (number of times allowed to buy/sell
+			in trailing 12 months). <strong>WP: </strong>Waiting Period (minimum
+			months to wait before buy again).
+			<form id="updateForm"
+				action="f401k_updatevariablesfor401k.action?includeHeader=false"
+				method='post'>
+							<table id='t1' cellspacing=10px>
+								<thead>
+									
+									<tr>
+										<th style="align: left"><b>Asset Class</b></th>
+										<th style="align: left"><b>Ticker</b>
+										<th style="align: left"><b>Name</b></th>
+										<th style="align: left"><b>Description</b></th>
+										<th style="align: left"><b>Rating</b></th>
+									</tr>
+								</thead>
+								<tbody>
+						 [#if fundtableMap??] 
+						            
+						        [#list fundtableMap?keys as key]
+								     [#if admin || isOwner]
+									            <tr class="assetTitle">
+													<td colspan="5">${key}</td>
+												</tr>
+												[#list fundtableMap[key] as var] 
+												[#if var_index%2==0]
+													<tr class='odd'>
+												[/#if] 
+												[#if var_index%2==1]
+													<tr class='even'>
+						 					 	[/#if]
+													<td>${var.assetClassName!""}</td>
+													<td>${var.symbol!""}</td>
+													<td>${var.name!""}</td>
+													<td>${var.description!""}</td>
+													<td>[#if var.quality ?? ]${var.quality?string.percent}[/#if]</td>
+												</tr>
+												
+								[/#list]
+								
+						[#else] [#if var_index%2==0]
+						<tr class='odd' id='parameter${var_index}'>[/#if] [#if
+							var_index%2==1]
+						<tr class='even' id='parameter${var_index}'>
+							[/#if]
+							<td>${var.assetClassName!""}</td>
+							<td>${var.symbol!""}</td>
+							<td>${var.name!""}</td>
+							<td>${var.description!""}</td>
+						</tr>
+						[/#if] [/#list] [/#if]
+						             
+						            </tbody>
+						         </table>
+						         
+					<table id='t2' style='display:none;' cellspacing=10px>
+								<thead>
+									
+									<tr>
+										<th style="align: left"><b>Asset Class</b></th>
+										<th style="align: left"><b>Ticker</b>
+										<th style="align: left"><b>Name</b></th>
+										<th style="align: left">[#if admin || isOwner]<input
+											type='button' class="uiButton" value='R*'
+											onclick='p_resetredemption()'>[#else]<b>R*</b>[/#if]</th>
+										<th style="align: left"><b>Description</b></th>
+										<th style="align: left"><b>M*</b></th>
+										<th style="align: left">[#if admin || isOwner]<input
+											type='button' class="uiButton" value='RT'
+											onclick='p_resetroundtriplimit()'>[#else]<b>RT</b>[/#if]
+										</th>
+										<th style="align: left">[#if admin || isOwner]<input
+											type='button' class="uiButton" value='WP'
+											onclick='p_resetwaitingperiod()'>[#else]<b>WP</b>[/#if]
+										</th> [#if admin || isOwner]
+										<th style="align: left"><b>Start Date</b></th> [/#if] [#if
+										admin || isOwner]
+										<th style="align: left"><b>End Date</b></th> [/#if]
+										<th style="align: left">[#if admin || isOwner] <input
+											type='button' value='' onclick='newParameter()'
+											class='button_new'> [/#if]</th> [#if admin]
+										<th style="align: left">[#if admin] <input
+											type='button' value='' onclick='newParameter()'
+											class='button_new'> [/#if]</th> [/#if]
+									</tr>
+								</thead>
+								<tbody>
+						 [#if fundtableMap??] 
+						            
+						        [#list fundtableMap?keys as key]
+								     [#if admin || isOwner]
+									            <tr class="assetTitle">
+													<td colspan="11">${key}</td>
+												</tr>
+												[#list fundtableMap[key] as var] 
+												[#if var_index%2==0]
+													<tr class='odd'>
+												[/#if] 
+												[#if var_index%2==1]
+													<tr class='even'>
+						 					 	[/#if]
+													<td>${var.assetClassName!""}</td>
+													<td>${var.symbol!""}</td>
+													<td>${var.name!""}</td>
+													<td>${var.redemption!""}</td>
+													<td>${var.description!""}</td>
+													<td>${var.memo!""}</td>
+													<td>${var.roundtripLimit!""}</td>
+													<td>${var.waitingPeriod!""}</td>
+													<td>${var.startDate!""}</td>
+													<td>${var.endDate!""}</td>
+													<td><input type='button' value='delete'
+														onclick='deleteParameter(${var_index})' class='button_remove'>
+													</td> [#if admin]
+													<td><input type='button' value='search'
+														onclick='secondSearch(${var_index})' class='button_remove'>
+													</td> [/#if]
+												</tr>
+												
+								[/#list]
+								
+						[#else] [#if var_index%2==0]
+						<tr class='odd' id='parameter${var_index}'>[/#if] [#if
+							var_index%2==1]
+						<tr class='even' id='parameter${var_index}'>
+							[/#if]
+							<td>${var.assetClassName!""}</td>
+							<td>${var.symbol!""}</td>
+							<td>${var.name!""}</td>
+							<td>${var.redemption!""}</td>
+							<td>${var.description!""}</td>
+							<td>${var.memo!""}</td>
+							<td>${var.roundtripLimit!""}</td>
+							<td>${var.waitingPeriod!""}</td>
+							<td></td>
+						</tr>
+						[/#if] [/#list] [/#if]
+						             
+						            </tbody>
+						         </table>	         
+			</form>
+			<button onclick='showMore()'>More Info</button>
+		</div>
+		</div>
+<script>
+	var isMore = false;
+	function showMore(){
+		if(!isMore){
+			$("#t1").fadeOut("slow");
+			$("#t2").fadeIn("slow");
+			isMore = true;
+		}else{
+			$("#t1").fadeIn("slow");
+			$("#t2").fadeOut("slow");
+			isMore = false;
+		}
+	}
+</script>

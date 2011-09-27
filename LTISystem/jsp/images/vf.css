@@ -1,0 +1,667 @@
+/* top elements */
+* { padding: 0; margin: 0; }
+
+body {
+	margin: 0;
+	padding: 0;
+	font: 0.8em/1.5em Verdana, Tahoma, Helvetica, sans-serif;
+	color: #666666; 
+	background: #B9D3EE repeat-x; 
+        background: #E9D3EE repeat-x;
+        background: #8EC1DA repeat-x;
+        background: #8A8F91 repeat-x;
+	text-align: center;
+	width:100%;
+        height:100%;
+}
+
+/* links */
+a { 
+    color: #2B60DE;
+	background-color: inherit;
+	text-decoration: none;
+}
+a:hover {
+	color: #9EC068;
+	background-color: inherit;
+    text-decoration: underline;
+}
+
+/* headers */
+
+h1, h2, h3 {
+    font: bold 1em Arial, Helvetica, sans-serif; 
+	color: #333;	
+}
+
+h1 { font: bold; font-size: 1.7em; color: #461B7E;}
+h2 { font-size: 1.4em; text-transform:uppercase;}
+h3 { font-size: 1.1em; }
+
+
+p, h1, h2, h3 {
+	margin: 10px 15px;
+}
+#vf_header h2{
+	font-size:15px;
+}
+#vf_submenu a{
+	font-size:12px;
+}
+
+.vf_blockleft p, h1, h2, h3{
+	margin:10px 11px;
+}
+ul, ol {
+	margin: 10px 30px;
+	padding: 0 15px;
+    color: #000000;
+}
+ul span, ol span {
+        color: #461B7E;
+}
+
+li span {
+        color: #000000;
+}
+
+li a span{
+       color:#2B60DE;
+}
+
+/* images */
+
+img.no-border {
+	border: none;
+}
+img.float-right {
+    margin: 5px 0px 5px 15px;  
+}
+img.float-left {
+	margin: 5px 15px 5px 0px;
+}
+
+a:hover img {  
+	 /* border: 2px solid #CCC !important;  IE fix*/
+	  border: 0px solid #568EB6;
+}
+
+code {
+	  margin: 5px 0;
+	  padding: 10px;
+	  text-align: left;
+	  display: block;
+	  overflow: auto;  
+	  font: 500 1em/1.5em 'Lucida Console', 'courier new', monospace;
+	  /* white-space: pre; */
+	  background: #FAFAFA;
+	  border: 1px solid #f2f2f2;  
+	  border-left: 4px solid #4284B0; 
+}
+acronym {
+  cursor: help;
+  border-bottom: 1px solid #777;
+}
+blockquote {
+	margin: 15px;
+ 	padding: 0 0 0 20px;  	
+  	background: #FAFAFA;
+	border: 1px solid #f2f2f2; 
+	border-left: 4px solid #4284B0;   
+	color: #4284B0;
+	font: bold 1.2em/1.5em Georgia, 'Bookman Old Style', Serif; 
+}
+
+/***********************
+	  LAYOUT
+************************/
+
+#vf_topmenu a {
+        color: #fff;
+        font-weight: bold;
+        background:inherit;
+        text-decoration: none;
+}
+
+#vf_topmenu a span {
+       color: #fff;
+       font-weight: bold;
+       font: bold 12px  Arial, 'Trebuchet MS', Tahoma, verdana,  sans-serif;
+       background:inherit;
+       text-decoration: none;
+       padding-top: 5px;
+       padding-right: 15px;
+       margin-left:10px;
+}
+
+#vf_topmenu a:hover span{
+        text-decoration: underline;
+}
+
+#vf_topmenu {
+        background: url(topmenu.png) repeat-x scroll 0% 100%;
+        z-index: 888;
+        top:0;
+        float: left;
+        width: 100%;
+        font-size: 11px;
+        height: 30px;
+      }
+
+
+#vf_search {
+        float: right;
+        margin-top: 1px;
+        margin-right: 12px;
+        margin-left: 5px;
+        
+}
+
+#vf_search-text {
+        float: left;
+        margin-right: 2px;
+}
+
+#vf_search-submit {
+        float: left;
+}
+#vf_quote{
+	margin:0px;
+}
+#vf_quote-submit{
+        float: left;
+}
+
+#vf_wrap {
+    width: 950px;
+    height: 100%;
+	margin: 0 auto;	
+	text-align: left;
+	background-color:#FFFFFF;
+}
+
+#vf_content-wrap {
+	clear: both;
+	margin: 0 auto; 
+	padding: 0;	
+	background:#FFFFFF;
+	height:auto !important;
+	height:600px; 
+	min-height:600px;
+    width:100%;
+
+}
+#vf_contentright{
+	width:79%;
+	/*float:left;
+	margin-left:2px;/*this is only used in 3 colums pages*/
+	padding-left:1px;
+	margin:0 auto;
+       
+}
+
+/* header */
+#vf_header {
+        top: 0;
+	position: relative;
+	height: 138px;	
+        background: #000 url(headerbg.jpg) repeat-x 0% 100%;
+}
+#vf_header h1#vf_logo {
+	position: absolute; 
+        top:100px;
+	margin: 0; padding: 0;
+	font: bolder 4.1em 'Trebuchet MS', Arial, Sans-serif;
+	letter-spacing: -2px;
+	text-transform: lowercase;
+	top: 0; left: 5px;	
+}
+#vf_header h2#vf_slogan {
+	position: absolute;	 
+	top:80px; left: 95px;
+	color: #666666;
+	text-indent: 0px;
+	font: bold 11px Tahoma, 'trebuchet MS', Sans-serif; 
+	text-transform: none;	
+}
+#vf_header form {
+    z-index: 888;
+    margin-bottom: 0px;
+	top: 0; right: -12px;	
+}
+#vf_logo{
+	float:left;
+	min-width:100px;
+	padding:0;
+	margin:0;
+	border:0;
+	vertical-align:bottom;
+	height:100%;
+}
+/* main */
+
+#vf_main{
+	float:left;
+	padding:0;
+	width:50%;
+	border: 1px solid #A9BAC3;
+	height:auto !important;
+	height:530px; 
+	min-height:530px;
+       
+       
+}
+
+.vf_post-footer {
+	background-color: #FAFAFA;
+	padding: 5px; margin: 20px 15px 0 15px;
+	border: 1px solid #f2f2f2;
+	font-size: 95%;	
+}
+.vf_post-footer .vf_date {
+	background: url(clock.gif) no-repeat left center;
+	padding-left: 20px; margin: 0 10px 0 5px;
+}
+.vf_post-footer .vf_comments {
+	background: url(comment.gif) no-repeat left center;
+	padding-left: 20px; margin: 0 10px 0 5px;
+}
+.vf_post-footer .vf_readmore {
+	background: url(page.gif) no-repeat left center;
+	padding-left: 20px; margin: 0 10px 0 5px;
+}
+
+/* sidebar */
+#vf_sidebar {
+	display:inline;
+	float:left;
+	padding:0;
+	width:20%;
+	border: 1px solid #A9BAC3;
+	height:auto !important;
+	height:530px; 
+	min-height:530px;
+	margin-left:2px;
+      
+}
+
+#vf_sidebar ul.vf_sidemenu {
+	list-style:none;
+	margin:10px 0 10px 15px;
+	padding:0;		
+}
+#vf_sidebar ul.vf_sidemenu li {
+	margin-bottom:1px;
+	border: 1px solid #f2f2f2;
+}
+#vf_sidebar ul.vf_sidemenu a {
+	display:block;
+	font-weight:bold;
+	color: #333;	
+	text-decoration:none;	
+	padding:2px 5px 2px 10px;
+	background: #f2f2f2;
+	border-left:4px solid #CCC;	
+	min-height:18px;
+}
+
+* html body #sidebar ul.sidemenu a { height: 18px; }
+
+#sidebar ul.vf_sidemenu a:hover {
+	padding:2px 5px 2px 10px;
+	background: #f2f2f2;
+	color: #339900;
+	border-left:4px solid #9EC630;
+}
+
+/* rightbar */
+#vf_rightbar{
+	float:right;
+	padding:0;
+	width:49%;
+	border: 1px solid #A9BAC3;
+	height:auto !important;
+	height:530px; 
+	min-height:530px;
+       
+}
+
+/* Footer */
+#vf_footer { 
+	clear: both; 
+	color: #FFF; 
+	background: #A9BAC3; 
+	border-top: 5px solid #568EB6;
+	margin: 0; padding: 0; 
+	height: 50px;	  
+	font-size: 95%;	
+	width:100%;	
+}
+#vf_footer a { 
+	text-decoration: none; 
+	font-weight: bold;	
+	color: #FFF;
+}
+#vf_footer .vf_footer-left{
+	float: left;
+	width: 65%;
+}
+#vf_footer .vf_footer-right{
+	float: right;
+	width: 30%;
+}
+
+/* header ul menu */
+#vf_header ul {
+	z-index: 999999;
+	position: absolute;
+    margin:0; padding: 0;
+    list-style:none;
+	right: 0; 
+	bottom: 2px !important; bottom: 5px;
+	font: bold 13px  Arial, 'Trebuchet MS', Tahoma, verdana,  sans-serif;	
+}
+#vf_header li {
+   display:inline;
+   margin:0; padding:0;
+}
+#vf_header li a {
+   float:left;
+   font-weight: bold;
+   background: url(tableft.gif) no-repeat left top;
+   margin:0;
+   padding:0 0 0 4px;
+   text-decoration:none;
+}
+#vf_header li a span {
+   float:left;
+   display:block;
+   font-weight: bold;
+   background: url(tabright.gif) repeat-x right top;
+   padding:7px 16px 3px 8px;
+   color: #FFF;
+}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#vf_header li a span {float:none;}
+/* End IE5-Mac hack */
+#vf_header a:hover span {
+	color:#FFF;
+    text-decoration: underline
+}
+
+#vf_header li a:hover {
+   background-position:0% -42px;
+}
+#vf_header li a:hover span {
+   background-position:100% -42px;
+   background: url(tabhover.gif) repeat-x right top;
+}
+#vf_header #vf_current a {
+    background-position:0% -42px;
+	color: #FFF;
+    color: #CFECEC;
+}
+#vf_header #vf_current a span {
+    background-position:100% -42px;
+    background: url(tabhover.gif) repeat-x right top;
+	color: #FFF;
+    color: #CFECEC;
+}
+/* end header ul menu*/
+
+
+#vf_lowmenu {
+  z-index: 999999;
+  margin:0; padding: 0;
+  list-style:none;
+  right: 0; 
+  bottom: 2px !important; bottom: 5px;
+  font: bold 13px  Arial, 'Trebuchet MS', Tahoma, verdana,  sans-serif;
+}
+ 
+#vf_lowmenu li {
+  display: inline;
+  margin:0; padding:0;
+}
+
+#vf_lowmenu li a {
+   float:left;
+   font-weight: bold;
+   background: url(tableft.gif) no-repeat left top;
+   margin:0;
+   padding:0 0 0 4px;
+   text-decoration:none;
+}
+#vf_lowmenu li a span {
+   float:left;
+   display:block;
+   font-weight: bold;
+   background: url(tabright.gif) repeat-x right top;
+   padding:7px 16px 3px 8px;
+   color: #FFF;
+}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#vf_lowmenu li a span {float:none;}
+/* End IE5-Mac hack */
+#vf_lowmenu a:hover span {
+	color:#FFF;
+    text-decoration: underline
+}
+
+#vf_lowmenu li a:hover {
+   background-position:0% -42px;
+}
+#vf_lowmenu li a:hover span {
+   background-position:100% -42px;
+   background: url(tabhover.gif) repeat-x right top;
+}
+#vf_lowmenu #vf_current a {
+   background-position:0% -42px;
+   color: #CFECEC;
+}
+#vf_lowmenu #vf_current a span {
+   background-position:100% -42px;
+   background: url(tabhover.gif) repeat-x right top;
+   color: #CFECEC;
+}
+ 
+#vf_lowmenu li ul {
+   display: none;
+}
+
+#vf_lowmenu li.vf_off ul, #vf_lowmenu li.vf_current ul { /*put the subnav below*/
+   position: absolute;
+   top: 33px;
+   *top: 44px; 
+   left: 5px; 
+   padding-top: 10px;
+   background: #d6e3b0;
+   height: 28px;
+   width: 640px;
+}
+ 
+#vf_lowmenu li.vf_current ul a, #vf_lowmenu li.vf_off ul a {
+	float: left; /*ie doesn't inherit the float*/
+	border: 0;
+	color: #7a8566;
+    width: auto;
+	margin-right: 15px;
+}
+ 
+#vf_lowmenu li.vf_current ul {
+	display: block;
+}
+ 
+#vf_lowmenu li.vf_off:hover ul {
+	display: block;
+	z-index: 6000;
+}
+ 
+#vf_lowmenu livf_.off a:hover, #vf_lowmenu li:hover a {
+	background: #d6e3b0;
+	color: #7a8566;
+}
+.vf_blockmain {
+        background: #fafafa;
+        border-left: 1px solid #f0e0e0;
+        border: 1px solid #f0e0e0;
+        height:auto !important;
+		height:450px; 
+		min-height:450px;
+}
+
+.vf_blockfund {
+        background: #fafafa;
+        border-left: 1px solid #f0e0e0;
+        border: 1px solid #f0e0e0;
+        height:auto !important;
+        line-height: 115%;
+}
+
+.feedburnerFeedBlock{
+	line-height:1.3em;
+	
+	
+}
+.feedburnerFeedBlock ul{
+	margin-left:5px;
+	margin-right:2px;
+}
+
+
+
+.vf_blockright {
+        background: #fafafa;
+        border-left: 1px solid #f0e0e0;
+        border: 1px solid #f0e0e0;
+        height:auto !important;
+	    height:450px; 
+	    min-height:450px;
+}
+.vf_blockleft {
+        background: #FAFAFA;
+        border-left: 1px solid #f0e0e0;
+        border: 1px solid #e0e0e0;
+        height:auto !important;
+		height:450px; 
+		min-height:450px;
+        
+}
+
+.vf_item { 
+	background: inherit;
+    border: 1px solid #e0e0f0;
+	font: 0.9em/1.5em Georgia, 'Bookman Old Style', Serif; 
+}
+
+/* start submenu */
+#vf_submenu {
+	position: relative;
+	height: 28px;	
+    background: #F9B7FF;
+    background: #CFECEC;
+}
+
+#vf_submenu ul {
+	z-index: 999999;
+	position: absolute;
+    margin:0; padding: 0;
+    list-style:none;
+    left:0;
+	//right: 0; 
+	bottom: 4px !important; bottom: 5px;
+	font: bold 13px  Arial, 'Trebuchet MS', Tahoma, verdana,  sans-serif;	
+}
+#vf_submenu li {
+   display:inline;
+   margin:0; padding:0;
+   padding: 0 0 8px 12px;
+}
+
+#vf_submenu a span {
+   color: #000000;
+}
+
+#vf_submenu a:hover span {
+	color:#0B3B39;
+    /*color:#348017;
+    color:#AF7817;
+    color:	#827839;
+    color:#7F462C;*/
+    text-decoration: underline
+}
+
+#vf_submenu #vf_current a {
+   background-position:0% -42px;
+   color: #000000;
+}
+#vf_submenu #vf_current a span {
+   background-position:100% -42px;
+   background: url(tabhover.gif) repeat-x right top;
+   color: #000000;
+}
+
+/* alignment classes */
+.float-left  { float: left; }
+.float-right {	float: right; }
+.align-left  {	text-align: left; }
+.align-right {	text-align: right; }
+
+/* additional classes */
+.clear { clear: both; padding:0;margin:0}
+.green {	color: #9EC630; }
+.gray  {	color: #BFBFBF; }
+
+
+
+
+
+/*new css module created by fangzhenju  2009/10/15*/
+html {
+	height:100%;
+	width:100%;
+}
+
+
+table, input, button, combox, select, textarea {
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:12px;
+	margin-left:0px;
+}
+
+iframe #news{
+	min-height:520px;
+	height:80%;
+}
+
+.fbbl_center iframe{
+        height:auto !important;
+	min-height:2100px;
+	height:2100px;
+}
+
+
+#creditfooter img{
+	display:none;
+}
+
+.feedTitle a{
+	font-size:1.7em;
+	color:#461B7E;
+	line-height:1.4em;
+}
+
+
+#mainForm{
+	padding-left:10px;
+    padding-right:10px;
+}
+/* additional classes */
+.clear { clear: both; padding:0;margin:0}
+.green {        color: #9EC630; }
+.gray  {        color: #BFBFBF; }
+.orange {       color: #CC3300; }
+
+
+.show_text {border:0px solid #fff;background:#fff;width:98%}  
+.edit_text {border:1px solid #369;background:#fff;;width:98%}  

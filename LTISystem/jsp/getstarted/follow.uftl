@@ -1,0 +1,285 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/portfolio/portfoliounits.ftl" as pu]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#if planType??]
+[#else]
+	[#assign planType=1 /]
+[/#if]
+<html>
+<head>
+<title>MyPlanIQ Get Started: Follow the Portfolio </title>
+<meta  name="Description" content="By default, users can get the delayed information on the portfolio's performance, transactions and holdings. The realtime information will be displayed once users click 'Follow this Portfolio'. Users can also receive email alerts of this portfolio.">
+
+<meta name="jqueryui" content="smoothness">
+<script src="/LTISystem/jsp/template/ed/js/initUI_elements.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/tablesorter/jquery.tablesorter.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/portfolio/images/jquery.timer.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/gpl/jprocess.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/LTISystem/jsp/template/gpl/vtip.css" />
+<script src="/LTISystem/jsp/template/gpl/vtip.js" type="text/javascript"></script>
+<style type="text/css">
+
+.btn {
+	font-family: Tahoma;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #000000;
+	background-image: url(images/grey-bg.gif);
+	border: 1px solid #999999;
+	cursor: pointer;
+	background-repeat: repeat;
+	padding: 2px;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-left: 2px;
+	width:160px;
+	height:30px;
+}
+</style>
+
+<script>
+	var endDate = '${portfolio.endDate?string("yyyy-MM-dd")}';
+	
+	function showMessage(html){
+		$("#leftnav").fadeOut('slow', function() {
+			$("#leftnav").html(html);
+			$("#leftnav").fadeIn();
+		});
+	}
+	
+	var show_more_holding = false;
+	function showmore() {
+		if(show_more_holding == false){
+			show_more_holding = true;
+			$('#show_holding_div').fadeIn();
+		}else{
+			show_more_holding = false;
+			$('#show_holding_div').fadeOut();
+		}
+	}
+	
+	var show_portfolio_chart = false;
+	function showadvancedinfo() {
+		if(show_portfolio_chart == false){
+			show_portfolio_chart = true;
+			$('#show_chart_div').fadeIn();
+		}else{
+			show_portfolio_chart = false;
+			$('#show_chart_div').fadeOut();
+		}
+	}
+	
+	function getholdingtable() {
+		$.ajax({type: "post",  
+         	url:'/LTISystem/jsp/clonecenter/ViewHolding.action?includeHeader=false&includeJS=false&usePrice=false&ID=${portfolio.ID}&holdingDate='+endDate,  
+         	dataType: "html",  
+         	success: function(result){
+         		$("#holdingPanel").html(result);
+         	}
+     	});
+	}
+	
+	$(function() {
+		getholdingtable();
+	})
+	
+	$(function() {
+		
+		
+		//window.onresize = function(){
+		//	if($('#qtip')!=undefined&&$('#qtip').css('display')!='none')
+		//		$(".tButton").trigger("click");
+		//};
+		
+		//setTimeout("$('.tButton').trigger('click')",2000);
+		
+		
+	});
+	
+</script>
+</head>
+
+<body>
+
+
+
+<table border=0 wdith=100% bgcolor="#ffffff" style="margin-left:1px;">
+	<tr>
+		<td style="width:248px;float:left;background-color:#ffffff" valign="top">
+			<div>
+				<div style="background-color:#E78E31;height:35px;width:243px;padding-left:5px;padding-top:15px">
+					<span style="font-size:1.5em;color:#ffffff;text-align:center;">Useful Info</span>
+				</div>
+				<div style="background-color:#F7F7FF;height:400px;width:243px;padding-left:5px;padding-top:15px; padding-right:5px">
+<p>What it means to <strong><i>Follow</i></strong></p>
+<ul class="list">
+<li>Month end re-balance email (depending on re-balance frequency)</li>
+<li>Portfolio updates daily for its holdings</li>
+<li>You can visit this portfolio on <a target=_blank href="/LTISystem/f401k__portfolios.action">My Portfolios</a> page. </li>
+</ul>
+<p>What you do to <strong><i>Follow</i></strong>
+<ul class ="list">
+<li>Visit portfolio page for <br>
+<ul class = "list">
+<li>Current holdings</li>
+<li>Historical transactions, performance and risk</li>
+</ul>
+</li>
+<li>Follow the re-balance email to make your account mirror the model portfolio</li>
+</ul>
+</p>
+			            <div id="leftnav">
+						</div>
+				</div>
+			</div>
+		</td>
+		<td width="730" valign="top">
+			[#include "nav.uftl"]
+			
+				<br>
+				[#-- 显示unfollow按钮 --]
+				[#if pc.hasRealtimeRole()]
+						[#if !pc.isAdmin()][@pu.BtnUnfollow portfolio pc.owner/][/#if]
+				[#-- 显示follow按钮 --]
+				[#else]
+					[#if Parameters.follow?? && Parameters.follow=="true"]
+						[@pu.BtnFollow portfolio pc.loginUser.userName true pc.anonymous pc.hasSimulateRole /]
+					[#else]
+						[@pu.BtnFollow portfolio pc.loginUser.userName false pc.anonymous pc.hasSimulateRole /]
+					[/#if]
+				[/#if]
+				&nbsp;<input title="" type='button' class=btn style='font-weight: bold' onclick="window.location.href='/LTISystem/getstarted_pickaplan.action'" value='Go Back'>
+				<div id="btn_mess_div"></div>
+			<script>
+				function remove(){
+					if(confirm("This portfolio will not be added to the 'My Portfolios' page. And you will start over to pick a plan.")){
+						
+						var url_s='profile_delete.action?portfolioID=${portfolio.ID?string.computer}&planID=${portfolio.strategies.assetAllocationStrategy.parameter["PlanID"]}&userID=';
+						$.ajax({
+					  	 	type: "Post",
+					   		url: url_s,
+					   		
+					   		success: function(msg){
+					     		window.location.href="http://www.myplaniq.com/LTISystem/getstarted_pickaplan.action";
+					     		<!--alert('The portfolio has been removed from your portfolio table.');-->
+					   		}
+					 });
+					}
+				}
+				
+			</script>
+			
+			
+			<div id='customize_portfolio_div' style="margin-left:8px;margin-left:5px;">
+				<br><h3 style="line-height:40px">
+					${portfolio.name}
+					<a alt="Click here to see detail" href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${portfolio.ID?string.computer}' target='_blank' class="qButton" style="height:20px;width:20px;font-size:0.7em">Click here to see the detail info of this portfolio.</a>
+					
+				</h3>
+                
+				
+                [@pu.PortfolioParametersUnit portfolio plan]
+				[/@pu.PortfolioParametersUnit]
+                
+				[@pu.HoldingsUnit portfolio aggregateFlag pc.lastLegalDate pc.hasRealtimeRole() pc.anonymous]
+				[/@pu.HoldingsUnit]
+				
+				[@pu.ScheduleHoldingsUnit portfolio pc.hasRealtimeRole()]
+				[/@pu.ScheduleHoldingsUnit]
+				
+				[@pu.PerformanceInfoUnit portfolio endDate]
+				[/@pu.PerformanceInfoUnit]
+				
+				
+				<br>
+				<table border=0 width=100%>
+				<tr><td>
+				<a id="btn_portfolio_chart" onclick="showadvancedinfo()" href='javascript:void(0)' class="uiButton">Portfolio Analytics and Historical Performance Chart</a>
+				</td>
+				<td align="right">
+					<a class="tButton">Tips</a>
+					<div style="display:none;">
+						<p><font size="+2"><strong><i>Hints:</i></strong></font>
+							<ul>
+							<li>Click here to see more detail.</li>
+							</ul>
+							<br>
+							</p>
+					</div>
+				</td>
+				</tr>
+				</table>
+				<div class="sidebar_box_noPadding roundHeadingBlue" id="show_chart_div" style="display:none">
+					<div class="sidebar_box_heading_white">Advanced Info [#if endDate??](As of ${endDate?string("MM/dd/yyyy")})[#else](As of ${portfolio.endDate?string("MM/dd/yyyy")})[/#if]</div>
+					<div class="sidebar_box_content">
+				
+				
+						<h3 style="text-align:center">Portfolio Analytics</h3>
+						<div>
+							[@s.action name="MPTMain" namespace="/jsp/portfolio" executeResult=true ignoreContextParams=true]
+								[@s.param name="portfolioID"]${portfolioID}[/@s.param]
+								[@s.param name="basicunit"]true[/@s.param]
+							[/@s.action]
+						</div>
+					
+					
+						<br>
+						<h3 style="text-align:center">Historical Portfolio Chart</h3>
+						<img width=680 src='/LTISystem/article_viewchart.action?portfolioID=${portfolioID?string.computer}&securityID=1144,91&width=680&height=500&Type=0' border=0>
+										
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				<br>
+				<br>
+
+				
+				
+				
+				
+				
+				
+			</div>
+		</td>
+	</tr>
+
+</table>
+
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+       
+
+
+

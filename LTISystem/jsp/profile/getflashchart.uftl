@@ -1,0 +1,16 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[@s.url action="OutputSecuirtyMPT" namespace="/jsp/flash" id="url_flash_xml" escapeAmp="false"]
+	[@s.param name="symbols"]${symbols}[/@s.param]
+[/@s.url]
+
+<!--${url_flash_xml} -->
+[@s.action name="DisplayFlash" namespace="/jsp/flash" executeResult=true]
+	[@s.param name="chartName"]${symbol}[/@s.param]
+	[@s.param name="lineNameArray"]${symbols}[/@s.param]
+	[@s.param name="address"]127.0.0.1[/@s.param]
+	[@s.param name="port"]80[/@s.param]
+	[@s.param name="url"]${url_flash_xml}[/@s.param]
+	[@s.param name="currentMode"]portfolio[/@s.param]
+[/@s.action]

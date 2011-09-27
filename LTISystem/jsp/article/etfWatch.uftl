@@ -1,0 +1,134 @@
+[#ftl]
+
+<p>
+  U.S. small cap stocks have been doing well recently. In fact, small cap blend (IWM) has a 24.15% 52-week return. 
+  Only the Smallcap Growth (IWO) and Midcap Growth (IWP) have the higher 52-week returns. For more detailed performance, 
+  please refer to <a href="http://www.myplaniq.com/LTISystem/advanced__markets.action">here</a>.
+</p>
+<p>
+<table border="0" cellspacing="10">
+  <tr>
+    <th align="left"><b>Assets Class</b></th>
+    <th><b>Symbols</b></th>
+	<th><b>[#if majorReturnTable??]${majorReturnTable[0][5]}[/#if]<br>Trend<br> Score</b></th>
+	<th><b>[#if majorReturnTable??]${majorReturnTable[1][5]}[/#if]<br>Trend<br> Score</b></th>
+	<th><b>Direction</b></th>
+  </tr>
+[#if majorReturnTable??]
+  [#list majorReturnTable as values]
+    <tr>
+     [#list values as value]
+     [#if value_index< values?size-1]
+	   <td>
+ 	   ${value}
+	   </td>
+	   [/#if]
+      [/#list]
+      </tr>
+  [/#list]
+[/#if]
+</table>
+</p>
+
+<p>
+<table cellspacing="10">
+  <tr>
+    <th align="left"><b>Assets Class</b></th>
+    <th><b>Symbols</b></th>
+	<th><b>[#if usStyleReturnTable??]${usStyleReturnTable[0][5]}[/#if]<br>Trend<br> Score</b></th>
+	<th><b>[#if usStyleReturnTable??]${usStyleReturnTable[1][5]}[/#if]<br>Trend<br> Score</b></th>
+	<th><b>Direction</b></th>
+  </tr>
+[#if usStyleReturnTable??]
+  [#list usStyleReturnTable as values]
+    <tr>
+     [#list values as value]
+     [#if value_index< values?size-1]
+	   <td>
+ 	   ${value}
+	   </td>
+	   [/#if]
+      [/#list]
+      </tr>
+  [/#list]
+[/#if]
+</table>
+</p>
+
+<p>
+<table border="0" cellspacing="10px">
+   <thead>
+      <tr>
+      <th align="center">Description(Symbol)</th>
+      <th>1Yr</th>
+      <th>3Yr</th>
+      <th>5Yr</th>
+      <th>1Yr Sharpe</th>
+      <th>Volume(K)</th>
+      </tr>
+   </thead>
+   <tbody>
+   [#if returntable??]
+     [#list returntable as value]
+       
+      <tr>
+        [#if value_index > 0]
+           [#list value as key]
+           	  [#assign des = "" /]
+              	 [#if key_index==0]
+              	 
+              	 [#elseif key_index==1]
+              	 	<td>${value[0]}(${key})</td>
+              	 [#elseif key_index!=5]
+              	 	<td>${key}</td>
+              	 [/#if]              	               	
+              
+           [/#list]
+          <td>${returntable[value_index][5]}</td>
+        [/#if]        
+        </tr> 
+     [/#list]
+   [/#if]
+   </tbody>
+</table>
+</p>
+<p>From the above table, it is very clear that Schwab ETF (SCHA) achieved highest 1 year return and highest Sharpe ratio (1.33). 
+Since Schwab ETF was created in 11/2009, it has shortest history and thus its 3 year and 5 year performance can not be compared. 
+But its extra 2% return in the last one year is impressive. </p>
+
+<p>From the above table, it is very clear that Schwab ETF (SCHA) achieved highest 1 year return and highest Sharpe ratio (1.33). 
+ Schwab ETF was created in 11/2009, it has shortest history and thus its 3 year and 5 year performance can not be compared. 
+ But its extra 2% return in the last one year is impressive. </p>
+ 
+ <p>The takeaway is that investors should pay attention to the performance among ETFs, even in the same category. 
+ The 1-2% annual return difference is striking. A systematic and periodic review of these ETFs can definitely improve portfolio performance.</p>
+<br>
+<p><strong>Symbols:[#if returntable??]
+                       [#list returntable as value]
+                       [#if value_index > 0]
+                       
+                       [#if value_index !=1]
+                            ,
+                        [/#if]
+                         ${value[1]} 
+                         
+                       [/#if]
+                        
+                       [/#list]
+                  [/#if]
+</strong></p>
+<br>
+<p><strong>Exchange Tickers:[#if returntable??]
+                       [#list returntable as value]
+                       [#if value_index > 0]
+                       
+                       [#if value_index !=1]
+                            ,
+                        [/#if]
+                         (${value[1]}) 
+                         
+                       [/#if]
+                        
+                       [/#list]
+                  [/#if]
+</strong></p>

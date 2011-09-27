@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+
+
+	<bean name="/jsp/verifycode/generateAction" class="com.lti.action.verifycode.GenerateAction"
+		singleton="false">
+
+	</bean>
+		
+	<bean name="/jsp/verifycode/verifyAction" class="com.lti.action.verifycode.VerifyAction" singleton="false"></bean>
+	
+</beans>

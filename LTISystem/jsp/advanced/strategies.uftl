@@ -1,0 +1,94 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ Advanced Strategies </title>
+<meta name="home" content="vf_current" />
+<meta content="MyPlanIQ collects various popular investment strategies for the advanced users. They can follow the model portfolios or customize their own portfolios. Goldman Sachs Global Tactical Asset Allocation and Dow Theory are among the most popular." name="Description">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+
+<!-- JZ <script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+-->
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+</script>
+</head>
+
+<body>
+<div>
+ [@s.action name="advanced__left" namespace="/" executeResult=true]
+ [/@s.action]
+
+
+<div class="col-2">
+    <h1 align="center">MyPlanIQ Advanced Strategies and Portfolios</h1>
+ <p>The following are the advanced strategies and their model portfolios. These portfolios were once listed on ValidFi.com, which is now redirected to here.</p>
+
+          <h2>Asset Allocation Strategies</h2>
+          <div class="dividerTop">
+          [@s.action name="GetModelPortfolioTable" namespace="/jsp/strategy" executeResult=true]
+  [@s.param name="ids"]26375|5671|3202[/@s.param]
+ [/@s.action]
+
+          </div>
+
+          <h2>Portfolio Rebalancing Strategies</h2>
+          <div class="dividerTop">
+          [@s.action name="GetModelPortfolioTable" namespace="/jsp/strategy" executeResult=true]
+  [@s.param name="ids"]6643|719[/@s.param]
+ [/@s.action]
+          </div>
+
+          <h2>Equity/Stock Strategies</h2>
+          <div class="dividerTop">
+          [@s.action name="GetModelPortfolioTable" namespace="/jsp/strategy" executeResult=true]
+  [@s.param name="ids"]3444|6517|7017|7145|1349|3294[/@s.param]
+ [/@s.action]
+
+          </div>
+
+          <h2>Fixed Income/Bond Strategies</h2>
+          <div class="dividerTop">
+          [@s.action name="GetModelPortfolioTable" namespace="/jsp/strategy" executeResult=true]
+  [@s.param name="ids"]5520|3078[/@s.param]
+ [/@s.action]
+
+          </div>
+
+          <h2>Commodities/Currencies Strategies</h2>
+          <div class="dividerTop">
+          [@s.action name="GetModelPortfolioTable" namespace="/jsp/strategy" executeResult=true]
+  [@s.param name="ids"]5160|3212|6839|3348[/@s.param]
+ [/@s.action]
+
+          </div>
+</div>
+
+</div>
+</body>
+</html>

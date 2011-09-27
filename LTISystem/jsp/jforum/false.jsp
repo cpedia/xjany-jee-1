@@ -1,0 +1,1 @@
+<h1>There is no forum for current strategy!</h1>

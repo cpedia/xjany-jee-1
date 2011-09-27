@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.security" namespace="/jsp/security" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/security/Main">
+			<result name="success">/jsp/security/main.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/security/Save">
+			<result name="input">/jsp/security/save.jsp</result>
+			<result name="success">/jsp/info.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Quote" class="/jsp/security/Quote">
+			<result name="input" type="redirect">/jsp/security/Main.action</result>
+			<result name="success" type="redirect">/jsp/fundcenter/View.action?symbol=${symbol}&amp;type=${type}</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="UploadSecurity" class="/jsp/security/UploadSecurity">
+			<result name="error">/jsp/error.jsp</result>
+			<result name="message" type="freemarker">
+					/jsp/message.uftl
+			</result>
+		</action>
+		<action name="CheckSecurity" class="/jsp/security/UploadSecurity" method="checkSecurity">
+			<result name="message">
+					/jsp/message.uftl
+			</result>
+			<result name="download" type="stream">
+					<param name="inputName">fis</param>
+					<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+					<param name="contentDisposition">attachment;fileName="${planName}"</param>
+					<param name="bufferSize">102400</param>  
+			</result>
+		</action>
+		<action name="ImportAndSecurity" class="/jsp/security/UploadSecurity" method="importAndSecurity">
+			<result name="download" type="stream">
+					<param name="inputName">fis</param>
+					<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+					<param name="contentDisposition">attachment;fileName="${planName}"</param>
+					<param name="bufferSize">102400</param>  
+			</result>
+		</action>
+		<action name="downloadFile" class="/jsp/security/UploadSecurity" method="downloadFile">
+			<result name="download" type="stream">
+					<param name="inputName">fis</param>
+					<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+					<param name="contentDisposition">attachment;fileName="${planName}"</param>
+					<param name="bufferSize">102400</param>  
+			</result>
+		</action>
+		
+		<action name="Search" class="/jsp/security/Search">
+			<result name="success">/jsp/security/search.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="ScreeningMain" class="/jsp/security/Screening" method="view">
+			<result name="success">/jsp/security/screening.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Screening" class="/jsp/security/Screening" method="screening">
+			<result name="success">/jsp/security/screeningresult.jsp</result>
+			<result name="input">/jsp/error.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="NormalScreening" class="/jsp/security/Screening" method="normalScreening">
+			<result name="success">/jsp/security/screeningresult.jsp</result>
+			<result name="input">/jsp/error.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="AdvancedScreening" class="/jsp/security/Screening" method="advancedScreening">
+			<result name="success">/jsp/security/screenresult.jsp</result>
+			<result name="input">/jsp/error.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="ScreeningOutput" class="/jsp/security/Screening" method="screeningOutput">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/security/{1}.uftl
+			</result>	
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>						
+		</action>	
+	</package>
+	
+	<package name="com.lti.action.security.dailydata" namespace="/jsp/security" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="DailydataMain" class="/jsp/security/dailydata/Main">
+			<result name="success">/jsp/security/dailydata/main.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="DailydataSave" class="/jsp/security/dailydata/Save">
+			<result name="success">/jsp/info.jsp</result>
+			<result name="input">/jsp/security/dailydata/save.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="DailydataSearch" class="/jsp/security/dailydata/Search">
+			<result name="success">/jsp/security/dailydata/search.jsp</result>
+			<result name="input">/jsp/security/dailydata/search.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>		
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/security/dailydata/{1}.uftl
+			</result>	
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>						
+		</action>
+	</package>
+</struts>

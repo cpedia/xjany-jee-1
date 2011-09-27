@@ -1,0 +1,572 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>University of Washington Retirement Plans</title>
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="The retirement plans available to the employees of University of Washington are listed on this page.">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+</script>
+</head>
+<body>
+
+<div class=" ">
+
+      <div>
+      <div class="col-1" style="height: 1300px; width:73%;">
+      <div style="width:100%">
+ 
+          <!--<p align="center"><img src="http://www.washington.edu/admin/hr/imgs/logos/uwlogo-wpurp.gif" align="center" alt="" width="200" height="26" /></p>-->
+          <h2 align="center">  University of Washington Retirement Plans</h2></p><br>
+          <div class="dividerTop">
+          <p>The University of Washington retirement plans (UWRP) consists of 3 providers: Fidelity, Vanguard and TIAA-CREF. In addition, some employees have access to a deferred compensation plan and Washington state retirement plan3. </p>
+<!--<p><strong><a href="mailto:support@myplaniq.com?subject=My company plan's investment options">Email your plan's investment options</a></strong></p>-->
+<p><strong>MyPlanIQ's Tactical Asset Allocation, based on strategies practiced by wealth managers for institutions and high net worth investors, offers 4-6% annual return improvement over a standard balanced portfolio in the last 5 years. We invite you to explore and test drive it!</strong></p>
+
+<h2 align="center">Tactical Asset Allocation Model Portfolios</h2>
+<table id="cloningtable1273788331182" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			
+			<thead>
+				<tr>
+					<th class="header">
+						Plan
+					</th>
+						<th class="header">
+							Portfolio
+						</th>	
+						
+						
+								<th class="header">
+									1 Yr Annualized Return
+								</th>	
+								<th class="header">
+									1 Yr Sharpe
+								</th>	
+								<th class="header">
+									3 Yr Annualized Return
+								</th>
+								<th class="header">
+									3 Yr Sharpe
+								</th>	
+								<th class="header">
+									5 Yr Annualized Return
+								</th>
+								<th class="header">
+									5 Yr Sharpe
+								</th>	
+							
+				</tr>			
+			</thead>
+			<tbody>
+				<tr class="odd">
+			
+			
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=691">University of Washington Retirement Plan Vanguard</a>
+				</td>
+
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=15,069">Tactical Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+								23%
+							</td>	
+							<td>
+								262%
+							</td>	
+							<td>
+								9%
+							</td>	
+							<td>
+								86%
+							</td>	
+							<td>
+								11%
+							</td>	
+							<td>
+								103%
+							</td>	
+				
+				</tr>
+
+				<tr class="even">
+			
+			
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=692">University of Washington Retirement Plan Fidelity</a>
+				</td>
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=12,303">Tactical Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+
+								20%
+							</td>
+							<td>
+								207%
+							</td>	
+							<td>
+								9%
+							</td>	
+							<td>
+								100%
+							</td>	
+							<td>
+
+								10%
+							</td>	
+							<td>
+								98%
+							</td>	
+				
+				</tr>
+				<tr class="odd">
+		
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=685">Washington State Deferred Compensation Program</a>
+
+				</td>
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=15,025">Tactical Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+								21%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								196%
+							</td>	
+							<td>
+
+								4%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	 -->
+							<td>
+								37%
+							</td>	
+							<td>
+								8%
+							</td>	
+							 <!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								74%
+							</td>	
+				
+				</tr>
+
+				<tr class="even">
+			
+			
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=1,081">Washington State Retirement System Plan 3</a>
+				</td>
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=15,057">Tactical Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+
+								20%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								193%
+							</td>	
+							<td>
+								3%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	 -->
+							<td>
+								22%
+							</td>	
+							<td>
+
+								7%
+							</td>	
+							 <!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								57%
+							</td>	
+				
+				</tr>
+				<tr class="odd">
+			
+			
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=1,074">University of Washington Retirement Plan TIAA-CREF</a>
+
+				</td>
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=11,693">Tactical Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+								22%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								189%
+							</td>	
+							<td>
+
+								3%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	 -->
+							<td>
+								23%
+							</td>	
+							<td>
+								5%
+							</td>	
+							 <!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								35%
+							</td>	
+				
+				</tr>
+
+			</tbody>
+			
+		</table>
+
+
+<h2 align="center">Strategic Asset Allocation Model Portfolios</h2>
+<table id="cloningtable1273788331182" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			
+			<thead>
+				<tr>
+					<th class="header">
+						Plan
+					</th>
+						<th class="header">
+							Portfolio
+						</th>	
+						
+						
+								<th class="header">
+									1 Yr Annualized Return
+								</th>	
+								<th class="header">
+									1 Yr Sharpe
+								</th>	
+								<th class="header">
+									3 Yr Annualized Return
+								</th>
+								<th class="header">
+									3 Yr Sharpe
+								</th>	
+								<th class="header">
+									5 Yr Annualized Return
+								</th>
+								<th class="header">
+									5 Yr Sharpe
+								</th>	
+							
+				</tr>			
+			</thead>
+			<tbody>
+				<tr class="odd">
+			
+			
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=691">University of Washington Retirement Plan Vanguard</a>
+				</td>
+
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=15,701">Strategic Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+								17%
+							</td>	
+							<td>
+								236%
+							</td>	
+							<td>
+								1%
+							</td>	
+							<td>
+								0%
+							</td>	
+							<td>
+								5%
+							</td>	
+							<td>
+								57%
+							</td>	
+				
+				</tr>
+
+				<tr class="even">
+			
+			
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=692">University of Washington Retirement Plan Fidelity</a>
+				</td>
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=12,309">Strategic Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+
+								21%
+							</td>
+							<td>
+								197%
+							</td>	
+							<td>
+								0%
+							</td>	
+							<td>
+								-8%
+							</td>	
+							<td>
+
+								5%
+							</td>	
+							<td>
+								26%
+							</td>	
+				
+				</tr>
+				<tr class="odd">
+		
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=685">Washington State Deferred Compensation Program</a>
+
+				</td>
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=15,031">Strategic Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+								22%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								199%
+							</td>	
+							<td>
+
+								-1%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	 -->
+							<td>
+								-15%
+							</td>	
+							<td>
+								4%
+							</td>	
+							 <!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								18%
+							</td>	
+				
+				</tr>
+
+				<tr class="even">
+			
+			
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=1,081">Washington State Retirement System Plan 3</a>
+				</td>
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=15,063">Strategic Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+
+								21%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								205%
+							</td>	
+							<td>
+								-1%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	 -->
+							<td>
+								-13%
+							</td>	
+							<td>
+
+								4%
+							</td>	
+							 <!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								19%
+							</td>	
+				
+				</tr>
+				<tr class="odd">
+			
+			
+				<td>
+					<a href="/LTISystem/f401k_view.action?ID=1,074">University of Washington Retirement Plan TIAA-CREF</a>
+
+				</td>
+					<td>
+						<a href="/LTISystem/jsp/portfolio/Edit.action?ID=11,691">Strategic Asset Allocation Moderate</a>
+					</td>	
+					
+					
+					
+							<td>
+								25%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								176%
+							</td>	
+							<td>
+
+								-5%
+							</td>	
+							<!--
+							<td>
+								NA
+							</td>	 -->
+							<td>
+								-25%
+							</td>	
+							<td>
+								1%
+							</td>	
+							 <!--
+							<td>
+								NA
+							</td>	-->
+							<td>
+								-5%
+							</td>	
+				
+				</tr>
+
+			</tbody>
+			
+		</table>
+          <p>As of 5/12/2010</p>
+
+          </div> <!-- dividerTop --->
+         <!--<p> <strong>... Search for more plans using search box...</strong></p>-->
+      </div>
+     </div> <!--- end of col-1 -->
+     <div class="col-2" style="height:1300px; width:25%">
+       <p>&nbsp;</p>
+       <p>&nbsp;</p>
+       <p>&nbsp;</p>
+       <p>&nbsp;</p>
+       <div id="decide"><a href="/LTISystem/profile_edit.action?planID=0&portfolioID=0"><img src="/LTISystem/jsp/template/ed/images/decide.gif" alt="" width="240" height="70" /></a></div>
+	<div class="customize"><a href="/LTISystem/profile_customizeportfolio.action"><img src="/LTISystem/jsp/template/ed/images/customize.gif" alt="" width="240" height="60" /></a></div>
+	<div id="manage"><a href="/LTISystem/profile_manageyourportfolio.action?planID=0&portfolioID=14838"><img src="/LTISystem/jsp/template/ed/images/manage.gif" alt="" width="240" height="60" /></a></div>
+	<div id="getStartedNow"><a href="/LTISystem/profile__getstarted.action"><img src="/LTISystem/jsp/template/ed/images/getStarted.gif" alt="" width="240" height="60" /></a></div>
+     <ul>
+     <li>For more on any of the plans, click on the plan to see details</li>
+     <li>For more on any of the portfolios, click on the portfolio to see details</li>
+     <li>Register to get access to the quickstart and tutorial</li>
+     <li>Questions? Send us email at support@myplaniq.com</li>
+     </ul>
+     </div> <!-- end of col-2 -->
+    </div> <!-- end of divider -->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+[#ftl]
+<p>
+[#if articleContent??]
+${articleContent.content}
+[/#if]
+</p>

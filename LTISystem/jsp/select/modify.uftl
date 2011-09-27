@@ -1,0 +1,566 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<meta name="jqueryui" content="smoothness">
+<script src="/LTISystem/jsp/template/ed/js/plugins/selectmenu/ui.selectmenu.js" type="text/javascript"></script>
+<link href="/LTISystem/jsp/template/ed/js/plugins/selectmenu/ui.selectmenu.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" href="jsp/profile/images/GooPieChart.css"/>
+<!--[if IE]><script  type="text/javascript" src="jsp/profile/images/excanvas.compiled.js"></script><![endif]-->
+<script  type="text/javascript" src="jsp/profile/images/GooFunc.js"></script>
+<script  type="text/javascript" src="jsp/profile/images/GooPieChart.js"></script>
+
+<style>
+#contianer input{
+	height:30px;width:500px;
+}
+#planwindow table{
+	border-collapse:collapse; border:1px solid #f0f0f0;
+}
+#planwindow th{
+     border: 1px solid #f0f0f0;
+}
+#planwindow td{
+     border: 1px solid #f0f0f0;padding:5px;
+}
+.ui-autocomplete-category {
+		padding:.2em .4em;
+		margin:.8em 0 .2em;
+)
+
+
+
+</style>	
+<script>
+
+$(document).ready(function() {
+
+	
+	
+	$("#helpwindow").dialog({
+			resizable: false,
+			height:500,
+			width:820,
+			autoOpen:false,
+			modal: true,
+			title:"Help",
+			buttons: {
+				'Close': function() {
+					$(this).dialog('close');
+				}
+				
+			}
+	});
+	
+	$('#btnstrategy').click(function(){
+    		if($('#strategyname').val()=='Strategic Asset Allocation'){
+			 		window.open("/LTISystem/jsp/strategy/View.action?ID=771", "_blank");
+			 }else{
+			 		window.open("/LTISystem/jsp/strategy/View.action?ID=1003", "_blank");
+			 }
+    });
+	
+	$("#help").click(function(){
+    	$("#helpwindow").dialog('open');
+    });	
+    
+    
+    $("#deciderpf").toggle(
+	    function(){
+			$("#tr_canvas").show();
+			$("#deciderpf span").html('- Help Me Decide' );
+		},
+		function(){
+			$("#tr_canvas").hide();
+			$("#deciderpf span").html('+ Help Me Decide' );
+		}
+	);	
+    
+    $('#decidewindow').load('profile_editforselecting.action?includeHeader=false&portfolioID=0&planID=0&date='+(new Date()).getTime());
+    $('#decidewindow').show();
+    
+    $("#sew_filter_button").toggle(
+	    function(){
+			$("#sew_filter_div").show();
+			$("#sew_filter_button span").html('- Set Moving Average Filter' );
+		},
+		function(){
+			$("#sew_filter_div").hide();
+			$("#sew_filter_button span").html('+ Set Moving Average Filter' );
+		}
+	);
+	
+	
+	$('#saveparameter').button();
+	$('#saveparameter').click(function(){
+		setfundfilter();
+		$('#profile_risknumber').val($('#t_riskprofile').val());
+		$('#frequency').val($('#t_frequency').val());
+		$('#maxOfRiskyAsset').val($('#t_maxOfRiskyAsset').val());
+		$.ajax({
+		    url: 'profile_saveparameter.action?includeHeader=false',
+		    type: 'POST',
+		    data: $('#profile_form').serialize(),
+		    error: function(message){
+		        alert(message.responseText);
+		        return;
+		    },
+		    success: function(result){
+		    	window.location.reload();
+		    }
+		});
+		
+	});
+	
+	initSelects("mySelect", 500);
+	
+	$('#sew_button_all').click(
+		function(){
+			setallfundfilter();
+		}
+	);
+	
+
+});
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+var show_filter = false;
+function setmafilter(){
+	if(show_filter == false){
+		show_filter = true;
+		$("#sew_filter_div").show();
+		$("#sew_filter_button").val('- Set Moving Average Filter' );
+	}else{
+		show_filter = false;
+		$("#sew_filter_div").hide();
+		$("#sew_filter_button").val('+ Set Moving Average Filter' );
+	}
+}
+[/@authz.authorize]
+function setfundfilterbyname(a){
+	var value = "";
+	var freq = "";
+	var fundsize = document.getElementById("fundsize").value;
+	for(var i=0;i<fundsize;++i){
+		if(value != ""){
+			value += ",";
+			freq += ",";
+		}
+		var ev = document.getElementById(a + "_value_" + i).value;
+		if(ev != null && ev != "")
+			value += ev;
+		else
+			value += "0";
+		freq += document.getElementById(a + "_freq_" + i).value;
+	}
+	var e_freq = document.getElementById(a + "Freq");
+	e_freq.value = freq;
+	var e_value = document.getElementById(a + "Value");
+	e_value.value = value;
+}
+
+
+function setfundfilter(){
+
+	setfundfilterbyname("sma");
+	setfundfilterbyname("ema");
+	setfundfilterbyname("wma");
+	var sma_flag = document.getElementById("sma_use");
+	var sma_filter = document.getElementById("useSMAFilter");
+	if(sma_flag.checked)
+		sma_filter.value = "true";
+	else
+		sma_filter.value = "false";
+	var ema_flag = document.getElementById("ema_use");
+	var ema_filter = document.getElementById("useEMAFilter");
+	if(ema_flag.checked)
+		ema_filter.value = "true";
+	else
+		ema_filter.value = "false";
+		
+	var wma_flag = document.getElementById("wma_use");
+	var wma_filter = document.getElementById("useWMAFilter");
+	if(wma_flag.checked)
+		wma_filter.value = "true";
+	else
+		wma_filter.value = "false";
+}
+
+function setallfundfilter(){
+	var smavalue = document.getElementById("sma_value_all").value;
+	var smafreq = document.getElementById("sma_freq_all").value;
+	var emavalue = document.getElementById("ema_value_all").value;
+	var emafreq = document.getElementById("ema_freq_all").value;
+	var wmavalue = document.getElementById("wma_value_all").value;
+	var wmafreq = document.getElementById("wma_freq_all").value;
+	var fundsize = document.getElementById("fundsize").value;
+	for(var i=0;i<fundsize;++i){
+		document.getElementById("sma_value_" + i).value = smavalue;
+		document.getElementById("sma_freq_" + i).value = smafreq;
+		document.getElementById("ema_value_" + i).value = emavalue;
+		document.getElementById("ema_freq_" + i).value = emafreq;
+		document.getElementById("wma_value_" + i).value = wmavalue;
+		document.getElementById("wma_freq_" + i).value = wmafreq;
+	}
+}
+
+
+function save(){
+	$.ajax({
+		url: $('#profile_form2').attr('action'),
+		dataType: "html",
+		data: $('#profile_form2').serialize(),
+		success: function( data ) {
+			alert("Save successfully.");
+			$('#t_riskprofile').val($('#rta').val());
+			$('#deciderpf').trigger("click");
+		}
+	});
+}
+function cancel(){
+	$('#deciderpf').trigger("click");
+}
+
+</script>
+</head>
+<body>
+<form id='profile_form' action='profile_edit.action' method='post'  style='display:none'>
+	<input type='hidden' id='profile_portfolioid' name='profile.portfolioID' value='0'>
+	<input type='hidden' id='profile_portfolioname' name='profile.portfolioName' value='New Portfolio'>
+	<input type='hidden' id='strategyname' name='strategyName' value=''>
+	<input type='hidden' id='strategyid' name='strategyID' value='-1'>
+	<input type='hidden' id='frequency' name='frequency' value='monthly'>
+	<input type='hidden' id='maxOfRiskyAsset' name='maxOfRiskyAsset' value='2'>
+	<input type='hidden' id='profile_planid' name='profile.planID' value='0'>
+	<input type='hidden' id='portfolioID' name='portfolioID' value='${portfolioID}'>
+	<input type='hidden' id='profile_planname' name='profile.planName' value='STATIC'>
+	<input type='hidden' id='profile_risknumber' name='profile.riskNumber' value='18'>
+	<input type='hidden' id='profile_attitude' name='profile.attitude' value='Moderate'>						
+	<input type='hidden' id='profile_yearstoretire' name='profile.yearsToRetire' value='24'>
+	<input type='hidden' id='operation' name='operation' value='save'>
+	
+	<input type="hidden" name="emaValue" id="emaValue" value="">
+	<input type="hidden" name="emaFreq" id="emaFreq" value="">
+	<input type="hidden" name="smaValue" id="smaValue" value="">
+	<input type="hidden" name="smaFreq" id="smaFreq" value="">
+	<input type="hidden" name="wmaValue" id="wmaValue" value="">
+	<input type="hidden" name="wmaFreq" id="wmaFreq" value="">
+	<input type="hidden" name="fundsize" id="fundsize" value="${fundList?size}">
+	<input type="hidden" name="useSMAFilter" id="useSMAFilter" value="">
+	<input type="hidden" name="useEMAFilter" id="useEMAFilter" value="">
+	<input type="hidden" name="useWMAFilter" id="useWMAFilter" value="">
+</form>
+<input type="hidden" name="fundsize" id="fundsize" value="${fundList?size}">
+<div class="ui-widget" id="contianer">
+<p>
+<table border=0 width='100%'>
+	<tr>
+		<td>
+			Portfolio Name
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="portfolioname" class="ui-widget ui-widget-content ui-corner-all" value='${portfolioName!""}'>
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Strategy
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="strategyName" class="ui-widget ui-widget-content ui-corner-all" value='${strategyName!""}'>
+						<input type="hidden" id="strategyID" name="strategyid" value="${strategyID}">
+					</td>
+					<td>
+						[@lti.questionmark "Click here for this strategy explanation" "btnstrategy" /]
+						
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Plan
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="planName" class="ui-widget ui-widget-content ui-corner-all" value='${planName!""}'>
+						<input type="hidden" id="planID" value="${planID!""}">
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Risk Profile
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="t_riskprofile"  class="ui-widget ui-widget-content ui-corner-all"  value='${riskProfileNumber!""}'>
+					</td>
+					<td>
+						[@lti.questionmark "Click here for Risk Profile explanation" "help" /]<a id="deciderpf" href='javascript:void(0)' class="uiButton">+ Help Me Decide</a>
+					</td>
+				</tr>
+			</table>
+			
+			
+		</td>
+	</tr>
+	<tr style="display:none" id="tr_canvas">
+		<td></td>
+		<td>
+			<div class="sidebar_box_noPadding roundHeadingGreen"  style="width:500px;">
+				 <div class="sidebar_box_heading_white">Decide your risk profile</div>
+				 <div class="sidebar_box_content" id="decidewindow">
+			         </div>
+			   </div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Rebalance Frequency
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select id="t_frequency" class="mySelect" value='${frequency!""}'>
+								[#if pc.isAdmin() || pc.isAdvancedUser()]
+								<option value="weekly" [#if frequency?? && frequency=="weekly"]selected[/#if]>Weekly</option>
+								[/#if]
+								<option value="monthly" [#if frequency?? && frequency=="monthly"]selected[/#if]>Monthly</option>
+								<option value="quarterly" [#if frequency?? && frequency=="quarterly"]selected[/#if]>Quarterly</option>
+								<option value="annually" [#if frequency?? && frequency=="annually"]selected[/#if]>Annually</option>
+						</select>
+					</td>
+					<td>
+                                            [@lti.questionmark "How often the portfolio is rebalanced: monthly, quarterly, annually" "" /]
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+	[#if pc.isAdmin() || pc.isAdvancedUser()]
+	<tr>
+		<td>
+			Maximum Risky Asset
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select id="t_maxOfRiskyAsset" class="mySelect" value='${maxOfRiskyAsset!""}'>
+								<option value="1" [#if maxOfRiskyAsset?? && maxOfRiskyAsset==1]selected[/#if]>1</option>
+								<option value="2" [#if maxOfRiskyAsset?? && maxOfRiskyAsset==2]selected[/#if]>2</option>
+								<option value="3" [#if maxOfRiskyAsset?? && maxOfRiskyAsset==3]selected[/#if]>3</option>
+						</select>
+					</td>
+					<td>
+                        [@lti.questionmark "The maximum of risky asset of this portfolio: 1, 2, 3" "" /]
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	[#else]
+		<input type="hidden" id="t_maxOfRiskyAsset" value="2">
+	[/#if]
+</table>
+</p>
+<br/>
+<p>
+
+
+	
+
+
+<button id="saveparameter">Save And Apply</button>
+</p>
+<span id="message"></span>
+</div>
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+<input type="button" id="sew_filter_button" onclick="setmafilter()" value ="+ Set Moving Average Filter">
+[/@authz.authorize]
+<div id="sew_filter_div" style="display:none">
+	<br>
+	<br>
+	<input type="checkbox" id="sma_use" name="sma_use" [#if useSMAFlag?? && useSMAFlag == "true"] checked [/#if]>Use SMA Filter
+	<input type="checkbox" id="wma_use" name="wma_use" [#if useWMAFlag?? && useWMAFlag == "true"] checked [/#if]>Use WMA Filter
+	<input type="checkbox" id="ema_use" name="ema_use" [#if useEMAFlag?? && useEMAFlag == "true"] checked [/#if]>Use EMA Filter
+	
+	<br>
+	<br>
+	[#if fundList?? && fundList?size > 0]
+		<table border=0 width='100%'>
+			<tr>
+				<td align="center" style="width:5%">Symbol</td>
+				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td align="center">SMA Length</td>
+				<td align="center">Time Unit</td>
+				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td align="center">WMA Length</td>
+				<td align="center">Time Unit</td>
+				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td align="center">EMA Length</td>
+				<td align="center">Time Unit</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<a id="sew_button_all" href='javascript:void(0)' class="uiButton" >Set All</a>
+				</td>
+				<td align="center"></td>
+				<td>
+					<input type="text" id="sma_value_all" value="" style="width:80px">
+				</td>
+				<td>
+					<select id="sma_freq_all" value="1">
+							<option value="1" selected>Days</option>
+							<option value="2">Weeks</option>
+							<option value="3">Months</option>
+					</select>
+				</td>
+				<td align="center"></td>
+				<td>
+					<input type="text" id="wma_value_all" value="" style="width:80px">
+				</td>
+				<td>
+					<select id="wma_freq_all" value="1">
+							<option value="1" selected>Days</option>
+							<option value="2">Weeks</option>
+							<option value="3">Months</option>
+					</select>
+				</td>
+				<td align="center"></td>
+				<td>
+					<input type="text" id="ema_value_all" value="" style="width:80px">
+				</td>
+				<td>
+					<select id="ema_freq_all" value="1">
+							<option value="1" selected>Days</option>
+							<option value="2">Weeks</option>
+							<option value="3">Months</option>
+					</select>
+				</td>
+				
+			</tr>
+			<tr>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+			</tr>
+			[#list fundList as fund]
+				<tr>
+					<td>
+						<input type="text" value="${fund}" style="width:80px">
+					</td>
+					<td align="center"></td>
+					<td>
+						<input type="text" id="sma_value_${fund_index}"  [#if SMAValueList[fund_index]!=0] value="${SMAValueList[fund_index]}" [/#if] style="width:80px">
+					</td>
+					<td>
+						<select id="sma_freq_${fund_index}" value="1">
+								<option value="1" selected>Days</option>
+								<option value="2">Weeks</option>
+								<option value="3">Months</option>
+						</select>
+					</td>
+					<td align="center"></td>
+					<td>
+						<input type="text" id="wma_value_${fund_index}" [#if WMAValueList[fund_index]!=0] value="${WMAValueList[fund_index]}" [/#if] style="width:80px">
+					</td>
+					<td>
+						<select id="wma_freq_${fund_index}" value="1">
+								<option value="1" selected>Days</option>
+								<option value="2">Weeks</option>
+								<option value="3">Months</option>
+						</select>
+					</td>
+					<td align="center"></td>
+					<td>
+						<input type="text" id="ema_value_${fund_index}" [#if EMAValueList[fund_index]!=0] value="${EMAValueList[fund_index]}" [/#if] style="width:80px">
+					</td>
+					<td>
+						<select id="ema_freq_${fund_index}" value="1">
+								<option value="1" selected>Days</option>
+								<option value="2">Weeks</option>
+								<option value="3">Months</option>
+						</select>
+					</td>
+				</tr>
+			[/#list]
+		</table>
+	[/#if]
+</div>
+
+<div id="planwindow" style="display:none">
+</div>
+
+<div id="helpwindow" style="display:none">
+				<p>All assets are classified to two classes: risky assets and fixed income (stable) assets.</p>
+<p>Risky assets include the following assets:
+							<ul>
+							 <li><strong>Equities (stocks): </strong>US, international and emerging market stocks,</li>
+							 <li><strong>REITs: </strong>US and international Real Estate Investment Trusts,</li>
+							 <li><strong>Commodities: </strong>Industrial Metals, Gold, Oil, Agricultural, .. etc.,</li>
+							 <li><strong>High Yield (Junk) Bonds: </strong>Low grade corporate bonds </li>
+							</ul>
+							<p><br>Fixed income assets include</p>
+							<ul>
+							<li><strong>Government bonds: </strong>short, intermediate and long term treasury bonds and GNMA,</li>
+							<li><strong>Investment Grade bonds: </strong>short, intermediate and long term investment corporate bonds,</li>
+							<li><strong>International bonds: </strong>Sovereign and corporate investment grade bonds,</li>
+							<li><strong>Cash: </strong>Money markets</li>
+							</ul>
+							</p>
+							<p><br>The Risk Profile number represents the target percentage allocation of fixed income in your portfolio. For example, the default risk profile number is 18. That means 18% should be allocated to fixed income and 82% should be allocated to risky assets</p>
+							<p>Your Risk Profile is determined based on your expected years to retirement and risk tolerance. The risk tolerance could be one of the following:
+							<ul>
+							<li><strong>Very Conservative</strong></li>
+							<li><strong>Conservative</strong></li>
+							<li><strong>Moderatge</strong></li>
+							<li><strong>Aggressive</strong></li>
+							<li><strong>Very Aggressive</strong></li>
+							</ul>
+							<p><br>The more aggressive you are, the more will be allocated to risky assets. The longer you expect to retire, the more will be allocated to risky assets too.</p>
+							<p>Your risk profile number will be adjusted every year.</p>
+							<p>You could always overwrite the risk profile number when customizing a model portfolio.</p>
+							<p>The following chart illustrates the meaning of the risk profile number:
+											<br/><br/>
+											<img border=0 src='jsp/profile/images/barchart.png'>
+											<br/>
+							</p>
+							<p>For more information on how to determine proper asset allocation, consult your financial adviser or use popular retirement planning tools provided by Fidelity, Vanguard or T.Rowe Price. Or you could find out more asset allocation information on target date funds such as <a target="_blank" href="http://personal.fidelity.com/products/funds/content/DesignYourPortfolio/freedomfunds.shtml.cvsr">Fidelity Freedom Target Date Funds</a>. 
+							</p> 
+							
+							<br/>
+							<br/>
+					</p>
+</div>
+</body>
+</html>

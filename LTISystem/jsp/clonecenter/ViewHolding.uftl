@@ -1,0 +1,109 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+[#if Parameters.includeJS?? && Parameters.includeJS=='false']
+[#else]
+[/#if]
+
+
+	<div id="ASHoldings">
+		<div id="AAHoldings">
+		<table id="sposition" class="evergreen_table tablesorter" border="0" cellpadding="0" cellspacing="1" width="100%">
+			<thead>
+			<tr>
+				<th class="header">
+					Asset
+				</th>
+				[#if aggregateFlag]
+				<th class="header">
+					Portfolio
+				</th>
+				[/#if]
+				<th class="header">
+					Fund in this portfolio
+				</th>	
+				[#if stateType]
+				<th class="header">
+					Original Fund Description
+				</th>
+				[/#if]
+				<!--
+				[#if usePrice]
+				<th class="header">
+					Price
+				</th>
+				[/#if]
+				-->
+				<th class="header">
+					Percentage
+				</th>
+			</tr>			
+			</thead>
+			[#if holdingItems??]
+			[#list holdingItems as security]
+			
+			[#if security_index%2==0]
+			<tr class='odd'>
+			[/#if]
+			[#if security_index%2==1]
+			<tr class='even'>
+			[/#if]
+				<td>
+				[#if security.symbol?? && security.symbol!=""]
+					${security.assetName!"-"}
+				[#else]
+					<font style="font-weight:bolder;font-size:11px">${security.assetName!"-"}</font>
+				[/#if]
+				</td>
+				[#if aggregateFlag]
+					<td>
+						<a href='ViewPortfolio.action?ID=${security.portfolioID!"-"}' target="_TOP" style="color:#2B60DE" title='${security.portfolioName!"-"}'>${security.portflolioSymbol!"-"}</a>
+					</td>
+				[/#if]
+				<td>
+					[@s.url action="View.action" id="urladdr" namespace="/jsp/fundcenter" includeParams="false"]
+							[@s.param name="symbol"]${security.symbol!"-"}[/@s.param]
+							[@s.param name="title"]${security.symbol!"-"}[/@s.param]
+					[/@s.url]
+					[#if security.symbol?? && security.symbol!=""]
+					<a href="${urladdr}" target="_TOP" style="color:#2B60DE">${security.symbol!"-"} (${security.description!"-"})</a>
+					[#else]
+					<font style="font-weight:bolder;font-size:11px">${security.description!"-"}</font>
+					[/#if]					
+				</td>
+				[#if stateType]
+				<td>
+					${security.fundDescription!"-"}					
+				</td>
+				[/#if]
+				<!--
+				[#if usePrice]
+				<td>
+					${security.price!"-"}
+				</td>
+				[/#if]
+				-->
+				[#if security.symbol?? && security.symbol!=""]
+					<td>
+						[#if security.percentage??]${(security.percentage*100)?string("0.00")}%[/#if]
+					</td>
+				[#elseif security.assetName?? && security.assetName!=""]
+					<td>
+					
+					</td>
+				[#else]
+					<td>
+						<font style="font-weight:bolder;font-size:11px">[#if security.percentage??]${(security.percentage*100)?string("0.00")}%[/#if]</font>
+					</td>
+				[/#if]
+			</tr>
+			
+			[/#list]
+			[/#if]
+		</table>	
+		<script>
+			$("#sposition").tablesorter({sorter:'num'}); 
+		</script>
+	</div>
+</div>

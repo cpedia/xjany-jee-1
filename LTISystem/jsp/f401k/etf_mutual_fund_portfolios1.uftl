@@ -1,0 +1,865 @@
+[#ftl] [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]] [#assign
+authz=JspTaglibs["/WEB-INF/authz.tld"]] [#import
+"/jsp/lti_library_ftl.jsp" as lti] [#import "/jsp/mp_left_div.ftl" as
+left]
+<html>
+<head>
+<title>ETFs or Mutual Funds Model Portfolios</title>
+<meta name="home" content="vf_current" />
+<meta name="Description"
+	content="ETFs or Mutual Funds Asset Allocation Portfolios for Retirement Investing">
+<meta name="keywords"
+	content="ETFs, Mutual Funds, IRA, Fidelity, Schwab, Vanguard, TD Ameritrade, Etrade, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<!--JZ <script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+-->
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+</script>
+</head>
+<body>
+	<style>
+#topNav a {
+	padding-right: 14px !important;
+}
+
+a#search-submit {
+	background-image: url("/media/img/search-btn.gif");
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	border: medium none;
+	color: #FFFFFF;
+	display: block;
+	float: left;
+	font-size: 13pt;
+	font-weight: bold;
+	height: 40px;
+	left: 15px;
+	padding: 9px 0 0;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	top: 0;
+	vertical-align: middle;
+	width: 131px;
+}
+
+#menu2 li a {
+	width: 250px !important;
+	display: inline;
+}
+
+.input-wrap a { #
+	line-height: 18px;
+	padding-top: 12px !important;
+	border: 1px;
+	width: 131px;
+	height: 30px;
+	background: no-repeat url('/LTISystem/jsp/images/search.png') !important;
+}
+
+
+#getModelPortfolios {
+	background-color: #2F5435;
+	color: #D3FF6C;
+	font-size: 15px;
+	padding: 8px 18px 8px 10px;
+	width: 575px;
+}
+
+#mpcenterright a {
+    color: #2A5333;
+    text-decoration: none;
+}
+#mpcenterright a:hover {
+    text-decoration: underline;
+}
+#mpcenterright hr{
+	background-color: #76923C;
+    border: 0 none;
+    height: 5px;
+    margin-bottom: 10px;
+}
+</style>
+
+	<div id="getModelPortfolios"
+		style="height: 115px; width: 890px; margin: -20px auto 40px 25px; background: none repeat scroll 0 0 #EBFEED;">
+		<form action="/LTISystem/f401k__search.action" method="get"
+			id="searchbox"
+			style="margin-left: 100px; margin-top: 35px; color: black;">
+			<div class="input-wrap">
+				<input name="groupIDS" value="8" type="hidden"></input> <input
+					name="includeHeader" value="true" type="hidden"></input> <input
+					name="type" value="2" type="hidden"></input> <input
+					name="urlPrefix" value="/LTISystem/f401k_view.action?ID="
+					type="hidden"></input> <input
+					style="float: left; font-size: 16pt !important; height: 40px !important; width: 560px;"
+					id="n401k_plansearch_text" name="q"
+					onfocus='this.value=&quot;&quot;'
+					onblur='if(this.value==&quot;&quot;)this.value="Schwab"' size="15"
+					type="text"
+					value='${Parameters.q!"Company 401K, IRA, Brokerage or ETF/Mutual Fund"}'
+					size="15" type="text"> <a
+					onclick="submit_search(this); return false;" id="search-submit"
+					href="#">Search</a>
+			</div>
+			<br class="clear-both" style="clear: both;">
+			<div class="main_directory_listing">
+				<a style="font-size: 13px;" id="ratings-link"
+					href="/LTISystem/getstarted_pickaplan.action">Find a <strong>plan</strong>&nbsp;|&nbsp;Pick/customsize
+					a <strong>portfolio</strong>&nbsp;|&nbsp;Study & Follow</a>
+			</div>
+		</form>
+	</div>
+
+	<div id="mpleft" style="float: left; width: 250px;">
+		<div style="width: 250px; margin-right: 9px;">
+
+			<style>
+.various_nav {
+	background: none repeat scroll 0 0 #EEF2F5;
+	border-right: 1px solid #CECFD0;
+	float: left;
+	width: 233px;
+	margin-bottom: 20px;
+}
+
+.various_nav_title {
+	color: #2C2C2C !important;
+	cursor: default !important;
+	font-size: 14px !important;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.various_nav.app_categories li a {
+	color: #024999 !important;
+}
+
+.various_nav ul li {
+	clear: both;
+	float: left;
+	list-style-type: none;
+	width: 210px;
+}
+
+.various_nav ul li a,.various_nav ul li span {
+	clear: both;
+	color: #024999;
+	cursor: pointer;
+	display: inline;
+	float: left;
+	font-size: 12px;
+	line-height: 1.2em;
+	text-decoration: none !important;
+}
+
+.various_nav ul {
+	clear: both;
+	float: left;
+	font-size: 1.1em;
+	width: 220px;
+}
+
+.various_nav.app_categories .selected {
+	background:
+		url("/LTISystem/jsp/images/title_pointer.gif")
+		no-repeat scroll 1px 6px transparent;
+	color: #000000 !important;
+	cursor: default;
+	padding: 4px 3px 4px 12px !important;
+	text-decoration: none;
+}
+
+.various_nav.app_categories li.selected a {
+	color: #000000 !important;
+}
+</style>
+
+			<div class="apps">
+				<div class="various_nav app_categories" id="categories">
+					<ul>
+						<li><span class="various_nav_title">ETF/Mutual Fund
+								Portfolios</span></li>
+						<!--onclick="return hide_show_div('sub_categories');"-->
+						<li class="second  selected"><a
+							name="Overview & Featured ETF Portfolios" id="apps-store-main"
+							href="/LTISystem/f401k__401kplans.action">Overview & Featured
+								ETF Portfolios</a>
+						</li>
+
+						<li class="second "><a
+							name="Brokerage ETF/Mutual Fund Portfolios" id="news"
+							href="/LTISystem/f401k__403bplans.action">Brokerage
+								ETF/Mutual Fund Portfolios</a></li>
+
+						<li class="second "><a name="Lazy Portfolios"
+							id="research-tools" href="/LTISystem/f401k__457plans.action">Lazy
+								Portfolios</a></li>
+
+						<li class="second "><a name="IRA/401K Brokerage Links"
+							id="research-tools" href="/LTISystem/f401k__457plans.action">IRA/401K
+								Brokerage Link Portfolios</a></li>
+
+						<li class="mid_title"><span class="various_nav_title">Help</span>
+						</li>
+						<li class="second"><a
+							href="/LTISystem/f401k__strategies.action">Asset Allocation
+								Strategies</a></li>
+						</li>
+						<li class="second"><a href="/LTISystem/f401k__faqs.action">IRA
+								FAQs</a></li>
+						</li>
+						<li class="second"><a href="/LTISystem/f401k__faqs.action">FAQs</a>
+						</li>
+
+
+					</ul>
+
+				</div>
+
+
+
+
+
+			</div>
+			[@left.TopPlans /]
+
+			<script type="text/javascript">	google_ad_client = "ca-pub-9404629437169860";
+	/* PlanPort_SmallSquare */
+	google_ad_slot = "8527794289";
+	google_ad_width = 200;
+	google_ad_height = 200;
+	</script>
+			<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+   </script>
+
+			[@s.action name="f401k_allblog" namespace="/" executeResult=true]
+			[@s.param name="formusCategories"]Retirement Investing News and
+			Articles[/@s.param] [@s.param name="setPageSize"]5[/@s.param]
+			[@s.param name="isMain"]false[/@s.param] [@s.param
+			name="isprePage"]true[/@s.param] [/@s.action]
+
+			<script type="text/javascript">google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_SmallSquare */
+google_ad_slot = "8527794289";
+google_ad_width = 200;
+google_ad_height = 200;
+</script>
+			<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+   </script>
+
+			[@s.action name="f401k_allblog" namespace="/" executeResult=true]
+			[@s.param name="formusCategories"]News and Commentaries[/@s.param]
+			[@s.param name="setPageSize"]3[/@s.param] [@s.param
+			name="isMain"]false[/@s.param] [@s.param
+			name="isprePage"]true[/@s.param] [/@s.action]
+
+			<script type="text/javascript">google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_Left_Skycraper */
+google_ad_slot = "7605014472";
+google_ad_width = 160;
+google_ad_height = 600;
+</script>
+			<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+			<!-- Begin Cox Digital Solutions tag for "coxskyscraper" Ad Space (180x300) ID #1000007411107 -->
+			<script type="text/javascript">
+	sr_adspace_id = 1000007411107;
+	sr_adspace_width = 180;
+	sr_adspace_height = 300;
+	sr_ad_new_window = true;
+	sr_adspace_type = "graphic";
+</script>
+			<script type="text/javascript"
+				src="http://ad.afy11.net/srad.js?azId=1000007411107">
+</script>
+			<!-- End Cox Digital Solutions tag for "coxskyscraper" Ad Space (180x300) ID #1000007411107 -->
+
+		</div>
+	</div>
+	<!-- end of mpleft -->
+
+	<!--mpcenterright -->
+	<div id="mpcenterright"
+		style="margin- left: 5px; float: right; width: 651px;">
+		<p style='margin-bottom: 7.8pt;'>
+			<b><span
+				style='font-size: 22.0pt; font-family: "Cambria", "serif"; color: #76923C;'>Overview:
+					ETF, Mutual Fund Portfolios</span> </b>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<span style='font-family: "Meiryo UI", "sans-serif";'>MyPlanIQ
+				has over hundreds of ETF/mutual fund based investment plans for
+				brokerage account investments including IRAs (Individual Retirement
+				Accounts) and taxable accounts. </span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<span style='font-family: "Meiryo UI", "sans-serif";'>Similar
+				to a 401k plan, an ETF/mutual plan consists of a list of selected
+				candidate funds.</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>&nbsp;</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+		<hr size='10px'>
+		</p>
+		<br clear=ALL>
+		<p align=left
+			style='margin-top: 0cm; margin-right: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<b><span
+				style='font-size: 18.0pt; font-family: "Cambria", "serif"; color: #76923C;'>Featured
+					ETF Plans</span> </b>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-right: 0cm; margin-bottom: 15.6pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<span style='font-family: "Meiryo UI", "sans-serif";'>T</span><span
+				style='font-family: "Meiryo UI", "sans-serif";'>hese 5 plans
+				represent some of our best ideas. <span style='color: #E36C0A;'>They
+					can be implement</span> </span><span
+				style='font-family: "Meiryo UI", "sans-serif"; color: #E36C0A;'>ed</span><span
+				style='font-family: "Meiryo UI", "sans-serif"; color: #E36C0A;'>
+				in any brokerage account.</span><b></b>
+		</p>
+		<table border=1 cellspacing=0 cellpadding=0
+			style='margin-left: 0pt; border-collapse: collapse; border: none;'>
+			<tr>
+				<td width="14%" valign=top
+					style='width: 14.58%; border-top: solid #4F81BD 1.0pt; border-left: none; border-bottom: solid #4F81BD 1.0pt; border-right: none; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style='color: #365F91;'><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,148"><span
+									>Six Core
+										Asset ETFs</span> </a> </span> </b>
+					</p></td>
+				<td width="61%" valign=top
+					style='width: 61.96%; border-top: solid #4F81BD 1.0pt; border-left: none; border-bottom: solid #4F81BD 1.0pt; border-right: none; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<span style=' color: #365F91;'>Simple Is
+							Best (SIB): <b>6 low cost candidate ETFs</b> representing 6 major
+							asset classes: U.S. stocks, international developed country
+							stocks, emerging market stocks, U.S. Real Estate Investment
+							Trusts (REITs), commodities and U.S. total bond markets. Focuses
+							on asset allocation &amp; diversification. </span>
+					</p></td>
+				<td width="23%" valign=top
+					style='width: 23.46%; border-top: solid #4F81BD 1.0pt; border-left: none; border-bottom: solid #4F81BD 1.0pt; border-right: none; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style=' color: #365F91;'>Good
+								for</span> </b><span style=' color: #365F91;'>
+							beginners and those preferring simplicity</span>
+					</p></td>
+			</tr>
+			<tr>
+				<td width="14%" valign=top
+					style='width: 14.58%; border: none; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style='color: #365F91;'><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,429"><span
+									style=''>MyPlanIQ Diversified Core
+										Allocation ETF Plan</span> </a> </span> </b><b></b>
+					</p></td>
+				<td width="61%" valign=top
+					style='width: 61.96%; border: none; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style=' color: #365F91;'>35
+								candidate ETFs provide ample opportunities for diversification
+								and fund selection</span> </b><span
+							style=' color: #365F91;'> (style or sector
+							rotation) in each asset class. U.S. stocks include 9 style
+							(large|mid-cap|small-cap value|growth|blend) ETFs. Commodities
+							include Gold and fixed income has wide bond ETFs to manage
+							interest rate and credit risk. Model portfolios can be mirrored
+							on </span><span style='color: #365F91;'><a
+							href="http://www.myplaniq.com/LTISystem/folio_foliosaa.action"><span
+								style=''>FolioInvesting.com</span> </a> </span><span
+							style=' color: #365F91;'> using 1-click
+							re-balance. </span>
+					</p></td>
+				<td width="23%" valign=top
+					style='width: 23.46%; border: none; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style=' color: #365F91;'>Good
+								for</span> </b><span style=' color: #365F91;'>
+							experienced &amp; active investors</span>
+					</p></td>
+			</tr>
+			<tr>
+				<td width="14%" valign=top
+					style='width: 14.58%; border: none; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style='color: #365F91;'><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=4,904"><span
+									style=''>Retirement Income ETFs</span> </a> </span> </b><b></b>
+					</p></td>
+				<td width="61%" valign=top
+					style='width: 61.96%; border: none; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style=' color: #365F91;'>36
+								candidate ETFs are income/dividend generating ETFs.</span> </b><span
+							style=' color: #365F91;'> Dividend stocks
+							have proved to deliver better returns and lower risk in long
+							term. More on </span><span style='color: #365F91;'><a
+							href="http://seekingalpha.com/article/236722-how-to-build-a-low-risk-income-producing-portfolio-with-higher-returns"><span
+								style=''>article</span> </a> </span><span
+							style=' color: #365F91;'>. </span>
+					</p></td>
+				<td width="23%" valign=top
+					style='width: 23.46%; border: none; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style=' color: #365F91;'>Good
+								for</span> </b><span style=' color: #365F91;'>
+							income, high yield investors</span>
+					</p></td>
+			</tr>
+			<tr>
+				<td width="14%" valign=top
+					style='width: 14.58%; border: none; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style='color: #365F91;'><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=5,856"><span
+									style=''>Permanent Global Portfolio ETF
+										Plan</span> </a> </span> </b><b></b>
+					</p></td>
+				<td width="61%" valign=top
+					style='width: 61.96%; border: none; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style=' color: #365F91;'>11
+								candidate ETFs are from famed Permanent Portfolio</span> </b><span
+							style=' color: #365F91;'> concept for
+							diversification and hedge purpose. These funds include Gold,
+							Silver, Swiss Franc, U.S. treasury bonds and stocks.</span>
+					</p></td>
+				<td width="23%" valign=top
+					style='width: 23.46%; border: none; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style=' color: #365F91;'>Good
+								for</span> </b><span style=' color: #365F91;'>
+							investors who are looking for more stable portfolios with
+							hedging.</span>
+					</p></td>
+			</tr>
+			<tr>
+				<td width="14%" valign=top
+					style='width: 14.58%; border: none; border-bottom: solid #4F81BD 1.0pt; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style='color: #365F91;'><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=714"><span
+									style=''>Vanguard ETFs</span> </a> </span> </b><b></b>
+					</p></td>
+				<td width="61%" valign=top
+					style='width: 61.96%; border: none; border-bottom: solid #4F81BD 1.0pt; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style=' color: #365F91;'>50
+								Vanguard extremely low cost ETFs</span> </b><span
+							style=' color: #365F91;'> enable to build
+							low cost diversified portfolios. These portfolios can be
+							implemented in Vanguard brokerage commission free.</span>
+					</p></td>
+				<td width="23%" valign=top
+					style='width: 23.46%; border: none; border-bottom: solid #4F81BD 1.0pt; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span style=' color: #365F91;'>Good
+								for</span> </b><span style=' color: #365F91;'>
+							investors preferring low cost and proven index funds</span>
+					</p></td>
+			</tr>
+		</table>
+		<p style='margin-left: 0pt; margin-top: 20px;'>
+			<b><span
+				style='font-size: 16.0pt; font-family: "Cambria", "serif"; color: #76923C;'>Featured
+					ETF Plan Performance &amp; Ratings</span> </b>
+		</p>
+		<table class=1-11 border=1 cellspacing=0 cellpadding=0 width=614
+			style='width: 460.7pt; margin-left: 0pt; border-collapse: collapse; border: none;'>
+			<tr>
+				<td width=359 valign=top
+					style='width: 269.35pt; border: solid #7BA0CD 1.0pt; border-right: none; background: #4F81BD; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<b><span style=' color: white;'>Name </span> </b>
+					</p></td>
+				<td width=162 valign=top
+					style='width: 121.4pt; border-top: solid #7BA0CD 1.0pt; border-left: none; border-bottom: solid #7BA0CD 1.0pt; border-right: none; background: #4F81BD; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<b><span style=' color: white;'>TAA 5
+								Yr Return Annualized </span> </b>
+					</p></td>
+				<td width=93 valign=top
+					style='width: 69.95pt; border: solid #7BA0CD 1.0pt; border-left: none; background: #4F81BD; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<b><span style=' color: white;'>Plan
+								Rating </span> </b>
+					</p></td>
+			</tr>
+			<tr>
+				<td width=359 valign=top
+					style='width: 269.35pt; border-top: none; border-left: solid #7BA0CD 1.0pt; border-bottom: solid #7BA0CD 1.0pt; border-right: none; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=5,856"><span
+									style=''>Permanent Global Portfolio ETF
+										Plan</span> </a> </span> </b><b><span style=''> </span> </b>
+					</p></td>
+				<td width=162 valign=top
+					style='width: 121.4pt; border: none; border-bottom: solid #7BA0CD 1.0pt; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>12% </span>
+					</p></td>
+				<td width=93 valign=top
+					style='width: 69.95pt; border-top: none; border-left: none; border-bottom: solid #7BA0CD 1.0pt; border-right: solid #7BA0CD 1.0pt; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>81% </span>
+					</p></td>
+			</tr>
+			<tr>
+				<td width=359 valign=top
+					style='width: 269.35pt; border-top: none; border-left: solid #7BA0CD 1.0pt; border-bottom: solid #7BA0CD 1.0pt; border-right: none; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,148"><span
+									style=''>Six Core Asset ETFs</span> </a> </span> </b><b><span
+							style=''> </span> </b>
+					</p></td>
+				<td width=162 valign=top
+					style='width: 121.4pt; border: none; border-bottom: solid #7BA0CD 1.0pt; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>13% </span>
+					</p></td>
+				<td width=93 valign=top
+					style='width: 69.95pt; border-top: none; border-left: none; border-bottom: solid #7BA0CD 1.0pt; border-right: solid #7BA0CD 1.0pt; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>67% </span>
+					</p></td>
+			</tr>
+			<tr>
+				<td width=359 valign=top
+					style='width: 269.35pt; border-top: none; border-left: solid #7BA0CD 1.0pt; border-bottom: solid #7BA0CD 1.0pt; border-right: none; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,429"><span
+									style=''>MyPlanIQ Diversified Core
+										Allocation ETF Plan</span> </a> </span> </b><b><span style=''>
+						</span> </b>
+					</p></td>
+				<td width=162 valign=top
+					style='width: 121.4pt; border: none; border-bottom: solid #7BA0CD 1.0pt; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>11% </span>
+					</p></td>
+				<td width=93 valign=top
+					style='width: 69.95pt; border-top: none; border-left: none; border-bottom: solid #7BA0CD 1.0pt; border-right: solid #7BA0CD 1.0pt; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>66% </span>
+					</p></td>
+			</tr>
+			<tr>
+				<td width=359 valign=top
+					style='width: 269.35pt; border-top: none; border-left: solid #7BA0CD 1.0pt; border-bottom: solid #7BA0CD 1.0pt; border-right: none; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=714"><span
+									style=''>Vanguard ETFs</span> </a> </span> </b><b><span
+							style=''> </span> </b>
+					</p></td>
+				<td width=162 valign=top
+					style='width: 121.4pt; border: none; border-bottom: solid #7BA0CD 1.0pt; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>10% </span>
+					</p></td>
+				<td width=93 valign=top
+					style='width: 69.95pt; border-top: none; border-left: none; border-bottom: solid #7BA0CD 1.0pt; border-right: solid #7BA0CD 1.0pt; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>62% </span>
+					</p></td>
+			</tr>
+			<tr>
+				<td width=359 valign=top
+					style='width: 269.35pt; border-top: none; border-left: solid #7BA0CD 1.0pt; border-bottom: solid #7BA0CD 1.0pt; border-right: none; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=left style='text-align: left;'>
+						<b><span><a
+								href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=4,904"><span
+									style=''>Retirement Income ETFs</span> </a> </span> </b><b><span
+							style=''> </span> </b>
+					</p></td>
+				<td width=162 valign=top
+					style='width: 121.4pt; border: none; border-bottom: solid #7BA0CD 1.0pt; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>10% </span>
+					</p></td>
+				<td width=93 valign=top
+					style='width: 69.95pt; border-top: none; border-left: none; border-bottom: solid #7BA0CD 1.0pt; border-right: solid #7BA0CD 1.0pt; background: #D3DFEE; padding: 0cm 5.4pt 0cm 5.4pt'><p
+						align=center style='text-align: center;'>
+						<span style=''>62% </span>
+					</p></td>
+			</tr>
+		</table>
+		<p>&nbsp;</p>
+		<p>
+		<hr>
+		</p>
+		<br clear=ALL>
+		<p align=left
+			style='margin-right: -52.5pt; margin-left: 0pt; text-align: left;'>
+			<b><span
+				style='font-size: 18.0pt; font-family: "Cambria", "serif"; color: #76923C;'>What
+					to do for your brokerage IRA or taxable investments?</span> </b>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/right.gif" style="margin-top: 4px;"/>
+			<b><span style='font-family: "Meiryo UI", "sans-serif";'>Pick
+					a plan</span> </b><span style='font-family: "Meiryo UI", "sans-serif";'>
+				from those listed above</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/right.gif" style="margin-top: 4px;"/>
+			<b><span style='font-family: "Meiryo UI", "sans-serif";'>Browse
+					a plan page for</span> </b><span
+				style='font-family: "Meiryo UI", "sans-serif";'>: </span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-top: 4px;margin-left: 20px;"/>
+			<span style='font-family: "Meiryo UI", "sans-serif"; color: #76923C;'>Plan
+				Rating</span><span style='font-family: "Meiryo UI", "sans-serif";'>:
+				see </span><span><a
+				href="http://www.myplaniq.com/LTISystem/f401k_showplanscorelist.action"><span
+					style='font-family: "Meiryo UI", "sans-serif"; color: #548DD4; text-decoration: none; text-underline: none'>PlanRatingIQ
+						Investment Choices Ranking</span><sup><span
+						style='font-family: "Meiryo UI", "sans-serif"; color: windowtext; text-decoration: none; text-underline: none'>new</span>
+				</sup> </a> </span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-top: 4px;margin-left: 20px;"/>
+			<span style='font-family: "Meiryo UI", "sans-serif"; color: #76923C;'>Fund
+				Ranking</span><span style='font-family: "Meiryo UI", "sans-serif";'>:
+				compare funds ranking in each category (asset class) in the plan</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-top: 4px;margin-left: 20px;"/>
+			<span style='font-family: "Meiryo UI", "sans-serif"; color: #76923C;'>Model
+				Portfolios</span><span style='font-family: "Meiryo UI", "sans-serif";'>:
+				browse and compare <span style='color: #548DD4;'>SAA</span> and <span
+				style='color: #548DD4;'>TAA</span> model portfolios historical
+				performance and holdings</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/right.gif" style="margin-top: 4px;"/>
+			<b><span style='font-family: "Meiryo UI", "sans-serif";'>Follow/customize
+					<span style='color: #548DD4;'>SAA</span> or <span
+					style='color: #548DD4;'>TAA</span> model portfolios</span> </b><span
+				style='font-family: "Meiryo UI", "sans-serif";'> tailored to
+				your own personal risk tolerance</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/right.gif" style="margin-top: 4px;"/>
+			<b><span style='font-family: "Meiryo UI", "sans-serif";'>Manage
+					your own brokerage account</span> </b><span
+				style='font-family: "Meiryo UI", "sans-serif";'>: </span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-top: 4px; margin-left: 20px;"/>
+			<span style='font-family: "Meiryo UI", "sans-serif";'>your
+				followed or customized portfolios are <span style='color: #76923C;'>updated
+					daily</span>. </span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-left: 20px;margin-top: 4px;"/>
+			<span style='font-family: "Meiryo UI", "sans-serif";'>You will
+				receive regular monthly or quarterly <span style='color: #76923C;'>re-balance
+					emails</span> for these portfolios. </span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-left: 20px;margin-top: 4px;"/>
+			<span style='font-family: "Meiryo UI", "sans-serif";'>You then
+				use the re-balance/holdings information to <span
+				style='color: #76923C;'>make transactions</span> in your brokerage
+				account.</span>
+		</p>
+		<p style="margin-top: 10px;">
+			<span style='font-size: 18.0pt; color: #E36C0A;'>Not sure how
+				to start?</span><span style='font-size: 18.0pt; color: #76923C;'>
+				follow</span><span style='font-size: 18.0pt; color: #548DD4;'> </span><span><a
+				href="http://www.myplaniq.com/LTISystem/getstarted_pickaplan.action"><span
+					style='font-size: 18.0pt; color: #548DD4;'>Step by Step
+						Guide&gt;&gt;</span> </a> </span><span style='font-size: 18.0pt'>.</span>
+		</p>
+		<p>&nbsp;</p>
+		<p>
+		<hr>
+		</p>
+		<br clear=ALL>
+		<p align=left style='margin-left: 0pt; text-align: left;'>
+			<b><span
+				style='font-size: 18.0pt; font-family: "Cambria", "serif"; color: #76923C;'>Asset
+					Allocation Model Portfolios</span> </b>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<span style='font-family: "Meiryo UI", "sans-serif";'>Each
+				plan has </span><span><a
+				href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=771"><span
+					style='font-family: "Meiryo UI", "sans-serif"; color: windowtext; text-decoration: none; text-underline: none'>Strategic
+						Asset Allocation (SAA)</span> </a> </span><span
+				style='font-family: "Meiryo UI", "sans-serif";'> moderate and
+			</span><span><a
+				href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=1003"><span
+					style='font-family: "Meiryo UI", "sans-serif"; color: windowtext; text-decoration: none; text-underline: none'>Tactical
+						Asset Allocation (TAA)</span> </a> </span><span
+				style='font-family: "Meiryo UI", "sans-serif";'> moderate
+				model portfolios. The portfolios' holdings are decided by their <span
+				style='color: #76923C;'>strategy's allocation</span> and <span
+				style='color: #76923C;'>fund selection</span> from the candidate
+				funds.</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<span><a
+				href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=771"><b><span
+						style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4; text-decoration: none; text-underline: none'>Strategic
+							Asset Allocation (SAA)</span> </b> </a> </span><b><span
+				style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4;'>:</span>
+			</b><span style='font-family: "Meiryo UI", "sans-serif";'> <span
+				style='color: red'>(Free)</span> </span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-top: 4px;"/>			
+			<b><span style='font-family: "Meiryo UI", "sans-serif";'>based
+					on main stream Modern Portfolio Theory</span> </b><span
+				style='font-family: "Meiryo UI", "sans-serif";'> that
+				emphasizes diversification and portfolio re-balancing. </span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-top: 4px;"/>
+			<b><span style='font-family: "Meiryo UI", "sans-serif";'>Good
+					for:</span> </b><span style='font-family: "Meiryo UI", "sans-serif";'>
+				Armchair or beginning investors, prefer mainstream and passive role.</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<span><a
+				href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=1003"><b><span
+						style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4; text-decoration: none; text-underline: none'>Tactical
+							Asset Allocation (TAA)</span> </b> </a> </span><b><span
+				style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4;'>:</span>
+			</b><span style='font-family: "Meiryo UI", "sans-serif";'> <span
+				style='color: red'>(Premium: basic </span> </span><span><a
+				href="http://www.myplaniq.com/LTISystem/paypal_subscr.action"><span
+					style='font-family: "Meiryo UI", "sans-serif"; color: red; text-decoration: none; text-underline: none'>subscription</span>
+			</a> </span><span style='font-family: "Meiryo UI", "sans-serif"; color: red;'>)</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-top: 4px;"/>
+			<b><span style='font-family: "Meiryo UI", "sans-serif";'>based
+					on major diversified asset trends</span> </b><span
+				style='font-family: "Meiryo UI", "sans-serif";'> to <span
+				style='color: #76923C;'>dynamically adjust</span> risk assets (such
+				as stocks) and fixed income (bonds) allocations.</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<img src="/LTISystem/jsp/images/toright.gif" style="margin-top: 4px;"/>
+			<b><span style='font-family: "Meiryo UI", "sans-serif";'>Good
+					for:</span> </b><span style='font-family: "Meiryo UI", "sans-serif";'>
+				Active or experienced investors, risk averse to avoid loss.</span>
+		</p>
+		<p
+			style='margin-top: 0cm; margin-right: -52.5pt; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-indent: -.1pt'>
+			<span style='font-size: 18.0pt; color: #E36C0A;'>Not clear
+				about how the strategies work? </span><span
+				style='font-size: 18.0pt; color: #76923C;'>See</span><span
+				style='font-size: 18.0pt; color: #E36C0A;'> </span><span><a
+				href="http://www.myplaniq.com/LTISystem/f401k__strategies.action"><span
+					style='font-size: 18.0pt; color: #548DD4;'>More
+						Details&gt;&gt;</span> </a> </span>
+		</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p align=left style='margin-left: 0pt; text-align: left;'>
+		<hr>
+		<b><span
+			style='font-size: 18.0pt; font-family: "Cambria", "serif"; color: #76923C;'>Other
+				Brokerage Plans:</span> </b>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<a name="Brokerage_ETF/Mutual_Fund_Portfolios"></a><a
+				href="http://www.myplaniq.com/LTISystem/f401k__brokerage_etf_mutual_portfolios.action"><span><b><span
+						style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4; text-decoration: none; text-underline: none'>Brokerage
+							ETF/Mutual Fund Portfolios</span> </b> </span> </a><b><span
+				style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4;'>&gt;&gt;</span>
+			</b><span style='font-family: "Meiryo UI", "sans-serif";'><br>
+				These are <span style='color: #76923C;'>brokerage specific</span>
+				ETF and mutual fund plans: commission free ETFs or no load no
+				transaction fee mutual funds suggested by brokerages such as
+				Fidelity, Schwab, TD Ameritrade</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 7.8pt; margin-left: 0pt; text-align: left; layout-grid-mode: char;'>
+			<a name="Lazy_Portfolios"></a><a
+				href="http://www.myplaniq.com/LTISystem/f401k__lazy_portfolios.action"><span><b><span
+						style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4; text-decoration: none; text-underline: none'>Lazy
+							Portfolios</span> </b> </span> </a><b><span
+				style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4;'>&gt;&gt;</span>
+			</b><span style='font-family: "Meiryo UI", "sans-serif";'><br>
+				Asset allocation lazy portfolios <span style='color: #76923C;'>suggested
+					by Guru investors</span> such as David Swensen and Fund Advice.</span>
+		</p>
+		<p align=left
+			style='margin-top: 0cm; margin-bottom: 0cm; margin-left: 0pt; margin-bottom: .0001pt; text-align: left; layout-grid-mode: char;'>
+			<a name="IRA/401K_Brokerage_Links"></a><a
+				href="http://www.myplaniq.com/LTISystem/f401k__457plans.action"><span><b><span
+						style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4; text-decoration: none; text-underline: none'>IRA/401K
+							Brokerage Link Portfolios</span> </b> </span> </a><b><span
+				style='font-size: 11.0pt; font-family: "Meiryo UI", "sans-serif"; color: #548DD4;'>&gt;&gt;</span>
+			</b><span style='font-family: "Meiryo UI", "sans-serif";'><br>
+				Automatic IRA, 401K or other retirement plans offer <span
+				style='color: #76923C;'>brokerage windows (links)</span> for plan
+				participants. </span>
+		</p>
+	</div>
+	<!-- end of mpcenterright -->
+	<div class="clearfloat"></div>
+</body>
+</html>

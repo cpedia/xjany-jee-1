@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/admin/security/Main" class="com.lti.action.admin.security.MainAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/security/Search" class="com.lti.action.admin.security.SearchAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+		
+	<bean name="/jsp/admin/security/Save" class="com.lti.action.admin.security.SaveAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>	
+
+	<bean name="/jsp/admin/security/CheckSecurityPrice" class="com.lti.action.admin.security.CheckSecurityPriceAction"
+		singleton="false">
+	</bean>	
+
+	<bean name="/jsp/admin/security/dailydata/Main" class="com.lti.action.admin.security.dailydata.MainAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/security/dailydata/Save" class="com.lti.action.admin.security.dailydata.SaveAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/security/dailydata/Search" class="com.lti.action.admin.security.dailydata.SearchAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>		
+	
+	<bean name="/jsp/admin/security/type/Main" class="com.lti.action.admin.security.type.MainAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/security/type/Save" class="com.lti.action.admin.security.type.SaveAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/security/type/Search" class="com.lti.action.admin.security.type.SearchAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>			
+</beans>

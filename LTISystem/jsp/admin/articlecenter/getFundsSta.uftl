@@ -1,0 +1,29 @@
+[#ftl]
+<p>
+<br>
+<br>
+<b>Article Generator</b>
+<br>
+<a href="/LTISystem/article__batchGenerate.action" target="_blank">Go</a>
+</p>
+<form action="/LTISystem/jsp/admin/articlecenter/mutualFunds.action" method="post" enctype="multipart/form-data">
+Change the parameters of SmartMoney Article
+<br>
+<input type="file" name="uploadFile" >
+<a rel="lightbox" href="/LTISystem/jsp/admin/articlecenter/downloadCsv.action">Download Example File</a>
+<br>
+<input type="submit" value="Execute">
+</form>
+
+<br>
+<br>
+<form action="/LTISystem/jsp/admin/articlecenter/plan.action" method="post" enctype"multipart/form-data">
+Plan Statistic<br>
+<input type="text" name="planID">Please input the ID of plans,for example:689,690
+<br>
+<br>
+<input type="submit" value="Execute">
+<br>
+Please download the result of the plans
+<a rel="lightbox" href="/LTISystem/jsp/admin/articlecenter/getPlanSta.action">Download Plan Statistic</a>
+</form>

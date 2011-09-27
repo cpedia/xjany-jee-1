@@ -1,0 +1,232 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+<head>
+
+<title>Customize Portfolio</title>
+
+<script src="/LTISystem/profile_js_customizedresult.action?includeHeader=false&portfolioID=${portfolioID?string.computer}&endDate=${portfolio.endDate?string("yyyy-MM-dd")}"></script>
+<script src="/LTISystem/jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.js" type="text/javascript"></script>
+<link href="/LTISystem/jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.css" rel="stylesheet" type="text/css" />
+
+<link href="/LTISystem/jsp/profile/images/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+[#-- the three big buttons --]
+[#include "nav.uftl"]
+
+<div id='customize_portfolio_div'>
+	[#-- profile information table --]
+	<p>
+		<table border=0 width='100%'>
+			<tr height='30px'>
+				<td width='200px'>
+					<b>Your Risk Profile Number</b>
+				</td>
+				<td>
+					${profile.riskNumber!""}
+				</td>
+			</tr>
+	        <tr>
+	            <td colspan=2>
+	            	This means the target allocations in your portfolio are
+	            </td>
+	        </tr>
+			<tr height='30px'>
+				<td>
+					<b>Fixed Income Allocation</b>
+				</td>
+				<td>
+					${profile.riskNumber!""}%
+				</td>
+			</tr>
+			<tr height='30px'>
+				<td>
+					<b>Risky Asset Allocation</b>
+				</td>
+				<td>
+					[#if profile.riskNumber??]${100-profile.riskNumber}%[/#if]
+				</td>
+			</tr>
+		</table>
+	</p>
+	
+	<p>
+		[#-- selection table --]
+		<table border=0 width=100%>
+			<tr>
+				<td width='200px'>
+					<b>Selected Plan</b>
+				</td>
+				<td valign='middle'>
+					<a href='/LTISystem/f401k_view.action?ID=${plan.ID?string.computer}' target='_blank'>${plan.name}</a>
+				</td>
+			</tr>
+			[#-- slecte strategy button --]
+			<tr style='display:none' id='tr_strategy_1'>
+				<td>
+					<b>Selected Strategy</b>
+				</td>
+				<td valign='middle'>
+					<a href='/LTISystem/jsp/strategy/View.action?ID=${portfolio.strategies.assetAllocationStrategy.ID?string.computer}' target='_blank'>${portfolio.assetAllocationStrategyName!""}</a>
+				</td>
+			</tr>
+			[#-- portfolio name --]
+			<tr>
+				<td>
+					<b>Portfolio Name</b>
+				</td>
+				<td>
+					<a href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${portfolio.ID}'  target='_blank'>${portfolio.name}</a>
+				</td>
+			</tr>
+			[#-- parameters --]
+			<tr>
+				<td>
+					<b>Parameters</b>
+				</td>
+				<td>
+					<table border=0 >
+						<tr>
+							<td width=150px>Risk Profile Number</td>
+							<td width=200px>
+								${profile.riskNumber}
+							</td>
+							
+						</tr>
+						<tr>
+							<td width=150px>Frequency</td>
+							<td width=200px>
+								[#if portfolio.assetAllocationParameter??]${portfolio.assetAllocationParameter["Frequency"]!""}[/#if]
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Email Alert</b>
+				</td>
+				<td>
+					[#if profile.isEMailAlert]
+						Yes
+					[#else]
+						No
+					[/#if]
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2>
+					<div>
+						<div class='expandable'>Historical Performance Table</div>
+						<div id='div_performance' class='expandcontent'>
+							[#--[@s.action name="profile_getperformance" namespace="/" executeResult=true]
+								[@s.param name='includeHeader']false[/@s.param]
+								[@s.param name='portfolioID']${portfolioID?string.computer}[/@s.param]
+							[/@s.action]--]
+							Please wait...
+						</div>
+
+					</div>	
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 >
+						<div id='div_hischart' >
+							<div class='expandable'>Historical Performance Chart</div>
+							<div class='expandcontent'>
+								<form id='flash_chart_form' action=''>
+
+									Symbols: <input type="hidden" name="symbol" value="P_${portfolioID?string.computer}"></input>
+									<input type="hidden" name="symbolList[0]" value="P_${portfolioID?string.computer}" readonly/>
+									<input type="text" name="symbolList[1]" id="index1"/>
+									<input type="text" name="symbolList[2]" id="index2"/>
+									<input type="text" name="symbolList[3]" id="index3"/>
+									<input type="text" name="symbolList[4]" id="index4"/>
+									<input type="button" value="Compare" onclick='compare()' class='uiButton'/>
+								</form>
+
+							</div>
+							<div id='inner_flash_chart' class='expandcontent'>
+							</div>
+						</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2>
+					<div>
+
+						<div class='expandable'>Pie Chart</div>
+						<div class='expandcontent'>
+							<img src='' id='piechart'>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2>
+					<div>
+						<div class="expandable">Transactions</div>
+
+						<div id='transactionPanel' class='expandcontent'>
+							[#--[@s.action name="ViewTransaction" namespace="/jsp/clonecenter" executeResult=true]
+								[@s.param name='includeHeader']false[/@s.param]
+								[@s.param name='includeJS']false[/@s.param]
+								[@s.param name='ID']${portfolioID?string.computer}[/@s.param]
+								[@s.param name='holdingDate']${portfolio.endDate}[/@s.param]
+							[/@s.action]--]
+							Please wait...
+						</div>
+					</div>
+				</td>
+			</tr>	
+			<tr>
+				<td colspan=2>
+					<div>
+				         <div class="expandable">Holdings on ${portfolio.endDate?string("yyyy-MM-dd")}</div>
+
+						 <div id='holdingPanel' class='expandcontent'>
+						 	[#--[@s.action name="ViewHolding" namespace="/jsp/clonecenter" executeResult=true]
+								[@s.param name='includeHeader']false[/@s.param]
+								[@s.param name='includeJS']false[/@s.param]
+								[@s.param name='ID']${portfolioID?string.computer}[/@s.param]
+								[@s.param name='holdingDate']${portfolio.endDate}[/@s.param]
+							[/@s.action]--]
+							Please wait...
+						 </div>
+					</div>
+				</td>
+			</tr>	
+			<tr>
+				<td colspan=2>
+					<div>
+				         <div class="expandable">Your Current Model Portfolios</div>
+
+						 <div id='div_modelportfolios' class='expandcontent'>
+						 	[#--[#@s.action name="profile_list" namespace="/" executeResult=true]
+								[@s.param name='includeHeader']false[/@s.param]
+							[/@s.action]--]
+							Please wait...
+						 </div>
+					</div>
+				</td>
+			</tr>	
+		</table>
+	</p>
+	<br>
+	[#--<input type="button" value="Back" class="uiButton" onclick="window.location.href='profile_edit.action?portfolioID=0&planID=0'"/>--]
+	<p>Portfolio construction is completed. Click on expandable areas in the above for detailed historical performance and current holdings. Or you could click on <a href='/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${portfolio.ID}'  target='_blank'>here</a> to view the detailed portfolio.
+	</p>
+	<p>
+	If you are not satisfied with this portfolio, you could remove it from the following model portfolio table.
+	</p>
+	<p>
+	Click <input type="button" value="Next" class="uiButton" onclick="window.location.href='profile_manageyourportfolio.action?portfolioID=${portfolioID?string.computer}&planID=${planID?string.computer}'"/>
+	 to go on to the next step.
+	</p>
+<br><br>
+</div>
+</body>
+</html>

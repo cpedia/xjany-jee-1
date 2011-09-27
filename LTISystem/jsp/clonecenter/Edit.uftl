@@ -1,0 +1,264 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<meta name="clonecenter" content="vf_current" />
+<title>${portfolio.name}</title>
+<script type="text/javascript" src="../images/jquery.dimensions.js"></script>
+<script type="text/javascript" src="../images/jquery.bgiframe.js"></script>
+<script type="text/javascript" src="../images/jquery.ui/1.7.1/ui.datepicker_p.js"></script>
+<script type="text/javascript" src="../images/jquery.ui/1.7.1/ui.slider.js"></script>
+<script type="text/javascript" src="../images/jquery.ui/1.7.1/ui.tabs.js"></script>
+
+		
+<script type="text/javascript" src="../images/jquery.tablesorter/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../images/jquery.tablesorter/jquery.tablesorter.pager.js"></script>
+
+<link rel="stylesheet" href="../images/jquery.tablesorter/style.css" type="text/css" />
+
+<style type="text/css">
+	#demo-frame > div.demo { padding: 10px !important; };
+
+
+.ui-slider { position: relative; text-align: left; }
+.ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 1.2em; height: 1.2em; cursor: default; background: #DFEFFC;border-color: #2E6E9E;}
+.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; }
+
+.ui-slider-horizontal { height: .8em; background:#6DA6D1;}
+.ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
+.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+.ui-slider-horizontal .ui-slider-range-min { left: 0; }
+.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+
+.ui-slider-vertical { width: .8em; height: 100px; }
+.ui-slider-vertical .ui-slider-handle { left: -.3em; margin-left: 0; margin-bottom: -.6em; }
+.ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
+.ui-slider-vertical .ui-slider-range-min { bottom: 0; }
+.ui-slider-vertical .ui-slider-range-max { top: 0; }
+</style>
+
+<script type="text/javascript">
+
+[#if holdingDates??]
+var dateArray=new Array(${holdingDates?size});
+var dateArray_js=new Array(${holdingDates?size});
+var cacheArray=new Array(${holdingDates?size});
+var transactionArray=new Array(${holdingDates?size});
+[#list holdingDates as d]
+dateArray[${d_index}]='${d?string("yyyy-MM-dd")}';
+dateArray_js[${d_index}]=Date.parse('${d?string("MM/dd/yyyy")}');
+cacheArray[${d_index}]=0;
+transactionArray[${d_index}]=0;
+[/#list]		
+[/#if]
+function getValue(dateText){
+	for(var i=0;i<dateArray.length;i++){
+		if(dateArray[i]==dateText)return i;
+	}
+	return -1;
+}
+
+function getContent(value){
+	$("#holding_date").val(dateArray[value]);
+	$("#holdingPanel").html('please wait');
+	$("#transactionPanel").html('please wait');
+	if(cacheArray[value]!=0){
+		$("#holdingPanel").html(cacheArray[value]);
+		$("#transactionPanel").html(transactionArray[value]);
+		return;
+	}
+	$.ajax({type: "post",  
+         url:'ViewHolding.action?includeHeader=false&includeJS=false&ID=${portfolio.ID}&holdingDate='+dateArray[value],  
+         dataType: "html",  
+         //data: "userName="+userName+"&password="+password,  
+         success: function(result){
+         	cacheArray[value]=result;
+         	$("#holdingPanel").html(result);
+         }
+     });	
+     $.ajax({type: "post",  
+         url:'ViewTransaction.action?includeHeader=false&includeJS=false&ID=${portfolio.ID}&holdingDate='+dateArray[value],  
+         dataType: "html",  
+         //data: "userName="+userName+"&password="+password,  
+         success: function(result){
+         	transactionArray[value]=result;
+         	$("#transactionPanel").html(result);
+         }
+     });	
+}
+function trace(){
+	$('#btn_trace').attr({disabled:true});
+	$.ajax({type: "post",  
+         url:'ViewTransaction.action?includeHeader=false&includeJS=false&ID=${portfolio.ID}&holdingDate=2008-01-01&symbol='+$('#stockname').val(),  
+         dataType: "html",  
+         success: function(result){
+         	$("#result_trace").html(result);
+         	$('#btn_trace').attr({disabled:false});
+         }
+     });	
+}
+function setValue(val){
+	//$('#slider').slider('value',val);
+}
+$(function() {
+ 	
+ 	
+	$("#slider").slider({
+		value:100,
+		min: 0,
+		max: ${holdingDates?size}-1,
+		value:0,
+		step: 1,
+		slide: function(event, ui) {
+			$("#holding_date").val(dateArray[ui.value]);
+		},
+		stop: function(event, ui) {
+			getContent(ui.value);	
+		}
+	});
+	
+	$('#newsPanel').load('/LTISystem/jsp/news/labels/portfolio_${ID?string.computer}.html?includeHeader=false');
+	
+	$("#tabs").tabs();
+	
+	$("#holding_date").val(dateArray[$("#slider").slider("value")]);
+	
+	getContent(0);
+	
+	$("#holding_date").datepicker({ dateFormat: 'yy-mm-dd',
+ 		changeMonth:true,
+ 		changeYear:true,
+ 		onSelect: function(dateText) {
+ 			var val=getValue(dateText);
+ 			if(val==-1)return;
+ 			getContent(val);
+ 			setValue(val);
+		}
+ 	});
+ 	$("#holding_date").datepicker('setHighlight',dateArray_js);
+   
+   
+    
+});
+</script>	
+
+</head>
+<body>
+
+<h1 style="font-size:28px;">${portfolio.name}</h1>
+<br>
+<div class="demo" >
+<div style="font-size:18px;text-align:left;padding:4px">${portfolio.description!""}</div>
+
+<br>
+<br>
+<div id="mptpanel" align="left" style="padding:5px;display:block">
+[@s.action name="MPTMain" namespace="/jsp/portfolio" executeResult=true ignoreContextParams=true]
+	[@s.param name="portfolioID"]${ID}[/@s.param]
+	[@s.param name="basicunit"]true[/@s.param]
+[/@s.action]
+</div>
+<br>
+<br>
+<div>
+<table width="100%" border="0">
+<tr>
+	<td width="50%" >
+	<div id="chartpanel" align="left" style="padding:5px;">
+	[@s.action name="PlotSectorsPieChart" namespace="/jsp/clonecenter" executeResult=true ignoreContextParams=true]
+		[@s.param name="ID"]${ID}[/@s.param]
+	[/@s.action]
+	</div>
+	<td width="50%" valign="top">
+	<div id="filingpanel" align="left" style="padding:5px;width:95%;">
+	[@s.action name="ViewFilingInformation" namespace="/jsp/clonecenter" executeResult=true ignoreContextParams=true]
+		[@s.param name="ID"]${ID}[/@s.param]
+	[/@s.action]
+	</div>
+	</td>
+
+	</td>
+</tr>
+
+</table>
+	
+</div>
+<br>
+<br>
+<div style="margin:0px;text-align:left">
+<br>
+Holding date: <input type="text" id="holding_date" readonly="true" style="border:1px solid #b1c9d9; color:#f6931f; font-weight:bold;" />
+<br>
+<br>
+</div>
+
+<div id="slider" style="margin-left:4px"></div>
+<div  style="width:100%;" >
+	<table width=100%>
+		<tr style="font-size:8px">
+			<td width=20% align="left">|</td>
+			<td width=20% align="center">
+				|
+			</td>
+			<td width=20% align="center">
+				|
+			</td>
+			<td width=20% align="center">
+				|
+			</td>
+			<td width=20% align="right">
+				|
+			</td>
+		</tr>
+		<tr style="font-size:10px">
+			<td width=20% align="left"><script>document.write(dateArray[0])</script></td>
+			<td width=20% align="center">
+				[#assign l2=holdingDates?size*3/10]
+				<script>document.write(dateArray[${l2?floor-1}])</script>
+			</td>
+			<td width=20% align="center">
+				[#assign l3=holdingDates?size*5/10]
+				<script>document.write(dateArray[${l3?floor-1}])</script>
+			</td>
+			<td width=20% align="center">
+				[#assign l4=holdingDates?size*7/10]
+				<script>document.write(dateArray[${l4?floor-1}])</script>
+			</td>
+			<td width=20% align="right">
+				<script>document.write(dateArray[${holdingDates?size-1}])</script>
+			</td>
+			
+		</tr>
+	</table>
+</div>
+</div><!-- End demo -->
+
+
+
+<div id="tabs">
+	<ul>
+		<li><a href="#result_holdingPanel">Holding position</a></li>
+		<li><a href="#result_transactionPanel">Transaction</a></li>
+		<li><a href="#result_newsPanel">News</a></li>
+	</ul>
+	<div id="result_holdingPanel">
+		<div id="holdingPanel" style="width:100%">
+		</div>
+	</div>
+	<div id="result_transactionPanel">
+		<div id="transactionPanel" style="width:100%">
+		</div>
+	</div>
+	<div id="result_newsPanel" align="left">
+		<!-- <input type="text" id="stockname"><input type="button" id="btn_trace" onclick="trace()" value=Trace>
+		<div id="result_trace" style="width:100%">
+		</div> -->
+		<div id="newsPanel" style="width:100%">
+		</div>
+	</div>
+</div>
+		
+</body>
+</html>
+

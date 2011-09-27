@@ -1,0 +1,50 @@
+[#ftl]
+<html>
+<head>
+<title>
+Welcome to The Consultation Center
+</title>
+</head>
+<body>
+
+
+<div class="sidebar_box_noPadding roundHeadingBlue" style="width:920px;">
+ <div class="sidebar_box_heading_white">Welcome to MyPlanIQ Advisor Network</div>
+ <div class="sidebar_box_content">
+ 	MyPlanIQ is pleased to provide the following list of financial advisors for our customers. We recognize that for some customers, they would like to have a further consultation and support relationship with a financial advisors. 
+
+        Users can send emails or make phone calls to an advisor they choose. 
+ </div>
+</div>
+<div id="advisors">
+
+[#if advisors??]
+	[#list advisors as advisor]
+		[#assign title=advisor.userName /]
+		[#if advisor.firstName?? && advisor.firstName != ""]
+			[#assign title=advisor.firstName /]
+			[#if advisor.lastName?? && advisor.lastName != ""]
+				[#assign title=title+" "+advisor.lastName /]
+			[/#if]
+		[/#if]
+		<div class="sidebar_box_noPadding roundHeadingGreen" style="width:300px;height:250px;float:left;">
+			 <div class="sidebar_box_heading_white">${title}</div>
+			 <div class="sidebar_box_content">
+			 	<p><b>Company:</b> ${advisor.company!"-"}</p>
+			 	<p><b>License:</b> ${advisor.license!"-"}</p>
+			 	<p><b>Address State:</b> ${advisor.addressState!"-"}</p>
+			 	<p><b>Address City:</b> ${advisor.addressCity!"-"}</p>
+			 	
+			 	<a href="advisor_view.action?ID=${advisor.ID}" target="_blank" class="uiButton">Ask Me</a>
+			 </div>
+		</div>
+		[#if advisor_index%3!=2]
+		<div style="width:10px;height:250px;float:left;"></div>
+		[/#if]
+	[/#list]
+[/#if]
+</div>
+
+
+</body>
+</html>

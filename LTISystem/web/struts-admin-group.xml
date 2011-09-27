@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.admin.group" namespace="/jsp/admin/group"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/group/Main">
+			<result name="success">/jsp/admin/group/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/group/Save">
+			<result name="input">/jsp/admin/group/save.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/group/Search">
+			<result name="success">/jsp/admin/group/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="FetchNames" class="/jsp/admin/group/FetchNames">
+			<result name="json">/jsp/admin/group/json.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+
+	<package name="com.lti.action.admin.group.portfolio" namespace="/jsp/admin/group/portfolio"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/group/portfolio/Main">
+			<result name="success">/jsp/admin/group/portfolio/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+
+		<action name="Search" class="/jsp/admin/group/portfolio/Search">
+			<result name="success">/jsp/admin/group/portfolio/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/group/portfolio/Save">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/group/portfolio/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+
+	<package name="com.lti.action.admin.group.strategy" namespace="/jsp/admin/group/strategy"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/group/strategy/Main">
+			<result name="success">/jsp/admin/group/strategy/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/group/strategy/Search">
+			<result name="success">/jsp/admin/group/strategy/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/group/strategy/Save">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/group/strategy/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+
+
+	<package name="com.lti.action.admin.group.user" namespace="/jsp/admin/group/user"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/group/user/Main">
+			<result name="success">/jsp/admin/group/user/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/group/user/Search">
+			<result name="success">/jsp/admin/group/user/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/group/user/Save">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/group/user/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="createCSV" class="com.lti.action.admin.group.user.createCSVAction">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">2048</param>
+			</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+	<package name="com.lti.action.admin.group.emails" namespace="/jsp/admin/group/emails"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/group/emails/Main">
+			<result name="success" type="freemarker">
+				/jsp/admin/group/emails/main.ftl
+			</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="InsertPortfolio" class="/jsp/admin/group/emails/InsertPortfolio">
+			<result name="message" type="freemarker">
+				/jsp/message.uftl
+			</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+	<package name="com.lti.action.admin.group.role" namespace="/jsp/admin/group/role"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/group/role/Main">
+			<result name="success">/jsp/admin/group/role/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/group/role/Save">
+			<result name="input">/jsp/admin/group/role/save.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+
+	</package>
+
+</struts>

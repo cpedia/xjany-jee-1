@@ -1,0 +1,43 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>Fund Center</title>
+
+</head>
+<body>
+<div id="wrap" style="min-height:800px; width:99%;height:100%"> 
+	<div id="content-wrap" style="width:83%">
+        <div id="content">
+			<div id="main" style="width:99%">
+				<div id="CEFSharpeTop10Table" class="border" sytle="padding:0;margin:0;margin-bottom:0">
+					<h2 style="padding:0;margin:5px 5px 5px 0">Top 10 1y-Sharpe CEF</h2>
+		    		<br class="clear"/>
+		    		[@s.action name="SecurityTable" namespace="/jsp/fundcenter" executeResult=true]
+					   [@s.param name="chosenMPT"]0-sharpeRatio,1-sharpeRatio,1-AR,3-sharpeRatio,3-AR,5-sharpeRatio,5-AR[/@s.param]
+					   [@s.param name="sort"]1-sharpeRatio[/@s.param]
+					   [@s.param name="securityType"]CEF[/@s.param]
+					   [@s.param name="size"]10[/@s.param]
+					   [@s.param name="assetClass"]equity[/@s.param]
+					   [@s.param name="extraAttrs"]20d-NAVSHARPE[/@s.param]
+					[/@s.action]
+	        	</div>
+			</div> 			
+        </div>
+	</div>
+    
+	<div id="sidebar" style="width:15%">
+		<ul class="sidemenu"> 
+            <li class="first"><a id="snap-shot" href="javascript:void(0)">Snap Shot</a></li>
+			<li><a href="javascript:void(0)" onclick="showStatistic()">Total Returns and Statistics</a></li>
+			<li><a target="_blank" href="${lti.baseUrl}/jsp/fundcenter/AATrend.action">Asset Allocation Trend</a></li> 
+            <li><a href="javascript:void(0)">Clone This Fund</a></li>
+			<li><a href="javascript:void(0)">Underlying Strategies</a></li> 
+		 	<li><a href="javascript:void(0)">Factor Analysis/Risk Alert</a></li> 
+			<li><a href="javascript:void(0)">Style Gains</a></li> 
+		</ul>
+	</div>
+</div>
+</body>
+</html>

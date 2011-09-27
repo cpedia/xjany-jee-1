@@ -1,0 +1,38 @@
+div#vtip {
+	display: none;
+	position: absolute;
+	padding: 10px;
+	left: 5px;
+	font-size: 0.8em;
+	background-color: white;
+	border: 1px solid #a6c9e2;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	z-index: 9999;
+	width:330px;
+}
+
+div#vtip #vtipArrow {
+	position: absolute;
+	top: -10px;
+	left: 5px
+}
+
+
+.qtip{
+	display: none;
+	position: absolute;
+	padding: 10px;
+	left: 5px;
+	font-size: 0.8em;
+	background-color: white;
+	border: 1px solid #a6c9e2;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	z-index: 9999;
+	width:330px;
+	text-align:left;
+}
+.qtip .qtipArrow{
+	position: absolute;
+}

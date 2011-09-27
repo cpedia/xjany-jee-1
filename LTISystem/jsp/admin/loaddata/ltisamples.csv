@@ -1,0 +1,33 @@
+THIS IS THE TEMPLATE: 1). asset class and sub (sub) class names should be upper case and EXACT. ,,,,,,,,,,
+"2). When the attributes are specified, the ones following this line will use the most recent attribute specification.",,,,,,,,,,
+"Example: If in the asset class attribute column,  EQUITY followed by empty cell and then FIXED INCOME and empty cell, the attributes are EQUITY, EQUITY, FIXED INCOME, FIXED INCOME",,,,,,,,,,
+
+Description (optional),symbol,security type,Asset Class,Sub Class,Sub Sub Class,,Diversified,StartDate,EndDate,Manual
+,,Mutual Fund,EQUITY,US EQUITY,MIDDLE VALUE,,1: yes,YYYY-M-D,YYYY-M-D,1:yes
+,,ETF,,,MIDDLE GROWTH,,0: no,,,0:no
+,,INDEX,,,LARGE VALUE,,,,,
+,,,,,LARGE GROWTH,,,,,
+,,,,,LARGE BLEND,,,,,
+,,,,,MIDDLE BLEND,,,,,
+,,,,,SMALL BLEND,,,,,
+,,,,,SMALL VALUE,,,,,
+,,,,,SMALL GROWTH,,,,,
+,,,,INTERNATIONAL EQUITY,,,,,,
+,,,,EMERGING MARKET EQUITY,,,,,,
+,,,FIXED INCOME,US GOVERNMENT BONDS,"SHORT TERM, MIDDLE TERM, LONG TERM",,,,,
+,,,,US CORPORATE BONDS,"INVESTMENT GRADE, HIGH YIELD",,,,,
+,,,,INTERNATIONAL BONDS,"GOVERNMENT BONDS, CORPORATE BONDS, HIGH YIELD BONDS, EMERGING MARKET BONDS",,,,,
+,,,,HYBRID/MULTI-SECTOR BONDS,,,,,,
+,,,,US TREASURY BONDS,,,,,,
+,,,CASH,"CASH, CD",,,,,,
+,,,HYBRID ASSETS,BALANCE FUND,,,,,,
+,,,,CONVERTIBLE FUND,,,,,,
+,,,,PREFERRED SECURITIES,,,,,,
+,,,,CONVERTIBLE SECURITIES,,,,,,
+,,,REAL ESTATE,REIT,,,,,,
+,,,,NON-REIT,,,,,,
+,,,COMMODITIES,,,,,,,
+,,,HEDGES,,,,,,,
+Description (optional),symbol,security type,Asset Class,Sub Class,Sub Sub Class,,Diversified,startDate,endDate,manual
+****** START HERE ******,,,**** DO NOT MODIFY THIS LINE ****,,,,,,,
+Vanguard Emerging Market,VEIEX,Mutual Fund,EQUITY,EMERGING MARKET EQUITY,,,1,1900-1-1,2008-1-1,0

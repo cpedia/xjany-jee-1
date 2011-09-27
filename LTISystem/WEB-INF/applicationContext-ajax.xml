@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/ajax/GetClassTxt" class="com.lti.action.ajax.GetClassTxtAction"
+		singleton="false">
+		<property name="assetClassManager">
+			<ref bean="assetClassManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/GetPortfolioState" class="com.lti.action.ajax.GetPortfolioStateAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/GetPortfolioMessage" class="com.lti.action.ajax.GetPortfolioMessageAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/SetPortfolioState" class="com.lti.action.ajax.SetPortfolioStateAction" singleton="false">
+	</bean>
+	<bean name="/jsp/ajax/GetResourceSuggestTxt" class="com.lti.action.ajax.GetResourceSuggestTxtAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>				
+	</bean>
+	<bean name="/jsp/ajax/GetSecuritySuggestTxt" class="com.lti.action.ajax.GetSecuritySuggestTxtAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/GetSecurityName" class="com.lti.action.ajax.GetSecurityNameAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/GetSecurityStartDate" class="com.lti.action.ajax.GetSecurityStartDateAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/GetSecurityEndDate" class="com.lti.action.ajax.GetSecurityEndDateAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/GetAssetClassSuggestTxt" class="com.lti.action.ajax.GetAssetClassSuggestTxtAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="assetClassManager">
+			<ref bean="assetClassManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/GetBenchmarkSuggestTxt" class="com.lti.action.ajax.GetBenchmarkSuggestTxtAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+		<property name="assetClassManager">
+			<ref bean="assetClassManager"/>
+		</property>
+	</bean>	
+	<bean name="/jsp/ajax/GetAssetClassListSuggestTxt" class="com.lti.action.ajax.GetAssetClassListSuggestTxtAction"
+		singleton="false">
+		<property name="assetClassManager">
+			<ref bean="assetClassManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/GetStrategyParameter" class="com.lti.action.ajax.GetStrategyParameterAction"
+		singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/GetStrategySuggestTxt" class="com.lti.action.ajax.GetStrategySuggestTxtAction"
+		singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+		<property name="strategyClassManager">
+			<ref bean="strategyClassManager"/>
+		</property>		
+	</bean>
+	<bean name="/jsp/ajax/GetTransactionTxt" class="com.lti.action.ajax.GetTransactionTxtAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>		
+	</bean>
+	<bean name="/jsp/ajax/GetValidStartDate" class="com.lti.action.ajax.GetValidStartDateAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>		
+	</bean>	
+	
+	
+	<bean name="/jsp/ajax/CodeExecutor" class="com.lti.action.ajax.CodeExecutorAction" singleton="false">
+	
+	</bean>
+	<bean name="/jsp/ajax/GetPrice" class="com.lti.action.ajax.GetPriceAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>		
+	</bean>
+	<bean name="/jsp/ajax/GetAssetClassName" class="com.lti.action.ajax.GetAssetClassName"
+		singleton="false">
+		<property name="assetClassManager">
+			<ref bean="assetClassManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/ajax/PutNews" class="com.lti.action.ajax.PutNewsAction" singleton="false">
+	</bean>	
+
+	<bean name="/jsp/ajax/CustomizePage" class="com.lti.action.ajax.CustomizePageAction" singleton="false">
+	
+	</bean>
+	<bean name="/jsp/ajax/StopExecution" class="com.lti.action.ajax.StopExecutionAction" singleton="false">
+	</bean>
+	<bean name="/jsp/ajax/GetStrategyID" class="com.lti.action.ajax.GetStrategyIDAction"
+		singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>	
+	</bean>
+	<bean name="/jsp/ajax/ViewSourceFile" class="com.lti.action.ajax.ViewSourceFileAction"
+		singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>	
+	</bean>	
+	<bean name="/jsp/ajax/DownloadFile" class="com.lti.action.ajax.DownloadFileAction"
+		singleton="false">
+	</bean>	
+	<bean name="/jsp/ajax/DownloadForUpdate" class="com.lti.action.ajax.DownloadForUpdateAction"
+		singleton="false">
+	</bean>	
+	
+	<bean name="/jsp/ajax/GetImportSecurityDataMessage" class="com.lti.action.ajax.GetImportSecurityDataMessageAction">
+	</bean>
+	<bean name="/jsp/ajax/GetUpdateAdjustCloseMessage" class="com.lti.action.ajax.GetUpdateAdjustCloseMessageAction">
+	</bean>
+	
+	<bean name="/jsp/ajax/GetLoadSecurityDataMessage" class="com.lti.action.ajax.GetLoadSecurityDataMessageAction">
+	</bean>	
+	<bean name="/jsp/ajax/SearchTicker" class="com.lti.action.ajax.SearchTickerAction">
+	</bean>	
+	<bean name="/jsp/ajax/Emailalert" class="com.lti.action.ajax.EmailAlertAction">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+</beans>

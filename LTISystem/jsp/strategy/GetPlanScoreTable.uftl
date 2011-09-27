@@ -1,0 +1,106 @@
+[#ftl]
+[#if planScoreList?? && planScoreList?size >0]
+		
+	<script type="text/javascript" src="/LTISystem/jsp/images/jquery.tablesorter/jquery.tablesorter.js"></script>
+	<script type="text/javascript" src="/LTISystem/jsp/images/jquery.tablesorter/jquery.tablesorter.pager.js"></script>
+		
+	<script>
+			$(document).ready(function(){ 
+			        $("#planscoretable").tablesorter({sorter:'num'});
+			        } 
+			); 
+	</script>		    
+	<div style="margin:10px;">
+		[#if title??]<span style="font-size:1.7em;">${title}</span>[/#if]
+		<table id="planscoretable" [#if width??]style='width:${width}px'[/#if] class="tablesorter" border="0" cellpadding="0" cellspacing="1" >
+			
+			<thead>
+				<tr>
+					<th class="header">
+						Name
+					</th>
+					[#if includeTAAReturn?? && includeTAAReturn]
+					<th class="header">
+						TAA 5 Yr Return Annualized
+					</th>	
+					[/#if]
+					[#if includeSAAReturn?? && includeSAAReturn]
+					<th class="header">
+						SAA 5 Yr Return Annualized
+					</th>	
+					[/#if]
+					[#if includeCoverageScore?? && includeCoverageScore]
+					<th class="header">
+						Coverage Score 
+					</th>	
+					[/#if]
+					[#if includeFundQualityScore?? && includeFundQualityScore]
+					<th class="header">
+						FundQuality Score
+					</th>	
+					[/#if]
+					[#if includeCapabilityScore?? && includeCapabilityScore]
+					<th class="header">
+						Capability Score
+					</th>	
+					[/#if]
+					[#if includeInvestmentScore?? && includeInvestmentScore]
+					<th class="header">
+						Plan Rating
+					</th>	
+					[/#if]
+				</tr>			
+			</thead>
+			<tbody>
+			[#list planScoreList as ps]
+			[#if ps_index%2==0]
+				<tr class='odd'>
+			[/#if]
+			[#if ps_index%2==1]
+				<tr class='even'>
+			[/#if]
+					<td>
+					[#if urlPrefix??]
+						<a href='${urlPrefix}${ps.getPlanID()}'>${ps.getPlanName()}</a>
+					[#else]
+						<a href='/LTISystem/jsp/strategy/View.action?ID=${ps.getPlanID()}'>${ps.getPlanName()}</a>
+					[/#if]
+					</td>
+					[#if includeTAAReturn?? && includeTAAReturn]
+					<td align="center">
+						[#if ps.getTAAReturn()??]${ps.getTAAReturn()?string.percent}[#else]{"-"}[/#if]
+					</td>
+					[/#if]
+					[#if includeSAAReturn?? && includeSAAReturn]
+					<td align="center">
+						[#if ps.getSAAReturn()??]${ps.getSAAReturn()?string.percent}[#else]{"-"}[/#if]
+					</td>
+					[/#if]
+					[#if includeCoverageScore?? && includeCoverageScore]
+					<td align="center">
+						[#if ps.getCoverageScore()??]${ps.getCoverageScore()?string.percent}[#else]{"-"}[/#if]
+					</td>	
+					[/#if]
+					[#if includeFundQualityScore?? && includeFundQualityScore]
+					<td align="center">
+						[#if ps.getFundQualityScore()??]${ps.getFundQualityScore()?string.percent}[#else]{"-"}[/#if]
+					</td>	
+					[/#if]
+					[#if includeCapabilityScore?? && includeCapabilityScore]
+					<td align="center">
+						[#if ps.getCapabilityScore()??]${ps.getCapabilityScore()?string.percent}[#else]{"-"}[/#if]
+					</td>	
+					[/#if]
+					[#if includeInvestmentScore?? && includeInvestmentScore]
+					<td align="center">
+						[#if ps.getInvestmentScore()??]${ps.getInvestmentScore()?string.percent}[#else]{"-"}[/#if]
+					</td>	
+					[/#if]
+				</tr>
+			[/#list]
+			</tbody>
+		</table>	
+</div>
+[#else]
+Sorry, there is no results for ${keyword!""}.
+[/#if]

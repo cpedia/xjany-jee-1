@@ -1,0 +1,22 @@
+[#ftl]
+<div class="sidebar_box_noPadding roundHeadingGreen" style="padding:5px;width:180px;height:400px">
+	<div class="sidebar_box_heading_white">Get Started</div>
+	<div style="font-size:1.3em;height:60px">
+	[#if step==1]<b>1.</b>[#else]1.[/#if]
+		Select a Plan
+	</div>
+	<div style="font-size:1.3em;height:60px">
+	[#if step==2]<b>2.</b>[#else]2.[/#if]
+		Select a Portfolio
+	</div>
+	
+	<div style="font-size:1.3em;height:60px">
+	[#if step==3]<b>3.</b>[#else]3.[/#if]
+		Adjust Parameters
+	</div>
+	
+	<div style="font-size:1.3em;height:60px">
+	[#if step==4]<b>4.</b>[#else]4.[/#if]
+		Build a Portfolio
+	</div>
+</div>

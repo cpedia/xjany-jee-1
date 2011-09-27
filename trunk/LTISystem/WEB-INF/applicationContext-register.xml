@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+
+	<bean name="/jsp/register" class="com.lti.action.register.registerAction" singleton="false">
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="inviteManage">
+			<ref bean="inviteManage"/>
+		</property>
+		<property name="sender">
+		<ref bean="sender"/>
+		</property>
+	</bean>
+	
+	
+	
+	<bean name="/jsp/emaillist" class="com.lti.action.register.EmailAlertListAction" singleton="false">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>
+	
+	<bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="javaMailProperties">
+		    <props>
+		    	<prop key="mail.smtp.auth">true</prop>
+		    </props>
+	    </property>
+    
+	</bean>
+	<bean name="/jsp/register/ForgotPassword" class="com.lti.action.register.ForgotPasswordAction">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="sender">
+		<ref bean="sender"/>
+		</property>
+	</bean>
+	<bean name="/jsp/register/PasswordReset" class="com.lti.action.register.PasswordResetAction">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+
+</beans>

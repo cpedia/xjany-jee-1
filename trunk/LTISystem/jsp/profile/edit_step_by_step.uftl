@@ -1,0 +1,246 @@
+[#ftl]
+<html>
+
+<head>
+<title>Profile</title>
+
+<script>
+	function edit_text(element){
+    	if($(element).val()=='Click here'){
+    		$(element).val('');
+    	}
+		$(element).removeClass('show_text');
+		$(element).addClass('edit_text');
+	}
+	function out_text(element){
+		$(element).removeClass('edit_text');
+		$(element).addClass('show_text');
+	}
+	
+	var curstep=1;
+	function previous(){
+		if(curstep==1)return;
+		$('#step'+curstep).hide();
+		if(curstep==4){
+			if($('#crta').attr('checked')==true){
+			}else{
+				curstep-=1;
+			}
+		}
+		curstep=curstep-1;
+		$('#step'+curstep).show();
+		restore();	
+	}
+	function next(){
+		if(curstep==4)return;
+		$('#step'+curstep).hide();
+		if(curstep==2){
+			if($('#crta').attr('checked')==true){
+			}else{
+				curstep+=1;
+			}
+		}
+		curstep=curstep+1;
+		$('#step'+curstep).show();
+		restore();	
+	}
+	function restore(){
+		var ytr=$('#ytr').val();
+		if(ytr=='')ytr=40;
+		$('#profile_yearstoretire').val(ytr);
+		
+		
+		$('#profile_attitude').val($('#ay option:selected').text());
+		
+		if($('#crta').attr('checked')==true){
+			$('#profile_risknumber').val($('#rta').val());
+		}else{
+			$('#profile_risknumber').val($('#ay').val());	
+		}
+		
+		var risknumber=100-$('#profile_risknumber').val();
+		$('#risknumber').html(risknumber);
+	}
+	function backup(){
+	}
+	function save(){
+		$('#profile_form').submit();
+	}
+	function view(){
+		[#if operation=="create"]
+			alert("you don't created any profile before.");
+			return;
+		[#else]
+			$('#view_window').dialog('open');
+		[/#if]
+	}
+	$(function() {
+	 	$('#view_window').dialog({height:200,weight:400,title:"Current Profile",autoOpen:false});
+	 });
+</script>
+<style type="text/css">
+.btn {
+	font-family: Tahoma;
+	font-size: 1.3em;
+	color: #000000;
+	background-image: url(jsp/portfolio/images/grey-bg.gif);
+	border: 1px solid #999999;
+	cursor: pointer;
+	background-repeat: repeat;
+	padding: 2px;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-left: 2px;
+	width:200px;
+}
+</style>
+</head>
+
+<body>
+	<div id='view_window' style='display:none' align='left'>
+		<table border=0 width='100%'>
+			<tr>
+				<td>
+					<b>Risk Number</b>
+				</td>
+				<td>
+					${profile.riskNumber!""}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Years To Retire</b>
+				</td>
+				<td>
+					${profile.yearsToRetire!""}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Stable Target Allocation</b>
+				</td>
+				<td>
+					${profile.riskNumber!""}%
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Risky Target Allocation</b>
+				</td>
+				<td>
+					[#if profile.riskNumber??]${100-profile.riskNumber}%[/#if]
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="margin:10px">
+		<span style='color: #461B7E;font-size:1.4em;'>Generate your default risk profile</span><br>
+		<a href='#' onclick='view()'>Default Profile</a>&nbsp;
+		<a href='main__getstarted.action'>Go back to 'Get started'</a>
+		<div id='step1' style='width:100%;padding-top:30px' align='center'>
+			<div style='height:450px'>
+				<br>
+				<br>
+				<br>
+				<br>
+				please input the number of the years to your retire.<br><br><br>
+				<span style='font-size:2.0em;'>Years to Retire:</span>
+				<input type='text' id='ytr' value='${profile.yearsToRetire!"40"}' class='edit_text' style='width:100px;font-size:2.0em;height:35px'>
+				<br><br><br><br><br><br>
+			</div>
+			<div style='width:100%'>
+				<div style='float:left;width:50%'>
+					<input type='button' value='Previous' onclick='previous()' class='btn'>
+				</div>
+				<div style='float:left;width:50%'>
+					<input type='button' value='Next' onclick='next()' class='btn'>
+				</div>
+			</div>
+		</div>
+		<div id='step2' style='width:100%;padding-top:30px;display:none' align='center'>
+			<div style='height:450px'>
+				What's your attitude of investment?<br><br><br>
+				<span style='font-size:2.0em;'>Are you 
+				<select id='ay' style='width:250px;font-size:1.0em;height:35px'>
+					<option value='12' [#if profile.attitude=="Very Conservative"]selected[/#if]>Very Conservative</option>
+					<option value='17' [#if profile.attitude=="Conservative"]selected[/#if]>Conservative</option>
+					<option value='38' [#if profile.attitude=="Moderate"]selected[/#if]>Moderate</option>
+					<option value='56' [#if profile.attitude=="Aggressive"]selected[/#if]>Aggressive</option>
+					<option value='90' [#if profile.attitude=="Very Aggressive"]selected[/#if]>Very Aggressive</option>
+				</select>?</span>
+				<br><br><br><br>
+				<input type='checkbox' id='crta'>Customize Risky Target Allocation by yourself
+				<br><br><br><br>
+			</div>
+			<div style='width:100%'>
+				<div style='float:left;width:50%'>
+					<input type='button' value='Previous' onclick='previous()' class='btn'>
+				</div>
+				<div style='float:left;width:50%'>
+					<input type='button' value='Next' onclick='next()' class='btn'>
+				</div>
+			</div>
+		</div>
+		<div id='step3' style='width:100%;padding-top:30px;display:none' align='center'>
+			<div style='height:450px'>
+				please input the risky target allocation by yourself.<br><br><br>
+				<span style='font-size:2.0em;'>Risky Target Allocation: </span>
+				<input type='text' id='rta' value='${profile.riskNumber!"0"}' class='edit_text' style='width:100px;font-size:2.0em;height:35px'>
+				<br><br><br><br><br><br>
+			</div>
+			<div style='width:100%'>
+				<div style='float:left;width:50%'>
+					<input type='button' value='Previous' onclick='previous()' class='btn'>
+				</div>
+				<div style='float:left;width:50%'>
+					<input type='button' value='Next' onclick='next()' class='btn'>
+				</div>
+			</div>
+		</div>
+		<div id='step4' style='width:100%;padding-top:30px;display:none' align='center'>
+			<div style='height:450px'>
+				<br><br><br>
+				<span style='font-size:2.0em;'>Your number is: <span id='risknumber'>${profile.riskNumber!""}</span> </span>
+				<br><br><br>
+				The meaning of number:
+				<br><br>
+				<img border=0 src='jsp/profile/images/barchart.png'>
+				<br>
+			</div>
+			<div style='width:100%'>
+				<div style='float:left;width:50%'>
+					<input type='button' value='Previous' onclick='previous()' class='btn'>
+				</div>
+				<div style='float:left;width:50%'>
+					<input type='button' value='Save' onclick='save()' class='btn'>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+	
+	
+	
+		<form action='profile_edit.action' method='post' style='display:none'>
+			<input type='hidden' name='operation' value='create'>
+			<input type='submit' value='Create'>
+		</form>
+		<form action='profile_delete.action' method='post'  style='display:none'>
+			<input type='hidden' name='operation' value='delete'>
+					<input type='hidden' name='profile.portfolioID' value='${profile.portfolioID!""}'>
+					<input type='hidden' name='profile.userID' value='${profile.userID!""}'>
+					<input type='hidden' name='profile.planID' value='${profile.planID!""}'>
+			<input type='submit' value='Delete'>
+		</form>
+		<form id='profile_form' action='profile_edit.action' method='post'  style='display:none'>
+			<input type='hidden' id='profile_portfolioid' name='profile.portfolioID' value='${profile.portfolioID!"0"}'>
+			<input type='hidden' id='profile_planid' name='profile.planID' value='${profile.planID!"0"}'>
+			<input type='hidden' id='profile_risknumber' name='profile.riskNumber' value='${profile.riskNumber!""}'>
+			<input type='hidden' id='profile_attitude' name='profile.attitude' value='${profile.attitude!""}'>						
+			<input type='hidden' id='profile_yearstoretire' name='profile.yearsToRetire' value='${profile.yearsToRetire!"0"}'>
+			<input type='hidden' name='operation' value='save'>
+		</form>
+	</div>
+</body>
+</html>

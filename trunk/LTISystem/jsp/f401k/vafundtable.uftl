@@ -1,0 +1,270 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+<head>
+<title>VA Fund Table</title>
+<link href="jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.css" rel="stylesheet" type="text/css" />
+<SCRIPT src="jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.ajaxContent.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.js" type="text/javascript"></SCRIPT>
+[#assign parameterSize=0]
+[#if vaFundList??]
+	[#assign parameterSize = vaFundList?size?string.computer]
+[/#if]
+<script type="text/javascript">
+	
+    var parameterSize=${parameterSize};
+    
+	function setstring() {
+		var e = document.getElementById('originalString');
+		e.value = $('#description').val();
+	}
+	function edit_text(element){
+    	if($(element).val()=='Click here'){
+    		$(element).val('');
+    	}
+		$(element).removeClass('show_text');
+		$(element).addClass('edit_text');
+	}
+	function out_text(element){
+		$(element).removeClass('edit_text');
+		$(element).addClass('show_text');
+	}
+	var nameArray=['ticker','assetName','fundName','MSVAName','fullName','barronName','memo'];
+	
+	function deleteParameter(pointer) {
+		var parameterID = "parameter"+pointer;
+		var parameter = document.getElementById(parameterID);
+		parameter.style.display = 'none' ;
+		//var tr=$(btn).parent().parent().remove();
+		for(var i=0;i<nameArray.length;i++){
+			var tmp = document.getElementById(getId(pointer,nameArray[i]));
+			tmp.value='';
+		}
+    }
+    
+    function searchvafund(index, category) {
+    	var type = document.getElementById('vafund_' + index + '_searchtype');
+    	$.ajax({
+			type: "post",
+			url: "f401k_searchvafundtable.action?includeHeader=false",
+			data: "barronName=" + $('#vafund_' + index + '_barronName').val() + "&searchType=" + type.value + "&fundIndex=" + index + "&searchCategory=" + category,
+			datatype: "html",
+			success: function(result){
+				$('#process_div').html(result);
+				$('#process_window').dialog("open");
+			}
+		});//end of ajax
+    }
+    
+    
+    function getId(pos,name){
+		return 'vafund_'+pos+'_'+name;
+	}
+    
+    function suggest(pos){
+		var symbolId='#'+getId(pos,'ticker');
+		var acId='#'+getId(pos,'assetName');
+		var nameId='#'+getId(pos,'fundName');
+		jQuery(symbolId).suggest("jsp/ajax/GetSecuritySuggestTxt.action?considerLength=1",
+			{
+				maxShowSize:10
+				,haveSubTokens: true
+				,afterSelect: true
+				,afterFunc:function(){
+					jQuery.get('jsp/ajax/GetAssetClassSuggestTxt.action?q='+$(symbolId).val()
+						,function(result){
+							$(acId).val(result);
+						}
+					);
+					jQuery.get('jsp/ajax/GetSecurityName.action?symbol='+$(symbolId).val()
+						,function(result){
+							$(nameId).val(result);
+						}
+					);
+				}//end after func, function
+			}//end JQuery
+		)
+		jQuery(acId).suggest("jsp/ajax/GetAssetClassListSuggestTxt.action",
+			{
+				maxShowSize:10
+				,haveSubTokens: true
+				,afterSelect: true
+				,afterFunc:function(){
+					if(confirm('Change the fund to the benchmark of the asset class?')){
+						jQuery.get('jsp/ajax/GetBenchmarkSuggestTxt.action?q='+$(acId).val()
+							,function(result){
+								$(symbolId).val(result);
+								jQuery.get('jsp/ajax/GetSecurityName.action?symbol='+$(symbolId).val()
+									,function(result){
+										$(nameId).val(result);
+									}
+								);
+							}
+						);//end JQuery
+						
+					}//end if
+					
+				}//end afterFunc
+			}//end options
+		)//end suggest
+		jQuery(nameId).suggest("jsp/ajax/GetSecuritySuggestTxt.action?considerLength=1",
+			{
+				maxShowSize:10
+				,haveSubTokens: true
+				,afterSelect: true
+				,afterFunc:function(){
+					$(symbolId).val($(nameId).val());
+					jQuery.get('jsp/ajax/GetAssetClassSuggestTxt.action?q='+$(symbolId).val()
+						,function(result){
+							$(acId).val(result);
+						}
+					);
+					jQuery.get('jsp/ajax/GetSecurityName.action?symbol='+$(symbolId).val()
+						,function(result){
+							$(nameId).val(result);
+						}
+					);
+				}//end after func, function
+			}//end JQuery
+		)
+	}
+	
+	$(function() {
+    	for(var i=0;i<parameterSize;i++){
+    		suggest(i);
+    	}
+    	$("#process_window").dialog({'height':800,'width':1200,'title':'Result','autoOpen':false});
+    });
+    
+    function selectvafund(pos, searchIndex, category) {
+    	var ticker = document.getElementById("vafund_" + searchIndex + "_ticker");
+    	var assetName = document.getElementById("vafund_" + searchIndex + "_assetName");
+    	var fundName = document.getElementById("vafund_" + searchIndex + "_fundName");
+    	var msvaname = document.getElementById("vafund_" + searchIndex + "_MSVAName");
+    	var newTicker = document.getElementById("vf_" + pos + "_ticker");
+    	var newAssetName = document.getElementById("vf_" + pos + "_assetname");
+    	var newFundName = document.getElementById("vf_" + pos + "_fundname");
+    	var newMSVAName = document.getElementById("vf_" + pos + "_msvaname");
+    	if(category == 1){
+    		ticker.value = newTicker.value;
+    		assetName.value = newAssetName.value;
+    		fundName.value = newFundName.value;
+    	}else{
+    		msvaname.value = newMSVAName.value;
+    	}
+    	$("#process_window").dialog("close");
+    }
+    
+	function save() {
+		$.ajax({
+			type: "post",
+			url: "f401k_updatevafunds.action?includeHeader=false",
+			data: $('#updateForm').serialize(),
+			datatype: "html",
+			success: function(result){
+				alert(result);
+				location.reload() ;
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+	}
+</script>
+</head>
+<body>
+	<div style="margin:10px">
+		<h3 align="center">VA Fund Table</h3>
+		<form id="updateForm" action="f401k_updatevafunds.action?includeHeader=false" method='post'>
+		[#if vaFundList?? && vaFundList?size > 0]
+		<table  class="tablesorter" border="0" cellpadding="0" cellspacing="1" width="95%" id="parametersTable"> <!-- variables table -->
+	 	 	<thead>
+	 	 	<tr>
+	 	 		<th class="header" width="3%">
+					<b>ST</b>
+				</th>
+	 	 		<th class="header" width="5%">
+					<b>Ticker</b>
+				</th>
+				<th class="header" width="10%">
+					<b>Asset Class</b>
+				</th>
+				<th class="header" width="25%">
+					<b>Name</b>
+				</th>
+				<th class="header" width="20%">
+					<b>MS Name</b>
+				</th>
+				<th class="header" width="10%">
+					<b>Full Name</b>
+				</th>
+				<th class="header" width="20%">
+					<b>Barron Name</b>
+				</th>
+				<th class="header" width="2%">
+					<b>M</b>
+				</th>
+				<th class="header" width="5%">
+					<b>D</b>
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+				[#list vaFundList as vf]
+					<tr id="parameter${vf_index}">
+						<td>
+							<select name="vafund_${vf_index}_searchtype" id="vafund_${vf_index}_searchtype" value="${vf.searchType!}">
+							<option value="A" [#if vf.searchType=="A"]selected="true"[/#if]>A</option>
+							<option value="B" [#if vf.searchType=="B"]selected="true"[/#if]>B</option>
+							<option value="C" [#if vf.searchType=="C"]selected="true"[/#if]>C</option>
+							</select>
+							
+						</td>
+						<td>
+							<input type="text" name="vaFundList[${vf_index}].ticker" id="vafund_${vf_index}_ticker" value="${vf.ticker!}" class="show_text" onclick="edit_text(this)" onblur="out_text(this)"/>
+							<a href="javascript:void(0)" value='search' onclick='searchvafund(${vf_index}, 1)' class='button_remove'/>search</a>
+						</td>
+						<td>
+							<input type="text" name="vaFundList[${vf_index}].assetName" id="vafund_${vf_index}_assetName" value="${vf.assetName!}" class="show_text" onclick="edit_text(this)" onblur="out_text(this)"/>
+						</td>
+						<td>
+							<input type="text" name="vaFundList[${vf_index}].fundName" id="vafund_${vf_index}_fundName" value="${vf.fundName!}" class="show_text" onclick="edit_text(this)" onblur="out_text(this)"/>
+						</td>
+						<td>
+							<input type="text" name="vaFundList[${vf_index}].MSVAName" id="vafund_${vf_index}_MSVAName" value="${vf.MSVAName!}" class="show_text" onclick="edit_text(this)" onblur="out_text(this)"/>
+							<input type='button' value='search' onclick='searchvafund(${vf_index}, 2)' class='button_remove'/>
+						</td>
+						<td>
+							<input type="text" name="vaFundList[${vf_index}].fullName" id="vafund_${vf_index}_fullName" value="${vf.fullName!}" class="show_text" onclick="edit_text(this)" onblur="out_text(this)"/>
+						</td>
+						<td>
+							<input type="text" name="vaFundList[${vf_index}].barronName" id="vafund_${vf_index}_barronName" value="${vf.barronName!}" class="show_text" onclick="edit_text(this)" onblur="out_text(this)"/>
+						</td>
+						<td>
+							<input type="text" name="vaFundList[${vf_index}].memo" id="vafund_${vf_index}_memo" value="${vf.memo!}" class="show_text" onclick="edit_text(this)" onblur="out_text(this)"/>
+						</td>
+						<td>
+							<input type='button' value='delete' onclick='deleteParameter(${vf_index})' class='button_remove'/>
+						</td>
+					</tr>
+				[/#list]
+			</tbody>
+		</table>
+		[/#if]
+		</form>
+		<br>
+		<br>
+		<form action="f401k_vafundtable.action">
+			<textarea id="originalString" name="originalString" style="width:95%;height:120px"></textarea>
+			<input type="submit" class="uiButton" value="Get VA Fund Table"/>
+		</form>
+		
+		<div id='process_window' style='display:none'>
+			<div id='process_div' style='height:250;' align="center"></div>
+		</div>
+		<input type="hidden" name="fundIndex" id="fundIndex" value="${fundIndex!}"/>
+		<input type='button' class="uiButton" value='Save' onclick='save()'>
+		<a href="f401k_companyfundtable.action" class="uiButton"  target="_blank">Fund Family</a>
+	</div>
+</body>
+</html>

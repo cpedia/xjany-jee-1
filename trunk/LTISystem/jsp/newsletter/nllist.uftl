@@ -1,0 +1,121 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ NewsLetter List</title>
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="All the historical MyPlanIQ newsletters are listed on this page. ">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<script>
+$(document).ready(function() {
+	alignHeight();
+});
+</script>
+<style>
+.newsletter-box {
+
+	overflow:hidden;
+	border: 8px solid #FAFAFA;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+}
+.newsletter-box .col-1 {
+	width:618px;
+	height: 545px;
+	overflow: hidden;
+}
+.newsletter-box .col-2 {
+	height: 545px;
+	overflow: hidden;
+	padding-left:10px;
+}
+
+</style>
+</head>
+<body>
+  <div class="borderGreen">
+  	<div class="newsletter-box" >
+  			<div>
+                         <table width="100%">
+                          <tr>
+                            <td>
+  				<br><h1 align="center"><font color="#458F51">MyPlan</font><font color="#95B5C1">IQ</font> Newsletter Archive</h1><br>
+                        <p align="center"><strong align="center">January 2011</strong></p>
+                            </td>
+                           </tr>
+                         </table>
+  			</div>
+
+
+
+<div class="inner">
+<ul class="list">
+
+<!-- ADD Here for <li>   </li> --->
+
+<li>
+<p><a href="/LTISystem/newsletter__newsletter110905.action"><strong>May 9th2011:</strong></a> What is your  risk profile? Impact of fall in commodities and recent articles.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter110205.action"><strong>May 2nd 2011:</strong></a> May investment outlook, request for feedback and recent articles.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter112504.action"><strong>April 25th 2011:</strong></a> Barrons coverage, Blogger continues her quest, request for feedback and recent articles.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter111804.action"><strong>April 18th 2011:</strong></a> New features, request for feedback and recent articles.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter111403.action"><strong>March 14th 2011:</strong></a> Brief overview of the site and recent articles.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter110703.action"><strong>March 7th 2011:</strong></a> This Newsletter offer free Widgets for key asset class updates and recent articles.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter112802.action"><strong>February 28th 2011:</strong></a> This Newsletter summarizes recent MyPlanIQ updates and recent articles.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter112102.action"><strong>February 21st 2011:</strong></a> This Newsletter covers new tracking for US Equity Sub-classes and US Equity ETF league tables and recent articles.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter111402.action"><strong>February 14th 2011:</strong></a> This Newsletter covers US ETF Equity rankings, dividend ETF reviews and recent articles.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter110702.action"><strong>February 7th 2011:</strong></a> This Newsletter covers large cap ETF rankings and the current tactical asset allocation portfolio balance.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter113101.action"><strong>January 31st 2011:</strong></a> This Newsletter covers the community pages and RolloverIQ. There is a new blog for those asking for direction and new tracking of US Subclasses as well as the best articles of the week.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter112401.action"><strong>January 24th 2011:</strong></a> This is the second RIA specific newsletter. There is a comparison of Morningstar and Chevron retirement plans to show you a good and a poor plan. We review fixed asset trends and provide articles of the week.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter111601.action"><strong>January 17th 2011:</strong></a> This Newsletter gives a brief summary of MyPlanIQ features, a word to the wise for 2011 investing and our Facebook announcement.</p>
+</li><li>
+<p><a href="/LTISystem/newsletter__newsletter111701.action"><strong>January 10th 2011:</strong></a> This is the first RIA specific newsletter. There is a summary of the number of plans against the number of asset classes over 800 plans. A 2010 investment review, top articles and summary of strategy definitions .</p>
+</li>
+<li>
+<p><a href="/LTISystem/newsletter__newsletter110301.action"><strong>January 3rd 2011:</strong></a> This is our New Year's resolution issue as well as the best recent articles.</p>
+</li>
+<li>
+<p><a href="/LTISystem/newsletter__newsletter102712.action"><strong>December 27th 2010:</strong></a> 2010 in review -- MyPlanIQ's first year of operation.</p>
+</li>
+<li>
+<p><a href="/LTISystem/newsletter__newsletter101312.action"><strong>December 13th 2010:</strong></a> Facts and figures you can use during party season.</p>
+</li>
+<li>
+<p><a href="/LTISystem/newsletter__newsletter100612.action"><strong>December 6th 2010:</strong></a> Bond styles review, comparison of returns for Strategic and Tactical Asset Allocation with our benchmark plans and best articles of the week.</p>
+</li>
+<li>
+<p><a href="/LTISystem/newsletter__newsletter102911.action"><strong>November 29th 2010:</strong></a> Asset allocation indicators; where the smart money is going, best articles of the week</p>
+</li>
+<li>
+<p><a href="/LTISystem/newsletter__newsletter101608.action"><strong>August 16, 2010:</strong></a> PlanRatingIQ Rates Effectiveness of Plan Investment Choices: MyPlanIQ recently released Plan Investment Choices PlanRatingIQ to help gauge quality of investment choices provided in vast retirement IRA, 401K, 403B, 457 plans, variable annuities, variable universal life and college savings 529 plans. Unlike other services, PlanRatingIQ looks at it from the participant&rsquo;s viewpoint &ndash; what returns they could achieve with the plan.</p>
+</li>
+<li>
+<p><a href="/LTISystem/newsletter__newsletter102607.action"><strong>July 26, 2010:</strong></a> Practical and Effective ETF Based 401K Plan: we examined one of the oldest and popular 401K plans using ETFs: Sharebuilder 401K.</p>
+</li>
+<li>
+<p><a href="/LTISystem/newsletter__newsletter101207.action"><strong>July 12, 2010:</strong></a> Investing with Styles Can Payoff: we showed that MyPlanIQ SAA addes 1-2% extra annual returns over passively maintained portfolios by smartly selecting funds with various styles.</p>
+</li>
+<li>
+<p><a href="/LTISystem/newsletter__newsletter102106.action"><strong>June 21, 2010:</strong></a> Usable, Understandable 401K Asset Allocation: we demonstrated that asset allocation over the most basic and popular five core assets is very effective and achieves low risk and respectable returns.</p>
+</li>
+<li>
+<p><a href="../../newsletter__newsletter060710.action"><strong>June 7, 2010:</strong></a> Introducing MyPlanIQ BiWeekly Newsletter. Simpler Is Better (SIB) portfolios, Plan Investment Choice Ranking and many ETF related portfolio building in taxable and 401(k) investments.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

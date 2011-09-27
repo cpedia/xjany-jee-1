@@ -1,0 +1,365 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+	<title>MyPlanIQ Newsletter: June 21st, 2010</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="A retirement plan and investing newsletter">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<script>
+$(document).ready(function() {
+	alignHeight();
+});
+</script>
+<style>
+.newsletter-box {
+	height:545px;
+	overflow:hidden;
+	border: 8px solid #FAFAFA;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+}
+.newsletter-box .col-1 {
+	width:618px;
+	height: 545px;
+	overflow: hidden;
+}
+.newsletter-box .col-2 {
+	height: 545px;
+	overflow: hidden;
+	padding-left:10px;
+}
+
+</style>
+</head>
+<body>
+  <div class="borderGreen">
+  	<div class="newsletter-box" >
+  			<div>
+                         <table width="100%">
+                          <tr>
+                            <td>
+  				<br><h1 align="center"><font color="#458F51">MyPlan</font><font color="#95B5C1">IQ</font> Newsletter</h1><br>
+                        <p align="center"><strong align="center">June 21st, 2010</strong></p>
+                            </td>
+                            <td align="right" width="6%">
+                              <strong align="right"><a href="http://www.myplaniq.com/LTISystem/newsletter__nllist.action"><strong><font size="5">Archive</font></strong></a></strong>
+                            <td>
+                          </tr>
+                         </table>
+  			</div>
+                      
+  			<div class="col-1">
+  			<!--- Upper Left --->
+                        <h3><a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=479">Usable,
+Understandable
+401K Asset Allocation </a></h3>
+<p>For many, achieving good investment returns is an arcane art for the
+gifted few. An exclusive club of magicians weave their spells and works
+their magic with new members appearing from time to time. It is our
+place to cross their palms with silver to get the benefit of their
+potions. In a previous article building a simple portfolio was
+discussed. This moves this art towards a science that is open to all,
+because the SIB Portfolio allows us to create a benchmark based on
+asset allocation. This can be used to compare against other plans and
+give some measure of the funds available.</p>
+<p>Five asset classes are chosen based on well proven academic research
+and practical proof. </p>
+<ul>
+  <li>US Equity </li>
+  <li>Developed Market Equity </li>
+  <li>Emerging Market Equity </li>
+  <li>Real Estate Investment Trust (REITs) </li>
+  <li>Fixed Income</li>
+</ul>
+<ul>
+</ul>
+<p>The claim of asset allocation is that over 90% of the returns are
+derived from the asset classes and not the selection of the funds
+themselves. So that if you select the funds that represent the right
+asset classes from your 401K, you will get better returns than chasing
+after the highest performing funds from the last 1, 2, or 3 years.</p>
+<a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=479">...More...</a><br>
+					
+					<!--- End Upper Left --->
+  			
+  			</div>
+  			<div class="col-2" style="width:32%; align:right;">          	
+            <!--- Upper Right --->
+<h3>Returns League Table</h3>
+<p>Last time we introduced the <a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=479">SIB
+(Simpler Is Better) porfolios.</a> There is often mystery surrounding a
+good portfolio and SIB demonstrates the results that can be achieved
+with basic asset allocation with funds that represent market indices --
+no special choice of stocks or funds. Today, we measure SIB against <span
+ class="maintitle"><a
+ href="http://www.myplaniq.com/jforum/posts/list/467.page" name="top"
+ class="maintitle" id="top">David Swensen's Six Asset Investment Plan</a></span>.<br>
+</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="font-weight: bold; text-align: center;" width="133">Annualized
+Return</td>
+      <td style="text-align: center; font-weight: bold;" width="69">
+      <p>3 YR</p>
+      </td>
+      <td style="text-align: center; font-weight: bold;" width="74">
+      <p>5 YR</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;" width="133">
+      <p><a rel="nofollow" target="_blank"
+ href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=17,295">Six
+Core
+TAA</a></p>
+      </td>
+      <td style="text-align: center;" width="69">
+      <p>12%</p>
+      </td>
+      <td style="text-align: center;" width="74">
+      <p>16%</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;" width="133">
+      <p><a rel="nofollow" target="_blank"
+ href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=17,373">Six
+Core
+Popular
+TAA</a></p>
+      </td>
+      <td style="text-align: center;" width="69">
+      <p>10%</p>
+      </td>
+      <td style="text-align: center;" width="74">
+      <p>13%</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;" width="133">
+      <p><a rel="nofollow" target="_blank"
+ href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=17,373">Swensen
+Six</a></p>
+      </td>
+      <td style="text-align: center;" width="69">
+      <p>7%</p>
+      </td>
+      <td style="text-align: center;" width="74">
+      <p>13%<br>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><span style="font-style: italic;">This table shows the comparison of
+the Six Asset Class SIB portfolio against David Swensen's Six Asset
+Investment Plan<br>
+</span></p>
+<!-- End Upper Right -->
+            
+            
+            </div>
+			</div>
+<!--				<div class="clearfloat"> </div>  -->
+  	</div>
+
+  <!-- CONTENT -->
+  <div id="content">
+    <div class=" middlebar">
+	  <div class="middleLinks" id="middleLinks">
+			<a href="/LTISystem/f401k__why.action"> Why MyPlanIQ</a>
+			<a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a>
+			<div id="searchForPlan">
+					<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    				<input name="groupIDS" value="8" type="hidden"></input>
+	        			<input name="includeHeader" value="true" type="hidden"></input>
+	        			<input name="type" value="2" type="hidden"></input>
+	       			    <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	       			    <span>Search For A Plan And Its Model Portfolios</span>
+	        			<input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)' size="15" type="text" value='${Parameters.symbolPlan!""}'>
+	       				<input alt='Quote' id='submitSearchBottom' type='submit' value=''/>
+	   				</form><!-- end of form -->
+		 	</div><!--searchForPlan -->
+	 </div>
+	 
+	 </div>
+
+      <div class="col-1 box maxheight">
+
+      	<div class="inner" style="font-size: 13px"> 
+<h3>Featured Articles</h3>
+<h4 style="font-size: 120%; font-weight: normal;"><a
+ href="http://www.myplaniq.com/jforum/posts/list/467.page#564">MyPlanIQ
+Introduces Free SAA Strategy<br>
+</a></h4>
+<p>With the introduction of the <a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=479">SIB
+(Simpler Is Better) porfolios</a>, asset allocation is shown to be
+critical as opposed to picking a particular fund or stock. MyPlanIQ is
+making Strategic Asset Allocation strategies (buy and hold) free for
+all registered users.<br>
+</p>
+<h4 style="font-size: 120%; font-weight: normal;"><a
+ href="http://www.myplaniq.com/jforum/posts/list/467.page#564">MyPlanIQ
+Starts 401K Return League Table<br>
+</a></h4>
+<p>The <a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=479">SIB
+(Simpler Is Better) porfolios</a>, are an ideal vehicle against which
+to benchmark other plans. SIB shows that if you have funds in the right
+classes, you should be able to achieve good returns with low risk. The
+league table will give you the ability to see how plans perform against
+each other and the SIB benchmark. <br>
+</p>
+<h4 style="font-size: 120%; font-weight: normal;"><a
+ href="http://www.myplaniq.com/jforum/posts/list/467.page#564">David
+Swensen's Six Asset Investment Plan</a></h4>
+<p><span class="postbody">David Swensen, the Yale Endowment Manager,
+proposed this one size fits all <a rel="nofollow"
+ href="http://www.amazon.com/Unconventional-Success-Fundamental-Approach-Investment/dp/0743228383/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1243828849&amp;sr=8-1"
+ target="_blank">model portfolio</a>
+for individual investors. The major difference between this portfolio
+and other conventional portfolios is that it emphasizes international
+equities (including emerging market equities) as well as real estate
+investment. </span>
+</p>
+<br>
+
+  		<p><a href="http://www.myplaniq.com/LTISystem/f401k_blogs.action" class="moreInCategory">More Featured Articles »</a></p>
+            </div> 
+     	</div>
+      <div class="col-2  box maxheight">
+         <div class="inner" style="font-size: 13px">
+<h3>Best of The Web</h3>
+<h4 style="font-size: 120%;"><a
+ href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=478"><span
+ style="font-weight: normal;">Big
+401(k) Mistakes That Hurt Savings</span><br>
+</a></h4>
+<br>
+<p>A new look at retirement trends by the human resources
+consulting firm Hewitt Associates shows that both inertia and strategic
+mistakes take a toll when it comes to planning for a secure retirement.</p>
+<h4 style="font-size: 120%; font-weight: normal;"><a
+ href="http://www.myplaniq.com/jforum/posts/list/477.page#576">Lawmakers
+Seek
+to
+Prevent
+Americans
+Outliving
+Savings</a></h4>
+Lawmakers concerned that Americans may outlive their savings
+are looking at ways to make the money last through retirement.
+<br>
+<br>
+<h4 style="font-size: 120%;"><a
+ href="http://www.myplaniq.com/jforum/posts/list/468.page#565"><span
+ style="font-weight: normal;">Finding
+the Right Asset Mix </span><br>
+</a></h4>
+<p>Fund Manager David Wright has generated steady, respectable
+returns by moving in and out of asset classes. These days, he's
+shunning stocks.</p>
+<h4 style="font-size: 120%; font-weight: normal;"><a
+ href="http://www.myplaniq.com/jforum/posts/list/469.page#566">The
+Mystery Advisers</a></h4>
+<p>Many Brand Name advisers get strategic tips and tech support
+from lower-profile firms. It is interesting to note that when you go to
+the Brand name companies, you may be getting advice from smaller
+boutique <br>
+</p>
+                 <p><a href="http://www.myplaniq.com/LTISystem/f401k_blogs.action" class="moreInCategory">More Articles »</a></p>    
+
+         </div>
+      </div>
+      <div class="col-3 box maxheight">
+         <div class="inner" style="font-size: 13px">
+	<h3>Plan Investment Choices Ranking</h3><br>
+                <h4 style="font-size:140%">Top 10 Plans With Best Overall Scores</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="1">
+  <thead> <tr>
+    <th alt="Plan Name" class="header" width="60px">Plan Name</th>
+    <th alt="TAA Moderate 5 Year Annual Return" class="header"
+ width="60px">TAA 5Yr ReturTAA Moderate 5 Year Annual Return</th>
+    <th alt="Overall Score" class="header" width="60px">Overall Score</th>
+  </tr>
+  </thead> <tbody>
+    <tr class="odd">
+      <td><a href="/LTISystem/f401k_view.action?ID=986">WACHOVIA
+SAVINGS PLAN</a></td>
+      <td width="60px">14%</td>
+      <td width="60px">91%</td>
+    </tr>
+    <tr class="even">
+      <td><a href="/LTISystem/f401k_view.action?ID=985">WESTERN
+DIGITAL
+CORPORATION 401(k) PLAN</a></td>
+      <td width="60px">10%</td>
+      <td width="60px">90%</td>
+    </tr>
+    <tr class="odd">
+      <td><a href="/LTISystem/f401k_view.action?ID=1,100">Polaris
+Electronics Inc 401K Plan</a></td>
+      <td width="60px">15%</td>
+      <td width="60px">90%</td>
+    </tr>
+    <tr class="even">
+      <td><a href="/LTISystem/f401k_view.action?ID=679">TD Ameritrade
+Premier List No Transaction Fee Mutual Fund Plan</a></td>
+      <td width="60px">14%</td>
+      <td width="60px">88%</td>
+    </tr>
+    <tr class="odd">
+      <td><a href="/LTISystem/f401k_view.action?ID=1,009">COMPUWARE
+CORPORATION ESOP/401(k) PLAN</a></td>
+      <td width="60px">14%</td>
+      <td width="60px">88%</td>
+    </tr>
+    <tr class="even">
+      <td><a href="/LTISystem/f401k_view.action?ID=724">Schwab
+OneSource Select List Funds</a></td>
+      <td width="60px">17%</td>
+      <td width="60px">88%</td>
+    </tr>
+    <tr class="odd">
+      <td><a href="/LTISystem/f401k_view.action?ID=930">PROGRESS
+ENERGY
+401(k) SAVINGS &amp; STOCK OWNERSHIP PLAN</a></td>
+      <td width="60px">12%</td>
+      <td width="60px">87%</td>
+    </tr>
+    <tr class="even">
+      <td><a href="/LTISystem/f401k_view.action?ID=782">RETIREMENT
+SAVINGS PLAN OF BNY SECURITIES GROUP</a></td>
+      <td width="60px">14%</td>
+      <td width="60px">87%</td>
+    </tr>
+    <tr class="odd">
+      <td><a href="/LTISystem/f401k_view.action?ID=840">EMC
+Corporation
+401(k) Savings Plan</a></td>
+      <td width="60px">12%</td>
+      <td width="60px">86%</td>
+    </tr>
+    <tr class="even">
+      <td><a href="/LTISystem/f401k_view.action?ID=940">PS 401(k)
+PROFIT SHARING PLAN</a></td>
+      <td width="60px">12%</td>
+      <td width="60px">86%</td>
+    </tr>
+  </tbody>
+</table>
+<br><p align="center"><a href="http://www.myplaniq.com/LTISystem/f401k_showplanscorelist.action">...More Plan Ranking...</a></p>
+
+
+  	</div>
+      </div>
+		<div class="clearfloat"></div>
+  </div>
+</body>
+</html>

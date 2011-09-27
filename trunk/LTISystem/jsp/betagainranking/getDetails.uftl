@@ -1,0 +1,83 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>Validfi funds Beta Gain Ranking[#if Parameters.symbol??] - ${Parameters.symbol}[/#if]</title>
+<link rel="stylesheet" href="../images/jquery.ui.theme/redmond/jquery-ui-1.7.1.custom.css" type="text/css" />
+
+<script type="text/javascript" src="../images/jquery.ui/1.7.1/ui.tabs.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $("#tabs").tabs();
+   
+  });
+</script>
+</head>
+<body>
+
+	
+	<h1 align="Center">${symbol}</h1>
+	<div class="demo">
+	<br>
+	<br>
+	<div id="detailspanel" align="left" style="padding:5px;display:block">
+		<h3> Factor Beta Gain <h3>
+		[@s.action name="FactorDetailsTable" namespace="/jsp/betagainranking" executeResult=true]
+		[@s.param name="symbol"]${symbol}[/@s.param]
+		[/@s.action]
+	</div>
+	<br>
+	<br>
+	</div><!-- End demo -->
+	<div id="tabs">
+		<ul>
+			<li><a href="#shortPanel">Short-Term Ranking</a></li>
+			<li><a href="#midPanel">Mid-Term Ranking</a></li>
+			<li><a href="#longPanel">Long-Term Ranking</a></li>
+			<li><a href="#shortChartPanel">Beta Gain Chart</a></li>
+		</ul>
+			<div id="shortPanel">
+			[@s.action name="HistoricalRankingTable" namespace="/jsp/betagainranking" executeResult=true]
+			[@s.param name="symbol"]${symbol}[/@s.param]
+			[@s.param name="interval"]3[/@s.param]
+			[/@s.action]
+			</div>
+			<div id="midPanel">
+			[@s.action name="HistoricalRankingTable" namespace="/jsp/betagainranking" executeResult=true]
+			[@s.param name="symbol"]${symbol}[/@s.param]
+			[@s.param name="interval"]12[/@s.param]
+			[/@s.action]
+			</div>
+			<div id="longPanel">
+			[@s.action name="HistoricalRankingTable" namespace="/jsp/betagainranking" executeResult=true]
+			[@s.param name="symbol"]${symbol}[/@s.param]
+			[@s.param name="interval"]36[/@s.param]
+			[/@s.action]
+			</div>
+			<div id="shortChartPanel" style="height:800px">
+				[@s.url action="OutputHistoricalBetaGain" namespace="/jsp/flash" id="url_flash_xml" escapeAmp="false"]
+					[@s.param name="symbol"]${symbol}[/@s.param]
+					[@s.param name="interval"]3[/@s.param]
+				[/@s.url]
+				
+				[@s.action name="DisplayFlash" namespace="/jsp/flash" executeResult=true]
+					[@s.param name="chartName"]${symbol}[/@s.param]
+					[@s.param name="lineNameArray"]${symbol}[/@s.param]
+					[@s.param name="address"]127.0.0.1[/@s.param]
+					[@s.param name="port"]8080[/@s.param]
+					[@s.param name="url"]${url_flash_xml}[/@s.param]
+					[@s.param name="currentMode"]portfolio[/@s.param]
+				[/@s.action]
+			</div>
+	</div>
+	<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs();
+	});
+	</script>
+</body>
+</html>
+

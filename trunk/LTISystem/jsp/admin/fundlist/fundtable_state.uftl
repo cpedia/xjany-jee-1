@@ -1,0 +1,205 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+      <head>
+      <title>FundTable List Operatiing Statement</title>
+      <meta http-equiv="refresh" content="60">
+      <link href="../images/style.css" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="../images/jquery-1.2.6.min.js"></script>
+      </head>
+      <body onload="setTimeout( this.location.reload(); ,1000);">
+      <table class="nav" width="100%">
+      		<td width="20%">
+				[@s.url action="Fundtable_main.action" id="url_tablemain" namespace="/jsp/admin/fundlist"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_tablemain}"]FundTable List Configeration[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="ExecutionFundTable.action" id="url_exetable" namespace="/jsp/admin/fundlist"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_exetable}"]FundTable List Operation Statement[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="Main.action" id="url_main" namespace="/jsp/admin/fundlist"  includeParams="none"]
+				[/@s.url]
+				[@s.a href="%{url_main}"]Upload FundTable List[/@s.a]	
+			</td>
+	  </table>  
+	  <h1>${"FundTable List Operatiing State"}</h1>
+	  
+      <br>
+      FundTable List Execution Process<br>
+		<table width="50%" border="0">
+		<tr>
+			<td>
+				<table  id="processtable" border="1" cellpadding="0" cellspacing="1" width="100%">
+					<thead>
+						<tr>
+							<th>Process</th>
+						</tr>
+					</thead>
+					<tbody>
+						[#list stateList as st]
+							[#if st_index%2==0]
+								<tr class='odd'>
+							[/#if]
+							[#if st_index%2==1]
+								<tr class='even'>
+							[/#if]
+							<td>${st.toString()}</td>
+						</tr>	
+						[/#list]	
+					</tbody> 
+				</table>
+			</td>
+			<td>
+				<table  id="statetable" border="1" cellpadding="0" cellspacing="1" width="100%">
+					<thead>
+						<tr>
+							<th>State</th>
+						</tr>
+					</thead>
+					<tbody>
+						[#list processState as ps]
+							[#if ps_index%2==0]
+								<tr class='odd'>
+							[/#if]
+							[#if ps_index%2==1]
+								<tr class='even'>
+							[/#if]
+						<td>${ps.toString()}</td>
+						</tr>	
+						[/#list]
+					</tbody> 
+				</table>
+			</td>
+		</tr>
+		</table>
+      
+      <br>
+      FundTable List Execution State<br>
+		<table id="logtable"  border="1" cellpadding="0" cellspacing="1"width="50%">
+			<thead>
+			<tr>
+				<th>Name</th><th>Value</th>	
+			</tr>			
+			</thead>
+			<tbody>
+				<tr>
+					<td>Is updating</td>
+					<td>${isUpdating.toString()}</td>
+				</tr>
+				<tr>
+					<td>Start Date</td>
+					<td>${updateDBStartDate}</td>
+				</tr>
+				<tr>
+					<td>Updating period</td>
+					<td>${updateDBPeriod }mins</td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td>${state!"Nothing Process"}</td>
+				</tr>
+				<tr>
+					<td>Total size</td>
+					<td>${totalCount }</td>
+				</tr>
+				<tr>
+					<td>Current pos</td>
+					<td>${currentCount }</td>
+				</tr>
+			</tbody>
+		</table>
+		<br><br>
+		
+		<h1>${"Ticker Search State"}</h1>
+	  
+      <br>
+      Ticker Search Process<br>
+		<table width="50%" border="0">
+		<tr>
+			<td>
+				<table  id="processtable" border="1" cellpadding="0" cellspacing="1" width="100%">
+					<thead>
+						<tr>
+							<th>Process</th>
+						</tr>
+					</thead>
+					<tbody>
+						[#list stateTList as stt]
+							[#if stt_index%2==0]
+								<tr class='odd'>
+							[/#if]
+							[#if stt_index%2==1]
+								<tr class='even'>
+							[/#if]
+							<td>${stt.toString()}</td>
+						</tr>	
+						[/#list]	
+					</tbody> 
+				</table>
+			</td>
+			<td>
+				<table  id="statetable" border="1" cellpadding="0" cellspacing="1" width="100%">
+					<thead>
+						<tr>
+							<th>State</th>
+						</tr>
+					</thead>
+					<tbody>
+						[#list processTState as pst]
+							[#if pst_index%2==0]
+								<tr class='odd'>
+							[/#if]
+							[#if pst_index%2==1]
+								<tr class='even'>
+							[/#if]
+						<td>${pst.toString()}</td>
+						</tr>	
+						[/#list]
+					</tbody> 
+				</table>
+			</td>
+		</tr>
+		</table>
+      
+      <br>
+     Ticker Search Execution State<br>
+		<table id="logtable"  border="1" cellpadding="0" cellspacing="1"width="50%">
+			<thead>
+			<tr>
+				<th>Name</th><th>Value</th>	
+			</tr>			
+			</thead>
+			<tbody>
+				<tr>
+					<td>Is updating</td>
+					<td>${isTUpdating.toString()}</td>
+				</tr>
+				<tr>
+					<td>Start Date</td>
+					<td>${updateDBTStartDate}</td>
+				</tr>
+				<tr>
+					<td>Updating period</td>
+					<td>${updateDBTPeriod }mins</td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td>${stateT!"Nothing Process"}</td>
+				</tr>
+				<tr>
+					<td>Total size</td>
+					<td>${totalTCount }</td>
+				</tr>
+				<tr>
+					<td>Current pos</td>
+					<td>${currentTCount }</td>
+				</tr>
+			</tbody>
+		</table>
+		<br><br>
+      </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Customize Page</title>
+<style>
+.blkContainerSblk{padding:34px 34px 34px 34px; margin:15px 15px 15px 15px;overflow:hidden; zoom:1; border:1px #c8d8f1 solid;background:#f5f8fd;}
+.blkContainerSblk h1{height:35px; line-height:35px; overflow:hidden; text-align:center; font-family:arial; font-size:20px; font-weight:normal; color:#03005C;}
+.artInfo{padding-top:10px; overflow:hidden; line-height:14px; text-align:center; font-family:Arial, Helvetica, sans-serif;}
+.artInfo a,.artInfo a:visited{text-decoration:none;}
+.artInfo a:hover,.artInfo a:active{text-decoration:underline;}
+</style>
+</head>
+<body id="conBody">
+<div class="Main">
+	
+		<div class="blkContainerSblk">
+				
+				<h1 id="artibodyTitle">ValidFi Customize Page</h1>
+				
+				<div class="artInfo"><span id="art_source">http://www.validfi.com</span>&nbsp;&nbsp;<span id="pub_date">2009 01 06 &nbsp;23:00</span>&nbsp;&nbsp;<span id="media_name"><a href=http://www.xinhuanet.com/ target="_blank">Valid Fi Website</a></span></div>
+				
+				Strategy Watch<br>
+				<br>
+				&nbsp;&nbsp;* Top strategies in each category: asset allocation, rebalance, cash flow, equity, fixed income, commodities and more. <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;o Retirement withdrawal strategies: how do they do in this turbulent time?<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;o Portfolio rebalancing strategies: reducing risks or taking advantage of the recent market deficiency?<br>
+							
+		</div>
+</div>
+</body>
+</html>

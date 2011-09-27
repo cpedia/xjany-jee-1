@@ -1,0 +1,35 @@
+[#ftl]
+<html>
+	<head>
+		<title>Exception</title>
+		<script>
+			var host=window.location.host;
+			$(function(){
+				$('#link').html(host);
+				$('#link').attr({'href':host});
+			});
+		</script>
+	</head>
+	<body>
+	<div align="left">
+		<span style=''>The operation cannot be completed , see the follow detail message: </span>
+		<br>
+		${message!""}<br>
+		<br>
+		Go back to <a href='' id='link'></a>.
+		<script>
+			var host=window.location.host;
+			$('#link').attr({'href':host});
+			$('#link').html(host);
+		</script>
+		<div style='display:none'>		
+		<pre>
+			[#if exception??]		
+				${exception.message!""}
+			[/#if]
+			${exceptionStack!""}
+		</pre>
+		</div>
+	</div>
+	</body>
+</html>

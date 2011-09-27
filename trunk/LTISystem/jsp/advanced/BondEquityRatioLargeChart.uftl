@@ -1,0 +1,31 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="smoney" content="vf_current" />
+<meta name="submenu" content="smoney" />
+<meta name="smoneyindicators" content="vf_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>MyPlanIQ Bond Equity Yield Ratio</title>
+<meta content="Bond Equity Yield Ratio is a popular indicator for future stock market" name="Description">
+<link rel="stylesheet" href="/LTISystem/jsp/images/vf.css" type="text/css" /> 
+<script type="text/javascript">
+function showPic(img,width,height){
+window.open("data:image/jpeg;base64,"+img,"","width="+width+",height="+height+",resizable=1");
+}
+</script>
+</head>
+<body>
+<p align-text="center"><h1>MyPlanIQ Bond Equity Yield Ratio</h1></p>
+                        <!--- I would like to add a permission check here --->
+<li><a href="/LTISystem/advanced__indicators.action">MyPlanIQ Marrket Indicators</a></li>                    
+[@lti.gchart Parameters.name!"Bond Equity Yield Ratio" Parameters.key!"BondEquityRatioList_4980.xml" Parameters.host!"www.myplaniq.com"][/@lti.gchart]
+ [@lti.gchart Parameters.name!"Bond Yield (^TNX),Equity Yield(^GSPC)" Parameters.key!"YieldData_4980.xml" Parameters.host!"www.myplaniq.com"][/@lti.gchart]
+
+</div>
+
+</body>
+</html>

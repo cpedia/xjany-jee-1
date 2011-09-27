@@ -1,0 +1,144 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title></title>
+<meta name="Blogs" content="n401k_current" />
+<meta  name="Description" content="MyPlanIQ constantly publishes news and articles about  portfolio management, retirment investing, ETF market trends and retirment plan evaluation.   ">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds,  gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset  Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<script>
+$(document).ready(function(){
+	$('li').addClass('liStyle');
+});
+
+function showRe(){
+  $("#news").hide();
+  $("#retirement").show();
+}
+function showNews(){
+   $("#news").show();
+  $("#retirement").hide();
+}
+</script>
+<style>
+li.liStyle{
+	margin-left:0px;
+	list-style-type:none;
+}
+
+.liStyle li {
+    list-style-type: disc !important;
+     margin-left: 20px;
+}
+
+ol li.liStyle{
+    margin-left:15px;
+	list-style-type:decimal;
+}
+
+a.lead{
+  color:#FFFFFF;
+}
+
+#creditfooter{
+	display:none;
+}
+.feedTitle{
+	padding-left:300px;
+	font-size:20pt;
+	padding-bottom:8px;
+	margin-bottom:8px;
+}
+.feedTitle a{
+	text-decoration:none;
+}
+.headline a{
+	text-decoration:none;
+}
+.date{
+	font-size:11px;
+	line-height:18px;
+}
+.headline{
+	font-size:14px;
+	font-weight:bold;
+}
+.edit_area{
+	margin-bottom:10px;
+}
+.liStyle{
+	margin-top:10px;
+}
+span{
+color:#000000;
+}
+.tab{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px  #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:18px;
+	margin:2px 0;
+	padding:7px 80px 9px 36px;
+}
+.tab1{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px  #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:1.7em;
+	margin:2px 0;
+	padding-left:30px;
+	padding-right:5px;
+}
+</style>
+</head>
+<body>
+	<div class="borderGreen">
+		 <div id="content_tier1" class="content_tier1">
+			<!--mpleft begining-->
+			<div id="mpleft" style="float:left;width:250px;">
+				<div style="width:250px; margin-right:9px;">
+								<!--leftfirst-->
+								[@s.action  name="f401k_allblog" namespace="/" executeResult=true]
+									[@s.param  name="formusCategories"]MyPlanIQ Newsletters[/@s.param]
+									[@s.param  name="isMain"]false[/@s.param]
+									[@s.param  name="setPageSize"]20[/@s.param]
+								[/@s.action]
+								<div style="margin-bottom: 15px;"><a href="http://www.myplaniq.com/LTISystem/newsletter__nllist.action"><strong><font size="3">Old Newsletter Archive</font></strong></a></div>
+								[@s.action  name="f401k_allblog" namespace="/" executeResult=true]
+									[@s.param  name="formusCategories"]News and Commentaries[/@s.param]
+									[@s.param  name="setPageSize"]20[/@s.param]
+									[@s.param  name="isMain"]false[/@s.param]
+									[@s.param  name="isprePage"]true[/@s.param]
+								[/@s.action]
+								[@s.action  name="f401k_allblog" namespace="/" executeResult=true]
+									[@s.param  name="isAnnouncements"]true[/@s.param]
+									[@s.param  name="isMain"]false[/@s.param]
+								[/@s.action]
+								
+								<!--firstend-->
+				</div>		   
+			</div>
+			<!--mpleft end-->
+			<!--mpcenter-->
+			<div id="mpcenterright" style="margin- left:5px;float:left;width:651px;">
+				<div style="width:615px; margin-right:0;float:left;word- wrap:break-word" id="news">
+					[@s.action name="f401k_allblog" namespace="/"  executeResult=true]
+						[@s.param  name="formusCategories"]MyPlanIQ Newsletters[/@s.param]
+                                                 [@s.param name="setPageSize"]20[/@s.param]
+						[@s.param name="isMain"]true[/@s.param]
+					[/@s.action]
+				</div>
+			</div>
+			<!--mpcenter end-->
+			<!--mpright begining
+			<div id="mpright" style="width:130px;background- color:#357C38;float:right" >right</div>
+			mpright end-->
+			<div class="clearfloat"></div>
+	</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<div id="create_mp_heardname"></div>
+
+<div id="createplan_mp_heardname" style="display:none; margin: 0 auto 20px;font-weight: bold;text-align: center;">Plan name:<input type="text" value="Please input the plan name here" onclick="if(this.value=='Please input the plan name here')this.value='';" onblur="if(this.value=='')this.value='Please input the plan name here';" id="mpiq_widget_createplanwidget_planname" style="width:230px;">
+</div>
+
+<p>Description:</p>
+<p>
+	<textarea style="width:97%;margin:1%" id="mpiq_widget_${widgetName}_description${time}"></textarea>
+</p>
+
+<div id="mp_fundtablehide" style="display:none">
+	<strong>R*:</strong> Redemption (Minimum months to hold). 
+	<strong>M*: </strong>Mark (p: proxy, n: not used). <br>
+	<strong>RT: </strong>Round Trip (number of times allowed to buy/sell in trailing 12 months). 
+	<strong>WP: </strong>Waiting Period (minimum months to wait before buy again).
+</div>
+
+<table width=100%  class="mpiq_fund_table" border="0" cellpadding="0" cellspacing="1" id="mpiq_widget_${widgetName}_fund_table${time}"> <!-- variables table -->
+	<thead>
+		<tr>
+			<th class="mpiq_header" key="assetclass" width="300">
+				<b>Asset Class</b>
+			</th>
+			<th class="mpiq_header" key="ticker" width="100">
+				<b>Ticker</b>
+			</th>
+			<th class="mpiq_header" key="name" width="300">
+				<b>Name</b>
+			</th>
+			<th class="mpiq_header" key="rating" width="100">
+				<b>Rating</b>
+			</th>
+			<th id="mpiq_widget_${widgetName}_overhere" class="mpiq_header" key="description" width="300">
+				<b>Description</b>
+			</th>
+			<th  style="display: none;" class="mpiq_header" key="redemption">
+				<input type="button" class="uiButton" value="R*" onclick="mpiq_widget_${widgetName}_resetredemption()">
+			</th>
+			<th  style="display: none;" class="mpiq_header" key="roundtrip">
+				<input type="button" class="uiButton" value="Rt" onclick="mpiq_widget_${widgetName}_resetroundtrip()">
+			</th>
+			<th  style="display: none;"class="mpiq_header" key="waitingperiod">
+				<input type="button" class="uiButton" value="WP" onclick="mpiq_widget_${widgetName}_resetwaitingperiod()">
+			</th>
+			<th  style="display: none;" class="mpiq_header" key="memo" >
+				<b>M*</b>
+			</th>
+			<th width=10 class="mpiq_header">
+				<input  type="button" value="More Option" onclick="mpiq_widget_${widgetName}_setHiddenCol(6,4)" class="button_add" id="mpiq_widget_${widgetName}_btnadd">
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	<#--
+	<#list 1..1 as var_index>
+		<tr>
+			<td>
+				<input type="text" value="" class="mpiq_show_text" onclick="mpiq_widget_${widgetName}_edit_text(this)" onblur="mpiq_widget_${widgetName}_out_text(this)">
+			</td>
+			<td>
+				<input type="text" value="" class="mpiq_show_text" onclick="mpiq_widget_${widgetName}_edit_text(this)" onblur="mpiq_widget_${widgetName}_out_text(this)">
+			</td>
+			<td>
+				<input type="text" value="" class="mpiq_show_text" onclick="mpiq_widget_${widgetName}_edit_text(this)" onblur="mpiq_widget_${widgetName}_out_text(this)">
+			</td>
+			<td>
+				<input type="text" value="" class="mpiq_show_text" onclick="mpiq_widget_${widgetName}_edit_text(this)" onblur="mpiq_widget_${widgetName}_out_text(this)">
+			</td>
+			<td>
+				<input type="text" value="" class="mpiq_show_text" onclick="mpiq_widget_${widgetName}_edit_text(this)" onblur="mpiq_widget_${widgetName}_out_text(this)">
+			</td>
+			<td>
+				<input type="button" value="delete" onclick="mpiq_widget_${widgetName}_remove_item(this)" class="button_remove">
+			</td>
+		</tr>
+	</#list>
+	-->
+	</tbody>
+</table>
+
+<input type="button" value="Add One More Fund" onclick="mpiq_widget_${widgetName}_add_item('#mpiq_widget_${widgetName}_btnadd',null)" class="button_add" id="mpiq_widget_${widgetName}_btnadd2">
+<BR><BR>
+Edit/Input available funds in the following box<BR>
+In the following text box, input a list of fund ticker symbols, one per line<BR>
+<BR><BR>
+VFINX<BR>
+VEIEX<BR>
+VBMFX<BR>
+CASH<BR>
+<p>
+<textarea id="mpiq_widget_${widgetName}_tickers" style="width:97%;margin:1%;height:150px;"></textarea>
+</p>
+<p style="text-align:center">
+<input type="button" value="Add" onclick="mpiq_widget_${widgetName}_b_add()">&nbsp;<input type="button" value="Replace" onclick="mpiq_widget_${widgetName}_b_replace()">
+</p>
+<p>Comment:
+<p><textarea style='width:97%;margin:1%;' id='mpiq_widget_${widgetName}_comment'></textarea></p>
+<p id="buttonlist" style="text-align: center;"><input class="createorupdate" type="button" value="Save" onclick="mpiq_widget_${widgetName}_save()">
+<input id="createmoderportolio" type="button" value="createmoderportolio" onclick="mpiq_widget_${widgetName}_save()"></p>
+<div id="mp_loading" style="position:absolute;"><div></div></div>
+<div id="mp_getBenchMarks"><a onclick="cancel('mp_getBenchMarks')" class="close"></a>
+	<div align="left" style="padding-left:25px;margin-bottom:25px;line-height:0.7em;font-size:16px;">
+		There still are  un-recognize funds in the table.<br><br>
+	 	You can assign the Asset Classes they belong to and their benchmarks will be used in the simulatiion,otherwise they will be ignored.
+	</div>
+	<table  class="mpiq_fund_table" border="0" cellpadding="0" cellspacing="1"> <!-- variables table -->
+		<thead>
+			<tr>
+				<th class="mpiq_header"  width="300">
+					<b>Asset Class</b>
+				</th>
+				<th class="mpiq_header"  width="300">
+					<b>Ticker</b>
+				</th>
+				<th class="mpiq_header"  width="300">
+					<b>Name</b>
+				</th>
+				<th class="mpiq_header"  width="300">
+					<b>Rating</b>
+				</th>
+				<th class="mpiq_header"  width="30">
+					<b>Description</b>
+				</th>
+			</tr>
+		</thead>
+		<tbody id="mpiq_widget_createplanwidget_bench">
+		</tbody>
+	</table>
+	<button onclick="mpiq_widget_createplanwidget_pasteTicker()">Add</button>
+</div>

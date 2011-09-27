@@ -1,0 +1,3 @@
+<p align="center" style="margin-bottom: 0cm;"><font face="Times New Roman, serif"><font face="Times New Roman, serif"><font size="4" style="font-size: 22pt;"><b>ValidFi: Financial and Investment Strategies on a Quantitative Platform</b></font></font></font></p>
+<p style="margin-bottom: 0cm;"><font face="Times New Roman, serif"><font face="Times New Roman, serif"><font size="3"><img height="468" width="531" src="/LTISystem/UserFiles/Image/Primers_html_html_3e1a0929.gif" alt="" /></font></font></font></p>
+<font face="Times New Roman, serif"><font face="Times New Roman, serif"><font size="3"></font></font><a href="${HomeURL}Guide"><font color="#0000ff"><u><font face="Times New Roman, serif"><font size="3">Read the primer ... </font></font></font></font></font></font></p>

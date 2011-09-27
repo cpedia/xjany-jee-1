@@ -1,0 +1,219 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ News and Articles</title>
+<meta name="Blogs" content="n401k_current" />
+<meta  name="Description" content="MyPlanIQ constantly publishes news and articles about portfolio management, retirment investing, ETF market trends and retirment plan evaluation.  ">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<script>
+$(document).ready(function(){
+	$('li').addClass('liStyle');
+});
+
+function showRe(){
+  $("#news").hide();
+  $("#retirement").show();
+}
+function showNews(){
+   $("#news").show();
+  $("#retirement").hide();
+}
+</script>
+<style>
+li.liStyle{
+	margin-left:0px;
+	list-style-type:none;
+}
+ol li.liStyle{
+    margin-left:15px;
+	list-style-type:decimal;
+}
+
+a.lead{
+  color:#FFFFFF;
+}
+
+#creditfooter{
+	display:none;
+}
+.feedTitle{
+	padding-left:300px;
+	font-size:20pt;
+	padding-bottom:8px;
+	margin-bottom:8px;
+}
+.feedTitle a{
+	text-decoration:none;
+}
+.headline a{
+	text-decoration:none;
+}
+.date{
+	font-size:11px;
+	line-height:18px;
+}
+.headline{
+	font-size:14px;
+	font-weight:bold;
+}
+.edit_area{
+	margin-bottom:10px;
+}
+.liStyle{
+	margin-top:10px;
+}
+span{
+color:#000000;
+}
+.tab{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:18px;
+	margin:2px 0;
+	padding:7px 80px 9px 36px;
+}
+.tab1{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:1.7em;
+	margin:2px 0;
+	padding-left:30px;
+	padding-right:5px;
+}
+</style>
+</head>
+<body>
+	<!--mpleft begining-->
+	<div id="mpleft" style="float:left;width:170px;">
+					<div style="width:170px; margin-right:9px;">
+					   <div class="sidebar_box_noPadding roundHeadingGreen">
+						<div class="sidebar_box_heading_white">Category</div>
+						[#if announcementsList??]
+						<ul>
+							[#list announcementsList as var]
+								<li class="tab1" style="line-height:2.5em">
+									<span><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+									<!--- <p class="date">${var.topicTime?string("MM/dd/yyyy")}</p> --->
+								</li>
+								[#if var_index==9][#break][/#if]
+							[/#list]
+						</ul>
+						[/#if]
+					   </div>
+					   
+					  <div class="sidebar_box_noPadding roundHeadingGreen">
+						<div class="sidebar_box_heading_white"><a class="lead" onclick="showRe()">Retirement Investing News & Articles</a></div>
+					
+					[#if jTopicsOfRetirement??]
+						<ul>
+							[#list jTopicsOfRetirement.items as var]
+								<li class="tab1" style="line-height:2.5em">
+									<span><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+									<!--- <p class="date">${var.topicTime?string("MM/dd/yyyy")}</p> --->
+								</li>
+							[/#list]
+						</ul>
+						[/#if]
+						<br><div style="margin:0 auto; margin-left: 20px;">[@lti.pagination jTopicsOfRetirement "f401k_blog.action" " "][/@lti.pagination]</div><br>
+					   </div> 
+					   
+					   <div class="sidebar_box_noPadding roundHeadingGreen">
+						<div class="sidebar_box_heading_white"><a class="lead" onclick="showNews()">News and Commentaries</a></div>
+						[#if jTopicsOfNewsAndCommentaries??]
+						<ul>
+							[#list jTopicsOfNewsAndCommentaries.items as var]
+								<li class="tab1" style="line-height:2.5em">
+									<span><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+									<!--- <p class="date">${var.topicTime?string("MM/dd/yyyy")}</p> --->
+								</li>
+							[/#list]
+						</ul>
+						[/#if]
+						<br><div style="margin:0 auto; margin-left: 20px;">[@lti.pagination jTopicsOfNewsAndCommentaries "f401k_blog.action" " "][/@lti.pagination]</div><br>
+					   </div>
+					   <div class="sidebar_box_noPadding roundHeadingGreen">
+						<div class="sidebar_box_heading_white">Resources</div>
+						<ul>
+						   <li class="tab1" style="line-height:2.5em">
+						    <span><a href="http://www.403bwise.com/">403bWise</a></span>			
+						   </li>
+					           <li class="tab1" style="line-height:2.5em">
+						    <span><a href="http://www.401khelpcenter.com/Employee_index.html/">401khelpcenter</a></span>			
+						   </li>
+					           <li class="tab1" style="line-height:2.5em">
+						    <span><a href="http://www.mint.com//">Mint.com</a></span>			
+						   </li>
+					           <li class="tab1" style="line-height:2.5em">
+						    <span><a href="http://www.walletpop.com//">WalletPop (AOL Finance)</a></span>			
+						   </li>
+					           <li class="tab1" style="line-height:2.5em">
+						    <span><a href="http://www.ebri.org//">Employee Benefit Research Institute</a></span>			
+						   </li>
+					           <li class="tab1" style="line-height:2.5em">
+						    <span><a href="http://www.benzinga.com//">Benzinga</a></span>			
+						   </li>
+						</ul>
+					   </div>
+					 </div>
+	</div>
+	<!--mpleft end-->
+	<!--mpcenterright begining-->
+	<div id="mpcenterright" style="margin-left:5px;float:left;width:615px;">
+		 <div style="width:615px; margin-right:0;float:left;word-wrap:break-word" id="news">
+			<h1 align="center"><a style="text-decoration:none;"href="../jforum/forums/show/61.page">News and Commentaries</a></h1>
+			   [#if jTopicsOfNewsAndCommentaries??]
+				<ul>
+					[#if tagCategory??]
+					[#else]
+					[#list jTopicsOfNewsAndCommentaries.items as var]
+						<li class="tab">
+							<span class="headline"><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+							<p class="date">${var.topicTime?string("MM/dd/yyyy")}</p>
+								[#if var.postText??]
+									${var.postText!''}
+									<p><a href ="../jforum/posts/list/${var.ID?string.computer}.page">comments(${var.topicReplies?string.computer})</a>&nbsp;
+									<a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark"/></a><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+									</p>
+								[/#if]
+							</li>
+					[/#list]
+					[/#if]
+				</ul>
+				[/#if]
+			<div style="margin:0 auto">[@lti.pagination jTopicsOfNewsAndCommentaries "f401k_blog.action" " "][/@lti.pagination]</div>
+			</div>
+			
+			<div style="width:651px; margin-right:0;float:left;word-wrap:break-word;display:none" id="retirement" >
+			<h1 align="center"><a style="text-decoration:none;"href="../jforum/forums/show/82.page">Retirement Investing News & Articles</a></h1>
+			   [#if jTopicsOfRetirement??]
+				<ul>
+					[#list jTopicsOfRetirement.items as var]
+						<li class="tab">
+							<span class="headline"><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+							<p class="date">${var.topicTime?string("MM/dd/yyyy")}</p>
+								[#if var.postText??]
+									${var.postText!''}
+									<p><a href ="../jforum/posts/list/${var.ID?string.computer}.page">comments(${var.topicReplies?string.computer})</a>&nbsp;
+									<a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark"/></a><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+									</p>
+								[/#if]
+							</li>
+					[/#list]
+				</ul>
+				[/#if]
+			<div style="margin:0 auto">[@lti.pagination jTopicsOfRetirement "f401k_blog.action" " "][/@lti.pagination]</div>
+		</div>
+	</div>
+	<!--mpcenterright end-->
+	<!--mpright begining-->
+	<div id="mpright" style="width:130px;background-color:#357C38;float:right" >right</div>
+	<!--mpright end-->
+</body>
+</html>

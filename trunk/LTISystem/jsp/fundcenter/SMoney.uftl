@@ -1,0 +1,243 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="smoney" content="vf_current" />
+<meta name="submenu" content="smoney" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>ValidFi Smart Money Watch</title>
+<link rel="stylesheet" href="/LTISystem/jsp/images/vf.css" type="text/css" /> 
+
+</head>
+<body>
+<div id="vf_wrap">
+	<div id="vf_content-wrap">
+		<div id="vf_sidebar">
+			[@lti.Articlesfeed2 "article"]
+
+		 	[/@lti.Articlesfeed2]
+		</div>
+		<div id="vf_contentright"style="float:left;">
+					<h1 align=center><span class="green">ValidFi<sup style="color:red"><em>Beta</em></sup>:</span> Guru Allocator Watch</h1>
+			<hr/>
+			<div class="clear">&nbsp;&nbsp;&nbsp;</div>
+			<p>&nbsp;</p>
+			
+			<div id ="vf_main">
+                        <h1>A Word on ValidFi's Asset Allocation Analysis</h1>
+                        <hr />
+                        <p>Studies have shown asset allocation is the most important determinant factor in a mutual fund's performance. ValidFi's Guru Asset Allocation Analysis is based on its proprietary technique called Realtime Asset Allocation (RAA) analyzer. The tool uses rigorous mathematical analysis on funds to obtain their beta factors associated with each asset. These beta factors are then normalized so that one could see their (beta) allocations in a portfolio. A derived asset allocation could be different from the actual allocation of a fund. Geek note: a beta of an asset reveals the underlying asset price movement with respect to a given index. For example, for a fund with 50-50 allocation of equities and cash, if its equity beta is 1.5, its beta allocation would be 1.5*50%=75%. 
+                        </p>
+                        <h1>US Equity, Bond Allocation Gurus</h1>
+                        <hr />
+                        <div class="vf_blockfund">
+                          <p><h3>Hussman Strategic Growth (<a href="../fundcenter/View.action?symbol=HSGFX">HSGFX</a>)</h3></p>
+                          <p><strong>Manager: </strong>John P. Hussman</p>
+                          <p>Hedged US Equity, never intended to be net short.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Fully hedged. See <a href="../fundcenter/AATrend.action?symbol=HSGFX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://hussman.net/wmc/wmc091123.htm">Alert for Tanks</a>:</p>
+                          <p>November 23, 2009. The past decade has been largely the experience of watching tanks rolling over a hilltop to attack the villagers celebrating below. Repeatedly, one could observe these huge objects rolling over the horizon, with an ominous knowledge that things would not work out well.</p>
+                          </li>
+                          <li><p><a href="http://hussman.net/wmc/wmc091109.htm">The Second Wave Begins</a>:</p>
+                           <p>November 9, 2009. This news of a shift in the character of foreclosure activity comes precisely in tandem with the beginning of the predictable second wave. The pleasant lull in the reset schedule is decidedly behind us...</p>
+                          </li>
+                          <li><p><a href="http://hussman.net/weeklyMarketComment.html">...More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->    
+                        <div class="vf_blockfund">
+                          <p><h3>Vanguard Asset Allocation (<a href="../fundcenter/View.action?symbol=VAAPX">VAAPX</a>)</h3></p>
+                          <p><strong>Manager: </strong>Thomas F. Loeb</p>
+                          <p>Flexible stock and bond asset allocation.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Has steadily reduced stock exposure since early Septempber. See <a href="../fundcenter/AATrend.action?symbol=VAAPX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.marketwatch.com/story/stock-market-surge-prompts-warning-to-investors-2009-10-06">Vanguard cautions investors on rally</a>:</p>
+                           <p>Oct 6, 2009 ... NEW YORK (MarketWatch) -- Many mutual funds are poised to celebrate ... The note highlights concerns that Vanguard has about investors being sucked ... From March 9 to the end of September, this year's bull market was on ...</p>
+                          </li>
+                          <li><p><a href="http://quicktake.morningstar.com/FundNet/SecFiling.aspx?symbol=VAAPX&country=USA">...More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->
+    
+                        <div class="vf_blockfund">
+                          <p><h3>FPA Crescent (<a href="../fundcenter/View.action?symbol=FPACX">FPACX</a>)</h3></p>
+                          <p><strong>Manager:</strong> Steven Romick</p>
+                          <p>Flexible stock and bond asset allocation based on value investing. Could take partial short position.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Has been very steady and methodologically rebalanced to its target allocation level (equity is around 50-60%). See <a href="../fundcenter/AATrend.action?symbol=FPACX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.fpafunds.com/media%5Ccrescentquarterly.mp3">Hear FPA Crescent's quarterly conference call.</a>:</p>
+                          </li>
+                          <li><p><a href="http://www.fpafunds.com/crescentfund.asp">...More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->   
+
+                        <div class="vf_blockfund">
+                          <p><h3>Greenspring Fund (<a href="../fundcenter/View.action?symbol=GRSPX">GRSPX</a>)</h3></p>
+                          <p><strong>Managers:</strong> Charles Carlson, Michael Fusting, David Trump</p>
+                          <p>Flexible stock and bond asset allocation based on value investment principle. Pay special attention to capital preservation. Use convertible and corporate bonds.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Had equity reduction since late August. See <a href="../fundcenter/AATrend.action?symbol=GRSPX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.greenspringfund.com/documents/Semi-Annual2009GRSPXletter.pdf">Semi-Annual Letter:</a></p>
+                           <p>..We are maintaining a conservative mix in the Fund's portfolio, a strategy designed to allow us to achieve returns that should be far less volatile than returns achieved by many other investment strategies...</p>
+                          </li>
+                          <li><p><a href="http://www.greenspringfund.com/commentary_from_us.shtml">...More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->  
+
+                        <div class="vf_blockfund">
+                          <p><h3>Leuthold Core Investment (<a href="../fundcenter/View.action?symbol=LCORX">LCORX</a>)</h3></p>
+                          <p><strong>Manager:</strong> Steve Leuthold</p>
+                          <p>Flexible stock and bond asset allocation based on fundamental and technical analysis.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Has increased its stock exposure and recently did a rebalancing to bring back to its long term target allocation. See <a href="../fundcenter/AATrend.action?symbol=LCORX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.bloomberg.com/apps/news?pid=newsarchive&sid=aXyvWHTpm.bU">Leuthold Says S&P 500 May Advance to 1,350 Next Year</a>:</p>
+                           <p>Oct. 22 (Bloomberg) -- The Standard & Poor’s 500 Index will rally through year-end and may rise to 1,350 in 2010 as profits improve, said Steve Leuthold, whose Leuthold Core Investment Fund beat 95 percent of rivals in the past five years...</p>
+                          </li>
+                          <li><p><a href="http://quicktake.morningstar.com/FundNet/SecFiling.aspx?symbol=LCORX&country=USA">...More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->    
+
+                        <div class="vf_blockfund">
+                          <p><h3>Manning & Napier Pro-Blend Extnd Term S (<a href="../fundcenter/View.action?symbol=MNBAX">MNBAX</a>)</h3></p>
+                          <p><strong>Manager:</strong> Jeffrey S. Coons, Jefferey A. Herrmann.</p>
+                          <p>Moderate asset allocation: a steady hand.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Has been pretty steady throughout the year. See <a href="../fundcenter/AATrend.action?symbol=MNBAX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.advisoryadvantage.com/public/filedisplay.asp?DocID=176">October Economic Review</a>:</p>
+                           <p>... The U.S. may be on a path to recoverr, but the economic will likely be weak for a while, particularly as daunting unemployment levels continue to pressure consumers...</p>
+                          </li>
+                          <li><p><a href="http://www.advisoryadvantage.com">...More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->    
+
+                        <div class="vf_blockfund">
+                          <p><h3>John Hancock Balanced Fund (<a href="../fundcenter/View.action?symbol=SVBIX">SVBIX</a>)</h3></p>
+                          <p><strong>Manager:</strong> MFC Global Investment Management</p>
+                          <p>US stock, foreign stock and bond (mostly corporate investment grade or high yield) asset allocation.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Has had a steady asset mix in the past year: the main source of outperformance came mostly from corporate bonds and foreign equity exposure. See <a href="../fundcenter/AATrend.action?symbol=SVBIX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.jhfunds.com/CMS/DownloadableItems/Funds/FundCommentaryText/Public/36MMC.pdf">Q3 2009 Commentary</a>:</p>
+                           <p>We plan to keep the Fund's economically-sensitive stock bias and its overweight in corporate bonds...</p>
+                          </li>
+                          <li><p><a href="http://www.jhfunds.com/Fund/ManagementCommentary.aspx?ProductType=MutualFund&FundID=99850&ClassCode=A&BackToFundTableType=Price">...More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->    
+                        </div> <!--- end of vf_main --->
+			<div id="vf_rightbar">
+				<h1><span>World Allocation Gurus</span></h1>
+	    		<hr />
+
+                        <div class="vf_blockfund">
+                          <p><h3>GMO Benchmark-Free Asset Allocation (<a href="../fundcenter/View.action?symbol=GBMFX">GBMFX</a>)</h3></p>
+                          <p><strong>Manager:</strong> Jeremy Grantham.</p>
+                          <p>Go anywhere asset allocation: fund of funds, could invest in alternative assets. A multi-strategy fund.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Emphasized on US and foreign (high qualtiy) stocks and US bonds recently. Equity allocation has been steady around 40% since June. See <a href="../fundcenter/AATrend.action?symbol=GBMFX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://news.morningstar.com/pdfs/gmoq32009.pdf">Just Desserts and Markets Being SillyAgain</a>:</p>
+                           <p>October 2009 --- Jeremy Grantham's 3Q 2009 letter: Markets being silly again!...</p>
+                          </li>
+                          <li><p><a href="https://www.gmo.com/America/MyHome/">...More (register to access)...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->    
+
+                        <div class="vf_blockfund">
+                          <p><h3>PIMCO All Asset (<a href="../fundcenter/View.action?symbol=PASDX">PASDX</a>)</h3></p>
+                          <p><strong>Manager:</strong> Robert Arnott.</p>
+                          <p>Go anywhere asset allocation: fund of funds, could invest in alternative assets. A multi-strategy fund.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Has had very light equity exposure since mid August. Heavy in US bonds recently. See <a href="../fundcenter/AATrend.action?symbol=PASDX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.indexuniverse.com/publications/journalofindexes/joi-articles/5710-bonds-why-bother.html?Itemid=11">Rethinking Fixed Income</a>:</p>
+                           <p>Journal of Index, May/June 2009 issue --- For four decades, from time to time, we hear this question: Why bother with bonds at all? Bond skeptics generally point out that stocks have beaten bonds by 5 percentage points a year for many decades, and that stock returns mean-revert, so that the true long-term investor enjoys that higher return with little additional risks in 20-year and longer annualized returns.</p>
+                          </li>
+                          <li><p><a href="http://www.allianzinvestors.com/newsAndMedia/archive.jsp">... More ...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->    
+
+                        <div class="vf_blockfund">
+                          <p><h3>PIMCO Global Multi-Asset (<a href="../fundcenter/View.action?symbol=PGMAX">PGMAX</a>)</h3></p>
+                          <p><strong>Manager:</strong> Curtis Mewbourne, Mohamed El-Erian.</p>
+                          <p>Go anywhere global asset allocation: fund of funds, could invest in alternative assets. A multi-strategy fund.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Has reduced equity exposure since Septempber. Raised international bond exposure since October. See <a href="../fundcenter/AATrend.action?symbol=PGMAX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.pimco.com/LeftNav/PIMCO+Spotlight/2009/Secular+Outlook+May+2009+El-Erian.htm">A New Normal:</a>:</p>
+                           <p>May 2009 --- El-Erian and Bill Gross have proposed a 'new normal' theory on the U.S. and global economics in the coming years. ... </p>
+                          </li>
+                          <li><p><a href="../strategy/View.action?ID=604">... More (also El-Erian's book in the reference section) ...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->   
+
+                        <div class="vf_blockfund">
+                          <p><h3>Ivy Asset Strategy (<a href="../fundcenter/View.action?symbol=WASYX">WASYX</a>)</h3></p>
+                          <p><strong>Manager:</strong>  Michael L. Avery,  Ryan Caldwell.</p>
+                          <p>Multiple market investing: could invest in any market including domestic, international, emerging market equities and fixed income, currencies and precious metals.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Has been heavy in international and the U.S. equities. In fixed income side, mostly in foreign fixed income or currencies. This fund's allocation could be very nimble and swiftly changed, as it did in the past two years. See <a href="../fundcenter/AATrend.action?symbol=WASYX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.ivyfunds.com/news_market_aug09.aspx">Economic Review - Sharp swings in inventory levels have exaggerated changes in GDP</a>:</p>
+                           <p>August 2009 --- To sum up, we believe the upcoming global recovery will likely be muted relative to historical recoveries. While the inventory swing will likely influence growth to the upside in the short-term, final demand may remain soft as consumer and capital spending remain sluggish. Therefore, we think economic growth could look better in the short-term, but growth prospects could be more challenging... </p>
+                          </li>
+                          <li><p><a href="http://www.ivyfunds.com/news_market.aspx">... More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->    
+
+                        <div class="vf_blockfund">
+                          <p><h3>BlackRock Global Allocation Fund (<a href="../fundcenter/View.action?symbol=MALOX">MALOX</a>)</h3></p>
+                          <p><strong>Manager:</strong> Dennis Stattman.</p>
+                          <p>A Portfolio for all season: global allocation of U.S. and international stocks and bonds. Managed volatility.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Raised international bond exposure since October. 60% even international and U.S. equity exposure. See <a href="../fundcenter/AATrend.action?symbol=MALOX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www1.blackrock.com/Default.aspx?cmty=inst&m=inst_2&m1=inst_2_1&lo=4">BlackRock Investment Commentary</a>:</p>
+                           <p>...Expected dollar to continue to fall. Generally optimistic about economics ... </p>
+                          </li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->   
+                        <h1>Fixed Income Gurus</h1>
+                        <hr />
+
+                        <div class="vf_blockfund">
+                          <p><h3>PIMCO Total Return (<a href="../fundcenter/View.action?symbol=PTTRX">PTTRX</a>)</h3></p>
+                          <p><strong>Manager:</strong>  Bill Gross.</p>
+                          <p>Multi-Sector Bond Fund: invest in treasury, government agency bonds and credit (corporate) bonds while managing the interest rate risk. Could invest in foreign fixed income. One of the best bond funds.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Recently increased allocation in treasury and agency bonds. Has been heavy in corporate bonds. See <a href="../fundcenter/AATrend.action?symbol=PTTRX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.pimco.com/LeftNav/Featured+Market+Commentary/IO/2009/Bill+Gross+Doo+Doo+Economics.htm">Investment Outlook: Doo-Doo Economics</a>:</p>
+                           <p> October 2009 --- ... Specifically that continues to dictate a focus on high quality bonds and steady dividend paying stocks that can survive, if not thrive, in our journey to a  "new normal" economy of slower growth, muted profit gains, and potential capital destruction via default, abrogation of property rights, and dollar devaluation. </p>
+                          </li>
+                          <li><p><a href="http://www.pimco.com/TopNav/Home/Default.htm">... More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->   
+
+                        <div class="vf_blockfund">
+                          <p><h3>Loomis Sayles Bond Fund (<a href="../fundcenter/View.action?symbol=LSBDX">LSBDX</a>)</h3></p>
+                          <p><strong>Manager:</strong>  Dan Fuss.</p>
+                          <p>Multi-Sector Bond Fund: invest in treasury, government agency bonds and credit (corporate) bonds while managing the interest rate risk. Could invest in foreign fixed income. One of the best bond funds. 2008 was a disaster year due to early exposure in high yield bonds.</p>
+                          <p><strong>Recent Asset Exposure: </strong>Extremely light in treasury. Heavy in corporate bonds (though had a noticeable reduction since late August. Increased foreign bond exposure recently. See <a href="../fundcenter/AATrend.action?symbol=LSBDX&chart=true">ValidFi's Analysis</a>.</p>
+                          <p><strong>Recent Articles</strong>: </p>
+                          <ul>
+                          <li><p><a href="http://www.loomissayles.com/Internet/internet.nsf/%28$Doc_Code%29/COM1282/$FILE/Bond_Quarterly.pdf">3Q Quarterly Letter</a>:</p>
+                           <p> October 2009 --- ... High yield bonds may be among top performers, expected U.S. dollar to continue to fall and emerging markets' currencies appreciation. 
+                          </li>
+                          <li><p><a href="http://www.loomissayles.com/Internet/FundProfiles.nsf/%28$ByFundID%29/1282?OpenDocument">... More...</a></p></li>
+                         </ul>
+                        </div> <!--- end of vf_blockfund  --->   
+
+               	</div> <!--- end of rigthbar -->
+ 	</div> <!--- end of contentright -->
+   </div>
+</div>
+</body>
+</html>

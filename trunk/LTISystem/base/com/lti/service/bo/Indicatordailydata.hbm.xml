@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="IndicatorDailyData"
+		table="ltisystem_indicatordailydata"
+		batch-size="200"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="Date"
+			column="Date"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="Value"
+			column="Value"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+		
+		<property
+			name="IndicatorID"
+			type="java.lang.Long"
+			column="IndicatorID"
+			not-null="false"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

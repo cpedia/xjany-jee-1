@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="PortfolioMPT"
+		table="ltisystem_portfoliompt"
+		batch-size="200"
+	>
+		
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="portfolioID"
+			column="portfolioID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="alpha"
+			column="alpha"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+		
+		<property
+			name="beta"
+			column="beta"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="AR"
+			column="AR"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+		
+	<property
+		name="RSquared"
+		column="RSquared"
+		type="java.lang.Double"
+		not-null="false"
+		length="22"
+	/>				
+	
+	<property
+		name="sharpeRatio"
+		column="sharpeRatio"
+		type="java.lang.Double"
+		not-null="false"
+		length="22"
+	/>
+	
+	<property
+		name="standardDeviation"
+		column="standardDeviation"
+		type="java.lang.Double"
+		not-null="false"
+		length="22"
+	/>
+	<property
+		name="treynorRatio"
+		column="treynorRatio"
+		type="java.lang.Double"
+		not-null="false"
+		length="22"
+	/>
+		  
+	<property
+		name="drawDown"
+		column="DrawDown"
+		type="java.lang.Double"
+		not-null="false"
+		length="22"
+	/>
+	
+	<property
+		name="sortinoRatio"
+		column="SortinoRatio"
+		type="java.lang.Double"
+		not-null="false"
+		length="22"
+	/>
+	
+	<property
+		name="classID"
+		column="classID"
+		type="java.lang.Long"
+		not-null="false"
+	/>
+	<property
+		name="strategyID"
+		column="strategyID"
+		type="java.lang.Long"
+		not-null="false"
+	/>			
+	<property
+		name="userID"
+		column="userID"
+		type="java.lang.Long"
+		not-null="false"
+	/>		
+	<property
+		name="benchmarkID"
+		column="benchmarkID"
+		type="java.lang.Long"
+		not-null="false"
+	/>	
+		<property
+			name="isModelPortfolio"
+			column="isModelPortfolio"
+			type="java.lang.Boolean"
+			not-null="false"
+		/>		
+		<property
+			name="name"
+			column="name"
+			type="string"
+			not-null="false"
+			length="200"
+		/>
+		<property
+			name="year"
+			column="year"
+			type="integer"
+			not-null="false"
+			length="11"
+		/>		
+		<property
+			name="Permissions"
+			column="permissions"
+			type="com.lti.type.LongStringList"
+			not-null="false"
+		/>		
+	</class>	
+</hibernate-mapping>

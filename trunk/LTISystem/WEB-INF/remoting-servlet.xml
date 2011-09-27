@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean name="/AssetClassManagerService" class="org.springframework.remoting.caucho.HessianServiceExporter">  
+        <property name="service">  
+            <ref bean="assetClassManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.AssetClassManager</value>  
+        </property> 
+    </bean>
+    <bean name="/StrategyClassManagerService" class="org.springframework.remoting.caucho.HessianServiceExporter">  
+        <property name="service">  
+            <ref bean="strategyClassManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.StrategyClassManager</value>  
+        </property> 
+    </bean>
+    <bean name="/HolidayManagerService" class="org.springframework.remoting.caucho.HessianServiceExporter">  
+        <property name="service">  
+            <ref bean="holidayManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.HolidayManager</value>  
+        </property> 
+    </bean>			
+    <bean name="/PortfolioManagerService" class="org.springframework.remoting.caucho.HessianServiceExporter">  
+        <property name="service">  
+            <ref bean="portfolioManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.PortfolioManager</value>  
+        </property> 
+    </bean>
+	<bean name="/IndicatorManagerService" class="org.springframework.remoting.caucho.HessianServiceExporter">  
+        <property name="service">  
+            <ref bean="indicatorManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.IndicatorManager</value>  
+        </property> 
+    </bean>  
+	<bean name="/SecurityManagerService" class="org.springframework.remoting.caucho.HessianServiceExporter">  
+        <property name="service">  
+            <ref bean="securityManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.SecurityManager</value>  
+        </property> 
+    </bean>  
+	<bean name="/StrategyManagerService" class="org.springframework.remoting.caucho.HessianServiceExporter">  
+        <property name="service">  
+            <ref bean="strategyManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.StrategyManager</value>  
+        </property> 
+    </bean>  
+    <bean name="/FinancialStatementManagerService" class="org.springframework.remoting.caucho.HessianServiceExporter">  
+        <property name="service">  
+            <ref bean="financialStatementManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.impl.FinancialStatementManager</value>  
+        </property> 
+    </bean>  
+	
+</beans>

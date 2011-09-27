@@ -1,0 +1,1 @@
+<a href="http://${output.ip}/LTISystem/jsp/ajax/DownloadFile.action?name=${output.filename}&isImageCache=false">download</a>

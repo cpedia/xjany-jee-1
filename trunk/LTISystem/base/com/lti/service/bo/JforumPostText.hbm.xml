@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="JforumPostText"
+		table="jforum_posts_text"
+	>
+		<id
+			name="ID"
+			type="java.lang.Integer"
+			column="post_id"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="PostText"
+			column="post_text"
+			type="java.lang.String"
+		/>
+		<property
+			name="PostSubject"
+			column="post_subject"
+			type="java.lang.String"
+		/>
+	</class>	
+</hibernate-mapping>

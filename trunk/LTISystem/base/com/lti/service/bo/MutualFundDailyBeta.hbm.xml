@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="MutualFundDailyBeta"
+		table="ltisystem_mutualfund_dailybeta"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+		<property
+			name="Date"
+			column="Date"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="RSquare"
+			column="RSquare"
+			type="java.lang.Double"
+			not-null="true"
+			length="22"
+		/>
+		<property
+			name="MutualFundID"
+			column="MutualFundID"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		<property
+			name="Betas"
+			column="Betas"
+			type="com.lti.type.HibernateDoubleArray"
+			not-null="true"
+		/>
+	
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+[#ftl]
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="/LTISystem/jsp/admin/images/style.css" rel="stylesheet" type="text/css" />
+<title>InviteCodeView</title>
+</head>
+<body>
+<a href="/LTISystem/jsp/register/addInviteCode.action?includeHeader=false">+Add InviteCode</a><br><br>
+<style>
+.trHeader {
+    background-color: #93CC6B;
+    color: #DCDCDC;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 22px;
+}
+</style>
+<table width="100%" border="0">
+  <tr class="trHeader">
+    <th width="1%" scope="col">InviteID</th>
+    <th width="5%" scope="col">InviteName</th>
+    <th width="3%" scope="col">InviteCode</th>
+    <th width="5%" scope="col">MiddleMan</th>
+    <th width="1%" scope="col">PriceItem</th>
+    <th width="20%" scope="col">date</th>
+    <th width="50%" scope="col">Url</th>
+    <th width="1%" scope="col">HowUser</th>
+    <th width="3%" scope="col">Remove</th>
+    <>
+  </tr>
+  [#list list as a]
+  <tr>
+    <td align="center">${a.ID}</td>
+    <td align="center"  style="line-height: 1em;">${a.inviteName}</td>
+    <td align="center">${a.inviteCode}</td>
+    <td align="center">${a.middleMan}</td>
+    <td align="center">Pitem ${a.priceItem}</td>
+    <td align="center">${a.date}</td>
+    <td align="center">http://www.myplaniq.com/LTISystem/jsp/register/openRegister.action?inviteCodeId=${a.inviteCode}</td>
+    <td align="center"><a href="/LTISystem/jsp/register/findUserbyInviteId.action?includeHeader=false&inviteCodeId=${a.ID}">${a.type}</a></td>
+    <td align="center"><a href="/LTISystem/jsp/register/delInvite.action?inviteCodeId=${a.ID}">Remove</a></td>
+  </tr>
+  [/#list]
+</table>
+</body>
+</html>

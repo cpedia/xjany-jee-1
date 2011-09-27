@@ -1,0 +1,210 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+	<head>
+	<title>User Profile Page</title>
+	<SCRIPT src="../images/common.js" type=text/javascript></SCRIPT>
+	<link href="../images/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+	function checkItem(e, allName){   
+   		var all = document.getElementsByName(allName)[0];   
+   		if(!e.checked) all.checked = false;   
+   		else{   
+     		var aa = document.getElementsByName(e.name);   
+     		for (var i=0; i<aa.length; i++)   
+      			if(!aa[i].checked) return;   
+    		all.checked = true;   
+   		}   
+   			
+	}   
+
+	function checkAll(e, itemName){   
+   		var aa = document.getElementsByName(itemName);   
+   		for (var i=0; i<aa.length; i++)   
+    		aa[i].checked = e.checked;   
+	}   
+   
+   function listenMultibox(){
+		var box=document.getElementsByName("selectedArray");
+		var f=false;
+		for(i=0;i<box.length;i++){
+     		if(box[i].checked){
+          		f=true;break;
+      		}
+		}
+		if(f==true){   
+      		return true;
+		}
+		else{
+    		alert("Please Choose the Group Items")
+    		return false;
+		}
+	}
+	function show_new_payitem(DivId){
+		var pane = document.getElementById(DivId);
+		pane.style.display = (pane.style.display =="none")? "block" : "none";
+		var input = document.getElementsByTagName("input");
+		input[0].setAttribute("action","cpayitem");
+		input[1].setAttribute("value","");
+		var b = document.getElementsByTagName("b");
+		replaceMessage(b[0],"b","Enter the Name of New Payitem:");
+		replaceMessage(b[1],"b","Please Choose these for the New Payitem:");
+		var j=0;
+		while(document.getElementById('input_'+j)!=null){
+			var ichecked = document.getElementById('input_'+j);
+			ichecked.checked = false;
+			j++;
+		}
+	}
+	function changeForm(DivId,FormId,itemName,itemContent){
+		var div = document.getElementById(DivId);
+		div.style.display = "block";
+		var itemlist = itemContent.split(",");
+		var form = document.getElementById(FormId);
+		var input = document.getElementsByTagName("input");
+		input[0].setAttribute("value","modify");
+		input[1].setAttribute("value",itemName);
+		input[2].setAttribute("value",itemName);
+		//alert(input[0].getAttribute("action"))
+		var b = document.getElementsByTagName("b");
+		//var b1 = form.elemnets["bid"];
+		replaceMessage(b[0],"b","Modify the Name of Payitem:");
+		//var b2 = form.elemnets["cid"];
+		replaceMessage(b[1],"b","Please Rechoose these for the Payitem:");
+		var j=0;
+		while(document.getElementById('input_'+j)!=null){
+			var ichecked = document.getElementById('input_'+j);
+			ichecked.checked = false;
+			j++;
+		}
+		for(var i=0;i<itemlist.length;i++){
+			var item = itemlist[i];
+			while(document.getElementById('input_'+j)!=null){
+				var itd = document.getElementById('td_'+j);
+				//alert(item.valueOf()+'%%'+itd.getAttribute("value").valueOf());
+				if(item.toString()==itd.getAttribute("value").valueOf()){
+					//alert("hello");
+					var ichecked = document.getElementById('input_'+j);
+					ichecked.checked = true;
+				}
+				j++;
+			}
+			j=0;
+		}
+	}
+	function replaceMessage(e,etype,Message){
+		var et = document.createElement(etype);
+		var etext = document.createTextNode(Message);
+		et.appendChild(etext);
+		e.parentNode.replaceChild(et,e);
+	}
+	</script>
+	</head>
+	<body>
+	<table class="nav" width="100%">
+			<td width="20%">
+				[@s.url action="Main.action" id="url_main" namespace="/jsp/admin/user"]
+				[/@s.url]
+				[@s.a href="%{url_main}"]User Manager[/@s.a]			
+			</td>		
+			<td width="20%">
+				[@s.url action="Save.action" id="url_create" namespace="/jsp/admin/user"  includeParams="none"]
+					[@s.param name="action"]create[/@s.param]
+				[/@s.url]
+				[@s.a href="%{url_create}"]Create A New User[/@s.a]			
+			</td>
+			<td width="20%">
+				[@s.url action="UserEmail_reportStatistics.action" id="url_reportStatistics" namespace="/jsp/admin/user"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_reportStatistics}"]EmailNotification Report[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="UserProfile.action" id="url_userprofile" namespace="/jsp/admin/user"  includeParams="none"]
+				[/@s.url]
+				[@s.a href="%{url_userprofile}"]User Profile[/@s.a]	
+			
+			</td>
+			<td width="20%">
+				[@s.url action="UserProfile.action" id="url_userprofile" namespace="/jsp/admin/user"  includeParams="none"]
+					[@s.param name="action"]payitem[/@s.param]
+				[/@s.url]
+				[@s.a href="%{url_userprofile}"]User PayItem[/@s.a]	
+			
+			</td>
+		</table>	
+		<p class="title">User PayItem</p>
+		<div>
+		<a href="javascript:void(0);" onclick="show_new_payitem('createItem')">Create a New PayItem</a>
+	<div style="display:none" id="createItem" >
+	<fieldset>
+	<legend>PayItem Configuration</legend>
+	<form id="payItemForm" action="UserProfile.action" method="post" onsubmit="return listenMultibox()">
+		<input type="hidden" name="action" value="cpayitem">
+	    <br><b>Enter the Name of New Payitem:</b>
+	    <input type="text" name="itemName" value="">
+	    <input type="hidden" name="oldItemName" value="">
+	    <br><b>Please Choose these for the New Payitem:</b><br>
+		<table width="50%" align="left" border="0" style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid">
+    	<tr class="trheader">
+    	<td>No.</td>
+    	<th>Group Name</th>
+    	<th>Choose</th>
+    	</tr>
+    	[#list group as gs]
+    	<tr>
+    		<td>${gs.ID}</td>
+    		<td id="td_${gs_index}" value="${gs.getName()}">${gs.getName()}</td>
+    		<td><input id="input_${gs_index}"type=checkbox name="selectedArray" value="${gs.ID}" onclick="checkItem(this, 'all')"></td>
+		</tr>
+		[/#list]
+  		<tr>
+  		<td></td>
+  		<td colspan="2" align="middle">          
+            <input type="submit" name="Submit" value="Comfirm">
+            <input type="reset" name="Submit2" value="Reset">
+            <input type=checkbox name="all" onclick="checkAll(this, 'selectedArray')" >Choose All
+		</td>
+		<tr>
+		</table>
+  </form>
+  </fieldset>
+  </div>
+  <fieldset>
+	<legend>PayItem List</legend>
+	<div>
+	     [#if payitems??]
+	     <table  rules="rows"  width="70%" align="left" border="0" style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid">
+		  		<tr class="trheader">
+		  	 		<th>Item Name</th>
+	         		<th>Item Content</th>
+	         		<th>Item Operation</th>
+	      		</tr>
+	      		[#list payitems?keys as pay]
+	      		<tr>
+	      			<td align="middle">${pay}</td>
+	      			<td align="middle">
+	      				<table>
+	      					[#assign items="test"]
+	      					[#list payitems[pay] as ps]
+	      					<tr><td>${ps_index+1}.${ps}</td></tr>
+	      					[#assign items=items+","+ps] 
+	      					[/#list]
+	      				</table>
+	      			</td>
+	      			<td align="middle"> [@s.url action="UserProfile.action" id="url_userprofile" namespace="/jsp/admin/user"  includeParams="none"]
+							[@s.param name="action"]delete[/@s.param]
+							[@s.param name="itemName"]${pay}[/@s.param]
+						[/@s.url]
+						[@s.a href="%{url_userprofile}"]Remove[/@s.a]
+						&nbsp;&nbsp;
+						<a href="javascript:void(0);" onclick="changeForm('createItem','payItemForm','${pay}','${items}')">Modify</a></td>
+	      		</tr>
+	      		[/#list]
+	       		</table>
+	     [/#if]
+	     <br><br>
+	</div>
+	</fieldset>
+	</body>
+</html>

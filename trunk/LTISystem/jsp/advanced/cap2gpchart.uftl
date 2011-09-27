@@ -1,0 +1,7 @@
+[#ftl]
+ [#import "/jsp/lti_library_ftl.jsp" as lti]
+<h1 style="text-align:center">Warren Buffett's Total Stock Market Value to GNP Ratio Chart</h1>
+<hr />
+<p></p>
+<li><a href="advanced__cap2gplargechart.action?includeHeader=false&amp;host=www.myplaniq.com">Larger Chart</a></li>
+[@lti.gchart "Warren Buffett Total Stock Market Value to GNP Ratio" "CapToGPList6511.xml" "www.myplaniq.com"][/@lti.gchart]</div>

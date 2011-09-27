@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+	"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+	
+	<field name="portfolio.name">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>Name can't be empty</message>
+		</field-validator>
+	</field>
+	<field name="portfolio.benchmarkID">
+		<field-validator type="int">
+			<message>Benchmark ID is not valid!</message>
+		</field-validator>
+	</field>
+	<field name="portfolio.endDate">
+		<field-validator type="date">
+			<param name="min">1900-01-01</param>
+			<param name="max">2050-02-21</param>
+			<message>Date is not valid!</message>
+		</field-validator>
+	</field>
+	<field name="portfolio.OriginalAmount">
+		<field-validator type="double">
+			<message>The amount must be over 0.0!</message>
+		</field-validator>
+	</field>
+</validators>
+
+

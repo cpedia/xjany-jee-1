@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="ThirdPartyResource"
+		table="ltisystem_third_party_resource"
+	>
+		<id
+			name="ThirdPartyResourceID"
+			type="java.lang.Long"
+			column="ThirdPartyResourceID"
+		>
+			<generator class="native"/>
+		</id>
+		<property
+			name="ThirdParty"
+			column="ThirdParty"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="ResourceID"
+			column="ResourceID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="ResourceType"
+			column="ResourceType"
+			type="java.lang.Integer"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

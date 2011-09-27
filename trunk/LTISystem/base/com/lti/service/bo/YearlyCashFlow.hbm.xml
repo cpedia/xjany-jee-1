@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="YearlyCashFlow"
+		table="ltisystem_cashflow_yearly"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+		<property
+			name="Symbol"
+			column="Symbol"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="EndDate"
+			column="EndDate"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="Year"
+			column="Year"
+			type="integer"
+			not-null="false"
+			length="11"
+		/>	
+		<property
+			name="CapExp"
+			column="CapExp"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="OperCF"
+			column="OperCF"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="FinCF"
+			column="FinCF"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="InvCF"
+			column="InvCF"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+
+	</class>	
+</hibernate-mapping>

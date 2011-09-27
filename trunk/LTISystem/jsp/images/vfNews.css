@@ -1,0 +1,802 @@
+/* top elements */
+* { padding: 0; margin: 0; }
+
+/*
+html {
+background:#FFFFFF
+}
+/*revised by fang 2009-9-29*/
+body {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+-x-system-font:none;
+background: #B9D3EE repeat-x; 
+background: #8A8F91 repeat-x;
+color:#333333;
+font-family:Verdana, Tahoma, Helvetica, sans-serif;
+font-size:small;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:normal;
+line-height:normal;
+margin:0;
+text-align:center;
+}
+/*body {
+	margin: 0;
+	padding: 0;
+	font: 0.8em/1.5em Verdana, Tahoma, Helvetica, sans-serif;
+	color: #666666; 
+	background: #A9BAC3 url(bg.gif) repeat-x; 
+	text-align: center;
+}*/
+
+/*ok-revised by fang 2009-9-29*/
+#description {
+-x-system-font:none;
+border-color:#EEEEEE;
+border-style:solid;
+border-width:0 1px 1px;
+color:#999999;
+font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+font-size:78%;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:normal;
+letter-spacing:0.2em;
+line-height:1.4em;
+margin:0 5px 5px;
+max-width:700px;
+padding:0 20px 20px;
+text-transform:uppercase;
+}
+
+/* links */
+
+/*revised by fang 2009-9-29*/
+a {
+background-color:inherit;
+color:#2B60DE;
+text-decoration:none;
+}
+a:link {
+color:#5588AA;
+text-decoration:none;
+}
+*revised by fang 2009-9-29*/
+a:visited {
+color:#996699;
+text-decoration:none;
+}
+
+
+
+
+
+
+/*revised by fang 2009-9-29*/
+a img {
+border-width:0;
+}
+
+/* headers */
+
+/*revised by fang 2009-9-29*/ 
+h2 {
+-x-system-font:none;
+color:#999999;
+font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+font-size:78%;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:normal;
+letter-spacing:0em;
+line-height:1.4em;
+margin:1.5em 0 0.75em;
+text-transform:uppercase;
+}
+
+acronym {
+  cursor: help;
+  border-bottom: 1px solid #777;
+}
+/*blockquote {
+	margin: 15px;
+ 	padding: 0 0 0 20px;  	
+  	background: #FAFAFA;
+	border: 1px solid #f2f2f2; 
+	border-left: 4px solid #4284B0;   
+	color: #4284B0;
+	font: bold 1.2em/1.5em Georgia, 'Bookman Old Style', Serif; 
+}*/
+
+/***********************
+	  LAYOUT
+************************/
+
+#vN_topmenu a {
+        color: #fff;
+        font-weight: bold;
+        background:inherit;
+        text-decoration: none;
+}
+
+#vN_topmenu a span {
+       color: #fff;
+       font-weight: bold;
+       font: bold 12px  Arial, 'Trebuchet MS', Tahoma, verdana,  sans-serif;
+       background:inherit;
+       text-decoration: none;
+       padding-top: 5px;
+       padding-right: 15px;
+}
+
+#vN_topmenu a:hover span{
+        text-decoration: underline;
+}
+
+#vN_topmenu {
+        background: url(topmenu.png) repeat-x scroll 0% 100%;
+        z-index: 888;
+        top:0;
+        float: left;
+        width: 100%;
+        font-size: 11px;
+        height: 30px;
+}
+
+
+#search {
+        float: right;
+        margin-top: 1px;
+        margin-right: 12px;
+        margin-left: 5px;
+        padding-bottom: 5px;
+}
+
+#search-text {
+        float: left;
+        margin-right: 2px;
+}
+
+#search-submit {
+        float: left;
+}
+#quote-submit{
+        float: left;
+}
+/*revised by fangzhenju*/
+#vN_wrap {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#F5F5F5 repeat scroll 0 0;
+height:100%;
+margin-left:auto;
+margin-right:auto;
+text-align:left;
+width:990px;
+}
+
+
+/*revised by fangzhenju*/
+ul, ol {
+color:#000000;
+margin:10px 30px;
+padding:0 15px;
+}
+
+/* header */
+revised by fangzhenju
+#vN_header ul {
+-x-system-font:none;
+bottom:2px !important;
+font-family:Arial,'Trebuchet MS',Tahoma,verdana,sans-serif;
+font-size:13px;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:bold;
+line-height:normal;
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+margin:0;
+padding:0;
+position:absolute;
+right:0;
+z-index:999999;
+}
+#vN_header {
+        top: 0;
+	position: relative;
+	height: 138px;	
+    background: #000 url(headerbg.jpg) repeat-x 0% 100%;
+}
+#logo {
+	position: absolute; 
+        top:100px;
+	margin: 0; padding: 0;
+	font: bolder 4.1em 'Trebuchet MS', Arial, Sans-serif;
+	letter-spacing: -2px;
+	text-transform: lowercase;
+	top: 0; left: 5px;	
+}
+#vN_header h2{
+margin:10px 15px;
+font-size:1.2em;
+text-transform:uppercase;
+-x-system-font:none;
+color:#333333;
+font-family:Arial,Helvetica,sans-serif;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:bold;
+line-height:normal;
+padding:0;
+text-align:left;
+}
+/*blog-title is revised by fang 2009-9-29*/
+#blog-title {
+color:#666666;
+font-size:200%;
+font-weight:normal;
+letter-spacing:0.2em;
+line-height:1.2em;
+margin:5px 5px 0;
+padding:20px 20px 0.25em;
+text-transform:uppercase;
+font-family:Georgia,Serif;
+font-size-adjust:none;
+font-style:normal;
+font-variant:normal;
+text-align:center;
+}
+#slogan {
+	position: absolute;	 
+	top:80px; left: 95px;
+	color: #666666;
+	text-indent: 0px;
+	font: bold 11px Tahoma, 'trebuchet MS', Sans-serif; 
+	text-transform: none;	
+}
+#vN_header form {
+        z-index: 888;
+        margin-bottom: 0px;
+	top: 0; right: -12px;	
+}
+#logo{
+	float:left;
+	min-width:100px;
+	padding:0;
+	margin:0;
+	border:0;
+	vertical-align:bottom;
+	height:100%;
+}
+
+/* main */
+/*revised by fangzhenju*/
+#main {
+	text-algin:left
+	padding: 0;
+	}
+/*revised by fangzhenju*/
+.post div {
+line-height:1.6em;
+}
+/*revised by fangzhenju*/
+p.post-footer {
+color:#CCCCCC;
+margin:-0.25em 0 0;
+}
+/*revised by fangzhenju*/
+.post-footer em, .comment-link {
+-x-system-font:none;
+font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+font-size:78%;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:normal;
+letter-spacing:0.1em;
+line-height:1.4em;
+text-transform:uppercase;
+}
+/*.date-header is revised by fangzhenju*/
+.date-header {
+margin:1.5em 0 0.5em;
+}
+/*.date-header is revised by fangzhenju*/
+
+.post-footer .comments {
+	background: url(comment.gif) no-repeat left center;
+	padding-left: 20px; margin: 0 10px 0 5px;
+}
+.post-footer .readmore {
+	background: url(page.gif) no-repeat left center;
+	padding-left: 20px; margin: 0 10px 0 5px;
+}
+/*revised by fangzhenju*/
+.post-title {
+color:#CC6600;
+font-size:140%;
+font-weight:normal;
+line-height:1.4em;
+margin:0.25em 0 0;
+padding:0 0 4px;
+}
+/*revised by fangzhenju*/
+.post img {
+border:1px solid #DDDDDD;
+padding:4px;
+}
+/*revised by fangzhenju*/
+.post {
+border-bottom:1px dotted #CCCCCC;
+margin:0.5em 0 1.5em;
+padding-bottom:1.5em;
+}
+.post-title a, .post-title a:visited, .post-title strong {
+color:#CC6600;
+display:block;
+font-weight:normal;
+text-decoration:none;
+}
+
+/*revised by fangzhenju*/
+element.style {
+border-bottom-color:-moz-use-text-color;
+border-bottom-style:none;
+border-bottom-width:0;
+border-left-color-ltr-source:physical;
+border-left-color-rtl-source:physical;
+border-left-color-value:-moz-use-text-color;
+border-left-style-ltr-source:physical;
+border-left-style-rtl-source:physical;
+border-left-style-value:none;
+border-left-width-ltr-source:physical;
+border-left-width-rtl-source:physical;
+border-left-width-value:0;
+border-right-color-ltr-source:physical;
+border-right-color-rtl-source:physical;
+border-right-color-value:-moz-use-text-color;
+border-right-style-ltr-source:physical;
+border-right-style-rtl-source:physical;
+border-right-style-value:none;
+border-right-width-ltr-source:physical;
+border-right-width-rtl-source:physical;
+border-right-width-value:0;
+border-top-color:-moz-use-text-color;
+border-top-style:none;
+border-top-width:0;
+display:inline;
+}
+/* sidebar */
+/*revised by fangzhenju*/
+#sidebar {
+float:right;
+width:220px;
+font-family:Georgia,Serif;
+}
+/*revised by fangzhenju*/
+#sidebar ul {
+border-bottom:1px dotted #CCCCCC;
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+margin:0 0 1.5em;
+padding:0 0 1.5em;
+}
+/*revised by fangzhenju*/
+#sidebar li {
+line-height:1.5em;
+text-indent:-15px;
+}
+/*revised by fangzhenju*/
+#sidebar p {
+color:#666666;
+line-height:1.5em;
+}
+#sidebar ul.sidemenu {
+	list-style:none;
+	margin:10px 0 10px 15px;
+	padding:0;		
+}
+#sidebar ul.sidemenu li {
+	margin-bottom:1px;
+	border: 1px solid #f2f2f2;
+}
+#sidebar ul.sidemenu a {
+	display:block;
+	font-weight:bold;
+	color: #333;	
+	text-decoration:none;	
+	padding:2px 5px 2px 10px;
+	background: #f2f2f2;
+	border-left:4px solid #CCC;	
+	min-height:18px;
+}
+
+* html body #sidebar ul.sidemenu a { height: 18px; }
+
+#sidebar ul.sidemenu a:hover {
+	padding:2px 5px 2px 10px;
+	background: #f2f2f2;
+	color: #339900;
+	border-left:4px solid #9EC630;
+}
+
+/* rightbar */
+#rightbar {
+	float: right;
+	width: 38%;
+	padding: 0; margin:0;		
+}
+
+/* Footer */
+
+/*revised by fangzhenju*/
+#vN_footer p {	
+font-family:Verdana,Tahoma,Helvetica,sans-serif;
+font-size:95%;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:normal;
+line-height:1.5em;
+/*padding-top:15px;*/
+text-transform:capitalize;
+margin:10px 15px;
+}
+
+
+
+/*revised by fangzhenju*/
+#vN_footer {
+font-family:Verdana,Tahoma,Helvetica,sans-serif;
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#A9BAC3 none repeat scroll 0 0;
+clear:both;
+color:#FFFFFF;
+font-size:95%;
+height:50px;
+text-align:left;
+margin:0;
+padding:0;
+border-top:5px solid #568EB6;
+}
+
+#vN_footer a { 
+	color:#FFFFFF;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+#vN_footer .vN_footer-left{
+	float: left;
+	width: 65%;
+}
+
+#vN_footer .vN_footer-right{
+	float: right;
+	width: 30%;
+}
+
+/* header ul menu */
+#vN_header ul {
+	z-index: 999999;
+	position: absolute;
+        margin:0; padding: 0;
+        list-style:none;
+	right: 0; 
+	bottom: 2px !important; bottom: 5px;
+	font: bold 13px  Arial, 'Trebuchet MS', Tahoma, verdana,  sans-serif;	
+}
+/*revised by fangzhenju*/
+#vN_header li {
+   display:inline;
+   margin:0; padding:0;
+}
+#vN_header li a {
+   float:left;
+   font-weight: bold;
+   background: url(tableft.gif) no-repeat left top;
+   margin:0;
+   padding:0 0 0 4px;
+   text-decoration:none;
+}
+#vN_header li a span {
+   float:left;
+   display:block;
+   font-weight: bold;
+   background: url(tabright.gif) repeat-x right top;
+   padding:7px 16px 3px 8px;
+   color: #FFF;
+}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#vN_header li a span {float:none;}
+/* End IE5-Mac hack */
+#vN_header a:hover span {
+	color:#FFF;
+        text-decoration: underline
+}
+
+#vN_header li a:hover {
+   background-position:0% -42px;
+}
+#vN_header li a:hover span {
+   background-position:100% -42px;
+   background: url(tabhover.gif) repeat-x right top;
+}
+/*#vN_header #current a {
+   background-position:0% -42px;
+	color: #FFF;
+        color: #CFECEC;
+}
+#vN_header #current a span {
+   background-position:100% -42px;
+   background: url(tabhover.gif) repeat-x right top;
+	color: #FFF;
+    color: #CFECEC;
+}*/
+/* end header ul menu*/
+
+/*revised by fang*/
+#lowmenu {
+-x-system-font:none;
+bottom:2px !important;
+font-family:Arial,'Trebuchet MS',Tahoma,verdana,sans-serif;
+font-size:13px;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:bold;
+line-height:normal;
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+margin:0;
+padding:0;
+right:0;
+z-index:999999;
+}
+ /*revised by fangzhenju*/
+#lowmenu li {
+  display: inline;
+  margin:0; padding:0;
+}
+
+#lowmenu li a {
+   float:left;
+   font-weight: bold;
+   background: url(tableft.gif) no-repeat left top;
+   margin:0;
+   padding:0 0 0 4px;
+   text-decoration:none;
+}
+#lowmenu li a span {
+   float:left;
+   display:block;
+   font-weight: bold;
+   background: url(tabright.gif) repeat-x right top;
+   padding:7px 16px 3px 8px;
+   color: #FFF;
+}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#lowmenu li a span {float:none;}
+/* End IE5-Mac hack */
+#lowmenu a:hover span {
+	color:#FFF;
+        text-decoration: underline
+}
+
+#lowmenu li a:hover {
+   background-position:0% -42px;
+}
+#lowmenu li a:hover span {
+   background-position:100% -42px;
+   background: url(tabhover.gif) repeat-x right top;
+}
+#lowmenu #current a {
+   background-position:0% -42px;
+   color: #CFECEC;
+}
+#lowmenu #current a span {
+   background-position:100% -42px;
+   background: url(tabhover.gif) repeat-x right top;
+   color: #CFECEC;
+}
+ 
+#lowmenu li ul {
+   display: none;
+}
+
+#lowmenu li.off ul, #lowmenu li.current ul { /*put the subnav below*/
+   position: absolute;
+   top: 33px;
+   *top: 44px; 
+   left: 5px; 
+   padding-top: 10px;
+   background: #d6e3b0;
+   height: 28px;
+   width: 640px;
+}
+ 
+#lowmenu li.current ul a, #lowmenu li.off ul a {
+	float: left; /*ie doesn't inherit the float*/
+	border: 0;
+	color: #7a8566;
+        width: auto;
+	margin-right: 15px;
+}
+ 
+#lowmenu li.current ul {
+	display: block;
+}
+ 
+#lowmenu li.off:hover ul {
+	display: block;
+	z-index: 6000;
+}
+ 
+#lowmenu li.off a:hover, #lowmenu li:hover a {
+	background: #d6e3b0;
+	color: #7a8566;
+}
+.blockmain {
+        background: #fafafa;
+        border-left: 1px solid #f0e0e0;
+        border: 1px solid #f0e0e0;
+}
+
+.blockright {
+        background: #fafafa;
+        border-left: 1px solid #f0e0e0;
+        border: 1px solid #f0e0e0;
+        margin-right: 1em;
+}
+.blockleft {
+        background: #f5f5f5;
+        border-left: 1px solid #f0e0e0;
+        border: 1px solid #e0e0e0;
+        margin-left: 1em;
+}
+
+.vfitem { 
+        background: inherit;
+        border: 1px solid #e0e0f0;
+	font: 0.9em/1.5em Georgia, 'Bookman Old Style', Serif; 
+}
+
+/* start submenu */
+#submenu {
+	position: relative;
+	height: 28px;	
+        background: #F9B7FF;
+        background: #CFECEC;
+}
+
+#submenu ul {
+	z-index: 999999;
+	position: absolute;
+        margin:0; padding: 0;
+        list-style:none;
+        left:0;
+	//right: 0; 
+	bottom: 4px !important; bottom: 5px;
+	font: bold 13px  Arial, 'Trebuchet MS', Tahoma, verdana,  sans-serif;	
+}
+#submenu li {
+   display:inline;
+   margin:0; padding:0;
+   padding: 0 0 8px 12px;
+}
+
+#submenu a span {
+   color: #000000;
+}
+
+#submenu a:hover span {
+	color:#0B3B39;
+        /*color:#348017;
+        color:#AF7817;
+        color:	#827839;
+        color:#7F462C;*/
+        text-decoration: underline
+}
+
+
+/* alignment classes */
+.float-left  { float: left; }
+.float-right {	float: right; }
+.align-left  {	text-align: left; }
+.align-right {	text-align: right; }
+
+/* additional classes */
+.vN_clear { clear: both; }
+.green {	color: #9EC630; }
+.gray  {	color: #BFBFBF; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Minima
+Designer: Douglas Bowman
+URL:      www.stopdesign.com
+Date:     26 Feb 2004
+----------------------------------------------- */
+
+#navbar-iframe {
+   display: none !important;
+}
+
+
+/* Content
+----------------------------------------------- */
+@media all {
+  #content {
+    width:950px;
+    margin:0 auto;
+    padding:0;
+    text-align:left;
+    }
+ #content-wrap {
+  background-color:background:#FFFFFF none repeat scroll 0 0;
+  	height:auto !important;
+	height:600px; 
+	min-height:600px;
+
+ }
+  #main {
+    width:600px;
+    float:left;
+    }
+  #sidebar {
+    width:300px;
+    float:right;
+    }
+  }
+@media handheld {
+  #content {
+    width:90%;
+    text-align:left;
+    }
+  #main {
+    width:100%;
+    float:none;
+    }
+  #sidebar {
+    width:100%;
+    float:none;
+    }
+  }

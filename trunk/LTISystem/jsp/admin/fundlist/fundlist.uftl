@@ -1,0 +1,58 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+
+<html>
+<head>
+<SCRIPT src="../images/common.js" type=text/javascript></SCRIPT>
+	<link href="../images/style.css" rel="stylesheet" type="text/css" />
+<script>
+	function upload(){
+		var var1 = document.getElementById("upload").value;
+	    var var2 = document.getElementById("fileName");
+	    var2.value = var1;
+	    var form = document.getElementById("updateForm");
+	    form.submit();	
+    }
+</script>
+</head>
+
+
+<body>
+	<table class="nav" width="100%">
+			<td width="20%">
+				[@s.url action="Fundtable_main.action" id="url_tablemain" namespace="/jsp/admin/fundlist"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_tablemain}"]FundTable List Configeration[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="ExecutionFundTable.action" id="url_exetable" namespace="/jsp/admin/fundlist"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_exetable}"]FundTable List Operation Statement[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="Main.action" id="url_main" namespace="/jsp/admin/fundlist"  includeParams="none"]
+				[/@s.url]
+				[@s.a href="%{url_main}"]Upload FundTable List[/@s.a]	
+			</td>
+	</table>	
+	<br>
+	<br>
+		<div  id='upload_div_source'>
+			<form action="Upload.action" method="post" id="updateForm" enctype="multipart/form-data">
+			 File: 	<input id="upload" type="file" name="upload" /><br>
+					<input id="fileName" value='' name="fileName" type="hidden">
+			</form>
+			<input  class="uiButton" type='button' value='upload' onclick='upload()'>
+		</div>
+		<div>
+		[#if fileList ??]
+			[#list fileList as var]
+				${var_index+1}&nbsp;&nbsp;&nbsp;&nbsp;<a href="Download.action?planName=${var?string}">${var?string}</a>
+				<br>
+			[/#list]
+		[/#if]
+		</div>
+</body>
+</html>

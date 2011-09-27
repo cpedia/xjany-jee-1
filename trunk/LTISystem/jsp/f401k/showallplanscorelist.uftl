@@ -1,0 +1,162 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<title>Rating Results of All Plans</title>
+<meta  name="Description" content="The rating results of all live MyPlanIQ plans are listed on this page. Admin can also start a full rating calculation here.">
+
+
+</head>
+<script>
+function calculatePlanRanking(){
+	alert("start calculating");
+	$.ajax({
+		type: "post",
+		url: "f401k_calculateplanscore.action?includeHeader=false",
+		data: "securityAlphaWeight="+$('#securityAlphaWeight').val()
+			+"&securityTreynorWeight="+$('#securityTreynorWeight').val()
+			+"&securityARWeight="+$('#securityARWeight').val()
+			+"&portfolioARWeight="+$('#portfolioARWeight').val()
+			+"&portfolioSortinoWeight="+$('#portfolioSortinoWeight').val()
+			+"&portfolioSharpeWeight="+$('#portfolioSharpeWeight').val()
+			+"&portfolioTreynorWeight="+$('#portfolioTreynorWeight').val()
+			+"&portfolioDrawDownWeight="+$('#portfolioDrawDownWeight').val()
+			+"&portfolioWinningWeight="+$('#portfolioWinningWeight').val()
+			+"&planTAAWeight="+$('#planTAAWeight').val()
+			+"&planSAAWeight="+$('#planSAAWeight').val()
+			+"&planFundQualityWeight="+$('#planFundQualityWeight').val()
+			+"&planCoverageWeight="+$('#planCoverageWeight').val()
+			+"&planCapabilityWeight="+$('#planCapabilityWeight').val(),
+		datatype: "html",
+		success: function(result){
+			alert(result);
+			location.reload() ;
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+}
+</script>
+<body>
+<div>
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+	[#if planScoreList??]
+		
+		<h1 align="center"><span id='ranking'>Plan Ranking Statistics</span></h1>
+		<br>
+		<br>
+		<table id ="rankingtable" width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			<thead>
+				<tr>
+					<th alt="Plan Name" width="60px" class="header">Plan Name</th>
+					<th alt="TAA 5Yr Return" width="60px" class="header">TAA 5Yr Return</th>
+					<th alt="SAA 5Yr Return" width="60px" class="header">SAA 5Yr Return</th>	
+					<th alt="TAA Construction Capability" width="60px" class="header">TAA Construction Capability</th>
+					<th alt="SAA Construction Capability" width="60px" class="header">SAA Construction Capability</th>	
+					<th alt="MajorAssetClass" width="60px" class="header">Major AssetClass</th>
+					<th alt="Diversification" width="60px" class="header">Diversification</th>	
+					<th alt="Fund Quality" width="60px" class="header">Fund Quality</th>
+					<th alt="Construciton Capability" width="60px" class="header">Construciton Capability</th>
+					<th alt="Overall Investment" width="60px" class="header">Overall Investment</th>
+						
+				</tr>			
+			</thead>
+			<tbody>
+				[#list planScoreList as ps]
+					[#if ps_index%2==0]
+						<tr class='odd'>
+					[/#if]
+					[#if ps_index%2==1]
+						<tr class='even'>
+					[/#if]
+							<td>[#if ps.getStatus() == 1 ]*[/#if]<a href="/LTISystem/f401k_view.action?ID=${ps.getPlanID()}">${ps.getPlanName()}</a></td>	
+							<td width=60px>[#if ps.getTAAReturn()??]${ps.getTAAReturn()?string.percent}[#else]-[/#if]</td>
+							<td width=60px>[#if ps.getSAAReturn()??]${ps.getSAAReturn()?string.percent}[#else]-[/#if]</td>
+							<td width=60px>[#if ps.getTAAScore()??]${ps.getTAAScore()?string.percent}[#else]-[/#if]</td>
+							<td width=60px>[#if ps.getSAAScore()??]${ps.getSAAScore()?string.percent}[#else]-[/#if]</td>
+							<td width=60px>[#if ps.getMajorAssetClass()??]${ps.getMajorAssetClass()}[#else]-[/#if]</td>
+							<td width=60px>[#if ps.getCoverageScore()??]${ps.getCoverageScore()?string.percent}[#else]-[/#if]</td>
+							<td width=60px>[#if ps.getFundQualityScore()??]${ps.getFundQualityScore()?string.percent}[#else]-[/#if]</td>
+							<td width=60px>[#if ps.getCapabilityScore()??]${ps.getCapabilityScore()?string.percent}[#else]-[/#if]</td>
+							<td width=60px>[#if ps.getInvestmentScore()??]${ps.getInvestmentScore()?string.percent}[#else]-[/#if]</td>
+							
+						</tr>
+				[/#list]	
+			</tbody>
+		</table>
+			<br class="clear"/>
+		<!--
+			[#if planScoreList.size() > 10]
+				<div style="posistion:static" id="rankingpager" class="pager">
+					<form>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/first.png" class="first"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/prev.png" class="prev"/>
+						<input type="text" class="pagedisplay"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/next.png" class="next"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/last.png" class="last"/>
+						<select class="pagesize">
+							<option selected="selected" value="10">10</option>
+							<option value="20">20</option>
+							[#if planScoreList.size()> 20 ]
+							<option value="30">30</option>
+							[/#if]
+							[#if planScoreList.size()> 30 ]
+							<option value="40">40</option>
+							[/#if]
+						</select>
+					</form>
+				</div>
+			[/#if]
+		<script type="text/javascript"> 
+		$(document).ready(function(){
+			$("#rankingtable").tablesorter({
+				widthFixed: true, 
+				widgets: ['zebra']
+			})
+			[#if planScoreList.size() > 10]
+				.tablesorterPager({container: $("#rankingpager")});
+			[/#if]
+			}); 
+		</script>
+		-->
+		<script type="text/javascript"> 
+			$(document).ready(function(){
+				$("#rankingtable").tablesorter({
+					widthFixed: true, 
+					widgets: ['zebra']
+				})
+			}); 
+		</script>
+	[/#if]
+	<br>
+	<div>
+		<p><label>[@s.text name="securityAlphaWeight"/]</lable><input type="text" id="securityAlphaWeight" value='${securityAlphaWeight!}'/></p>
+		<p><label>[@s.text name="securityTreynorWeight"/]</lable><input type="text" id="securityTreynorWeight" value='${securityTreynorWeight!}'/></p>
+		<p><label>[@s.text name="securityARWeight"/]</lable><input type="text" id="securityARWeight" value='${securityARWeight!}'/></p>
+		
+		<p><label>[@s.text name="portfolioARWeight"/]</lable><input type="text" id="portfolioARWeight" value='${portfolioARWeight!}'/></p>
+		<p><label>[@s.text name="portfolioSortinoWeight"/]</lable><input type="text" id="portfolioSortinoWeight" value='${portfolioSortinoWeight!}'/></p>
+		<p><label>[@s.text name="portfolioSharpeWeight"/]</lable><input type="text" id="portfolioSharpeWeight" value='${portfolioSharpeWeight!}'/></p>
+		<p><label>[@s.text name="portfolioTreynorWeight"/]</lable><input type="text" id="portfolioTreynorWeight" value='${portfolioTreynorWeight!}'/></p>
+		<p><label>[@s.text name="portfolioDrawDownWeight"/]</lable><input type="text" id="portfolioDrawDownWeight" value='${portfolioDrawDownWeight!}'/></p>
+		<p><label>[@s.text name="portfolioWinningWeight"/]</lable><input type="text" id="portfolioWinningWeight" value='${portfolioWinningWeight!}'/></p>
+		
+		<p><label>[@s.text name="planTAAWeight"/]</lable><input type="text" id="planTAAWeight" value='${planTAAWeight!}'/></p>
+		<p><label>[@s.text name="planSAAWeight"/]</lable><input type="text" id="planSAAWeight" value='${planSAAWeight!}'/></p>
+		
+		<p><label>[@s.text name="planFundQualityWeight"/]</lable><input type="text" id="planFundQualityWeight" value='${planFundQualityWeight!}'/></p>
+		<p><label>[@s.text name="planCoverageWeight"/]</lable><input type="text" id="planCoverageWeight" value='${planCoverageWeight!}'/></p>
+		<p><label>[@s.text name="planCapabilityWeight"/]</lable><input type="text" id="planCapabilityWeight" value='${planCapabilityWeight!}'/></p>
+		
+		<input type='button' onclick='calculatePlanRanking()' class='uiButton' value='Calculate Plan Ranking'>
+	</div>
+	<br>
+[/@authz.authorize]
+
+</div>
+
+</body>
+</html>

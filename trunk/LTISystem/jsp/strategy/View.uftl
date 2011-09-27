@@ -1,0 +1,66 @@
+[#ftl]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Expires" CONTENT="0"> 
+<title>MyPlanIQ Strategy Page: ${strategy.name}</title>
+<meta name="description" content="[#if strategy.description!=""]${shortDescription}[#else]${strategy.name}[/#if]">
+<meta name="strategies" content="vf_current"/>
+<meta name="strategy" content="vf_current"/>
+<meta name="id" content='${ID}'/>
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+<meta name="submenu" content="strategymaintable"/>
+[/@authz.authorize]
+<script>
+	var host=window.location.href;
+	var isGreen=false;
+	if(host.indexOf("evergreenplans")!=-1||host.indexOf("myplaniq")!=-1){
+		isGreen=true;
+	}else{
+		isGreen=false;
+	}
+</script>
+</head>
+<body>
+	[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+		<a href="/LTISystem/jsp/strategy/Edit.action?ID=${strategy.ID}">Edit</a>
+	[/@authz.authorize]
+	<div id="name" style="margin:10px">
+		<h1>${strategy.name}</h1>
+	</div>
+	
+	<div id="className" style="margin:10px">
+		${strategy.className!""}
+	</div>
+	<script>
+		if(isGreen==true){
+			$('#className').hide();
+		}
+	</script>
+	<div id="modelPortfolios" style="margin:10px">
+		<div id='modelportfoliosdiv'>
+		</div>
+		<script>
+			if(isGreen==false){
+				$('#modelportfoliosdiv').load('/LTISystem/jsp/strategy/ModelPortfolioMain.action?ID=${strategy.ID}&strategyID=${strategy.ID}&size=10&includeHeader=false&includeJS=false');
+			}
+		</script>
+	</div>
+	<div id="shortDescription" style="margin:10px">
+		${strategy.shortDescription!""}
+	</div>
+	<div id="description" style="margin:10px">
+		${strategy.description!""}
+	</div>
+	<div id="similarIssues" style="margin:10px">
+		${strategy.similarIssues!""}
+	</div>
+	<div id="reference" style="margin:10px">
+		<h3>See Also</h3>
+		${strategy.reference!""}
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<include file="struts-example.xml"></include>
+	
+	<include file="struts-admin-assetclass.xml"></include>
+	<include file="struts-admin-group.xml"></include>
+	<include file="struts-admin-allocationtemplate.xml"></include>
+	<include file="struts-admin-articlecenter.xml"></include>
+	<include file="struts-admin-holiday.xml"></include>
+	<include file="struts-admin-indicator.xml"></include>
+	<include file="struts-admin-portfolio.xml"></include>
+	<include file="struts-admin-quartz.xml"></include>
+	<include file="struts-admin-security.xml"></include>
+	<include file="struts-admin-strategy.xml"></include>
+	<include file="struts-admin-loaddata.xml"></include>
+	<include file="struts-admin-validate.xml"></include>
+	<include file="struts-admin-strategyclass.xml"></include>
+	<include file="struts-admin-tradingdate.xml"></include>
+	<include file="struts-admin-user.xml"></include>
+	<include file="struts-admin-emails.xml"></include>
+	<include file="struts-admin-news.xml"></include>
+	<include file="struts-admin-header.xml"></include>
+	<include file="struts-indicator.xml"></include>
+	<include file="struts-mainpage.xml"></include>
+	<include file="struts-portfolio.xml"></include>
+	<include file="struts-security.xml"></include>
+	<include file="struts-fundcenter.xml"></include>
+	<include file="struts-flash.xml"></include>
+	<include file="struts-strategy.xml"></include>
+	<include file="struts-commentary.xml"></include>
+	<include file="struts-news.xml"></include>
+	<include file="struts-user.xml"></include>
+	<include file="struts-ajax.xml"></include>
+	<include file="struts-jforum.xml"></include>
+	<include file="struts-help.xml"></include>
+	
+	<include file="struts-register.xml"></include>
+	<include file="struts-verifycode.xml"></include>
+	<include file="struts-admin-customize-page.xml"></include>
+	<include file="struts-admin-region-customize.xml"></include>
+	<include file="struts-admin-customize-region.xml"></include>
+	<include file="struts-customize-region.xml"></include>
+	
+	<include file="struts-blapp.xml"></include>
+	
+	<include file="struts-mutualfund.xml"></include>
+	
+	<include file="struts-RFA.xml"></include>
+	
+	<include file="struts-admin-factors.xml"></include>
+	<include file="struts-betagain.xml"></include>
+	
+	<include file="struts-mvo.xml"></include>
+	<include file="struts-betagainranking.xml"></include>
+	<include file="struts-customizepage.xml"></include>
+	<include file="struts-clonecenter.xml"></include>
+	
+	<include file="struts-f401k.xml"></include>
+	<include file="struts-admin-fundlist.xml"></include>
+	
+	<package name="admin2" namespace="/jsp/admin" extends="struts-default">
+			<global-results>
+				<result name="exception">/jsp/exception.jsp</result>
+				
+			</global-results>
+			<global-exception-mappings>
+				<exception-mapping result="exception" exception="java.lang.Exception">
+				</exception-mapping>
+				
+			</global-exception-mappings> 
+			
+			
+			
+			<action name="*/*" class="com.lti.action.admin.{1}.{2}Action" >
+				<result name="success" type="freemarker">
+					/jsp/admin/{1}/{2}.ftl
+				</result>
+				<result name="message" type="freemarker">
+					/jsp/message.uftl
+				</result>
+				
+				<result name="download" type="stream">
+					<param name="inputName">fis</param>
+					<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+					<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+					<param name="bufferSize">102400</param>  
+				</result>  
+			</action>
+			
+			
+			
+	</package>
+	
+	<package name="widgets" namespace="/widgets" extends="struts-default">
+			<global-results>
+				<result name="exception">/jsp/exception.jsp</result>
+				
+			</global-results>
+			<global-exception-mappings>
+				<exception-mapping result="exception" exception="java.lang.Exception">
+				</exception-mapping>
+				
+			</global-exception-mappings> 
+			
+			<action name="framework" class="com.lti.widgets.framework">
+				<result name="js" type="freemarker">
+					/jsp/widgets/framework.js
+				</result>
+				<result name="json" type="freemarker">
+					/jsp/widgets/json.uftl
+				</result>  
+			</action>
+			
+			
+			<action name="*/*" class="com.lti.widgets.{1}" method="{2}">
+				<result name="js" type="freemarker">
+					/jsp/widgets/{1}/{2}.js
+				</result>
+				<result name="data" type="freemarker">
+					/jsp/widgets/{1}/{2}.json
+				</result>
+				<result name="html" type="freemarker">
+					/jsp/widgets/{1}/{2}.html
+				</result>
+				<result name="json" type="freemarker">
+					/jsp/widgets/json.uftl
+				</result>  
+			</action>
+			
+	</package>
+	<package name="new_mechanisms" namespace="/" extends="struts-default">
+			<global-results>
+				<result name="exception">/jsp/exception.jsp</result>
+				
+			</global-results>
+			<global-exception-mappings>
+				<exception-mapping result="exception" exception="java.lang.Exception">
+				</exception-mapping>
+			</global-exception-mappings> 
+			
+			
+			
+			<action name="f401k__main" class="com.lti.action.f401kaction" method="main">
+				<result name="success" type="freemarker">
+						/jsp/f401k/main.uftl
+				</result>
+			</action> 
+			<action name="updateAr" class="com.lti.action.f401kaction" method="updateAr">
+				<result name="message" type="freemarker">
+						/jsp/message.uftl
+				</result>
+				<result name="error" type="freemarker">
+						/jsp/admin/error.jsp
+				</result>
+			</action> 
+		
+			<action name="*_js_*"  class="com.lti.action.TemplateAction">
+		    	<result name="success" type="freemarker">
+						/jsp/{1}/images/{2}.js
+				</result>
+			</action> 
+				
+			<action name="article_plan*"  class="com.lti.action.articleaction" method="plan">
+		    	<result name="success" type="freemarker">
+						/jsp/article/plan{1}.uftl
+				</result>
+			</action> 
+		    <action name="article_economy"  class="com.lti.action.articleaction" method="plan">
+		    	<result name="success" type="freemarker">
+						/jsp/article/economy.uftl
+				</result>
+			</action> 
+			<action name="*__*"  class="com.lti.action.TemplateAction">
+		    	<result name="success" type="freemarker">
+						/jsp/{1}/{2}.uftl
+				</result>
+			</action> 
+		    
+		    <action name="invitLogin" class="com.lti.action.register.registerAction" method="invitLogin">
+			<result name="success">/invitlogin.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+			</action>
+			
+			
+			
+			
+			
+			
+		    
+			<action name="*help_*" class="com.lti.action.{1}helpaction" method="{2}">
+				<result name="success" type="freemarker">
+					/jsp/{1}/{2}.uftl
+				</result>
+				<result name="message" type="freemarker">
+					/jsp/message.uftl
+				</result>  
+			</action>
+			<action name="*_*" class="com.lti.action.{1}action" method="{2}">
+				<result name="success" type="freemarker">
+					/jsp/{1}/{2}.uftl
+				</result>
+				<result name="json" type="freemarker">
+					/jsp/widgets/json.uftl
+				</result>	
+				<result name="redirect_edit" type="redirect">
+					{1}_edit.action?${params}
+				</result>
+				<result name="error" type="freemarker">
+					/jsp/error.uftl
+				</result>  
+				<result name="message" type="freemarker">
+					/jsp/message.uftl
+				</result>  
+				<result name="login" type="redirect">
+					/LTISystem/acegilogin.jsp
+				</result>  
+				<result name="redirect" type="redirect">
+					{1}_${action_name}.action?${params}
+				</result>
+				<result name="image" type="stream">
+					<param name="inputName">fis</param>
+					<param name="contentType">image/x-png</param>
+					<param name="contentDisposition">fileName="${planName}.png"</param>
+					<param name="bufferSize">102400</param> 
+				</result>
+				<result name="download" type="stream">
+					<param name="inputName">fis</param>
+					<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+					<param name="contentDisposition">attachment;fileName="${planName}"</param>
+					<param name="bufferSize">102400</param>  
+				</result>
+				
+			</action>
+			
+	</package>	
+	<package name="com.lti.action.main" namespace="/jsp/main" extends="struts-default"> 
+
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		
+		<action name="Main" class="/jsp/main/Main">
+			<result name="success" type="freemarker">/jsp/main/main.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="*"  class="com.lti.action.TemplateAction">
+		    <result name="success" type="freemarker">
+					/jsp/main/{1}.uftl
+			</result>
+		</action> 
+	</package>
+	<package name="com.lti.action.admin.filebrowser" namespace="/jsp/admin/filebrowser" extends="struts-default">
+			<global-results>
+				<result name="exception">/jsp/exception.jsp</result>
+			</global-results>
+			<global-exception-mappings>
+				<exception-mapping result="exception" exception="java.lang.Exception">
+				</exception-mapping>
+			</global-exception-mappings> 
+		
+			<action name="List" class="/jsp/admin/filebrowser/Main" method="list">
+				<result name="list" type="freemarker">
+					/jsp/admin/filebrowser/list.ftl
+				</result>			
+			</action>
+			<action name="Update" class="/jsp/admin/filebrowser/Main" method="update">
+				<result name="read" type="freemarker">
+					/jsp/admin/filebrowser/read.ftl
+				</result>			
+			</action>
+			<action name="Delete" class="/jsp/admin/filebrowser/Main" method="delete">
+				<result name="read" type="freemarker">
+					/jsp/admin/filebrowser/read.ftl
+				</result>			
+			</action>
+			<action name="Read" class="/jsp/admin/filebrowser/Main" method="read" >
+				<result name="read" type="freemarker">
+					/jsp/admin/filebrowser/read.ftl
+				</result>			
+			</action>
+	</package>
+	<package name="com.lti.action" namespace="/jsp" extends="struts-default">
+			<global-results>
+				<result name="exception">/jsp/exception.jsp</result>
+				
+			</global-results>
+			<global-exception-mappings>
+				<exception-mapping result="exception" exception="java.lang.Exception">
+				</exception-mapping>
+			</global-exception-mappings> 
+		
+			<action name="*" class="com.lti.action.TemplateAction">
+				<result name="success" type="freemarker">
+					/jsp/{1}.uftl
+				</result>
+				<result name="withheader" >
+					/jsp/withheader.jsp
+				</result>			
+			</action>
+	</package>	
+	<package name="com.lti.action.admin.clonecenter" namespace="/jsp/admin/clonecenter" extends="struts-default">
+			<global-results>
+				<result name="exception">/jsp/exception.jsp</result>
+			</global-results>
+			<global-exception-mappings>
+				<exception-mapping result="exception" exception="java.lang.Exception">
+				</exception-mapping>
+			</global-exception-mappings> 
+		
+			<action name="*" class="com.lti.action.admin.clonecenter.{1}Action">
+				<result name="success" type="freemarker">
+					/jsp/admin/clonecenter/{1}.uftl
+				</result>		
+				<result name="withheader" >
+					/jsp/withheader.jsp
+				</result>	
+				<result name="actionMessage" type="freemarker">
+					/jsp/admin/clonecenter/actionMessage.uftl
+				</result>						
+			</action>
+	</package>	
+
+	<package name="com.lti.action.admin.stock" namespace="/jsp/admin/stock" extends="struts-default">
+			<global-results>
+				<result name="exception">/jsp/exception.jsp</result>
+			</global-results>
+			<global-exception-mappings>
+				<exception-mapping result="exception" exception="java.lang.Exception">
+				</exception-mapping>
+			</global-exception-mappings> 
+		
+		<action name="DownloadUpdateLog" class="com.lti.action.admin.stock.DownloadUpdateLogAction">
+			<result name="input" type="freemarker" >/jsp/admin/stock/DownloadUpdateLog.uftl</result>
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${date}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>	
+		<action name="FinancialInfo" class="com.lti.action.admin.stock.FinancialInfoAction">
+				<result name="success" type="freemarker">
+					/jsp/admin/stock/FinancialInfo.uftl
+				</result>								
+		</action>
+		<action name="FinancialStatement" class="com.lti.action.admin.stock.FinancialStatementAction">
+				<result name="success" type="freemarker">
+					/jsp/admin/stock/UpdateFinancialStatement.uftl
+				</result>							
+		</action>
+		<action name="UpdateFinancialStatement" class="com.lti.action.admin.stock.UpdateFinancialStatementAction">
+				<result name="success" type="freemarker">
+					/jsp/admin/stock/UpdateFinancialStatement.uftl
+				</result>
+				<result name="view" type="freemarker">
+					/jsp/admin/stock/UpdateFinancialStatement.uftl
+				</result>								
+		</action>
+		<action name="StopFinancialStatement" class="com.lti.action.admin.stock.StopFinancialStatementAction">
+				<result name="success" type="freemarker">
+					/jsp/admin/stock/UpdateFinancialStatement.uftl
+				</result>								
+		</action>
+		<action name="ExecutionFinan" class="com.lti.action.admin.stock.ExecutionFinanAction">
+				<result name="success" type="freemarker">
+					/jsp/admin/stock/executionFinan.uftl
+				</result>								
+		</action>
+		<action name="UpdateConfiguration" class="com.lti.action.admin.stock.UpdateConfigurationAction">
+				<result name="success" type="freemarker">
+					/jsp/admin/stock/UpdateConfiguration.uftl
+				</result>						
+		</action>
+		
+		<action name="Search" class="com.lti.action.admin.stock.SearchAction">
+				<result name="success" type="freemarker">/jsp/admin/stock/Search.uftl</result>						
+		</action>   		
+	</package>	
+</struts>

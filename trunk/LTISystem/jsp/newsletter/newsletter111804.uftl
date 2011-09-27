@@ -1,0 +1,375 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+	<title>MyPlanIQ Newsletter: April 2011</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="A retirement plan and investing newsletter">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<script>
+$(document).ready(function() {
+	alignHeight();
+});
+</script>
+<style>
+.newsletter-box {
+	height:auto;
+	overflow:hidden;
+	border: 8px solid #FAFAFA;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+}
+.newsletter-box .col-1 {
+	width:618px;
+	height: 545px;
+	overflow: hidden;
+}
+.newsletter-box .col-2 {
+	height: 545px;
+	overflow: hidden;
+	padding-left:10px;
+}
+
+</style>
+</head>
+<body>
+  <div class="borderGreen">
+  
+
+
+<!-- <STYLE>
+
+ .headerTop { background-color:#FFCC66; border-top:0px solid #000000; border-bottom:1px solid #FFFFFF; text-align:center; }
+
+ .adminText { font-size:10px; color:#996600; line-height:200%; font-family:verdana; text-decoration:none; }
+
+ .headerBar { background-color:#FFFFFF; border-top:0px solid #333333; border-bottom:10px solid #FFFFFF; }
+
+ .title { font-size:20px; font-weight:bold; color:#CC6600; font-family:arial; line-height:110%; }
+
+ .subTitle { font-size:11px; font-weight:normal; color:#666666; font-style:italic; font-family:arial; }
+
+ .defaultText { font-size:12px; color:#000000; line-height:150%; font-family:trebuchet ms; }
+
+ .footerRow { background-color:#FFFFCC; border-top:10px solid #FFFFFF; }
+
+ .footerText { font-size:10px; color:#996600; line-height:100%; font-family:verdana; }
+
+ a { color:#FF6600; color:#FF6600; color:#95b5c1; }
+
+</STYLE>
+
+-->
+
+<div class="newsletter-box">
+
+
+
+<table width="100%" cellpadding="10" cellspacing="0" class="backgroundTable" >
+
+<tr>
+
+<td valign="top" align="center">
+
+
+
+
+
+<table width="550" cellpadding="0" cellspacing="0">
+
+
+
+<tr>
+
+
+</tr>
+
+</table>
+
+
+
+
+
+<table width="550" cellpadding="20" cellspacing="0">
+
+<tr>
+
+<td valign="top" style="font-size:12px;color:#000000;line-height:150%;font-family:trebuchet ms;">
+
+
+
+<p>
+
+<table width="100%">
+  <tbody>
+    <tr>
+    </tr>
+    <tr>
+      <td>
+      <h2 align="center"><font color="#458f51">MyPlan</font><font
+ color="#95b5c1">IQ</font> <p> Investment Advisor Newsletter</h2>
+      <p align="center"><strong align="center">April 18 2011</strong></p>
+      </td>
+      <td align="right" width="6%"> <align="right"><a
+ href="http://www.myplaniq.com/LTISystem/newsletter__nllist.action"><strong><font
+ size="3">Archive</font></strong></a></strong> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This is a biweekly newsletter with quantitative data from thousands of plans. 
+
+We believe that good asset allocation brings the best returns.</p>
+
+
+<p><span style="font-weight: bold;">Key New Features</span></p>
+<ul>
+<li><b>Upgrade portfolio comparisons: </span></b>We now allow securities on the
+portfolio comparison page, and provide side by side comparison of all attribute of the compared portfolios.<br>
+</span></li>
+<li><b>Allow
+expert users to create model portfolios for their private plans:</b>We now
+provide an advanced button on the fund table
+page for expert users to create model portfolios of their own plan. The
+plan
+will be rated one or two days after the model portfolios have been
+created. The
+model portfolios and the rating scores will be show on the plan page of
+these
+user plans.</span></li>
+<li><b>Relax
+the volumn volatility restriction
+for the TAA and SAA</b>:.
+By default, the TAA strategy and SAA strategy
+will not suggest funds with small trading volumn or relatively
+large volatility, such as recently listed ETFs and leveraged funds. Now
+expert users can relax these restriction for their own plans. On the
+fund table
+page you can select "Allow
+Trading funds with Small Volumn or Large Volatility". </span></li>
+<li><b>How
+we deal with the user portfolios when the user cancel the
+subscription:</b>.For the basic
+subscriber who want to upgrade to the expert level, you must cancel the
+basic subscription and subscribe again as an expert. When you cancel the basic subscription, all followed
+portfolios and customized portfolios will turn inactive and can be
+found by
+clicking the "My Inactive Portfolio" button on the My Portfolio page.
+Theses portfolios can be re-activated according the user's permission
+status. For
+example, a non-subscriber can not re-activate the TAA portfolios and a
+basic
+subscriber can not re-activate private plans. Be aware that the
+inactive
+portfolios will automatically be deleted after 3 months.</span></li>
+</ul>
+<span style="font-weight: bold;"><br>
+</span><span style="font-weight: bold;"><big>How can we improve this
+newsletter -- <a href="http://www.surveymonkey.com/s/F3JNJ8D">we value
+your inputs</a> -- note we will only take the first 100 respondents.
+Thank you.</big></span><br><br>
+<p><span style="font-weight: bold;">
+
+
+<a
+href="http://www.myplaniq.com/LTISystem/advanced__markets.action">Major
+Asset
+Classes
+Trends</a></span></p>
+Commodities remain at the top of the asset class table followed by real
+estate and US stocks. We have seen a similar pattern with US REITs and
+US stocks battling for second place (if you include gold in the
+commodities asset class). You can get a widget of this <a
+href="http://www.myplaniq.com/LTISystem/api__customize.action">here</a>.<br>
+<br>
+<table cellspacing="10">
+<tbody>
+<tr>
+<th align="left"><b>Assets Class</b></th>
+<th><b>Symbols</b></th>
+<th><b>04/15<br>
+Trend<br>
+Score</b></th>
+<th><b>04/08<br>
+Trend<br>
+Score</b></th>
+<th style="text-align: center;"><b>Direction</b></th>
+</tr>
+<tr>
+<td> Commodities </td>
+<td> DBC </td>
+<td> 13.46% </td>
+<td> 17.68% </td>
+<td style="text-align: center;"> v </td>
+</tr>
+<tr>
+<td> Gold </td>
+<td> GLD </td>
+<td> 10.8% </td>
+<td> 10.04% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> US Equity REITs </td>
+<td> VNQ </td>
+<td> 9.5% </td>
+<td> 5.32% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> US Stocks </td>
+<td> VTI </td>
+<td> 7.42% </td>
+<td> 7.96% </td>
+<td style="text-align: center;"> v </td>
+</tr>
+<tr>
+<td> Emerging Market Stks </td>
+<td> VWO </td>
+<td> 6.86% </td>
+<td> 8.49% </td>
+<td style="text-align: center;"> v </td>
+</tr>
+<tr>
+<td> International REITs </td>
+<td> RWX </td>
+<td> 6.29% </td>
+<td> 6.32% </td>
+<td style="text-align: center;"> v </td>
+</tr>
+<tr>
+<td> US High Yield Bonds </td>
+<td> JNK </td>
+<td> 5.49% </td>
+<td> 3.97% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> International Developed Stks </td>
+<td> EFA </td>
+<td> 4.53% </td>
+<td> 5.22% </td>
+<td style="text-align: center;"> v </td>
+</tr>
+<tr>
+<td> International Treasury Bonds </td>
+<td> BWX </td>
+<td> 3.18% </td>
+<td> 2.85% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> US Credit Bonds </td>
+<td> CFT </td>
+<td> 1.63% </td>
+<td> 0.1% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> Total US Bonds </td>
+<td> BND </td>
+<td> 1.18% </td>
+<td> -0.16% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> Mortgage Back Bonds </td>
+<td> MBB </td>
+<td> 1.01% </td>
+<td> -0.9% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> Municipal Bonds </td>
+<td> MUB </td>
+<td> 0.68% </td>
+<td> -1.11% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> Intermediate Treasuries </td>
+<td> IEF </td>
+<td> 0.64% </td>
+<td> -1.14% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> Frontier Market Stks </td>
+<td> FRN </td>
+<td> 0.63% </td>
+<td> 2.28% </td>
+<td style="text-align: center;"> v </td>
+</tr>
+<tr>
+<td> Emerging Mkt Bonds </td>
+<td> PCY </td>
+<td> 0.55% </td>
+<td> 0.48% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+<tr>
+<td> Treasury Bills </td>
+<td> SHV </td>
+<td> 0.05% </td>
+<td> 0.03% </td>
+<td style="text-align: center;"> ^ </td>
+</tr>
+</tbody>
+</table>
+The trend score is defined as the average of 1,4,13,26 and 52 week
+total returns (including dividend reinvested). <br>
+<span></span><span
+style="font-size: 12pt; font-family: &quot;SimSun&quot;,&quot;serif&quot;;"><br style="">
+</span>
+<p><span style="font-weight: bold;"><a target="_blank"
+href="http://www.myplaniq.com/LTISystem/f401k_blog.action">Articles of
+the week</a>
+</span></p>
+<ul>
+<li><a target="_blank"
+href="http://seekingalpha.com/article/261301-macro-tailwinds-behind-junk-and-inflation-hedged-bonds">Macro
+Tailwinds
+Behind
+Junk and Inflation-Hedged Bonds</a> </li>
+<li> <a target="_blank"
+href="http://seekingalpha.com/article/261211-the-uncanny-permanent-portfolio-does-adding-a-reit-help">The
+Uncanny
+Permanent
+Portfolio: Does Adding a REIT Help?</a> </li>
+<li> <a target="_blank"
+href="http://seekingalpha.com/article/260641-risk-appetite-back-to-pre-disaster-levels-as-emerging-market-equities-recover">Risk
+Appetite
+Back
+to Pre-Disaster Levels as Emerging Market Equities Recover</a> </li>
+<li> <a target="_blank"
+href="http://seekingalpha.com/article/260638-large-cap-etfs-ready-to-come-back-into-favor">Large
+Cap
+ETFs
+Ready to Come Back Into Favor?</a> </li>
+<li> <a target="_blank"
+href="http://seekingalpha.com/article/260126-adding-commodity-etf-exposure-to-high-yield-income-portfolios-can-enhance-returns">Adding
+Commodity
+ETF
+Exposure to High Yield Income Portfolios Can Enhance
+Returns</a> </li>
+</ul>
+<div><br>
+<br><br>
+</div>
+<div><a rel="nofollow" href="../../../../jforum/rss/forumTopics/61.page" target="_blank">RSS Feed <img src="../../../../jforum/templates/default/images/xml_button.gif" alt="[XML]" /></a></div>
+<div><br />
+<p><span><strong>Disclaimer:</strong> </span></p>
+<p><span>Any investment in securities including mutual funds,  ETFs, closed end funds, stocks and any other securities could lose  money over any period of time. All investments involve risk. Losses may  exceed the principal invested. Past performance is not an indicator of  future performance. There is no guarantee for future results in your  investment and any other actions based on the information provided on  the website including, but not limited to, strategies, portfolios,  articles, performance data and results of any tools.</span></p>
+<p><span>All rights are reserved and enforced. By accessing  the website, you agree not to copy and redistribute the information  provided herein without the explicit consent from MyPlanIQ.</span></p>
+</div>
+<br /></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

@@ -1,0 +1,275 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<style>
+.font{
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 10px
+}
+</style>
+[#if profiles?? && profiles?size >0]
+		<!-- ${lastUpdated?datetime} -->
+		<script>
+			$(document).ready(function(){ 
+			        	//$("#profiletable${currentTimeMillis?string.computer}").tablesorter({sorter:'num'});
+			        	//$("#managewindow").dialog({height:300,width:600,title:"Login",autoOpen:false,modal:true});
+			        } 
+			);
+		</script>  
+		<script>
+			function getEvent() { 
+				if (document.all) return window.event;
+				func = getEvent.caller;
+				while (func != null) {
+					var arg0 = func.arguments[0];
+					if (arg0) {
+						if ((arg0.constructor == Event || arg0.constructor == MouseEvent)
+							|| (typeof (arg0) == "object" && arg0.preventDefault && arg0.stopPropagation)) {
+							return arg0;
+						}
+					}
+					func = func.caller;
+				}
+				return null;
+			} 
+			function remove(portfolioId,planId,userId){
+				if(confirm("Are you sure to remove this portfolio?")){
+					
+					var url_s='getstarted_unfollow.action?portfolioID='+portfolioId+'&planID='+planId+'&userID='+userId;;
+					$.ajax({
+				  	 	type: "Post",
+				   		url: url_s,
+				   		
+				   		success: function(msg){
+				     			//alert(msg );
+				     			var _href=window.location.href;
+				     			if(_href.indexOf("select_building")==-1)
+				     				window.location.reload();
+				     			else
+				     				window.location.href="http://www.myplaniq.com.";
+				   		}
+				 });
+				}
+			}
+			function hide(){
+				$('#managewindow').hide();
+			}
+			function openmanagewindow(portfolioid,portfolioname){
+				//var event = getEvent();
+				//alert(event) 
+				//var PosX = 0;
+				//var PosY = 0;
+				//if (event.pageX || event.pageY) {
+				//	PosX = event.pageX;
+				//	PosY = event.pageY;
+				//}
+				//else {
+				//	PosX = event.clientX + document.body.scrollLeft - document.body.clientLeft;
+				//	PosY = event.clientY + document.body.scrollTop - document.body.clientTop;
+				//}
+				
+				//$("#managewindow_content").html($("#window_"+portfolioid).html());
+				//$("#managewindow").dialog({title:portfolioname});
+				//$("#managewindow").dialog({position:[PosX,PosY]});
+				//$("#managewindow").dialog("open");
+				//$("#managewindow").css({position:'absolute',left:PosX,top:PosY});
+				//$("#managewindow").show();
+				//$(this).append($("#managewindow"));
+				$("#window_"+portfolioid).toggle();
+				if($("#title_"+portfolioid).css('font-weight')==400){
+					$("#title_"+portfolioid).css('font-weight',700);
+					$("#title_"+portfolioid).css('color','black');			
+				}else{
+					$("#title_"+portfolioid).css('font-weight',400);		
+					$("#title_"+portfolioid).css('color','#333333');			
+				}
+				
+			}
+			
+			function setfollowdate(portfolioID, hasEndDate) {
+				if(hasEndDate == false){
+					alert("This portfolio has not been simulated. Please remove it and costomize a new portfolio.");
+					return;
+				}
+				$('#followDateStr_' + portfolioID).datepicker();
+				if($('#followdatestate_' + portfolioID).val() == "true"){
+					$("#followDateStr_" + portfolioID + "_div").show();
+					$('#followdatestate_' + portfolioID).val(false);
+				}else {
+					$("#followDateStr_" + portfolioID + "_div").hide();
+					$('#followdatestate_' + portfolioID).val(true);
+				}
+			}
+			
+			function starttoimitate(portfolioID) {
+				if(confirm("Be aware: We will re-set the redemption limit periods of the portfolio holdings. The simulated portfolio will keep the current holdings within their redemption limit periods, which start from today. Please do it after you creat an active account with the allocation of our simulated portfolio. Are you sure to inform us the initiation of tracking?")){
+					$.ajax({
+					  	type: "Post",
+					   	url: "profile_starttoimitate.action?includeHeader=false&portfolioID=" + portfolioID,
+					   	success: function(msg){
+					   		alert("start to imitate successful.");
+					   		window.location.reload();
+					   	}
+					 });
+				}
+			}
+			
+			function changefollowdate(portfolioID) {
+				var pattern = /^((\d{1,2})\/(\d{1,2})\/(\d{4}))$/;  
+				var followdate = $('#followDateStr_' + portfolioID).val();
+				if(!pattern.test(followdate)){
+					alert( "Please input the follow date with format 'MM/dd/yyyy'.");
+					return;
+				}
+				$.ajax({
+				  	type: "Post",
+				   	url: "profile_changefollowdate.action?includeHeader=false&portfolioID=" + portfolioID,
+				   	data: $('#chanagefollowdateform_' + portfolioID).serialize(),
+				   	success: function(msg){
+				   		alert("set follow date successful.");
+				   		window.location.reload();
+				   	}
+				 });
+			}
+		</script>
+[/#if]
+	<div>
+		[#if title??]<span style="font-size:1.7em;">${title}</span><br>[/#if]
+		[#if description??]<span style="font-size:1.1em;">${description}</span><br>[/#if]
+		[#if profiles?? && profiles?size >0]
+		<div align="center">
+		<span style="font-size:1.4em;">[#if portfolioSource == 0]My Followed Basic Portfolios[#else]My Customized Basic Portfolios[/#if]</span><br><br>
+		[#if portfolioSource != 0]
+		<div style="padding-left: 650px;">
+			<form action='/LTISystem/getstarted_pickaplan.action' name='vf_createplan' method='post'>
+					     <input class="uiButton" value='Build a New Customized Portfolio' type='submit'/>
+			</form><!-- end of form -->
+		</div>
+		[/#if]
+		click on a <strong>portfolio name</strong> to see options to view or remove this portfolio and other parameters
+		<br>
+		<br>
+		</div>
+		<table id="profiletable${currentTimeMillis?string.computer}" class="tablesorter" border="0" cellpadding="0" cellspacing="1" width="100%">
+			<thead>
+				<tr>
+					<th class="header">
+						Portfolio Name
+					</th>	
+					<th class="header">
+						Plan Name
+					</th>
+					<th class="header">
+						Strategy
+					</th>
+					<th class="header">
+						Risk Profile
+					</th>
+					<th alt="One Years' Annualized Return" width="30px"  class="header">
+						1Yr AR
+					</th>
+					<!--<th alt="One Years' Sharpe Ratio" width="30px" class="header">
+						1Yr Sharpe
+					</th>-->
+					<th alt="Three Years' Annualized Return" width="30px" class="header">
+						3Yr AR
+					</th>
+<!--					<th alt="Three Years' Sharpe Ratio" width="30px" class="header">
+						3Yr Sharpe
+					</th>
+-->					<th alt="Five Years' Annualized" width="30px" class="header">
+						5Yr AR
+					</th>
+					<!--<th alt="Five Years' Sharpe Ratio" width="30px" class="header">
+						5Yr Sharpe
+					</th>-->
+					<th class="header">
+						Manage
+					</th>
+						<th class="header">
+						Remove
+						</th>
+				</tr>			
+			</thead>
+			<tbody>
+			
+			[#list profiles as item]
+				[#if item.portfolioID==0 && item.planID==0]
+				[#else]
+					[#if item_index%2==0]
+						<tr class='odd' valign='top'>
+					[/#if]
+					[#if item_index%2==1]
+						<tr class='even' valign='top'>
+					[/#if]
+							
+							<td>
+								[#-- jsp/portfolio/ViewPortfolio.action?ID=${item.portfolioID?string.computer} --]
+								<div id='title_${item.portfolioID?string.computer}' style='cursor: pointer;'>
+								${item.portfolioName}
+								<button type="submit" onclick="javascript:window.location='jsp/portfolio/ViewPortfolio.action?ID=${item.portfolioID?string.computer}'"><span class="font">visit</span></button>
+								</div>
+							</td>
+							<td>
+									<a href='f401k_view.action?ID=${item.planID}' target='_blank'>${item.planName}</a>
+							</td>
+							<td>
+									<a href="/LTISystem/jsp/strategy/View.action?ID=${item.strategyID}" target="_blank">${item.strategyName}</a>
+							</td>
+							<td>
+									${item.riskNumber}
+							</td>
+							
+							<td width=30px>[#if item.AR1??]${item.AR1?string.percent}[/#if]</td>
+							<!--<td width=30px>[#if item.sharpeRatio1??]${item.sharpeRatio1?string.percent}[/#if]</td>-->
+							<td width=30px>[#if item.AR3??]${item.AR3?string.percent}[/#if]</td>
+							<!--<td width=30px>[#if item.sharpeRatio3??]${item.sharpeRatio3?string.percent}[/#if]</td>-->
+							<td width=30px>[#if item.AR5??]${item.AR5?string.percent}[/#if]</td>
+							<!--<td width=30px>[#if item.sharpeRatio5??]${item.sharpeRatio5?string.percent}[/#if]</td>-->
+							<td align="center"><button type="submit" onclick="openmanagewindow(${item.portfolioID?string.computer},'')" ><span class="font2">Manage</span></button></td>
+							<td align="center"><button type="submit" onclick="remove(${item.portfolioID?string.computer},${item.planID?string.computer},${item.userID?string.computer})" ><span class="font2">Remove</span></button></td>
+							</tr>
+						<tr style='display:none' id='window_${item.portfolioID?string.computer}'>
+							<td colspan="9">
+								<div class="sidebar_box">
+									<p>
+										<br>
+										<a href='jsp/portfolio/ViewPortfolio.action?ID=${item.portfolioID?string.computer}' target='_blank'>View this portfolio</a>
+										<br>
+										<br>
+										[#if item.frequency??]
+										Rebalance Frequency: ${item.frequency}
+										<br>
+										<br>
+										[/#if]
+										Follow Status[@lti.questionmark "'Follow' means that you want to see the realtime info and will receive rebalance email alerts of the portfolio." ""/]: true &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Follow Date: [#if item.startToFollowDate??] ${item.startToFollowDate}[#else] Null [/#if]&nbsp;&nbsp;<input type="button" class="uiButton" value="Set Follow Date" onclick="setfollowdate(${item.portfolioID?string.computer}, [#if item.endDate??]true[#else]false[/#if])"> [@lti.questionmark "It records the portfolio date when you start paying attention on this portfolio. By default, it is the date when you click 'Follow this portfolio' or customize the portfolio." ""/]
+										<input type="hidden" id="followdatestate_${item.portfolioID?string.computer}" value="true"/>
+										<div id="followDateStr_${item.portfolioID?string.computer}_div" style="display:none">
+											<form action="changefollowdate.action" id="chanagefollowdateform_${item.portfolioID?string.computer}" method="post">
+												<input id="followDateStr_${item.portfolioID?string.computer}" name="followDateStr" value=[#if item.endDate??]"${item.endDate?string('MM/dd/yyyy')}"[#else]""[/#if] class="ui-widget ui-corner-all" style="height:30px;width:250px"> &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" class="uiButton" value="Change" onclick="changefollowdate(${item.portfolioID?string.computer})">
+											</form>
+										</div>
+										[#if portfolioSource == 1]
+										Tracking Status[@lti.questionmark "Are you tracking the allocation of the MyPlanIQ Portfolio in your Actual Fund Account?" ""/]: [#if item.imitationDate??]true[#else]false[/#if] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Initiate Tracking Date:[#if item.imitationDate??] ${item.imitationDate}[#else] Null <input type="button" class="uiButton" value="Confirm Tracking in Actual Funds" onclick="starttoimitate(${item.portfolioID?string.computer})"> [/#if] [@lti.questionmark "To notify us that you have created an active account with the allocation of our simulated portfolio. When notified, we re-set the redemption period of the simulated portfolio holdings and prevent an email to make changes to the holdings inside the redemption" ""/]
+										<br>
+										<br>
+										[/#if]
+										<a href='javascript:void(0)' onclick='remove(${item.portfolioID?string.computer},${item.planID?string.computer},${item.userID?string.computer})' >Remove this portfolio</a>
+										<br>
+										<br>
+									</p>
+								</div> 
+							</td>
+						</tr>
+					[/#if]
+				[#if size?? && size!=0 && item_index == size][#break][/#if]
+			[/#list]
+			
+			</tbody>
+		</table>	
+		[/#if]
+</div>
+<div class="sidebar_box_noPadding roundHeadingBlue" id='managewindow' style='display:none;background-color:White; z-index:0 '>
+	<div class="sidebar_box_heading_white">More Operations&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void" onclick='hide()'>Close</a></div>
+	<div class="sidebar_box_content" id="managewindow_content">
+	</div>
+</div>

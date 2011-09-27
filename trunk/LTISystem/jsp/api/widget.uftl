@@ -1,0 +1,134 @@
+[#ftl]
+function include_js(ind,func) {
+	if(ind==mp_files.length){
+		func();
+		return false;
+	}
+	var file=mp_files[ind];
+	var flag=eval(mp_flags[ind]);
+	if(flag){
+	    var _doc = document.getElementsByTagName('head')[0];
+	    var js = document.createElement('script');
+	    js.setAttribute('type', 'text/javascript');
+	    js.setAttribute('src', file);
+	    _doc.appendChild(js);
+	
+	    if (!/*@cc_on!@*/0) { //if not IE
+	        //Firefox2、Firefox3、Safari3.1+、Opera9.6+ support js.onload
+	        js.onload = function () {
+	            include_js(++ind,func);
+	        }
+	    } else {
+	        //IE6、IE7 support js.onreadystatechange
+	        js.onreadystatechange = function () {
+	            if (js.readyState == 'loaded' || js.readyState == 'complete') {
+	                include_js(++ind,func);
+	            }
+	        }
+	    }
+	}else{
+		include_js(++ind,func);
+	}
+
+    return false;
+}
+
+var mp_files=new Array("http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js","http://www.myplaniq.com/LTISystem/jsp/api/images/jquery.tablesorter.js"/*,"http://www.myplaniq.com/LTISystem/jsp/api/images/jquery.tablesorter.pager.js"*/,"http://www.myplaniq.com/LTISystem/jsp/api/images/swfobject.js");
+var mp_flags=new Array("typeof window.jQuery == \"undefined\"","typeof jQuery.tablesorter == \"undefined\""/*,"typeof jQuery.tablesorterPager == \"undefined\""*/,"typeof swfobject == \"undefined\"");
+include_js(0,function(){
+	//回调函数
+	$(function(){
+		load_mp_table();
+		load_mp_rss();
+		load_flash_chart();
+	});
+	//回调函数结束
+});
+
+
+function load_mp_rss(){
+	[#list widgets as w]
+		[#if w.type==2]
+				$.ajax({
+			       type : "GET",
+			       url : '${w.url}&_callback=?',
+			       dataType : "jsonp",
+			       jsonp: '_callback',
+			       success : function(data){
+				       	var sbody="";
+						var shead="";
+						$(data.value.items).each(function(index,item) {
+							sbody += '<tr><td><a href="'+item.link+'" target="_blank">'+item.title+'</a></td></tr>';
+						});
+						$("#${w.id}").html("<table class='ltitable' id='table_${w.id}' border=0><thead><tr><th>${w.title!""}</th></tr></thead><tbody>"+
+						sbody+
+						"</tbody></table>"
+						
+						
+						);
+						
+						$("#table_${w.id}").tablesorter();
+			       }	
+			    });
+		[/#if]
+	[/#list]
+}
+
+function load_flash_chart(){
+	[#list widgets as w]
+		[#if w.type==3]
+	var mp_flashvars = {"data-file":"${w.url}"};  
+	var mp_params = {menu: "false",scale: "noScale",wmode:"opaque",allowScriptAccess:"always"};  
+	swfobject.embedSWF("http://www.myplaniq.com/LTISystem/jsp/api/images/open-flash-chart.swf", "${w.id}", "${w.width}px", "${w.height}px", "9.0.0","expressInstall.swf",mp_flashvars,mp_params);
+		[/#if]
+	[/#list]
+}
+
+
+function load_mp_table(){
+
+	var data_url;
+	[#list widgets as w]
+		[#if w.type==1]
+			data_url="${w.url}";
+			$.ajax({
+		       type : "GET",
+		       url : data_url,
+		       dataType : "jsonp",
+		       jsonp: 'callback',
+		        success : function(data){
+		            var sbody="";
+					var shead="";
+					$.each(data.items, function(i,item){
+						if(i==0){
+							shead+="<tr>";
+							for(j=0;j<item.length;j++){
+								shead+="<th>"
+								shead+=item.values[j].value;
+								shead+="</th>";
+							}
+							shead+="</tr>";
+						}else{
+							sbody+="<tr>";
+							for(j=0;j<item.length;j++){
+								sbody+="<td>"
+								sbody+=item.values[j].value;
+								sbody+="</td>";
+							}
+							sbody+="</tr>";
+						}
+						
+					});
+					$("#${w.id}").html("<table class='ltitable' id='table_${w.id}' border=0>[#if w.title??]<caption>${w.title!""}</caption>[/#if]<thead>"+shead+"</thead><tbody>"+sbody+"</tbody></table>");
+					$("#table_${w.id}").tablesorter();
+		        }
+		    });
+			
+		[/#if]
+	[/#list]
+
+}
+
+
+
+

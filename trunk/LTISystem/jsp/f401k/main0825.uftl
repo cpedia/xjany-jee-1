@@ -1,0 +1,408 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+	<title>MyPlanIQ: Retirement and Taxable Plans Investment Solutions</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="MyPlanIQ is an online application that provides investment strategies and planning in retirement plans such as IRA, 401K, Annuities, Life Insurance and college savings plans. It is also an online portal and community that syndicates and originates quality financial news, blogs, research and educational articles.">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<script src="/LTISystem/jsp/template/ed/js/logos.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/mediaPlugin.js" type="text/javascript"></script>
+
+	<script>
+	$(document).ready(function() {
+		logoRotator();
+		alignHeight();
+		
+		
+		if($.browser.msie){
+		 	ieInputFix();
+		}
+		
+		$('#flashdiv').append("<a class='mediaObject'></a>");
+		$('.mediaObject').media({ 
+				width:     618, 
+				height:    339, 
+				autoplay:  true, 
+				src:       "/LTISystem/jsp/template/ed/media/evergreen.swf"
+				//attrs:     { controller:  'true', "scale":"tofit", postdomevents:true},
+				//params:     { controller:  'true', "SCALE":"tofit", postdomevents:true}
+		}); 
+		
+		$("#btnsignup").button();
+		$("#signupemail").click(function(){
+       		if (isValidEmail($('#subemail').val())){
+       			
+       		}else{
+       			alert("Invalid email, please re-enter.");
+       			return;
+       		}
+			$.ajax({
+			url: '/LTISystem/jsp/register/FreeNewsletter.action?action=send&email='+$('#subemail').val(),
+			success: function(resulthtml){
+				alert("Thank you for signing up MyPlanIQ Newsletter.");
+			}
+		});
+		});
+		
+	});
+		
+	function ieInputFix() {
+		$('input').css("margin-top","-1px");
+	}
+	function send(e){
+		var email = $('#subemail').val();
+		var k = window.event?window.event.keyCode:e.which;
+  		var src = window.event?window.event.srcElement:e.target;
+        if(k==13){
+        	if(email.trim()==''){
+				alert("Please input your email address.");
+				return;
+			}
+			else if(!isValidEmail(email)){
+				alert("Invalid email, please re-enter.");
+				return;
+			}
+        	$("#signupemail").trigger("click");
+        }
+	}
+	function isValidEmail(isText){
+		var reEmail = /^(?:\w+\.?)*\w+@(?:\w+\.?)*\w+$/;
+		return reEmail.test(isText);
+	}
+ </script>
+<style>
+#flashdiv {
+	border: 1px solid #C0C0C0;
+	height: 337px;
+	width: 616px;
+}
+
+.topbar {
+        background-image: url(/LTISystem/jsp/template/ed/images/middlebar.gif);
+        background-repeat: repeat;
+        height: 41px;
+        border: 1px solid #224422;
+        margin-bottom:10px;
+        
+}
+#page1 #content .col-1 {
+	margin-right:8px;
+	overflow-x:hidden;
+	width:318px;
+}
+
+#page1 #content .col-2 {
+	margin-right:9px;
+	overflow-x:hidden;
+	width:318px;
+}
+#page1 #content .col-3 {
+	overflow-x:hidden;
+	width:318x;
+}
+
+#content_tier1 .col-1 {
+	margin-right:8px;
+	width:610px;
+}
+.content_tier1, #content_tier1{
+	padding:0px 0px 0px 0px;
+}
+
+.content_tier1 li{
+ 	margin-bottom:11px;
+ 	list-style-type:none;
+ 	margin-left:5px;
+}
+.featured-box li{
+	list-style-type:none;
+}
+
+.content_tier1, #content_tier1 {
+	background-color:#2A5333;
+	border:0px solid #FAFAFA;
+	border-collapse:collapse;
+	color:#333333;
+	line-height:1.3em;
+}
+ </style>
+</head>
+<body>
+  <div class="borderGreen" style="margin-top:0px;">
+<div class="topbar" style="margin-top:0px; margin-bottom:10px;">
+          <div class="middleLinks" id="middleLinks" style="margin-top:0px; margin-bottom:30px; margin-left:0px; margin-right:0px;">
+          <div id="searchForPlan" style="margin-right:210px">
+					<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    				<input name="groupIDS" value="8" type="hidden"></input>
+	        			<input name="includeHeader" value="true" type="hidden"></input>
+	        			<input name="type" value="2" type="hidden"></input>
+	       			    <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	       			    <span align="center">Get Model Portfolios for My IRA/401K etc. Plan</span>
+	        			<input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)this.value="Company/Brokerage Name"' size="30" type="text" value='${Parameters.symbolPlan!"Company/Brokerage Name"}'>
+	       				<input alt='Quote' id='submitSearchBottom' type='submit' value=''/>
+	   				</form><!-- end of form -->
+         </div><!--searchForPlan -->
+         </div>
+        </div>
+  	<div class="featured-box" style="height:340px; margin-top:2px;">
+
+  			<div class="col-1" id="flashdiv"></div>
+  			<div class="col-2" style="width:35%; align:right;">          	
+<!--  				<div id="decide"><a href="/LTISystem/profile_edit.action?planID=0&portfolioID=0"><img src="/LTISystem/jsp/template/ed/images/decide.gif" alt="" width="341" height="99" /></a></div>
+				<div class="customize"><a href="/LTISystem/profile_customizeportfolio.action"><img src="/LTISystem/jsp/template/ed/images/customize.gif" alt="" width="341" height="75" /></a></div>
+				<div id="manage"><a href="/LTISystem/profile_manageyourportfolio.action?planID=0&portfolioID=14838"><img src="/LTISystem/jsp/template/ed/images/manage.gif" alt="" width="341" height="87" /></a></div>
+				<div id="getStartedNow"><a href="/LTISystem/profile__getstarted.action"><img src="/LTISystem/jsp/template/ed/images/getStarted.gif" alt="" width="341" height="79" /></a></div>
+-->
+<!--                         <div class="inner" style="margin-left:2px;">
+                                <div  class="logoRotation" id="logoRotation">
+					<h3 id="logoTitleText">Comprehensive Plan Coverage</h3>
+					<div class="logoRotator"></div>
+				</div>
+                                <a href="/LTISystem/f401k__plans.action" class="moreInCategory"><h2>Find My Investment Plan 禄</h2></a>
+                            </div>
+-->
+    <div class="sidebar_box_noPadding roundHeadingBlue" style="margin-top:0px; margin-left: 5px; margin-bottom:1px;line-height:0.8em">
+           <div class="sidebar_box_heading_white" style="font-size: 150%">Get started now >></div>
+           <ul class="list" style="margin-top: 10px; ">
+           <li><a href="/LTISystem/jsp/register/FreeNewsletter.action?action=link">
+            <h4 style="font-size: 110%;"><strong style="text-decoration:underline">Sign Up for FREE Newsletter</strong></h4></a>
+            <ol><li class="last" style="margin-top: 6px; padding-bottom:0px"><h4 style="font-size: 100%">Quality Retirement Investment Articles</h4></li>
+                <li class="last" style="padding-bottom:0px"><h4 style="font-size: 100%">
+					<input id="subemail" name="email" type="text" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)this.value="Email"' onkeyup="send(event)"value="Email"/>
+					<input type="button" id="signupemail" class="uiButton" value="Sign Up">	
+            </h4></li>
+            </ol>
+           </li>
+           <li>
+           [@authz.authorize ifAllGranted="ROLE_ANONYMOUS"]
+           	<a href="/LTISystem/jsp/register/openRegister.action">
+            <h4 style="font-size: 110%;"><strong style="text-decoration:underline">Register for FREE</strong></h4></a>
+           [/@authz.authorize]
+           [@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+           	<a href="/LTISystem/profile__getstarted.action">
+            <h4 style="font-size: 110%;"><strong style="text-decoration:underline">Customize and Manage</strong></h4></a>
+           [/@authz.authorize]
+            <ol>
+             <li class="last" style="margin-top:6px; margin-bottom:5px;padding-bottom:0px;"><h4 style="font-size: 100%;margin-bottom:0px;padding-bottom:0px;">Create and Customize My Own Portfolios</h4></li>
+             <li class="last" style="margin-top:0px; padding-top:0px; padding-bottom:0px"><h4 style="font-size: 100%;margin-top:0px; padding-top:0px; padding-bottom:0px">Real Time <a href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=771">Strategic Asset Allocation</a></h4></li>
+            </ol>
+            
+           </li>
+           <li class="last" style="padding-bottom:0px">
+           [@authz.authorize ifAllGranted="ROLE_ANONYMOUS"]
+           <a href="/LTISystem/jsp/register/MainPageSubscr.action">
+           [/@authz.authorize]
+           [@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+           <a href="/LTISystem/paypal_center.action">
+           [/@authz.authorize]
+            <h4 style="font-size: 110%"><strong style="text-decoration:underline">Subscribe</strong></h4></a>
+            <ol>
+             <li class="last" style="margin-top:6px; margin-bottom:5px;padding-bottom:0px;"><h4 style="font-size: 100%; margin-bottom:0px;padding-bottom:0px;">3 Month Free Trial($9.95 Monthly/$99.95 Annually)</h4></li>
+             <li class="last" style="margin-top:0px; padding-top:0px; padding-bottom:0px"><h4 style="font-size: 100%;margin-top:0px; padding-top:0px; padding-bottom:0px">Real Time <a href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=1003">Tactical Asset Allocation</a></h4></li>
+            </ol>
+           </li>
+           </ul>                         
+   </div>
+   </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div id="content">
+<!--    <div class=" middlebar">
+	  <div class="middleLinks" id="middleLinks">
+			<a href="/LTISystem/f401k__why.action"> Why MyPlanIQ</a>
+			<a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a>
+			<div id="searchForPlan">
+					<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    				<input name="groupIDS" value="8" type="hidden"></input>
+	        			<input name="includeHeader" value="true" type="hidden"></input>
+	        			<input name="type" value="2" type="hidden"></input>
+	       			    <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	       			    <span>Find A Plan And Its Model Portfolios</span>
+	        			<input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)this.value="Company Name"' size="30" type="text" value='${Parameters.symbolPlan!"Company Name"}'>
+	       				<input alt='Quote' id='submitSearchBottom' type='submit' value=''/>
+	   				</form>
+		 	</div>
+	 </div>
+	 
+	 </div>
+-->
+      <div class="col-1 box maxheight">
+
+        	<div class="inner">
+				<div id="fb-root"></div>
+				<script src="http://connect.facebook.net/en_US/all.js"></script>
+				<script>
+			         FB.init({ 
+			            appId:'173189549388799', cookie:false, 
+			            status:true, xfbml:true 
+			         });
+			    </script>
+				[@authz.authorize ifAllGranted="ROLE_ANONYMOUS"]
+				<div id="facebook">
+					<div id="login"><fb:login-button perms="email">Login with Facebook</fb:login-button></div>
+					<div id="me" style="display:none"></div>
+				</div>
+				[/@authz.authorize]
+				<script>
+				var div = document.getElementById('me'),
+				showMe = function(response) {
+				    if (!response.session) {
+				        div.innerHTML = '<em>Not Connected</em>';
+				    } else {
+				        FB.api('/me',
+				        function(response) {
+				            var html = '<table>';
+				            var email = "";
+				            email = response["email"]; < !--alert(email); -->$.ajax({
+				                url: "/LTISystem/fb_facebook.action?includeHeader=false",
+				                type: "post",
+				                data: "fbEmail=" + email,
+				                success: function(result) {
+				                    window.location.reload();
+				                    if (result.trim().length > 0) {
+				                        alert(result);
+				                    }
+				                }
+				            });
+				
+				            for (var key in response) {
+				                html += ('<tr>' + '<th>' + key + '</th>' + '<td>' + response[key] + '</td>' + '</tr>');
+				            }
+				            div.innerHTML = html;
+				        });
+				    }
+				};
+				FB.getLoginStatus(function(response) {
+				    $("#login").click(function() {
+				        showMe(response);
+				    });
+				    FB.Event.subscribe('auth.sessionChange', showMe);
+				});
+				</script>
+
+                        <h3>News &amp; Announcements</h3>
+     			     	[#if topics_homepage??]
+						<ul class="list">
+                                         
+							[#list topics_homepage as var]
+								<li class="tab1" style="line-height:2.5em">
+									<h4 style="font-size: 150%"><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a> (${var.topicTime?string("MM/dd/yyyy")})</h4>
+									<!-- <p class="date">${var.topicTime?string("MM/dd/yyyy")}</p> -->
+								</li>
+								[#if var_index==8 ][#break][/#if]
+							[/#list]
+						</ul>
+						[/#if]	
+  		<a href="secondary.html" class="moreInCategory">More News &amp; Announcements 禄</a>
+<!--        		<a href='/LTISystem/f401k__strategies.action'><h3>Time Proven Strategies</h3></a>
+  				<ul class="list">
+  					<li>
+  						<h4><strong>Strategic Asset Allocation (SAA):</strong> 
+                                                   <ul class="list">
+                                                     <li>Modern Portfolio Theory Based</li>
+                                                     <li>Superior Fund Selection Algorithm</li>
+                                                     <li>Built upon Personal Tolerance and Retirement Ages</li>
+                                                     <li>Periodically Rebalancing</li>
+                                                   </ul>
+                                                 </h4>
+
+     				</li>
+  				</ul>
+  				<ul class="list">
+  					<li>
+  						<h4><strong>Tactical Asset Allocation (TAA):</strong> 
+                                                   <ul class="list">
+                                                    <li>Major Asset Trends Based</li>
+                                                    <li>Dynamic Allocation</li>
+                                                    <li>Much Higher Return and Acceptable Risk</li>
+                                                    <li>Practiced by Major Wealth Managers</li>
+                                                   </ul>
+
+					</li>
+				</ul>
+ 				<ul class="list">
+  					<li>
+  						<h4><strong>Guru (Smart Money) Directed Asset Allocation:</strong> following
+						great fund managers' asset allocation decisions</h4>
+					</li>
+  					<li class="">
+  						<h4><strong>Optimized Asset Allocation:</strong> Efficient frontier
+						optimized</h4>
+					</li>
+  				</ul>
+
+         	<a href="/LTISystem/f401k__strategies.action" class="moreInCategory">More Info on Evergreen Strategies 禄</a>
+
+                <br><br><p><span><a title="Click for Strategy Performance" href="jsp/images/Why4.pdf" target=_blank><img style="border:6px outset #545565;" width="260" height="145" src="jsp/images/why.png"></a></span></p>
+-->
+              </div>
+     	</div>
+      <div class="col-2  box maxheight">
+         <div class="inner">
+        	<a href='/LTISystem/f401k__strategies.action'><h3>Time Proven Strategies</h3></a>
+                   <ul class="list">
+                     <li><h4 style="font-size: 150%">Dynamic and Strategic Allocation</h4></li>
+                     <li><h4 style="font-size: 150%">Superior Fund Selection</h4></li>
+                     <li><h4 style="font-size: 150%">Much Higher Return and Acceptable Risk</h4></li>
+                     <li><h4 style="font-size: 150%">Practiced by Major Wealth Managers</h4></li>
+                   </ul>     
+                 <a href="/LTISystem/f401k__strategies.action" class="moreInCategory">More Info on Strategies</a>    
+<!--           	<h3>Comprehensive Coverage of Plans</h3>
+     			<ul class="list">
+                                <li>    
+                                        <h4><strong>401(k) Retirement Plans</strong></h4>
+                                </li>
+                                <li>    
+                                        <h4><strong>403(b) Nonprofit Retirement Plans</strong></h4>
+                                </li>
+                                <li>    
+                                        <h4><strong>Brokerage ETF Plans (IRA/Taxable)</strong></h4>
+                                </li>
+     				<li>
+     					<h4><strong>Brokerage No Load No Transaction Fee Mutual Fund </strong></h4>
+     				</li>
+     				<li>
+     					<h4><strong>Variable Annuities and VUL Plans</strong></h4>
+     				</li>
+     				<li>
+     					<h4><strong>529 College Savings Plans </strong></h4>
+  					</li>
+  				</ul>
+-->
+				
+				<div  class="logoRotation" id="logoRotation">
+					<h3 id="logoTitleText">Comprehensive Plan Coverage</h3>
+					<div class="logoRotator"></div>
+				</div>
+                                <a href="/LTISystem/f401k__list.action" class="moreInCategory">More Info on Plans</a>
+
+         </div>
+      </div>
+      <div class="col-3 box maxheight">
+                <div id="decide"><a href="/LTISystem/profile_edit.action?planID=0&portfolioID=0"><img src="/LTISystem/jsp/template/ed/images/decide.gif" alt="" width="300" height="85" /></a></div>
+				<div class="customize"><a href="/LTISystem/profile_customizeportfolio.action"><img src="/LTISystem/jsp/template/ed/images/customize.gif" alt="" width="300" height="68" /></a></div>
+				<div id="manage"><a href="/LTISystem/profile_manageyourportfolio.action?planID=0&portfolioID=14838"><img src="/LTISystem/jsp/template/ed/images/manage.gif" alt="" width="300" height="70" /></a></div>
+				<div id="getStartedNow"><a href="/LTISystem/profile__getstarted.action"><img src="/LTISystem/jsp/template/ed/images/getStarted.gif" alt="" width="300" height="70" /></a></div>    
+<!--         <div class="clearfloat">        -->
+         <div class="inner">
+           	<h3>Easy to Use and Low Cost</h3>
+                <ul class="list">
+                 <li><h4 style="font-size: 150%">MyPlanIQ gives you both Strategic and Tactical allocation strategies, mapped directly to your plan</h4></li>
+
+<li><h4 style="font-size: 150%">MyPlanIQ allows you to explore multiple alternatives based on personal profile, plan and strategy</h4></li>
+
+<li><h4 style="font-size: 150%">MyPlanIQ sends you regular email instructions to keep your portfolio optimally tuned</h4></li>
+
+<li><h4 style="font-size: 150%">MyPlanIQ costs less than $10 a month</h4></li>
+                </ul>
+
+  	</div>
+      </div>
+		<div class="clearfloat"></div>
+  </div>
+</body>
+</html>

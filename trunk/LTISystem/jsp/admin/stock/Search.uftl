@@ -1,0 +1,85 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+	    <head>
+	    <title>Financial Statements List</title>
+	    <SCRIPT src="../images/common.js" type=text/javascript></SCRIPT>
+	    <link href="../images/style.css" rel="stylesheet" type="text/css" />
+		</head>
+	<body>
+      <table class="nav" width="100%">
+      <td width="15%">
+                [@s.url value="DownloadUpdateLog.action" id="url_1"]
+				[/@s.url]
+				[@s.a href="%{url_1}"]Download Log[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="UpdateConfiguration.action" id="url_2"]
+				[/@s.url]
+				[@s.a href="%{url_2}"]Update Configuration[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="FinancialInfo.action" id="url_3"]
+				[/@s.url]
+				[@s.a href="%{url_3}"]Financial Statements[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="FinancialStatement.action?action=view" id="url_4"]
+				[/@s.url]
+				[@s.a href="%{url_4}"]Update Financial Statements[/@s.a]
+	  </td>
+	  <td width="15%">
+                [@s.url value="ExecutionFinan.action" id="url_5"]
+				[/@s.url]
+				[@s.a href="%{url_5}"]Financial Statements Update State[/@s.a]
+	  </td>
+	  </table>  
+	    <h1>${"Search Result"}</h1>
+	    <form action="Search.action" method="post">
+	    <input type="hidden" name="action" value="save"/>
+        Symbol:
+        <input type="text" name="symbol"/>
+        <input type="submit" value="Search"/>
+        
+         [#if is??]
+		 <div>
+		  <table width="100%" align="middle">
+		  <tr class="trheader">
+	         <td>
+	          ID
+	         </td>
+	         <td>
+	          Symbol
+	         </td>
+	         <td>
+	          Year
+	         </td>
+	         <td>
+	          Quarter
+	         </td>
+	       </tr>
+		 [#list is as item]
+		 <tr>
+		 <td>
+		 ${item.ID.toString()}
+		 </td>
+		 <td>
+		 ${item.getSymbol()}
+		 </td>
+		 <td>
+		 ${item.getYear().toString()}
+		 </td>
+		 <td>
+		 ${item.getQuarter()}
+		 </td>
+		 </tr>
+		 
+		 [/#list]
+		 </table>
+		 </div>
+		 [/#if]
+		
+	</body>
+</html>
+        	  

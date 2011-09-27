@@ -1,0 +1,117 @@
+[#ftl]
+[#if plans?? && plans?size>0]
+<script>
+$(document).ready(function() {
+	$(".qButton").button({
+		icons: {
+			primary: "ui-icon-help"
+		},
+		text: false
+	});
+});
+</script>
+[#if planName??]
+	<p style="font-size:1.2em;color:#187929;font-weight:bold;">Search for [${planName}]</p>
+[/#if]
+<table width=100% id="p${curtime?string.computer}">
+	<tr>
+		<td width=65%></td>
+		<td width=80px><Strong>Rating</Strong><a href='/LTISystem/f401k_news.action?PID=861' target='_blank' class="qButton" style="height:20px;width:20px">Click here to visit the rating description</a></td>
+		<td></td>
+		<td></td>
+	</tr>
+[#list plans as p]
+	<tr style="[#if p_index%2==0]background-color:#EFF3F7;[/#if]" class="item">
+		<td width=65%>
+			${p.name}
+		</td>
+		<td width=80px>
+			[#assign ranksize=p.planType /]
+			[#if ranksize!=0][#list 1..ranksize as i]<img border=0 src="/LTISystem/jsp/images/star.jpg">[/#list][/#if][#if ranksize!=5][#list ranksize..4 as i][/#list][/#if]
+		</td>
+		<td>
+			<button class="morebutton${curtime?string.computer}" style="height:25px;width:80px;border:1px solid #ccc;background-color:#DEDFDE;cursor:pointer" onmouseout="this.style.backgroundColor='#DEDFDE'" onmouseover="this.style.backgroundColor='#CED3CE'">More Info</button>
+		</td>
+		<td>
+			<button onclick="select(${p.ID?string.computer},'${p.name}',mycallback)" style="height:25px;width:80px;border:1px solid #ccc;background-color:#DEDFDE;cursor:pointer" onmouseout="this.style.backgroundColor='#DEDFDE';" onmouseover="this.style.backgroundColor='#CED3CE'">Select</button>
+		
+		</td>
+		
+	</tr>
+	<tr style="display:none;background-color:#FFFBFF;" class="t${curtime?string.computer}">
+		<td colspan="4" style="padding:3px;">
+			<p>[#if p.shortDescription?? && !p.shortDescription?matches("")]
+				${p.shortDescription}
+				<br>
+			   [/#if]
+			   [#if p.similarIssues?? && !p.similarIssues?matches("")]
+				${p.similarIssues!""}
+			   [/#if]<br>
+			<a href='/LTISystem/f401k_view.action?ID=${p.ID?string.computer}' target='_blank' class="uiButton${curtime?string.computer}" style="font-size:0.7em;height:20px;width:90px">See Detail</a>
+			<a href='javascript:void(0)' class="uiButton${curtime?string.computer}" style="font-size:0.7em;height:20px;width:90px" onclick='$(this).parent().parent().parent().prev().children().eq(0).children().css({"font-weight":"normal"});$(this).parent().parent().parent().fadeOut();'>Hide</a>
+			</p>
+		</td>
+	</tr>
+[/#list]
+</table>
+<style>
+.current{
+  color : red;
+}
+</style>
+<script>
+$(function(){
+	$(".morebutton${curtime?string.computer}").click(function(){
+		var dd=$(this).parent().parent().next();
+		if(dd.css('display')=='none'){
+			dd.fadeIn();
+			$(this).parent().prev().prev().children().css({'font-weight':'bold'});
+		}else{
+			dd.fadeOut();
+			$(this).parent().prev().prev().children().css({'font-weight':'normal'});
+		}
+	});
+
+	$('.uiButton${curtime?string.computer}').button();
+	 $('table #p${curtime?string.computer}').each(function(){
+  
+	    var currentPage = 0;
+	    var numPerPage = 6;
+	    var $table = $(this);
+	   
+	    var pageFunction = function(){
+		    $table.find('.item').show()
+		    .slice( 0, currentPage * numPerPage)
+		    .hide()
+		    .end()
+		    .slice( ((currentPage+1) * numPerPage -1) + 1 )
+		    .hide()
+		    .end();
+	   }//end of   pageFunction()
+	
+	  var num_row  =  $table.find('.item').length;
+	  var num_pages  = Math.ceil( num_row / numPerPage );
+	  var $pager = $('<div style="text-align:center"></div>');
+	  
+	   for(var i=0 ; i< num_pages ;i++)
+	    {
+	     $('<span style="cursor:pointer">'+ (i+1) +'</span>')
+	      .bind("click" , { 'cssrain' : i } ,function(event){
+	      		currentPage = event.data['cssrain'] ;
+	            pageFunction();
+	     		$(this).addClass('current').siblings().removeClass('current');
+	     		$(".t${curtime?string.computer}").hide();
+	     })
+	     .appendTo($pager);
+	     $('<span>&nbsp;</span>').appendTo($pager);
+	   }
+	   if(num_pages>1){         
+		   $pager.insertAfter($table);
+		   $pager.find("span:first").addClass('current');
+		   pageFunction();
+	   }
+  })//end of each()
+
+})
+</script>
+[/#if]

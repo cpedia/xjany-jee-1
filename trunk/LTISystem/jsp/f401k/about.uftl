@@ -1,0 +1,109 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>About MyPlanIQ</title>
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="The goals, the uniqueness and the team structure of MyPlanIQ are introduced here. MyPlanIQ is the only application that automatically maps advanced investment strategies completely to your plan and risk profile. ">
+
+</head>
+
+<body>
+	<script>
+		$(function() {
+			$('.tab').each(function(){
+				//$(this).click(function(){
+				//	$(this).children('.answer').toggle(
+				//	);
+				//});
+				$(this).children('.question').toggle(
+						function(){
+							$(this).parent().children('.answer').show();
+							$(this).parent().css({ background: '#fff url(/LTISystem/jsp/template/ed/images/faq_s.png) 0px 9px no-repeat' });
+						},
+						function(){
+							$(this).parent().children('.answer').hide();
+							$(this).parent().css({ background: '#fafafa url(/LTISystem/jsp/template/ed/images/faq_c.png) 0px 9px no-repeat' });
+						}
+				
+				);
+			});
+		});
+	</script>
+
+<div class="col-1">
+   
+   <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">Contact MyPlanIQ</div>
+	 <div class="sidebar_box_content">
+           <p>Email: <a href="mailto:support@MyPlanIQ.com">support@MyPlanIQ.com</a></p>
+           <p>Phone: 510-279-3131</p>
+           <p>Address:</p>
+           <p>39812 Mission Blvd.</p>
+           <p>Fremont, CA 94539</p>
+         </div>
+   </div>
+    
+</div>
+<div class="col-2">
+    <h1 align="center">About MyPlanIQ</h1>
+    <div class="dividerTop">
+    <p><h2>The Problem</h2></p>
+    <p>We have to be responsible for the security of our own financial future. Retirement plans such as 401(k)s have become the main vehicle for millions of Americans who hold $3.9 trillion in them as of Sept. 30 2009. Most have little knowledge of how to invest for their retirement and have no idea of the fees they are charged. As a result, the returns on their investment are significantly less than they could be.</p> 
+
+<p>Put another way, you could end up having to work an extra ten years or longer because of poor investment strategies and high fees.</p>
+
+<p>Many of the wealthy consistently see better than average returns by using proven and established tactical asset allocation. Investment professionals create a portfolio based on the client’s investment horizon, personal risk tolerance and investment strategy. Until now, this has not been affordable for the small investor. </p>
+
+<p>The goals are
+<ul>
+<li>Effective asset allocation strategies available to all </li>
+<li>Easy to map the strategies to my plan and personal risk profile</li>
+<li>Don’t incur a lot of fees</li>
+</ul>
+<br></p>
+<p><h2>The Solution</h2></p>
+<p>MyPlanIQ is a web based application that automatically provides strategic and tactical asset allocation strategies totally mapped to your plan and personal risk profile. </p>
+
+<p>MyPlanIQ enables any investor to achieve high returns at a low risk.</p>
+
+<p>MyPlanIQ monitors your portfolio and sends you regular email updates to ensure optimal performance with minimal plan fees.</p> 
+
+<ol>
+<li>MyPlanIQ gives you both Strategic (SAA) and Tactical (TAA) asset allocation strategies</li>
+<li>MyPlanIQ supports many plans including 401(k), 403(b), 457, 529, Variable Annuities, Variable Universal Plans, self-directed brokerage IRA and taxable investment accounts</li>
+<li>MyPlanIQ allows you to generate a number of alternative portfolios and compare their historical performance</li>
+<li>MyPlanIQ understands plan restrictions and will limit portfolio changes to minimize fees</li>
+<li>MyPlanIQ is free for strategic asset allocation and costs $9.95 a month for tactical asset allocation</li>
+</ol>
+<br></p>
+
+<p><h2>MyPlanIQ Uniqueness</h2></p>
+<p>MyPlanIQ is the only application that automatically maps advanced investment strategies completely to your plan and risk profile.</p>
+<p>MyPlanIQ has no bias on plan or Brokerage Company you use. You can build many portfolios and explore the differences between different risk profiles, investment strategies and funds offered by different providers.</p>
+<p>As a result of using MyPlanIQ, you will improve your returns and lower your risk. The sooner you start, the sooner you will reach your investment objectives.</p>
+
+<p><h2>MyPlanIQ Team</h2></p>
+<p>MyPlanIQ founders have extensive technology and business background in the computer and semiconductor industries.</p>
+<p>The asset allocation strategies utilized by MyPlanIQ have been academically researched and practiced by wealth and hedge fund managers.</p>
+
+<h3>John Zhong</h3>
+<p><em>CEO/Founder</em></p>
+<p>John has over 20 years experience in the IC design industry. Before creating MyPlanIQ, he was a co-founder and CTO of InnoLogic Systems, Inc., an Electronic Design Automation company which was acquired by Synopsys in 2003. Before Innologic and Synopsys, he held senior engineering and management positions at MIPS technologies and Silicon Graphics Inc.(SGI). John holds 3 US patents in IC verification and has a Ph.D. in Computer Engineering.</p>
+
+<h3>Simon Napper</h3>
+<p><em>President/Founder</em></p>
+<p>Simon has a management and marketing background in the semiconductor design market. He has held various executive and marketing positions including CEO of Synfora and Innologic Systems, Inc. and Vice Presidents of marketing in EPIC design and LSI Logic. He has more than 20 years experience in leading startups and large companies to develop and market their products successfully. </p>
+
+<h3>Xiaola Lin</h3>
+<p><em>Head of R&D</em></p>
+<p>Dr. Lin has been a professor in computer science at several major universities including Sun-Yat Sun University in China and University of Hong Kong and City University of Hong Kong. Before that, he spent several years in Silicon Valley developing computer software. Dr. Lin has extensive research and development experience in large scale distributed server systems and applications. He has a Ph.D. in Computer Science.
+
+</p>
+
+    </div> <!-- end of dividerTop -->
+</div>
+</body>
+</html>

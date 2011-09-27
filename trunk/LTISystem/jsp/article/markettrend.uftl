@@ -1,0 +1,158 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<p>MyPlanIQ tracks major asset classes trend movement. Major asset trends provide insights into underlying economic and market segments and are critical to tactical asset allocation strategies. 
+        We use ETFs that represent the asset class indices. For more information, please visit <a rel="nofollow" href="http://www.myplaniq.com/LTISystem/advanced__markets.action" target="_blank">MyPlanIQ 360 Degree Market View</a>
+</p>
+<p> The Fed announced $600 billion treasury purchase, the so called QE2 that pushed most risk assets price higher. Risk assets like emerging market stocks, foreign stocks, US stocks, REITs and commodities had risen higher even before the announcement, 
+        partly due to QE2 anticipation and partly due to perceived improved economic conditions.
+</p>
+ <p>It is also believed that QE2 will result in US dollar devaluation and that in turns has led so called ‘commodity stockpiling’ propelling Gold and other commodities (such as agricultural commodities) to continue their recent ascent.
+</p> 
+<p>  The only major trend change worth watching is the prices of long term treasury bonds, especially 10+ years which have continued weakness. It illustrates the market's belief that in the longer term, the Fed's actions will result in higher inflation.&nbsp;
+</p> <br>
+
+<p>
+<table cellspacing="10">
+  <tr>
+    <th align="left"><b>Assets Class</b></th>
+    <th><b>Symbols</b></th>
+	<th><b>[#if returntable??]${returntable[0][5]}[/#if]<br>Trend<br> Score</b></th>
+	<th><b>[#if returntable??]${returntable[1][5]}[/#if]<br>Trend<br> Score</b></th>
+	<th><b>Direction</b></th>
+  </tr>
+[#if returntable??]
+  [#list returntable as values]
+    <tr>
+     [#list values as value]
+     [#if value_index< values?size-1]
+	   <td>
+ 	   ${value}
+	   </td>
+	   [/#if]
+      [/#list]
+      </tr>
+  [/#list]
+[/#if]
+</table>
+The trend score is defined as the average of 1,4,13,26 and 52 week total returns (including dividend reinvested). 
+</p>
+<p>
+  <a rel="lightbox" href="http://www.myplaniq.com/LTISystem/article_toptablechart.action?tableName=${tableName}">
+  <img src="http://www.myplaniq.com/LTISystem/article_toptablechart.action?tableName=${tableName}" alt="" hspace="6" vspace="6" /> </a>
+</p>
+<p>
+<a rel="lightbox" href="http://www.myplaniq.com/LTISystem/article_lowtablechart.action?tableName=${tableName}">
+  <img src="http://www.myplaniq.com/LTISystem/article_lowtablechart.action?tableName=${tableName}" alt="" hspace="6" vspace="6" /> </a>
+</p>
+<br>
+<p>
+[#if tableName?matches("MajorAssetReturnTable")]
+ 	<strong>Symbols:</strong> EEM, VNQ, FRN, VWO, IYR, ICF, GLD, RWX, VTI, SPY, IWM, PCY, EMB, JNK, 
+ 	HYG, PHB, EFA, VEU, IEF, TLT, GSG, DBC, DBA, CFT, BWX, MBB, BND, MUB, SHV, AGG
+ 	<br>
+ 	<strong>Tickers:</strong> (NYSE: EEM), (NYSE: VNQ), (NYSE: FRN), (NYSE: VWO), (NYSE: IYR), (NYSE: ICF), 
+ 	(NYSE: GLD), (NYSE: RWX), (NYSE: VTI), (NYSE: SPY), (NYSE: IWM), (NYSE: PCY), (NYSE: EMB), (NYSE: JNK), 
+ 	(NYSE: HYG), (NYSE: PHB), (NYSE: EFA), (NYSE: VEU), (NYSE: IEF), (NYSE: TLT), (NYSE: GSG), (NYSE: DBC), 
+ 	(NYSE: DBA), (NYSE: CFT), (NYSE: BWX), (NYSE: MBB), (NYSE: BND), (NYSE: MUB), (NYSE: SHV), (NYSE: AGG)
+ [#elseif tableName?matches("FixedIncomeReturnTable")]
+ 	<strong>Symbols:</strong> AGG, BND, SHV, SHY, IEF, TLH, TLT, TIP, WIP, HYG, JNK, PHB, CSJ, CIU, 
+ 	LQD, BWX, CMF, NYF, MUB, MBB, PCY, EMB
+ 	<br>
+ 	<strong>Tickers:</strong> (NYSE: AGG), (NYSE: BND), (NYSE: SHV), (NYSE: SHY), (NYSE: IEF), (NYSE: TLH), 
+ 	(NYSE: TLT), (NYSE: TIP), (NYSE: WIP), (NYSE: HYG), (NYSE: JNK), (NYSE: PHB), (NYSE: CSJ), (NYSE: CIU), 
+ 	(NYSE: LQD), (NYSE: BWX), (NYSE: CMF), (NYSE: NYF), (NYSE: MUB), (NYSE: MBB), (NYSE: PCY), (NYSE: EMB) 
+ [#elseif tableName?matches("CurrencyReturnTable")]
+	<strong>Symbols:</strong>  FXA, FXM, BZF, FXY, FXC, FXF, FXS, DBV, CYB, UDN, FXB, FXE
+	<br>
+	<strong>Tickers:</strong> (NYSE: FXA), (NYSE: FXM), (NYSE: BZF), (NYSE: FXY), (NYSE: FXC), 
+	(NYSE: FXF), (NYSE: FXS), (NYSE: DBV), (NYSE: CYB), (NYSE: UDN), (NYSE: FXB), (NYSE: FXE)
+ [#elseif tableName?matches("CountryReturnTable")]
+ 	<strong>Symbols:</strong> INP, EZA, EWS, EWH, EWW, EWM, EWY, RSX, EWA, EWT, EWC, EWZ, EWL, EWG, 
+ 	EWU, FXI, EWK, EWN, EWJ, EWQ, EWO, EWI, EWP, SPY, QQQQ, IWM, MDY, EFA, 
+ 	VEU, EEM, VWO, IYR, ICF, VNQ, GSG, DBC, DBA, USO, LQD, CSJ, CIU, HYG, 
+ 	JNK, PHB, TLT, IEF, SHY, SHV, BND, AGG, MUB, MBB
+ 	<br>
+ 	<strong>Tickers:</strong> (NYSE: INP), (NYSE: EZA), (NYSE: EWS), (NYSE: EWH), (NYSE: EWW), (NYSE: EWM), 
+ 	(NYSE: EWY), (NYSE: RSX), (NYSE: EWA), (NYSE: EWT), (NYSE: EWC), (NYSE: EWZ), (NYSE: EWL), (NYSE: EWG), 
+ 	(NYSE: EWU), (NYSE: FXI), (NYSE: EWK), (NYSE: EWN), (NYSE: EWJ), (NYSE: EWQ), (NYSE: EWO), (NYSE: EWI), 
+ 	(NYSE: EWP), (NYSE: SPY), (NYSE: QQQQ), (NYSE: IWM), (NYSE: MDY), (NYSE: EFA), (NYSE: VEU), (NYSE: EEM), 
+ 	(NYSE: VWO), (NYSE: IYR), (NYSE: ICF), (NYSE: VNQ), (NYSE: GSG), (NYSE: DBC), (NYSE: DBA), (NYSE: USO), 
+ 	(NYSE: LQD), (NYSE: CSJ), (NYSE: CIU), (NYSE: HYG), (NYSE: JNK), (NYSE: PHB), (NYSE: TLT), (NYSE: IEF), 
+ 	(NYSE: SHY), (NYSE: SHV), (NYSE: BND), (NYSE: AGG), (NYSE: MUB), (NYSE: MBB) 
+ [#elseif tableName?matches("CommodityReturnTable")]
+ 	<strong>Symbols:</strong> SLV, DBP, GLD, DBB, DBA, DBC, DBE, USO, UNG, SPY, QQQQ, IWM, MDY, EFA,
+ 	VEU, EEM, VWO, IYR, ICF, VNQ, GSG, LQD, CSJ, CIU, HYG, JNK, PHB, TLT, 
+ 	IEF, SHY, SHV, BND, AGG, MUB, MBB
+ 	<br>
+ 	<strong>Tickers:</strong> (NYSE: SLV), (NYSE: DBP), (NYSE: GLD), (NYSE: DBB), (NYSE: DBA), (NYSE: DBC), 
+ 	(NYSE: DBE), (NYSE: USO), (NYSE: UNG), (NYSE: SPY), (NYSE: QQQQ), (NYSE: IWM), (NYSE: MDY), (NYSE: EFA), 
+ 	(NYSE: VEU), (NYSE: EEM), (NYSE: VWO), (NYSE: IYR), (NYSE: ICF), (NYSE: VNQ), (NYSE: GSG), (NYSE: LQD), 
+ 	(NYSE: CSJ), (NYSE: CIU), (NYSE: HYG), (NYSE: JNK), (NYSE: PHB), (NYSE: TLT), (NYSE: IEF), (NYSE: SHY), 
+ 	(NYSE: SHV), (NYSE: BND), (NYSE: AGG), (NYSE: MUB), (NYSE: MBB) 	
+ [#elseif tableName?matches("USSectorReturnTable")]
+    <strong>Symbols:</strong> XLY, IYZ, XLI, XLB, XLK, XLE, XLF, XLP, XLU, XLV, SPY, QQQQ, IWM, MDY, 
+    EFA, VEU, EEM, VWO, IYR, ICF, VNQ, GSG, DBC, DBA, USO, LQD, CSJ, CIU, HYG, 
+    JNK, PHB, TLT, IEF, SHY, SHV, BND, AGG, MUB, MBB
+    <br>
+    <strong>Tickers:</strong> (NYSE: XLY), (NYSE: IYZ), (NYSE: XLI), (NYSE: XLB), (NYSE: XLK), (NYSE: XLE), 
+    (NYSE: XLF), (NYSE: XLP), (NYSE: XLU), (NYSE: XLV), (NYSE: SPY), (NYSE: QQQQ), (NYSE: IWM), (NYSE: MDY), 
+    (NYSE: EFA), (NYSE: VEU), (NYSE: EEM), (NYSE: VWO), (NYSE: IYR), (NYSE: ICF), (NYSE: VNQ), (NYSE: GSG), 
+    (NYSE: DBC), (NYSE: DBA), (NYSE: USO), (NYSE: LQD), (NYSE: CSJ), (NYSE: CIU), (NYSE: HYG), (NYSE: JNK), 
+    (NYSE: PHB), (NYSE: TLT), (NYSE: IEF), (NYSE: SHY), (NYSE: SHV), (NYSE: BND), (NYSE: AGG), (NYSE: MUB), (NYSE: MBB)   
+ [#elseif tableName?matches("HighDividendReturnTableWed")]
+    <strong>Symbols:</strong> RWX, SPY, IYR, VIG, IDV, VYM, EEM, PID, EFA, FVD, DVY, PEY, SDY, PFF
+    <br>
+    <strong>Tickers:</strong> (NYSE: RWX), (NYSE: SPY), (NYSE: IYR), (NYSE: VIG), (NYSE: IDV), (NYSE: VYM), (NYSE: EEM), 
+    (NYSE: PID), (NYSE: EFA), (NYSE: FVD), (NYSE: DVY), (NYSE: PEY), (NYSE: SDY), (NYSE: PFF)
+ [#elseif tableName?matches("USStyleReturnTable")]
+    <strong>Symbols:</strong> IWF, IWB, IWD, IWP, IWR, IWS, IWO, IWM, IWN
+    <br>
+    <strong>Tickers:</strong> (NYSE: IWF), (NYSE: IWB), (NYSE: IWD), (NYSE: IWP), (NYSE: IWR), (NYSE: IWS), (NYSE: IWO), (NYSE: IWM), (NYSE: IWN)
+ [#elseif tableName?matches("CurrencyReturnTableWed")]
+	 <strong>Symbols:</strong> FXA, FXM, BZF, FXY, FXC, FXF, FXS, DBV, CYB, UDN, FXB, FXE
+	 <br>
+	 <strong>Tickers:</strong> (NYSE: FXA), (NYSE: FXM), (NYSE: BZF), (NYSE: FXY), (NYSE: FXC), (NYSE: FXF), (NYSE: FXS), (NYSE: DBV), 
+	 (NYSE: CYB), (NYSE: UDN), (NYSE: FXB), (NYSE: FXE)
+ [#elseif tableName?matches("CountryReturnTableWed")]
+ 	<strong>Symbols:</strong> INP, EZA, EWS, EWH, EWW, EWM, EWY, RSX, EWA, EWT, EWC, EWZ, EWL, EWG, 
+ 	EWU, FXI, EWK, EWN, EWJ, EWQ, EWO, EWI, EWP, SPY, QQQQ, IWM, MDY, EFA, 
+ 	VEU, EEM, VWO, IYR, ICF, VNQ, GSG, DBC, DBA, USO, LQD, CSJ, CIU, HYG, 
+ 	JNK, PHB, TLT, IEF, SHY, SHV, BND, AGG, MUB, MBB
+ 	<br>
+ 	<strong>Tickers:</strong> (NYSE: INP), (NYSE: EZA), (NYSE: EWS), (NYSE: EWH), (NYSE: EWW), (NYSE: EWM), (NYSE: EWY), (NYSE: RSX), 
+ 	(NYSE: EWA), (NYSE: EWT), (NYSE: EWC), (NYSE: EWZ), (NYSE: EWL), (NYSE: EWG), (NYSE: EWU), (NYSE: FXI), (NYSE: EWK), (NYSE: EWN), 
+ 	(NYSE: EWJ), (NYSE: EWQ), (NYSE: EWO), (NYSE: EWI), (NYSE: EWP), (NYSE: SPY), (NYSE: QQQQ), (NYSE: IWM), (NYSE: MDY), (NYSE: EFA), 
+ 	(NYSE: VEU), (NYSE: EEM), (NYSE: VWO), (NYSE: IYR), (NYSE: ICF), (NYSE: VNQ), (NYSE: GSG), (NYSE: DBC), (NYSE: DBA), (NYSE: USO), 
+ 	(NYSE: LQD), (NYSE: CSJ), (NYSE: CIU), (NYSE: HYG), (NYSE: JNK), (NYSE: PHB), (NYSE: TLT), (NYSE: IEF), (NYSE: SHY), (NYSE: SHV), 
+ 	(NYSE: BND), (NYSE: AGG), (NYSE: MUB), (NYSE: MBB) 
+ [#elseif tableName?matches("CommodityReturnTableWed")]
+ 	<strong>Symbols:</strong> SLV, DBP, GLD, DBB, DBA, DBC, DBE, USO, UNG, SPY, QQQQ, IWM, MDY, EFA,
+ 	VEU, EEM, VWO, IYR, ICF, VNQ, GSG, LQD, CSJ, CIU, HYG, JNK, PHB, TLT, 
+ 	IEF, SHY, SHV, BND, AGG, MUB, MBB
+ 	<br>
+ 	<strong>Tickers:</strong> (NYSE: SLV), (NYSE: DBP), (NYSE: GLD), (NYSE: DBB), (NYSE: DBA), (NYSE: DBC), 
+ 	(NYSE: DBE), (NYSE: USO), (NYSE: UNG), (NYSE: SPY), (NYSE: QQQQ), (NYSE: IWM), (NYSE: MDY), (NYSE: EFA), 
+ 	(NYSE: VEU), (NYSE: EEM), (NYSE: VWO), (NYSE: IYR), (NYSE: ICF), (NYSE: VNQ), (NYSE: GSG), (NYSE: LQD), 
+ 	(NYSE: CSJ), (NYSE: CIU), (NYSE: HYG), (NYSE: JNK), (NYSE: PHB), (NYSE: TLT), (NYSE: IEF), (NYSE: SHY), 
+ 	(NYSE: SHV), (NYSE: BND), (NYSE: AGG), (NYSE: MUB), (NYSE: MBB) 	
+ [#elseif tableName?matches("USSectorReturnTableWed")]
+    <strong>Symbols:</strong> XLY, IYZ, XLI, XLB, XLK, XLE, XLF, XLP, XLU, XLV, SPY, QQQQ, IWM, MDY, 
+    EFA, VEU, EEM, VWO, IYR, ICF, VNQ, GSG, DBC, DBA, USO, LQD, CSJ, CIU, HYG, 
+    JNK, PHB, TLT, IEF, SHY, SHV, BND, AGG, MUB, MBB
+    <br>
+    <strong>Tickers:</strong> (NYSE: XLY), (NYSE: IYZ), (NYSE: XLI), (NYSE: XLB), (NYSE: XLK), (NYSE: XLE), 
+    (NYSE: XLF), (NYSE: XLP), (NYSE: XLU), (NYSE: XLV), (NYSE: SPY), (NYSE: QQQQ), (NYSE: IWM), (NYSE: MDY), 
+    (NYSE: EFA), (NYSE: VEU), (NYSE: EEM), (NYSE: VWO), (NYSE: IYR), (NYSE: ICF), (NYSE: VNQ), (NYSE: GSG), 
+    (NYSE: DBC), (NYSE: DBA), (NYSE: USO), (NYSE: LQD), (NYSE: CSJ), (NYSE: CIU), (NYSE: HYG), (NYSE: JNK), 
+    (NYSE: PHB), (NYSE: TLT), (NYSE: IEF), (NYSE: SHY), (NYSE: SHV), (NYSE: BND), (NYSE: AGG), (NYSE: MUB), (NYSE: MBB)   
+ [#elseif tableName?matches("USStyleReturnTableWed")]
+    <strong>Symbols:</strong> IWF, IWB, IWD, IWP, IWR, IWS, IWO, IWM, IWN
+    <br>
+    <strong>Tickers:</strong> (NYSE: IWF), (NYSE: IWB), (NYSE: IWD), (NYSE: IWP), (NYSE: IWR), (NYSE: IWS), (NYSE: IWO), (NYSE: IWM), (NYSE: IWN)
+ [#else]
+ [/#if]
+</p>
+<p><strong>Disclosure:</strong></p>
+<p>MyPlanIQ does not have any business relationship with the company or companies mentioned in this article. It does not set up their retirement plans. The performance data of portfolios mentioned above are obtained through historical simulation and  are hypothetical.</p>

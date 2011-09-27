@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="GroupPermission"
+		table="ltisystem_grouppermission"
+	>
+		<id
+			name="GroupID"
+			type="java.lang.Long"
+			column="GroupID"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="MaxPortfolioRealTimeNum"
+			column="MaxPortfolioRealTimeNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="MaxPortfolioFollowNum"
+			column="MaxPortfolioFollowNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="MaxPlanCreateNum"
+			column="MaxPlanCreateNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="MaxPlanRefNum"
+			column="MaxPlanRefNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="MaxPlanFundTableNum"
+			column="MaxPlanFundTableNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="FollowSAA"
+			column="FollowSAA"
+			type="java.lang.Boolean"
+		/>
+		
+		<property
+			name="FollowTAA"
+			column="FollowTAA"
+			type="java.lang.Boolean"
+		/>
+		
+		<property
+			name="FollowADV"
+			column="FollowADV"
+			type="java.lang.Boolean"
+		/>
+		
+		<property
+			name="ChangeMHP"
+			column="ChangeMHP"
+			type="java.lang.Boolean"
+		/>
+		
+		<property
+			name="CreatePlan"
+			column="CreatePlan"
+			type="java.lang.Boolean"
+		/>
+		
+		<property
+			name="PortfolioCompare"
+			column="PortfolioCompare"
+			type="java.lang.Boolean"
+		/>
+		
+		<property
+			name="PlanCompare"
+			column="PlanCompare"
+			type="java.lang.Boolean"
+		/>
+		
+		<property
+			name="PlanRollover"
+			column="PlanRollover"
+			type="java.lang.Boolean"
+		/>
+		
+		<property
+			name="CustomerReport"
+			column="CustomerReport"
+			type="java.lang.Boolean"
+		/>
+		<property
+			name="MaxConsumerPlanNum"
+			column="MaxConsumerPlanNum"
+			type="java.lang.Integer"
+		/>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.admin.loaddata" namespace="/jsp/admin/loaddata" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="ExportEcnomicData" class="/jsp/admin/loaddata/ExportEcnomicData">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Main" class="/jsp/admin/loaddata/Main">
+			<result name="success">/jsp/admin/loaddata/loadsecuritydata.jsp</result>
+		</action>
+		<action name="ExportSecurityData" class="/jsp/admin/loaddata/ExportSecurityData">
+			<result name="input">/jsp/admin/loaddata/exportsecuritydata.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		<action name="ExportPortfolioData" class="/jsp/admin/loaddata/ExportPortfolioData">
+			<result name="input">/jsp/admin/loaddata/exportsecuritydata.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${portfolioFilename}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		<action name="UpdatePortfolioData" class="/jsp/admin/loaddata/UpdatePortfolioData">
+			<result name="input">/jsp/admin/loaddata/importsecuritydata.jsp</result>
+			<result name="success" type="freemarker">/jsp/message.uftl</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="ImportEcnomicData" class="/jsp/admin/loaddata/ImportEcnomicData">
+			<result name="input">/jsp/admin/loaddata/importecnomicdata.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="ImportEcnomicDatas" class="/jsp/admin/loaddata/ImportEcnomicDatas">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/loaddata/importecnomicdatas.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>	
+		<action name="ImportSecurityData" class="/jsp/admin/loaddata/ImportSecurityData">
+			<result name="success">/jsp/admin/loaddata/importsecuritydataresult.jsp</result>
+			<result name="input">/jsp/admin/loaddata/importsecuritydata.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="UpdateAdjustClose" class="/jsp/admin/loaddata/UpdateAdjustClose">
+			<result name="success">/jsp/admin/loaddata/updateadjustcloseresult.jsp</result>
+			<result name="input">/jsp/admin/loaddata/importsecuritydata.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="LoadSecurityData" class="/jsp/admin/loaddata/LoadSecurityData">
+			<result name="input">/jsp/admin/loaddata/loadsecuritydata.jsp</result>
+			<result name="success">/jsp/admin/loaddata/loadsecuritydataresult.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>	
+		<action name="UpdateSecurityDailyData" class="/jsp/admin/loaddata/UpdateSecurityDailyData">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>		
+		<action name="DownloadLog" class="/jsp/admin/loaddata/DownloadLog">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${name}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		<action name="StopUpdateDailyData" class="/jsp/admin/loaddata/StopUpdateDailyData">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+	
+
+</struts>

@@ -1,0 +1,111 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+<head>
+<title>Daily Update Reports of Security MPTs </title>
+<meta  name="Description" content="Daily Update Reports of Security MPTs are provided here.">
+</head>
+<script>
+	function showdiv(num){
+		for(var i=0;i<3;++i){
+			if(i != num)
+				$('#ss_div_' + i).hide();
+		}
+		$('#ss_div_' + num).show();
+	}
+	function getsecuritymptreport(){
+		location.href="f401k_getsecuritymptreport.action?dateStr=" + $('#dateStr').val();
+	}
+	$(function() {
+		$('#dateStr').datepicker({ dateFormat: "yy-mm-dd"});
+	});
+</script>
+<body>
+	<h1 align="center"> Security MPT Update Status </h1>
+	<br>
+    <br>
+    <div align="center">
+	When before 16:00, "Up-to-date" means "Up-to-yesterday".
+    When after 16:00, "Up-to-date" means "Up-to-today".
+    </div>
+    <br>
+    <br>
+	<input type='button' onclick='getsecuritymptreport()' class='uiButton' value='Get Security MPT Update Status'/>
+	<input type='text' id='dateStr' name='dateStr' value=''/>
+	<br>
+	<br>
+	<input type='button' onclick='showdiv(0)' class='uiButton' value='Show Security MPT Update Summary'>
+	<input type='button' onclick='showdiv(1)' class='uiButton' value='Show Update_to_date Security MPT'>
+	<input type='button' onclick='showdiv(2)' class='uiButton' value='Show Delayed Security MPT'>
+	<br>
+	<br>
+	<div id="ss_div_0">
+			<h3 align="center">Security MPT Update Summary</h3>
+			<table width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+				<thead>
+					<tr>
+						<th class="header">EndDate</th>
+						<th class="header">Cost Time</th>
+						<th class="header">Total Num</th>
+						<th class="header">Fail Num</th>
+					</tr>
+				</thead>
+				[#if updateSummary?? && updateSummary?size>0]
+				<tbody>
+					[#list updateSummary as us]
+						<td>
+							${us}
+						</td>
+					[/#list]
+				</tbody>
+				[/#if]
+			</table>
+	</div>
+	<div id="ss_div_1" style='display:none'>
+		<h3 align="center">Update_to_date Security MPT</h3>
+			<table width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+				<thead>
+					<tr>
+						<th class="header">Name</th>
+						<th class="header">MPTLastDate</th>
+						<th class="header">Cost Time</th>
+					</tr>
+				</thead>
+				[#if securityPriceSuccessStateList?? && securityPriceSuccessStateList?size > 0]
+				[#list securityPriceSuccessStateList as ss]
+					<tbody>
+						<tr>
+							<td>${ss.symbol}</td>
+							<td>${ss.endDate!}</td>
+							<td>${ss.updateTime!}</td>
+						</tr>
+					</tbody>
+				[/#list]
+				[/#if]
+			</table>
+	</div>
+	<div id="ss_div_2" style='display:none'>
+		<h3 align="center">Delayed Security MPT</h3>
+			<table width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+				<thead>
+					<tr>
+						<th class="header">Name</th>
+						<th class="header">MPTLastDate</th>
+						<th class="header">Cost Time</th>
+					</tr>
+				</thead>
+				[#if securityPriceFailStateList?? && securityPriceFailStateList?size > 0]
+				[#list securityPriceFailStateList as ss]
+					<tbody>
+						<tr>
+							<td>${ss.symbol}</td>
+							<td>${ss.endDate!}</td>
+							<td>${ss.updateTime!}</td>
+						</tr>
+					</tbody>
+				[/#list]
+				[/#if]
+			</table>
+	</div>
+</body>
+</html>

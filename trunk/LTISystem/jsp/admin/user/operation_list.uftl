@@ -1,0 +1,57 @@
+[#ftl]
+<script type="text/javascript" src="../images/jquery-1.2.6.min.js"></script>
+<link rel="stylesheet" href="/LTISystem/jsp/images/jquery.tablesorter/style.css" type="text/css" />
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery.tablesorter/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery.tablesorter/jquery.tablesorter.pager.js"></script>
+<script>
+function change(id){
+		$.ajax({
+		  url: 'operation_change.action?includeHeader=false&userOperation.id='+id+'&userOperation.optCondition=finish',
+		  cache: false,
+		  async: false,
+		  success: function(data) {
+		    alert(data);
+		    window.location.href='operation_list.action';
+		  }
+		});
+		
+	}
+</script>
+<table id="table_operation" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+	<thead>
+		<tr>
+			<th class="header">
+				ID
+			</th>
+			<th class="header">
+				Date
+			</th>
+			<th class="header">
+				Operation
+			</th>
+			<th class="header">
+				Status
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		[#if userOperations?? && userOperations.size()>0 ]
+			[#list userOperations as uo]
+			<tr>
+				<td>
+					${uo.id}
+				</td>
+				<td>
+					${uo.operationDate}
+				</td>
+				<td>
+					${uo.optDescription}
+				</td>
+				<td>
+					${uo.optCondition} <a href='#' onclick='change(${uo.id})'>Change to finish</a>
+				</td>
+			</tr>
+			[/#list]
+		[/#if]
+	</tbody>
+</table>	

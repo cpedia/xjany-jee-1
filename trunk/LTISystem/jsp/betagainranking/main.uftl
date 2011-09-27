@@ -1,0 +1,115 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="bga" content="vf_current"/>
+<meta name="tools" content="vf_current" />
+<meta name="submenu" content="tools"/>
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>ValidFi Funds, Beta Gain Ranking</title>
+</head>
+<body>
+
+<div id="wrap" style="min-height:910px;height:910px;width:910px"> 
+	<div id="content-wrap">
+	
+		<div id="content" style="width:910px;">
+			<p>&nbsp;</p>
+			<h1 align="center"><span class="green">ValidFi<sup style="color:red"><i>Beta Gain</i></sup>:</span> Funds Beta Gain Ranking</h1>
+        	<div class="clear">&nbsp;&nbsp;&nbsp;</div>
+			<div id="main"">	
+				<div class="bl">
+					<div class="br">
+						<div class="tl">
+							<div class="tr">
+								<div class="prop" style="height:450px;">
+								<!---  <img align="left" src="/LTISystem/UserFiles/Image/strategies.GIF" alt="strategies">--->
+								<h1><span>Fund Analysis</span></h1>
+								<hr width="80%">
+								<ul>
+									<li>*********************************** </li>
+									<li>***********************************</li>
+									<li>*********************************** </li>
+								</ul>
+								<form target="_top" action="/LTISystem/jsp/security/Quote.action">
+				 					<input type="text" id="quote-search-field" name="symbol">
+				 					<input type="submit" value="Fund Analysis">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+			
+		<div id="rightbar" style="margin-right: 1em">
+			<div class="bl">
+				<div class="br">
+					<div class="tl">
+						<div class="tr">
+							<div class="prop" style="height:450px;">
+	             				<a target="_top" href="../ajax/CustomizePage.action?pageName=GuruAllocation&includeHeader=true"><h1>Guru Market Exposure Watch</h1></a>
+                                <hr width="80%">
+								<p>Studies have shown asset allocation is the most important determinant factor in a mutual fund's performance. This is especially true during the tumultuous 2008. With <a target="_top" href="../ajax/CustomizePage.action?pageName=GuruAllocation&includeHeader=true">ValidFi's Guru Asset Allocation services</a>, you
+								<ul>
+									<li>Gain insights into great asset allocators' timely moves in stocks, bonds and other asset exposures. </li>
+									<li>Monitor recent asset exposures of Gurus like Hussman Growth fund's John Hussman, GMO's Jeremy Grantham, Steve Leuthold, Ivy Asset Management, PIMCO's (Research Affiliated) Rob Arnott, etc. or even CGM's Ken Heebner's stock sector rotation. </li>
+									<li>Follow ValidFi's <a target="_top" href="../strategy/View.action?ID=544&action=view">Guru Asset Allocation Clone</a> strategy.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <div id="content" style=" width:910px;">
+		<p>&nbsp;&nbsp;</p>	
+		<h2 align="center">Validfi funds Beta Gain Ranking</h2>	
+		<hr align="center" width="100%">
+		<p>&nbsp;&nbsp;</p>
+		<div id="main" style="width:48%;">
+			<div class="bl">
+				<div class="br">
+					<div class="tl">
+						<div class="tr">
+							<div class="prop" >	
+								<h3 style="padding:0;margin:5px 5px 5px 0">Top 10 US EQUITY Funds</h3>
+								<br class="clear"/>
+								[@s.action name="SecurityRankingTable" namespace="/jsp/betagainranking" executeResult=true]
+								[@s.param name="name"]US EQUITY[/@s.param]
+								[/@s.action]	
+           					</div>
+           				</div>
+           			</div>
+           		</div>
+           	</div>
+			<p>&nbsp;&nbsp;</p>
+		</div> 			
+	</div>
+	<div id="rightbar" style="margin-right: 1em">
+		<div class="bl">
+			<div class="br">
+				<div class="tl">
+					<div class="tr">
+						<div class="prop">
+           					<h3 style="padding:0;margin:5px 5px 5px 0">Top 10 INTERNATIONAL EQUITY Funds</h3>
+							<br class="clear"/>
+							[@s.action name="SecurityRankingTable" namespace="/jsp/betagainranking" executeResult=true]
+							[@s.param name="name"]INTERNATIONAL EQUITY[/@s.param]
+							[/@s.action]
+           				</div>
+           			</div>
+           		</div>
+           	</div>
+		</div>
+		<p>&nbsp;&nbsp;</p>
+	</div>
+</div>
+</div>
+</body>
+</html>

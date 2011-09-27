@@ -1,0 +1,45 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>Asset Allocation Strategies of MyPlanIQ</title>
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="The four main asset allocation strategies are indroduced here.">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<script src="jsp/images/jquery.tablesorter/jquery.tablesorter.js" type="text/javascript"></script>
+<script src="jsp/images/jquery.tablesorter/jquery.tablesorter.pager.js" type="text/javascript"></script>
+<style type="text/css">
+ p{color: black}
+</style>
+</head>
+<body>
+<div id="n401k_mainFrame">
+<div class="n401k_content" style="height: 230px;">
+<div class="n401k_contentright" style="width: 100%;">
+<div class="myBox2" style="background-color:#FEFEFE; border-color:#FEFEFE;">
+<div class="n401k_main" style="width: 98%;">
+<div class="n401k_mainblock" style="height:auto !important;height:350px;min-height:350px;">
+<h1 align="center">Investment Strategies</h1>
+<p>Evergreen Plans provides several quantitative investment strategies to a plan that usually consists of a list of available investment choices such as mutual funds, Separately Managed Accounts (SMAs), commingled funds, various trusts or ETFs. The strategies are all asset allocation and fund selection based. </p>
+<p>The following are the list of strategies supported.</p>
+<ul>
+<li><a target="_blank" href="jsp/strategy/View.action?ID=771">Strategic Asset Allocation:</a> this strategy is based on widely practiced  <em>modern portfolio theory. </em>The key of this strategy is to diversify the  portfolio into an array of asset classes. The allocation is based on your risk  tolerance. It adjusts the allocation only based on major life events such as  getting closer to retirement or a major spending need in the near future. This strategy is sometimes called <em>"buy and hold"</em>. It works best in a major bull market or when economics are in a prosperous cycle. We recommend that you only allocate some part of capital to this strategy.</li>
+<li><a target="_blank" href="jsp/strategy/View.action?ID=1003">Tactical Asset Allocation:</a> this strategy is based on a key factor of  investment returns: researchers have found that return (price) momentum in major  assets could improve risk adjusted returns dramatically. Again, allocations into  risky assets are decided based on your personal risk tolerance. This strategy performs well when there are major trends among assets. It might under perform during a period of time due to uncertainty.</li>
+<li><a target="_blank" href="jsp/strategy/View.action?ID=746">Optimized Asset Allocation:</a> this strategy uses mathematical optimization  theory to derive an optimal asset allocation. Allocations into risky assets are  again decided by the risk tolerance. Expected returns of underlying assets in  funds available from your plan are based on past performance. Similar to  Tactical Asset Allocation, this is again a variation of momentum based  strategies. </li>
+<li><a target="_blank" href="jsp/strategy/View.action?ID=744">Guru Directed Asset Allocation:</a> this strategy derives periodical asset  allocations&nbsp;by following smart (top performing in turns of risk adjusted  returns) asset allocation managers&rsquo; decisions. At the time of rebalancing, we first select top asset allocation managers based on their asset allocation mutual funds performance and then we apply a proprietary method to derive the asset allocations for these funds. This strategy is sometimes called smart money asset allocation clone. The advantage for such a strategy is that it always relies on best money managers. The con is that it is opaque and sometimes could have a portfolio allocation which seems to be quite different from the previous ones. </li>
+</ul>
+<p>In addition to the asset allocation strategies, an advanced method is used to  selected funds available from a plan for each asset class once a proper asset  allocation is determined.</p>
+<p>Users could find out more information on each strategy's page.</p>
+<br /> <br />
+</div>
+<div style="font: 0px/0px sans-serif;clear: both;display: block"> </div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,347 @@
+[#ftl]
+<html>
+<head>
+<title>${portfolio.name!"My PlanIQ"}</title>
+</head>
+<body>
+	<br>
+	<br>
+	<br>
+	<h2><a href='http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${portfolio.ID}'>${portfolio.name!"My PlanIQ"}</a></h2>
+	<br>
+	<h3>${holding.currentDate?string("MM/dd/yyyy")}</h3>
+	<br>
+	<table width=100% border=0 >
+		<tr>
+			<td>
+				<h3>Chart</h3>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<img src='${chart}' width='450' border=0>
+				<br>
+							<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<h3>Performance</h3>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table bgcolor="#999999" border="0.5" cellpadding="0" cellspacing="1" width="100%" style="font-size:0.4em"><!-- start of performance -->
+					<tr style="color:#3A5FCD;" bgcolor="#ffffff">
+				        <td align="left" >
+				        </td>
+				        [#list MPTBeans as mptbean]
+				        	<td>
+				        		${mptbean.yearString}
+				        	</td>
+				        [/#list]
+					</tr>
+					
+					<tr bgcolor="#ffffff">
+				        <td align="left" style="color:#3A5FCD">
+				          Annualized Return (%)
+				        </td>
+				         [#list MPTBeans as mptbean]
+				        	<td>
+				        		${mptbean.AR}
+				        	</td>
+				        [/#list]
+					</tr>		
+					<tr bgcolor="#ffffff">
+				        <td align="left" style="color:#3A5FCD">
+				           Sharpe Ratio (%)
+				        </td>
+				        [#list MPTBeans as mpt]
+				        	<td>
+				        		${mpt.sharpeRatio}
+				        	</td>
+				        [/#list]
+					</tr>		
+					
+					<tr bgcolor="#ffffff">
+				        <td align="left" style="color:#3A5FCD">
+				          Alpha
+				        </td>
+				        [#list MPTBeans as mpt]
+				        	<td>
+				        		${mpt.alpha}
+				        	</td>
+				        [/#list]
+																								
+					</tr>	
+					<tr bgcolor="#ffffff">
+				        <td align="left" style="color:#3A5FCD">
+				           Beta
+				        </td>
+				        [#list MPTBeans as mpt]
+				        	<td>
+				        		${mpt.beta}
+				        	</td>
+				        [/#list]
+					</tr>	
+												
+					<tr bgcolor="#ffffff">
+				        <td align="left" style="color:#3A5FCD">
+				           RSquare
+				        </td>
+				        [#list MPTBeans as mpt]
+				        	<td>
+				        		${mpt.RSquared}
+				        	</td>
+				        [/#list]
+					</tr>	
+					
+					<tr bgcolor="#ffffff">
+				        <td align="left" style="color:#3A5FCD">
+				          Standard deviation
+				        </td>
+				        [#list MPTBeans as mpt]
+				        	<td>
+				        		${mpt.standardDeviation}
+				        	</td>
+				        [/#list]
+					</tr>	
+					<tr bgcolor="#ffffff">
+				        <td align="left" style="color:#3A5FCD">
+				          Treynor
+				        </td>
+				        [#list MPTBeans as mpt]
+				        	<td>
+				        		${mpt.treynorRatio}
+				        	</td>
+				        [/#list]
+					</tr>	
+					<tr bgcolor="#ffffff">
+				        <td align="left" style="color:#3A5FCD">
+				          Draw down
+				        </td>
+				        [#list MPTBeans as mpt]
+				        	<td>
+				        		${mpt.drawDown}
+				        	</td>
+				        [/#list]
+					</tr>		
+				
+					<tr bgcolor="#ffffff">
+				        <td align="left" style="color:#3A5FCD">
+				          Sortino ratio
+				        </td>
+				        [#list MPTBeans as mpt]
+				        	<td>
+				        		${mpt.sortinoRatio}
+				        	</td>
+				        [/#list]
+					</tr>							                  
+				</table><!-- end of performance -->
+				<br>
+							<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<h2>Strategies</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				[#if plan??]
+					<table border=0 width=100%>
+							<tr>
+								<td><strong>Plan</strong></td>
+								<td><a href='/LTISystem/f401k_view.action?ID=${plan.ID?string.computer}' target="_blank">${plan.name}</a></td>
+							</tr>
+							<tr>
+								<td><strong>Strategy</strong></td>
+								<td><a href='/LTISystem/jsp/strategy/View.action?ID=${portfolio.strategies.assetAllocationStrategy.ID}' target="_blank">${portfolio.strategies.assetAllocationStrategy.name}</a></td>
+							</tr>
+							<tr>
+								<td width=150px><strong>Risk Profile</strong></td>
+								<td width=200px>
+									${portfolio.strategies.assetAllocationStrategy.parameter["RiskProfile"]}
+								</td>
+								
+							</tr>
+							<tr>
+								<td width=150px><strong>Re-Balance Frequency</strong></td>
+								<td width=200px>
+									[#assign f="" /]
+									[#if portfolio.strategies?? && portfolio.strategies.assetAllocationStrategy?? && portfolio.strategies.assetAllocationStrategy.parameter??]
+										[#if portfolio.strategies.assetAllocationStrategy.parameter["Frequency"]??]
+											[#assign f=portfolio.strategies.assetAllocationStrategy.parameter["Frequency"]?lower_case  /]
+										[/#if]
+										[#if f==""]
+											[#if portfolio.strategies.assetAllocationStrategy.parameter["RebalanceFrequency"]??]
+												[#assign f=portfolio.strategies.assetAllocationStrategy.parameter["RebalanceFrequency"]?lower_case  /]
+											[/#if]
+										[/#if]
+										[#if f==""]
+											[#if portfolio.strategies.assetAllocationStrategy.parameter["CheckFrequency"]??]
+												[#assign f=portfolio.strategies.assetAllocationStrategy.parameter["CheckFrequency"]?lower_case  /]
+											[/#if]
+										[/#if]
+									[/#if]
+									
+									
+									[#if f=="monthly"]
+										Month End 
+									[#elseif f=="quarterly"]
+										Quarter End
+									[#elseif f=="yearly"]
+										Year End
+									[#else]
+										${f}
+									[/#if]
+								</td>
+							</tr>
+						</table>
+				[#else]
+					<table border=0 >
+							[#if portfolio.strategies??]
+							[#if portfolio.strategies.assetAllocationStrategy.ID?? && portfolio.strategies.assetAllocationStrategy.ID!=0]
+							<tr>
+								<td>
+								Asset Allocation Strategy&nbsp;&nbsp;&nbsp; 
+								</td>
+								<td>
+								<a href='/LTISystem/jsp/strategy/View.action?ID=${portfolio.strategies.assetAllocationStrategy.ID}'>${portfolio.strategies.assetAllocationStrategy.name!""}</a>
+								</td>
+							</tr>
+							[/#if]
+							[#if portfolio.strategies.cashFlowStrategy.ID?? && portfolio.strategies.cashFlowStrategy.ID!=0]
+							<tr>
+								<td>
+								Cash Flow Strategy&nbsp;&nbsp;&nbsp; 
+								</td>
+								<td>
+								<a href='/LTISystem/jsp/strategy/View.action?ID=${portfolio.strategies.cashFlowStrategy.ID}'>${portfolio.strategies.cashFlowStrategy.name!""}</a>
+								</td>
+							</tr>
+							[/#if]
+							[#if portfolio.strategies.rebalancingStrategy.ID?? && portfolio.strategies.rebalancingStrategy.ID!=0]
+							<tr>
+								<td>
+								Rebalancing Strategy&nbsp;&nbsp;&nbsp;
+								</td>
+								<td>
+								<a href='/LTISystem/jsp/strategy/View.action?ID=${portfolio.strategies.rebalancingStrategy.ID}'>${portfolio.strategies.rebalancingStrategy.name!""}</a>
+								</td>
+							</tr>	
+							[/#if]
+							[#if portfolio.strategies.assetStrategies??]
+							[#list portfolio.strategies.assetStrategies as assetstrategy]
+							[#if assetstrategy.ID?? && assetstrategy.ID!=0]
+							<tr>
+								<td>
+								Asset Strategy&nbsp;&nbsp;&nbsp;
+								</td>
+								<td>
+								<a href='/LTISystem/jsp/strategy/View.action?ID=${assetstrategy.ID}'>${assetstrategy.name!"STATIC"}</a>
+								</td>
+							</tr>	
+							[/#if]
+							[/#list]
+							[/#if]
+							[/#if]
+						</table>
+				[/#if]
+				<br>
+							<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<h2>Pie Chart & Basic information</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+							<img src='${piechart}' border=0 >
+			
+							
+			</td>
+			<br>
+		</tr>
+		<tr>
+			<td>
+							<table bgcolor="#999999" border="0.5" cellpadding="0" cellspacing="1" style="font-size:0.7em">
+								<tr bgcolor="#ffffff">
+									<td  bgcolor="#ECECEC">Last Transaction Date</td>							
+									<td>[#if portfolio.lastTransactionDate??]${portfolio.lastTransactionDate?string("MM/dd/yyyy")}[/#if]</td>
+								</tr>
+								<tr bgcolor="#ffffff">
+									<td  bgcolor="#ECECEC">Starting Date</td>							
+									<td>${portfolio.startingDate?string("MM/dd/yyyy")}</td>
+								</tr>
+								<tr bgcolor="#ffffff">
+									<td  bgcolor="#ECECEC">Original Amount</td>							
+									<td>10000.0</td>
+								</tr>
+								<tr bgcolor="#ffffff">
+									<td  bgcolor="#ECECEC">Benchmark</td>							
+									<td>${holding.benchmarkSymbol}</td>
+								</tr>
+								<tr bgcolor="#ffffff">
+									<td  bgcolor="#ECECEC" width='50%'>Symbol</td>							
+									<td>${portfolio.symbol}</td>
+								</tr>
+								
+							</table> <!-- end of basic information table -->
+							<br>
+							<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<h2>Holdings on ${holding.currentDate?string("MM/dd/yyyy")}</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table id="sposition" class="evergreen_table tablesorter" border="0" cellpadding="0" cellspacing="1" width="100%">
+					<thead>
+					<tr>
+						<th class="header">
+							Asset
+						</th>
+						<th class="header">
+							Fund in this portfolio
+						</th>	
+						<th class="header">
+							Percentage
+						</th>
+					</tr>			
+					</thead>
+					[#if holding.holdingItems??]
+					[#list holding.holdingItems as security]
+					
+					[#if security_index%2==0]
+					<tr class='odd'>
+					[/#if]
+					[#if security_index%2==1]
+					<tr class='even'>
+					[/#if]
+						<td>
+							${security.assetName!"-"}
+						</td>
+						<td>
+							<a href='http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=${security.symbol!"-"}' target="_TOP" style="color:#2B60DE">${security.symbol!"-"} (${security.description!"-"})</a>					
+						</td>
+						<td>
+							[#if security.percentage??]${(security.percentage*100)?string("0.00")}%[/#if]
+						</td>
+					</tr>
+					
+					[/#list]
+					[/#if]
+				</table>		
+			</td>
+		</tr>
+	</table>
+	Welcome to <a href='http://www.myplaniq.com' style='color:#436EEE'>MyPlanIQ</a>
+</body>
+</html>

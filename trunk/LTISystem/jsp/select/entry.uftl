@@ -1,0 +1,3214 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+<html>
+<head>
+<title>MyPlanIQ: Customize A New Portfolio</title>
+<meta  name="Description" content="MyPlanIQ Users can customize a new portfolio using strategic or tactical strategy and have it tailored to their risk profiles and their investment plans. They can also set the rebalance frequncy and the other parameters. ">
+<meta name="jqueryui" content="smoothness">
+<script src="/LTISystem/jsp/template/ed/js/plugins/selectmenu/ui.selectmenu.js" type="text/javascript"></script>
+<link href="/LTISystem/jsp/template/ed/js/plugins/selectmenu/ui.selectmenu.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" href="jsp/profile/images/GooPieChart.css"/>
+<!--[if IE]><script  type="text/javascript" src="jsp/profile/images/excanvas.compiled.js"></script><![endif]-->
+<script  type="text/javascript" src="jsp/profile/images/GooFunc.js"></script>
+<script  type="text/javascript" src="jsp/profile/images/GooPieChart.js"></script>
+
+<style>
+#contianer input{
+	height:30px;width:500px;
+}
+#planwindow table{
+	border-collapse:collapse; border:1px solid #f0f0f0;
+}
+#planwindow th{
+     border: 1px solid #f0f0f0;
+}
+#planwindow td{
+     border: 1px solid #f0f0f0;padding:5px;
+}
+.ui-autocomplete-category {
+		padding:.2em .4em;
+		margin:.8em 0 .2em;
+}
+
+.asset_box{
+   border:1px solid #575757;
+   padding:10px 10px 10px 10px;
+   margin-top:10px;
+}
+
+
+.ui-autocomplete{
+  max-height:300px;
+  overflow-y:auto;
+}
+
+.ui-autocomplete a{
+    margin: 0px;
+	padding: 0px 0px;
+	font-size: 12px;
+	line-height: 12px;
+	overflow: hidden;
+ }
+ 
+.uitext{
+   height:25px;
+   
+}
+
+.readtext{
+   background: none repeat scroll 0 0 #FFFFFF;
+   border: 0 solid #FFFFFF;
+   text-align:center;
+}
+
+.greytext{
+  background: none repeat scroll 0 0 #EEEEE0;
+}
+
+.even{
+  background:none repeat scroll 0 0 #FFFFFF;
+}
+
+.odd{
+  background:none repeat scroll 0 0 #E5E5E5;
+}
+
+.assetTitle{
+  background:none repeat scroll 0 0 #FFEFD5;
+}
+</style>
+<script>
+
+$(document).ready(function() {
+    
+	  					
+	$("#t_planname").autocomplete({
+			minLength: 2,
+			source: function(request, response) {
+				if ( request.term in cache ) {
+					response( cache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "select_ajaxplanname.action?includeHeader=false&size=10",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						cache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			 select: function(event, ui) { 
+			 	if(ui.item.data==false){
+			 		window.open("/LTISystem/f401k__search.action?keyword="+this.value, "_blank");
+			 	}else{
+			 		$('#t_planid').val(ui.item.id);
+			 		$('#t_planname').val(ui.item.name);
+			 	}
+			 	if($('#t_planname').val()!=currentPlanName){
+			 	currentPlanName = $('#t_planname').val();
+			 	changePlan();
+			 	}
+			 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}else{
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a href='javascript:void(0)'>Show all results for <b>"+item.id+"</b></a>" )
+					.appendTo( ul );
+			}
+			
+		};
+					
+	
+	var dataArr={};
+	var selectIndex=0;
+	
+	$('#btnwindow').click(
+		function(){
+			//$("#planwindow").dialog("open");
+			window.open("/LTISystem/f401k__search.action?keyword="+$('#t_planname').val(), "_blank");
+		}
+		 
+	);
+	
+	$("#helpwindow").dialog({
+			resizable: false,
+			height:500,
+			width:820,
+			autoOpen:false,
+			modal: true,
+			title:"Help",
+			buttons: {
+				'Close': function() {
+					$(this).dialog('close');
+				}
+				
+			}
+	});
+	
+	$("#help").click(function(){
+    	$("#helpwindow").dialog('open');
+    });	
+    
+    
+    $("#deciderpf").toggle(
+	    function(){
+			$("#tr_canvas").show();
+			$("#deciderpf span").html('- Help Me Decide' );
+		},
+		function(){
+			$("#tr_canvas").hide();
+			$("#deciderpf span").html('+ Help Me Decide' );
+		}
+	);	
+    
+    //$("#deciderpf").button();
+    
+    [#if !pc.anonymous]
+    $('#decidewindow').load('profile_editforselecting.action?includeHeader=false&portfolioID=0&planID=0&date='+(new Date()).getTime());
+    $('#decidewindow').show();
+   // $('#decidewindow').dialog({title:"Decide Your Risk Profile",autoOpen:false,width:600,height:550});
+    [/#if]
+    $('#btnstrategy').click(function(){
+    		if($('#t_strategyname').val()=='Strategic Asset Allocation'){
+			 		window.open("/LTISystem/jsp/strategy/View.action?ID=771", "_blank");
+			 }else{
+			 		window.open("/LTISystem/jsp/strategy/View.action?ID=1003", "_blank");
+			 }
+    });
+    
+    $("#t_strategyid").change(function(){
+    	if(this.value==771){
+    		$('#t_strategyname').val('Strategic Asset Allocation');
+    	}else{
+    		$('#t_strategyname').val('Tactical Asset Allocation');
+    	}
+	}); 
+    
+	
+	// $('#btnplan').button();
+    
+    $('#btnplan').click(function(){
+    		window.open("/LTISystem/f401k_view.action?ID="+$("#t_planid").val(), "_blank");
+    		
+    });
+    
+    $("#sew_filter_button").toggle(
+	    function(){
+			$("#sew_filter_div").show();
+			$("#sew_filter_button span").html('- Set Moving Average Filter' );
+		},
+		function(){
+			$("#sew_filter_div").hide();
+			$("#sew_filter_button span").html('+ Set Moving Average Filter' );
+		}
+	);
+	
+	
+	//$('#build').button();
+	
+	
+	initSelects("mySelect", 500);
+	
+	
+	$('#sew_button_all').click(
+		function(){
+			setallfundfilter();
+		}
+	);
+
+
+});
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+var show_filter = false;
+function setmafilter(){
+	if(show_filter == false){
+		show_filter = true;
+		$("#sew_filter_div").show();
+		$("#sew_filter_button").val('- Set Moving Average Filter' );
+	}else{
+		show_filter = false;
+		$("#sew_filter_div").hide();
+		$("#sew_filter_button").val('+ Set Moving Average Filter' );
+	}
+}
+[/@authz.authorize]
+function setfundfilterbyname(a){
+	var value = "";
+	var freq = "";
+	var fundsize = document.getElementById("fundsize").value;
+	for(var i=0;i<fundsize;++i){
+		if(value != ""){
+			value += ",";
+			freq += ",";
+		}
+		var ev = document.getElementById(a + "_value_" + i).value;
+		if(ev != null && ev != "")
+			value += ev;
+		else
+			value += "0";
+		freq += document.getElementById(a + "_freq_" + i).value;
+	}
+	var e_freq = document.getElementById(a + "Freq");
+	e_freq.value = freq;
+	var e_value = document.getElementById(a + "Value");
+	e_value.value = value;
+}
+
+function setfundfilter(){
+	setfundfilterbyname("sma");
+	setfundfilterbyname("ema");
+	setfundfilterbyname("wma");
+	var sma_flag = document.getElementById("sma_use");
+	var sma_filter = document.getElementById("useSMAFilter");
+	if(sma_flag.checked)
+		sma_filter.value = "true";
+	else
+		sma_filter.value = "false";
+	var ema_flag = document.getElementById("ema_use");
+	var ema_filter = document.getElementById("useEMAFilter");
+	if(ema_flag.checked)
+		ema_filter.value = "true";
+	else
+		ema_filter.value = "false";
+		
+	var wma_flag = document.getElementById("wma_use");
+	var wma_filter = document.getElementById("useWMAFilter");
+	if(wma_flag.checked)
+		wma_filter.value = "true";
+	else
+		wma_filter.value = "false";
+}
+
+function setallfundfilter(){
+	var smavalue = document.getElementById("sma_value_all").value;
+	var smafreq = document.getElementById("sma_freq_all").value;
+	var emavalue = document.getElementById("ema_value_all").value;
+	var emafreq = document.getElementById("ema_freq_all").value;
+	var wmavalue = document.getElementById("wma_value_all").value;
+	var wmafreq = document.getElementById("wma_freq_all").value;
+	var fundsize = document.getElementById("fundsize").value;
+	for(var i=0;i<fundsize;++i){
+		document.getElementById("sma_value_" + i).value = smavalue;
+		document.getElementById("sma_freq_" + i).value = smafreq;
+		document.getElementById("ema_value_" + i).value = emavalue;
+		document.getElementById("ema_freq_" + i).value = emafreq;
+		document.getElementById("wma_value_" + i).value = wmavalue;
+		document.getElementById("wma_freq_" + i).value = wmafreq;
+	}
+}
+
+function checkname(){
+	var selected=false;
+	$.ajax({
+	    url: 'profile_checkname.action?includeHeader=false',
+	    type: 'POST',
+	    async: false,
+	    data: 'profile.portfolioName='+$('#t_portfolioname').val()+"&date="+(new Date()).getTime(),
+	    error: function(){
+	        alert('Error loading XML document');
+	    },
+	    success: function(result){
+	    	if(result.indexOf('true')!=-1){
+	    		selected=true;
+	    	}else{
+	    		selected=false;
+	    	}
+	    }
+	});
+	return selected;
+}
+
+function save(){
+	$.ajax({
+		url: $('#profile_form2').attr('action'),
+		dataType: "html",
+		data: $('#profile_form2').serialize(),
+		success: function( data ) {
+			alert("Save successfully.");
+			$('#t_riskprofile').val($('#rta').val());
+			$('#deciderpf').trigger("click");
+		}
+	});
+}
+function cancel(){
+	$('#deciderpf').trigger("click");
+}
+
+</script>
+</head>
+<body>
+<form id='profile_form' action='profile_edit.action' method='post'  style='display:none'>
+	<input type='hidden' id='profile_portfolioid' name='profile.portfolioID' value='0'>
+	<input type='hidden' id='profile_portfolioname' name='profile.portfolioName' value='New Portfolio'>
+	<input type='hidden' id='strategyname' name='strategyName' value=''>
+	<input type='hidden' id='strategyid' name='strategyID' value='-1'>
+	<input type='hidden' id='frequency' name='frequency' value='monthly'>
+	<input type='hidden' id='maxOfRiskyAsset' name='maxOfRiskyAsset' value='2'>
+	<input type='hidden' id='numberOfMainRiskyClass' name='numberOfMainRiskyClass' value='2'>
+	<input type='hidden' id='profile_planid' name='profile.planID' value='0'>
+
+	<input type='hidden' id='profile_planname' name='profile.planName' value='STATIC'>
+	<input type='hidden' id='profile_risknumber' name='profile.riskNumber' value='18'>
+	<input type='hidden' id='profile_attitude' name='profile.attitude' value='Moderate'>						
+	<input type='hidden' id='profile_yearstoretire' name='profile.yearsToRetire' value='24'>
+	<input type='hidden' id='operation' name='operation' value='save'>
+	
+	<input type="hidden" name="emaValue" id="emaValue" value="">
+	<input type="hidden" name="emaFreq" id="emaFreq" value="">
+	<input type="hidden" name="smaValue" id="smaValue" value="">
+	<input type="hidden" name="smaFreq" id="smaFreq" value="">
+	<input type="hidden" name="wmaValue" id="wmaValue" value="">
+	<input type="hidden" name="wmaFreq" id="wmaFreq" value="">
+	<input type="hidden" name="fundsize" id="fundsize" value="${fundList?size}">
+	<input type="hidden" name="useSMAFilter" id="useSMAFilter" value="">
+	<input type="hidden" name="useEMAFilter" id="useEMAFilter" value="">
+	<input type="hidden" name="useWMAFilter" id="useWMAFilter" value="">
+	<input type="hidden" name="MainAssetClass" id="MainAssetClass" value="">
+	<input type="hidden" name="MainAssetClassWeight" id="MainAssetClassWeight" value="">
+	<input type="hidden" name="AssetFundString" id="AssetFundString" value="">
+	<input type="hidden" name="BuyThreshold" id="BuyThreshold" value="3.0">
+	<input type="hidden" name="SellThreshold" id="SellThreshold" value="3.0">
+	<input type="hidden" name="SpecifyAssetFund" id="SpecifyAssetFund" value="false">
+	<input type="hidden" name="UseDataObject" id="UseDataObject" value="true">
+</form>
+<input type="hidden" name="fundsize" id="fundsize" value="${fundList?size}">
+<div class="ui-widget" id="contianer">
+<p>
+<table border=0 width='100%'>
+	<tr>
+		<td>
+			Portfolio Name
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="t_portfolioname" class="ui-widget ui-widget-content ui-corner-all" value='${portfolioName!""}'>
+					</td>
+					<td>
+						[@lti.questionmark "Enter a new portfolio name" "" /]
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Strategy
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select class="mySelect" value='${strategyName!""}' id="t_strategyid" onchange="/*alert(this.options[this.options.selectedIndex].value);*/window.location='/LTISystem/select_entry.action?portfolioID=${portfolioID?string.computer}&strategyID='+this.options[this.options.selectedIndex].value +'&name=${planName}'">
+								<option value="771" [#if strategyName?? && strategyName=="Strategic Asset Allocation"]selected[/#if]>Strategic Asset Allocation(SAA)</option>
+								<option value="1003" [#if strategyName?? && strategyName=="Tactical Asset Allocation"]selected[/#if]>Tactical Asset Allocation(TAA)</option>
+						</select>
+					</td>
+					<td>
+						[@lti.questionmark "Click here for this strategy explanation" "btnstrategy" /]
+						<input type="hidden" id="t_strategyname" value="${strategyName}">
+					</td>
+						
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Plan
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="t_planname" class="ui-widget ui-widget-content ui-corner-all" value='${planName!""}' >
+					</td>
+					<td>
+						[@lti.questionmark "Click here to visit this plan page" "btnplan" /]
+						<a id="btnwindow" href="javascript:void(0)" class="uiButton">Search</a>
+						<input type="hidden" id="t_planid" value="${planID!""}">
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Risk Profile
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<input type="text" id="t_riskprofile"  class="ui-widget ui-widget-content ui-corner-all"  onblur="changeriskprofile()"  value='${riskProfileNumber!""}'>
+					</td>
+					<td>
+						[@lti.questionmark "Click here for Risk Profile explanation" "help" /]<a id="deciderpf" href='javascript:void(0)' class="uiButton">+ Help Me Decide</a>
+					</td>
+				</tr>
+			</table>
+			
+			
+		</td>
+	</tr>
+	<tr style="display:none" id="tr_canvas">
+		<td></td>
+		<td>
+			<div class="sidebar_box_noPadding roundHeadingGreen"  style="width:500px;">
+				 <div class="sidebar_box_heading_white">Decide your risk profile</div>
+				 <div class="sidebar_box_content" id="decidewindow">
+			         </div>
+			   </div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Rebalance Frequency
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select id="t_frequency" class="mySelect" value='${frequency!""}'>
+								[#if pc.isAdmin() || pc.isAdvancedUser()]
+								<option value="weekly" [#if frequency?? && frequency=="weekly"]selected[/#if]>Weekly</option>
+								[/#if]
+								<option value="monthly" [#if frequency?? && frequency=="monthly"]selected[/#if]>Monthly</option>
+								<option value="quarterly" [#if frequency?? && frequency=="quarterly"]selected[/#if]>Quarterly</option>
+								<option value="annually" [#if frequency?? && frequency=="annually"]selected[/#if]>Annually</option>
+						</select>
+					</td>
+					<td>
+						[@lti.questionmark "How often the portfolio is rebalanced: monthly, quarterly, annually" "" /]
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+	[#if pc.isAdmin() && (strategyID?? && strategyID == 1003)]
+	<tr>
+		<td>
+			Funds in Each Risky Asset
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select id="t_maxOfRiskyAsset" class="mySelect" value='${maxOfRiskyAsset!""}'>
+								<option value="1">1</option>
+								<option value="2" selected>2</option>
+								<option value="3">3</option>
+						</select>
+					</td>
+					<td>
+                        [@lti.questionmark "The max number of funds we recommend for each risky class" "" /]
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	[#else]
+		<input type="hidden" id="t_maxOfRiskyAsset" value="2">
+	[/#if]
+	[#if (pc.isAdmin() || pc.isAdvancedUser()) && (strategyID?? && strategyID == 1003)]
+	<tr>
+		<td>
+			Number of Risky Assets
+		</td>
+		<td>
+			<table width="100%">
+				<tr>
+					<td width=500>
+						<select id="t_numberOfMainRiskyClass" class="mySelect" value='${numberOfMainRiskyClass!""}'>
+								<option value="1">1</option>
+								<option value="2" selected>2</option>
+								<option value="3">3</option>
+						</select>
+					</td>
+					<td>
+                        [@lti.questionmark "The max number of risky assets which we recommend each time" "" /]
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	[#else]
+		<input type="hidden" id="t_numberOfMainRiskyClass" value="2">
+	[/#if]
+</table>
+</p>
+<br/>
+<p>
+
+
+	
+
+
+<input title="" type='button' id='btn_customize' class="uiButton" style='font-weight: bold;width:260px' value='Build a Customized Portfolio'>
+<div id=customizediv style="margin-top:7px;margin-bottom:7px;display:none">
+	[#if pc.anonymous]
+		<span style="font-size:1.1em;line-height:20px;">
+		You need to register for free to customize SAA portfolios or subscribe to customize the TAA portfolios. Please login or register first.  </span>
+		<br>
+		<br>
+		<a class="uiButton" href="javascript:void(0)"  onclick='$("#loginEntry").trigger("click");' >Login</a>&nbsp;
+		<a class="uiButton" href="/LTISystem/jsp/register/openRegister.action" target="_blank" >Register</a>&nbsp;
+	[#else]
+		[#-- 检查是否有customize的权限 --]
+		[#if pc.hasSimulateRole || pc.admin]
+		[#else]
+			<span style="font-size:1.1em;line-height:20px;">You need to subscribe as Basic User to customize the TAA portfolios. Please subscribe for one month free trial.</span>
+			<br>
+			<br>
+			<a class="uiButton" href="/LTISystem/paypal_subscr.action" target="_blank">About Subscription</a>
+		[/#if]
+	[/#if]
+</div>
+<script>
+$(function(){
+		[#if pc.hasSimulateRole || pc.admin]
+	   		$("#btn_customize").click(function(){
+				if(!checkname()){
+					alert('Please enter another name for the portfolio name!');
+					return;
+				}else if($('#t_planid').val()==""){
+					alert('Please select a plan from the pull down menu!');
+					return;
+				}else if(isNaN($('#t_riskprofile').val())){
+					alert('Please enter a number for rik profile!');
+					return;
+				}
+				setfundfilter();
+				$('#message').html("Redirecting...");
+				$('#profile_planid').val($('#t_planid').val());
+				$('#strategyid').val($('#t_strategyid').val());
+				$('#strategyname').val($('#t_strategyname').val());
+				$('#profile_portfolioname').val($('#t_portfolioname').val());
+				$('#profile_risknumber').val($('#t_riskprofile').val());
+				$('#frequency').val($('#t_frequency').val());
+				$('#maxOfRiskyAsset').val($('#t_maxOfRiskyAsset').val());
+				$('#numberOfMainRiskyClass').val($('#t_numberOfMainRiskyClass').val());
+				var checkvalue=false;
+				if(checkvalue){
+					var str="planid: "+$('#profile_planid').val();
+					str+="\r\n";
+					str+="strategyid: "+$('#strategyid').val();
+					str+="\r\n";
+					str+="strategyname: "+$('#strategyname').val();
+					str+="\r\n";
+					str+="profile_portfolioname: "+$('#profile_portfolioname').val();
+					str+="\r\n";
+					str+="profile_risknumber: "+$('#profile_risknumber').val();
+					str+="\r\n";
+					str+="frequency: "+$('#frequency').val();
+					str+="\r\n";
+					alert(str);
+					$('#build').button( "option", "disabled", true );
+					return;
+				}
+				$.ajax({
+				    url: 'profile_generateportfolio.action?includeHeader=false',
+				    type: 'POST',
+				    data: $('#profile_form').serialize(),
+				    error: function(message){
+				        alert(message.responseText);
+				        return;
+				    },
+				    success: function(result){
+				    	//var portfolioID=result.replace(/(^\s*)|(\s*$)/g, '');
+				    	//if(portfolioID==-1){
+				    	//	alert('Error, please try again.');
+				        //	return;
+				    	//}else{
+				    	//	window.location.href='select_building.action?portfolioID='+portfolioID;
+				    	//}
+				    	var nums = result.split("_");
+				    	if(nums.length != 2){
+				    		alert(result);
+				    	}else{
+				    		var meg = 'This portfolio has been added to "My Customized Private Portfolios" table. You will receive rebalance email alerts of this portfolio. You can customize/follow ' + $.trim(nums[0]) + ' more portfolio(s)';
+				    		alert(meg);
+				    		window.location.href='select_building.action?portfolioID=' + nums[1];
+				    	}
+				    }
+				});
+				
+			});
+		[#else]
+			$("#btn_customize").toggle(
+	   	
+			   function(){
+			   		$("#btn_mess_div").html($("#customizediv").html());
+			   		$("#btn_mess_div").fadeIn();
+			   		$("#btn_customize").css({"background-image": "url(images/grey-bg2.gif)"});
+			   },
+			   function(){
+			    	$("#btn_mess_div").fadeOut();
+			    	$("#btn_customize").css({"background-image": "url(images/grey-bg.gif)"});
+			   }
+		     );
+			
+    	[/#if]
+});
+
+
+
+</script>
+<div id=btn_mess_div style="display:none">
+</div>
+
+</p>
+<span id="message"></span>
+</div>
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+<input type="button" id="sew_filter_button" onclick="setmafilter()" value ="+ Set Moving Average Filter">
+[/@authz.authorize]
+<div id="sew_filter_div" style="display:none">
+	<br>
+	<br>
+	<input type="checkbox" id="sma_use" name="sma_use" [#if useSMAFlag?? && useSMAFlag == "true"] checked [/#if]>Use SMA Filter
+	<input type="checkbox" id="wma_use" name="wma_use" [#if useWMAFlag?? && useWMAFlag == "true"] checked [/#if]>Use WMA Filter
+	<input type="checkbox" id="ema_use" name="ema_use" [#if useEMAFlag?? && useEMAFlag == "true"] checked [/#if]>Use EMA Filter
+	
+	<br>
+	<br>
+	[#if fundList?? && fundList?size > 0]
+		<table border=0 width='100%'>
+			<tr>
+				<td align="center" style="width:5%">Symbol</td>
+				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td align="center">SMA Length</td>
+				<td align="center">Time Unit</td>
+				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td align="center">WMA Length</td>
+				<td align="center">Time Unit</td>
+				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td align="center">EMA Length</td>
+				<td align="center">Time Unit</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<a id="sew_button_all" href='javascript:void(0)' class="uiButton" >Set All</a>
+				</td>
+				<td align="center"></td>
+				<td>
+					<input type="text" id="sma_value_all" value="" style="width:80px">
+				</td>
+				<td>
+					<select id="sma_freq_all" value="1">
+							<option value="1" selected>Days</option>
+							<option value="2">Weeks</option>
+							<option value="3">Months</option>
+					</select>
+				</td>
+				<td align="center"></td>
+				<td>
+					<input type="text" id="wma_value_all" value="" style="width:80px">
+				</td>
+				<td>
+					<select id="wma_freq_all" value="1">
+							<option value="1" selected>Days</option>
+							<option value="2">Weeks</option>
+							<option value="3">Months</option>
+					</select>
+				</td>
+				<td align="center"></td>
+				<td>
+					<input type="text" id="ema_value_all" value="" style="width:80px">
+				</td>
+				<td>
+					<select id="ema_freq_all" value="1">
+							<option value="1" selected>Days</option>
+							<option value="2">Weeks</option>
+							<option value="3">Months</option>
+					</select>
+				</td>
+				
+			</tr>
+			<tr>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+				<td align="center">&nbsp;</td>
+			</tr>
+			[#list fundList as fund]
+				<tr>
+					<td>
+						<input type="text" value="${fund}" style="width:80px">
+					</td>
+					<td align="center"></td>
+					<td>
+						<input type="text" id="sma_value_${fund_index}"  [#if SMAValueList?? && SMAValueList[fund_index]?? && SMAValueList[fund_index]!=0] value="${SMAValueList[fund_index]}" [/#if] style="width:80px">
+					</td>
+					<td>
+						<select id="sma_freq_${fund_index}" value="1">
+								<option value="1" selected>Days</option>
+								<option value="2">Weeks</option>
+								<option value="3">Months</option>
+						</select>
+					</td>
+					<td align="center"></td>
+					<td>
+						<input type="text" id="wma_value_${fund_index}" [#if WMAValueList?? && WMAValueList[fund_index]?? && WMAValueList[fund_index]!=0] value="${WMAValueList[fund_index]}" [/#if] style="width:80px">
+					</td>
+					<td>
+						<select id="wma_freq_${fund_index}" value="1">
+								<option value="1" selected>Days</option>
+								<option value="2">Weeks</option>
+								<option value="3">Months</option>
+						</select>
+					</td>
+					<td align="center"></td>
+					<td>
+						<input type="text" id="ema_value_${fund_index}" [#if EMAValueList?? && EMAValueList[fund_index]?? &&EMAValueList[fund_index]!=0] value="${EMAValueList[fund_index]}" [/#if] style="width:80px">
+					</td>
+					<td>
+						<select id="ema_freq_${fund_index}" value="1">
+								<option value="1" selected>Days</option>
+								<option value="2">Weeks</option>
+								<option value="3">Months</option>
+						</select>
+					</td>
+				</tr>
+			[/#list]
+		</table>
+	[/#if]
+</div>
+
+<div id="planwindow" style="display:none">
+</div>
+
+<div id="helpwindow" style="display:none">
+				<p>All assets are classified to two classes: risky assets and fixed income (stable) assets.</p>
+<p>Risky assets include the following assets:
+							<ul>
+							 <li><strong>Equities (stocks): </strong>US, international and emerging market stocks,</li>
+							 <li><strong>REITs: </strong>US and international Real Estate Investment Trusts,</li>
+							 <li><strong>Commodities: </strong>Industrial Metals, Gold, Oil, Agricultural, .. etc.,</li>
+							 <li><strong>High Yield (Junk) Bonds: </strong>Low grade corporate bonds </li>
+							</ul>
+							<p><br>Fixed income assets include</p>
+							<ul>
+							<li><strong>Government bonds: </strong>short, intermediate and long term treasury bonds and GNMA,</li>
+							<li><strong>Investment Grade bonds: </strong>short, intermediate and long term investment corporate bonds,</li>
+							<li><strong>International bonds: </strong>Sovereign and corporate investment grade bonds,</li>
+							<li><strong>Cash: </strong>Money markets</li>
+							</ul>
+							</p>
+							<p><br>The Risk Profile number represents the target percentage allocation of fixed income in your portfolio. For example, the default risk profile number is 18. That means 18% should be allocated to fixed income and 82% should be allocated to risky assets</p>
+							<p>Your Risk Profile is determined based on your expected years to retirement and risk tolerance. The risk tolerance could be one of the following:
+							<ul>
+							<li><strong>Very Conservative</strong></li>
+							<li><strong>Conservative</strong></li>
+							<li><strong>Moderatge</strong></li>
+							<li><strong>Aggressive</strong></li>
+							<li><strong>Very Aggressive</strong></li>
+							</ul>
+							<p><br>The more aggressive you are, the more will be allocated to risky assets. The longer you expect to retire, the more will be allocated to risky assets too.</p>
+							<p>Your risk profile number will be adjusted every year.</p>
+							<p>You could always overwrite the risk profile number when customizing a model portfolio.</p>
+							<p>The following chart illustrates the meaning of the risk profile number:
+											<br/><br/>
+											<img border=0 src='jsp/profile/images/barchart.png'>
+											<br/>
+							</p>
+							<p>For more information on how to determine proper asset allocation, consult your financial adviser or use popular retirement planning tools provided by Fidelity, Vanguard or T.Rowe Price. Or you could find out more asset allocation information on target date funds such as <a target="_blank" href="http://personal.fidelity.com/products/funds/content/DesignYourPortfolio/freedomfunds.shtml.cvsr">Fidelity Freedom Target Date Funds</a>. 
+							</p> 
+							
+							<br/>
+							<br/>
+					</p>
+</div>
+[@authz.authorize ifAnyGranted="MPIQ_P,ROLE_SUPERVISOR"]
+<script>
+
+
+  String.prototype.trim=function(){
+　　      return this.replace(/(^\s*)|(\s*$)/g, "");
+　　 }
+  
+  
+  var curTotalRiskyPercent="";
+  var curTotalStablePercent="";
+  var currentPlanName = "";
+  var curriskyprofile="";
+  var curTemplateName = "";
+  var riskyFundTrNum = 0;
+  var stableFundTrNum = 0;
+  
+   var cache = {};
+   var riskycache = {};
+   var stablecache = {};
+$(document).ready(function() {
+   		 if($("#totalrisky").val()!="${defaultTotalRiskyPercentage}")
+           		$("#totalrisky").val("${defaultTotalRiskyPercentage}");
+   		 if($("#totalstable").val()!="${defaultTotalStablePercentage}")
+           		$("#totalstable").val("${defaultTotalStablePercentage}");
+     
+    	 if($("#t_riskprofile").val()!="${riskProfileNumber}")
+            $("#t_riskprofile").val("${riskProfileNumber}");
+            
+         if($("#UseDataObject").val() !="true")
+              $("#UseDataObject").val("true");
+     	[#list defaultRiskyAssetClassList as item]
+        	if($("#riskyasset_${item_index}").val() != "${item}")
+           		$("#riskyasset_${item_index}").val("${item}");
+     	[/#list]
+     	[#list defaultStableAssetClassList as item]
+       	 if($("#stableasset_${item_index}").val() != "${item}")
+           $("#stableasset_${item_index}").val("${item}");
+     	[/#list]
+     
+     [#list defaultRiskyFundNumList as item]
+        if($("#riskyfundnum_${item_index}").val() != "${item}")
+           $("#riskyfundnum_${item_index}").val("${item}");
+     [/#list]
+     
+     [#list defaultStableFundNumList as item]
+        if($("#stablefundnum_${item_index}").val() != "${item}")
+           $("#stablefundnum_${item_index}").val("${item}");
+     [/#list]
+     
+     [#list defaultRiskyPercentageList as item]
+        if($("#riskypercent_${item_index}").val() != "${item}")
+           $("#riskypercent_${item_index}").val("${item}");
+     [/#list]
+      [#list defaultStablePercentageList as item]
+        if($("#stablepercent_${item_index}").val() != "${item}")
+           $("#stablepercent_${item_index}").val("${item}");
+     [/#list]
+     
+     if($("#t_BuyThreshold").val()!="1.0")
+        $("#t_BuyThreshold").val("1.0");
+     
+     if($("#t_SellThreshold").val()!="1.0")
+        $("#t_SellThreshold").val("1.0");
+        
+       $("#single_ticker").val("");
+       $("#single_percent").val("");
+       riskyFundTrNum = 0;
+       stableFundTrNum = 0;
+
+	var rTrSize = $("#risky_asset tr").length;
+	var sTrSize = $("#stable_asset tr").length;
+    currentPlanName=$("#t_planname").val();
+    curTotalRiskyPercent = $("#totalrisky").val();
+    curTotalStablePercent = $("#totalstable").val();
+    curTotalRiskyPercent = numFixed(curTotalRiskyPercent);
+    curTotalStablePercent = numFixed(curTotalStablePercent);
+    curriskyprofile = numFixed($("#t_riskprofile").val());
+    curTemplateName = $("#myselect").val();
+    
+	for(var i=0;i<rTrSize;i++){
+	     $("#riskyasset_"+i).autocomplete({
+			minLength: 0,
+			source: function(request, response) {
+			    if(request.term == "")
+			        request.term = "riskyspace";
+				if ( request.term in riskycache) {
+					response( riskycache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "/LTISystem/select_searchAssetClass.action?includeHeader=false&assetType=0",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						riskycache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			        var assetid = $(this).attr("id")			 	
+			 		$("#"+assetid).val(ui.item.name.replace(/&nbsp;/ig,""));
+			 		changeFundNum(0);			 				 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+	}
+	
+	for(var j=0;j<sTrSize;j++){
+		$("#stableasset_"+j).autocomplete({
+			minLength: 0,
+			source: function(request, response) {
+			    if(request.term == "")
+			        request.term = "stablespace";
+				if ( request.term in stablecache) {
+					response( stablecache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "/LTISystem/select_searchAssetClass.action?includeHeader=false&assetType=1",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						stablecache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 			 	
+			 		var assetid = $(this).attr("id")			 	
+			 		$("#"+assetid).val(ui.item.name.replace(/&nbsp;/ig,""));
+			 		changeFundNum(0);		 				 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+	}
+	
+	$("#single_ticker").autocomplete({
+			minLength: 1,
+			source: function(request, response) {			    				
+				$.ajax({
+					url: "/LTISystem/select_searchFund.action?includeHeader=false",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 			 	
+			 					 	
+			 		$("#single_ticker").val(ui.item.name);
+			 				 				 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+	
+	
+	handleDefaultTemp();
+	var tempRiskyPercent = "${riskProfileNumber}";
+	var tempStablePercentNum = parseFloat(tempRiskyPercent);
+	var tempRiskyPercentNum = 100-tempRiskyPercent+0.001;
+	var totalRiskyPercent = numFixed(tempRiskyPercentNum);
+	var totalStablePercent = numFixed(tempStablePercentNum);
+	$("#totalrisky").val(totalRiskyPercent);
+	$("#totalstable").val(totalStablePercent);
+	changeTotalRiskyPercent();
+	changeTotalStablePercent();
+	
+	rTrSize = $("#risky_asset tr").length;
+	sTrSize = $("#stable_asset tr").length;
+	for(var n=0;n<rTrSize;n++){
+	   if(n!=0){defaultAssetClassName+=",";}
+	   var assetName = $("#riskyasset_"+n).val();
+	   defaultAssetClassName+=assetName;
+	}
+	
+	for(var m=0;m<sTrSize;m++){
+	  var assetName = $("#stableasset_"+m).val();
+	  defaultAssetClassName +=",";
+	  defaultAssetClassName +=assetName;
+	}
+	
+	
+	 $("#helpwindow").dialog({
+			resizable: false,
+			height:500,
+			width:820,
+			autoOpen:false,
+			modal: true,
+			title:"More on Risk Profile",
+			buttons: {
+				'Close': function() {
+					$(this).dialog('close');
+				}
+				
+			}
+	});
+	
+	$("#helpriskprofile").click(function(){
+    	$("#helpwindow").dialog('open');
+        });
+});
+ 
+    
+var defaultAssetClassName="";
+function handleDefaultTemp(){
+    var rTrSize = 0;
+	var sTrSize = 0;
+	var rdivide = true;
+	var sdivide = true;
+	//alert("default template");
+	while(rdivide){
+	  rTrSize = $("#risky_asset tr").length;
+	  for(var i=0;i<rTrSize;i++){
+	   var fundNum = $("#riskyfundnum_"+i).val();
+	   if(fundNum =="0"){
+	     divideRisky(i,0);
+	     break;
+	   }
+	   
+	}
+	if(i==rTrSize)
+	 rdivide = false;
+  }
+	
+	while(sdivide){
+	  sTrSize = $("#stable_asset tr").length;
+	  for(var j=0;j<sTrSize;j++){
+	    var fundNum = $("#stablefundnum_"+j).val();
+	    if(fundNum =="0"){
+	    	divideStable(j,0);
+	    	break;
+	  		}
+	 	}
+	 	if(j==sTrSize)
+	 	   sdivide = false;
+	}
+	
+	changeFundNum(0);
+}
+
+
+function changeriskprofile(){
+   var riskyprofile = $("#t_riskprofile").val();
+
+   riskyprofile = numFixed(riskyprofile);
+   $("#t_riskprofile").val(riskyprofile);
+   if(riskyprofile == curriskyprofile)
+   		return;
+   var totalStableNum = parseFloat(riskyprofile);
+   var totalRiskyNum = 100-totalStableNum+0.001;
+   var totalStablePercent = numFixed(totalStableNum);
+   var totalRiskyPercent = numFixed(totalRiskyNum);
+   $("#totalrisky").val(totalRiskyPercent);
+   $("#totalstable").val(totalStablePercent);
+   curriskyprofile = riskyprofile;
+   
+   changeTotalRiskyPercent();
+   changeTotalStablePercent();
+}         
+      
+function changePlan(){
+   var planName = $("#t_planname").val();
+   if(planName=="")return;
+   $("#changeplan_dialog").dialog({
+            autoOpen: false,
+		    resizable: true,
+		    height:250,
+			width: 400,
+			modal: true,
+			beforeClose: function(event, ui) {					
+					return false; 
+				    }
+                });
+     $("#changeplan_dialog").dialog("open");    
+   $.ajax({
+         type:"post",
+         url:"/LTISystem/select_getPlanInfo.action?includeHeader=false&planName="+planName,
+         success:function(message){
+            message = message.trim();
+            if(message.trim().length<40){
+              $("#changeplan_dialog").dialog("destroy");   
+               alert(message);
+            }              
+            else{
+              $("#allfundtable").html(message);
+           
+           var fundName="";  
+           var count=0;
+           for(var i=0;i<riskyFundTrNum;i++){
+             var fund = $("#riskyfund_"+i).val();
+             if(fund==undefined)
+             continue
+             if(count!=0)
+              fundName+=",";
+             fundName+=fund;
+             count++;
+          }
+          
+          for(var j=0;j<stableFundTrNum;j++){
+             var fund = $("#stablefund_"+j).val();
+             if(fund==undefined)
+             continue
+             fundName+=",";
+             fundName+=fund;
+             count++;
+          }
+          if(fundName!=""){
+            $.ajax({
+               type:"post",
+               url:"/LTISystem/select_getSingleFundInfo.action?includeHeader=false&fundName="+fundName,
+               success:function(message){
+                  message=message.trim();
+                  var numItem = message.split(",");
+                  var num=0;
+                  for(var i=0;i<riskyFundTrNum;i++){
+             			var fund = $("#riskyfund_"+i).val();
+             			if(fund==undefined)
+             			continue
+             			var item = numItem[num];
+             	         num++;
+             			if(item=="0"){
+             			  var percent = $("#riskyFundPercent_"+i).val();
+             			  percent = parseFloat(percent);
+             			  var totalRiskyPercent = $("#totalrisky").val();
+             			  totalRiskyPercent = parseFloat(totalRiskyPercent);
+             			  totalRiskyPercent = totalRiskyPercent - percent;
+             			  totalRiskyPercent = numFixed(totalRiskyPercent);
+             			  $("#totalrisky").val(totalRiskyPercent);
+             			  curTotalRiskyPercent = totalRiskyPercent;
+             			  $("#riskyFundTr_"+i).remove();
+             			}
+          			}
+          
+         		 for(var j=0;j<stableFundTrNum;j++){
+             		var fund = $("#stablefund_"+j).val();
+             		if(fund==undefined)
+             		continue
+             		var item = numItem[num];
+             	    num++;
+             	    if(item=="0"){
+             			  var percent = $("#stableFundPercent_"+j).val();
+             			  percent = parseFloat(percent);
+             			  var totalStablePercent = $("#totalstable").val();
+             			  totalStablePercent = parseFloat(totalStablePercent);
+             			  totalStablePercent = totalStablePercent - percent;
+             			  totalStablePercent = numFixed(totalStablePercent);
+             			  $("#totalrisky").val(totalStablePercent);
+             			  curTotalStablePercent = totalStablePercent;
+             			  $("#stableFundTr_"+j).remove();
+             			}
+          			}
+          			 changeFundNum(1);
+           		 }//end success
+          
+            });//end ajax
+          }else{
+             changeFundNum(1);
+          } //end if(fundName!="")                                         
+        } //end else              
+      }//end success
+   });//end ajax
+}  
+              
+      var AssetShow = true;
+      function showAsset(){
+         if(AssetShow == false){
+             $("#assetallocation").show();
+             AssetShow = true;
+             $("#btn_showasset").val("- Specify the Asset Allocation");
+         }else{
+             $("#assetallocation").hide();
+             AssetShow = false;
+             $("#btn_showasset").val("+ Specify the Asset Allocation");
+         }
+      }
+     
+    var fundtableShow = false; 
+    function showAllFundtable(){
+      if(fundtableShow == false){
+        $("#allfundtable").show();
+        fundtableShow = true;
+        $("#btn_fundtable").val("- Investment Options");
+      }else{
+        $("#allfundtable").hide();
+        fundtableShow = false;
+        $("#btn_fundtable").val("+ Investment Options");
+      }
+    }
+    
+    var advanceshow = false;
+    function showAdvance(){
+    if(advanceshow == false){
+        $("#advance").show();
+        advanceshow = true;
+        $("#btn_advance").val("- Advance Option");
+      }else{
+        $("#advance").hide();
+        advanceshow = false;
+        $("#btn_advance").val("+ Advance Option");
+      }
+    }
+    
+    var singlefundshow = false;
+    function showSingleFund(){
+      if(singlefundshow==false){
+        $("#singleFund").show();
+        singlefundshow = true;
+        $("#btn_singleFund").val("- Add Single Fund");
+      }else{
+      	$("#singleFund").hide();
+        singlefundshow = false;
+        $("#btn_singleFund").val("+ Add Single Fund");
+      }
+    }
+    
+    function showAllRisky(index){
+         var text = $("#riskyasset_"+index).val();
+         if(text!="" || text.length!=0)
+           return;
+         $("#riskyasset_"+index).autocomplete( "search", "" );
+    }
+    
+    function showAllStable(index){
+    	 var text = $("#stableasset_"+index).val();
+         if(text!="" || text.length!=0)
+           return;
+         $("#stableasset_"+index).autocomplete( "search", "" );
+    }
+    
+     function showRiskyTree(index){
+         var text = $("#riskyasset_"+index).val();
+         if(text =="" || text.length==0)
+           return;
+         $("#riskyasset_"+index).autocomplete( "search", "" );
+    }
+    
+    
+    function showStableTree(index){
+    	 var text = $("#stableasset_"+index).val();
+         if(text=="" || text.length==0)
+           return;
+         $("#stableasset_"+index).autocomplete( "search", "" );
+    }
+    
+    function deleteRisky(index,flag){
+      var rTrSize = $("#risky_asset tr").length;	     
+      var percentage = $("#riskypercent_"+index).val();
+      var asset = $("riskyasset_"+index).val();
+      var totalPercent = parseFloat($("#totalrisky").val());
+      var curtotalPercent = 0;
+      if(percentage == "")
+          curtotalPercent = totalPercent;
+          else{
+          percentage = parseFloat(percentage);
+          curtotalPercent = totalPercent-percentage;
+          curtotalPercent +=0.001;
+
+          }
+          curtotalPercent = numFixed(curtotalPercent);
+          curTotalRiskyPercent = curtotalPercent;
+
+      $("#riskyTr_"+index).remove();
+      $("#riskyasset_"+index).autocomplete("destroy");
+      $("#totalrisky").val(curtotalPercent);
+      for(var i=index+1;i<rTrSize;i++){
+        var curindex = i-1;
+        var type = "riskyasset";
+        var assetName = $("#riskyasset_"+i).val();
+        var percent = $("#riskypercent_"+i).val();
+        var td2html = $("#riskyTr_"+i+" td:eq(2)").html();
+        var td6html = $("#riskyTr_"+i+" td:eq(6)").html();
+        var ht0 = "<input type='text' id='riskyasset_"+curindex+"' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' onclick='showAllRisky("+curindex+")'  ondblclick='showRiskyTree("+curindex+")' value=\""+assetName+"\">";
+        $("#riskyTr_"+i+" td:eq(0)").html(ht0);
+        
+        $("#riskyfundnum_"+i).attr("id","riskyfundnum_"+curindex);
+        
+        if(td2html!=""){
+          var ht2="<a id='riskyButton_"+curindex+"' title='Click here to view funds' href='javascript:void(0)' onclick='showFundtable(\""+type+"\","+curindex+")'><img alt='Click here to view funds' height=20px width=20px src='/LTISystem/jsp/template/ed/images/info.png'></a>";
+          $("#riskyTr_"+i+" td:eq(2)").html(ht2);
+        }
+        
+        var ht3 = "<input type='text' id='riskypercent_"+curindex+"' class='uitext ui-widget ui-widget-content ui-corner-all' onblur='changeRiskyPercent("+curindex+")' value=\""+percent+"\">";
+        $("#riskyTr_"+i+" td:eq(3)").html(ht3);
+        
+        var ht5 = "<input type='button' class='uiButton' id='rdelete_"+curindex+"' value='Delete' onclick='deleteRisky("+curindex+",1)'>"
+        $("#riskyTr_"+i+" td:eq(5)").html(ht5);
+        $("#rdelete_"+curindex).button();
+        
+        if(td6html!=""){
+          var ht6="<input type='button' class='uiButton' id='rdivide_"+curindex+"' value='Scale to other' onclick='divideRisky("+curindex+",1)'>";
+		  $("#riskyTr_"+i+" td:eq(6)").html(ht6);
+		  $("#rdivide_"+curindex).button();
+        }
+           
+        $("#riskyTr_"+i).attr("id","riskyTr_"+curindex);
+        
+        $("#riskyasset_"+i).autocomplete("destroy");
+        
+        $("#riskyasset_"+curindex).autocomplete({
+			minLength: 0,
+			source: function(request, response) {
+			    if(request.term == "")
+			        request.term = "riskyspace";
+				if ( request.term in riskycache) {
+					response( riskycache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "/LTISystem/select_searchAssetClass.action?includeHeader=false&assetType=0&portfolioID=${portfolioID?string.computer}",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						riskycache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	
+			 		$("#riskyasset_"+curindex).val(ui.item.name.replace(/&nbsp;/ig,""));
+			 		changeFundNum(0);		 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+      }     
+      if(asset == "") return;
+      if(flag ==1)
+       changeFundNum(0);
+    }
+    
+    function deleteStable(index,flag){
+      var sTrSize = $("#stable_asset tr").length;  
+      var percentage = $("#stablepercent_"+index).val();
+      var asset = $("stableasset_"+index).val();
+      var totalPercent = parseFloat($("#totalstable").val());
+      var curtotalPercent = 0;
+      if(percentage == "")
+          curtotalPercent = totalPercent;
+          else{
+          percentage = parseFloat(percentage);
+          curtotalPercent = totalPercent-percentage;
+          curtotalPercent +=0.001;
+
+          }
+          curtotalPercent = numFixed(curtotalPercent);
+          curTotalStablePercent = curtotalPercent;
+      $("#stableTr_"+index).remove();
+      $("#stableasset_"+index).autocomplete("destroy");
+      $("#totalstable").val(curtotalPercent);
+      for(var i=index+1;i<sTrSize;i++){
+        var curindex = i-1;
+        var type = "stableasset";
+        var assetName = $("#stableasset_"+i).val();
+        var percent = $("#stablepercent_"+i).val();
+        var td2html = $("#stableTr_"+i+" td:eq(2)").html().trim();
+        var td6html = $("#stableTr_"+i+" td:eq(6)").html().trim();
+        var ht0 = "<input type='text' id='stableasset_"+curindex+"' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' onclick='showAllStable("+curindex+")'  ondblclick='showStableTree("+curindex+")'  value=\""+assetName+"\">";
+        $("#stableTr_"+i+" td:eq(0)").html(ht0);
+        
+        $("#stablefundnum_"+i).attr("id","stablefundnum_"+curindex);
+        
+        if(td2html!=""){
+          var ht2="<a id='stableButton_"+curindex+"' title='Click here to view funds' href='javascript:void(0)' onclick='showFundtable(\""+type+"\","+curindex+")'><img alt='Click here to view funds' height=20px width=20px src='/LTISystem/jsp/template/ed/images/info.png'></a>";
+          $("#stableTr_"+i+" td:eq(2)").html(ht2);
+        }
+        
+        var ht3 = "<input type='text' id='stablepercent_"+curindex+"' class='uitext ui-widget ui-widget-content ui-corner-all' onblur='changeStablePercent("+curindex+")' value=\""+percent+"\">";
+        $("#stableTr_"+i+" td:eq(3)").html(ht3);
+        
+        var ht5 = "<input type='button' class='uiButton' id='sdelete_"+curindex+"' value='Delete' onclick='deleteStable("+curindex+",1)'>"
+        $("#stableTr_"+i+" td:eq(5)").html(ht5);
+        $("#sdelete_"+curindex).button();
+        
+        if(td6html!=""){
+          var ht6="<input type='button' class='uiButton' id='sdivide_"+curindex+"' value='Scale to other' onclick='divideStable("+curindex+",1)'>";
+		  $("#stableTr_"+i+" td:eq(6)").html(ht6);
+		  $("#sdivide_"+curindex).button();
+        }
+           
+        $("#stableTr_"+i).attr("id","stableTr_"+curindex);
+        
+        $("#stableasset_"+i).autocomplete("destroy");
+        
+        $("#stableasset_"+curindex).autocomplete({
+			minLength: 0,
+			source: function(request, response) {
+				if(request.term == "")
+			        request.term = "stablespace";
+				if ( request.term in stablecache ) {
+					response( stablecache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "/LTISystem/select_searchAssetClass.action?includeHeader=false&assetType=1",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						stablecache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	
+			 		$("#stableasset_"+curindex).val(ui.item.name.replace(/&nbsp;/ig,""));
+			 		changeFundNum(0);			 				 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+      }
+      if(asset == "") return;
+      if(flag==1)
+      changeFundNum(0);
+    }
+    
+    function numFixed(curvalue){
+       var curNum = new Number();
+       curNum = parseFloat(curvalue);
+       curNum = parseInt(curNum*100+0.1);
+       curNum = curNum/100;
+       var numString = curNum.toString();
+       var stringItem = numString.split(".");
+       if(stringItem[1]==undefined){
+          var fixed = stringItem[0]+".00";
+          return fixed;
+       }else if(stringItem[1]!=undefined && stringItem[1].length<2){
+
+           if(stringItem[1].length==0){
+              stringItem[1]+="00";
+           }else if(stringItem[1].length==1){
+              stringItem[1]+="0";
+           }
+           var fixed = stringItem[0]+"."+stringItem[1];
+            return fixed;
+       }else if(stringItem[1]!=undefined && stringItem[1].length==2){
+
+          var fixed = stringItem[0]+"."+stringItem[1];
+           return fixed;
+          
+       }
+    }
+     
+    function resultNumFixed(curvalue){
+       var numString = curvalue.toString();
+       var stringItem = numString.split(".");
+       var pointString="";
+       if(stringItem[1].length>4){
+         for(var i=0;i<4;i++){
+            pointString+=stringItem[1].charAt(i);
+         }
+         var fixed = stringItem[0]+"."+pointString;
+         return fixed;
+       }
+       return numString;
+    }
+     
+    function changeRiskyPercent(index){
+       var curvalue = $("#riskypercent_"+index).val();
+       if(curvalue=="")
+           return;
+       var fixed = numFixed(curvalue);
+        $("#riskypercent_"+index).val(fixed);
+        
+       var size = $("#risky_asset tr").length;
+       var totalPercent =new Number(0);
+       for(var i=0;i<size;i++){
+          var perc = new Number();
+          perc = parseFloat($("#riskypercent_"+i).val());
+          if(perc !="" &&!isNaN(perc))
+             totalPercent+=perc;
+       }
+       
+       for(var j=0;j<riskyFundTrNum;j++){
+        var curfundpercent = $("#riskyFundPercent_"+j).val();
+        if(curfundpercent == undefined)
+           continue;
+        curfundpercent = parseFloat(curfundpercent);
+        if(isNaN(curfundpercent))curfundpercent = 0;
+        totalPercent +=curfundpercent;
+      }
+      
+       totalPercent = numFixed(totalPercent);
+       $("#totalrisky").val(totalPercent);
+
+       curTotalRiskyPercent = totalPercent;
+    }
+    
+    function changeStablePercent(index){
+    
+       var curvalue = $("#stablepercent_"+index).val();
+       if(curvalue=="")
+           return;
+       var fixed = numFixed(curvalue);
+        $("#stablepercent_"+index).val(fixed);
+       var size = $("#stable_asset tr").length;
+       var totalPercent =0;
+       for(var i=0;i<size;i++){
+          var perc = parseFloat($("#stablepercent_"+i).val());
+          if(perc !="" &&!isNaN(perc))
+             totalPercent+=perc;
+       }
+       
+       for(var j=0;j<stableFundTrNum;j++){
+        var curfundpercent = $("#stableFundPercent_"+j).val();
+        if(curfundpercent == undefined)
+           continue;
+        curfundpercent = parseFloat(curfundpercent);
+        if(isNaN(curfundpercent))curfundpercent = 0;
+        totalPercent +=curfundpercent;
+      }
+      
+       totalPercent = numFixed(totalPercent);
+       $("#totalstable").val(totalPercent);
+        totalPercent = parseFloat(totalPercent);
+       curTotalStablePercent = numFixed(totalPercent);
+    }
+    
+    function divideRisky(index,flag){
+       
+       if($("#riskypercent_"+index).val()=="")
+          return;
+       var curDividePercent = $("#riskypercent_"+index).val();              
+       var curTotalPercent = $("#totalrisky").val();
+       if(flag ==1){
+         deleteRisky(index,1);
+       }else if(flag==0){
+        deleteRisky(index,0);
+       }
+       
+       
+       curTotalRiskyPercent = numFixed(curTotalPercent);
+       var size = $("#risky_asset tr").length;
+       var fundTrSize = $("#tb_riskyFund tr").length;
+       var totalSize = size+fundTrSize;
+
+       curDividePercent = parseFloat(curDividePercent);
+       
+       var addPercent = numFixed(curDividePercent/totalSize);
+
+       addPercent = parseFloat(addPercent);
+
+       var totalChangePercent = 0;
+       
+       for(var j=0;j<riskyFundTrNum;j++){
+        var curfundpercent = $("#riskyFundPercent_"+j).val();
+        if(curfundpercent == undefined)
+           continue;
+        curfundpercent = parseFloat(curfundpercent);
+        if(isNaN(curfundpercent))curfundpercent = 0;
+        var changePercent = curfundpercent+addPercent;
+        totalChangePercent +=changePercent;
+        changePercent = numFixed(changePercent);
+        $("#riskyFundPercent_"+j).val(changePercent);
+      }
+      
+       for(var i=0;i<size-1;i++){
+            var curPercent = parseFloat($("#riskypercent_"+i).val());
+            if(isNaN(curPercent)){curPercent = 0;}
+            var changePercent = curPercent+addPercent;
+            totalChangePercent +=changePercent;
+            changePercent = numFixed(changePercent);
+            $("#riskypercent_"+i).val(changePercent);
+            
+       }
+       $("#totalrisky").val(curTotalPercent);
+       var lastNum = size-1;
+       curTotalPercent = parseFloat(curTotalPercent);
+
+       var lastCurPercent = curTotalPercent - totalChangePercent+0.001;
+       
+       lastCurPercent = numFixed(lastCurPercent);
+       $("#riskypercent_"+lastNum).val(lastCurPercent);
+
+       
+    }
+    
+    function divideStable(index,flag){
+       
+       if($("#stablepercent_"+index).val()=="")
+          return;
+       var curDividePercent = $("#stablepercent_"+index).val();              
+       var curTotalPercent = $("#totalstable").val();
+       if(flag==1){ 
+       		deleteStable(index,1);
+        }else if(flag==0){
+          deleteStable(index,0);
+        }
+       
+      
+       
+       curTotalStablePercent = numFixed(curTotalPercent);
+       
+       var size = $("#stable_asset tr").length;       
+       var fundTrSize = $("#tb_stableFund tr").length;
+       var totalSize = size+fundTrSize;
+
+       curDividePercent = parseFloat(curDividePercent);
+       
+       var addPercent = numFixed(curDividePercent/totalSize);
+
+       addPercent = parseFloat(addPercent);
+
+       var totalChangePercent = 0;
+       
+       for(var j=0;j<stableFundTrNum;j++){
+        var curfundpercent = $("#stableFundPercent_"+j).val();
+        if(curfundpercent == undefined)
+           continue;
+        curfundpercent = parseFloat(curfundpercent);
+        if(isNaN(curfundpercent))curfundpercent = 0;
+        var changePercent = curfundpercent+addPercent;
+        totalChangePercent +=changePercent;
+        changePercent = numFixed(changePercent);
+        $("#stableFundPercent_"+j).val(changePercent);
+      }
+      
+       for(var i=0;i<size-1;i++){
+            var curPercent = parseFloat($("#stablepercent_"+i).val());
+            if(isNaN(curPercent)){curPercent = 0;}
+            var changePercent = curPercent+addPercent;
+            totalChangePercent +=changePercent;
+            changePercent = numFixed(changePercent);
+            $("#stablepercent_"+i).val(changePercent);
+            
+       }
+       $("#totalstable").val(curTotalPercent);
+       var lastNum = size-1;
+       curTotalPercent = parseFloat(curTotalPercent);
+
+       var lastCurPercent = curTotalPercent - totalChangePercent+0.001;
+       
+       lastCurPercent = numFixed(lastCurPercent);
+       $("#stablepercent_"+lastNum).val(lastCurPercent);
+    }
+    
+    function changeTotalRiskyPercent(){
+         var totalRiskyPercent = $("#totalrisky").val();
+
+         totalRiskyPercent = numFixed(totalRiskyPercent);
+
+
+         $("#totalrisky").val(totalRiskyPercent);
+         if(totalRiskyPercent == curTotalRiskyPercent)
+            return;
+  
+          totalRiskyPercent = parseFloat(totalRiskyPercent);  
+         var curTRPercentNum = parseFloat(curTotalRiskyPercent);
+        var size = $("#risky_asset tr").length;
+        var totalChangePercent = 0;
+        
+      for(var j=0;j<riskyFundTrNum;j++){
+        var curfundpercent = $("#riskyFundPercent_"+j).val();
+        if(curfundpercent == undefined)
+           continue;
+        curfundpercent = parseFloat(curfundpercent);
+        if(isNaN(curfundpercent))curfundpercent = 0;
+        var changePercent = totalRiskyPercent/curTRPercentNum*curfundpercent;
+
+        changePercent = numFixed(changePercent);
+        $("#riskyFundPercent_"+j).val(changePercent);
+        changePercent = parseFloat(changePercent);
+        totalChangePercent +=changePercent;
+
+      }
+        
+        for(var i=0;i<size-1;i++){
+           var curPercent = $("#riskypercent_"+i).val();
+           curPercent = parseFloat(curPercent);
+           if(isNaN(curPercent)){curPercent = 0;}
+           var changePercent = totalRiskyPercent/curTRPercentNum*curPercent;
+           changePercent = numFixed(changePercent);
+
+           $("#riskypercent_"+i).val(changePercent);
+           
+           changePercent = parseFloat(changePercent);
+           totalChangePercent +=changePercent;
+        }
+        var lastChangePercent = totalRiskyPercent-totalChangePercent+0.001;
+        lastChangePercent = numFixed(lastChangePercent);
+        var lastNum = size-1;
+         $("#riskypercent_"+lastNum).val(lastChangePercent);
+         curTotalRiskyPercent = numFixed(totalRiskyPercent);
+    }
+    
+     function changeTotalStablePercent(){
+         var totalStablePercent = $("#totalstable").val();
+         totalStablePercent = numFixed(totalStablePercent);
+         $("#totalstable").val(totalStablePercent);
+
+         if(totalStablePercent == curTotalStablePercent)
+            return;
+           
+          totalStablePercent = parseFloat(totalStablePercent);  
+         var curSTPercentNum = parseFloat(curTotalStablePercent);
+        var size = $("#stable_asset tr").length;
+        var totalChangePercent = 0;
+        
+       for(var j=0;j<stableFundTrNum;j++){
+        var curfundpercent = $("#stableFundPercent_"+j).val();
+        if(curfundpercent == undefined)
+           continue;
+        curfundpercent = parseFloat(curfundpercent);
+        if(isNaN(curfundpercent))curfundpercent = 0;
+        var changePercent = totalStablePercent/curSTPercentNum*curfundpercent;
+
+        changePercent = numFixed(changePercent);
+        $("#stableFundPercent_"+j).val(changePercent);
+        changePercent = parseFloat(changePercent);
+        totalChangePercent +=changePercent;
+
+      }
+      
+        for(var i=0;i<size-1;i++){
+           var curPercent = $("#stablepercent_"+i).val();
+           curPercent = parseFloat(curPercent);
+           if(isNaN(curPercent)){curPercent = 0;}
+           var changePercent = totalStablePercent/curSTPercentNum*curPercent;
+
+           changePercent = numFixed(changePercent);
+          
+           $("#stablepercent_"+i).val(changePercent);
+           changePercent = parseFloat(changePercent);
+           totalChangePercent +=changePercent;
+        }
+        var lastChangePercent = totalStablePercent-totalChangePercent+0.001;
+        lastChangePercent = numFixed(lastChangePercent);
+        var lastNum = size-1;
+         $("#stablepercent_"+lastNum).val(lastChangePercent);
+         curTotalStablePercent = numFixed(totalStablePercent);
+    }
+      
+       
+    function addRiskyLine(){
+         var size = $("#tb_risky tr").length-1;
+         var $pane = $("#tb_risky");
+         var type="riskyasset";
+         var $tr,$td;
+         $tr = $(document.createElement("tr"));
+         $tr.attr({id:'riskyTr_'+size});
+         $pane.append($tr);
+         $td = $(document.createElement("td"));
+         $td.html("<input type='text' id='riskyasset_"+size+"' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' onclick='showAllRisky("+size+")' ondblclick='showRiskyTree("+size+")'>");
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $td.html("<input type='text' id='riskyfundnum_"+size+"' class='uitext readtext' readOnly='true'>");
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $td.html("<input type='text' id='riskypercent_"+size+"' class='uitext ui-widget ui-widget-content ui-corner-all' onblur='changeRiskyPercent("+size+")'>");
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $td.html("<input type='button' class='uiButton' id='rdelete_"+size+"' value='Delete' onclick='deleteRisky("+size+",1)'>");
+         $tr.append($td);
+         $("#rdelete_"+size).button();
+         $td = $(document.createElement("td"));         
+         $tr.append($td);
+         
+         $("#riskyasset_"+size).autocomplete({
+			minLength: 0,
+			source: function(request, response) {
+			    if(request.term == "")
+			        request.term = "riskyspace";
+				if ( request.term in riskycache) {
+					response( riskycache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "/LTISystem/select_searchAssetClass.action?includeHeader=false&assetType=0&portfolioID=${portfolioID?string.computer}",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						riskycache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	
+			 		$("#riskyasset_"+size).val(ui.item.name.replace(/&nbsp;/ig,""));
+			 		changeFundNum(0);		 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+         
+      }
+      
+      function addStableLine(){
+         var size = $("#tb_stable tr").length-1;
+         var $pane = $("#tb_stable");
+         var type="stableasset";
+         var $tr,$td;
+         $tr = $(document.createElement("tr"));
+         $tr.attr({id:'stableTr_'+size});
+         $pane.append($tr);
+         $td = $(document.createElement("td"));
+         $td.html("<input type='text' id='stableasset_"+size+"' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' onclick='showAllStable("+size+")' ondblclick='showStableTree("+size+")'>");
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $td.html("<input type='text' id='stablefundnum_"+size+"' class='uitext readtext' readOnly='true'>");
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $td.html("<input type='text' id='stablepercent_"+size+"' class='uitext ui-widget ui-widget-content ui-corner-all' onblur='changeStablePercent("+size+")'>");
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $tr.append($td);
+         $td = $(document.createElement("td"));
+         $td.html("<input type='button' class='uiButton' id='sdelete_"+size+"' value='Delete' onclick='deleteStable("+size+",1)'>");
+         $tr.append($td);
+         $("#sdelete_"+size).button();
+         $td = $(document.createElement("td"));         
+         $tr.append($td);
+         
+         $("#stableasset_"+size).autocomplete({
+			minLength: 0,
+			source: function(request, response) {
+				if(request.term == "")
+			        request.term = "stablespace";
+				if ( request.term in stablecache ) {
+					response( stablecache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "/LTISystem/select_searchAssetClass.action?includeHeader=false&assetType=1",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						stablecache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	
+			 		$("#stableasset_"+size).val(ui.item.name.replace(/&nbsp;/ig,""));
+			 		changeFundNum(0);			 				 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+      }
+      
+      
+      function showFundtable(type,index){
+                //alert("come in");
+                var assetClassName = $("#"+type+"_"+index).val();
+                var planName = $("#t_planname").val();
+       		    var divStr = "<table>";
+       		    var btype = "";
+       		    if(type=="riskyasset")
+       		       btype="risky";
+       		       else
+       		       btype="stable";
+       		   //var top=$("#"+btype+"Button_"+index).offset().top; 
+       		    //var left=$("#"+btype+"Button_"+index).offset().left;
+       		    var theEvent = window.event || arguments.callee.caller.arguments[0];
+       		    var top = theEvent.clientY;
+       		    if(top >265)
+       		       top = top -265;
+       		    else
+       		       top =0;
+       		    var left = theEvent.clientX;
+       		    //alert(top);
+       		   // alert(left);
+       		   // alert($("#"+btype+"Button_"+index).css("top"));
+       		   // alert($("#"+btype+"Button_"+index).css("left"));
+       			 $.ajax({
+           			 url: "/LTISystem/select_getFundtable.action?includeHeader=false&planName="+planName+"&assetClassName="+assetClassName,
+            		 type:"post",
+            	 success:function(message){              		 
+                $("#fundtable_dialog").html(message.trim());
+                $("#fundtable_dialog").dialog({
+                autoOpen: false,
+		        resizable: true,
+			 	height:250,
+			 	width: 400,
+			 	position:[left,top],
+			 	modal: false,
+			 	
+                });
+                
+                $("#fundtable_dialog").dialog("open");
+             }
+             
+        });
+     
+        
+                //var tipdiv= $("#delmar");				
+				//var top=$("#riskyButton_"+index).offset().top; 
+				//var left=$("#riskyButton_"+index).offset().left;
+				
+				//var html="<div id='qtip' class='qtip' style='display:none'>";
+				//html+="<div style='text-align:right'><a style='text-decoration: none' href='javascript:void(0)' onclick=\"$('#qtip').fadeOut();$('#qtip').remove();\">X</a></div>";
+				//html+=tipdiv.html();
+				//html+="<img class='qtipArrow' src='/LTISystem/jsp/template/gpl/vtip_arrow2.png'></div>";
+				//$('body').append( html );
+                 
+                //alert(top);
+				//alert(left); 
+               // alert($('#qtip').width());
+	            //alert($('#qtip').height());       
+				//$('#qtip').children(".qtipArrow").css("top", $('#qtip').height()+20+"px").css("left", $('#qtip').width()-5+"px");
+	           // $('#qtip').css("top", top-$('#qtip').height()-40+"px").css("left", left-$('#qtip').width()+"px").fadeIn("slow"); 
+
+	           // alert($("#qtip").css("top"));
+	           // alert($("#qtip").css("left"));
+	           
+	          // $('#qtip').children(".qtipArrow").css("top", "240px").css("left", "325px");
+	           //$('#qtip').css("top", "400px").css("left", "960px").fadeIn("slow"); 
+      }
+            
+            
+      //function assetClassChange(type,index){
+         //alert("come in");
+        // alert(type);
+        // alert($("#"+type+"_"+index).val());
+        // if($("#"+type+"_"+index).val()=="")
+        // return;
+         
+        // changeFundNum(0);         
+     // }
+      
+      function changeFundNum(index){
+        var assetClassName ="";
+         var rTrSize = $("#risky_asset tr").length;
+		 var sTrSize = $("#stable_asset tr").length;
+		 var num =0;
+		 for(var i=0;i<rTrSize;i++){
+		     if($("#riskyasset_"+i).val()=="")
+		       continue;
+		    if(num!=0)
+		      assetClassName+=",";
+		   assetClassName+=$("#riskyasset_"+i).val(); 
+		    num++;  
+		 }
+		 for(var j=0;j<sTrSize;j++){
+		 if($("#stableasset_"+j).val()=="")
+		       continue;
+		       if(num!=0)
+		         assetClassName+=",";
+		    assetClassName+=$("#stableasset_"+j).val(); 
+		    num++; 
+		 }
+		 $.ajax({
+		      type:"post",
+		      url:"/LTISystem/select_getAssetFundNum.action?includeHeader=false&assetClassName="+assetClassName,
+		      success:function(message){
+		         var numItem = message.trim().split(",");
+		         var riskynum=0;
+		         var stablenum=0;
+		         for(var i=0;i<rTrSize;i++){
+		            var type="riskyasset";
+		            if($("#riskyasset_"+i).val()=="")
+		       			continue;
+		       			
+		            $("#riskyfundnum_"+i).val(numItem[riskynum]);
+		            if(numItem[riskynum]!= "0"){
+		               var tdhtml = $("#riskyTr_"+i+" td:eq(2)").html().trim();
+		               var td4html = $("#riskyTr_"+i+" td:eq(4)").html().trim();
+		               var td6html = $("#riskyTr_"+i+" td:eq(6)").html().trim();
+		               if(tdhtml==""){
+		                   var ht = "<a id='riskyButton_"+i+"' title='Click here to view funds' href='javascript:void(0)' onclick='showFundtable(\""+type+"\","+i+")'><img alt='Click here to view funds' height=20px width=20px src='/LTISystem/jsp/template/ed/images/info.png'></a>";
+		                   $("#riskyTr_"+i+" td:eq(2)").html(ht);
+		               }
+		               if(td4html!=""){
+		                 $("#riskyTr_"+i+" td:eq(4)").html("");
+		               }
+		               if(td6html!=""){
+		               $("#riskyTr_"+i+" td:eq(6)").html("");
+		               }
+		               
+		            }else{
+		                var tdhtml = $("#riskyTr_"+i+" td:eq(4)").html().trim();		                
+		                var td2html = $("#riskyTr_"+i+" td:eq(2)").html().trim();
+		                var td6html = $("#riskyTr_"+i+" td:eq(6)").html().trim();
+		                if(tdhtml==""){
+		                  var ht = "<a title='No Funds in Plan' href='javascript:void(0)'><img alt='No Funds in Plan' height=20px width=20px src='/LTISystem/jsp/template/ed/images/gth.png'></a>";
+		                  $("#riskyTr_"+i+" td:eq(4)").html(ht);
+		                }
+		                
+		                if(td2html!=""){
+		                  $("#riskyTr_"+i+" td:eq(2)").html("");
+		                }
+		                if(td6html==""){
+		                 var td6 = "<input type='button' class='uiButton' id='rdivide_"+i+"' value='Scale to other' onclick='divideRisky("+i+",1)'>";
+		                 $("#riskyTr_"+i+" td:eq(6)").html(td6);
+		                 $("#rdivide_"+i).button();
+		                }
+		            }
+		            riskynum++;
+		         }
+		         
+		         for(j=0;j<sTrSize;j++){ 
+		            var type="stableasset";
+		            if($("#stableasset_"+j).val()=="")
+		       			continue;
+		       			
+		            $("#stablefundnum_"+j).val(numItem[stablenum+riskynum]);
+		            if(numItem[j+rTrSize]!= "0"){
+		               var tdhtml = $("#stableTr_"+j+" td:eq(2)").html().trim();
+		               var td4html = $("#stableTr_"+j+" td:eq(4)").html().trim();
+		               var td6html = $("#stableTr_"+j+" td:eq(6)").html().trim();
+		               if(tdhtml==""){
+		                   var ht = "<a id='stableButton_"+j+"' title='Click here to view funds' href='javascript:void(0)' onclick='showFundtable(\""+type+"\","+j+")'><img alt='Click here to view funds' height=20px width=20px src='/LTISystem/jsp/template/ed/images/info.png'></a>";
+		                   $("#stableTr_"+j+" td:eq(2)").html(ht);
+		               }
+		               if(td4html!=""){
+		                 $("#stableTr_"+j+" td:eq(4)").html("");
+		               }
+		               if(td6html!=""){
+		                  $("#stableTr_"+j+" td:eq(6)").html("");
+		               }
+		               
+		            }else{
+		                var tdhtml = $("#stableTr_"+j+" td:eq(4)").html().trim();
+		                var td2html = $("#stableTr_"+j+" td:eq(2)").html().trim();
+		                var td6html = $("#stableTr_"+j+" td:eq(6)").html().trim();
+		                if(tdhtml==""){
+		                  var ht = "<a title='No Funds in Plan' href='javascript:void(0)'><img alt='No Funds in Plan' height=20px width=20px src='/LTISystem/jsp/template/ed/images/gth.png'></a>";
+		                  $("#stableTr_"+j+" td:eq(4)").html(ht);
+		                }
+		                if(td2html!=""){
+		                   $("#stableTr_"+j+" td:eq(2)").html("");
+		                }
+		                
+		                if(td6html==""){
+		                  var td6 = "<input type='button' class='uiButton' id='sdivide_"+j+"' value='Scale to other' onclick='divideStable("+j+",1)'>";
+		                  $("#stableTr_"+j+" td:eq(6)").html(td6);
+		                  $("#sdivide_"+j).button();
+		                }
+		            }
+		            stablenum++;
+		         }
+		         
+		         if(index == 1){
+		          $("#changeplan_dialog").dialog("destroy");   
+		         }
+		      }
+		 });
+		 
+      }
+      
+      function changeDescription(){
+          var templateName = $("#myselect").val();
+          if(templateName == "")
+          return;
+          if(templateName == curTemplateName)
+             return;
+          curTemplateName = templateName;   
+          $.ajax({
+          type:"post",
+          url:"/LTISystem/select_getTemplateDesc.action?includeHeader=false&templateName="+templateName,
+          success:function(message){
+          $("#description").attr("title",message.trim());
+          $("#description").children("img").attr("alt",message.trim());
+          }
+          });
+          
+          applytemplate();
+          $("#tb_riskyFund").html("");
+          $("#tb_stableFund").html("");
+          riskyFundTrNum = 0;
+       	  stableFundTrNum = 0;
+            
+      }
+      
+      function applytemplate(){
+         var templateName = $("#myselect").val();
+         var fundName = "";
+          if(templateName == "")
+          return;
+          var count=0;
+          for(var i=0;i<riskyFundTrNum;i++){
+             var fund = $("#riskyfund_"+i).val();
+             if(fund==undefined)
+             continue
+             if(count!=0)
+              fundName+=",";
+             fundName+=fund;
+             count++;
+          }
+          
+          for(var j=0;j<stableFundTrNum;j++){
+             var fund = $("#stablefund_"+j).val();
+             if(fund==undefined)
+             continue
+             fundName+=",";
+             fundName+=fund;
+             count++;
+          }
+          
+          var rTrSize = $("#risky_asset tr").length;
+		  var sTrSize = $("#stable_asset tr").length;
+		  for(var i=0;i<rTrSize;i++){
+		    $("#riskyasset_"+i).autocomplete("destroy");
+		  }
+		  for(var j=0;j<sTrSize;j++){
+		  $("#stableasset_"+j).autocomplete("destroy");
+		  }
+          $.ajax({
+          type:"post",
+          url:"/LTISystem/select_getTemplateInfo.action?includeHeader=false&templateName="+templateName+"&fundName="+fundName,
+          success:function(message){
+            var table = message.trim().split("@");
+            var riskyItem = table[0].split("#");
+            var stableItem = table[1].split("#");
+            var riskyAssetItem = riskyItem[0].split(",");
+            var riskyFundNumItem = riskyItem[1].split(",");
+            var riskyPercentItem = riskyItem[2].split(",");
+            var stableAssetItem = stableItem[0].split(",");
+            var stableFundNumItem = stableItem[1].split(",");
+            var stablePercentItem = stableItem[2].split(",");
+            var riskyhtml = "";
+            var stablehtml = "";
+            for(var i=0;i<riskyAssetItem.length;i++){
+                var type="riskyasset";
+                riskyhtml+="<tr id='riskyTr_"+i+"'>";
+                riskyhtml+="<td><input type='text' id='riskyasset_"+i+"' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' onclick='showAllRisky("+i+")'  ondblclick='showRiskyTree("+i+")' value=\""+riskyAssetItem[i]+"\"></td>";
+                riskyhtml+="<td><input type='text' id='riskyfundnum_"+i+"' class='uitext readtext' readOnly='true' value="+riskyFundNumItem[i]+"></td>";
+                riskyhtml+="<td>";
+                if(riskyFundNumItem[i]!="0"){
+                   riskyhtml+="<a id='riskyButton_"+i+"' title='Click here to view funds' href='javascript:void(0)' onclick='showFundtable(\""+type+"\","+i+")'><img alt='Click here to view funds' height=20px width=20px src='/LTISystem/jsp/template/ed/images/info.png'></a>";                   
+                }
+                riskyhtml+="</td>";
+                riskyhtml+="<td><input type='text' id='riskypercent_"+i+"' class='uitext ui-widget ui-widget-content ui-corner-all' onblur='changeRiskyPercent("+i+")' value="+riskyPercentItem[i]+"></td>";
+                riskyhtml+="<td>";
+                if(riskyFundNumItem[i]=="0"){
+                     riskyhtml+="<a title='No Funds in Plan' href='javascript:void(0)'><img alt='No Funds in Plan' height=20px width=20px src='/LTISystem/jsp/template/ed/images/gth.png'></a>";
+                }
+                riskyhtml+="</td>";
+                riskyhtml+="<td><input type='button' class='uiButton' id='rdelete_"+i+"' value='Delete' onclick='deleteRisky("+i+",1)'></td>";
+                riskyhtml+="<td>";
+                if(riskyFundNumItem[i]=="0"){
+                  riskyhtml+="<input type='button' class='uiButton' id='rdivide_"+i+"' value='Scale to other' onclick='divideRisky("+i+",1)'>";
+                  
+                }
+                
+                riskyhtml+="</td>";
+                riskyhtml+="</tr>"
+            }
+            
+             for(var i=0;i<stableAssetItem.length;i++){
+                var type="stableasset";
+                stablehtml+="<tr id='stableTr_"+i+"'>";
+                stablehtml+="<td><input type='text' id='stableasset_"+i+"' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' onclick='showAllStable("+i+")'  ondblclick='showStableTree("+i+")' value=\""+stableAssetItem[i]+"\"></td>";
+                stablehtml+="<td><input type='text' id='stablefundnum_"+i+"' class='uitext readtext' readOnly='true' value="+stableFundNumItem[i]+"></td>";
+                stablehtml+="<td>";
+                if(stableFundNumItem[i]!="0"){
+                   stablehtml+="<a id='stableButton_"+i+"' title='Click here to view funds' href='javascript:void(0)' onclick='showFundtable(\""+type+"\","+i+")'><img alt='Click here to view funds' height=20px width=20px src='/LTISystem/jsp/template/ed/images/info.png'></a>";                   
+                }
+                stablehtml+="</td>";
+                stablehtml+="<td><input type='text' id='stablepercent_"+i+"' class='uitext ui-widget ui-widget-content ui-corner-all' onblur='changeStablePercent("+i+")' value="+stablePercentItem[i]+"></td>";
+                stablehtml+="<td>";
+                if(stableFundNumItem[i]=="0"){
+                     stablehtml+="<a title='No Funds in Plan' href='javascript:void(0)'><img alt='No Funds in Plan' height=20px width=20px src='/LTISystem/jsp/template/ed/images/gth.png'></a>";
+                }
+                stablehtml+="</td>";
+                stablehtml+="<td><input type='button' class='uiButton' id='sdelete_"+i+"' value='Delete' onclick='deleteStable("+i+",1)'></td>";
+                stablehtml+="<td>";
+                
+                if(stableFundNumItem[i]=="0"){
+                  stablehtml+="<input type='button' class='uiButton' id='sdivide_"+i+"' value='Scale to other' onclick='divideStable("+i+",1)'>";
+                }
+                stablehtml+="</td>";
+                stablehtml+="</tr>"
+            }
+            
+            $("#risky_asset").html(riskyhtml);
+            $("#stable_asset").html(stablehtml);
+            for(var j=0;j<riskyAssetItem.length;j++){
+              if(riskyFundNumItem[j]=="0"){
+                $("#rdelete_"+j).button();
+                $("#rdivide_"+j).button();
+              }else{
+              $("#rdelete_"+j).button();
+              }
+            }
+            
+            for(var j=0;j<stableAssetItem.length;j++){
+              if(stableFundNumItem[j]=="0"){
+                $("#sdelete_"+j).button();
+                $("#sdivide_"+j).button();
+              }else{
+              $("#sdelete_"+j).button();
+              }
+            }
+            
+            changeRiskyPercent(0);
+            changeStablePercent(0);
+            if(templateName == "Default Equal Weight"){
+            // alert("come in");
+                handleDefaultTemp();
+          }
+          
+          rTrSize = $("#risky_asset tr").length;
+		  sTrSize = $("#stable_asset tr").length;
+		for(var i=0;i<rTrSize;i++){
+	     $("#riskyasset_"+i).autocomplete({
+			minLength: 0,
+			source: function(request, response) {
+			    if(request.term == "")
+			        request.term = "riskyspace";
+				if ( request.term in riskycache) {
+					response( riskycache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "/LTISystem/select_searchAssetClass.action?includeHeader=false&assetType=0",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						riskycache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			        var assetid = $(this).attr("id")			 	
+			 		$("#"+assetid).val(ui.item.name.replace(/&nbsp;/ig,""));
+			 		changeFundNum(0);			 				 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+	}//end for
+	
+	for(var j=0;j<sTrSize;j++){
+		$("#stableasset_"+j).autocomplete({
+			minLength: 0,
+			source: function(request, response) {
+			    if(request.term == "")
+			        request.term = "stablespace";
+				if ( request.term in stablecache) {
+					response( stablecache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "/LTISystem/select_searchAssetClass.action?includeHeader=false&assetType=1",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						stablecache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 			 	
+			 		var assetid = $(this).attr("id")			 	
+			 		$("#"+assetid).val(ui.item.name.replace(/&nbsp;/ig,""));
+			 		changeFundNum(0);		 				 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+	}//end for
+          }//end success
+          });//end ajax
+      }
+      
+      function saveTemplate(flag){
+         var rTrSize = $("#risky_asset tr").length;
+		 var sTrSize = $("#stable_asset tr").length;
+		 var useDataObject = true;
+		 
+		  for(var n=0;n<rTrSize;n++){
+		  var curassetName = $("#riskyasset_"+n).val();
+		  
+		  
+		  if(defaultAssetClassName.indexOf(curassetName)==-1){
+		    useDataObject = false;
+		  }
+		  
+		  
+		   for(var i=0;i<rTrSize;i++){
+		   if( i==n){
+		       continue;	     
+		   }
+		   if($("#riskyasset_"+i).val()==curassetName){
+		     alert("Two assetClass are same, please remove one of them.");
+		     return;
+		   }
+		   
+		 }
+		 
+		 for(var j=0;j<sTrSize;j++){
+		   if($("#stableasset_"+j).val()==curassetName){
+		      alert("Two assetClass are same, please remove one of them.");
+		     return;
+		   }		   
+		 }
+	 }
+	 
+	 for(var m=0;m<sTrSize;m++){
+		 var curassetName = $("#stableasset_"+m).val();
+		 
+		 
+		 if(defaultAssetClassName.indexOf(curassetName)==-1){
+		    useDataObject = false;
+		  }
+		 
+		   for(var i=0;i<rTrSize;i++){		   
+		     if($("#riskyasset_"+i).val()==curassetName){
+		       alert("Two assetClass are same, please remove one of them.");
+		       return;
+		   }
+		   
+		 }
+		 
+		 for(var j=0;j<sTrSize;j++){
+		    if(j==m){
+		       continue;	     
+		       }
+		   if($("#stableasset_"+j).val()==curassetName){
+		      alert("Two assetClass are same, please remove one of them.");
+		     return;
+		   }		   
+		 }
+	 }
+		 var assetClassName ="";
+		 var assetClassWeight="";
+		 var totalPercent = 0;
+		 var count = 0;
+		 for(var i=0;i<rTrSize;i++){
+		   var rfundNum = $("#riskyfundnum_"+i).val();
+		   var rfundName = $("#riskyasset_"+i).val();
+		   if(rfundNum == "0" ||rfundNum ==""){		     
+		     alert("The AssetClass of "+rfundName+" is not available for this plan, please delete it.");
+		     return;
+		   }
+		   var rpercent = $("#riskypercent_"+i).val();
+		   if(rpercent==""){
+		      alert("The target allocation of "+rfundName+" has not been filled, please fill it.");
+		      return
+		   }else{
+		      var rpercentNum = parseFloat(rpercent);
+		      if(!isNaN(rpercentNum))
+		           totalPercent+=rpercentNum;
+		   }
+		   if(i!=0){
+		     assetClassName+=",";
+		     assetClassWeight+=",";	     
+		   }
+		    var rpointpercent = rpercent/100+0.00001;
+		    rpointpercent = resultNumFixed(rpointpercent);
+		    assetClassName+=rfundName; 
+		    assetClassWeight+=rpointpercent; 
+		    count++;
+		 }
+		 
+		 for(var j=0;j<sTrSize;j++){
+		   var sfundNum = $("#stablefundnum_"+j).val();
+		   var sfundName = $("#stableasset_"+j).val();
+		   if(sfundNum == "0" || sfundNum ==""){		     
+		     alert("The AssetClass of "+sfundName+" is not available for this plan, please delete it.");
+		     return;
+		   }
+		   var spercent = $("#stablepercent_"+j).val();
+		   if(spercent==""){
+		      alert("The target allocation of "+sfundName+" has not been filled, please fill it.");
+		      return
+		   }else{
+		      var spercentNum = parseFloat(spercent);
+		      if(!isNaN(spercentNum))
+		           totalPercent+=spercentNum;
+		   }
+		   
+		   var spointpercent = spercent/100+0.00001;
+		   spointpercent = resultNumFixed(spointpercent);
+		   if(count!=0){
+		    assetClassName+=",";
+		    assetClassWeight+=",";	
+		   }		  
+		   assetClassName+=sfundName;
+		   assetClassWeight+=spointpercent;
+		   count++;
+		 }
+		 
+		 for(var i=0;i<riskyFundTrNum;i++){
+             var fund = $("#riskyfund_"+i).val();
+             if(fund==undefined)
+             	continue
+             if(defaultAssetClassName.indexOf(fund)==-1){
+		     		useDataObject = false;
+		      }
+             var percent = $("#riskyFundPercent_"+i).val();
+             percent = parseFloat(percent);
+             if(isNaN(percent))percent=0;
+             totalPercent+=percent;
+             var percentpoint = percent/100+0.00001;
+             percentpoint = resultNumFixed(percentpoint);
+             if(count!=0){
+                assetClassName+=",";
+		   	    assetClassWeight+=",";	
+             }            
+		     assetClassName+=fund.toUpperCase();
+		     assetClassWeight+=percentpoint;
+		     count++;	
+          	}
+          
+         	for(var j=0;j<stableFundTrNum;j++){
+             	var fund = $("#stablefund_"+j).val();
+             	if(fund==undefined)
+             		continue
+             	if(defaultAssetClassName.indexOf(fund)==-1){
+		     		useDataObject = false;
+		     	 }
+             	var percent = $("#stableFundPercent_"+j).val();
+             	percent = parseFloat(percent);
+                if(isNaN(percent))percent=0;
+                totalPercent+=percent;
+            	var percentpoint = percent/100+0.00001;
+            	percentpoint = resultNumFixed(percentpoint);
+            	if(count!=0){
+            	   assetClassName+=",";
+		   	 	   assetClassWeight+=",";
+            	}             		
+		     	assetClassName+=fund.toUpperCase();
+		     	assetClassWeight+=percentpoint;	
+		     	count++;
+          	}
+          	
+          	if(defaultAssetClassName.length!=assetClassName.length){
+           				useDataObject = false;
+          	}
+		 
+		 if(totalPercent != 100){
+		   alert("The total target allocation is not 100%, please modify and save again.");
+		   return;
+		 }
+		 //save as template
+		 if(flag==1){
+		    $("#save_as_dialog").dialog({
+		     autoOpen: false,
+		     resizable: true,
+			 height:300,
+			 width: 500,
+			 modal: true,
+			 buttons:{
+			    Cancel: function() {
+					$(this).dialog('close');
+					},
+				Confirm: function(){
+				  	 var save_assetClassName="";
+					 var save_assetClassWeight="";
+					 var save_rTrSize = $("#risky_asset tr").length;
+		 			 var save_sTrSize = $("#stable_asset tr").length;
+		 			 for(var i=0;i<save_rTrSize;i++){
+		 			   var rfundName = $("#riskyasset_"+i).val();
+		 			   var rpercent = $("#riskypercent_"+i).val();
+		 			   if(i!=0){
+		     				save_assetClassName+=",";
+		     				save_assetClassWeight+=",";		     
+		   					}
+		    			save_assetClassName+=rfundName;
+		    			save_assetClassWeight+= rpercent;
+		 			 }
+		 			for(var j=0;j<save_sTrSize;j++){ 
+		 			  var sfundName = $("#stableasset_"+j).val();
+		 			  var spercent = $("#stablepercent_"+j).val();
+					   save_assetClassName+=",";
+					   save_assetClassWeight+=",";
+					   save_assetClassName+=sfundName;
+					   save_assetClassWeight+=spercent;
+		 			}
+		 			var save_templateName=$("#sava_as_templateName").val();
+		 			var save_description = $("#sava_as_description").val();
+		 			if(save_templateName==""||save_description==""){
+		 			   alert("Please fill the templateName or template Description.");
+		 			   return;
+		 			}
+		 			$(this).dialog('close');
+		 			$.ajax({
+		 			   type:"post",
+		 			   url:"/LTISystem/select_saveTemplate.action?includeHeader=false&templateName="+save_templateName+"&description="+save_description+"&assetClassName="+save_assetClassName+"&assetClassWeight="+save_assetClassWeight,
+		 			   success:function(message){
+		 			     alert(message);
+		 			   }
+		 			});
+				}
+			 }
+		    });
+		    $("#save_as_dialog").dialog("open");
+		     return;
+		 }
+	 //save as template
+		
+		if(useDataObject == false){
+		 $("#UseDataObject").val("false");
+		}
+		
+		$("#MainAssetClass").val(assetClassName);
+		$("#MainAssetClassWeight").val(assetClassWeight);
+		$("#BuyThreshold").val($("#t_BuyThreshold").val());
+		$("#SellThreshold").val($("#t_SellThreshold").val());
+		$("#SpecifyAssetFund").val("true");
+		$("#t_riskprofile").val($("#totalstable").val());
+		$("#t_riskprofile").attr("readOnly","true");
+		$("#t_riskprofile").addClass("greytext");
+		$.ajax({
+		    type:"post",
+		    url:"/LTISystem/select_getAllAssetFund.action?includeHeader=false&assetClassName="+assetClassName,
+		    success:function(message){
+		       message = message.trim();
+		       $("#AssetFundString").val(message);
+		       alert("Asset allocation has been specified.");
+		    }
+		});
+      }
+      
+      
+  function addSingleFund(){
+    var fundName = $("#single_ticker").val();
+    var percent = $("#single_percent").val();
+    if(fundName==""){
+      alert('The "ticker" is empty, please fill it');
+      return;
+    }
+    if(percent==""){
+     alert('The "Allocation Target" is empty, please fill it');
+     return;
+    }
+    percent = numFixed(percent);
+    $.ajax({
+        type:"post",
+        url:"/LTISystem/select_getFundType.action?includeHeader=false&fundName="+fundName,
+        success:function(message){
+         message = message.trim();
+         if(message=="not fund"){
+             alert("The ticker is not correct.")
+             return;
+    }else if(message == "Risky Asset"){
+            var $pane = $("#tb_riskyFund");
+            var $tr,$td;
+         	$tr = $(document.createElement("tr"));
+        	$tr.attr({id:'riskyFundTr_'+riskyFundTrNum});
+         	$pane.append($tr);
+         	$td = $(document.createElement("td"));
+         	$td.html("<input type='text' id='riskyfund_"+riskyFundTrNum+"' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' value="+fundName+">");
+         	$tr.append($td);
+         	$td = $(document.createElement("td"));
+         	$td.html("<input type='text'  class='uitext readtext' style='width:155px' readOnly='true' value='1'>");
+         	$tr.append($td);
+         	$td = $(document.createElement("td"));
+         	$td.html("<a  title='Click here to view funds' href='javascript:void(0)' onclick='showSingleFundtable(\"riskyfund\","+riskyFundTrNum+")'><img alt='Click here to view funds' height=20px width=20px src='/LTISystem/jsp/template/ed/images/info.png'></a>");
+         	$tr.append($td);
+        	$td = $(document.createElement("td"));
+         	$td.html("<input type='text' id='riskyFundPercent_"+riskyFundTrNum+"' style='width:157px' class='uitext ui-widget ui-widget-content ui-corner-all' value="+percent+"  onblur='changeRiskyFundPercent("+riskyFundTrNum+")'>");
+         	$tr.append($td);
+         	$td = $(document.createElement("td"));
+         	$tr.append($td);
+         	$td = $(document.createElement("td"));
+         	$td.html("<input type='button' class='uiButton' id='rdeleteFund_"+riskyFundTrNum+"' value='Delete' onclick='deleteRiskyFund("+riskyFundTrNum+")'>");
+         	$tr.append($td);
+         	$("#rdeleteFund_"+riskyFundTrNum).button();
+         	riskyFundTrNum++;
+         	var totalRiskyPercent = $("#totalrisky").val();
+         	totalRiskyPercent = parseFloat(totalRiskyPercent);
+         	percent = parseFloat(percent);
+         	totalRiskyPercent = totalRiskyPercent + percent;
+         	totalRiskyPercent = numFixed(totalRiskyPercent);
+         	$("#totalrisky").val(totalRiskyPercent);
+         	curTotalRiskyPercent = totalRiskyPercent;
+         }else if(message == "Stable Asset"){
+            var $pane = $("#tb_stableFund");
+            var $tr,$td;
+         	$tr = $(document.createElement("tr"));
+        	$tr.attr({id:'stableFundTr_'+stableFundTrNum});
+         	$pane.append($tr);
+         	$td = $(document.createElement("td"));
+         	$td.html("<input type='text' id='stablefund_"+stableFundTrNum+"' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' value="+fundName+">");
+         	$tr.append($td);
+         	$td = $(document.createElement("td"));
+         	$td.html("<input type='text'  class='uitext readtext' style='width:155px' readOnly='true' value='1'>");
+         	$tr.append($td);
+         	$td = $(document.createElement("td"));
+         	$td.html("<a  title='Click here to view funds' href='javascript:void(0)' onclick='showSingleFundtable(\"stablefund\","+stableFundTrNum+")'><img alt='Click here to view funds' height=20px width=20px src='/LTISystem/jsp/template/ed/images/info.png'></a>");
+         	$tr.append($td);
+        	$td = $(document.createElement("td"));
+         	$td.html("<input type='text' id='stableFundPercent_"+stableFundTrNum+"' style='width:157px' class='uitext ui-widget ui-widget-content ui-corner-all' value="+percent+"  onblur='changeStableFundPercent("+stableFundTrNum+")'>");
+         	$tr.append($td);
+         	$td = $(document.createElement("td"));
+         	$tr.append($td);
+         	$td = $(document.createElement("td"));
+         	$td.html("<input type='button' class='uiButton' id='sdeleteFund_"+stableFundTrNum+"' value='Delete' onclick='deleteStableFund("+stableFundTrNum+")'>");
+         	$tr.append($td);
+         	$("#sdeleteFund_"+stableFundTrNum).button();
+         	stableFundTrNum++;
+         	var totalStablePercent = $("#totalstable").val();
+         	totalStablePercent = parseFloat(totalStablePercent);
+         	percent = parseFloat(percent);
+         	totalStablePercent = totalStablePercent + percent;
+         	totalStablePercent = numFixed(totalStablePercent);
+         	$("#totalstable").val(totalStablePercent);
+         	curTotalStablePercent = totalStablePercent;
+         }
+          
+         changeFundNum(0);
+         
+         $("#single_fund").html("<tr> <td><input type='text' class='uitext ui-widget ui-widget-content ui-corner-all' id='single_ticker'></td><td><input type='text' class='uitext ui-widget ui-widget-content ui-corner-all' id='single_percent'></td><td><input type='button' class='uiButton' value='Add' id='btn_addfund' onclick='addSingleFund()'></td></tr>");
+         $("#btn_addfund").button();
+         $("#single_ticker").autocomplete({
+			minLength: 1,
+			source: function(request, response) {			    				
+				$.ajax({
+					url: "/LTISystem/select_searchFund.action?includeHeader=false",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 			 	
+			 					 	
+			 		$("#single_ticker").val(ui.item.name);
+			 				 				 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}
+			
+		};
+        }
+    });
+  }
+  
+  function deleteRiskyFund(index){
+    var percent = $("#riskyFundPercent_"+index).val();
+    var fund = $("#riskyfund_"+index).val();
+    percent = parseFloat(percent);
+    $.ajax({
+         type:"post",
+         url:"/LTISystem/select_deleteFund.action?includeHeader=false&fundName="+fund,
+         success:function(message){
+         	$("#riskyFundTr_"+index).remove();
+    		var totalRiskyPercent = $("#totalrisky").val();
+    		totalRiskyPercent = parseFloat(totalRiskyPercent);
+    		totalRiskyPercent = totalRiskyPercent -percent+0.001;
+    		totalRiskyPercent = numFixed(totalRiskyPercent);
+    		$("#totalrisky").val(totalRiskyPercent);
+    		curTotalRiskyPercent = totalRiskyPercent; 
+    		changeFundNum(0); 
+       }
+    });
+      
+  }
+  
+  function deleteStableFund(index){
+    var percent = $("#stableFundPercent_"+index).val();
+    var fund = $("#stablefund_"+index).val();
+    percent = parseFloat(percent);
+    $.ajax({
+    	 type:"post",
+         url:"/LTISystem/select_deleteFund.action?includeHeader=false&fundName="+fund,
+         success:function(message){
+         	$("#stableFundTr_"+index).remove();
+    		var totalStablePercent = $("#totalstable").val();
+    		totalStablePercent = parseFloat(totalStablePercent);
+    		totalStablePercent = totalStablePercent -percent+0.001;
+    		totalStablePercent = numFixed(totalStablePercent);
+    		$("#totalstable").val(totalStablePercent);
+    		curTotalStablePercent = totalStablePercent;  
+    		changeFundNum(0);
+         }
+    });
+      
+  }
+  
+  function changeRiskyFundPercent(index){
+       var percent = $("#riskyFundPercent_"+index).val();
+       if(percent=="")
+         return;
+       percent = parseFloat(percent);
+       if(isNaN(percent))
+         return;
+      var rTrSize = $("#risky_asset tr").length;
+      var totalRiskyPercent = 0;
+      for(var i=0;i<rTrSize;i++){
+         var curpercent = $("#riskypercent_"+i).val();
+         curpercent = parseFloat(curpercent);
+         if(isNaN(curpercent)){curpercent=0;}
+         totalRiskyPercent +=curpercent;
+      }
+      for(var j=0;j<riskyFundTrNum;j++){
+        var curfundpercent = $("#riskyFundPercent_"+j).val();
+        if(curfundpercent == undefined)
+           continue;
+        curfundpercent = parseFloat(curfundpercent);
+        if(isNaN(curfundpercent))curfundpercent = 0;
+        totalRiskyPercent +=curfundpercent;
+      }
+      totalRiskyPercent = numFixed(totalRiskyPercent);
+      $("#totalrisky").val(totalRiskyPercent);
+      curTotalRiskyPercent = totalRiskyPercent;
+  }
+  
+  
+  function changeStableFundPercent(index){
+       var percent = $("#stableFundPercent_"+index).val();
+       if(percent=="")
+         return;
+       percent = parseFloat(percent);
+       if(isNaN(percent))
+         return;
+      var sTrSize = $("#stable_asset tr").length;
+      var totalStablePercent = 0;
+      for(var i=0;i<sTrSize;i++){
+         var curpercent = $("#stablepercent_"+i).val();
+         curpercent = parseFloat(curpercent);
+         if(isNaN(curpercent)){curpercent=0;}
+         totalStablePercent +=curpercent;
+      }
+      for(var j=0;j<stableFundTrNum;j++){
+        var curfundpercent = $("#stableFundPercent_"+j).val();
+        if(curfundpercent == undefined)
+           continue;
+        curfundpercent = parseFloat(curfundpercent);
+        if(isNaN(curfundpercent))curfundpercent = 0;
+        totalStablePercent +=curfundpercent;
+      }
+      totalStablePercent = numFixed(totalStablePercent);
+      $("#totalstable").val(totalStablePercent);
+      curTotalStablePercent = totalStablePercent;
+  }
+  
+  function showSingleFundtable(type,index){
+      var fundName = $("#"+type+"_"+index).val();
+      var planName = $("#t_planname").val();
+      if(fundName=="") return;
+      var theEvent = window.event || arguments.callee.caller.arguments[0];
+       var top = theEvent.clientY;
+      if(top >265)
+      	top = top -265;
+      else
+       	 top =0;
+      var left = theEvent.clientX;
+      $.ajax({
+           type:"post",
+           url:"/LTISystem/select_getFundInfo.action?includeHeader=false&fundName="+fundName+"&planName="+planName,
+           success:function(message){
+            message = message.trim();
+            $("#fundtable_dialog").html(message);
+                $("#fundtable_dialog").dialog({
+                autoOpen: false,
+		        resizable: true,
+			 	height:250,
+			 	width: 400,
+			 	position:[left,top],
+			 	modal: false,
+			 	
+                });
+                
+                $("#fundtable_dialog").dialog("open");
+           }
+      });
+  }
+    </script>
+  
+     [#if strategyID?? && strategyID == 771]   
+     <br><br>
+     <input style="float:left" type="button" class="uiButton" id="btn_showasset" value="- Specify the Asset Allocation" onclick="showAsset()"><div style="color: red;font-weight: bold">Beta</div><br>
+     <div id="assetallocation" class="asset_box" >
+       <h2>Instruction</h2>
+       <p style="text-indent:2em;font-size:1.1em">In default, Strategic Asset Allocation(SAA) will equally invest in the available major asset classes in the plan. Alternatively, you can choose one of our pre-set Asset Allocation Templates from below or modify the target allocations in your favor, in which cases please be sure that you have clicked "Apply" before building the portfolio.<br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If some asset classes of the template are not available in your plan, you can either click "Scale to Others" to scale the percentage to the other assets or double-click the asset class column to choose another asset class from the pull-down menu.<br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the advance options, you can also set the transaction thresholds to avoid fragmental tradings.
+	</p>
+       <input type="button" class="uiButton" id="btn_fundtable" value="+ Investment Options" onclick="showAllFundtable()" >
+       <div id="allfundtable" style="display:none">
+       [#if fundtableMap??]
+         <table cellspacing=10px>
+           <thead>
+             <tr>
+               <th style="align:left">Asset Class</th>
+               <th style="align:left">Description(Ticker)</th>
+             </tr>
+           </thead>
+             <tbody>
+            [#list fundtableMap?keys as key]
+                <tr class="assetTitle">
+                <td>${key}</td>
+                <td></td>
+                </tr>
+                [#list fundtableMap[key] as var]
+                  [#if var_index%2==0]
+						<tr class='odd'>
+				  [/#if] 
+				  [#if var_index%2==1]
+						<tr class='even'>
+				  [/#if]
+                     <td>${var.assetClassName!""}</td>
+                     <td>${var.description!""}(${var.symbol!""})</td>
+                   </tr> 
+                [/#list]
+            [/#list]
+            </tbody>
+         </table>
+         
+       [/#if]
+       </div>
+       <br><br>
+       <h2>Asset Allocation Template:</h2>
+       [#if templateList??]
+        <table width="100%" class="ui-widget">         
+           <tr>              
+             <td width="500"><select class="mySelect" id="myselect" onchange="changeDescription()">
+                 [#list templateList as item]
+                  [#if item_index==0]
+                  <option selected="selected">${item.templateName}</option>
+                  [#else]
+                  <option>${item.templateName}</option>
+                  [/#if]
+                 [/#list]
+             </select></td>
+             <td width="20px"><a id="description" title="${defaultDescription}" href="javascript:void(0)" ><img alt="${defaultDescription}" height=20px width=20px src="/LTISystem/jsp/template/ed/images/info.png"></a></td>
+             <td></td>
+           </tr>
+
+        </table>
+       [/#if]
+       <br>
+       
+       <h2>Risk Assets:</h2>      
+          <table id="tb_risky">
+          <thead>
+            <tr>
+             <th width="300px">Asset Class</th>
+             <th width="155px"># of Available Funds</th>
+             <th width="20px"></th>
+             <th width="155px">Target Allocation(%)</th>
+             <th></th>
+             <th></th>
+             <th></th>
+            </tr>
+          </thead>
+          <tbody id="risky_asset">
+          [#if defaultRiskyAssetClassList??]
+             [#list defaultRiskyAssetClassList as assetItem]
+                <tr id="riskyTr_${assetItem_index}">
+                   <td><input type='text' id='riskyasset_${assetItem_index}' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' value='${assetItem}' onclick='showAllRisky(${assetItem_index})' ondblclick='showRiskyTree(${assetItem_index})'></td>
+                   <td><input type='text' id='riskyfundnum_${assetItem_index}' class='uitext readtext' readOnly='true'   value="${defaultRiskyFundNumList.get(assetItem_index)}"></td>
+                   <td>
+                    [#if defaultRiskyFundNumList.get(assetItem_index)!="0"]
+                      <a id="riskyButton_${assetItem_index}" title="Click here to view funds" href="javascript:void(0)" onclick="showFundtable('riskyasset',${assetItem_index})"><img alt="Click here to view funds" height=20px width=20px src="/LTISystem/jsp/template/ed/images/info.png"></a>
+                      
+                   [/#if]
+                   </td>
+                   <td><input type='text' id='riskypercent_${assetItem_index}' class='uitext ui-widget ui-widget-content ui-corner-all' value="${defaultRiskyPercentageList.get(assetItem_index)}" onblur="changeRiskyPercent(${assetItem_index})"></td>
+                   <td>
+                   [#if defaultRiskyFundNumList.get(assetItem_index)=="0"]
+                   <a title="No Funds in Plan" href="javascript:void(0)"><img alt="No Funds in Plan" height=20px width=20px src="/LTISystem/jsp/template/ed/images/gth.png"></a>
+                   [/#if]
+                   </td>
+                   <td><input type='button' class='uiButton' id='rdelete_${assetItem_index}' value='Delete' onclick='deleteRisky(${assetItem_index},1)'></td>
+                   <td>
+                   [#if defaultRiskyFundNumList.get(assetItem_index)=="0"]
+                   <input type='button' class='uiButton' id='rdivide_${assetItem_index}' value='Scale to other' onclick='divideRisky(${assetItem_index},1)'>
+                   [/#if]
+                   </td>
+                </tr>
+             [/#list]
+          [/#if]                     
+          </tbody>
+          </table>
+          
+          <table id='tb_riskyFund'>
+          </table>
+          
+          <table>          
+          <tr>
+            <td style="width:320px"><input type="button" class="uiButton" value="Add" onclick="addRiskyLine()"></td>
+            <td style="align:right;width:160px">Total Risky Percentage:</td>
+            <td style="width:155px"><input type="text" id="totalrisky" class='uitext ui-widget ui-widget-content ui-corner-all' value="${defaultTotalRiskyPercentage}" onblur="changeTotalRiskyPercent()"></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </table>
+          
+          <h2>Fixed Income Assets:</h2> 
+          <table id="tb_stable">
+          <thead>
+            <tr>
+             <th width="300px">Asset Class</th>
+             <th width="155px"># of Available Funds</th>
+             <th width="20px"></th>
+             <th width="155px">Target Allocation(%)</th>
+             <th></th>
+             <th></th>
+             <th></th>
+            </tr>
+          </thead>
+          <tbody id="stable_asset">
+            [#if defaultStableAssetClassList??]
+             [#list defaultStableAssetClassList as assetItem]
+                <tr id="stableTr_${assetItem_index}">
+                   <td><input type='text' id='stableasset_${assetItem_index}' class='uitext ui-widget ui-widget-content ui-corner-all' style='width:300px' value='${assetItem}' onclick='showAllStable(${assetItem_index})' ondblclick='showStableTree(${assetItem_index})'></td>
+                   <td><input type='text' id='stablefundnum_${assetItem_index}' class='uitext readtext'   readOnly='true' value="${defaultStableFundNumList.get(assetItem_index)}"></td>
+                   <td>
+                   [#if defaultStableFundNumList.get(assetItem_index)!="0"]
+                     <a id="stableButton_${assetItem_index}" title="Click here to view funds" href="javascript:void(0)" onclick="showFundtable('stableasset',${assetItem_index})"><img alt="Click here to view funds" height=20px width=20px src="/LTISystem/jsp/template/ed/images/info.png"></a>
+                    
+                   [/#if]
+                   </td>
+                   <td><input type='text' id='stablepercent_${assetItem_index}' class='uitext ui-widget ui-widget-content ui-corner-all' value="${defaultStablePercentageList.get(assetItem_index)}" onblur="changeStablePercent(${assetItem_index})"></td>
+                   <td>
+                   [#if defaultStableFundNumList.get(assetItem_index)=="0"]
+                    <a title="No Funds in Plan" href="javascript:void(0)"><img alt="No Funds in Plan" height=20px width=20px src="/LTISystem/jsp/template/ed/images/gth.png"></a>
+                   [/#if]
+                   </td>
+                   <td><input type='button' class='uiButton' id='sdelete_${assetItem_index}' value='Delete' onclick='deleteStable(${assetItem_index},1)'></td>
+                    <td>
+                   [#if defaultStableFundNumList.get(assetItem_index)=="0"]
+                    <input type='button' class='uiButton' id='sdivide_${assetItem_index}' value='Scale to other' onclick='divideStable(${assetItem_index},1)'>
+                   [/#if]
+                   </td>
+                </tr>
+             [/#list]
+          [/#if] 
+          </tbody>
+          </table>
+          
+          <table id='tb_stableFund'>
+          </table>
+          
+          <table>
+          <tr>
+            <td style="width:180px"><input type="button" class="uiButton" value="Add" onclick="addStableLine()"></td>
+            <td style="text-align:right;width:300px">Total Fixed Income Percentage(Risk Profile<a id="helpriskprofile" href="javascript:void(0)" title="Click here for more Risk Profile explanation"><img height="20px" width="20px" src="/LTISystem/jsp/template/ed/images/newhelp.png" alt="Click here for more Risk Profile explanation"></a>):</td>
+            <td style="width:155px"><input type="text" id="totalstable" class='uitext ui-widget ui-widget-content ui-corner-all' value="${defaultTotalStablePercentage}" onblur="changeTotalStablePercent()"></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </table>
+          <br>
+          <input type="button" id="btn_singleFund" class="uiButton" value="+ Add Single Fund" onclick="showSingleFund()">
+          <div id="singleFund" style="display:none">
+             <table>
+               <thead>
+                 <tr>
+                   <th>Ticker</th>
+                   <th>Target Allocation(%)</th>
+                 </tr>
+               </thead>
+             	<tbody id="single_fund">
+                  <tr>
+                  <td><input type='text' class='uitext ui-widget ui-widget-content ui-corner-all' id='single_ticker'></td>
+                  <td><input type='text' class='uitext ui-widget ui-widget-content ui-corner-all' id='single_percent'></td>
+                  <td><input type='button' id='btn_addfund' class='uiButton' value='Add' onclick='addSingleFund()'></td>
+                  </tr>
+             	</tbody>
+             </table>
+          </div>
+          <br><br>
+          <input type="button" id="btn_advance" class="uiButton" value="+ Advance Option" onclick="showAdvance()"><br>
+          <div id="advance" style="display:none">
+          <br>
+            BuyThreshold(%) <input type="text" id="t_BuyThreshold" class='uitext ui-widget ui-widget-content ui-corner-all' value="1.0">
+            SellThreshold(%) <input type="text" id="t_SellThreshold" class='uitext ui-widget ui-widget-content ui-corner-all' value="1.0">
+          </div>
+          <br>
+          <input type="button" class="uiButton" value="Apply" onclick="saveTemplate(0)">
+          [@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+         <input type="button" class="uiButton" value="Save as" onclick="saveTemplate(1)">
+         [/@authz.authorize]
+     </div>
+     
+     
+     <div id="dialog" height="250px" style="display:none">
+	  <div id="fundtable_dialog" title="Funds" align='left' style="text-align: left">
+	  </div>
+	 </div>
+	 
+	 <div id="plan_dialog" height="250px" style="display:none">
+	  <div id="changeplan_dialog" title="Info" align='left' style="text-align: left">
+	    You have change the plan, please wait for the infomation update!
+	  </div>
+	 </div>
+	 
+	 <div id="save_as_template" height="250px" style="display:none">
+	   <div id="save_as_dialog" title="Template" style="text-align: left">
+	      <table>
+	        <tr>
+	           <td>
+	            Template Name:
+	           </td>
+	           <td width="350px">
+	            <input type="text" id="sava_as_templateName" style="width:350px" class='uitext ui-widget ui-widget-content ui-corner-all'> 
+	           </td>
+	        </tr>
+	        <tr>
+	           <td>
+	            Description:
+	           </td>
+	           <td width="400px">
+	            <textarea wrap="virtual" rows='5' cols='45' class='ui-widget ui-widget-content ui-corner-all' id='sava_as_description'></textarea>
+	           </td>
+	        </tr>
+	      </table>
+	   </div>
+	 </div>
+	 
+	 <div id="helpwindow" style="display:none">
+				<p>All assets are classified to two classes: risky assets and fixed income (stable) assets.</p>
+				<p>Risky assets include the following assets:
+							<ul>
+							 <li><strong>Equities (stocks): </strong>US, international and emerging market stocks,</li>
+							 <li><strong>REITs: </strong>US and international Real Estate Investment Trusts,</li>
+							 <li><strong>Commodities: </strong>Industrial Metals, Gold, Oil, Agricultural, .. etc.,</li>
+							 <li><strong>High Yield (Junk) Bonds: </strong>Low grade corporate bonds </li>
+							</ul>
+							<p><br>Fixed income assets include</p>
+							<ul>
+							<li><strong>Government bonds: </strong>short, intermediate and long term treasury bonds and GNMA,</li>
+							<li><strong>Investment Grade bonds: </strong>short, intermediate and long term investment corporate bonds,</li>
+							<li><strong>International bonds: </strong>Sovereign and corporate investment grade bonds,</li>
+							<li><strong>Cash: </strong>Money markets</li>
+							</ul>
+							</p>
+							<p><br>The Risk Profile number represents the target percentage allocation of fixed income in your portfolio. For example, the default risk profile number is 18. That means 18% should be allocated to fixed income and 82% should be allocated to risky assets</p>
+							<p>Your Risk Profile is determined based on your expected years to retirement and risk tolerance. The risk tolerance could be one of the following:
+							<ul>
+							<li><strong>Very Conservative</strong></li>
+							<li><strong>Conservative</strong></li>
+							<li><strong>Moderatge</strong></li>
+							<li><strong>Aggressive</strong></li>
+							<li><strong>Very Aggressive</strong></li>
+							</ul>
+							<p><br>The more aggressive you are, the more will be allocated to risky assets. The longer you expect to retire, the more will be allocated to risky assets too.</p>
+							<p>Your risk profile number will be adjusted every year.</p>
+							<p>You could always overwrite the risk profile number when customizing a model portfolio.</p>
+							<p>The following chart illustrates the meaning of the risk profile number:
+											<br/><br/>
+											<img border=0 src='jsp/profile/images/barchart.png'>
+											<br/>
+							</p>
+							<p>For more information on how to determine proper asset allocation, consult your financial adviser or use popular retirement planning tools provided by Fidelity, Vanguard or T.Rowe Price. Or you could find out more asset allocation information on target date funds such as <a target="_blank" href="http://personal.fidelity.com/products/funds/content/DesignYourPortfolio/freedomfunds.shtml.cvsr">Fidelity Freedom Target Date Funds</a>. 
+							</p> 
+							
+							<br/>
+							<br/>
+					</p>
+			</div>
+  [/#if]
+[/@authz.authorize]
+</body>
+</html>

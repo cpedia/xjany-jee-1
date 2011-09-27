@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+
+<!-- Portfolio Main Page Configuration -->
+	<bean name="/jsp/portfolio/Main" class="com.lti.action.portfolio.MainAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/portfolio/PortfolioTable" class="com.lti.action.portfolio.PortfolioTableAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+
+
+<!-- Portfolio Dispatch Configuration -->
+	<bean name="/jsp/portfolio/Edit" class="com.lti.action.portfolio.EditAction" singleton="false">
+        <property name="portfolioManager">
+           <ref bean="portfolioManager" />    
+        </property>
+        <property name="strategyManager">
+           <ref bean="strategyManager" />
+        </property>           
+		<property name="securityManager">
+           <ref bean="securityManager" />
+        </property>
+        <property name="userManager">
+           <ref bean="userManager" />
+        </property>	
+        <property name="assetClassManager">
+           <ref bean="assetClassManager" />
+        </property>	
+        <property name="groupManager">
+           <ref bean="groupManager" />
+        </property>	
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+		<property name="portfolioHoldingManager">
+           <ref bean="portfolioHoldingManager" />    
+        </property>
+	</bean>	
+
+<!-- Portfolio Save Function Configuration -->	
+	<bean name="/jsp/portfolio/Save" class="com.lti.action.portfolio.SaveAction" singleton="false">
+        <property name="portfolioManager">
+           <ref bean="portfolioManager" />    
+        </property>
+        <property name="strategyManager">
+           <ref bean="strategyManager" />
+        </property>           
+		<property name="securityManager">
+           <ref bean="securityManager" />
+        </property>
+        <property name="userManager">
+           <ref bean="userManager" />
+        </property>
+        <property name="assetClassManager">
+           <ref bean="assetClassManager" />
+        </property>	
+        <property name="groupManager">
+           <ref bean="groupManager" />
+        </property>	
+		
+	</bean>	
+
+<!-- Portfolio Daily Data Main Page Configuration -->		
+	<bean name="/jsp/portfolio/dailydata/Main" class="com.lti.action.portfolio.dailydata.MainAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="groupManager">
+           <ref bean="groupManager" />
+        </property>	
+        <property name="userManager">
+           <ref bean="userManager" />
+        </property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+	</bean>	
+
+<!-- Portfolio Transaction Main Page Configuration -->
+	<bean name="/jsp/portfolio/transaction/Main" class="com.lti.action.portfolio.transaction.MainAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+        <property name="strategyManager">
+           <ref bean="strategyManager" />
+        </property>           
+		<property name="securityManager">
+           <ref bean="securityManager" />
+        </property>		
+        <property name="groupManager">
+           <ref bean="groupManager" />
+        </property>	
+        <property name="userManager">
+           <ref bean="userManager" />
+        </property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+	</bean>
+
+<!-- Portfolio Log Main Page Configuration -->
+	<bean name="/jsp/portfolio/log/Main" class="com.lti.action.portfolio.log.MainAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>		
+		<property name="groupManager">
+           <ref bean="groupManager" />
+        </property>	
+        <property name="userManager">
+           <ref bean="userManager" />
+        </property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+	</bean>		
+	
+	<bean name="/jsp/portfolio/log/TailLogs" class="com.lti.action.portfolio.log.TailLogsAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>					
+<!-- Portfolio MPT Main Page Configuration -->
+	<bean name="/jsp/portfolio/mpt/Main" class="com.lti.action.portfolio.mpt.MainAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+        <property name="userManager">
+           <ref bean="userManager" />
+        </property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+		<property name="strategyManager">
+           <ref bean="strategyManager" />
+        </property> 
+	</bean>	
+	
+	<bean name="/jsp/portfolio/mpt/TaxMPT" class="com.lti.action.portfolio.mpt.TaxMPTAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>	
+	
+	
+	
+	<bean name="/jsp/portfolio/mpt/ComparePortfolioMPT" class="com.lti.action.portfolio.mpt.ComparePortfolioMPTAction" singleton="false">
+	</bean>	
+	
+<!-- Portfolio Screening Main Page Configuration -->
+	<bean name="/jsp/portfolio/screening/Main" class="com.lti.action.portfolio.screening.ScreeningAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+        <property name="strategyManager">
+           <ref bean="strategyManager" />
+        </property> 
+		<property name="strategyClassManager">
+			<ref bean="strategyClassManager"/>
+		</property>		
+		<property name="userManager">
+           <ref bean="userManager" />
+        </property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+	</bean>		
+<!-- Portfolio State Save Configuration -->		
+	<bean name="/jsp/portfolio/state/Save" class="com.lti.action.portfolio.state.SaveAction" singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		
+	</bean>
+
+<!-- AJAX for Security Suggestion -->	
+	<bean name="/jsp/portfolio/ajax/SecuritySuggest" class="com.lti.action.portfolio.ajax.SecuritySuggestAction" singleton="false">
+         <property name="securityManager">
+           <ref bean="securityManager" />    
+        </property>
+    </bean>
+    
+<!-- AJAX for Strategy Suggestion -->
+    <bean name="/jsp/portfolio/ajax/StrategySuggest" class="com.lti.action.portfolio.ajax.StrategySuggestAction" singleton="false">
+         <property name="strategyManager">
+           <ref bean="strategyManager" />    
+        </property>
+         <property name="strategyClassManager">
+           <ref bean="strategyClassManager" />    
+        </property>		
+    </bean>
+
+<!-- AJAX for Strategy Parameter -->
+	<bean name="/jsp/portfolio/ajax/StrategyParameter" class="com.lti.action.portfolio.ajax.StrategyParameterAction" singleton="false">
+         <property name="strategyManager">
+           <ref bean="strategyManager" />    
+        </property>
+    </bean>					
+
+
+
+</beans>
+

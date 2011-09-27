@@ -1,0 +1,410 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+	<head>
+	<title>User Profile Page</title>
+	<script src="/LTISystem/jsp/template/ed/js/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+	<link href="/LTISystem/jsp/template/ed/css/jquery_UI/moss/jquery-ui-1.8.custom.css" rel="stylesheet" type="text/css" />
+	<script src="/LTISystem/jsp/template/ed/js/jquery_UI/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+	<SCRIPT src="../images/common.js" type=text/javascript></SCRIPT>
+	<link href="../images/style.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+	ul{
+ 		margin:0;
+ 		padding:0;
+ 		list-style-type:none;
+	 	height:24px;
+	}
+	ul li{
+ 		float:left;
+ 		display:inline;
+	}
+	ul a{
+ 		text-decoration: none;
+ 		border-top:1px solid #ddd;
+ 		border-bottom:1px solid #ccc;  
+ 		border-left:1px solid #ddd;
+ 		border-right:1px solid #ddd;
+ 		display: block;
+ 		padding: 5px 0 3px;
+ 		margin-left:-1px;
+ 		width:150px;
+ 		font-weight: bold;
+ 		text-align:center;
+ 		line-height:15px;
+ 		color: #11449E;
+	}
+	a.on,a.on:hover{ 
+ 		padding-top: 6px;
+ 		padding-bottom:3px;
+ 		width:150px;
+ 		border: 1px solid #ccc;
+ 		border-bottom: 0;
+ 		background:#DEEBFF;
+	}
+	</style>
+	<script type="text/javascript">
+	var xmlHttp=null;
+	var gDIVId="";
+	
+	function setInnerHTML(el, htmlCode) {   
+ 		var ua = navigator.userAgent.toLowerCase();   
+ 		if (ua.indexOf('msie') >= 0 && ua.indexOf('opera') < 0) {  
+ 			htmlCode = '<div style="display:none">for IE</div>' + htmlCode;   
+ 			htmlCode = htmlCode.replace(/<script([^>]*)>/gi,'<script$1 defer="true">');   
+ 			el.innerHTML = htmlCode;   
+ 			el.removeChild(el.firstChild);   
+ 		}   
+ 		else {   
+ 			var el_next = el.nextSibling;   
+ 			var el_parent = el.parentNode;   
+ 			el_parent.removeChild(el);   
+ 			el.innerHTML = htmlCode;   
+ 			if (el_next) {   
+ 				el_parent.insertBefore(el, el_next)   
+ 			} 
+ 			else {   
+ 				el_parent.appendChild(el);   
+ 			}   
+ 		}   
+	}  
+	
+	function createXmlHttpRequest(){
+		if(window.ActiveXObject){
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		else if(window.XMLHttpRequest){
+			xmlHttp = new XMLHttpRequest();
+		}
+	}
+	$(function(){
+		$("#trans").dialog({"autoOpen":false,"modal":true,"width":800,"height":500});
+		$(".uiButton").button();
+	});
+	function showTransaction(DivId,userID){
+		var url1="UserProfile.action?action=transaction&userID="+userID;
+				$.ajax({
+					url:url1,
+					dataType:"html",
+					success:function(r){
+						$("#trans_inner").html(r);
+						$("#trans").dialog({"title":"History of "+userID});
+						$("#trans").dialog("open");
+					}
+				});	
+		
+		
+	}	
+	function startRequest(DivId){		
+		var url="UserProfile.action?action=";
+		if(DivId=="intimelist") url=url+"validtime";
+		if(DivId=="outtimelist") url=url+"expired";
+		if(DivId=="statuslist") url=url+"status";
+		//if(DivId=="viewitem") url=url+"viewitem";
+		createXmlHttpRequest();
+		gDIVId=DivId;
+		xmlHttp.onreadystatechange = handleStateChange;
+		//xmlHttp.setRequestHeder("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+		xmlHttp.open("GET",url,true);
+		xmlHttp.send(null);
+	}
+	function handleStateChange(){
+		if(xmlHttp.readyState == 4){
+			if(xmlHttp.status == 200){
+				document.getElementById(gDIVId).innerHTML = xmlHttp.responseText;
+				setInnerHTML(document.getElementById(gDIVId), xmlHttp.responseText);
+			}
+		}
+	}
+	function findContentDIV(obj){
+        TagDiv=obj.childNodes;
+        var arrDiv = new Array;
+        for(i=0;i<TagDiv.length;i++){
+            var objDiv = TagDiv[i];
+            var re = /div/i;
+            var arr = re.exec(objDiv.tagName);
+            if(arr != null){
+                if(arr.index == 0){
+                  	arrDiv.push(objDiv);
+                }
+           	}    
+        }
+        return arrDiv;
+	}	
+	function chShift(tabs,DivID){
+        var div=document.getElementById(tabs);    
+        var ul=document.getElementById("ules");  
+        var tA=ul.getElementsByTagName("a");
+        var tDIV=findContentDIV(div);
+        for(i=0;i<tA.length;i++){ 
+            tA[i].className= null;   
+            tDIV[i].style.display="none";
+            if(DivID==tDIV[i].getAttribute("id")){
+               tA[i].className="on";
+               tDIV[i].style.display="block";
+               if(DivID!="profilelist"){
+            		startRequest(DivID);
+            	}
+            }
+            
+        }
+	}
+	function chooseStatus(){
+		var select = document.getElementById("chs");
+		var type = select.options[select.selectedIndex].value;
+		//alert(select.selectedIndex);
+ 		var table = document.getElementById("pro_list");
+ 		var ua = navigator.userAgent.toLowerCase();
+ 		if (ua.indexOf('msie') >= 0 && ua.indexOf('opera') < 0){
+ 			if(type=="null"){
+ 				for(var i = 1 ;i < table.rows.length; i++){
+ 					if(table.rows[i].style.display =="none"){
+ 						table.rows[i].style.display="inline";
+ 					}
+ 				}
+ 			}else{
+ 				for(var i = 1 ;i < table.rows.length; i++){
+					if($(table.rows[i].cells[5]).children().val()==type){
+ 						table.rows[i].style.display="inline";			
+ 					}
+ 					else{
+ 						table.rows[i].style.display = "none";
+ 					}	
+ 				}
+ 			}
+ 		}
+ 		else{
+ 			if(type=="null"){
+ 				for(var i = 1 ;i < table.rows.length; i++){
+ 					if(table.rows[i].style.display =="none"){
+ 						table.rows[i].style.display="";
+ 						table.rows[i].style.display = "table-row";
+ 					}
+ 				}
+ 			}else{
+ 				for(var i = 1 ;i < table.rows.length; i++){
+					if($(table.rows[i].cells[5]).children().val()==type){
+ 						table.rows[i].style.display="";
+ 						table.rows[i].style.display = "table-row";			
+ 					}
+ 					else{
+ 						table.rows[i].style.display = "none";
+ 					}	
+ 				}
+ 			}
+ 		}		
+ 	}
+ 	function namesearch(tuser,user){
+		var username  = tuser.value;
+		var userinput = document.getElementById("user_name");
+		var name = userinput.getAttribute("value");
+		var table = document.getElementById("pro_list");
+		var nameReg = new RegExp(username,"gi");
+		var ua = navigator.userAgent.toLowerCase();
+		if (ua.indexOf('msie') >= 0 && ua.indexOf('opera') < 0){
+			for(var i=1;i<table.rows.length;i++){
+				if(nameReg.test(table.rows[i].cells[1].innerHTML)){			
+					table.rows[i].style.display="inline";
+				} 
+				else{
+					table.rows[i].style.display = "none";
+				}
+			}
+		}
+		else{
+			for(var i=1;i<table.rows.length;i++){
+				if(nameReg.test(table.rows[i].cells[1].innerHTML)){			
+					table.rows[i].style.display="";
+ 					table.rows[i].style.display = "table-row";
+				} 
+				else{
+					table.rows[i].style.display = "none";
+				}
+			}
+		}	
+	}
+	function changeItem(ptr,userID){	
+		
+		
+		var url = "UserProfile.action?action=chaItem&userID="+userID;
+		if(ptr!=null){
+			var itemName = $(ptr).parent().prev().children().val();
+			var status = $(ptr).parent().prev().prev().children().val();
+			var endDate = $(ptr).parent().prev().prev().prev().children().val();
+			var startDate = $(ptr).parent().prev().prev().prev().prev().children().val();
+			url+="&itemName="+itemName;
+			url+="&status="+status;	
+			url+="&startDate="+startDate;	
+			url+="&endDate="+endDate;		
+		}
+		$.ajax({
+			url:url,
+			dataType:"html",
+			success:function(e){
+				if($.trim(e)=="ok")window.location.reload();
+			}
+		});
+		/*if(itemName=='null') return;	
+		var url = "UserProfile.action?action=chaItem&userID="+userID;	
+		url = url+"&itemName="+itemName;
+		if(confirm("Are you sure to change this user's Item ?" )){
+			location.href=url;
+		}else{
+			return;
+		}*/		
+	}
+	</script>
+	</head>
+	<body>
+	<table class="nav" width="100%">
+			<td width="20%">
+				[@s.url action="Main.action" id="url_main" namespace="/jsp/admin/user"]
+				[/@s.url]
+				[@s.a href="%{url_main}"]User Manager[/@s.a]			
+			</td>		
+			<td width="20%">
+				[@s.url action="Save.action" id="url_create" namespace="/jsp/admin/user"  includeParams="none"]
+					[@s.param name="action"]create[/@s.param]
+				[/@s.url]
+				[@s.a href="%{url_create}"]Create A New User[/@s.a]			
+			</td>
+			<td width="20%">
+				[@s.url action="UserEmail_reportStatistics.action" id="url_reportStatistics" namespace="/jsp/admin/user"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_reportStatistics}"]EmailNotification Report[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="UserProfile.action" id="url_userprofile" namespace="/jsp/admin/user"  includeParams="none"]
+				[/@s.url]
+				[@s.a href="%{url_userprofile}"]User Profile[/@s.a]	
+			</td>
+			<td width="20%">
+				[@s.url action="UserProfile.action" id="url_userprofile" namespace="/jsp/admin/user"  includeParams="none"]
+					[@s.param name="action"]payitem[/@s.param]
+				[/@s.url]
+				[@s.a href="%{url_userprofile}"]User PayItem[/@s.a]	
+			
+			</td>
+		</table>	
+		<p class="title">User Profile Configuration</p>
+		<div id="tabs">
+			<ul id="ules">
+            	<li onclick="javascript:chShift('tabs','profilelist')"><a  class="on">User Profile List</a></li>
+            	<li onclick="javascript:chShift('tabs','intimelist')"><a>Valid User List</a></li>
+            	<li onclick="javascript:chShift('tabs','outtimelist')"><a>Expired User List</a></li>
+       	 	</ul>
+    
+		<div id="profilelist" stlye="margin:0;padding:0;">
+		<table align="left"width="100%">
+		<tr><td>
+		<fieldset>
+			<legend>Criteria Area</legend>
+				<table id="criteria_rows" align="left" width="40%"align="middle" border="0" style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid">
+	  				<tr>
+					<th><b>Criteria</b></th>
+					<th><b>Choose or Input</b></th>
+	  				</tr>
+	 				 <tr>
+	  				<td align="center">User Status</td>
+	  				<td align="center">
+	  				<select id="chs" name="status" onchange="chooseStatus('chs')">
+	  					<option value="null">Please Choose Status</option>
+				 		<option value="inactive">inactive</option>
+				 		<option value="normal">normal</option>
+				 		<option value="waiting">waiting</option>
+				 		<option value="expired">expired</option>
+				 		<option value="locked">locked</option>
+				 	</select>
+	  				</td>
+	  				</tr>
+	  				<tr>
+	  				<td align="center">Name Search</td>
+	  				<td align="center"><input id='user_name' type="text" onkeyup="javascript:namesearch(this,'user_name')"></td>
+	  				</tr>
+	  			</table>
+	  	</fieldset>
+	  	</td></tr>
+	  	<tr><td>
+	  	
+	  	[#assign sts=["inactive","expired","normal","waiting","locked"] /]
+	  	
+	  	User ID: <input value='' id='nid'><a href='javascript:void(0)' class='uiButton' onclick='changeItem(null,$("#nid").val())'>Create</a>
+	  	
+	  	[#if userprofile??]
+		  <table id="pro_list" width="100%" align="left" border="0">
+		  <tr class="trheader">
+		  	 <th>UserID</th>
+	         <th>UserName</th>
+	         <th>Email</th>
+	   <!--      <th>SubscrId</th>
+	         <th>PayerId</th> -->  
+	         <th>Profile StartDate</th>
+	         <th>Profile EndDate</th>
+	         <th>User Status</th>
+	         <th>Itemname</th>
+	         <th>Change</th>
+	         <th>User Transactions</th>
+	      </tr>
+	      [#list userprofile as up]
+	      <tr>
+	      	<td>${up.userID}</td>
+	      	<td><a href='/LTISystem/jsp/admin/user/Save.action?ID=${up.userID?string.computer}&action=view' target='_blank'>${up.userName}</a></td>
+	      	<td>${up.payerEmail!""}</td>
+	     <!-- 	<td>${up.subscrId!""}</td>
+	      	<td>${up.payerId!""}</td> -->	      	
+	      	<td><input value='[#if up.paymentStartDate??]${up.paymentStartDate?string("yyyy-MM-dd")}[/#if]'></td>
+	      	<td><input value='[#if up.paymentEnddate??]${up.paymentEnddate?string("yyyy-MM-dd")}[/#if]'></td>
+	      	<td>
+	        <select  name="stsn"  >
+	      		<option value="null">Choose</option>
+			 	[#list sts as its]
+			 		[#if up.userStatus?? && up.userStatus==its]
+			 			<option value="${its}" selected>${its}</option>
+			 		[#else]
+			 			<option value="${its}">${its}</option>
+			 		[/#if]
+			 	
+				 	
+			 	[/#list]
+			 </select>
+	      		
+	      	</td>
+	      	<td> 
+			 <select  name="itsn" >
+	      		<option value="null">Choose</option>
+			 	[#list itemsname as its]
+			 		[#if up.itemName?? && up.itemName==its]
+			 			<option value="${its}" selected>${its}</option>
+			 		[#else]
+			 			<option value="${its}">${its}</option>
+			 		[/#if]
+			 	[/#list]
+			 </select>
+			 </td>
+			 <td>
+			 	<a href="javascript:void(0)" class="uiButton" onclick="changeItem(this,'${up.userID}')">Change</a>
+			 </td>
+	      	<td><a href="javascript:void(0);" onclick="showTransaction('trans','${up.userID?string.computer}')">His Trans</a></td>
+	      </tr>
+	      [/#list]
+	     </table>    
+	     [/#if]
+	  	</td></tr>
+	    
+	     <tr><td>
+	     <div id='trans' style="display:none">
+	     	<div id="trans_inner"></div>
+	     </div>
+	     </td></tr>
+	      </table>
+	     </div>
+	     <div id="intimelist" style="display:none">
+	     
+	     </div>
+	     <div id="outtimelist" style="display:none">
+	     
+	     </div>
+	    </div>
+	</body>
+</html>

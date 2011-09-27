@@ -1,0 +1,45 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="portfolios" content="vf_current" />
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" href="/LTISystem/jsp/images/vf.css" type="text/css" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>Full Portfolios Comparison Chart</title>
+<script type="text/javascript">
+function showPic(img,width,height){
+window.open("data:image/jpeg;base64,"+img,"","width="+width+",height="+height+",resizable=1");
+}
+var address=document.location.hostname;
+var port=document.location.port;
+if(port=="")port='80';
+
+</script>
+</head>
+<body>
+
+<p align-text="center"><h1>Full Portfolios Comparison Chart</h1></p>
+<!--- I would like to add a permission check here --->
+<div id="chartPortfDiv" style="padding-top:60px;margin:0;width=800px">
+			[@s.url action="OutputPrice" namespace="/jsp/flash" id="urlPorts_flash_xml" escapeAmp="false"]
+			[@s.param name="indexArray"]${pSymbols}[/@s.param]
+			[@s.param name="startDate"]2000-12-31[/@s.param]
+			[@s.param name="endDate"]${endate}[/@s.param]
+			[/@s.url]
+			[@s.action name="DisplayFlash" namespace="/jsp/flash" executeResult=true]
+			[@s.param name="chartName"]Portfolio Comparison Chart[/@s.param]
+			[@s.param name="lineNameArray"]${pString}[/@s.param]
+			[@s.param name="address"]127.0.0.1[/@s.param]
+			[@s.param name="port"]8080[/@s.param]
+			[@s.param name="url"]${urlPorts_flash_xml}[/@s.param]
+			[@s.param name="currentMode"]portfolio[/@s.param]
+			[/@s.action]
+		</div>
+
+</div>
+</body>
+</html>

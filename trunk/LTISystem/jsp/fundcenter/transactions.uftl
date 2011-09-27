@@ -1,0 +1,17 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>${Parameters.symbol}</title>
+
+</head>
+<body>
+
+[@s.action name="ViewTransaction" namespace="/jsp/clonecenter" executeResult=true]
+	[@s.param name="size"]0[/@s.param]
+	[@s.param name="symbol"]${Parameters.symbol}[/@s.param]
+	[@s.param name="orderBy"]date[/@s.param]
+[/@s.action]
+</body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Please select the type of plan</title>
+<meta name="jqueryui" content="smoothness">
+<script>
+	function showMessage(html){
+		$("#mess").fadeOut('slow', function() {
+			$("#mess").html(html);
+			$("#mess").fadeIn();
+		});
+	}
+	
+	$(function(){
+		
+		$("#first").trigger("click");
+		showMessage($("#t1").html());
+		$(".sel").click(function(){
+			showMessage($("#t"+$(this).val()).html());
+		});
+	});
+	
+</script>
+<style>
+#divid div{
+	height:100px;
+}
+</style>
+</head>
+<body>
+	<div id="t1" style="display:none">
+		<p>Retirement Plans</p>
+	</div>
+	
+	<div id="t2" style="display:none">
+		<p>IRA/Taxable Account</p>
+	</div>
+	
+	
+	<div id="t3" style="display:none">
+		<p>Variable Annuities and Life Insurance</p>
+	</div>
+	
+	<div id="t4" style="display:none">
+		<p>College Savings 529</p>
+	</div>
+
+	<table border=0 width=100% style="margin:10px">
+		<tr>
+			<td width="30%" valign=top>
+				<form action="getstarted_pickaplan.action" method="get">
+				<p><input type="radio" name="planType" value="1" class="sel" id="first">Retirement Plans</p>
+				<p><input type="radio" name="planType" value="2" class="sel">IRA/Taxable Account</p>
+				<p><input type="radio" name="planType" value="3" class="sel">Variable Annuities and Life Insurance</p>
+				<p><input type="radio" name="planType" value="4" class="sel">College Savings 529</p>
+				<p><button class="uiButton">Get Started Now</button></p>
+				</form>
+			</td>
+			<td width="60%"  valign=top>
+				<div id="mess">
+				
+				</div>
+			</td>
+		</tr>
+	
+	</table>
+
+	
+</body>
+</html>

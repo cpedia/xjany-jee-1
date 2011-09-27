@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="UserPermission"
+		table="ltisystem_userpermission"
+	>
+		<id
+			name="UserID"
+			type="java.lang.Long"
+			column="UserID"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="MaxPortfolioRealTimeNum"
+			column="MaxPortfolioRealTimeNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="MaxPortfolioFollowNum"
+			column="MaxPortfolioFollowNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="MaxPlanCreateNum"
+			column="MaxPlanCreateNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="MaxPlanRefNum"
+			column="MaxPlanRefNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="MaxPlanFundTableNum"
+			column="MaxPlanFundTableNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="CurPortfolioRealTimeNum"
+			column="CurPortfolioRealTimeNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="CurPortfolioFollowNum"
+			column="CurPortfolioFollowNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="CurPlanCreateNum"
+			column="CurPlanCreateNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="CurPlanRefNum"
+			column="CurPlanRefNum"
+			type="java.lang.Integer"
+		/>
+		
+		<property
+			name="CurPlanFundTableNum"
+			column="CurPlanFundTableNum"
+			type="java.lang.Integer"
+		/>
+		<property
+			name="MaxConsumerPlanNum"
+			column="MaxConsumerPlanNum"
+			type="java.lang.Integer"
+		/>
+		<property
+			name="CurConsumerPlanNum"
+			column="CurConsumerPlanNum"
+			type="java.lang.Integer"
+		/>
+	</class>	
+</hibernate-mapping>

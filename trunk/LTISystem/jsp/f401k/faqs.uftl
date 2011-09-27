@@ -1,0 +1,291 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ FAQs</title>
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="Frequently asked questions and their answers are listed on this page to help users start with MyPlanIQ.">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+
+</head>
+
+<body>
+	<script>
+		$(function() {
+			$('.tab').each(function(){
+				//$(this).click(function(){
+				//	$(this).children('.answer').toggle(
+				//	);
+				//});
+				$(this).children('.question').toggle(
+						function(){
+							$(this).parent().children('.answer').show();
+							$(this).parent().css({ background: '#fff url(/LTISystem/jsp/template/ed/images/faq_s.png) 0px 9px no-repeat' });
+						},
+						function(){
+							$(this).parent().children('.answer').hide();
+							$(this).parent().css({ background: '#fafafa url(/LTISystem/jsp/template/ed/images/faq_c.png) 0px 9px no-repeat' });
+						}
+				
+				);
+			});
+		});
+	</script>
+
+<div class="col-1">
+   
+   <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">Support</div>
+	 <div class="sidebar_box_content">
+           <ul class="list">
+           <li><strong>General Support Issues: </strong><a href="/jforum/forums/show/81.page">Support Forum</a></li>
+           <li><strong>Email (only for account/personal related issues): </strong><a href="mailto:support@MyPlanIQ.com">support@MyPlanIQ.com</a></li>
+           <li><strong>Phone: </strong>510-279-3131</li>
+           </ul>
+         </div>
+   </div>
+    <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">More Info</div>
+	 <div class="sidebar_box_content">
+         <ul class="list">
+          <li><a href="f401k__why.action">Why MyPlanIQ</a></li>
+          <li><a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a></li>
+          <li><a href="/LTISystem/UserFiles/tutorial.pdf">Tutorial</a></li>
+          <li><a href="f401k__glossary.action">Glossary</a></li>
+          <li><a href="f401k__plancompare.action">Subscription Plan Comparison</a></li>
+         </ul>
+         </div>
+    </div>
+<!--    <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">How It Work?</div>
+	 <div class="sidebar_box_content">
+           <p>See <a href="jsp/images/guide1/guide1.html">a tutorial</a></p>
+         </div>
+    </div>
+-->
+</div>
+<div class="col-2">
+    <h1 align="center">Frequently Asked Questions (FAQs)</h1>
+       
+   <div id='faqs'>
+       <div class="tab">
+			<div class="question">What is the mission of MyPlanIQ.com?</div>
+			<div class="answer">
+				<p>
+					 With the secular demographic trend towards to an aging population, the new 'normal' economic growth in the coming years and the grossly underserved investors by the current financial industry (hefty fees and unrewarding or risky investment solutions), our mission is to provide low cost, easy to use, systematic investment solutions to mass investors. These solutions are personal risk tolerance tailored and plan specific. Our solutions enable mass investors to utilize the investment strategies and processes that are once employed and well practiced by institutions and high net worth wealth management.
+				</p>
+			</div>
+		</div>
+       
+        <div class="tab">
+			<div class="question">What does MyPlanIQ do?</div>
+			<div class="answer">
+				<p>
+					 We maintain a comprehensive database of investment choices and their specific restrictions (such as a mutual fund's redemption limit) for investment plans including retirement plans such as 401Ks, 403bs and variable annuities, as well as other plans such as college 529 savings plans and even taxable investment accounts for various brokerages (such as <a href="f401k_view.action?ID=724">Schwab's OneSource</a> or <a href="f401k_view.action?ID=727">Fidelity's Fund Picks</a>).<br/><br/>
+          We then apply our proprietary investment strategies to plans. For each plan, three preconfigured model portfolios with different pre-selected risk tolerance (conservative, moderate and growth) for each strategy are generated and monitored daily. These portfolios are the starting points for users to better understand how each strategy does in a specific plan. <br /><br />
+          Investors could generate customized model portfolios based on each individual personal risk tolerance and growth expectation. Such customized model portfolios are monitored daily. Investors could manage their personal portfolios by mirroring the customized model portfolios or just taking the model portfolios as references.  <br /><br />
+          Periodic portfolio rebalancing instructions are sent out to investors so that investors could manage their real personal portfolios in a plan by mirroring these customized model portfolios. See the <a href="jsp/images/guide1/guide1.html">guide</a> for more information.<br /><br /> 
+			MyPlanIQ.com also provides a community for exchange of information and discussions on wide range of financial planning and investment topics. <br/><br />
+          </p>
+			</div>
+		</div>
+		
+		<div class="tab">
+			<div class="question">What are in a plan?</div>
+			<div class="answer">
+				<p>
+					A plan consists of a list of available investment choices and the pre configured model portfolios for the MyPlanIQ's investment strategies. The investment choices are the mutual funds, commingled pooled funds, Separate Managed Accounts (SMAs) and trusts. MyPlanIQ collects a plan’s investment choices based on public disclosed information and users' input (your input could help to make a plan up to date as some of the choices could have been changed since the last disclosure that is usually several months or even a year earlier). In many cases, these funds or trusts could be found in MyPlanIQ'database. In the event of no such funds in MyPlanIQ'database, substitute mutual funds or even the benchmark funds of the asset classes for the missing funds are used as proxies. In such cases, the performance of the model portfolios (including the customized model portfolios) is  approximate as those substitutes are not the exact investments in your plan. <br/><br/>
+
+					The other important information for the investment choices are the redemption limits. Usually, a fund or a trust has a pre set minimum holding period. If a fund is sold within a period shorter than these redemption periods (limits), redemption fees are charged. To avoid the redemption fees, MyPlanIQ strategies will keep the funds for at least the redemption limits. In MyPlanIQ, the redemption limits are represented as a number of months. For example, a fund PTTRX (PIMCO Total Return Instl) in Microsoft 401K Plan has a redemption limit 3, that would mean PTTRX will be held for at least 3 months after its purchase. By default, 3 month redemption limit is used for each fund other than money market fund (which is represented by a unique CASH symbol). <br/><br/>
+					
+					MyPlanIQ applies proven quantitative strategies to each plan. Three model portfolios for each strategy in this plan are created and monitored daily. These three model portfolios have pre-configured risk tolerance representing conservative, moderate and growth. <br/><br/>
+					          <li> My 401K has become 201K since the financial crisis. How would the MyPlanIQ' investment strategies be different?<br/><br/>
+					MyPlanIQ'investment strategies are based on time proven investment principles:<br/><br/>
+					            <ul>
+					             <li><strong>Asset Allocation: </strong>this is the pillar of all of the investment strategies provided by MyPlanIQ. Modern Portfolio Theory (MPT), a well recognized investment theory, calls for properly allocating capital into a diversified array of assets. The key factors in asset allocation are diversification and proper asset allocation. </li>
+					             <li><strong>Risk Management: </strong>the risk tolerance and growth expectation are fully incorporated in a customized portfolio. Furthermore, all of the strategies other than Strategic Asset Allocation dynamically re-allocate capital based on the asset trends or smart money managers' outlook. By limiting risky assets (such as stocks, REITs and commodities) exposure and tactically re-allocating, loss of capital is controlled.</li>
+					             <li><strong>Well Researched Results: </strong>The strategies are based on academic and practical algorithms that have been used in institutions and wealth management. Based on the back test results, their risk adjusted performance has been outstanding in the past ten years that span two severe bear markets. Please refer to the Strategies page and individual strategy page to better understand the principles behind them. Moreover, the preconfigured model portfolios in each plan are good starting points to get up to date information for each strategy. </li>
+					             <li><strong>Advanced Fund Selections: </strong>In addition to the asset allocation strategies, a proprietary fund selection algorithm is incorporated into each strategy to achieve better results.</li>
+					             <li><strong>Systematic and Consistent Action Plan: </strong>Precise and timely investment process is the key to long term investment success. In addition to the sound strategies, MyPlanIQ strives to provide investors a precise and consistent process. </li>
+					            </ul>
+					            Finally, users are reminded that the past performance of any strategy does not guarantee its future performance. Please read MyPlanIQ's Terms of Use and make sure you understand the risk of investment. <br/><br/>
+	           </p>
+			</div>
+		</div>
+
+
+	<div class="tab">
+			<div class="question">What is the risk profile?</div>
+			<div class="answer">
+				<p>
+										  A <a href="profile_edit.action?planID=0&portfolioID=0">risk profile</a> is your personal risk aversion number: intuitively, the higher the risk profile, the more risk averse you are. In MyPlanIQ, the risk profile number is used to be the target fixed income asset allocation percentage. For example, if your risk profile is 28 which represents in your customized model portfolios, the percentage of the portfolio allocated to fixed income assets is 28%. <br/><br/>
+					
+					MyPlanIQ classifies all investment assets into two major categories: fixed income and risky assets. Fixed income assets include<br/><br/>
+					            <ul>
+					             <li><strong>Government bonds: </strong>short, intermediate and long term treasury bonds and GNMA.</li>
+					             <li><strong>Investment grade bonds: </strong>short, intermediate and long term investment corporate bonds.</li>
+					             <li><strong>International bonds: </strong>sovereign and international corporate investment grade bonds.</li>
+					             <li><strong>Cash and Cash equivalent: </strong>Money markets, short term and stable funds.</li>
+					            </ul>
+					            Risky assets include<br /><br/>
+					            <ul>
+					             <li><strong>Equities (stocks): </strong>US, international and emerging market stocks.</li>
+					             <li><strong>REITs: </strong>US and international Real Estate Investment Trusts.</li>
+					             <li><strong>Commodities: </strong>Industrial Metals, Gold, Oil, Agricultural, etc..</li>
+					             <li><strong>High yield (Junk) bonds, convertibles and preferred: </strong>Low grade corporate bonds.</li>
+					             <li><strong>Asset allocation funds: </strong>we classify any asset allocation funds such as moderate allocation into risky assets. </li>
+					            </ul>
+					For more information, refer to <a href="profile_edit.action?planID=0&portfolioID=0">Decide Risk Profile</a> page. <br/><br/>
+				</p>
+			</div>
+		</div>
+		
+		<div class="tab">
+			<div class="question">What is the difference between the model portfolios in a plan and my own customized model portfolios?</div>
+			<div class="answer">
+				<p>
+					The model portfolios in a plan are pre-configured for three levels of risk tolerance: conservative, moderate and growth. They are generic. The customized model portfolios you generate through the <a href="profile_customizeportfolio.action">Customize Model Portfolio</a> process are tailored to your own specific risk profile that is derived from your expected retirement age and personal risk tolerance. Users should mirror their personal portfolios with the customized model portfolios, if it is possible. However, you could also opt to mirror a pre-configured model portfolio. <br/><br/>
+             	</p>
+			</div>
+		</div>
+		
+		<div class="tab">
+			<div class="question">I could not find my plan, what should I do?</div>
+			<div class="answer">
+				<p>
+					 If you could not find your plan, please send us an email with your plan’s investment choice information. You could find investment choice information in your online account (most likely in a rebalance tab where it lists the funds available in the plan or a performance report sheet) or from the information your human resource office provides. A simple list of all funds (or preferably their symbols) would be the best. In addition, please provide us the redemption limit (or so called minimum holding period) for each fund if there is any such information (usually found out in each fund’s prospectus). We will use default 3 month redemption limit for each fund (other than money market or stable funds) if no such information is available.<br/><br/>
+
+					Once we receive your information, it usually takes us one working day to setup your plan. <br/><br/>
+
+						We rely on users like you to keep plan information up to date and precise. Please send email to <a href="mailto:support@MyPlanIQ.com">support@MyPlanIQ.com</a>. <br/><br/>
+             	</p>
+			</div>
+		</div>
+		
+		
+		<div class="tab">
+			<div class="question">The funds listed in model portfolios are not the exact funds available in my plan, what happens?</div>
+			<div class="answer">
+				<p>
+					MyPlanIQ maintains a comprehensive mutual fund and ETF database. However, for some commingled funds, trusts and SMAs (Separate Managed Accounts), we do not have information thus, a work around is to use a mutual fund, an ETF or an index as its substitute. In the event we could not find a suitable fund or index for substitution, we will use the benchmark for the asset class to which the investment choice belongs (if the asset class information is available) instead. If we could not determine the asset class, we will opt not to use this investment choice at all.  <br/><br/>
+
+					Even though if a substitute is used, we believe the model portfolios could still track the actual portfolio closely: according to <a href="http://en.wikipedia.org/wiki/Asset_allocation">a study by Gary Brinson, Randolph Hood and Gilbert Beebower</a>, asset allocation strategies is responsible for over 90% of variations in portfolio performance. On a portfolio page, we have shown both suggested holdings (using the real names of the investment choices) and the actual holdings (using the actual substitutes (if any)) that represents the actual holding in such a portfolio. <br/><br/>
+
+					In addition to the fund substitution issue, actual fees charged in your real personal portfolio and the difference of fee charges on the funds used could also cause the difference of the performance between your personal portfolio and a model portfolio you choose to mirror. <br/><br/>
+             </p>
+			</div>
+		</div>
+
+		<div class="tab">
+			<div class="question">I’m still not comfortable with your strategies, how could I be convinced? How could I migrate gradually?</div>
+			<div class="answer">
+				<p>
+					 We suggest you follow model portfolios and their strategies for a period of time to have a better understanding on those strategies. In fact, this is one of the key factors for you to achieve better investment results. Without fully understanding and thus having confidence in the underlying strategies, one could easily deviate from the strategies during a period of time when the strategies under perform. Bear in mind that investing is a long term process and there is no strategy that could consistently perform well at any given time. It is thus important to stick to a strategy in a well planned out portfolio with acceptable risk. <br/><br/>
+            </p>
+			</div>
+		</div>
+		
+		<div class="tab">
+			<div class="question">Which strategy should I choose?</div>
+			<div class="answer">
+				<p>
+					
+				Please refer to <a href="f401k__strategies.action">Strategies</a> and each individual strategy page for more information. In general, there is no definite answer on what strategies to choose. However, we believe there is a major difference between <strong><a href="jsp/strategy/View.action?ID=771">Strategic Asset Allocation: </a></strong> and the other strategies provided by MyPlanIQ. The Strategic Asset Allocation strategy works best during a major bull market. In the coming decade, we concur with PIMCO's opinion that the US (and the global) economics will enter into a 'new normal' period during which economic growth will be uneven and slow. In such a period, it is more appropriate to adhere to a proven tactical asset allocation strategy such as <strong><a href="jsp/strategy/View.action?ID=1003">Tactical Asset Allocation</a></strong> or <strong><a href="jsp/strategy/View.action?ID=744">Guru Directed Asset Allocation</a></strong>. Investors are encouraged to compare performances of these strategies to have a better understanding. <br/><br/>
+
+					If you have a large portfolio or several portfolios, you could further diversify by choosing more than one strategy. This practice is sometimes called the Core Satellite portfolio. MyPlanIQ will release a strategy to allow investors to adopt such a multi-strategy approach in the near future. <br/><br/>
+				 </p>
+			</div>
+		</div>
+
+
+		<div class="tab">
+			<div class="question">If there are too many investors following the same strategy, would that reduce the strategy’s effectiveness?</div>
+			<div class="answer">
+				<p>
+					
+				All of MyPlanIQ strategies are based on diversified large assets such as US equity market, US fixed income market etc. Unless there are an extremely large number of investors adopting the same strategy, it is hard to affect a major market (for example, the whole US equity market). <br/><br/>
+
+				 </p>
+			</div>
+		</div>
+
+
+		<div class="tab">
+			<div class="question">How could I get started?</div>
+			<div class="answer">
+				<p>
+					
+				We suggest the following steps: <br/><br/>
+             <ol>
+               <li>Go through the <a href="profile__getstarted.action">Get Started</a> process to create your own risk profile and customized model portfolios. <br/><br/></li>
+               <li>Follow the model portfolios for an extended period of time. Make yourself comfortable and understand more thoroughly on the strategies and the process. <br/><br/></li>
+               <li>Start to mirror your personal portfolio with the customized portfolio. <br/><br/></li>
+             </ol>
+     			The other way is to create a personal portfolio based on your current portfolio in a plan and    go through a migration period. See the question 'How could I migrate gradually?' <br/><br/>
+
+				 </p>
+			</div>
+		</div>
+
+        <div class="tab">
+			<div class="question">How could I migrate gradually?</div>
+			<div class="answer">
+				<p>
+				
+				At MyPlanIQ, we understand and fully support a gradual migration instead of a sudden shift of your current investments. We believe understanding and getting comfortable with the strategies you are going to adopt are the utmost factors for your success (thus our success too). We provide a migration path that <br/><br/>
+                <ol>
+                  <li>You first create a personal portfolio that is mirroring your real personal portfolio. <br/><br/></li>
+                  <li>We will perform portfolio checkup to help you identify three key issues: risk, asset allocation/diversification and fund selections. <br/><br/></li>
+                  <li>We will use your chosen asset allocation and give you rebalancing instructions which include what funds you should switch to. The funds are chosen based on our fund selection process. We will keep a model portfolio that has the same asset allocation as your personal portfolio and show you how much difference our fund selection method will make. Furthermore, another model portfolio with the same risk as your personal portfolio is created. This model portfolio employs tactical asset allocation strategy. You could compare the performance and risk, again, in an extended period of time. <br/><br/></li>
+                </ol> <br/>
+                kcarr7 has this excellent detailed <a href="/jforum/posts/list/2417.page">article</a> on how to migrate to a mutual fund portfolio using equivalent or similar ETFs.
+				 </p>
+			</div>
+		</div>  
+		
+		
+		<div class="tab">
+			<div class="question">How do I manage my personal portfolio that is mirrored with a customized model portfolio? </div>
+			<div class="answer">
+				<p>
+				Should I make a onetime change or gradual change? <br/>
+				
+					That depends your time, your personal outlook of the market and your current portfolio situation. In general, we advocate a gradual change. One way to do that is through so called 'Dollar Cost Average'(DCA) that changes your portfolio a piece at a time. However, there are situations that call for a clean change. An example is that your current portfolio has a heavy allocation on risky assets (such as stocks) that is way beyond your acceptable target allocation. In such a situation, a clean change is a reasonable approach. <br/><br/>
+
+				 </p>
+			</div>
+		</div>
+		
+		
+		<div class="tab">
+			<div class="question">I have many 401k and IRA portfolios, how could I take the whole holistic view for them?</div>
+			<div class="answer">
+				<p>
+				
+					There is no limit for you to create several customized model portfolios for various plans. <br/><br/>
+					
+					At the moment, we have no aggregate functionality. We are working on this and it will be released in the near future. <br/><br/>
+				</p>
+			</div>
+		</div>
+		
+		
+		<div class="tab">
+			<div class="question">Can I use the investment strategies for my taxable or self-directed brokerage accounts? Are they tax efficient?</div>
+			<div class="answer">
+				<p>
+				
+					
+					MyPlanIQ have plans that are designed for specific brokerage accounts. MyPlanIQ also provide general ETF portfolios that could be used for any brokerage although some of them are best suited for certain brokerage (such as Fidelity 25 Commission Free ETF Plan). For mutual funds, we have maintained several plans based on a list of  no load and no transaction fee funds a brokerage suggests (for example, Schwab’s OneSource Select List or Fidelity’s Fund Picks Select List). <br/><br/>
+
+					At the moment, all of the strategies are not optimized for tax efficiency, though we have tried to reduce frequent trading. MyPlanIQ are working on their tax efficient versions. <br/><br/>
+        		</p>
+			</div>
+		</div>
+		
+	</div>
+</div>
+</body>
+</html>

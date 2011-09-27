@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/strategy/GetStrategyTable" class="com.lti.action.strategy.GetStrategyTableAction" singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+		<property name="strategyClassManager">
+			<ref bean="strategyClassManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="groupManager">
+			<ref bean="groupManager"/>
+		</property>
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>
+	
+	<bean name="/jsp/strategy/GetPlanScoreTable" class="com.lti.action.strategy.GetPlanScoreTableAction" singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+	</bean>
+	
+	<bean name="/jsp/strategy/Main" class="com.lti.action.strategy.MainAction" singleton="false">
+
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="strategyClassManager">
+			<ref bean="strategyClassManager"/>
+		</property>	
+	</bean>
+
+	<bean name="/jsp/strategy/Search" class="com.lti.action.strategy.SearchAction" singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>
+		<property name="strategyClassManager">
+			<ref bean="strategyClassManager"/>
+		</property>	
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>	
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+	</bean>	
+		
+	
+	<bean name="/jsp/strategy/modelportfolio/Main" class="com.lti.action.strategy.modelportfolio.MainAction" singleton="false">
+		<property name="strategyManager">
+			<ref bean="strategyManager"/>
+		</property>	
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>	
+	</bean>		
+	
+	<bean name="/jsp/strategyClass/Save" class="com.lti.action.strategyClass.SaveAction" singleton="false">
+	<property name="strategyClassManager">
+	<ref bean="strategyClassManager"/></property>
+	<property name="userManager">
+	<ref bean="userManager"/></property>
+	<property name="strategyManager">
+	<ref bean="strategyManager"/></property>
+	<property name="portfolioManager">
+	<ref bean="portfolioManager"/></property>
+	</bean>
+</beans>

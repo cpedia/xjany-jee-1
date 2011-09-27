@@ -1,0 +1,61 @@
+[#ftl]
+<script>
+function update(){
+	bConfirmed = window.confirm("Are you sure?")
+	if(bConfirmed){
+		
+		$.ajax({
+			type: "post",
+			url: "f401k_addSymbols.action?includeHeader=false&jforumID="+$("#jforumID").val()+"&symbolsItem="+$("#symbolsItem").val(),
+			datatype: "html",
+			success: function(result){
+				alert(result);
+			},
+			error:function(){
+				alert("error");
+			}
+		});//end of ajax
+		
+	}
+	
+	
+}
+
+function checkexits(data_url,fn){
+	$.ajax({
+       type : "GET",
+       url : data_url,
+       dataType : "html",
+        success : function(data){
+        	fn(data);
+        }
+    });
+}
+
+function view(){
+		if($("#jforumID").val()==""){
+			alert("Please input a number to ID");
+		}else {
+			var url="/jforum/posts/list/"+$("#jforumID").val()+".page";
+			checkexits(url,function(data){
+				if((data.indexOf("exist"))>0){
+					alert("The topicID that your input is not exist");
+				}else{
+					alert("exist");
+				}
+				
+			});
+			
+		}
+		//window.location="/jforum/posts/list/"+$("#jforumID").val()+".page";
+	}
+
+</script>
+<button onclick="view()">check your ID in jforum</button><p>* if you can't be sure what your input ID is exist, please click here to check it before.
+<div>
+<form>
+ID:<br><input type="text" id="jforumID" ><br>
+Symblos:<br><textarea rows="1" cols="30" id="symbolsItem">${Parameters.symbolsItem}</textarea><br><br><br>
+<input type="button" value="UpdateOrAdd" onclick="update()">
+</form>
+</div>

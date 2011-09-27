@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="MutualFund"
+		table="ltisystem_mutualfund"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+		<property
+			name="StartDate"
+			column="StartDate"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="Symbol"
+			column="Symbol"
+			type="java.lang.String"
+			not-null="true"
+		/>
+		<property
+			name="EndDate"
+			column="EndDate"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="CreateTime"
+			column="CreateTime"
+			type="java.lang.Long"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="IsRAA"
+			column="IsRAA"
+			type="java.lang.Boolean"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="Index"
+			column="Indexes"
+			type="com.lti.type.HibernateStringArray"
+			not-null="true"
+		/>
+
+	</class>	
+</hibernate-mapping>

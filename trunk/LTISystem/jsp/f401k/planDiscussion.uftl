@@ -1,0 +1,9 @@
+[#ftl]
+<script>
+	[#if topicID?? && topicID!=0]
+		window.location.href = "../jforum/posts/list/${topicID?string.computer}.page";
+	[#else]
+		alert("Sorry,you can't access discussion forum,please retry later");
+		window.location.href = "f401k_view.action?ID=${ID?string.computer}";
+	[/#if]
+</script>

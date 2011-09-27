@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<string-to-map $ hMap>
+	<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:java="http://java.sun.com" xsi:type="java:org.exolab.castor.mapping.MapItem">
+		<key xsi:type="java:java.lang.String">k3</key>
+		<value xsi:type="java:java.lang.String">v3</value>
+	</map>
+	<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:java="http://java.sun.com" xsi:type="java:org.exolab.castor.mapping.MapItem">
+		<key xsi:type="java:java.lang.String">k4</key>
+		<value xsi:type="java:java.lang.String">v4</value>
+	</map>
+	<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:java="http://java.sun.com" xsi:type="java:org.exolab.castor.mapping.MapItem">
+		<key xsi:type="java:java.lang.String">k1</key>
+		<value xsi:type="java:java.lang.String">v1</value>
+	</map>
+	<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:java="http://java.sun.com" xsi:type="java:org.exolab.castor.mapping.MapItem">
+		<key xsi:type="java:java.lang.String">k2</key>
+	</map>
+</string-to-map$-hMap>

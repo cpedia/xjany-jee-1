@@ -1,0 +1,125 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#if Parameters.includeJS?? && Parameters.includeJS=='false']
+[#else]
+[/#if]
+
+[#if transactions??]
+	<table id="ssctransaction" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+		<thead>
+		<tr>
+			[#if aggregateFlag]
+			<th class="header" width="10%">
+				Portfolio
+			</th>
+			[/#if]
+			<th class="header" width="10%">
+				Transaction
+			</th>
+			<th class="header" width="10%">
+				Date
+			</th>
+			
+			<th class="header" width="20%">
+				Fund in this portfolio
+			</th>
+			[#if stateType]
+			<th class="header" width="20%">
+				Original Fund Description
+			</th>	
+			[/#if]
+			
+			<th class="header" width="11%">
+				Portfolio Percentage (%)
+			</th>
+			<th class="header" width="10%">
+				Amount
+			</th>
+		</tr>			
+		</thead>
+		[#assign index=0]
+		
+		[#list transactions as sitem]
+	
+		[#-- list transactions start --]
+		[#if index%2==0]
+		<tr class='odd'>
+		[/#if]
+		[#if index%2==1]
+		<tr class='even'>
+		[/#if]
+		[#assign index=index+1]
+		[#if aggregateFlag]
+			<td>
+				<a href="ViewPortfolio.action?ID=${sitem.portfolioID?string.computer}" target="_TOP" style="color:#2B60DE" title='${sitem.portfolioName!"-"}'>${sitem.portfolioSymbol!"-"}</a>
+			</td>
+			[/#if]
+			<td>
+				${sitem.operation!"-"}
+			</td>
+			<td>
+				${sitem.date?string("MM/dd/yyyy")!"-"}
+			</td>
+			<td>
+					[@s.url action="View.action" id="urladdr" namespace="/jsp/fundcenter" includeParams="false"]
+							[@s.param name="symbol"]${sitem.symbol!"-"}[/@s.param]
+							[@s.param name="title"]${sitem.symbol!"-"}[/@s.param]
+					[/@s.url]
+					<a href="${urladdr}" target="_TOP" style="color:#2B60DE">
+					${sitem.symbol!""}(${sitem.securityName!"-"})</a>
+			</td>
+			[#if stateType]
+			<td>
+					${sitem.description401k!"-"}
+			</td>
+			[/#if]
+			<td>
+				[#if sitem.percentage??]
+					[#assign sp=sitem.percentage*100]
+	                 ${sp?string("0.00")}%							
+				[/#if]
+			</td>
+			<td>
+				${sitem.amount!"-"}
+			</td>
+				
+		</tr>
+		[#-- list position end --]
+		
+		[/#list]
+	</table>
+	[#if transactions.size() > 30]
+	<br class="clear"/>
+	<div style="posistion:static;font-size:10px" id='pager' class="pager">
+		<form>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/first.png" class="first"/>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/prev.png" class="prev"/>
+			<input type="text" class="pagedisplay"/>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/next.png" class="next"/>
+			<img src="${lti.baseUrl}/jsp/images/jquery.tablesorter/addons/pager/icons/last.png" class="last"/>
+			<select class="pagesize">
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option selected="selected" value="30">30</option>
+				<option value="40">40</option>
+			</select>
+		</form>
+	</div>
+	[/#if]
+	<script>
+	$(document).ready(function(){
+		$("#sstransaction").tablesorter({
+			widthFixed: true, 
+			widgets: ['zebra']
+		})
+		[#if transactions.size() > 30]
+		.tablesorterPager({container: $("#pager"),size: 30});
+		[/#if]
+	})
+	</script>
+[#else]
+No Suggested Transactions!
+[/#if]
+	
+

@@ -1,0 +1,1 @@
+<a href="/LTISystem/j_acegi_logout">Logout</a>

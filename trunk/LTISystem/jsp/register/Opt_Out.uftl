@@ -1,0 +1,26 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<style>
+body {
+	margin: 0px;
+	font: 18px;
+}
+</style>
+</head>
+<body>
+ <div align="center" style="height:550px;">
+ <p>Please confirm that you would like to remove your email from our future newsletter email list.</p>
+ <table align="center" border="0">
+ <tr>
+ 	<td><a href="refuseMarketEmail.action?action=do&userEmail=${email}"><strong>Yes</strong></a></td>
+ 	<td></td>
+ 	<td><a href="${lti.baseUrl}"><strong>No</strong></a></td>
+ </tr>
+ </table>
+ </div>
+</body>
+</html>

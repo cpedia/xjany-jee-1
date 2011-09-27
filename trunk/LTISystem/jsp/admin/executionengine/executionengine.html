@@ -1,0 +1,148 @@
+<html>
+<head>
+<script type="text/javascript" src="../images/jquery-1.2.6.min.js"></script>
+<script type="text/javascript">
+function sendCommand(cmd){
+	$.ajax({type: "post",  
+            url:'../portfolio/ExecuteCommand.action?command='+cmd,  
+		    dataType: "html",  
+            success: function(result){  
+             	$('#message').html(result);
+             	getResetMode();
+            },
+            error:function(){
+            	alert("ERROR");
+            }
+	});
+
+}
+
+function updateResetMode(){
+	var mode=$("#resetMode").val();
+	sendCommand("updateResetMode"+"&resetMode="+mode);
+}
+ function updateModeInterval(){
+ 	var interval = $("#updateInterval").val();
+ 	sendCommand("updateIntervalMode"+"&modeInterval="+interval);
+ }
+
+ function updatePriorityArray(){
+ 	var prioritys = $("#priorityArray").val();
+ 	sendCommand("updatePriorityArray"+"&prioritys="+prioritys);
+ }
+ function setPortfolioState(){
+	 var updateMode = $("#updateMode").val();
+	 var keyWords = $("#keyWords").val();
+	 alert(updateMode);
+	 sendCommand("setPortfolioState"+"&updateMode="+updateMode+"&keyWords="+keyWords);
+ }
+
+function getResetMode(){
+   $.ajax({type: "post",  
+            url:'../portfolio/ExecuteCommand.action?command=getResetMode',  
+		    dataType: "html",  
+            success: function(result){  
+             	$('#c_mode').html("'"+result+"'");
+            },
+            error:function(){
+            	alert("ERROR");
+            }
+	});
+}
+$(document).ready(function() {
+	getResetMode();
+	 
+}); 
+			 
+
+</script>
+</head>
+
+<body>
+<a href="javascript:sendCommand('restartExecution')">Restart Execution Engine</a>
+<br>
+<a href="javascript:sendCommand('startExecution')">Start Execution Engine</a>
+<br>
+<a href="javascript:sendCommand('stopExecution')">Stop Execution Engine</a>
+<br>
+<a href="javascript:sendCommand('getExecution')" >Process State</a>
+<br>
+<br>
+<a href="javascript:sendCommand('getUpdateInterval')" >Get Current Update Interval</a>
+<br>
+UpdateInterval: <input type="text" id=updateInterval value="0_0_0_0_1_1_1_1" >
+<input type="button" name="reset" onclick="updateModeInterval()" value="reset">
+<br>
+<br>
+<p>Here is the Level Table, You can set the priority like 5_1, it means do Portfolio at EMAILALER leve first, and then ALIVE.
+<p>The default priority array is EMAILALERT_ALIVE_DEVELOPMENT_LOWLEVEL_UNALIVE, it means it will do in the priority order for all portfolios.
+<table border="1" cellpadding="0" cellspacing="1">
+	<thead>
+		<tr>
+			<th> Level </th>
+			<th> Num   </th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td> ALIVE </td>
+			<td>   1   </td>
+		</tr>
+		<tr>
+			<td> UNALIVE </td>
+			<td>    2    </td>
+		</tr>
+		<tr>
+			<td> DEVELOPMENT </td>
+			<td>      3	     </td>
+		</tr>
+		<tr>
+			<td> LOWLEVEL </td>
+			<td>     4	  </td>
+		</tr>
+		<tr>
+			<td> EMAILALERT </td>
+			<td>    5	    </td>
+		</tr>
+	</tbody>
+</table>
+Priority: <input type="text" id=priorityArray value="6_8_7_5_1_3_4_2" >
+<input type="button" name="reset" onclick="updatePriorityArray()" value="reset">
+<br>
+<a href="javascript:sendCommand('getPriorityArray')" >Get Current Priority</a>
+<br>
+<br>
+KeyWord:    <input type="text"  id=keyWords>
+UpdateMode: <input type="text"  id=updateMode>
+<input type="button" name="resetPortfolioState" onclick="setPortfolioState()" value="resetPortfolioState">
+
+<!--
+<br>
+<a href="javascript:sendCommand('resetState')" >ReSet Portfolio State</a>
+<br>
+<br>
+reset mode
+<select id="resetMode">
+	<option value="none" selected>none</option>
+	<option value="weekend">weekend</option>
+	<option value="monthend">monthend</option>
+</select>
+<input type="button" name="update" onclick="updateResetMode()" value="update">
+current mode <span id="c_mode">'-'</span>
+<br>
+-->
+<br>
+
+
+<a href="" target="detail1" id='dds'>Daily Execution State</a>
+<script type="text/javascript">
+	var ip=document.location.hostname;
+	$('#dds').attr({href:'http://'+ip+':8081/executionstate.html?'+(new Date()).getTime()});
+</script>
+<br>
+
+<div><pre id="message"></pre></div>
+<iframe src="" name="detail1" id="detail1" scrolling="no" width="100%" height="100%" frameborder="0" marginWidth="0" marginHeight="0"></iframe>
+z
+</body>
+</html>

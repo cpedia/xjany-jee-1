@@ -1,0 +1,10 @@
+[#ftl]
+ [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+ [#import "/jsp/lti_library_ftl.jsp" as lti]
+  <meta name="submenu" content="strategymaintable"/>
+ <meta name="strategies" content="vf_current" />
+  ${Parameters.title!"ValidFi.com"}
+<h2>Top Strategy Styles</h2>
+[@s.action name="GetModelPortfolioTable" namespace="/jsp/strategy" executeResult=true]
+  [@s.param name="ids"]462|465|19493[/@s.param]
+ [/@s.action]

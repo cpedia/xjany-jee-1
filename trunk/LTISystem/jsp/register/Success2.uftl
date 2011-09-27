@@ -1,0 +1,18 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+</head>
+
+<body>
+    <div align="center" style="height:550px;">
+    <br>
+    <p>${resultString!"Your email has been removed from our email list."}</p>
+</body>
+</html>
+
+     </div>
+</body>
+</html>

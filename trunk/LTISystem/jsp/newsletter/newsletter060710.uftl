@@ -1,0 +1,247 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+	<title>MyPlanIQ Newsletter: June 7th, 2010</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="A retirement plan and investing newsletter">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<script>
+$(document).ready(function() {
+	alignHeight();
+});
+</script>
+<style>
+.newsletter-box {
+	height:auto;
+	overflow:hidden;
+	border: 8px solid #FAFAFA;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+}
+.newsletter-box .col-1 {
+	width:618px;
+	height: 500px;
+	overflow: hidden;
+}
+.newsletter-box .col-2 {
+	height: 500px;
+	overflow: hidden;
+	padding-left:10px;
+}
+
+</style>
+</head>
+<body>
+  <div class="borderGreen">
+  	<div class="newsletter-box" >
+  			<div>
+                         <table width="100%">
+                          <tr>
+                            <td>
+  				<br><h1 align="center"><font color="#458F51">MyPlan</font><font color="#95B5C1">IQ</font> Newsletter</h1><br>
+                        <p align="center"><strong align="center">June 7th, 2010</strong></p>
+                            </td>
+                            <td align="right" width="6%">
+                              <strong align="right"><a href="http://www.myplaniq.com/LTISystem/newsletter__nllist.action"><strong><font size="5">Archive</font></strong></a></strong>
+                            <td>
+                          </tr>
+                         </table>
+  			</div>
+                      
+  			<div class="col-1">
+  			<!--- Upper Left --->
+                        <h3>MyPlanIQ BiWeekly -- A plain spoken newsletter for your retirement investment and planning</h3>
+                        <p>When was the last time you opened a 401K statement from your provider? Remember the dark days of 2008 and 2009 when your 401K shrank to 201K? </p>
+
+					<p>Boomers are starting to utter the 'R' word while striving to adjust to the long term economic trends of the East rising, massive budget deficits and continuing trade imbalances. It is more important than ever to take care of your retirement and financial future. Since we all work hard for our money, why shouldn't our money work hard for us? For example, an extra 6% return for a decade doubles your money.</p>
+					
+					<p>That's all very nice, but what about the expense, effort and risk of investing? Some turn to financial experts, paying high fees, not having a clue how to invest. A few brave souls search for guidance, only to be disappointed by the inconsistent and unsystematic "advice". </p>
+					<p>MyPlanIQ was born out of this background and experience. We are in a unique position to discuss and address getting your money to work harder for you. The purpose of this newsletter is to help you learn and stay informed about issues and available solutions to getting better returns with low risk and cost. Remember that investment is a process and not an event. <a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=462">...More...</a></p>
+					
+					<!--- End Upper Left --->
+  			
+  			</div>
+  			<div class="col-2" style="width:32%; align:right;">          	
+            <!--- Upper Right --->
+                        <h3>Simpler Is Better</h3>
+                        <p>Introducing the Simpler Is Better (SIB) portfolios: <a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,147">Six Core Asset ETFs Most Popular</a> and <a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,148">Six Core Asset ETFs</a>. Each plan has only six ETFs in six major assets: U.S., Foreign, Emerging Equities, REITs, Commodities and Fixed Income. The Tactical Asset Allocation (TAA) model portfolios in both plans illustrate type of returns you could achieve. These simple plans are used as measuring sticks in our plan ranking. <a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=459">...More...</a></p>
+                         <table border="1" cellspacing="0" cellpadding="2">
+				        <tbody>
+				         <tr>
+				            <td  width="133">Annualized Return</td>
+				            <td  width="69">
+				            <p>3 YR</p>
+				            </td>
+				            <td  width="74">
+				            <p>5 YR</p>
+				            </td>
+				         </tr>
+				         <tr>
+				            <td  width="133">
+				            <p><a rel="nofollow" target="_blank" href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=17,295">Six Core TAA</a></p>
+				            </td>
+				            <td  width="69">
+				            <p>12%</p>
+				            </td>
+				            <td  width="74">
+				            <p>16%</p>
+				            </td>
+				         </tr>
+				         <tr>
+				            <td  width="133">
+				            <p><a rel="nofollow" target="_blank" href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=17,373">Six Core Popular TAA</a></p>
+				            </td>
+				            <td  width="69">
+				            <p>10%</p>
+				            </td>
+				            <td  width="74">
+				            <p>13%</p>
+				            </td>
+				         </tr>
+				        </tbody>
+				      </table>
+<!-- End Upper Right -->
+            
+            
+            </div>
+			</div>
+<!--				<div class="clearfloat"> </div>  -->
+  	</div>
+
+  <!-- CONTENT -->
+  <div id="content">
+    <div class=" middlebar">
+	  <div class="middleLinks" id="middleLinks">
+			<a href="/LTISystem/f401k__why.action"> Why MyPlanIQ</a>
+			<a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a>
+			<div id="searchForPlan">
+					<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    				<input name="groupIDS" value="8" type="hidden"></input>
+	        			<input name="includeHeader" value="true" type="hidden"></input>
+	        			<input name="type" value="2" type="hidden"></input>
+	       			    <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	       			    <span>Search For A Plan And Its Model Portfolios</span>
+	        			<input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)' size="15" type="text" value='${Parameters.symbolPlan!""}'>
+	       				<input alt='Quote' id='submitSearchBottom' type='submit' value=''/>
+	   				</form><!-- end of form -->
+		 	</div><!--searchForPlan -->
+	 </div>
+	 
+	 </div>
+
+      <div class="col-1 box maxheight">
+
+      	<div class="inner" style="font-size: 13px"> 
+                        <h3>Featured Articles</h3>
+                        <ul class="list">
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=771">MyPlanIQ Strategic Asset Allocation (SAA)</a></h4><br><p>SAA is based on main stream Modern Portfolio Theory. It invests in a diversified array of major assets and rebalances regularly.</p></li>
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=1003">MyPlanIQ Tactical Asset Allocation (TAA)</a></h4><br><p>TAA is based on asset momentum. It invests in a diversified array of major assets and dynamically changes asset exposure based on current market trends.</p></li>
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=459">Selecting Candidate ETFs for Effective Portfolio Building</a></h4><br><p>Introducing SIB (Simpler Is Better) portfolios: Selecting the right funds in a portfolio strategy is critical for both self-directed investors and administrators of retirement plans such as 401(k) and IRAs. Working with too few funds limits diversification benefits and limits opportunities. On the other hand, too many funds can be confusing and misleading. </p></li>
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=354">ETFs for 401K Portfolio Building</a></h4><br><p>ETFs have become increasingly popular in taxable or self-directed IRA portfolios. A flurry of  introducing commission free ETFs will only accelerate ETF adoption. There is another less visible but significant move to make ETFs a staple in traditional company sponsored retirement plans such as the 2.7 trillion 401(k) sector.</p> </li>
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=348">Commission-Free ETFs Enable Portfolio Building Using Asset Allocation Strategie</a></h4><br><p>The latest Vanguard announcement on offering all the company's 46 ETF trades commission free marks a new era for ETFs. This articles introduces a plan and its several model portfolios that use Vanguard ETFs.</p>
+ </li>
+                        </ul>   
+
+  		<p><a href="http://www.myplaniq.com/LTISystem/f401k_blogs.action" class="moreInCategory">More Featured Articles »</a></p>
+            </div> 
+     	</div>
+      <div class="col-2  box maxheight">
+         <div class="inner" style="font-size: 13px">
+        	<h3>Best of The Web</h3>
+                        <ul class="list">
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=457">Silver Tsunami: Steering Boomers Away from Buy and Hold</a></h4><br><p>Paul Menchaca at BankInvestmentConsultant.com wrote the following: "One of the great aftershocks felt in the wake of the financial meltdown has been a fairly loud drumbeat against Harry Markowitz’s modern portfolio theory. ... From this assailment on one of investment’s cornerstone theories has come the oft-repeated line, “buy and hold is dead.”"</p></li>
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=389">Exxon, Dynegy offer best 401k plans in Houston, study says</a></h4><br><p>Houston Business Journal reports that energy firms offer best 401k plans in a ranking compiled by data analytics company BrightScope Inc. ExxonMobil Corp. (NYSE: XOM) and Dynegy Inc. (NYSE: DYN) take first and second. Law firm Baker Botts LLP took third, with Citgo Petroleum Corp., and Reliant Energy Inc. (NYSE: RRI) rounding out the top five. While ExxonMobil's corporate headquarters are in Irving, it has a significant presence here.</p></li>
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=351">401(k) providers brace for new fee disclosure</a></h4><br><p>Darla Mercado of Investment News reports that as one 401(k) provider rolls out enhanced fee disclosures for plans, rivals are keeping a close watch on upcoming regulations that will likely require them to follow suit.</p></li>
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=314">Four in Five Americans Will Fall Short of Retirement Income Needs</a></h4><br><p>Based on an article by aul Menchaca at BankInvestmentConsultant.com, according to a study by Hewitt Associates, "four of five Americans are expected to fall short of meeting all of their financial needs in retirement unless they improve their savings habits or retire at a later age." </p> </li>
+                         <li><h4 style="font-size: 120%"><a href="http://www.myplaniq.com/LTISystem/f401k_news.action?PID=300">Relative Strength Strategies Vindicated</a></h4><br><p>By Rob Curran at Wall Street Journal. It is a long held belief by MyPlanIQ that momentum over diversified assets plays a critical role in enhancing portfolio returns while avoiding dramatic loss. This Wall Street Journal's latest article in Portfolio Strategy section enforces this idea. In the article, it was reported that even Morningstar, the de facto goto mutual fund rating firm is now rolling out a new rating factor based on the momentum factor for mutual funds. </p>
+ </li>
+                        </ul>   
+                 <p><a href="http://www.myplaniq.com/LTISystem/f401k_blogs.action" class="moreInCategory">More Articles »</a></p>    
+
+         </div>
+      </div>
+      <div class="col-3 box maxheight">
+         <div class="inner" style="font-size: 13px">
+	<h3>Plan Investment Choices Ranking</h3><br>
+                <h4 style="font-size:140%">Top 10 Plans With Best Overall Scores</h4>
+<table id ="toprankingtable" width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			<thead>
+				<tr>
+
+					<th alt="Plan Name" width="60px" class="header">Plan Name</th>
+					<th alt="TAA Moderate 5 Year Annual Return" width="60px" class="header">TAA 5Yr ReturTAA Moderate 5 Year Annual Return</th>
+					<th alt="Overall Score" width="60px" class="header">Overall Investment</th>	
+				</tr>			
+			</thead>
+			<tbody>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=986">WACHOVIA SAVINGS PLAN</a></td>
+							<td width=60px>14%</td>
+							<td width=60px>91%</td>
+						</tr>
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=985">WESTERN DIGITAL CORPORATION 401(k) PLAN</a></td>
+
+							<td width=60px>10%</td>
+							<td width=60px>90%</td>
+
+						</tr>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=1,100">Polaris Electronics Inc 401K Plan</a></td>
+							<td width=60px>15%</td>
+							<td width=60px>90%</td>
+						</tr>
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=679">TD Ameritrade Premier List No Transaction Fee Mutual Fund Plan</a></td>
+
+							<td width=60px>14%</td>
+							<td width=60px>88%</td>
+
+						</tr>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=1,009">COMPUWARE CORPORATION ESOP/401(k) PLAN</a></td>
+							<td width=60px>14%</td>
+							<td width=60px>88%</td>
+						</tr>
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=724">Schwab OneSource Select List Funds</a></td>
+							<td width=60px>17%</td>
+							<td width=60px>88%</td>
+						</tr>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=930">PROGRESS ENERGY 401(k) SAVINGS & STOCK OWNERSHIP PLAN</a></td>
+
+							<td width=60px>12%</td>
+							<td width=60px>87%</td>
+
+						</tr>
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=782">RETIREMENT SAVINGS PLAN OF BNY SECURITIES GROUP</a></td>
+							<td width=60px>14%</td>
+							<td width=60px>87%</td>
+						</tr>
+						<tr class='odd'>
+							<td><a href="/LTISystem/f401k_view.action?ID=840">EMC Corporation 401(k) Savings Plan</a></td>
+							<td width=60px>12%</td>
+							<td width=60px>86%</td>
+						</tr>
+						<tr class='even'>
+							<td><a href="/LTISystem/f401k_view.action?ID=940">PS 401(k) PROFIT SHARING PLAN</a></td>
+
+							<td width=60px>12%</td>
+							<td width=60px>86%</td>
+
+						</tr>
+			</tbody>
+		</table>
+<br><p align="center"><a href="http://www.myplaniq.com/LTISystem/f401k_showplanscorelist.action">...More Plan Ranking...</a></p>
+
+
+  	</div>
+      </div>
+		<div class="clearfloat"></div>
+  </div>
+</body>
+</html>

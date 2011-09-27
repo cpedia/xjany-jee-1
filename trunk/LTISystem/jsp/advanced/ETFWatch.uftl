@@ -1,0 +1,305 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ ETF Watch</title>
+<meta name="home" content="vf_current" />
+<meta content="'MyPlanIQ ETF Watch' page monitors and updates the performance of the main ETFs in each asset class weekly, which help the investors with the fund selection." name="Description">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+
+<!-- <script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+-->
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+
+$(function(){
+   $('<a href="#top">back to top</a>').insertAfter('.back');
+});
+</script>
+</head>
+
+<body>
+<div>
+ [@s.action name="advanced__left" namespace="/" executeResult=true]
+ [/@s.action]
+<div class="col-2">
+  <div id="top">
+    <h1 align="center">MyPlanIQ ETF Watch</h1>
+    <p align="center">Other than indicated, performance data are based on closing prices on last Friday</p>
+      <a  href="#largeCapBlend">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Large Cap Blend    </span>   <br>
+      <a  href="#largeCapGrowth">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Large Cap Growth   </span>   <br>
+      <a  href="#largeCapValue">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Large Cap Value  </span>   <br>
+      <a  href="#midCapBlend">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Mid Cap Blend   </span>   <br>
+      <a  href="#midCapGrowth">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Mid Cap Growth  </span>   <br>
+      <a  href="#midCapValue">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Mid Cap Value  </span>   <br>
+      <a  href="#smallCapBlend">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S Small Cap Blend  </span>   <br>
+      <a  href="#smallCapGrowth">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Small Cap Growth  </span>   <br>
+      <a  href="#smallCapValue">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Small Cap Value </span>   <br>
+      <a  href="#foreignLargeCap">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Foreign Large Cap Equities  </span>   <br>
+      <a  href="#foreignSmallMidCap">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Foreign Small/Mid Cap Equities  </span>   <br>
+      <a  href="#europeStocks">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Europe Equities  </span>   <br>
+      <a  href="#emergingMktDiversified">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Emerging Markets Diversified Equities  </span>   <br>
+      <a  href="#emergingMktSmall">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Emerging Markets Small Cap  </span>   <br>
+      <a  href="#usReits">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. REITs  </span>   <br>
+      <a  href="#internationalReits">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">International REITs </span>   <br>
+      <a  href="#broadbaseCom">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Broadbase Commodities  </span>   <br>
+      <a  href="#totalBonds">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Total Bonds  </span>   <br>
+      <a  href="#shortTermBonds">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Short Term Investment Grade Bonds  </span>   <br>
+      <a  href="#intermediateBonds">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Intermediate Term Investment Grade Bonds  </span>   <br>
+      <a  href="#longTermBonds">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Long Term Investment Grade Bonds  </span>   <br>
+      <a  href="#highYieldBonds">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. High Yield Bonds   </span>   <br>
+      <a  href="#IntlGovBonds">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">International Government Bonds   </span>   <br>
+      <a  href="#emergingBonds">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Emerging Market Bonds   </span>   <br>
+      <a  href="#preferred">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">U.S. Preferred/Convertible   </span>   <br>
+      <a  href="#managedfutures">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Managed Futures ETFs   </span>   <br>
+       <a  href="#hedgefunds">GO to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Hedge Funds ETFs   </span>   <br>
+    </div>
+             <div class="back" id="largeCapBlend">
+                        <h2><span>U.S. Large Cap Blend</span></h2>
+                         <span>${readGlobalObject("USLargeCapBlend.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "USLargeCapBlend" readGlobalObject("USLargeCapBlend") false/]
+	    		</div>
+	    	</div>
+	    	
+            <div class="back" id="largeCapGrowth">
+                        <h2><span>U.S. Large Cap Growth</span></h2>
+                         <span>${readGlobalObject("USLargeCapGrowth.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "USLargeCapGrowth" readGlobalObject("USLargeCapGrowth") false/]
+	    		</div>
+	    	</div>	
+
+            <div class="back" id="largeCapValue">
+                        <h2><span>U.S. Large Cap Value</span></h2>
+                         <span>${readGlobalObject("USLargeCapValue.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "USLargeCapValue" readGlobalObject("USLargeCapValue") false/]
+	    		</div>
+	    	</div>
+                   
+            <div class="back" id="midCapBlend">    
+                        <h2><span>U.S. Mid Cap Blend</span></h2>
+                         <span>${readGlobalObject("USMidCapBlend.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "USMidCapBlend" readGlobalObject("USMidCapBlend") false/]
+	    		</div>
+	    	</div>	
+
+            <div class="back" id="midCapGrowth">
+                         <h2><span>U.S. Mid Cap Growth</span></h2>
+                         <span>${readGlobalObject("USMidCapGrowth.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "USMidCapGrowth" readGlobalObject("USMidCapGrowth") false/]
+	    		</div> 
+	    	</div>
+	    	
+	    	<div class="back" id="midCapValue">	
+                         <h2><span>U.S. Mid Cap Value</span></h2>
+                         <span>${readGlobalObject("USMidCapValue.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "USMidCapValue" readGlobalObject("USMidCapValue") false/]
+	    		</div>
+	    	</div>	
+	    		
+             <div class="back" id="smallCapBlend">
+                        <h2><span>U.S. Small Cap Blend</span></h2>
+                         <span>${readGlobalObject("USSmallCapBlend.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "USSmallCapBlend" readGlobalObject("USSmallCapBlend") false/]
+	    		</div>
+	    	</div>
+
+		<div class="back" id="smallCapGrowth">
+                        <h2><span>U.S. Small Cap Growth</span></h2>
+                         <span>${readGlobalObject("USSmallCapGrowth.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "USSmallCapGrowth" readGlobalObject("USSmallCapGrowth") false/]
+	    		</div>
+	    	</div>
+	    	
+            <div class="back" id="smallCapValue">
+                         <h2><span>U.S. Small Cap Value</span></h2>
+                         <span>${readGlobalObject("USSmallCapValue.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "USSmallCapValue" readGlobalObject("USSmallCapValue") false/]
+	    		</div>
+	    	</div>
+            
+            <div class="back" id="foreignLargeCap">
+                         <h2><span>Foreign Large Cap Equities</span></h2>
+                         <span>${readGlobalObject("ForeignLargeCap.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "ForeignLargeCap" readGlobalObject("ForeignLargeCap") false/]
+	    		</div>
+	    	</div>
+  
+           <div class="back" id="foreignSmallMidCap">
+                         <h2><span>Foreign Small/Mid Cap Equities</span></h2>
+                         <span>${readGlobalObject("ForeignSmallMidCap.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "ForeignSmallMidCap" readGlobalObject("ForeignSmallMidCap") false/]
+	    		</div>
+	    	</div>
+
+           <div class="back" id="europeStocks">
+                         <h2><span>Europe Equities</span></h2>
+                         <span>${readGlobalObject("EuropeStocks.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "EuropeStocks" readGlobalObject("EuropeStocks") false/]
+	    		</div>
+	    	</div>
+
+            <div class="back" id="emergingMktDiversified">
+                         <h2><span>Emerging Market Diversified Equities</span></h2>
+                         <span>${readGlobalObject("EmergingMktDiversified.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "EmergingMktDiversified" readGlobalObject("EmergingMktDiversified") false/]
+	    		</div>
+	    	</div>
+
+            <div class="back" id="emergingMktSmall">
+                         <h2><span>Emerging Market Small Cap</span></h2>
+                         <span>${readGlobalObject("EmergingMktSmall.time")}</span>
+	    		<div class="dividerTop">
+	    		[@lti.table "EmergingMktSmall" readGlobalObject("EmergingMktSmall") false/]
+	    		</div>
+	    	</div>
+	    		
+            <div class="back" id="usReits">
+                        <h2><span> U.S. REITs</span></h2>
+                        <span>${readGlobalObject("USREIT.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "USREIT" readGlobalObject("USREIT") false/]
+	    		</div>
+            </div>
+            
+            <div class="back" id="internationalReits">
+                        <h2><span> International REITs</span></h2>
+                        <span>${readGlobalObject("IntlREIT.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "IntlREIT" readGlobalObject("IntlREIT") false/]
+	    		</div>
+             </div>
+             
+             <div class="back" id="broadbaseCom">          
+                        <h2><span> Broadbase Commodities</span></h2>
+                        <span>${readGlobalObject("BroadbaseCommodities.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "BroadbaseCommodities" readGlobalObject("BroadbaseCommodities") false/]
+	    		</div>
+             </div>
+             
+             <div class="back" id="totalBonds">
+                        <h2><span> U.S. Total Bonds</span></h2>
+                        <span>${readGlobalObject("TotalBond.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "TotalBond" readGlobalObject("TotalBond") false/]
+	    		</div>
+              </div>
+              
+              <div class="back" id="shortTermBonds">
+                        <h2><span> U.S. Short Term Investment Grade Bonds</span></h2>
+                        <span>${readGlobalObject("ShortInvestmentGradeBond.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "ShortInvestmentGradeBond" readGlobalObject("ShortInvestmentGradeBond") false/]
+	    		</div>
+              </div>
+              
+              <div class="back" id="intermediateBonds">      
+                        <h2><span> U.S. Intermediate Term Investment Grade Bonds</span></h2>
+                        <span>${readGlobalObject("IntermInvestmentGradeBond.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "IntermInvestmentGradeBond" readGlobalObject("IntermInvestmentGradeBond") false/]
+	    		</div>
+              </div>
+              
+              <div class="back" id="longTermBonds">
+                        <h2><span> U.S. Long Term Investment Grade Bonds</span></h2>
+                        <span>${readGlobalObject("LongInvestmentGradeBond.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "LongInvestmentGradeBond" readGlobalObject("LongInvestmentGradeBond") false/]
+	    		</div>
+	    	 </div>
+
+             <div class="back" id="highYieldBonds">
+                        <h2><span> U.S. High Yield Bonds</span></h2>
+                        <span>${readGlobalObject("HighYieldBond.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "HighYieldBond" readGlobalObject("HighYieldBond") false/]
+	    		</div>
+             </div>
+             
+             <div class="back" id="IntlGovBonds">
+                        <h2><span> International Government Bonds ETFs</span></h2>
+                        <span>${readGlobalObject("IntlGovBonds.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "IntlGovBonds" readGlobalObject("IntlGovBonds") false/]
+	    		</div>
+             </div>
+
+             <div class="back" id="emergingBonds">
+                        <h2><span> Emerging Market Bonds</span></h2>
+                        <span>${readGlobalObject("EmergingBond.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "EmergingBond" readGlobalObject("EmergingBond") false/]
+	    		</div>
+             </div>
+             
+             <div class="back" id="preferred">
+                        <h2><span> U.S. Preferred/Convertible</span></h2>
+                        <span>${readGlobalObject("PreferredConvertible.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "PreferredConvertible" readGlobalObject("PreferredConvertible") false/]
+	    		</div>
+             </div>
+
+             <div class="back" id="managedfutures">
+                        <h2><span> Managed Futures ETFs</span></h2>
+                        <span>${readGlobalObject("ManagedFutures.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "ManagedFutures" readGlobalObject("ManagedFutures") false/]
+	    		</div>
+             </div>
+
+             <div class="back" id="hedgefunds">
+                        <h2><span> Hedge Funds ETFs</span></h2>
+                        <span>${readGlobalObject("HedgeFunds.time")}</span>
+                        <div class="dividerTop">
+	    		[@lti.table "HedgeFunds" readGlobalObject("HedgeFunds") false/]
+	    		</div>
+             </div>
+
+              
+
+
+</div>
+
+</div>
+</body>
+</html>

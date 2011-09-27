@@ -1,0 +1,158 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+
+<html>
+<head>
+
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache,must-revalidate"> 
+<META HTTP-EQUIV="Expires" CONTENT="0"> 
+<META HTTP-EQUIV="expires" CONTENT="wed,26feb199708:21:57gmt"> 
+
+<style type="text/css">
+body {
+font-family: Arial, Helvetica, sans-serif;
+font-size:12px;
+color:#666666;
+background:#fff;
+text-align:center;
+}
+* {
+margin:0;
+padding:0;
+}
+
+a {
+color:#1E7ACE;
+text-decoration:none; 
+}
+a:hover {
+color:#000;
+text-decoration:underline;
+}
+h3 {
+font-size:14px;
+font-weight:bold;
+}
+
+pre,p {
+color:#1E7ACE;
+margin:4px;
+}
+input, select,textarea {
+padding:1px;
+margin:2px;
+font-size:15px;
+}
+.buttom{
+padding:1px 10px;
+font-size:12px;
+border:1px #1E7ACE solid;
+background:#D0F0FF;
+cursor:pointer;
+}
+#formwrapper {
+width:450px;
+margin:15px auto;
+padding:20px;
+text-align:left;
+border:1px solid #A4CDF2;
+}
+fieldset {
+padding:10px;
+margin-top:5px;
+border:1px solid #A4CDF2;
+background:#fff;
+}
+fieldset legend {
+color:#1E7ACE;
+font-weight:bold;
+padding:3px 20px 3px 20px;
+border:1px solid #A4CDF2; 
+background:#fff;
+}
+fieldset label {
+float:left;
+width:120px;
+text-align:right;
+padding:4px;
+margin:1px;
+}
+fieldset div {
+clear:left;
+margin-bottom:2px;
+}
+.enter{ text-align:center;}
+.clear {
+clear:both;
+}
+</style>
+
+
+</head>
+<body style="background-color:#DCDCDC;">
+
+
+
+<div id="formwrapper">
+
+  <h3>Add inviteCode</h3>
+  <form action="adminInsertinvite.action?includeHeader=false" method="post">
+
+    <fieldset>
+    <legend>Here Add inviteCode</legend>
+    <div>
+      <label for="Name">Invite Name</label>
+      <input type="text" name="inviteName" id="Name" size="18" maxlength="30" />
+      <br/>
+    </div>
+    <div>
+
+      <label for="password">Middle Man</label>
+      <input type="text" name="middleMan" id="password" size="18" maxlength="30" />
+      <br/>
+    </div>
+    
+    <div>
+
+      <label for="password">Invite Code</label>
+      <input type="text" name="inviteCodecode" id="password" value="${inviteCodecode}" size="18" maxlength="30" />
+      <br/>
+    </div>
+    
+    <div>
+
+      <label for="password">Prince Item</label>
+      <select name="priceItem">
+		<option value="1">Princeitem of 1</option>
+   	 	<option value="2">Princeitem of 2</option>
+    	<option value="3">Princeitem of 3</option>
+    	<option value="4">Princeitem of 4</option>
+    	<option value="5">Princeitem of 5</option>
+    	<option value="6">Princeitem of 6</option>
+	  </select>
+      <br/>
+    </div>
+    <div class="cookiechk" style="text-align:center;">
+      <input name="login791" type="submit" class="buttom" value="build" />
+    </div>
+    </fieldset>
+  </form>
+  <br/>
+  
+  <form action="" method="post" name="apForm" id="apForm">
+    <fieldset>
+    <legend>Url code</legend>
+    <p><strong>Please copy this url</strong> </p>
+    <div>
+      [@s.textarea name="url" cssStyle="width:450px;height:100px;"][/@s.textarea]
+    </div>
+  </form>
+
+</div>
+
+
+
+
+</body>
+</html>

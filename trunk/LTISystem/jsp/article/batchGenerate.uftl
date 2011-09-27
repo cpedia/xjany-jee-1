@@ -1,0 +1,62 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+<head>
+<script>
+function execute(){
+	$("#executeform").submit();
+	/*
+ 	$.ajax({
+	   type: "Post",
+	   url: "/LTISystem/article_generate.action",
+	   data:$("#executeform").serialize(),
+	   success: function(msg){
+	     alert("Success");
+	     window.location.reload();
+	   },
+	  error: function(message){
+        alert($.trim(message.responseText));
+        return;
+      }
+	 });*/
+}
+</script>
+</head>
+<body>
+ <p>
+  <form action="/LTISystem/article_generate.action" method="post" id="executeform" enctype="multipart/form-data">
+  <table width="100%" style="margin:10px">
+  <tr>
+  <td width="100px" valign="top">
+  <b>ID or Ticker</b>
+  </td>
+  <td>
+  <textarea name="idsOrTickers" cols="40" rows="5"></textarea>
+   Please input the plan IDs or Tickers like:686,GOOG,687,688,690,SDS,AAPL
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <b>UpLoad File</b>
+  </td>
+  <td>
+  <input type="file" name="uploadFile" >
+   <a rel="lightbox" href="/LTISystem/article_downloadList.action?usePlanList=true">Download Example File</a>
+  </td>
+  </tr>
+  <tr>
+  <td width="100px">
+  <b>Template</b>
+  </td>
+  <td>
+  <input type="text" name="templateName" value="plan.uftl" size="40">
+  </td>
+  </tr>
+  </table>
+  </form>
+ </p>
+  <p>
+ <input type="button" class="uiButton" value="Execute" onclick="execute()"> 
+  </p>
+ </body>
+</html>

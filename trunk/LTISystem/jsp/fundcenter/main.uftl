@@ -1,0 +1,73 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<meta name="funds" content="vf_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>ValidFi Mutual Funds, ETFs and Close End Funds</title>
+</head>
+<body>
+		<div id="vf_contentright">
+			<h1 align="center"><span class="green">ValidFi<sup style="color:red"><i>Beta</i></sup>:</span> Mutual Funds, ETFs, Closed End Funds Research</h1>
+			<hr>
+			<div class="clear">&nbsp;&nbsp;&nbsp;</div>
+			<p>&nbsp;</p>
+			
+			<div id ="vf_main" style="min-height: 300px; height:300px;">
+				<h1><span>Fund Analysis</span></h1>
+				<hr/>
+				<ul>
+					<li>Study the total return (with dividend and distribution reinvested) and other factors (such as standard deviation, alpha etc.) for any period of time. </li>
+					<li>Compare performance with other funds or even a portfolio.</li>
+					<li>Analyze funds' exposure to stocks, bonds and other asset classes. </li>
+				</ul>
+				<form target="_top" action="/LTISystem/jsp/security/Quote.action">
+						<input type="text" id="quote-search-field" name="symbol">
+						<input type="submit" value="Fund Analysis">
+				</form>
+			</div>
+			<div id="vf_rightbar" style="min-height: 300px; height:300px;">
+				<a target="_top" href="../security/ScreeningMain.action"><h1>Funds, ETFs, CEFs Screener</h1></a>
+				<hr width="80%">
+				<p>Use the <a target="_top" href="../security/ScreeningMain.action">screener</a> to screen 
+				<ul>
+					<li>Various security types such as Funds, ETFs, CEFs, Stocks or even Portfolios. </li>
+					<li>Use statistics criteria such as annualized returns (ARs), Sharpe ratio, standard deviation, maximum drawdown, etc. </li>
+					<li>Various asset classes and even closed end fund discount rates. </li>
+                                        <li>Various historical periods such as past 1 year, past 3 years or even a calendar year like 2008.</li>
+				</ul>
+			</div>
+			<div class="clear">&nbsp;&nbsp;&nbsp;</div>
+			<p>&nbsp;&nbsp;</p>
+		        <p><h2 align="center">Top Performing Funds</h2></p>
+                        <p align="center">You could create your own list using the screener too!</p>
+			<hr align="center">
+			<p>&nbsp;&nbsp;</p>
+			<div id="vf_main" >
+				<h2 style="padding:0;margin:5px 5px 5px 0">Top 10 Small Cap Value Funds</h2>
+				<br class="clear"/>
+				[@s.action name="SecurityTable" namespace="/jsp/fundcenter" executeResult=true]
+				[@s.param name="chosenMPT"]1-sharpeRatio,1-AR[/@s.param]
+			    [@s.param name="sort"]1-sharpeRatio[/@s.param]
+			    [@s.param name="securityType"]MUTUAL FUND[/@s.param]
+			    [@s.param name="size"]10[/@s.param]
+			    [@s.param name="assetClass"]Small Value[/@s.param]
+			    [/@s.action]
+			</div>
+			<div id="vf_rightbar">
+				<h2 style="padding:0;margin:5px 5px 5px 0">Top 10 Multisector Bond Funds</h2>
+				<br class="clear"/>
+				[@s.action name="SecurityTable" namespace="/jsp/fundcenter" executeResult=true]
+			    [@s.param name="chosenMPT"]1-sharpeRatio,1-AR[/@s.param]
+				[@s.param name="sort"]1-AR[/@s.param]
+		    	[@s.param name="securityType"]MUTUAL FUND[/@s.param]
+			    [@s.param name="size"]10[/@s.param]
+			    [@s.param name="assetClass"]Multisector Bond[/@s.param]
+			    [/@s.action]
+			</div>
+				<div class="clear">&nbsp;&nbsp;&nbsp;</div>	
+		</div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+[#ftl]
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>
+<html>
+<head>
+  <meta content='text/html; charset=ISO-8859-1'
+ http-equiv='Content-Type'>
+  <title>Registration Welcome Letter</title>
+</head>
+<body>
+[#if user??]
+<p>Your username is: ${user}</p>
+[/#if]
+<table cellpadding='0' cellspacing='0' width='100%'>
+  <tbody>
+    <tr>
+      <td><span
+ style='font-size: 10px; line-height: 200%; font-family: verdana; text-decoration: none;'>Email
+not
+displaying
+correctly?
+
+      <a
+ href='http://www.myplaniq.com/LTISystem/newsletter__newsletter111403.action'
+ style='font-size: 12px; color: rgb(153, 102, 0); line-height: 200%; font-family: verdana; text-decoration: none;'>View
+it
+in
+your
+browser.</a></span></td>
+    </tr>
+  </tbody>
+</table>
+<table width='100%'>
+  <tbody>
+    <tr>
+    </tr>
+    <tr>
+      <td>
+      <a href="http://www.myplaniq.com"><h2 align='center'><font color='#458f51'>Welcome To MyPlan</font><font
+ color='#95b5c1'>IQ</font> </h2></a>
+      </td>
+      <td align='right' width='6%'><a
+ href='http://www.myplaniq.com/LTISystem/newsletter__nllist.action'><strong></strong></a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style='text-align: left;'>Thank you for registering with us. You are
+joining thousands of users who are using MyPlanIQ for unbiased,
+transparent and low cost information for long term investing.<br>
+</p>
+<p style='text-align: left;'>John Zhong and Simon Napper co-founded
+MyPlanIQ to provide systematic, unbiased, easy to understand
+information to improve risk adjusted returns from your portfolios. We
+provide advanced asset allocation strategies -- once the exclusive
+territory of wealth managers and hedge funds -- tailored to your plan
+(401K, IRA, etc.) and risk profile. We both spent many years
+in the electronics (semiconductor) industry. As a 401K plan participant
+and private investor, we found it almost impossible to find clear,
+understandable investment advice. We are baby
+boomers concerned about our own retirement and decided to build a
+system to fill this huge hole.&nbsp;<a
+ href='mailto:support@myplaniq.com?subject=Questions/Comments'></a>
+</p>
+<p><span style='font-weight: bold;'><a href='http://www.surveymonkey.com/s/9T27GQ9'>Two Minute Survey</a> <br>
+</span></p>
+<p><span style='font-weight: bold;'>Getting Started </span><span style='font-weight: bold;'><br>
+</span></p>
+<ul>
+  <li>Take this three minute survey to help us serve you better<br>
+  </li>
+  <li><a
+ href='http://www.myplaniq.com/LTISystem/getstarted_pickaplan.action'>Select
+a
+plan</a> (If you can't find the plan, <a
+ href='mailto:support@myplaniq.com?subject=Plan%20Tickers'>email</a> us
+the tickers
+and we will build it for you)</li>
+  <li>Customize it for your risk profile -- how much in bonds and how
+much in stocks</li>
+  <li>Start following your portfolio</li>
+</ul>
+<p><span style='font-weight: bold;'></span><span
+ style='font-weight: bold;'></span></p>
+<span style='font-weight: bold;'>A Brief Site Map </span><span
+ style='font-weight: bold;'></span>
+<p>You may not know all of the features that we offer. This is a brief
+summary of some of the key capabilities you may not know.
+</p>
+<ul>
+  <li><a href='http://www.myplaniq.com/LTISystem/f401k__main.action'>Home</a></li>
+  <ul>
+    <li>This takes you to the home page. Note that there are yellow
+tabs towards the bottom of the page with more information</li>
+    <li>Note this&nbsp; <a target='_blank'
+ href='http://www.myplaniq.com/LTISystem/f401k__ma.action'>landing page</a>
+which explains what good asset
+allocation can provide </li>
+    <li>Note that there are short videos explaining the site</li>
+    <li>You can sign-up using your Facebook account</li>
+  </ul>
+  <li><a
+ href='http://www.myplaniq.com/LTISystem/jsp/register/ViewUserDetails.action'>My
+Account</a> </li>
+  <ul>
+    <li>Reset your password</li>
+    <li>See how many portfolios you are following</li>
+    <li>Default risk profile</li>
+    <li>Subscribe or unsubscribe</li>
+  </ul>
+  <li><a
+ href='http://www.myplaniq.com/LTISystem/f401k__portfolios.action'>My
+Portfolios</a> </li>
+  <ul>
+    <li>Where are your customized portfolios are listed</li>
+  </ul>
+  <li><a
+ href='http://www.myplaniq.com/LTISystem/f401k__strategies.action'>Strategies</a></li>
+  <ul>
+    <li>Explanation of Strategic Asset and Tactical Asset Allocation
+Strategies so you know how it all works</li>
+  </ul>
+  <li><a href='http://www.myplaniq.com/LTISystem/f401k__faqs.action'>Support</a></li>
+  <ul>
+    <li>Where you can find the Quickstart guide</li>
+    <li>FAQs</li>
+    <li>Tutorials</li>
+  </ul>
+  <li><a href='http://www.myplaniq.com/jforum/forums/list.page'>Communities</a></li>
+  <ul>
+    <li>Post questions </li>
+    <li>See what other users are saying</li>
+  </ul>
+  <li>Comparison</li>
+  <ul>
+    <li><a
+ href='http://www.myplaniq.com/LTISystem/f401k_plancomparetool.action'>Compare
+plans</a> -- ability of a set of funds to deliver good returns</li>
+    <li><a
+ href='http://www.myplaniq.com/LTISystem/jsp/portfolio/CompareMain.action?action=viewportfolio&amp;ID=31644&amp;pName=Six%20Core%20Asset%20ETF%20Benchmark%20Strategic%20Asset%20Allocation%20Moderate'>Compare
+portfolios</a> -- ability to compare strategy applied to a plan with a
+risk profile. Note that this one has the Six Asset Benchmark but you
+can clear it and list whatever you want up to 5 portfolios<br>
+    </li>
+  </ul>
+  <li><a href='http://www.myplaniq.com/LTISystem/f401k_blog.action'>Articles</a></li>
+  <ul>
+    <li>Most of our published articles are posted here</li>
+    <li>Some are only allowed on the main blogsite (Seekingalpha)</li>
+    <li>Archive of weekly <a
+ href='http://www.myplaniq.com/LTISystem/newsletter__main.action'>newsletters</a><br>
+    </li>
+  </ul>
+  <li><a
+ href='http://www.myplaniq.com/LTISystem/advanced__strategies.action'>Advanced</a></li>
+  <ul>
+    <li> <a
+ href='http://www.myplaniq.com/LTISystem/advanced__strategies.action'>Advanced
+Strategies</a> review other people's investment strategies (expert
+level subscription required to deploy them)</li>
+    <li> <a
+ href='http://www.myplaniq.com/LTISystem/advanced__markets.action'>360&deg;
+Market
+Overview</a> gives you up-to-date trends for a wide range
+ofsasset classes</li>
+    <li> <a
+ href='http://www.myplaniq.com/LTISystem/advanced__ETFWatch.action'>ETFs
+in
+Asset
+Classes</a></li>
+    <li> <a
+ href='http://www.myplaniq.com/LTISystem/advanced__indicators.action'>Rankings</a>
+of the top ETFs in the major asset classes and sub classes</li>
+    <li> <a
+ href='http://www.myplaniq.com/LTISystem/advanced__indicators.action'>Market
+Indicators</a> tells you what the gurus think </li>
+    <li> <a
+ href='http://www.myplaniq.com/LTISystem/advanced__moneySmart.action'>Smart
+Money
+Indicators</a> tells you what the pros are doing with their money</li>
+  </ul>
+</ul>
+<br>
+Welcome and please let us know if you
+have any <a
+ href='mailto:support@myplaniq.com?subject=Questions/Comments'>questions
+or
+comments</a><b><br>
+<br>
+Disclaimer:</b>
+<div>
+<p><font size='-1'> </font></p>
+<p><font size='-1'>Any investment in securities including mutual funds,
+ETFs, closed end funds, stocks and any other securities could lose
+money over any period of time. All investments involve risk. Losses may
+exceed the principal invested. Past performance is not an indicator of
+future performance. There is no guarantee for future results in your
+investment and any other actions based on the information provided on
+the website including, but not limited to, strategies, portfolios,
+articles, performance data and results of any tools.</font></p>
+<p><font size='-1'>All rights are reserved and enforced. By accessing
+the website, you agree not to copy and redistribute the information
+provided herein without the explicit consent from MyPlanIQ.</font></p>
+</div>
+</body>
+</html>

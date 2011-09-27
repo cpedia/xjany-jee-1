@@ -1,0 +1,151 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ Fund Center: ${Parameters.symbol}</title>
+
+<meta name="funds" content="vf_current" />
+<meta  name="Description" content="MyPlanIQ Fund Center provides the news, the performance statistics data, total return chart and other analytic tools for all mutual funds, CEFs and ETFs.">
+
+
+
+<script>
+function loadroot(category,btn){
+	$('#sub_category').hide();
+	loadresult(category,btn);
+}
+
+function loadsub(category,btn){
+	$('#sub_category').show();
+	$('#sub_category').html($('#'+category.replace(/ /g,'_')).html());
+	
+	loadresult(category,btn);
+}
+
+function loadresult(category,btn){
+	var paras = window.location.search;
+	var url = window.location.host;
+	paras.replace(/includeHeader/,"_includeHeader");
+	if(category=="News" ){
+		if(url.indexOf("localhost")>=0||url.indexOf("myplaniq.com")>=0){
+			window.open("${lti.baseUrl}/f401k_symbols.action?symbol=${Parameters.symbol?upper_case}","_blank");	
+		}
+		else{
+			window.open("${lti.baseUrl}/jsp/news/labels/${Parameters.symbol?upper_case}.html","_blank");
+		}
+	}else if(category=="Total Return Chart"){
+		window.open("SecurityMPTChart.action?includeHeader=false&symbol=${Parameters.symbol}","_blank");
+	}else if(category=="Asset Allocation Analysis"){
+		window.open("${lti.baseUrl}/jsp/fundcenter/AATrend.action?symbol=${Parameters.symbol}&chart=true&IsFirst=1","_blank");
+	}else if(category=="Asset Allocation Ranking"){
+		window.open("../betagainranking/GetDetails.action?symbol=${Parameters.symbol}","_blank");
+	}else if(category=="Beta Gain Analysis"){
+		window.open("${lti.baseUrl}/jsp/fundcenter/BetaGain.action?symbol=${Parameters.symbol}","_blank");
+	}else if(category=="Snap Shot"){
+		$("#result").html($("#content_hide").html());	
+		resetBtn(btn);
+	}else if(category=="Total Returns and Statistics"){
+		var urlstring='DetailPerformance.action'+ paras;
+		loadPage(urlstring,btn);	
+		
+	}else if(category=="Tools"){
+		resetBtn(btn);
+	}
+	
+	return;
+}
+function loadPage(urlstring,btn){
+	$('.ibutton').each(function(){
+		$(this).attr({"disabled":true});
+	});
+	
+	
+	$('#result').html('Please wait ... ');
+		 $.ajax({
+		   type: "POST",
+		   url: urlstring,
+		   data:"includeHeader=false",
+		   success: function(msg){
+		   		$('#result').html(msg);
+		   		resetBtn(btn);
+		   }
+	 });	
+	
+}
+
+function resetBtn(btn){
+	$('.ibutton').each(function(){
+		$(this).attr({"disabled":false});
+	});
+	$(btn).attr({"disabled":true});
+}
+
+$(function() {
+	$("#result").html($("#content_hide").html());
+	$("#btn_ss").attr({"disabled":true});
+});
+
+
+</script>
+</head>
+<body>
+<div id="mainForm">
+<br>
+
+<div style="width:100%" id="root_category" align="left">
+	<input type="button" class="ibutton"  onclick="loadroot('News',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value='News'>
+	<input type="button" class="ibutton"  onclick="loadroot('Snap Shot',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value='Snap Shot' id="btn_ss">
+	<input type="button" class="ibutton"  onclick="loadroot('Total Returns and Statistics',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value="Total Returns and Statistics">
+	<input type="button" class="ibutton"  onclick="loadroot('Total Return Chart',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value="Total Return Chart">
+	[@s.if test="type==2"]
+	<input type="button" class="ibutton"  onclick="loadroot('CEF: NAV Statistics',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value="CEF: NAV Statistics">
+	[/@s.if]
+	<input type="button" class="ibutton"  onclick="loadsub('Tools',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value="Tools">
+
+</div>
+
+<div style="display:none" id="Tools" align="left">
+    <input type="button" class="ibutton"  onclick="loadresult('Asset Allocation Analysis',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:14px" value='Asset Allocation Analysis'>
+	[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+	<input type="button" class="ibutton"  onclick="loadresult('Asset Allocation Ranking',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:14px" value="Asset Allocation Ranking">
+	<input type="button" class="ibutton"  onclick="loadresult('Beta Gain Analysis',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:14px" value='Beta Gain Analysis'>
+	<input type="button" class="ibutton"  onclick="loadresult('Clone This Fund',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:14px" value='Clone This Fund'>
+	<input type="button" class="ibutton"  onclick="loadresult('Underlying Strategies',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:14px" value="Underlying Strategies">
+	<input type="button" class="ibutton"  onclick="loadresult('Factor Analysis/Risk Alert',this)" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:14px" value='Factor Analysis/Risk Alert'>
+	[/@authz.authorize]	
+</div>
+
+
+<br>		
+<div style="width:100%" id="sub_category" align="left">
+</div>
+<br>
+
+<div style="width:100%" id="result" align="left">
+   
+</div>
+<div id="content_hide" style="display:none">
+[@s.action name="Details" namespace="/jsp/fundcenter" executeResult=true]
+	[@s.param name="symbol"]${Parameters.symbol}[/@s.param]
+[/@s.action]
+<br>
+<br>
+<h2 style="margin: 5px 5px 5px 0pt; padding: 0pt;  ">Performance</h2>
+<br>
+[@s.action name="Partial" namespace="/jsp/fundcenter" executeResult=true]
+	[@s.param name="chosenYear"]2005,2006,2007,2008,2009,2010[/@s.param]
+	[@s.param name="symbol"]${Parameters.symbol}[/@s.param]
+[/@s.action]  
+<br>   
+
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+

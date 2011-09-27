@@ -1,0 +1,6 @@
+<p style="text-align: center;"><span style="font-size: large;"><b>Strategy Commentaries</b></span></p>
+<ol>
+    <li><span style="font-size: large;"><span><!---revised by fangzhenju-><!--<a href="http://202.116.76.163:8080/LTISystem/jsp/ajax/CustomizePage.action?pageName=LazySummaryGoogle">Asset Allocation Strategy: Static &quot;Lazy&quot; Portfolios Performance and Risk Analysis.</a>-->
+<a href="http://202.116.76.163:8080/LTISystem/jsp/customizepage/LazySummaryGoogle.action?">Asset Allocation Strategy: Static &quot;Lazy&quot; Portfolios Performance and Risk Analysis.</a></span></span></li>
+    <li><span style="font-size: large;"><span><!---revised by fangzhenju-><!--<a href="http://202.116.76.163:8080/LTISystem/jsp/ajax/CustomizePage.action?pageName=CashFlowSpendingLazyPort">Cash Flow Strategy: Retirement Spending Rules on Various &quot;Lazy&quot; Portfolios</a>--><a href="http://202.116.76.163:8080/LTISystem/jsp/customizepage/CashFlowSpendingLazyPort.action?">Cash Flow Strategy: Retirement Spending Rules on Various &quot;Lazy&quot; Portfolios</a>. </span></span><sup style="color: red;">New!</sup></li>
+</ol>

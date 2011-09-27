@@ -1,0 +1,343 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title></title>
+<meta name="Blogs" content="n401k_current" />
+<meta  name="Description" content="MyPlanIQ constantly publishes news and articles about portfolio management, retirment investing, ETF market trends and retirment plan evaluation.  ">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<script>
+$(document).ready(function(){
+	$('li').addClass('liStyle');
+});
+
+function showRe(){
+  $("#news").hide();
+  $("#retirement").show();
+}
+function showNews(){
+   $("#news").show();
+  $("#retirement").hide();
+}
+</script>
+<style>
+.content_tier1, #content_tier1{
+	padding: 35px 10px 30px 0px !important;
+
+}
+li.liStyle{
+	margin-left:0px;
+	list-style-type:none;
+}
+ol li.liStyle{
+    margin-left:15px;
+	list-style-type:decimal;
+}
+
+a.lead{
+  color:#FFFFFF;
+}
+
+#creditfooter{
+	display:none;
+}
+.feedTitle{
+	padding-left:300px;
+	font-size:20pt;
+	padding-bottom:8px;
+	margin-bottom:8px;
+}
+.feedTitle a{
+	text-decoration:none;
+}
+.headline a{
+	text-decoration:none;
+}
+.date{
+	font-size:11px;
+	line-height:18px;
+}
+.headline{
+	font-size:14px;
+	font-weight:bold;
+}
+.edit_area{
+	margin-bottom:10px;
+}
+.liStyle{
+	margin-top:10px;
+}
+span{
+color:#000000;
+}
+.tab{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:18px;
+	margin:2px 0;
+	padding:7px 10px 9px 36px;
+}
+.tab1{
+	background:url("/LTISystem/jsp/template/ed/images/faq_c.png") no-repeat scroll 0 9px #FAFAFA;
+	border-bottom:1px solid #E2E2E2;
+	border-top:1px solid #E2E2E2;
+	font-size:13px;
+	line-height:1.7em;
+	margin:2px 0;
+	padding-left:30px;
+	padding-right:5px;
+}
+</style>
+</head>
+<body>
+	<!--mpleft begining-->
+	<div id="mpleft" style="float:left;width:150px;">
+		<div style="width:250px; margin-right:9px;">
+						<!--leftfirst-->
+						
+						<style>
+.various_nav {
+    background: none repeat scroll 0 0 #EEF2F5;
+	border-right: 1px solid #CECFD0;
+    float: left;
+    width: 142px;
+}
+.various_nav_title {
+    color: #2C2C2C !important;
+    cursor: default !important;
+    font-size: 14px !important;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.various_nav.app_categories li a {
+    color: #024999 !important;
+}
+.various_nav ul li {
+    clear: both;
+	float: left;
+    list-style-type: none;
+    padding: 1px 0 4px 12px !important;
+    width: 123px;
+}
+.various_nav ul li a, .various_nav ul li span {
+    clear: both;
+    color: #024999;
+    cursor: pointer;
+    display: inline;
+    float: left;
+    font-size: 12px;
+    line-height: 1.2em;
+    text-decoration: none !important;
+}
+.various_nav ul {
+    clear: both;
+    float: left;
+    font-size: 1.1em;
+    padding: 10px 0 0;
+    width: 134px;
+}
+.various_nav.app_categories .selected {
+    background: url("/LTISystem/jsp/images/title_pointer.gif") no-repeat scroll 1px 6px transparent;
+    color: #000000 !important;
+    cursor: default;
+    padding: 4px 3px 4px 12px !important;
+    text-decoration: none;
+}
+.various_nav.app_categories li.selected a {
+    color: #000000 !important;
+}
+</style>
+
+<div class="apps">
+  <div class="various_nav app_categories" id="categories">
+  <ul>
+    <li><span class="various_nav_title">Categories</span></li><!--onclick="return hide_show_div('sub_categories');"-->
+    <li class="second  selected"><a name="all" id="apps-store-main" href="/store">All</a> </li> 
+     
+      <li class="second "><a name="News" id="news" href="/store/news">Portfolio Strategies</a></li>
+     
+      <li class="second "><a name="Research Tools" id="research-tools" href="/store/research-tools">ETFs</a></li>
+     
+      <li class="second "><a name="Charts" id="charts" href="/store/charts">Mutual Funds</a></li>
+     
+      <li class="second "><a name="Investment Screeners" id="investment-screeners" href="/store/investment-screeners">401K/IRAs</a></li>
+     
+      <li class="second "><a name="ETF" id="etf" href="/store/etf">Brokerages</a></li>
+     
+      <li class="second "><a name="Data" id="data" href="/store/data">Annuities</a></li>
+    
+    <li class="mid_title"><span class="various_nav_title">Help</span>
+    </li><li class="second"><a href="/store/help-and-support">Blogs</a></li>
+    <li class="second "><a href="/store/apps-faq">FAQ</a></li>
+      
+  </ul>
+  
+</div>
+
+
+  
+
+
+</div>
+						<!--leftfirstend-->
+		</div>		   
+	</div>
+	<!--mpleft end-->
+	<!--mpcenter-->
+	<div id="mpcenterright" style="margin-left:5px;float:left;width:501px;">
+		<div style="width:505px; margin-right:0;float:left;word-wrap:break-word" id="news">
+			[@s.action name="f401k_allblog" namespace="/" executeResult=true]
+				[@s.param name="formusCategories"]News and Commentaries[/@s.param]
+				[@s.param name="setHowCategories"]2[/@s.param]
+				[@s.param name="formuslist"]News and Commentaries|Retirement Investing News and Articles[/@s.param]
+				[@s.param name="setPageSize"]20[/@s.param]
+				[@s.param name="isMain"]true[/@s.param]
+				[@s.param name="isprePage"]true[/@s.param]
+			[/@s.action]
+		</div>
+	</div>
+	<!--mpcenter end-->
+	<!--mpright begining-->
+	<div id="mpright" style="width:280px;float:right" >
+
+		<style>
+.Apricot_yellow {
+	border-color: #3D843D;
+	border-style: solid;
+	border-width: 6px 1px 1px 0;
+	clear: both;
+	margin: 0 0 10px;
+	padding: 0;
+	width: 228px;
+	margin-left: 5px;
+	margin-top: 10px;
+}
+
+.keywords_shadow {
+	margin: 0;
+	padding: 0 8px 3px;
+}
+
+#inner_li {
+	padding-bottom: 3px;
+}
+
+#inner_li a {
+	text-decoration: none;
+}
+
+.etf_extra {
+	color: #777777;
+	background: none repeat scroll 0 0 #EBFEED;
+}
+
+.mini_category {
+	clear: both;
+	margin-bottom: 25px;
+}
+
+.red_title_bk {
+	border-bottom: 2px solid #3D843D;
+	color: #000000;
+	float: left;
+	font-size: 1.6em;
+	font-weight: 500;
+	padding-top: 5px;
+	width: 230px;
+	margin-bottom: 10px;
+	padding-bottom: 2px;
+}
+
+.red_title_bk span {
+	font-size: 13px;
+	cursor: default;
+	font-weight: bold;
+}
+
+.etf_extra_content {
+	float: left;
+	padding: 10px 0 0;
+	width: 100%;
+}
+
+.etf_extra .other {
+	margin-top: 5px;
+}
+
+inner_li a:link {
+	
+	text-decoration: none;
+}
+</style>
+
+
+
+
+
+
+				<div style="margin-top: 10px;">
+					<div class="mini_category etf_extra"
+						style="width: 230px; margin-left: 5px;">
+						<div class="red_title_bk">
+							<span class="red_title_text">Top Plans for Brokerages</span>
+						</div>
+						<div>
+
+							<div id="inner_li">
+								<a href="#">Vanguard ETF</a>: <img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" /><img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" /><img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" /><img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" />
+							</div>
+							<div id="inner_li">
+								<a href="#">MyPlanIQ Diversified Core</a>: <img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" /><img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" /><img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" />
+							</div>
+							<div id="inner_li">
+								<a href="#">Six Core Asset ETFs</a>: <img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" /><img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" /><img
+									src="/LTISystem/jsp/images/star.jpg"
+									alt="" border="0" />
+							</div>
+
+
+						</div>
+
+					</div>
+					
+					<div class="mini_category etf_extra"
+						style="width: 230px; margin-left: 5px;">
+						<div class="red_title_bk">
+							<span class="red_title_text">News & Reports</span>
+						</div>
+						<div>
+								<div id="inner_li">5/2011</div>
+								<div id="inner_li">4/2011</div>
+					    </div>
+
+					</div>
+				</div>
+		
+
+
+   </div>
+	<!--mpright end-->
+</body>
+</html>

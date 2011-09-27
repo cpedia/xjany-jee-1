@@ -1,0 +1,323 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ: Portfolio Comparison Tool</title>
+<meta  name="Description" content="MyPlanIQ Portfolio Comparison Tool help investors compare the performances of different portfolios. Net value charts of different time horizons and various performance indicators are displayed and compared in the result.  ">
+
+<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT">
+<meta name="jqueryui" content="smoothness">
+<script src="/LTISystem/jsp/template/ed/js/initUI_elements.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	var cache = {};
+	$("#t_portfname").autocomplete({
+			minLength: 2,
+			source: function(request, response) {
+				if ( request.term in cache ) {
+					response( cache[ request.term ] );
+					return;
+				}
+				$.ajax({
+					url: "/LTISystem/jsp/portfolio/SearchPortfolio.action?includeHeader=false&size=10&includeSecurity=1",
+					dataType: "json",
+					data: request,
+					success: function( data ) {
+						cache[ request.term ] = data;
+						response( data );
+					}
+				});
+			},
+			focus: function(event, ui) {
+				
+			},
+			select: function(event, ui) { 
+			 	if(ui.item.data==false){
+			 		window.open("/LTISystem/f401k__search.action?keyword="+this.value, "_blank");
+			 	}else{
+			 		$('#t_portfname').val(ui.item.name);
+			 	}
+			 	
+			}
+			
+			
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+			if(item.data==true){
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.name + "</a>" )
+					.appendTo( ul );
+			}else{
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a href='javascript:void(0)'>Show all results for <b>"+item.id+"</b></a>" )
+					.appendTo( ul );
+			}
+			
+		};
+	
+	[#if portfolioName??]
+	$('#t_portfname').val("${portfolioName}");
+	addPortfolio();
+	[/#if]
+});
+
+function addPortfolio(){
+	var canportfs=document.getElementById("portfolioNameArray");
+	var names = canportfs.value.split("\n");
+	var canportfnum = 0;
+	if(names!=null){
+		for(var i=0;i<names.length;++i){
+			if(names[i]!="")
+				++canportfnum;
+		}
+	}
+	if(canportfnum==5)
+		alert("At most compare 5 portfolios!!!");
+	else{
+		var portfname=document.getElementById("t_portfname");
+		var canportfs=document.getElementById("portfolioNameArray");
+		if(canportfnum==0)
+			canportfs.value=portfname.value;
+		else
+			canportfs.value+="\n"+portfname.value;
+		canportfnum++;
+		portfname.value="";
+	}
+	
+}
+function compare(){
+	var portfolioNames="";
+	var canplans=document.getElementById("portfolioNameArray");
+	var names = canplans.value.split("\n");
+	if(names!=null){
+		for(var i=0;i<names.length;++i){
+			if(names[i]!=""){
+				if(portfolioNames!="")
+					portfolioNames+=",";
+				portfolioNames += names[i];
+			}
+		}
+		//alert(portfolioNames);
+		location.href="/LTISystem/jsp/portfolio/ComparePortfolio.action?portfolioString="+escape(portfolioNames);
+	}else
+		alert("The number of plans can not be 0!!!");
+	canplans.value="";
+}
+function clearName(){
+	$('#portfolioNameArray').val("");
+}
+var show_Portf=false;
+function showPortf(){
+	//if(show_Portf==false){
+	//	show_Portf=true;
+	//	$('#btn_showPortf').val('- Portfolio Comparison Chart');
+	//	$('#show_Portf_div').show();
+	//}else{
+	//	show_Portf=false;
+	//	$('#btn_showPortf').val('+ Portfolio Comparison Chart');
+	//	$('#show_Portf_div').hide();
+	//}
+	[#if portfolioSymbols?? && portfolioString??]
+	var url="/LTISystem/jsp/fundcenter/SecurityMPTChart.action?includeHeader=false";
+	url+="&chartName=Portfolio Comparison Chart";
+	url+="&symbol=Portfolio Comparison Chart";
+	url+="&symbols=${portfolioSymbols}";
+	url+="&names=${portfolioString}";
+	window.open(url, "_blank");
+	[/#if]
+}
+var show_Port=true;
+function showPort(){
+	if(show_Port==false){
+		show_Port=true;
+		$('#btn_showPort').val('- Performance Comparison');
+		$('#show_Port_div').show();
+	}else{
+		show_Port=false;
+		$('#btn_showPort').val('+ Performance Comparison');
+		$('#show_Port_div').hide();
+	}
+}
+var show_Perf=false;
+function showPerf(){
+	if(show_Perf==false){
+		show_Perf=true;
+		$('#btn_showPerf').val('- More Performance Analytics Comparison');
+		$('#show_Perf_div').show();
+	}else{
+		show_Perf=false;
+		$('#btn_showPerf').val('+ More Performance Analytics Comparison');
+		$('#show_Perf_div').hide();
+	}
+}
+
+var show_Image=false;
+function showImage(){
+ if(show_Image==false){
+    show_Image=true;
+     $("#btn_showImage").val('- Show Portfolio Compare Chart');
+     $("#show_image_div").show();
+ }else{
+    show_Image=false;
+    $("#btn_showImage").val('+ Show Portfolio Compare Chart');
+    $("#show_image_div").hide();
+ }
+}
+</script>
+</head>
+<body>
+	<h1 align="center">Portfolio Comparison</h1>
+	[#if ignoreNames?? && ignoreNames.size()>0]
+		<p>
+			[#list ignoreNames as name]
+			[<b>${name}</b>]  
+			[/#list]
+			 has/have not been simulated. Please contact support@myplaniq.com if you want to know the simulated result, we will set up for you in priority. It will be much appreciated if you can send us the latest investment options in your Plan. Thank you for your attention.
+		</p>
+	[/#if]
+	[#if portfolioName??]<p>The portfolio you want to compare is: <strong>${portfolioName}</strong></p>[/#if]
+		<div class="ui-widget" id="contianer">
+			<table border=0 width='100%'>
+				<tr>
+					<td>Portfolio Name</td>
+					<td>
+						<table width="100%">
+						<tr>
+							<td width="520">
+								<textarea class="ui-widget ui-widget-content" id="t_portfname" rows="1" cols="70"></textarea>
+							</td>
+							<td>
+								<a id="btn_addplan" href="javascript:void(0)" onclick="addPortfolio()" class="uiButton">Add A Portfolio</a>
+							</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>Candidate Portfolios</td>
+					<td>
+						<table width="100%">
+						<tr>
+							<td width="520">
+								<textarea class="ui-widget ui-widget-content" id="portfolioNameArray" rows="5" cols="70">[#if portfolioString??]${portfolioString?replace(",","\n")}[/#if]</textarea>
+							</td>
+							<td>
+								<a id="btn_compare" href="javascript:void(0)" onclick="compare()" class="uiButton">Compare</a>
+								<a id="btn_clear" href="javascript:void(0)" onclick="clearName()" class="uiButton">Clear</a>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		[#if portMap??]
+		<input type='button' id='btn_showPort' class="uiButton" onclick='javascript:showPort()' style='width:220px;text-align:left' value='- Performance Comparison'>
+		<div id='show_Port_div' style='display:block'>
+		<h3 align="center">Portfolio Performance Comparison</h3>
+			<table id="comparetablePort" width='100%' width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+				<thead>
+					<tr>
+						<th alt="Plan Name" width="40%" class="header">Portfolio/Fund Name</th>
+						<th alt="One Years' Annualized Return" width="10%" class="header">1Yr AR</th>
+						<th alt="One Years' Sharpe Ratio" width="10%" class="header">1Yr Sharpe</th>
+						<th alt="Three Years' Annualized Return" width="10%" class="header">3Yr AR</th>
+						<th alt="Three Years' Sharpe Ratio" width="10%" class="header">3Yr Sharpe</th>
+						<th alt="Five Years' Annualized" width="10%" class="header">5Yr AR</td>
+						<th alt="Five Years' Sharpe Ratio" width="10%" class="header">5Yr Sharpe</th>
+					</tr>
+				</thead>
+				<tbody>
+						[#list   portMap?keys as portfname]
+						[#if portfname_index%2==0]
+							<tr class='odd'>
+						[/#if]
+						[#if portfname_index%2==1]
+							<tr class='even'>
+						[/#if]
+							<td>${portfname}</td>
+							<td>[#if portMap[portfname].AR1??]${portMap[portfname].AR1?string.percent}[/#if]</td>
+							<td>[#if portMap[portfname].sharpeRatio1??]${portMap[portfname].sharpeRatio1?string.percent}[/#if]</td>
+							<td>[#if portMap[portfname].AR3??]${portMap[portfname].AR3?string.percent}[/#if]</td>
+							<td>[#if portMap[portfname].sharpeRatio3??]${portMap[portfname].sharpeRatio3?string.percent}[/#if]</td>
+							<td>[#if portMap[portfname].AR5??]${portMap[portfname].AR5?string.percent}[/#if]</td>
+							<td>[#if portMap[portfname].sharpeRatio5??]${portMap[portfname].sharpeRatio5?string.percent}[/#if]</td>
+							</tr>
+						[/#list]
+				</tbody>
+				</table>
+				<script type="text/javascript"> 
+					$(document).ready(function(){
+						$("#comparetablePort").tablesorter({
+							widthFixed: true, 
+							widgets: ['zebra']
+						})
+					}); 
+				</script>
+				</div>
+		[/#if]
+		<br><br>
+		[#if portfolioString?? && portfolioSymbols??]
+		<input type='button' id='btn_showPortf' class="uiButton" onclick='javascript:showPortf()' style='width:240px;text-align:left' value='+ Portfolio Comparison Chart'>
+		<div id='show_Portf_div' style='display:none'>
+		<div id="chartPortfDiv" style="padding-top:60px;margin:0;">
+		<a href="FullCompare.action?portfolioSymbols=${portfolioSymbols}&endDate=${endDate}&portfolioString=${portfolioString}&includeHeader=false" target="_blank">Larger Chart</a>
+		[#--
+			[@s.url action="OutputPrice" namespace="/jsp/flash" id="urlPorts_flash_xml" escapeAmp="false"]
+			[@s.param name="indexArray"]${portfolioSymbols}[/@s.param]
+			[@s.param name="startDate"]2000-12-31[/@s.param]
+			[@s.param name="endDate"]${endDate}[/@s.param]
+			[/@s.url]
+		[@s.action name="DisplayFlash" namespace="/jsp/flash" executeResult=true]
+			[@s.param name="chartName"]Portfolio Comparison Chart[/@s.param]
+			[@s.param name="lineNameArray"]${portfolioString}[/@s.param]
+			[@s.param name="address"]127.0.0.1[/@s.param]
+			[@s.param name="port"]8080[/@s.param]
+			[@s.param name="url"]${urlPorts_flash_xml}[/@s.param]
+			[@s.param name="currentMode"]portfolio[/@s.param]
+		[/@s.action]
+		--]
+		</div>
+		</div>
+		[/#if]
+		<br><br>
+				
+  	
+		[#if portfolioString?? && portfolioSymbols??]
+		   <input type='button' id='btn_showImage' class="uiButton" onclick='javascript:showImage()' style='width:320px;text-align:left' value='+ Show Portfolio Compare Chart'>
+		   <div id="show_image_div" style="display:none">
+		   	 <h2>Three Month Chart</h2>
+		     <a rel="lightbox" href="/LTISystem/article_viewchart2.action?[#if portfolioids??]portfolioID=${portfolioids}[/#if][#if securityids??]&securityID=${securityids}[/#if]&monthNum=3">
+		     <img src="/LTISystem/article_viewchart2.action?[#if portfolioids??]portfolioID=${portfolioids}[/#if][#if securityids??]&securityID=${securityids}[/#if]&monthNum=3" alt="" hspace="6" vspace="6" /></a>
+		     
+		     <h2>One Year Chart</h2>
+		     <a rel="lightbox" href="/LTISystem/article_viewchart2.action?[#if portfolioids??]portfolioID=${portfolioids}[/#if][#if securityids??]&securityID=${securityids}[/#if]&yearNum=1">
+		     <img src="/LTISystem/article_viewchart2.action?[#if portfolioids??]portfolioID=${portfolioids}[/#if][#if securityids??]&securityID=${securityids}[/#if]&yearNum=1" alt="" hspace="6" vspace="6" /></a>
+		     
+		     <h2>Three Year Chart</h2>
+		     <a rel="lightbox" href="/LTISystem/article_viewchart2.action?[#if portfolioids??]portfolioID=${portfolioids}[/#if][#if securityids??]&securityID=${securityids}[/#if]&yearNum=3">
+		     <img src="/LTISystem/article_viewchart2.action?[#if portfolioids??]portfolioID=${portfolioids}[/#if][#if securityids??]&securityID=${securityids}[/#if]&yearNum=3" alt="" hspace="6" vspace="6" /></a>
+		     
+		     <h2>Five Year Chart</h2>
+		     <a rel="lightbox" href="/LTISystem/article_viewchart2.action?[#if portfolioids??]portfolioID=${portfolioids}[/#if][#if securityids??]&securityID=${securityids}[/#if]&yearNum=5">
+		     <img src="/LTISystem/article_viewchart2.action?[#if portfolioids??]portfolioID=${portfolioids}[/#if][#if securityids??]&securityID=${securityids}[/#if]&yearNum=5" alt="" hspace="6" vspace="6" /></a>
+		   </div>
+		[/#if]
+		<br><br>
+		[#if portfolioString??]
+		<input type='button' id='btn_showPerf' class="uiButton" onclick='javascript:showPerf()' style='width:320px;text-align:left' value='+ More Performance Analytics Comparison'>
+			<div id='show_Perf_div' style='display:none'>
+				[@s.action name="ComparePortfolioMPT" namespace="/jsp/portfolio" executeResult=true ignoreContextParams=true]
+					[@s.param name="portfolioString"]${portfolioString}[/@s.param]
+				[/@s.action]
+			</div>
+		[/#if]
+</body>
+</html>

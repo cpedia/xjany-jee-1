@@ -1,0 +1,396 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ SmartMoneyIQ Managers</title>
+<meta name="home" content="vf_current" />
+<meta content="SmartMoneyIQ provides insight into the asset allocation of thirty two of the world’s top money managers. Cloning proven technique, based on statistical regression, is used to revealed the correlation changes between the balanced funds and the major asset classes." name="Description">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+
+<!-- <script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+-->
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+
+$(function(){
+   $('<tr><td><a href="#top">back to top</a></td></tr>').insertAfter('.back');
+});
+</script>
+</head>
+
+<body>
+    <div id="top">
+    </div>
+    <h1 align="center">MyPlanIQ SmartMoneyIQ Managers</h1>
+    <p align="center">Other than indicated, performance data are based on closing prices on last Friday</p>
+    <p>The following tables are derived by MyPlanIQ SmartMoneyIQ tool. The percentage on each column reflects a portfolio's correlation coefficient with the asset class benchmark for that column (the sum of all correlation coefficients is 1). These percentages reflect the portfolio's behavior with respect to asset classes. They are not necessarily the actual asset allocations of a fund.</p><br>
+    <h2 align="center">U.S. Allocation Fund Managers</h2>
+<table width="100%">
+    <tr>
+    <td width="50%"><a href="#hsgfx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Hussman Strategic Growth (HSGFX)</span></td>    
+    <td width="50%"><a href="#hsgfx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">FPA Crescent Fund (FPACX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#mnbax">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Manning & Napier Pro-Blend Extnd Term (MNBAX)</span></td>
+    <td width="50%"><a href="#mnbax">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">John Hancock Balanced Fund (SVBIX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#lcorx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Leuthold Core Investment (LCORX)</span></td>
+    <td width="50%"><a href="#lcorx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Greenspring Fund (GRSPX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#vaapx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Vanguard Asset Allocation (VAAPX)</span></td>
+    <td width="50%"><a href="#vaapx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Bruce fund (BRUFX)</span></td>
+    </tr>
+   </table>
+    <h2 align="center">Global Allocation Fund Managers</h2>
+    <table width="100%">
+    <tr>
+    <td width="50%"><a href="#gbmfx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">GMO Benchmark Free Allocation (GBMFX)</span></td>
+    <td width="50%"><a href="#gbmfx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">PIMCO All Asset (PASDX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#pgmax">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">PIMCO Global Multi-Asset (PGMAX)</span></td>
+    <td width="50%"><a href="#pgmax">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">IVY Asset Strategy (WASYX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#pgbax">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Principal Global Diversified Income (PGBAX)</span></td>
+    <td width="50%"><a href="#pgbax">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Loomis Sayles Global Markets (LSWWX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#sgiix">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">First Eagle Global (SGIIX)</span></td>
+    <td width="50%"><a href="#sgiix">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Blackrock Global Allocation (MALOX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#intlx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Forester Discovery (INTLX)</span></td>
+     <td width="50%"><a href="#intlx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Dreyfus Global Absolute Return (DGPIX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#tincx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Templeton Income Fund (TINCX)</span></td>
+     <td width="50%"><a href="#tincx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Goldman Sachs Income Strategies (GXIIX)</span></td>
+    </tr>
+   </table>
+   <h2 align="center">Fixed Income Fund Managers</h2>
+  <table width="100%">
+    <tr>
+    <td width="50%"><a href="#pttrx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">PIMCO Total Return (PTTRX)</span></td>
+    <td width="50%"><a href="#lsbdx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Loomis Sayles Bond (LSBDX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#nsttx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Neuberger Berman Strategic Income (NSTTX)</span></td>
+    <td width="50%"><a href="#agdix">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Alliance Berstein High Income (AGDIX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#opsix">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Oppenheimer Global Bond (OPSIX)</span></td>
+    <td width="50%"><a href="#fsrrx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Fidelity Strategic Income (FSRRX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#tglmx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">TCW Total Return Bond (TGLMX)</span></td>
+    <td width="50%"><a href="#watfx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Western Asset Core Bond (WATFX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#mwtrx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Metropolitan West Total Return Bond (MWTRX)</span></td>
+    <td width="50%"><a href="#ostix">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Osterweis Strategic Income (OSTIX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#tgbax">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Templeton Global Bond (TGBAX)</span></td>
+    <td width="50%"><a href="#dpgix">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">Delaware Pooled Global Fixed Income (DPGIX)</span></td>
+    </tr>
+    <tr>
+    <td width="50%"><a href="#dbltx">Go to</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:1.0em">DoubleLine Total Return Bond I (DBLTX)</span></td>
+    </tr>
+    </table>
+
+   <table border="0" style="width:100%"> 
+     <tr class="back" id="hsgfx">
+            <td style="width:48%" >
+                   <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=HSGFX&type=4">Hussman Strategic Growth (HSGFX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Hsgfx" readGlobalObject("SmartTable.HSGFX") false/]
+	    		</div>
+	    	</td>
+	    	<td style="width:4%"></td>
+	    	<td style="width:48%" >
+                    <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=FPACX&type=4">FPA Crescent Fund (FPACX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Fpacx" readGlobalObject("SmartTable.FPACX") false/]
+	    		</div>
+	    	</td>
+	     </tr>
+	     <tr class="back" id="mnbax">
+	       <td style="width:48%" >
+                     <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=MNBAX&type=4">Manning & Napier Pro-Blend Extnd Term (MNBAX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Mnbax" readGlobalObject("SmartTable.MNBAX") false/]
+	    		</div>
+	    	</td>
+	    	<td style="width:4%"></td>
+	    	<td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=SBBIX&type=4">John Hancock Balanced Fund (SVBIX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Svbix" readGlobalObject("SmartTable.SVBIX") false/]
+	    		</div>
+	    	</td>	
+	    </tr>
+	    <tr class="back" id="lcorx">
+	         <td style="width:60%">
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=LCORX&type=4">Leuthold Core Investment (LCORX)</a></span></h2>
+	    		<div class="dividerTop" align="left">
+	    		[@lti.table "Lcorx" readGlobalObject("SmartTable.LCORX") false/]
+	    		</div>
+	    	</td>
+	    	<td style="width:4%"></td>
+	    	<td style="width:36%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=GRSPX&type=4">Greenspring Fund (GRSPX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Grspx" readGlobalObject("SmartTable.GRSPX") false/]
+	    		</div>
+	    	</td>	
+	    </tr>
+	    <tr class="back" id="vaapx">
+	        <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=VAAPX&type=4">Vanguard Asset Allocation (VAAPX</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Vaapx" readGlobalObject("SmartTable.VAAPX") false/]
+	    		</div>
+	    	</td>
+	    	<td style="width:4%"></td>
+                 <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=BRUFX&type=4">Bruce fund (BRUFX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Brufx" readGlobalObject("SmartTable.BRUFX") false/]
+	    		</div>
+	    	</td>
+            </tr>
+          </table>
+          <table border="0" style="width:100%">
+           <tr class="back" id="gbmfx">
+	    	<td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=GBMFX&type=4">GMO Benchmark Free Allocation (GBMFX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Gbmfx" readGlobalObject("SmartTable.GBMFX") false/]
+	    		</div>
+	    	</td>
+                <td style="width:4%"></td>
+	        <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=PASDX&type=4">PIMCO All Asset (PASDX)</a></span></h2>
+	    		<div class="dividerTop" align="left">
+	    		[@lti.table "Pasdx" readGlobalObject("SmartTable.PASDX") false/]
+	    		</div>
+	    	</td>
+             </tr>
+             <tr class="back" id="pgmax">
+	    	<td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=PGMAX&type=4">PIMCO Global Multi-Asset (PGMAX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Pgmax" readGlobalObject("SmartTable.PGMAX") false/]
+	    		</div>
+	    	</td>
+                <td style="width:4%"></td>
+                <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=WASYX&type=4">IVY Asset Strategy (WASYX)</a></span></h2>
+	    		<div class="dividerTop" align="left">
+	    		[@lti.table "Wasyx" readGlobalObject("SmartTable.WASYX") false/]
+	    		</div>
+	    	</td>
+	    </tr>
+	    <tr class="back" id="pgbax">
+	        <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=PGBAX&type=4">Principal Global Diversified Income (PGBAX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Pgbax" readGlobalObject("SmartTable.PGBAX") false/]
+	    		</div>
+	    	</td>
+	    	<td style="width:4%"></td>
+	    	<td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=LSWWX&type=4">Loomis Sayles Global Markets (LSWWX)</a></span></h2>
+	    		<div class="dividerTop" align="left">
+	    		[@lti.table "Lswwx" readGlobalObject("SmartTable.LSWWX") false/]
+	    		</div>
+	    	</td>
+	    </tr>
+	    <tr class="back" id="sgiix">
+	        <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=SGIIX&type=4">First Eagle Global (SGIIX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Sgiix" readGlobalObject("SmartTable.SGIIX") false/]
+	    		</div>
+	    	</td>
+	    	<td style="width:4%"></td>
+                <td style="width:48%">
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=MALOX&type=4">Blackrock Global Allocation (MALOX)</a></span></h2>
+	    		<div class="dividerTop" align="left">
+	    		[@lti.table "Malox" readGlobalObject("SmartTable.MALOX") false/]
+	    		</div>
+	    	</td>
+	    </tr>
+	    <tr class="back" id="intlx">
+	        <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=INTLX&type=4">Forester Discovery (INTLX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Intlx" readGlobalObject("SmartTable.INTLX") false/]
+	    		</div>
+	    	</td>
+	    	<td style="width:4%"></td>
+                <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=DGPIX&type=4">Dreyfus Global Absolute Return (DGPIX)</a></span></h2>
+	    		<div class="dividerTop" align="left">
+	    		[@lti.table "Dgpix" readGlobalObject("SmartTable.DGPIX") false/]
+	    		</div>
+	    	</td>
+             </tr>
+	    <tr class="back" id="tincx">
+	        <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=TINCX&type=4">Templeton Income Fund (TINCX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Tincx" readGlobalObject("SmartTable.TINCX") false/]
+	    		</div>
+	    	</td>
+	    	<td style="width:4%"></td>
+                <td style="width:48%" >
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=GXIIX&type=4">Goldman Sachs Income Strategies (GXIIX)</a></span></h2>
+	    		<div class="dividerTop" align="left">
+	    		[@lti.table "Gxiix" readGlobalObject("SmartTable.GXIIX") false/]
+	    		</div>
+	    	</td>
+             </tr>
+
+           </table>
+
+        <table border="0" style="width:100%">
+           <tr class="back" id="pttrx">
+                <td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=PTTRX&type=4">PIMCO Total Return (PTTRX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Pttrx" readGlobalObject("SmartTable.PTTRX") false/]
+	    		</div>
+                </td>
+             </tr>
+           <tr class="back" id="lsbdx">
+	        <td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=LSBDX&type=4">Loomis Sayles Bond (LSBDX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Lsbdx" readGlobalObject("SmartTable.LSBDX") false/]
+	    		</div>
+	    	</td>
+            </tr>
+           <tr class="back" id="nsttx">
+	    	<td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=NSTTX&type=4">Neuberger Berman Strategic Income (NSTTX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Nsttx" readGlobalObject("SmartTable.NSTTX") false/]
+	    		</div>
+	    	</td>
+	    </tr>
+            <tr class="back" id="agdix">
+	        <td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=AGDIX&type=4">Alliance Berstein High Income (AGDIX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Agdix" readGlobalObject("SmartTable.AGDIX") false/]
+	    		</div>
+	    	</td>
+            </tr>
+           <tr class="back" id="opsix">
+	    	<td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=OPSIX&type=4">Oppenheimer Global Bond (OPSIX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Opsix" readGlobalObject("SmartTable.OPSIX") false/]
+	    		</div>	    	 
+	    	</td>
+	    </tr>
+	    <tr class="back" id="fsrrx">
+	        <td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=FSRRX&type=4">Fidelity Strategic Income (FSRRX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Fsrrx" readGlobalObject("SmartTable.FSRRX") false/]
+	    		</div>
+	    	</td>
+             </tr>
+            <tr class="back" id="tglmx">
+	    	<td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=TGLMX&type=4">TCW Total Return Bond (TGLMX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Tglmx" readGlobalObject("SmartTable.TGLMX") false/]
+	    		</div>
+	    	</td>
+	    </tr>
+	    <tr class="back" id="watfx">	   
+	        <td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=WATFX&type=4">Western Asset Core Bond (WATFX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Watfx" readGlobalObject("SmartTable.WATFX") false/]
+	    		</div>
+	    	</td>
+           </tr>
+	    <tr class="back" id="mwtrx">
+	    	<td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=MWTRX&type=4">Metropolitan West Total Return Bond (MWTRX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Mwtrx" readGlobalObject("SmartTable.MWTRX") false/]
+	    		</div>
+	    	</td>
+	    </tr>
+          	    <tr class="back" id="ostix">	   
+	        <td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=OSTIX&type=4">Osterweis Strategic Income (OSTIX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Ostix" readGlobalObject("SmartTable.OSTIX") false/]
+	    		</div>
+	    	</td>
+           </tr>
+           	    <tr class="back" id="tgbax">
+	    	<td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=TGBAX&type=4">Templeton Global Bond (TGBAX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Tgbax" readGlobalObject("SmartTable.TGBAX") false/]
+	    		</div>
+	    	</td>
+	    </tr>
+	    <tr class="back" id="dpgix">	   
+	        <td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=DPGIX&type=4">Delaware Pooled Global Fixed Income (DPGIX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Dpgix" readGlobalObject("SmartTable.DPGIX") false/]
+	    		</div>
+	    	</td>
+           </tr>
+           
+         <tr class="back" id="dbltx">	   
+	        <td>
+                      <h2><span><a href="http://www.myplaniq.com/LTISystem/jsp/fundcenter/View.action?symbol=DBLTX&type=4">DoubleLine Total Return Bond I (DBLTX)</a></span></h2>
+	    		<div class="dividerTop" align="center">
+	    		[@lti.table "Dbltx" readGlobalObject("SmartTable.DBLTX") false/]
+	    		</div>
+	    	</td>
+           </tr>
+           
+        </table>
+
+
+</body>
+</html>

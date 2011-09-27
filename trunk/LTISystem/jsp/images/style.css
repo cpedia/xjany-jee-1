@@ -1,0 +1,244 @@
+UNKNOWN {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 12px/21px Arial, 'simsun', '����'; COLOR: #2e2e2e; PADDING-TOP: 0px
+}
+IMG {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.clear {
+	BORDER-TOP-WIDTH: 0px; CLEAR: both; BORDER-LEFT-WIDTH: 0px; FONT-SIZE: 0px; BACKGROUND: #fff; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 100%; HEIGHT: 2px; BORDER-RIGHT-WIDTH: 0px
+}
+.TD2
+{FONT-SIZE: 14px; LINE-HEIGHT: 20px;padding-left:10px;}
+.l_pad{ padding-left:4px;line-height: 23px; height:23px;}
+A:link {
+	COLOR: #236eee; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #236eee; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #236eee; TEXT-DECORATION: underline
+}
+#Contents .center H4 .d_left {
+	FONT-SIZE: 14px
+}
+#Contents .center H5 .d_left {
+	FONT-SIZE: 14px
+}
+#Contents .center .caption {
+	FONT: bold 24px arial; COLOR: #236eee
+}
+#Contents .center .dl DT {
+	FONT-WEIGHT: bold
+}
+#Contents .center .dl DT {
+	FONT-FAMILY: Arial, 'simsun'
+}
+#Contents .center .dl DD {
+	FONT-FAMILY: Arial, 'simsun'
+}
+#Contents .center .dl DD .us {
+	FONT-FAMILY: Arial, 'simsun'
+}
+#Contents .center .dl DD .us B {
+	FONT-FAMILY: Arial, 'simsun'
+}
+#Contents .center .dl DD .us B {
+	FONT-WEIGHT: bold; COLOR: #666; FONT-FAMILY: Verdana, Arial, 'simsun'
+}
+#Contents .center .dl DD .us {
+	COLOR: #666; FONT-FAMILY: Verdana, Arial, 'simsun'
+}
+#footer {
+	COLOR: #c1bfc1; FONT-FAMILY: Arial
+}
+#footers {
+	COLOR: #c1bfc1; FONT-FAMILY: Arial
+}
+#footers A {
+	COLOR: #c1bfc1; FONT-FAMILY: Arial
+}
+#footer A {
+	COLOR: #c1bfc1; FONT-FAMILY: Arial
+}
+#top {
+	CLEAR: both; MARGIN: 5px 5px 0px; FONT: 12px Arial, 'simsun'
+}
+#top #langTg {
+	FONT: 12px Arial, 'simsun'; CURSOR: pointer
+}
+#top #showinfo {
+	FLOAT: right; FONT: 12px Arial, 'simsun'
+}
+#top #showinfo A {
+	FONT: 12px Arial, 'simsun'; COLOR: #666
+}
+#top #spdc {
+	FONT: 12px Arial, 'simsun'; COLOR: #666
+}
+#top #spdc A {
+	FONT: 12px Arial, 'simsun'; COLOR: #666
+}
+#footers {
+	MARGIN-TOP: -12px; LINE-HEIGHT: 24px
+}
+#seah_list .logo {
+	FLOAT: left
+}
+#seah_list .seah_ch {
+	MARGIN-TOP: 1px; FLOAT: left; TEXT-ALIGN: left
+}
+.line {
+	BACKGROUND: url(/LTISystem/jsp/images/line.gif); HEIGHT: 19px
+}
+#Contents {
+	CLEAR: both; MARGIN-TOP: 5px; WIDTH: 100%; TEXT-ALIGN: left
+}
+#Contents .Right {
+	WIDTH: 185px; TEXT-ALIGN: left
+}
+#Contents .center {
+	FONT-FAMILY: Verdana, Arial, 'simsun'
+}
+#Contents .center .menu {
+	WIDTH: auto; BORDER-BOTTOM: #d7d7d7 1px solid; HEIGHT: 26px
+}
+#Contents .center .menu LI {
+	BORDER-RIGHT: #f7f7f7 1px solid; PADDING-RIGHT: 22px; BORDER-TOP: #f7f7f7 1px solid; PADDING-LEFT: 22px; BACKGROUND: #f7f7f7; FLOAT: left; PADDING-BOTTOM: 0px; BORDER-LEFT: #f7f7f7 1px solid; CURSOR: pointer; LINE-HEIGHT: 24px; PADDING-TOP: 0px; BORDER-BOTTOM: #f7f7f7 1px solid; POSITION: relative; HEIGHT: 24px
+}
+#Contents .center .menu .v_ {
+	BORDER-RIGHT: #d7d7d7 1px solid; BORDER-TOP: #d7d7d7 1px solid; FONT-WEIGHT: bold; BACKGROUND: #fff; MARGIN-BOTTOM: -1px; BORDER-LEFT: #d7d7d7 1px solid; COLOR: #236eee; BORDER-BOTTOM: #fff 1px solid; POSITION: relative; HEIGHT: 25px
+}
+#Contents .center .menu .tabspace {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BACKGROUND: #fff; FLOAT: left; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; WIDTH: 5px; PADDING-TOP: 0px; HEIGHT: 20px; BORDER-RIGHT-WIDTH: 0px
+}
+#Contents .center H4 {
+	MARGIN-TOP: 0px; BACKGROUND: url(/LTISystem/jsp/images/oncl.gif) repeat-x center 50%; CURSOR: pointer; HEIGHT: 26px; TEXT-ALIGN: left
+}
+#Contents .center H4 .d_left {
+	PADDING-RIGHT: 8px; BACKGROUND: #fff; FLOAT: left; LINE-HEIGHT: 26px; PADDING-TOP: 8px; HEIGHT: 26px
+}
+#Contents .center H4 .d_right {
+	FLOAT: right; MARGIN: 12px 0px; WIDTH: 18px
+}
+#Contents .center .dl {
+	MARGIN-BOTTOM: 20px
+}
+#Contents .center .dl DT {
+	FONT-SIZE: 14px; LINE-HEIGHT: 24px
+}
+#Contents .center .dl DD {
+	MARGIN-LEFT: 13px; LINE-HEIGHT: 18px; FONT-FAMILY: Verdana, Arial, 'simsun'
+}
+#Contents .center .dl .cite {
+	MARGIN-BOTTOM: 5px
+}
+#Contents .center .dl .indent {
+	MARGIN-LEFT: 29px
+}
+#Contents .center #dictlangc_lovedict {
+	FONT-FAMILY: Verdana, Arial, 'simsun'
+}
+#Contents .center #dictlangc_lovedict A {
+	FONT-FAMILY: Verdana, Arial, 'simsun'
+}
+#Contents .center #dictlangc_dj LI {
+	MARGIN-TOP: 8px; FONT-FAMILY: Verdana, Arial, 'simsun'
+}
+#Contents .center #dictlangc_dj LI SPAN {
+	FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Arial, 'simsun'
+}
+#Contents .center .dl .et {
+	MARGIN-BOTTOM: 15px
+}
+#Contents .center .speciality {
+	DISPLAY: block; MARGIN-LEFT: 39px; LINE-HEIGHT: 61px; 
+}
+#Contents .center H5 {
+	BACKGROUND: url(/LTISystem/jsp/images/oncl.gif) repeat-x center 50%; MARGIN-LEFT: 25px; CURSOR: pointer; LINE-HEIGHT: 26px; HEIGHT: 26px; TEXT-ALIGN: left
+}
+#Contents .center H5 .d_left {
+	PADDING-RIGHT: 8px; BACKGROUND: #fff; FLOAT: left; LINE-HEIGHT: 26px; PADDING-TOP: 8px; HEIGHT: 26px
+}
+#Contents .center H5 .d_right {
+	FLOAT: right; MARGIN: 12px 0px; WIDTH: 18px
+}
+#Contents .center .line_bm {
+	MARGIN-LEFT: 5px; BORDER-BOTTOM: #d7d7d7 1px solid
+}
+#Contents .left {
+	PADDING-LEFT: 15px; WIDTH: 115px
+}
+#Contents .left DL {
+	MARGIN-BOTTOM: 10px
+}
+#Contents .left DL DT {
+	PADDING-LEFT: 15px; BACKGROUND: url(/LTISystem/jsp/images/icon_1.gif) no-repeat left center; LINE-HEIGHT: 26px; PADDING-TOP: 4px
+}
+#Contents .left DL DD {
+	MARGIN-LEFT: 15px; LINE-HEIGHT: 16px
+}
+#Contents .ei {
+	MARGIN-TOP: 5px; FONT-FAMILY: Verdana, Arial, 'simsun'
+}
+#bosech {
+	BACKGROUND: #f5f5f5; PADDING-BOTTOM: 15px; MARGIN: 35px auto; WIDTH: 100%; PADDING-TOP: 15px; TEXT-ALIGN: center
+}
+#bosech .se {
+	BORDER-RIGHT: #d4d1c8 1px solid; PADDING-RIGHT: 8px; BORDER-TOP: #808080 1px solid; PADDING-LEFT: 8px; FONT-SIZE: 16px; BORDER-LEFT: #808080 1px solid; WIDTH: 370px; PADDING-TOP: 2px; BORDER-BOTTOM: #d4d1c8 1px solid; HEIGHT: 24px
+}
+#bosech .sego {
+	FONT-SIZE: 13px; WIDTH: 100px; LINE-HEIGHT: 24px; HEIGHT: 28px
+}
+#Contents .center UL LI {
+	FONT-SIZE: 14px
+}
+#Contents .center .dl .cite {
+	FONT-STYLE: italic
+}
+#Contents .center OL LI {
+	FONT-FAMILY: Arial, 'simsun'
+}
+#Contents .left DL DD {
+	FONT-FAMILY: Arial, 'simsun'
+}
+#Contents .left DL DD A {
+	FONT-FAMILY: Arial, 'simsun'
+}
+
+#menu table, tr, td A{
+	FONT-FAMILY: Arial, 'simsun';
+}
+#dwindowcontent table,tr,td A{
+	FONT-FAMILY: Arial, 'simsun';
+}
+
+input[type=button]{
+	width:80px;height:25px;BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; 
+	BORDER-TOP:#2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; 
+	BORDER-LEFT: #2C59AA 1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; 
+    BORDER-BOTTOM: #2C59AA 1px solid;
+    FILTER:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#ffffff, EndColorStr=#C3DAF5);
+}
+
+#portfolio_div input[type=submit]{
+	width:80px;height:25px;BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; 
+	BORDER-TOP:#2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; 
+	BORDER-LEFT: #2C59AA 1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; 
+    BORDER-BOTTOM: #2C59AA 1px solid;
+    FILTER:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#ffffff, EndColorStr=#C3DAF5);
+}
+
+#top .bar{
+	clear:both;
+	width:100%;
+	background: url("bar.png") repeat-x;
+	padding:10px 0 11px 0;
+	height:25px;
+}

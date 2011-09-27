@@ -1,0 +1,723 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="jqueryui" content="smoothness">
+<link rel="stylesheet" type="text/css" href="/LTISystem/jsp/template/gpl/vtip.css" />
+<script src="/LTISystem/jsp/template/gpl/vtip.js" type="text/javascript"></script>
+<script>
+	var mycallback=null;
+	var chrome=false;
+	var ua = navigator.userAgent.toLowerCase();
+	try{
+		if(ua!=undefined&&ua!=null&&ua.match(/chrome\/([\d.]+)/)[1]){
+			chrome=true;
+		}
+	}catch(err){}
+	
+	
+		
+	function showMessage(html){
+		$("#desc401k").fadeOut('slow', function() {
+			$("#desc401k").html(html);
+			vtip();
+			$("#desc401k").fadeIn();
+		});
+		$("div#vtip").fadeOut("slow").remove();
+	}
+	
+	function select(planID,planName,callback){
+		build(planID);
+		/*$.ajax({
+			url: "/LTISystem/getstarted_getdesc.action?includeHeader=false&planID="+planID,
+			dataType: "html",
+			success: function( data ) {
+				var html="<span class='sld_title'>"+planName+"</span><p></p>";
+				if($.trim(data)==""){
+					html+="<p>There is no description about '"+planName+"'</p>";
+				}else{
+					html+="<p>"+data+"</p>";
+				}
+				html+="<p><a href='javascript:build("+planID+")' class='btnnext'><img border=0 src='/LTISystem/jsp/images/customize.png'></a>&nbsp;&nbsp;</p>";
+				callback(html);
+			},error:function(){
+				var html="<span class='sld_title'>"+planName+"</span><p></p>";
+				callback(html);
+			}
+		});*/
+	}
+	
+	function search(planName,callback){
+		$.ajax({
+			url: "/LTISystem/getstarted_search.action?includeHeader=false&planName="+planName,
+			dataType: "html",
+			success: function( data ) {
+				callback(data);
+			},error:function(){
+				callback(null);
+			}
+		});
+	}
+	
+	
+	var curitem=null;
+	$(function() {
+		$("#wnd").dialog({"title":"Pick A Plan",width:600,height:400,autoOpen:false});
+		$("#planName").bind('keyup',function(event){ 
+        	if(event.keyCode==13){ 
+            	handle401k();
+            } 
+        });
+		
+		$('#search').click(function(){
+			handle401k();
+		});
+		
+		
+		
+		$(".navitem").mouseover(function(){
+			$(this).css({'opacity':1});
+			if($(this).attr("src")!=curitem.attr("src")){
+				//$(this).next().show( "blind", {}, 500, callback );
+				$(this).next().fadeIn();
+			}
+		});
+		
+		$(".navitem").mouseout(function(){
+			if($(this).attr("src")!=curitem.attr("src")){
+				$(this).css({'opacity':0.5});
+				//$(this).next().hide( "blind", {}, 500, callback );
+				$(this).next().fadeOut();
+			}
+		});
+		
+		$(".navitem").eq(0).trigger("click");
+		
+		$("input").keydown(function(e){
+			if(e.keyCode == 13){
+				$(this).next().trigger("click");
+			}
+		});
+		
+		window.onresize = function(){
+			curitem.trigger("click");
+			if($('#qtip')!=undefined&&$('#qtip').css('display')!='none')
+				$(".tButton").trigger("click");
+				//$(".tButton").trigger("mouseover");
+		};
+		
+		//setTimeout("$('.tButton').trigger('mouseover')",2000);
+         setTimeout("$('.tButton').trigger('click')",2000);
+		
+		
+	});
+	
+	
+	function clickitem(item){
+		var oldsrc=null;
+		if(curitem!=null){
+			oldsrc=curitem.attr("src");
+		}
+	
+		curitem=$(item);
+		
+		$(".navitem").each(function(){
+			if($(this).attr("src")==curitem.attr("src")){
+				$(this).css({'opacity':1});
+				//$(this).next().show( "blind", {}, 500, function(){} );
+				$(this).next().show();
+				
+				var offsettop=$("#inner_con").offset().top;   
+				var offsetleft=$("#inner_con").offset().left;  
+				//position()获取当前元素基于父容器的位置             
+				//var positiontop=$("#unamespan").position().top;  
+				//var positionleft=$("#unamespan").position().left;  
+				if(chrome){
+					$(this).next().next().css({position: "absolute",'top':offsettop+10,'left':offsetleft-25,'z-index':100});
+				}else{
+					$(this).next().next().css({position: "absolute",'top':offsettop+10,'left':offsetleft+5,'z-index':100});
+				}
+				$(this).next().next().show(); 
+				
+			}else{
+				$(this).css({'opacity':0.5});
+				if(oldsrc!=null&&oldsrc==$(this).attr("src")){
+					//$(this).next().hide( "blind", {}, 500, function(){} );
+					$(this).next().hide();
+					$(this).next().next().hide(); 
+				}
+			}
+		});
+		
+		$(".triangle").button({
+				icons: {
+	                primary: "ui-icon-triangle-1-e"
+	            },
+	            text: false
+
+			});
+		
+	
+	}
+	
+	function mycallback1(html){
+		$("#wnd1").hide();
+		$("#message1").html(html);
+		$("#message1").show();
+	}
+	function mysearchback1(html){
+		var con=$.trim(html);
+		if(con==""){
+			$("#message1").html($("#nofound1").html());
+		}else{
+			$("#message1").html(con);
+		}
+	}
+
+	function mysearchback2(html){
+		var con=$.trim(html);
+		if(con==""){
+			$("#message2").html($("#nofound2").html());
+		}else{
+			$("#message2").html(con);
+		}
+	}
+	
+	function mycallback2(html){
+		$("#message2").html(html);
+	}
+	
+	
+	function mysearchback3(html){
+		var con=$.trim(html);
+		if(con==""){
+			$("#message3").html($("#nofound3").html());
+		}else{
+			$("#message3").html(con);
+		}
+	}
+	
+	function mycallback3(html){
+		$("#message3").html(html);
+	}
+	
+	
+	function mysearchback4(html){
+		var con=$.trim(html);
+		if(con==""){
+			$("#message4").html($("#nofound4").html());
+		}else{
+			$("#message4").html(con);
+		}
+	}
+	
+	function mycallback4(html){
+		$("#message4").html(html);
+	}
+	
+	
+	function build(planID){
+		window.location.href="getstarted_build.action?planID="+planID;
+	}
+	
+	
+</script>
+<style>
+li{
+	font-size:12px;
+}
+
+#desc401k a{
+	font-size:1.0em;
+	text-decoration:none;
+}
+#desc401k li{
+	height:30px;
+}
+.navitem{
+	cursor:pointer
+}
+</style>
+</head>
+
+<body>
+
+<div style="display:none" id="wnd">
+</div>
+
+<div style="display:none" id="tip1">
+	Click here to select this paln.
+</div>
+
+<div style="display:none" id="tip2">
+	Click here to see the detail information of this plan.
+</div>
+
+<table border=0 wdith=100% bgcolor="#ffffff" style="margin-left:1px;">
+	<tr>
+		<td style="width:248px;float:left;background-color:#ffffff" valign=top>
+			<div>
+				<div style="background-color:#E78E31;height:35px;width:243px;padding-left:5px;padding-top:15px">
+					<span style="font-size:1.5em;color:#ffffff;">Choose from the following</span>
+				</div>
+				<div style="background-color:#F7F7FF;height:880px;width:243px;margin:0px;padding:0px;padding-left:5px;padding-top:15px">
+					
+					<table id="__01" width="243"  border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="/LTISystem/jsp/images/leftnav_02.gif" width="243" height="94" alt="" class="navitem" onclick="clickitem(this);mycallback=mycallback1;">
+								<div style="display:none;margin-left:15px;margin-right:15px">
+									<p>
+									<strong>ETF based plans:</strong> applicable to any brokerage account. 
+									</p>
+                                                                        <p>
+                                                                        <strong>Mutual fund based plans:</strong> built on brokerage suggested mutual funds, specific to that brokerage, most of them are no load and no transaction fee. Check with the brokerage for more details. 
+                                                                        </p>
+								</div>
+								<div style="width:720px;display:none">
+									<h3>Featured ETF Plans</h3>
+									
+									[@s.action name="getstarted_search" namespace="/" executeResult=true]
+									  [@s.param name="ids"]1429,4863,1148,4904,714[/@s.param]
+									  [@s.param name="includeHeader"]false[/@s.param]
+									[/@s.action]
+                                                                        <br><h3>Featured Mutual Fund Plans</h3>
+									
+									[@s.action name="getstarted_search" namespace="/" executeResult=true]
+									  [@s.param name="ids"]724,679,1032,727,725[/@s.param]
+									  [@s.param name="includeHeader"]false[/@s.param]
+									[/@s.action]
+                                                                        <br>
+<!--									<button onclick="$('#wnd1').toggle();return false;" class="uiButton"><a target="_blank" href="/LTISystem/f401k__ira_brokerage_intro.action">Click Here to see more Brokerage Investment Plans</a></button>
+-->
+<br>                                                                    <h3>Search for a brokerage investment plan</h3>
+									<div id="search1">
+										<p>
+											<input  style="border: 1px solid #9FC78F;width:75%;height:25px;font-size:12px">&nbsp;
+											<button class="uiButton" style="height:30px;font-size:12px" onclick="search($(this).prev().val(),mysearchback1)">Search</button>
+											<br>
+											<span style="font-size:12px;font-weight:900">[Enter Brokerage Name (Example): FolioInvesting]</span>
+										</p>
+										<div id="nofound1" style="display:none">
+											<h3>Cannot find your plan? May we suggest:</h3>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">Please check your keywords!</button>
+													</td>
+													<td width="170" valign="top">
+														Check your keywords:
+													</td valign="top">
+													<td valign="top">
+														Make sure you have the right keywords!
+													</td>
+												</tr>
+											</table>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">You can email a request to setup a brokerage plan to us.</button>
+													</td>
+													<td width="240" valign="top">
+														<a href="mailto:support@myplaniq.com?subject=Please setup a brokerage plan">Email your brokerage plan request (investment options like brokerage suggested mutual funds):</a>
+													</td>
+													<td valign="top">
+														<p>■ Document(s) that have plan investment choices (ticker symbols preferred)<br>
+														■ Screen shots of online rebalance choices</p>
+													</td>
+												</tr>
+											</table>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">You can email your plan's investment options to us.</button>
+													</td>
+													<td width="230" valign="top">
+														My Portfolios->Create My Own Plan:
+													</td>
+													<td valign="top">
+														when you become an expert subscriber
+													</td>
+												</tr>
+											</table>
+											
+											
+											
+										</div>
+										
+										<div id="message1" class="ui-state-highlight ui-corner-all" style="margin-right:5px;padding:3px;">
+											
+										</div>
+									</div>
+<br><br>	
+
+
+<button onclick="window.open('/LTISystem/f401k__ira_brokerage.action')" class="uiButton">Click Here to see more Brokerage Investment Plans</a></button>
+									<div style="display:none" id="wnd1">
+										[@s.action name="getstarted_search" namespace="/" executeResult=true]
+										  [@s.param name="ids"]989,1026,1027,735,991,714,728,1094,1196,1210,1152,1148,1147,1169,1174,1175,1211,1172,1173,4863[/@s.param]
+										  [@s.param name="includeHeader"]false[/@s.param]
+										[/@s.action]
+									</div>
+									<div style="display:none;margin:5px;" id="message1">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="/LTISystem/jsp/images/leftnav_04.gif" width="243" height="97" alt="" class="navitem" onclick="clickitem(this);mycallback=mycallback2;">
+								<div style="display:none;margin-left:15px;margin-right:15px">
+									<p>
+									<strong>401K:</strong> company sponsored<br> <strong>403b:</strong> non-profit organization<br><strong>457:</strong> deferred compensation plans for non-profit employees or company executives</p>
+<p>A retirement plan consists of a number of funds that have trading policy like <a target="_blank" href="/LTISystem/f401k__glossary.action">Minimum holding periods</a> and <a target="_blank" href="/LTISystem/f401k__glossary.action">Minimum waiting period and round trip</a></p>
+<p><strong>Proxy fund:</strong> replacement fund for a non mutual fund</p>
+<!-- <p><strong>Minimum holding periods:</strong> default is 3 months<br>
+<strong>Proxy fund:</strong> replacement fund for a fund that is not mutual fund for modeling purpose<br>
+<strong>Minimum waiting period and round trip:</strong> Some funds require minimum waiting period before buying a same fund again and limited number of times to buy-sell a fund</p>
+-->
+<!-- <p>Cannot find your plan, email us plan investment options (mutual funds, trusts or separately manged accounts). 
+									</p>
+-->
+								</div>
+								<div style="width:720px;display:none">
+									<h3>401K, 403B and 457 Retirement Plans</h3>
+									<br>
+									<div id="search2">
+										<p>
+											<input  style="border: 1px solid #9FC78F;width:75%;height:25px;font-size:12px">&nbsp;
+											<button class="uiButton" style="height:30px;font-size:12px" onclick="search($(this).prev().val(),mysearchback2)">Search</button>
+											<br>
+											<span style="font-size:12px;font-weight:900">[Enter Company Name (Example): Google]</span>
+										</p>
+										<div id="nofound2" style="display:none">
+											<h3>Cannot find your plan? May we suggest:</h3>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">Please check your keywords!</button>
+													</td>
+													<td width="170" valign="top">
+														Check your keywords:
+													</td valign="top">
+													<td valign="top">
+														Make sure you have the right keywords!
+													</td>
+												</tr>
+											</table>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">You can email your plan's investment options to us.</button>
+													</td>
+													<td width="240" valign="top">
+														<a href="mailto:support@myplaniq.com?subject=My company plan's investment options">Email your plan's investment options:</a>
+													</td>
+													<td valign="top">
+														<p>■ Document(s) that have plan investment choices (ticker symbols preferred)<br>
+														■ Screen shots of online rebalance choices</p>
+													</td>
+												</tr>
+											</table>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">You can email your plan's investment options to us.</button>
+													</td>
+													<td width="230" valign="top">
+														My Portfolios->Create My Own Plan:
+													</td>
+													<td valign="top">
+														when you become an expert subscriber
+													</td>
+												</tr>
+											</table>
+											
+											
+											<br>
+											<button onclick='$(".navitem").eq(0).trigger("click")' class="uiButton">Or Try a brokerage (IRA or taxable) investment plan</button>
+										</div>
+										
+										<div id="message2" class="ui-state-highlight ui-corner-all" style="margin-right:5px;padding:3px;">
+											
+										</div>
+									</div>
+									<br><br><h3>Fortune Top 10 Company 401K Plans</h3>
+									[@s.action name="getstarted_search" namespace="/" executeResult=true]
+									  [@s.param name="ids"]690,774,817,1089,689,995,810,1079,674,716[/@s.param]
+									  [@s.param name="includeHeader"]false[/@s.param]
+									[/@s.action]
+									<br>
+									
+                                                                       <button onclick="window.open('/LTISystem/f401k__401kplans.action')" class="uiButton">See More 401K, 403B and 457 plans</button>									
+								</div>
+								
+							</td>
+						</tr>
+						<tr>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="/LTISystem/jsp/images/leftnav_06.gif" width="243" height="97" alt="" class="navitem" onclick="clickitem(this);mycallback=mycallback3;">
+								<div style="display:none;margin-left:15px;margin-right:15px">
+									<p>
+									Both variable annuity and variable life (VUL) plans have a list of investment choices, typically mutual funds or trust funds.</p>
+								</div>
+								<div style="width:720px;display:none">
+									<h3>Variable Annuity and Variable Universal Life Insurance (VUL) Plans</h3>
+									<br>
+									<div id="search3">
+										<p>
+											<input  style="border: 1px solid #9FC78F;width:75%;height:25px;font-size:12px">&nbsp;
+											<button class="uiButton" style="height:30px;font-size:12px" onclick="search($(this).prev().val(),mysearchback3)">Search</button>
+											<br>
+											<span style="font-size:12px;font-weight:900">[Enter Provider Name or Key Words In a Plan (Example): John Hancock]</span>
+										</p>
+										<div id="nofound3" style="display:none">
+											<h3>Cannot find your plan? May we suggest:</h3>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">Please check your keywords!</button>
+													</td>
+													<td width="170" valign="top">
+														Check your keywords:
+													</td valign="top">
+													<td valign="top">
+														Make sure you have the right keywords!
+													</td>
+												</tr>
+											</table>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">You can email your plan's investment options to us.</button>
+													</td>
+													<td width="240" valign="top">
+														<a href="mailto:support@myplaniq.com?subject=My company plan's investment options">Email your plan's investment options:</a>
+													</td>
+													<td valign="top">
+														<p>■ Document(s) that have plan investment choices (ticker symbols preferred)<br>
+														■ Screen shots of online rebalance choices</p>
+													</td>
+												</tr>
+											</table>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">You can email your plan's investment options to us.</button>
+													</td>
+													<td width="230" valign="top">
+														My Portfolios->Create My Own Plan:
+													</td>
+													<td valign="top">
+														when you become an expert subscriber
+													</td>
+												</tr>
+											</table>
+											
+											
+											<br>
+											<button onclick='$(".navitem").eq(0).trigger("click")' class="uiButton">Or Try a brokerage (IRA or taxable) investment plan</button>
+                                                                                     </div>
+                                                                                         										                             <div id="message3" class="ui-state-highlight ui-corner-all" style="margin-right:5px;padding:3px;">
+											
+										</div>
+									</div>
+									<br><h3>Some Variable Annuities and Life Insurance Plans</h3>
+									[@s.action name="getstarted_search" namespace="/" executeResult=true]
+									  [@s.param name="ids"]1025,1029,1030,1031,1505,1507,1058,1055,1508,5102,1046,4660,1056,5293,4771,5282,5266,5257,5247,5225,5196,5148,5048,5065,5090[/@s.param]
+									  [@s.param name="includeHeader"]false[/@s.param]
+									[/@s.action]
+									<br>
+									
+									
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="/LTISystem/jsp/images/leftnav_08.gif" width="243" height="101" alt="" class="navitem" onclick="clickitem(this);mycallback=mycallback4;">
+								<div style="display:none;margin-left:15px;margin-right:15px">
+									<p>
+									Each state offers its own 529 plan. A plan consists of a list of funds (or portfolios). </p>
+<p><strong>Important Restriction:</strong> A college plan only allows ONCE per calendar account re-balance.
+									</p>
+								</div>
+								<div style="width:720px;display:none">
+									<h3>College Savings 529 Plans</h3>
+									<br>
+									<div id="search4">
+										<p>
+											<input  style="border: 1px solid #9FC78F;width:75%;height:25px;font-size:12px" >&nbsp;
+											<button class="uiButton" style="height:30px;font-size:12px" onclick="search($(this).prev().val(),mysearchback4)">Search</button>
+											<br>
+											<span style="font-size:12px;font-weight:900">[Enter State or Provider Name (Example): California]</span>
+										</p>
+										<div id="nofound4" style="display:none">
+											<h3>Cannot find your plan? May we suggest:</h3>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">Please check your keywords!</button>
+													</td>
+													<td width="170" valign="top">
+														Check your keywords:
+													</td valign="top">
+													<td valign="top">
+														Make sure you have the right keywords!
+													</td>
+												</tr>
+											</table>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">You can email your plan's investment options to us.</button>
+													</td>
+													<td width="240" valign="top">
+														<a href="mailto:support@myplaniq.com?subject=My 529 plan's investment options">Email your plan's investment options:</a>
+													</td>
+													<td valign="top">
+														<p>■ Document(s) that have plan investment choices (ticker symbols preferred)<br>
+														■ Screen shots of online rebalance choices</p>
+													</td>
+												</tr>
+											</table>
+											<br>
+											<table border=0 width=710 style="height:30px;background-color:#E7E3FF;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"> 
+												<tr >
+													<td width="22" valign="top">
+														<button class="triangle" style="height:20px;width:20px">You can email your plan's investment options to us.</button>
+													</td>
+													<td width="230" valign="top">
+														My Portfolios->Create My Own Plan:
+													</td>
+													<td valign="top">
+														when you become an expert subscriber
+													</td>
+												</tr>
+											</table>
+											
+											
+											<br>
+											<button onclick='$(".navitem").eq(0).trigger("click")' class="uiButton">Or Try a brokerage (IRA or taxable) investment plan</button>
+                                                                                     </div>
+                                                                                         										                             <div id="message4" class="ui-state-highlight ui-corner-all" style="margin-right:5px;padding:3px;">
+											
+										</div>
+									</div>
+									<br><h3>Complete List of College Savings 529 Plans</h3>
+									[@s.action name="getstarted_search" namespace="/" executeResult=true]
+									  [@s.param name="ids"]717,4727,4728,4729,4730,4731,4732,4735,4737,4738,4739,4740,4741,4747,4748,4750,4751,4752,4772,4781,4783,4787,4788,4789,4790,4791,4792,4796,4802,4804,4805,4806,4809,4810,4811,4812,4813,4814,4815,4816,4817,4818,4886[/@s.param]
+									  [@s.param name="includeHeader"]false[/@s.param]
+									[/@s.action]
+									<br>
+									
+									
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							</td>
+						</tr>
+					</table>
+
+					
+				</div>
+			</div>
+		</td>
+		<td width="730" valign="top" height=1100>
+			[#include "nav.uftl"]
+			<table border="0" width=100%>
+				<tr>
+					<td valign="top">
+					</td>
+					<td valign="top" >
+						<div style='margin-right:5px;text-align:right' >
+							<a class="tButton">Tips</a>
+							<div style="display:none;">
+								<p><font size="+2"><strong><i>Basic Info:</i></strong></font>
+<ul class="list">
+<li><strong>Plan:</strong> a list of funds (ETFs or mutual funds)</li>
+
+<li><strong>Strategies:</strong><br>
+<a target=_blank href="/LTISystem/jsp/strategy/View.action?ID=771">Strategic Asset Allocation (SAA):</a> fixed asset mixes<br>
+<a target=_blank href="/LTISystem/jsp/strategy/View.action?ID=1003">Tactical Asset Allocation (TAA):</a> dynamic asset mixes<br>
+</li>
+
+<li><strong>Model Portfolios:</strong> each strategy has pre-built portfolios for three risk levels: Growth, Moderate and Conservative</li>
+<!-- <li><strong>Model Portfolios:</strong> based on SAA or TAA for various risks (Growth, Moderate, Conservative).</li> -->
+<li><strong>Plan Rating:</strong> <a target=_blank href="/LTISystem/f401k_news.action?PID=861">Effectiveness of a plan's investment choices </a></li>
+</ul>
+</p>
+							</div>
+						</div>
+						<div id="inner_con" style="width:100%;height:850px;margin-top:-10px">
+						&nbsp;
+						</div>
+					</td>	
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+</table>
+
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+       
+
+
+

@@ -1,0 +1,246 @@
+#CFSPWindow 
+{
+	position: absolute;
+	left:40%;
+	top:40%;
+	width:300px;
+	background-color:#f0f5FF;
+	border: 1px solid #000;
+	z-index: 50;
+}
+
+#CFSPWindow_handle 
+{
+	background-color:#5588bb;
+	padding:2px;
+	text-align:center;
+	font-weight:bold;
+	color: #FFFFFF;
+	vertical-align:middle;
+}
+
+#CFSPWindow_content 
+{
+	padding:5px;
+}
+
+#CFSPWindow_close
+{
+	float:right;
+	text-decoration:none;
+	color:#FFFFFF;
+}
+.cashFlowStrategyParameter
+{
+	display:none;
+}
+
+#RBSPWindow
+{
+	position: absolute;
+	left:40%;
+	top:30%;
+	width:300px;
+	background-color:#f0f5FF;
+	border: 1px solid #000;
+	z-index: 50;
+}
+
+#RBSPWindow_handle 
+{
+	background-color:#5588bb;
+	padding:2px;
+	text-align:center;
+	font-weight:bold;
+	color: #FFFFFF;
+	vertical-align:middle;
+}
+
+#RBSPWindow_content 
+{
+	padding:5px;
+}
+
+#RBSPWindow_close
+{
+	float:right;
+	text-decoration:none;
+	color:#FFFFFF;
+}
+
+.rebalancingStrategyParameter
+{
+	display:none;
+}
+
+#AASPWindow
+{
+	position: absolute;
+	left:40%;
+	top:50%;
+	width:300px;
+	background-color:#f0f5FF;
+	border: 1px solid #000;
+	z-index: 50;
+}
+
+#AASPWindow_handle 
+{
+	background-color:#5588bb;
+	padding:2px;
+	text-align:center;
+	font-weight:bold;
+	color: #FFFFFF;
+	vertical-align:middle;
+}
+
+#AASPWindow_content 
+{
+	padding:5px;
+}
+
+#AASPWindow_close
+{
+	float:right;
+	text-decoration:none;
+	color:#FFFFFF;
+}
+
+.assetAllocationStrategyParameter{
+	display:none;
+}
+
+.ACPWindow
+{
+	position: absolute;
+	left:40%;
+	top:60%;
+	width:300px;
+	background-color:#f0f5FF;
+	border: 1px solid #000;
+	z-index: 50;
+}
+
+.ACPWindow_handle 
+{
+	background-color:#5588bb;
+	padding:2px;
+	text-align:center;
+	font-weight:bold;
+	color: #FFFFFF;
+	vertical-align:middle;
+}
+
+.ACPWindow_content 
+{
+	padding:5px;
+}
+
+.ACPWindow_close
+{
+	float:right;
+	text-decoration:none;
+	color:#FFFFFF;
+}
+
+.ASPWindow
+{
+	position: absolute;
+	left:40%;
+	top:60%;
+	width:300px;
+	background-color:#f0f5FF;
+	border: 1px solid #000;
+	z-index: 50;
+}
+
+.ASPWindow_handle 
+{
+	background-color:#5588bb;
+	padding:2px;
+	text-align:center;
+	font-weight:bold;
+	color: #FFFFFF;
+	vertical-align:middle;
+}
+
+.ASPWindow_content 
+{
+	padding:5px;
+}
+
+.ASPWindow_close
+{
+	float:right;
+	text-decoration:none;
+	color:white;
+}
+.assetStrategyParameter{
+	display:none;
+}
+
+.ATWindow
+{
+	position: absolute;
+	left:40%;
+	top:60%;
+	width:300px;
+	background-color:#f0f5FF;
+	border: 1px solid #000;
+	z-index: 50;
+}
+
+.ATWindow_handle 
+{
+	background-color:#5588bb;
+	padding:2px;
+	text-align:center;
+	font-weight:bold;
+	color: #FFFFFF;
+	vertical-align:middle;
+}
+
+.ATWindow_content 
+{
+	padding:5px;
+}
+
+.ATWindow_close
+{
+	float:right;
+	text-decoration:none;
+	color:#FFFFFF;
+}
+
+#SaveAsWindow
+{
+	position: absolute;
+	left:40%;
+	top:30%;
+	width:300px;
+	background-color:#f0f5FF;
+	border: 1px solid #000;
+	z-index: 50;
+}
+
+#SaveAsWindow_handle 
+{
+	background-color:#5588bb;
+	padding:2px;
+	text-align:center;
+	font-weight:bold;
+	color: #FFFFFF;
+	vertical-align:middle;
+}
+
+#SaveAsWindow_content 
+{
+	padding:5px;
+}
+
+#SaveAsWindow_close
+{
+	float:right;
+	text-decoration:none;
+	color:#FFFFFF;
+}

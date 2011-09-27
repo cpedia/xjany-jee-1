@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping package="com.lti.service.bo">
+
+	<class
+		name="FactorBetaGain"
+		table="ltisystem_factorbetagain"
+	>
+	
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+		
+		<property
+			name="Symbol"
+			column="SYMBOL"
+			type="java.lang.String"
+			not-null="true"
+		/>
+		
+		<property
+			name="Factor"
+			column="FACTOR"
+			type="java.lang.String"
+			not-null="true"
+		/>
+		
+		<property
+			name="OneMonth"
+			column="ONEMONTH"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="ThreeMonth"
+			column="THREEMONTH"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="HalfYear"
+			column="HALFYEAR"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		<property
+			name="OneYear"
+			column="ONEYEAR"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="Beta"
+			column="BETA"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="LastDate"
+			column="LASTDATE"
+			type="java.util.Date"
+			not-null="true"
+		/>
+		</class>	
+</hibernate-mapping>

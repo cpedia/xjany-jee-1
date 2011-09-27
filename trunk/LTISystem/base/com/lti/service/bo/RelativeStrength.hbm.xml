@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="RelativeStrength"
+		table="ltisystem_relativestrength"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+		<property
+			name="SecurityID"
+			column="SecurityID"
+			type="java.lang.Long"
+			not-null="false"
+		/>			
+		<property
+			name="Symbol"
+			column="Symbol"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="SecurityType"
+			column="SecurityType"
+			type="integer"
+			not-null="false"
+			length="16"
+		/>
+		<property
+			name="Date"
+			column="Date"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="Return_52w"
+			column="Return_52w"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="Rank"
+			column="Rank"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+											
+	</class>	
+</hibernate-mapping>

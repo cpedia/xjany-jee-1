@@ -1,0 +1,300 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#import "/jsp/mp_left_div.ftl" as left]
+<html>
+<head>
+<title>401K Retirement Plans Model Portfolios</title>
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="PlanIQ collects and maintains thousands of 401K, 403B and 457 Retirement Plans. MyPlanIQ provides tactical strategy and strategic strategy for users to establish and manage their portfolios out of these plans. MyPlanIQ plan ratings are available to evaluate these plans.">
+<meta name="keywords" content="401k, 401 k, 401k Retirement Plan, Employee Savings Plan, Profit Sharing Plan, Thrift Plan, Defined Contribution Plans, Pension Plan, Retirement Funds, IRA, SEP, SIMPLE, Fidelity, Schwab, Hweitt AON, John Hancock 401K, Hartford 401K, TIAA-CREF, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<!--JZ <script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+-->
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+</script>
+</head>
+<body>
+<style>
+	#topNav a{
+		padding-right: 14px !important;
+	}
+	a#search-submit {
+	    background-image: url("/media/img/search-btn.gif");
+	    background-position: 0 0;
+	    background-repeat: no-repeat;
+	    border: medium none;
+	    color: #FFFFFF;
+	    display: block;
+	    float: left;
+	    font-size: 13pt;
+	    font-weight: bold;
+	    height: 40px;
+	    left: 15px;
+	    padding: 9px 0 0;
+	    position: relative;
+	    text-align: center;
+	    text-decoration: none;
+	    top: 0;
+	    vertical-align: middle;
+	    width: 131px;
+	}
+	#menu2 li a{
+		width: 250px !important;
+		display: inline;
+	}
+	.input-wrap a{
+		#line-height:18px;
+		padding-top: 12px !important;
+		border:1px;width:131px;
+		height:30px;
+		background:no-repeat url('/LTISystem/jsp/images/search.png')!important;
+	}
+	#getModelPortfolios {
+    background-color: #2F5435;
+    color: #D3FF6C;
+    font-size: 15px;
+    padding: 8px 18px 8px 10px;
+    width: 575px;
+}
+	
+</style>
+
+<div id="getModelPortfolios" style="height: 115px;width: 890px;margin: -20px auto 40px 25px;background: none repeat scroll 0 0 #EBFEED;">
+	<form action="/LTISystem/f401k__search.action" method="get" id="searchbox" style="margin-left: 100px;margin-top: 35px;color: black;">
+       	<div class="input-wrap">
+   			<input name="groupIDS" value="8" type="hidden"></input>
+	        <input name="includeHeader" value="true" type="hidden"></input>
+	        <input name="type" value="2" type="hidden"></input>
+   	        <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+   	        <input style="float:left;font-size: 16pt !important;height: 40px !important;width:560px;" id="n401k_plansearch_text" name="q" 
+   	        onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)this.value="Schwab"' size="15" type="text" value='${Parameters.q!"Company 401K, IRA, Brokerage or ETF/Mutual Fund"}'
+			size="15" type="text">
+	        <a onclick="submit_search(this); return false;" id="search-submit" href="#">Search</a>
+		</div>
+       	<br class="clear-both" style="clear:both;">
+       	<div class="main_directory_listing">
+           	<a style="font-size: 13px;" id="ratings-link" href="/LTISystem/getstarted_pickaplan.action">Find a <strong>plan</strong>&nbsp;|&nbsp;Pick/customsize a <strong>portfolio</strong>&nbsp;|&nbsp;Study & Follow</a>
+       	</div>
+   	</form>
+</div>
+
+<div id="mpleft" style="float:left;width:250px;">
+   <div style="width:250px; margin-right:9px;">
+   
+
+<div class="apps">
+  <div class="various_nav app_categories" id="categories">
+  <ul>
+    <li><span class="various_nav_title">Categories</span></li><!--onclick="return hide_show_div('sub_categories');"-->
+    <li class="second  selected"><a name="all" id="apps-store-main" href="/store">All</a> </li> 
+     
+      <li class="second "><a name="News" id="news" href="/store/news">Portfolio Strategies</a></li>
+     
+      <li class="second "><a name="Research Tools" id="research-tools" href="/store/research-tools">ETFs</a></li>
+     
+      <li class="second "><a name="Charts" id="charts" href="/store/charts">Mutual Funds</a></li>
+     
+      <li class="second "><a name="Investment Screeners" id="investment-screeners" href="/store/investment-screeners">401K/IRAs</a></li>
+     
+      <li class="second "><a name="ETF" id="etf" href="/store/etf">Brokerages</a></li>
+     
+      <li class="second "><a name="Data" id="data" href="/store/data">Annuities</a></li>
+    
+    <li class="mid_title"><span class="various_nav_title">Help</span>
+    </li><li class="second"><a href="/store/help-and-support">Blogs</a></li>
+    <li class="second "><a href="/store/apps-faq">FAQ</a></li>
+      
+  </ul>
+  
+</div>
+
+
+  
+
+
+</div>
+   [@left.TopPlans /]
+
+   <script type="text/javascript"><!--
+	google_ad_client = "ca-pub-9404629437169860";
+	/* PlanPort_SmallSquare */
+	google_ad_slot = "8527794289";
+	google_ad_width = 200;
+	google_ad_height = 200;
+	//-->
+   </script>
+   <script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+   </script>
+								
+   [@s.action  name="f401k_allblog" namespace="/" executeResult=true]
+   [@s.param  name="formusCategories"]Retirement Investing News and Articles[/@s.param]
+   [@s.param  name="setPageSize"]5[/@s.param]
+   [@s.param  name="isMain"]false[/@s.param]
+   [@s.param  name="isprePage"]true[/@s.param]
+   [/@s.action]
+   
+   <script type="text/javascript"><!--
+google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_SmallSquare */
+google_ad_slot = "8527794289";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+   </script>
+   <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+   </script>  
+								
+  [@s.action  name="f401k_allblog" namespace="/" executeResult=true]
+	[@s.param  name="formusCategories"]News and Commentaries[/@s.param]
+	[@s.param  name="setPageSize"]3[/@s.param]
+	[@s.param  name="isMain"]false[/@s.param]
+	[@s.param  name="isprePage"]true[/@s.param]
+   [/@s.action]
+
+   <script type="text/javascript"><!--
+google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_Left_Skycraper */
+google_ad_slot = "7605014472";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+    </script>
+    <script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+								
+<!-- Begin Cox Digital Solutions tag for "coxskyscraper" Ad Space (180x300) ID #1000007411107 -->
+<script type="text/javascript">
+	sr_adspace_id = 1000007411107;
+	sr_adspace_width = 180;
+	sr_adspace_height = 300;
+	sr_ad_new_window = true;
+	sr_adspace_type = "graphic";
+</script>
+<script type="text/javascript" src="http://ad.afy11.net/srad.js?azId=1000007411107">
+</script>
+<!-- End Cox Digital Solutions tag for "coxskyscraper" Ad Space (180x300) ID #1000007411107 -->								
+                                
+   </div>
+</div>  <!-- end of mpleft -->
+
+<!--mpcenterright -->
+<div id="mpcenterright" style="margin- left:5px;float:right;width:651px;">
+<div style="width:615px; margin-right:0;float:left;word- wrap:break-word" id="news">
+
+<h1 align="center">Company 401K Retirement Plans</h1>
+<div class=" ">
+<p>A workplace 401 K retirement plans is also called Employee Savings Plan, Profit Sharing Plan or Thrift Plan. It is also called Defined Contribution Plan. For small businesses, SEP or SIMPLE plans are variants of a 401k plan. Compared with a traditional pension plan (defined benefit plan), a 401K employee savings plan lets employees manage their investment funds in the plan. Participants are responsible for their portfolio returns.</p>
+<h2>What to do for your investments in a 401k savings plan?</h2>
+<p>
+<ul>
+<li>Search for your plan from MyPlanIQ's comprehensive database with over 100 thousands of 401K retirement plans.</li>
+<li>Browse its plan rating and individual investment fund ranking. See <a href="/LTISystem/f401k_showplanscorelist.action"><strong>PlanRatingIQ Investment Choices Ranking</strong><sup><i><font color="orange">new</font></i></sup></a></li>
+<li>Follow pre built asset allocation model portfolios or customize a model portfolio tailored to your own personal risk tolerance. </li>
+<li>Your followed or customized portfolios are updated daily. You will receive regular monthly or quarterly re-balance emails for these portfolios. You then use the re-balance/holdings information to manage your own 401K account.</li>
+<li>As a registered user, you can follow or customize up to 5 <a href="/LTISystem/jsp/strategy/View.action?ID=771">Strategic Asset Allocation (SAA)</a> model portfolios for free. If you are a paying subscriber in the basic subscription plan, you can follow or customize up to 5 <a href="/LTISystem/jsp/strategy/View.action?ID=1003">Tactical (TAA)</a> or Strategic Asset Allocation model portfolios.</li>
+</ul>
+</p>
+<p>A 401k plan usually consists of a dozen (no less than 3 by law) investment funds. The available investment funds of a plan are obtained based on public filing information and thousands of users' input. If you can not find your plans or you think they need to be updated/corrected, please email us your plans investment options (a list of investment funds. They could be mutual funds (thus preferably their symbols), trusts and Separately Managed Accounts (SMAs)). You can find this information from your Summary Plan Descriptions (SPD) document (in 401K/403B cases) or through your online accounts. Other important information includes the redemption period for each fund. By default, we assume that funds (other than money market funds and ETFs) have a minimum three month (90 days) holding period to avoid redemption charge. </p>
+<p><strong><a href="mailto:support@myplaniq.com?subject=My company plan's investment options">Email your plan's investment options</a></strong></p>
+
+<p><span style="font-size: larger">Not sure how to start? follow <a href="/LTISystem/getstarted_pickaplan.action"><strong>Step by Step Guide</strong></a> to follow/customize a model portfolio for your plan.</span></p>
+
+
+
+<h2 style="text-align:center;">Fortune Top 10 Company 401K Plans Ranking<sup>*</sup></h2>
+          <div align="center">
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetPlanScoreTable" namespace="/jsp/strategy" executeResult=true]
+	          [@s.param name="includeTAAReturn"]true[/@s.param]
+	          [@s.param name="includeSAAReturn"]false[/@s.param]
+	          [@s.param name="includeCoverageScore"]false[/@s.param]
+	          [@s.param name="includeFundQualityScore"]false[/@s.param]
+	          [@s.param name="includeCapabilityScore"]false[/@s.param]
+	          [@s.param name="includeInvestmentScore"]true[/@s.param]
+	          [@s.param name="ids"]995|1079|817|716|774|810|1089|689|674|690[/@s.param]
+	          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action]
+          </div>
+<p>*: Based on 2010 <a href="http://money.cnn.com/magazines/fortune/fortune500/2010/">Fortune 500 List</a></p>
+          </div>
+          </div>
+
+      <div style="width:100%">
+ 
+          <h2>Some of 401k Retirement Plans</h2>
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetPlanScoreTable" namespace="/jsp/strategy" executeResult=true]
+              [@s.param name="includeTAAReturn"]true[/@s.param]
+              [@s.param name="includeSAAReturn"]false[/@s.param]
+              [@s.param name="includeCoverageScore"]false[/@s.param]
+              [@s.param name="includeFundQualityScore"]false[/@s.param]
+              [@s.param name="includeCapabilityScore"]false[/@s.param]
+              [@s.param name="includeInvestmentScore"]true[/@s.param]
+              [@s.param name="ids"]880|673|688|690|920|774|1089|1079|1024|1028|715|716|817|723|791|676|1014|919|1119|990|686|708|4871[/@s.param]
+              [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action]
+          
+          </div>
+          </div>
+
+         <p> <strong>... Search for more plans ...</strong></p>
+     </div>
+
+ <!--        <div class="col-2" style="width:48%">
+          <h2>Public and Non-Profit Employees 403(b) and 457 Plans</h2>
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetPlanScoreTable" namespace="/jsp/strategy" executeResult=true]
+              [@s.param name="includeTAAReturn"]true[/@s.param]
+              [@s.param name="includeSAAReturn"]false[/@s.param]
+              [@s.param name="includeCoverageScore"]false[/@s.param]
+              [@s.param name="includeFundQualityScore"]false[/@s.param]
+              [@s.param name="includeCapabilityScore"]false[/@s.param]
+              [@s.param name="includeInvestmentScore"]true[/@s.param]
+              [@s.param name="ids"]1076|691|1081|685|692|1128|1075|1082|1077|1074|1134|1135|1136|1137|1112|1218|1224|1225|1226|4830|1228|1109|4870[/@s.param]
+              [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action]
+
+          </div>
+          </div>
+ 
+         <p> <strong>... Search for more plans ...</strong></p>
+       </div>
+-->
+    </div>
+    </div>
+    </div> <!-- end of mpcenterright -->
+<div class="clearfloat"></div>
+</body>
+</html>

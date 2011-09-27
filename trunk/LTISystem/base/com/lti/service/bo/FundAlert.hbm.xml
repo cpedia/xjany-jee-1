@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="FundAlert"
+		table="ltisystem_fundalert"
+		batch-size="3"
+	>
+		
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="Date"
+			column="DATE"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="SecurityID"
+			column="SECURITYID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="PointType"
+			column="POINTTYPE"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		<property
+			name="DR"
+			column="DR"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		<property
+			name="Mean"
+			column="MEAN"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		<property
+			name="STD"
+			column="STD"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

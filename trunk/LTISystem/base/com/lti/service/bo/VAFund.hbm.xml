@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="VAFund"
+		table="ltisystem_vafund"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="Ticker"
+			column="Ticker"
+			type="string"
+			not-null="false"
+		/>
+		
+		<property
+			name="AssetName"
+			column="AssetName"
+			type="string"
+			not-null="false"
+		/>
+		
+		<property
+			name="FundName"
+			column="FundName"
+			type="string"
+			not-null="false"
+		/>
+		
+		<property
+			name="MSVAName"
+			column="MSVAName"
+			type="string"
+			not-null="false"
+		/>
+		
+		<property
+			name="FullName"
+			column="FullName"
+			type="string"
+			not-null="false"
+		/>
+		
+		<property
+			name="BarronName"
+			column="BarronName"
+			type="string"
+			not-null="false"
+		/>
+		
+		<property
+			name="Memo"
+			column="Memo"
+			type="string"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

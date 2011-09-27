@@ -1,0 +1,571 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>MyPlanIQ: Retirement and Taxable Plans Investment Solutions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link href="/LTISystem/jsp/template/ed/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/LTISystem/jsp/template/ed/css/layout.css" rel="stylesheet" type="text/css" />
+<link href="/LTISystem/jsp/template/ed/css/jquery_UI/moss/jquery-ui-1.8.custom.css" rel="stylesheet" type="text/css" />
+<link href="/LTISystem/jsp/template/ed/css/tablesorter/tablesorter.css" rel="stylesheet" type="text/css"/>
+
+
+<script src="/LTISystem/jsp/template/ed/js/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/jquery_UI/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+
+<script src="/LTISystem/jsp/template/ed/js/tablesorter/jquery.tablesorter.js" type="text/javascript"></script>
+
+<script src="/LTISystem/jsp/template/ed/js/maxheight.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/cufon/cufon-yui.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/cufon/cufon-replace.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/cufon/Franklin_Gothic_Medium_Cond_400.font.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/dd_roundies/dd_roundies.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/initUI_elements.js" type="text/javascript"></script>
+
+<script>
+	function setCookie(name, value, expires, path, domain, secure) {
+				document.cookie = name + "=" + escape(value) +
+				((expires) ? "; expires=" + expires.toGMTString() : "") +
+				((path) ? "; path=" + path : "") +
+				((domain) ? "; domain=" + domain : "") + ((secure) ? "; secure" : ""); 
+	}
+	$(document).ready(function() {
+	
+		initButtons();
+		Cufon.now();
+		DD_roundies.addRule('.sidebar_box, .sidebar_box_noPadding', '8px', true);
+		ieInputFix();
+		$("#login_content").dialog({height:300,weight:400,title:"Login",position:"center",autoOpen:false});
+
+		$("#loginEntry").click(function(){
+			 $("#login_content").dialog("open");
+			 var page = window.location;
+			 setCookie("requestpage", page, null, "/", null, null);
+		});
+		
+	});
+	
+ </script>
+
+ <meta name="home" content="vf_current" />
+<meta name="description" content="investment strategies in retirement plans 401(k), 403(b), self-directed IRAs, Variable Universal Life (VULs), taxable brokerage mutual fund and ETF investments based on tactical asset allocation, smart money (GURU) directed asset allocations and modern portfolio theory (MPT) based strategic asset allocations. Optimized (Mean Variance Optimization) efficient frontiers">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<script src="/LTISystem/jsp/template/ed/js/logos.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/template/ed/js/mediaPlugin.js" type="text/javascript"></script>
+
+	<script>
+	$(document).ready(function() {
+		logoRotator();
+		alignHeight();
+		
+		
+		if($.browser.msie){
+		 	ieInputFix();
+		}
+		
+		$('#flashdiv').append("<a class='mediaObject'></a>");
+		$('.mediaObject').media({ 
+				width:     618, 
+				height:    339, 
+				autoplay:  true, 
+				src:       "/LTISystem/jsp/template/ed/media/evergreen.swf"
+				//attrs:     { controller:  'true', "scale":"tofit", postdomevents:true},
+				//params:     { controller:  'true', "SCALE":"tofit", postdomevents:true}
+		}); 
+		
+		
+	});
+	
+	
+	function ieInputFix() {
+		$('input').css("margin-top","-1px");
+	}
+	
+ </script>
+<style>
+ .feedburnerFeedBlock ul li span a{
+ 	font-size:0.8em;
+ 	line-height:3.0em;
+ }
+ .feedburnerFeedBlock{
+ margin-top:-10px;
+ padding:0px;
+ }
+ <!--
+#flashdiv {
+	border: 1px solid #C0C0C0;
+	height: 337px;
+	width: 616px;
+}
+-->
+.feedburnerFeedBlock ul li {
+	background:url(/LTISystem/jsp/template/ed/images/listBullet.gif) no-repeat left 0.4em;
+	padding-bottom:8px;
+	margin-bottom:8px;
+	padding-left: 15px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #8bac76;
+}
+ 
+ .feedburnerFeedBlock{
+ font:10pt/14pt Arial,Helvetica,sans-serif;
+}
+.feedburnerFeedBlock ul{
+	list-style-type:none;
+}
+
+.feedburnerFeedBlock ul li div p span a{
+	font-size:1.0em;
+}
+.feedburnerFeedBlock p a{
+/*font-size:0.8em;*/
+	text-decoration:none;
+}
+#creditfooter{
+	display:none;
+}
+.feedTitle{
+	font-size:2.0em;
+ 	line-height:1.5em;
+ 	
+}
+ </style>
+</head>
+<body id="page1">
+<div id="main">
+
+  <!-- HEADER -->
+  <div id="header">
+    <div class="top">
+	 
+		 
+	 	<div class="searchbar">
+				<div class="regSignin" >
+				<a href="/LTISystem/j_acegi_logout">Logout &nbsp;</a>
+				<a href="/LTISystem/jsp/register/ViewUserDetails.action">Admin</a>
+				</div>
+
+	 		<div class="searchFields">
+	 					<table height='100%' align="left">
+                	<tr>
+                		<td>Site Search</td>
+                    	<td align='right'>
+                    		<form action='/LTISystem/jsp/main/Search.action' id='vf_search' name="vf_search" method='get'>
+                        		<input id='n401k_search_text' name='q' onfocus='' onblur='' size="15" type='text' value=''/>
+                            	<input alt='Search' class="submitSearchTop" type='submit' value=''/>
+
+                            	<input name="cx" value="004465209614154372366:fpwmrrwztqy" type="hidden">
+      							<input name="cof" value="FORID:9" type="hidden">
+                            	<input name="ie" value="UTF-8" type="hidden">
+                         	</form><!-- end of form -->
+                     	</td><!-- end of search -->
+                     	<td>Stock/Fund</td>
+                     	
+                     	<td align=right valign='middle'>
+                     		<form action='/LTISystem/jsp/security/Quote.action' id='vf_quote' name="vf_quote" method='get'>
+
+                           		<input id="n401k_search_text" name="symbol" onfocus='' onblur='' size="15" type="text" value=''>
+                           		<input alt='Quote' class="submitSearchTop" type='submit' value=''/>
+                         	</form><!-- end of form -->
+                     	</td><!-- end of quote -->
+                     	<td>Plan Search</td>
+                     	<td align=right valign='left'>
+		                		<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+		            	    	<input name="groupIDS" value="8" type="hidden"></input>
+
+		            	        <input name="includeHeader" value="true" type="hidden"></input>
+		            	        <input name="type" value="2" type="hidden"></input>
+		            	        <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+		            	        <input id="n401k_plansearch_text" name="keyword" onfocus='' onblur='' size="15" type="text" value=''>
+		            	        <input alt='Quote' class="submitSearchTop" type='submit' value=''/>
+	            	        </form><!-- end of form -->
+	                    </td><!-- end of PlanSearch -->
+					</tr>
+				</table>
+
+ 			</div>
+			<div class="clearfloat"></div>
+			</div>
+      <div class="mast"><a href="/LTISystem/f401k__main.action"><img src="/LTISystem/jsp/template/ed/images/mast.gif" alt="" width="891" height="80" /></a></div>
+		<div class="navbar" id="navbar">
+		
+				<a href="/LTISystem/f401k__main.action" class="active">HOME</a>
+				<a href="/LTISystem/f401k__plans.action" >RETIREMENT/TAXABLE PLANS</a>
+<!--				<a href="/LTISystem/f401k__iraplans.action" >TAXABLE/SELF-DIRECTED</a>
+-->
+
+				<a href="/LTISystem/f401k__strategies.action" >STRATEGIES</a>
+				<a href="/LTISystem/f401k__portfolios.action" >MY PORTFOLIOS</a>
+			        <a href="/LTISystem/jsp/register/ViewUserDetails.action" >MY ACCOUNT</b></a>
+				<a href="/LTISystem/f401k_blogs.action" >ARTICLES</a>
+				<a href="/jforum" >COMMUNITIES</a>
+				<a href="/LTISystem/f401k__faqs.action" >SUPPORT</a>
+
+					<a href="/LTISystem/f401k_admin.action" >ADMIN</a>
+					<a href="/LTISystem/jsp/admin/index.jsp" >VF ADMIN</a>
+
+		</div>
+    </div>
+  </div>
+  	<div class="borderGreen">
+  	<div class="featured-box" style="width:100%; height:500px">
+
+		<br><h1 align="center"><font color="#458F51">MyPlan</font><font color="#95B5C1">IQ</font> NewsLetter</h1><br>
+                        <h3 align="center">June 4th, 2010</h3><br>
+        <div style="width:100%">
+  	<div class="col-1" style="width: 66%; height:500px">
+<!--- Upper Left --->
+                        <h3>MyPlanIQ BiWeekly -- A plain spoken investment newsletter</h3>
+                        <p>When was the last time you opened a 401K statement from your provider? Remember the dark days of 2008 and 2009 when your 401K shrank to 201K? </p>
+
+<p>Boomers are starting to utter the 'R' word while striving to adjust to the long term economic trends of the East rising, massive budget deficits and continuing trade imbalances. It is more important than ever to take care of your retirement and financial future. Since we all work hard for our money, why shouldn't our money work hard for us? For example, an extra 6% return for a decade doubles your money.</p>
+
+<p>That's all very nice, but what about the expense, effort and risk of investing? Some turn to financial experts, paying high fees, not having a clue how to invest. A few brave souls search for guidance, only to be disappointed by the inconsistent and unsystematic "advice". </p>
+<p>MyPlanIQ was born out of this background and experience. We are in a unique position to discuss and address getting your money to work harder for you. The purpose of this newsletter is to help you learn and stay informed about issues and available solutions to getting better returns with low risk and cost. Remember that investment is a process and not an event. <a href="http://www.myplaniq.com/LTISystem/f401k__blogs.action">...More...</a></p>
+
+<!--- End Upper Left --->
+        </div>
+  	<div class="col-2" style="margin-left:10px; width: 32%; height:500px">          	
+<!--- Upper Right --->
+                        <h3>Simpler Is Better</h3>
+                        <p>Introducing the Simpler Is Better (SIB) portfolios: <a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,147">Six Core Asset ETFs Most Popular</a> and <a href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=1,148">Six Core Asset ETFs</a>. Each plan has only six ETFs in six major assets: U.S., Foreign, Emerging Equities, REITs, Commodities and Fixed Income. The Tactical Asset Allocation (TAA) model portfolios in both plans illustrate type of returns you could achieve. These simple plans are used as measuring sticks in our plan ranking. <a href="http://www.myplaniq.com/LTISystem/f401k__blogs.action">...More...</a></p>
+                         <table border="1" cellspacing="0" cellpadding="2">
+        <tbody>
+         <tr>
+            <td  width="133">Annualized Return</td>
+            <td  width="69">
+            <p>3 YR</p>
+            </td>
+            <td  width="74">
+            <p>5 YR</p>
+            </td>
+         </tr>
+         <tr>
+            <td  width="133">
+            <p><a rel="nofollow" target="_blank" href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=17,295">Six Core TAA</a></p>
+            </td>
+            <td  width="69">
+            <p>12%</p>
+            </td>
+            <td  width="74">
+            <p>16%</p>
+            </td>
+         </tr>
+         <tr>
+            <td  width="133">
+            <p><a rel="nofollow" target="_blank" href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=17,373">Six Core Popular TAA</a></p>
+            </td>
+            <td  width="69">
+            <p>10%</p>
+            </td>
+            <td  width="74">
+            <p>13%</p>
+            </td>
+         </tr>
+        </tbody>
+      </table>
+<!---- End Upper Right --->
+	</div> <!--- end of col-2 --->
+          </div>
+  	</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div id="content">
+    <div class=" middlebar">
+	  <div class="middleLinks" id="middleLinks">
+
+			<a href="/LTISystem/f401k__why.action"> Why MyPlanIQ</a>
+			<a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a>
+			<div id="searchForPlan">
+					<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    				<input name="groupIDS" value="8" type="hidden"></input>
+	        			<input name="includeHeader" value="true" type="hidden"></input>
+	        			<input name="type" value="2" type="hidden"></input>
+
+	       			    <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	       			    <span>Search For A Plan And Its Model Portfolios</span>
+	        			<input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)' size="15" type="text" value=''>
+	       				<input alt='Quote' id='submitSearchBottom' type='submit' value=''/>
+	   				</form><!-- end of form -->
+		 	</div><!--searchForPlan -->
+	 </div>
+	 
+	 </div>
+
+    
+      <div class="col-1 box maxheight">
+
+        	<div class="inner">
+                        <h3>News &amp; Announcements</h3>
+<script src="http://feeds.feedburner.com/evergreenplans/iVUh?format=sigpro" type="text/javascript" ></script><noscript><p>Subscribe to RSS headline updates from: <a href="http://feeds.feedburner.com/evergreenplans/iVUh"></a><br/>Powered by FeedBurner</p> </noscript>
+  		<a href="secondary.html" class="moreInCategory">More News &amp; Announcements »</a>
+
+<!--        		<a href='/LTISystem/f401k__strategies.action'><h3>Time Proven Strategies</h3></a>
+  				<ul class="list">
+  					<li>
+  						<h4><strong>Strategic Asset Allocation (SAA):</strong> 
+                                                   <ul class="list">
+                                                     <li>Modern Portfolio Theory Based</li>
+                                                     <li>Superior Fund Selection Algorithm</li>
+                                                     <li>Built upon Personal Tolerance and Retirement Ages</li>
+                                                     <li>Periodically Rebalancing</li>
+                                                   </ul>
+                                                 </h4>
+
+     				</li>
+  				</ul>
+  				<ul class="list">
+  					<li>
+  						<h4><strong>Tactical Asset Allocation (TAA):</strong> 
+                                                   <ul class="list">
+                                                    <li>Major Asset Trends Based</li>
+                                                    <li>Dynamic Allocation</li>
+                                                    <li>Much Higher Return and Acceptable Risk</li>
+                                                    <li>Practiced by Major Wealth Managers</li>
+                                                   </ul>
+
+					</li>
+				</ul>
+ 				<ul class="list">
+  					<li>
+  						<h4><strong>Guru (Smart Money) Directed Asset Allocation:</strong> following
+						great fund managers' asset allocation decisions</h4>
+					</li>
+  					<li class="">
+  						<h4><strong>Optimized Asset Allocation:</strong> Efficient frontier
+						optimized</h4>
+					</li>
+  				</ul>
+
+         	<a href="/LTISystem/f401k__strategies.action" class="moreInCategory">More Info on Evergreen Strategies »</a>
+
+                <br><br><p><span><a title="Click for Strategy Performance" href="jsp/images/Why4.pdf" target=_blank><img style="border:6px outset #545565;" width="260" height="145" src="jsp/images/why.png"></a></span></p>
+-->
+              </div>
+     	</div>
+      <div class="col-2  box maxheight">
+         <div class="inner">
+        	<a href='/LTISystem/f401k__strategies.action'><h3>Time Proven Strategies</h3></a>
+                   <ul class="list">
+                     <li><h4 style="font-size: 150%">Dynamic and Strategic Allocation</h4></li>
+
+                     <li><h4 style="font-size: 150%">Superior Fund Selection</h4></li>
+                     <li><h4 style="font-size: 150%">Much Higher Return and Acceptable Risk</h4></li>
+                     <li><h4 style="font-size: 150%">Practiced by Major Wealth Managers</h4></li>
+                   </ul>     
+                 <a href="/LTISystem/f401k__strategies.action" class="moreInCategory">More Info on Strategies »</a>    
+<!--           	<h3>Comprehensive Coverage of Plans</h3>
+     			<ul class="list">
+                                <li>    
+                                        <h4><strong>401(k) Retirement Plans</strong></h4>
+                                </li>
+                                <li>    
+                                        <h4><strong>403(b) Nonprofit Retirement Plans</strong></h4>
+                                </li>
+                                <li>    
+                                        <h4><strong>Brokerage ETF Plans (IRA/Taxable)</strong></h4>
+                                </li>
+     				<li>
+     					<h4><strong>Brokerage No Load No Transaction Fee Mutual Fund </strong></h4>
+     				</li>
+     				<li>
+     					<h4><strong>Variable Annuities and VUL Plans</strong></h4>
+     				</li>
+     				<li>
+     					<h4><strong>529 College Savings Plans </strong></h4>
+  					</li>
+  				</ul>
+-->
+				
+<!--				<div  class="logoRotation" id="logoRotation">
+					<h3 id="logoTitleText">Comprehensive Plan Coverage</h3>
+					<div class="logoRotator"></div>
+				</div>
+                                <a href="/LTISystem/f401k__list.action" class="moreInCategory">More Info on Plans »</a>
+-->
+         </div>
+
+      </div>
+      <div class="col-3 box maxheight">
+                <div id="decide"><a href="/LTISystem/profile_edit.action?planID=0&portfolioID=0"><img src="/LTISystem/jsp/template/ed/images/decide.gif" alt="" width="300" height="85" /></a></div>
+				<div class="customize"><a href="/LTISystem/profile_customizeportfolio.action"><img src="/LTISystem/jsp/template/ed/images/customize.gif" alt="" width="300" height="68" /></a></div>
+				<div id="manage"><a href="/LTISystem/profile_manageyourportfolio.action?planID=0&portfolioID=14838"><img src="/LTISystem/jsp/template/ed/images/manage.gif" alt="" width="300" height="70" /></a></div>
+				<div id="getStartedNow"><a href="/LTISystem/profile__getstarted.action"><img src="/LTISystem/jsp/template/ed/images/getStarted.gif" alt="" width="300" height="70" /></a></div>    
+<!--         <div class="clearfloat">        -->
+         <div class="inner">
+           	<h3>Easy to Use and Low Cost</h3>
+
+                <ul class="list">
+                 <li><h4 style="font-size: 150%">MyPlanIQ gives you both Strategic and Tactical allocation strategies, mapped directly to your plan</h4></li>
+
+<li><h4 style="font-size: 150%">MyPlanIQ allows you to explore multiple alternatives based on personal profile, plan and strategy</h4></li>
+
+<li><h4 style="font-size: 150%">MyPlanIQ sends you regular email instructions to keep your portfolio optimally tuned</h4></li>
+
+<li><h4 style="font-size: 150%">MyPlanIQ costs less than $10 a month</h4></li>
+                </ul>
+
+  	</div>
+      </div>
+		<div class="clearfloat"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer">
+        <div class="footerColumn">
+                <a href="#" class="footerColumnHeading">@ 2010 LTI Systems, Inc.</a>
+
+        </div> 
+  	<div class="footerColumn">
+  		<a href="secondary.html" class="footerColumnHeading">Company Info</a>
+		<a href="/LTISystem/f401k__about.action">About Us</a>
+<!--		<a href="secondary.html">News and Press</a>
+		<a href="secondary.html">Contact Us</a>
+		<a href="secondary.html">TV and Radio Apearances</a>
+		<a href="secondary.html">Our Services</a>
+		<a href="secondary.html">Affiliate Program</a>
+		<a href="secondary.html">Invite a Friend</a>
+-->
+  	</div>
+	
+	
+  	<div class="footerColumn">
+  		<a href="/LTISystem/f401k__faqs.action" class="footerColumnHeading">Support</a>
+
+		<a href="/LTISystem/f401k__faqs.action">FAQs</a>
+		<a href="/LTISystem/f401k__glossary.action">Glossary</a>
+		<a href="/LTISystem/f401k__strategies.action">Asset Allocation Strategies</a>
+	</div>	
+	
+	<div class="footerColumn">
+  		<a href="#" class="footerColumnHeading">Legal</a>
+		<a href="/LTISystem/jsp/register/privacy.action">Privacy Policy</a>
+
+		<a href="/LTISystem/jsp/register/termuse2.action">Terms of Service</a>
+		<a href="/LTISystem/jsp/register/disclaimer.action">Disclaimer</a>
+<!--		<a href="secondary.html">Lorem Ipsum Dolor Con</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+-->
+  	</div>	
+	
+	<div class="footerColumn">
+  		<a href="secondary.html" class="footerColumnHeading">Site Map</a>
+<!--		<a href="secondary.html">Lorem Ipsum Dolor</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum Dolor Con</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+-->
+  	</div>	
+	
+	<div class="footerColumn">
+
+  		<a href="/jforum/rss/forumTopics/61.page" class="footerColumnHeading">RSS Feed  <img border="0" alt="[XML]" src="/jforum/templates/default/images/xml_button.gif"></a>
+<!--		<a href="secondary.html">Lorem Ipsum Dolor</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum Dolor Con</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+-->
+  	</div>	
+	
+<!--	<div class="footerColumn">
+  		<a href="secondary.html" class="footerColumnHeading">Lorem Ipsum Dolor</a>
+		<a href="secondary.html">Lorem Ipsum Dolor</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum Dolor Con</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+		<a href="secondary.html">Lorem Ipsum</a>
+  	</div>	
+-->	
+	<div class="clearfloat"></div>
+     <div>
+        <p></br><br><font color="#B4D377" size="1.9pt"><b>Disclaimer:</b> Any investment in securities including mutual funds, ETFs, closed end funds, stocks and any other securities could lose money over any period of time. All investments involve risk. Losses may exceed the principal invested. Past performance is not an indicator of future performance. There is no guarantee for future results in your investment and any other actions based on the information provided on the website including but not limited strategies, portfolios, articles, performance data and results of any tools.</font><br></p>
+
+<p><font color="#B4D377" size="1.9pt">The website is not operated by a broker, a dealer, a registered financial planner or a registered investment adviser.</font><br></p>
+
+<p><font color="#B4D377" size="1.9pt">Investment strategies, results and any other information presented on the website are for education and research purpose only. They do not represent financial planning and investment advice. MyPlanIQ does not provide tax or legal advice. They are generic in nature and do not take into account your detailed and complete personal financial facts and needs. You alone are responsible for evaluating the information provided and to decide which securities and strategies are suitable for your own financial risk profile and expectations.</font><br></p>
+
+<p><font color="#B4D377" size="1.9pt">Information provided by the website could be time-sensitive and out of date. There is no guarantee for accuracy and completeness for the contents on the website. Contents are subject to change without notice.</font><br></p>
+
+<p><font color="#B4D377" size="1.9pt">All rights are reserved and enforced. By accessing the website, you agree not to copy and redistribute the information provided herein without the explicit consent from MyPlanIQ.</font><br></p>
+   </div>
+  </div>
+</div>
+<div style="display:none;padding:0;margin:0">
+	<div id="login_content" class="flora">
+
+		<form id="form" action="/LTISystem/j_acegi_security_check" method="POST">
+
+		<table width="100%" border="0" cellspacing="8" cellpadding="0" align="center">
+			<tr>
+				<td headers="40" colspan="2" align="left">Please register for free if you don't have an account. </td>
+			</tr> 
+		    <tr> 
+		    	<td align="left"><b>Name</b></td>
+		    	<td>
+
+	
+		    	<p>
+		    		<input id="username" name='j_username' type='text' maxlength="40">
+
+				</p>
+				<label id="Ntip"></label>
+				</td>
+			</tr>
+			<tr> 
+				<td align="left"><b>Password</b><font color="#FFFFFF"></font></td>
+
+				<td>
+				
+				<p>
+					<input id="password" type='password' name='j_password' maxlength="20" />
+
+				</p>
+				<label id="Ptip"></label>
+				</td>
+			</tr>
+			<tr>
+
+				<td align="center" width="10%">
+					<input type="checkbox" name="_acegi_security_remember_me" >
+	
+				</td>
+				<td width="90%"><div style="width:95%" align='left'>Keep me signed in for two weeks</div></td>
+
+			</tr>
+			<tr> 
+				<td colspan="2" width="100%">
+					<div align="center"> 
+						<input id="login"  type="submit" name="Submit" value="Login"   class="uiButton"/>
+
+		                &nbsp; 
+		                <input type="button"  value="Register"  onclick="window.location.href='/LTISystem/jsp/register/openRegister.action'"  class="uiButton"/>
+						&nbsp; 
+						<br>
+					</div>
+				</td>
+			</tr>
+			<tr>
+			     <td colspan="2" width="100%">
+			       <s:url id="forgotpassword" action="ForgotPassword" namespace="/jsp/register"></s:url>
+
+				    <a href="/LTISystem/jsp/register/ForgotPassword.action" >Forgot your password ?</a>
+			     </td>
+			</tr>
+		</table>
+		</form>
+	</div>   <!--login_content -->
+</div>
+</body>
+</html>

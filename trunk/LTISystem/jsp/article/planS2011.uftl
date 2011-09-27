@@ -1,0 +1,46 @@
+[#ftl]
+
+<p>
+Performance chart (as of  [#if portfolio??]${portfolio.endDate?date}[/#if])</p>
+<p>
+  [#assign portfolioids = ""  /]
+  	[#if portfolios??]
+  		[#list portfolios as pp]
+  			[#assign portfolioids=portfolioids+"${pp.ID?string.computer}"/]
+  			[#if pp_index < portfolios?size-1]
+  			[#assign portfolioids=portfolioids+","]	
+  			[/#if]
+  		[/#list]
+  	[/#if]
+
+  	
+  <a rel="lightbox" href="http://www.myplaniq.com/LTISystem/article_viewchart.action?portfolioID=[#if portfolioids??]${portfolioids}[/#if][#if compareID??]&compareID=${compareID}[/#if]">
+  <img src="http://www.myplaniq.com/LTISystem/article_viewchart.action?portfolioID=[#if portfolioids??]${portfolioids}[/#if][#if compareID??]&compareID=${compareID}[/#if]" alt="" hspace="6" vspace="6"  /> </a>
+</p>
+<p>Performance table (as of  [#if portfolio??]${portfolio.endDate?date}[/#if])</p>
+
+[#if performanceItems??]
+	<div id="show_Port_div" style="display:block">
+	<table id="comparetablePort" class="tablesorter" style="width: 100%;" border="0" cellspacing="1" cellpadding="0">
+	<thead>
+	<tr>
+	<th  width="40%">Portfolio Name</th><th  width="10%">1Yr AR</th><th  width="10%">1Yr Sharpe</th><th  width="10%">3Yr AR</th><th  width="10%">3Yr Sharpe</th><th  width="10%">5Yr AR </th><th  width="10%">5Yr Sharpe</th>
+	</tr>
+	</thead>
+	<tbody>
+	[#list performanceItems as item]
+	<tr>
+
+	<td><a href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${item.portfolioID}"> ${item.portfolioName}</a></td>
+	<td>[#if item.AR1??]${item.AR1?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio1??]${item.sharpeRatio1?string.percent}[/#if]</td>
+	<td>[#if item.AR3??]${item.AR3?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio3??]${item.sharpeRatio3?string.percent}[/#if]</td>
+	<td>[#if item.AR5??]${item.AR5?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio5??]${item.sharpeRatio5?string.percent}[/#if]</td>
+	</tr>
+	[/#list]
+	</tbody>
+	</table>
+	</div>
+[/#if]

@@ -1,0 +1,16 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+</head>
+<body>
+    <div align="center" style="height:550px;">
+    <br>
+    <br>
+    <br>
+   <p>Congratulations!  Your registration is successful.</p>
+   <p> Please &nbsp; <a href="/LTISystem/acegilogin.jsp" >Login</p>
+</div>
+</body>
+</html>

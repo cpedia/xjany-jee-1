@@ -1,0 +1,3 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[@s.fielderror /]

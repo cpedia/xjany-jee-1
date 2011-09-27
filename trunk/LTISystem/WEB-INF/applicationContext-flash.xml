@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/flash/result/OutputXML" class="com.lti.action.flash.OutputXMLAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/flash/result/OutputTL" class="com.lti.action.flash.OutputTLAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/flash/result/OutputBeta" class="com.lti.action.flash.OutputBetaAction"
+		singleton="false">
+		<property name="mutualFundManager">
+			<ref bean="mutualFundManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/flash/result/OutputCompare" class="com.lti.action.flash.OutputCompareAction"
+		singleton="false">
+		<property name="securityManager">
+			<ref bean="securityManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/flash/main" class="com.lti.action.flash.MainAction"
+		singleton="false">
+		<property name="customizeRegionManager">
+			<ref bean="customizeRegionManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+	<bean name="/jsp/flash/result/OutputMPT" class="com.lti.action.flash.OutputMPTAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>
+	
+	<bean name="/jsp/flash/result/OutputBetaGain" class="com.lti.action.flash.OutputBetaGainAction"
+		singleton="false">
+	</bean>
+	
+</beans>

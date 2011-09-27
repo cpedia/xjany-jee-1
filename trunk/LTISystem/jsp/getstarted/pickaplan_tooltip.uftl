@@ -1,0 +1,81 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="jqueryui" content="smoothness">
+<link rel="stylesheet" type="text/css" href="/LTISystem/jsp/template/gpl/vtip.css" />
+<script src="/LTISystem/jsp/template/gpl/vtip.js" type="text/javascript"></script>
+
+
+
+<script>
+	
+	$(function() {
+		
+		
+		window.onresize = function(){
+			if($('#qtip')!=undefined&&$('#qtip').css('display')!='none')
+				$(".tButton").trigger("mouseover");
+		};
+		
+		setTimeout("$('.tButton').trigger('mouseover')",2000);
+		
+		
+	});
+	
+	
+</script>
+
+</head>
+
+<body>
+<div style="margin:5px;background-color:#fff;text-align:right">
+<br><br><br><br><br><br><br><br><br><br><br>
+							<a class="tButton">Tips</a>
+							<div style="display:none;">
+								<p><font size="+2"><strong><i>Hints:</i></strong></font>
+									<ul>
+									<li><strong>Plan:</strong> a list of funds (ETFs or mutual funds)</li>
+									<li><strong>Strategies:</strong>
+									  <ul>
+									  <li><a href="/LTISystem/jsp/strategy/View.action?ID=771">Strategic Asset Allocation (SAA):</a>buy and hold with periodic re-balance</li>
+									  <li><a href="/LTISystem/jsp/strategy/View.action?ID=1003">Tactical Asset Allocation (TAA):</a> dynamic asset mixes to avoid big loss and improve returns</li>
+									  </ul>
+									</li>
+									<li><strong>Model Portfolios:</strong> based on SAA or TAA for various risks(Growth, Moderate, Conservative).</li>
+									<li><strong>Plan Rating:</strong> <a href="/LTISystem/f401k_news.action?PID=861">Rates effectiveness of plan investment choices</a></li>
+									</ul>
+									<br>
+									</p>
+							</div>
+
+</div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+       
+
+
+

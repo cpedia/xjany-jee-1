@@ -1,0 +1,75 @@
+#assetList{
+border-left:thin #666666 solid; 
+border-right:thin #666666 solid; 
+border-top:thin #666666 solid; 
+border-collapse:collapse
+}
+
+.assetlist td, th{
+border-right:thin #666666 solid; 
+border-bottom:#666666 thin solid;
+border-top:thin #666666 solid;
+border-collapse:collapse;
+}
+
+.security{
+border-bottom:none;
+border-left:none;
+border-right:none;
+border-top:none;
+border-collapse:collapse;
+}
+.security td, th{
+border-right:thin #666666 solid; 
+border-left:thin #666666 solid; 
+border-bottom:#666666 thin solid;
+border-collapse:collapse;
+}
+
+#basic td{
+border-right:thin #a6a398 solid; 
+border-bottom:#a6a398 thin solid;
+border-collapse:collapse;
+}
+
+#strategy td{
+border-right:thin #a6a398 solid; 
+border-bottom:#a6a398 thin solid;
+border-collapse:collapse;
+}
+
+#originalPortfolioTitle{
+	FONT-SIZE: 20px;
+	FONT-FAMILY: Arial;
+
+}
+#originalPortfolioTitle a{
+	FONT-SIZE: 20px;
+	FONT-FAMILY: Arial;
+}
+#originalPortfolioDescription{
+	FONT-SIZE: 12px;
+	FONT-FAMILY: Arial;
+}
+#holdingTitle{
+	FONT-SIZE: 12px;
+	FONT-FAMILY: Arial;
+}
+.sorlidBorder{
+	border:solid 1px;
+}
+
+.changeButton{
+	border: solid ipx;
+	height: 12px;
+	width: 25px;
+}
+#emailDiv{
+	FONT-SIZE: 13px;
+	FONT-FAMILY: Arial;
+
+}
+#emailDiv a{
+	FONT-SIZE: 13px;
+	FONT-FAMILY: Arial;
+}

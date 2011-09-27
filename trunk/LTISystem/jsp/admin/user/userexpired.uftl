@@ -1,0 +1,44 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+	<head>
+	<title>User Profile Page</title>
+	<SCRIPT src="../images/common.js" type=text/javascript></SCRIPT>
+	<link href="../images/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+	function show_new_payitem(DivId){
+		var pane = document.getElementById(DivId);
+		pane.style.display = (pane.style.display =="none")? "block" : "none";
+	}
+	</script>
+	</head>
+	<body>
+		<div>
+		  <table width="100%" align="left">
+		  <tr class="trheader">
+		  	 <th>UserID</th>
+	         <th>UserName</th>
+	         <th>Email</th>
+	         <th>SubscrId</th>
+	         <th>Itemname</th>
+	         <th>Profile StartDate</th>
+	         <th>Profile EndDate</th>
+	         <th>Days after Timeout</th>
+	         <th>User Status</th>
+	      </tr>
+	     [#list expireds as es]
+	      <tr>
+	      	<td>${es.userID}</td>
+	      	<td>${es.userName}</td>
+	      	<td>${es.payerEmail!""}</td>
+	      	<td>${es.subscrId!""}</td>
+	      	<td>${es.itemName!""}</td>
+	      	<td>${es.paymentStartDate?string("yyyy/MM/dd")}</td>
+	      	<td>${es.paymentEnddate?string("yyyy/MM/dd")}</td>
+	      	<td>${es.timeout}</td>
+	      	<td>${es.userStatus!""}</td>
+	     </tr>
+	      [/#list]
+	     </table>
+	   </div>
+	</body>

@@ -1,0 +1,113 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#if isMain?? && isMain==true]
+<style>
+.recommend_num{
+    background: url("/LTISystem/jsp/images/recommend_num_article_toolbar.gif") no-repeat scroll 0 0 transparent;
+    color: #2D2D2D;
+    display: inline;
+    float: right;
+    height: 15px;
+    padding: 3px 3px 0 10px;
+}
+.right_close {
+    background: url("/LTISystem/jsp/images/recommend_num_article_toolbar_right.gif") no-repeat scroll 0 0 transparent;
+    display: inline;
+    float: right;
+    height: 18px;
+    width: 1px;
+    margin-right: 5px;
+}
+.comment_button{
+	color: #FFFFFF;
+    float: right;
+    font-size: 14px;
+    height: 20px;
+    min-width: 70px;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+}
+.recommend{
+	background: url("/LTISystem/jsp/images/mp_comment.jpg") no-repeat scroll 0 0 transparent;
+    float: right;
+    margin-top: -2px;
+}
+.facebook_small{
+	background: url("/LTISystem/jsp/images/facebook_small.gif") no-repeat scroll 0 0 transparent;
+    float: right;
+}
+.fb_link_button_count {
+    float: right;
+    height: 18px;
+    min-width: 83px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin-left: 15px;
+}
+.share_text_fb {
+    margin-left: -400px;
+    text-decoration: none;
+}
+</style>
+			<h1 align="center"><a style="text-decoration:none;"href="../jforum/forums/show/82.page">${formusCategories!'myplaniq'}</a></h1>
+			   [#if jTopicsOfOne??]
+				<ul>
+					[#if tagCategory??]
+					[#else]
+					[#list jTopicsOfOne.items as var]
+						<li class="tab">
+							<span class="headline"><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+							<p class="date">${var.topicTime?string("MM/dd/yyyy")}</p>
+								[#if var.postText??]
+									${var.postText!''}
+									<span class="recommend" style="float:left"><a href = "../jforum/posts/list/${var.ID?string.computer}.page" class="comment_button"  style="float: left;">comments</a></span>
+		<span class="recommend_num" style="float: left;">${var.topicReplies?string.computer}</span>
+		<span class="right_close" style="float: left;"></span>&nbsp;
+		<span class="facebook_small"><a href="javascript:window.open('http://www.facebook.com/sharer.php?u=http://www.myplaniq.com/jforum/posts/list/${var.ID?string.computer}.page&amp;t=${var.topicTitle!''}');void(0)" name="fb_share" class="fb_link_button_count"><span class="share_text_fb">Share</span></a></span>
+									<a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark"/></a><script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+									</p>
+								[/#if]
+							</li>
+					[/#list]
+					[/#if]
+				</ul>
+				[/#if]
+			<div style="margin:0 auto">[@lti.blogpagination jTopicsOfOne "f401k_blog.action" " "][/@lti.blogpagination]</div>
+ [#else]
+ 	[#if isAnnouncements?? && isAnnouncements==false]
+		 <div class="sidebar_box_noPadding roundHeadingGreen">
+								<div class="sidebar_box_heading_white"><a class="lead" onclick="showRe()">${formusCategories!'myplaniq'}</a></div>
+							
+							[#if jTopicsOfOne??]
+								<ul>
+									[#list jTopicsOfOne.items as var]
+										<li class="tab1" style="line-height:2.5em">
+											<span><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+											<!--- <p class="date">${var.topicTime?string("MM/dd/yyyy")}</p> --->
+										</li>
+									[/#list]
+								</ul>
+								[/#if]
+								<br><div style="margin:0 auto; margin-left: 20px;">[@lti.blogpagination jTopicsOfOne "f401k_blog.action" " "][/@lti.blogpagination]</div><br>
+		 </div>
+	[#else]
+		 <div class="sidebar_box_noPadding roundHeadingGreen">
+						<div class="sidebar_box_heading_white">Announcements</div>
+						[#if announcementsList??]
+						<ul>
+							[#list announcementsList as var]
+								<li class="tab1" style="line-height:2.5em">
+									<span><a href="f401k_news.action?PID=${var.ID?string.computer}">${var.topicTitle!''}</a></span>
+									<!--- <p class="date">${var.topicTime?string("MM/dd/yyyy")}</p> --->
+								</li>
+								[#if var_index==9][#break][/#if]
+							[/#list]
+						</ul>
+						[/#if]
+		  </div>
+	[/#if]
+ [/#if]

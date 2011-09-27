@@ -1,0 +1,28 @@
+<h1>Download</h1>
+<a href="/LTISystem/jsp/admin/thirdparty/Main.action?thirdParty=abc.com">abc.com</a><br>
+<a href="/LTISystem/jsp/admin/thirdparty/Main.action?thirdParty=abc2.com">abc2.com</a><br>
+<a href="/LTISystem/jsp/admin/thirdparty/Main.action?thirdParty=abc3.com">abc3.com</a><br>
+<br>
+<input id="tp" type="text" value="abc.com"> <input type="button" value="download" onclick="window.location.href='/LTISystem/jsp/admin/thirdparty/Main.action?thirdParty='+document.getElementById('tp').value">
+
+
+
+
+
+
+
+
+
+<h1>Upload</h1>
+<form action="/LTISystem/jsp/admin/thirdparty/Update.action" method="post" enctype="multipart/form-data">
+Change the third party resource table
+<br>
+thirdparty,0,planid<br>
+thirdparty,1,plantype<br>
+<br>
+please note that only the name of thirdparty in first line is used.
+<br>
+<input type="file" name="uploadFile" >
+<br>
+<input type="submit" value="Update">
+</form>

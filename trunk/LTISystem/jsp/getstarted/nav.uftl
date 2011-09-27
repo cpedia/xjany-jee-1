@@ -1,0 +1,40 @@
+[#ftl]
+[#assign ind=request.requestURL?last_index_of("/")] 
+[#assign action_name=request.requestURL?substring(ind+1)]
+[#if action_name?contains("pickaplan")]
+<div style="height:50px;width:720px;padding:0px;margin:0px">
+<div style="width:230px;float:left">
+<img src="/LTISystem/jsp/images/step1_06.gif"  width="230" height="50" alt="" broder=0>
+</div>
+<div style="width:240px;float:left">
+<img src="/LTISystem/jsp/images/step1_07.gif" style="width:240px" width="240" height="50" alt="" broder=0>
+</div>
+<div style="width:250px;float:left">
+<img src="/LTISystem/jsp/images/step1_08.gif" style="width:250px" width="250" height="50" alt="" broder=0>
+</div>
+</div>
+[#elseif action_name?contains("build")]
+<div style="height:50px;width:720px;padding:0px;margin:0px">
+<div style="width:230px;float:left">
+<img src="/LTISystem/jsp/images/step2_06.gif"  width="230" height="50" alt="" broder=0>
+</div>
+<div style="width:240px;float:left">
+<img src="/LTISystem/jsp/images/step2_07.gif" style="width:240px" width="240" height="50" alt="" broder=0>
+</div>
+<div style="width:250px;float:left">
+<img src="/LTISystem/jsp/images/step2_08.gif" style="width:250px" width="250" height="50" alt="" broder=0>
+</div>
+</div>
+[#elseif action_name?contains("follow")]
+<div style="height:50px;width:720px;padding:0px;margin:0px">
+<div style="width:230px;float:left">
+<img src="/LTISystem/jsp/images/step3_06.gif"  width="230" height="50" alt="" broder=0>
+</div>
+<div style="width:240px;float:left">
+<img src="/LTISystem/jsp/images/step3_07.gif" style="width:240px" width="240" height="50" alt="" broder=0>
+</div>
+<div style="width:250px;float:left">
+<img src="/LTISystem/jsp/images/step3_08.gif" style="width:250px" width="250" height="50" alt="" broder=0>
+</div>
+</div>
+[/#if]

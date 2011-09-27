@@ -1,0 +1,43 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<style type="text/css">
+body{
+	background:#ffffff;
+}
+</style>
+
+
+[@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+    [@s.param name="categories"]%[/@s.param]
+    [@s.param name="includeCategory"]true[/@s.param]
+    [@s.param name="includeClassName"]true[/@s.param]
+    [@s.param name="includePortfolio"]true[/@s.param]
+    [@s.param name="year"]-1,-3,-5[/@s.param]
+    [@s.param name="mpt"]ar,sharperatio[/@s.param]
+    [@s.param name="sortColumn"]${Parameters.sortColumn}[/@s.param]
+    [@s.param name="size"]${Parameters.topNum}[/@s.param]
+[/@s.action]
+
+[@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+    [@s.param name="categories"]%[/@s.param]
+    [@s.param name="includeCategory"]true[/@s.param]
+    [@s.param name="includeClassName"]true[/@s.param]
+    [@s.param name="includePortfolio"]true[/@s.param]
+    [@s.param name="year"]-1,-3,-5[/@s.param]
+    [@s.param name="mpt"]ar,sharperatio[/@s.param]
+    [@s.param name="sortColumn"]5[/@s.param]
+    [@s.param name="size"]5[/@s.param]
+    [@s.param name="sortByDesc"]false[/@s.param]
+[/@s.action]
+
+[@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+    [@s.param name="categories"]%[/@s.param]
+    [@s.param name="includeCategory"]true[/@s.param]
+    [@s.param name="includeClassName"]true[/@s.param]
+    [@s.param name="includePortfolio"]true[/@s.param]
+    [@s.param name="year"]-1,-3,-5[/@s.param]
+    [@s.param name="mpt"]ar,sharperatio[/@s.param]
+    [@s.param name="sortColumn"]5[/@s.param]
+[/@s.action]
+

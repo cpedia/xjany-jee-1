@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="StrategyClass"
+		table="ltisystem_strategyclass"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="Name"
+			column="NAME"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="ParentID"
+			column="PARENTID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="CategoryID"
+			column="categoryID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="OverView"
+			column="overView"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="StrategyTableUp"
+			column="strategyTableUp"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="StrategyTableDown"
+			column="strategyTableDown"
+			type="string"
+			not-null="false"
+		/>		
+		<property
+			name="LatestCommons"
+			column="latestCommons"
+			type="string"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

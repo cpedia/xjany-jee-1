@@ -1,0 +1,286 @@
+[#ftl]
+<style type="text/css">
+
+/*security table*/
+#portfoliocompare{
+	width:100%;
+	border:1px solid  #BBBBBB;
+	margin:0;
+	font-size:10px;
+}
+td{
+	padding:4px;
+}
+#portfoliocompare .compare{
+	color:#3333ff;
+}
+/*end security table*/
+
+/*security compare*/
+#compareDiv label{
+	font-size:10pt;
+	padding:0;
+	margin:0;
+	width:10em;
+	float:left;
+}
+/*end security compare*/
+/*calculate result*/
+</style>
+	<br>
+	<br>
+	[#if Anonymous &&!hasRealtimeAR]
+	<p>As an anonymous, you may not get the latest performance data. Please login to get the latest data.</p>
+	[/#if]
+	[#if portfolioNameList??]
+		<table width="98%">
+		<tr>
+			<td width="20%">
+				<strong>${firstSymbol} </strong>(As of ${firstMPTLastDateList[0]})
+			</td>
+			<td>
+				${portfolioNameList[0]}
+			</td>
+		</tr>
+		[#list symbolList as symbol]
+			<tr>
+				<td width="20%">
+					<strong>${symbol} </strong>(As of ${MPTLastDateList[symbol_index]})
+				</td>
+				<td>
+					${portfolioNameList[symbol_index + 1]}
+				</td>
+			</tr>
+		[/#list]
+		</table>
+	[/#if]
+	<br>
+	<br>
+	<div style="width:920px;overflow:auto">
+	<table id="portfoliocompare" width="98%" rules="all" sytle="height:99%">
+		<thead>
+			<tr>
+				<th>
+					
+				</th>
+				<th>
+					Symbol
+				</th>
+			[#list years as year]
+				<th>
+					[#if year > 0]
+						${year?string("####")}
+					[#elseif year < 0]
+						${(-year)} Yr
+					[#else]
+						Inception
+					[/#if]
+				</th>
+			[/#list]
+			<tr>
+		</thead>
+		<tbody>
+			<tr id="AR">
+				<td rowspan="${compareSize}">AR(%)</td>
+				<td>${firstSymbol}</td>
+				[#list firstMPTBeans as mb]
+				<td>${mb.AR}</td>
+				[/#list]
+			</tr>
+				[#if MPTBeans??]
+					[#list MPTBeans as oneBeanList]
+					<tr>
+						<td class="compare">${symbolList[oneBeanList_index]}</td>
+						[#list oneBeanList as mb]
+							<td class="compare">${mb.AR}</td>
+						[/#list]
+					</tr>
+					[/#list]
+				[/#if]
+			
+			
+			<tr id="SharpeRatio" border="1">
+				<td rowspan="${compareSize}">SharpeRatio(%)</td>
+				<td>${firstSymbol}</td>
+				[#list firstMPTBeans as mb]
+				<td>${mb.sharpeRatio}</td>
+				[/#list]
+			</tr>
+			
+				[#if MPTBeans??]
+					[#list MPTBeans as oneBeanList]
+						<tr>
+						<td class="compare">${symbolList[oneBeanList_index]}</td>
+						[#list oneBeanList as mb]
+							<td class="compare">${mb.sharpeRatio}</td>
+						[/#list]
+						</tr>
+					[/#list]
+				[/#if]
+			
+			
+			<tr id="DrawDown">
+				<td rowspan="${compareSize}">DrawDown(%)</td>
+				<td>${firstSymbol}</td>
+				[#list firstMPTBeans as mb]
+				<td>${mb.drawDown}</td>
+				[/#list]
+			</tr>
+		
+				[#if MPTBeans??]
+					[#list MPTBeans as oneBeanList]
+						<tr>
+						<td class="compare">${symbolList[oneBeanList_index]}</td>
+						[#list oneBeanList as mb]
+							<td class="compare">${mb.drawDown}</td>
+						[/#list]
+						</tr>
+					[/#list]
+				[/#if]
+			
+		</tbody>
+	</table>
+	</div>
+	<br>
+	<br>
+	<div style="width:920px;overflow:auto">
+	<table id="portfoliocompare" rules="all" width="98%" sytle="height:99%">
+		<thead>
+			<tr>
+				<th>
+					
+				</th>
+				<th>
+					Symbol
+				</th>
+			[#list years as year]
+				<th>
+					[#if year > 0]
+						${year?string("####")}
+					[#elseif year < 0]
+						${(-year)} Yr
+					[#else]
+						Inception
+					[/#if]
+				</th>
+			[/#list]
+			<tr>
+		</thead>
+		<tbody>
+			<tr id="Alpha">
+				<td rowspan="${compareSize}">Alpha(%)</td>
+				<td>${firstSymbol}</td>
+				[#list firstMPTBeans as mb]
+				<td>${mb.alpha}</td>
+				[/#list]
+			</tr>
+				[#if MPTBeans??]
+					[#list MPTBeans as oneBeanList]
+					<tr>
+						<td class="compare">${symbolList[oneBeanList_index]}</td>
+						[#list oneBeanList as mb]
+							<td class="compare">${mb.alpha}</td>
+						[/#list]
+					</tr>
+					[/#list]
+				[/#if]
+			
+			
+			<tr id="Beta">
+				<td rowspan="${compareSize}">Beta(%)</td>
+				<td>${firstSymbol}</td>
+				[#list firstMPTBeans as mb]
+				<td>${mb.beta}</td>
+				[/#list]
+			</tr>
+			
+				[#if MPTBeans??]
+					[#list MPTBeans as oneBeanList]
+						<tr>
+						<td class="compare">${symbolList[oneBeanList_index]}</td>
+						[#list oneBeanList as mb]
+							<td class="compare">${mb.beta}</td>
+						[/#list]
+						</tr>
+					[/#list]
+				[/#if]
+			
+			
+			<tr id="RSquared">
+				<td rowspan="${compareSize}">RSquared(%)</td>
+				<td>${firstSymbol}</td>
+				[#list firstMPTBeans as mb]
+				<td>${mb.RSquared}</td>
+				[/#list]
+			</tr>
+		
+				[#if MPTBeans??]
+					[#list MPTBeans as oneBeanList]
+						<tr>
+						<td class="compare">${symbolList[oneBeanList_index]}</td>
+						[#list oneBeanList as mb]
+							<td class="compare">${mb.RSquared}</td>
+						[/#list]
+						</tr>
+					[/#list]
+				[/#if]
+			
+			<tr id="Standard Deviation">
+				<td rowspan="${compareSize}">Standard Deviation(%)</td>
+				<td>${firstSymbol}</td>
+				[#list firstMPTBeans as mb]
+				<td>${mb.standardDeviation}</td>
+				[/#list]
+			</tr>
+		
+				[#if MPTBeans??]
+					[#list MPTBeans as oneBeanList]
+						<tr>
+						<td class="compare">${symbolList[oneBeanList_index]}</td>
+						[#list oneBeanList as mb]
+							<td class="compare">${mb.standardDeviation}</td>
+						[/#list]
+						</tr>
+					[/#list]
+				[/#if]
+				
+				<tr id="TreynorRatio">
+				<td rowspan="${compareSize}">TreynorRatio(%)</td>
+				<td>${firstSymbol}</td>
+				[#list firstMPTBeans as mb]
+				<td>${mb.treynorRatio}</td>
+				[/#list]
+			</tr>
+		
+				[#if MPTBeans??]
+					[#list MPTBeans as oneBeanList]
+						<tr>
+						<td class="compare">${symbolList[oneBeanList_index]}</td>
+						[#list oneBeanList as mb]
+							<td class="compare">${mb.treynorRatio}</td>
+						[/#list]
+						</tr>
+					[/#list]
+				[/#if]
+				
+				<tr id="SortinoRatio">
+				<td rowspan="${compareSize}">SortinoRatio(%)</td>
+				<td>${firstSymbol}</td>
+				[#list firstMPTBeans as mb]
+				<td>${mb.sortinoRatio}</td>
+				[/#list]
+			</tr>
+		
+				[#if MPTBeans??]
+					[#list MPTBeans as oneBeanList]
+						<tr>
+						<td class="compare">${symbolList[oneBeanList_index]}</td>
+						[#list oneBeanList as mb]
+							<td class="compare">${mb.sortinoRatio}</td>
+						[/#list]
+						</tr>
+					[/#list]
+				[/#if]
+		</tbody>
+	</table>
+	</div>

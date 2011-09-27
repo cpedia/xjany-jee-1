@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.admin.security" namespace="/jsp/admin/security" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/security/Main">
+			<result name="success">/jsp/admin/security/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/security/Save">
+			<result name="input">/jsp/admin/security/save.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/security/Search">
+			<result name="success">/jsp/admin/security/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="CheckSecurityPrice" class="/jsp/admin/security/CheckSecurityPrice">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+	
+	<package name="com.lti.action.admin.security.dailydata" namespace="/jsp/admin/security/dailydata" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/security/dailydata/Main">
+			<result name="success">/jsp/admin/security/dailydata/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/security/dailydata/Save">
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="input">/jsp/admin/security/dailydata/save.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/security/dailydata/Search">
+			<result name="success">/jsp/admin/security/dailydata/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>		
+	</package>
+</struts>

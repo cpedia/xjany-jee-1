@@ -1,0 +1,8 @@
+[#ftl]
+ [#import "/jsp/lti_library_ftl.jsp" as lti]
+<h1 style="text-align:center">Shiller's CAPE10 and Shiller Ratio</h1>
+<hr />
+<p></p>
+<li><a href="advanced__ShillerRatioLargeChart.action?includeHeader=false&amp;host=www.myplaniq.com">Larger Chart</a></li> 
+ [@lti.gchart "Shiller Cyclically Adjusted Price Earning Ratio (CAPE10),Long Term Average" "PE10Data_7017.xml" "www.myplaniq.com"][/@lti.gchart]
+ [@lti.gchart "Shiller Ratio" "ShillerRatioList_7017.xml" "www.myplaniq.com"][/@lti.gchart]

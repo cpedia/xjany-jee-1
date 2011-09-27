@@ -1,0 +1,157 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+
+
+	[#if planScoreTopList??]
+		<h1 align="center"><span id='topranking'>PlanRatingIQ Top 20 Plans</span></h1>
+		<br>
+		<table id ="toprankingtable" width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			<thead>
+				<tr>
+					<th alt="Plan Name" width="60px" class="header">Plan Name</th>
+					<th alt="TAA 5 Year Return" width="60px" class="header">TAA 5Yr Return</th>
+					<th alt="SAA 5 Year Return" width="60px" class="header">SAA 5Yr Return</th>
+					<th alt="Overall Rating" width="60px" class="header">Overall Rating</th>	
+				</tr>			
+			</thead>
+			<tbody>
+				[#list planScoreTopList as ps]
+					[#if ps_index%2==0]
+						<tr class='odd'>
+					[/#if]
+					[#if ps_index%2==1]
+						<tr class='even'>
+					[/#if]
+							<td><a href="/LTISystem/f401k_view.action?ID=${ps.getPlanID()}">${ps.getPlanName()}</a></td>
+							<td width=60px>[#if ps.getTAAReturn()??]${ps.getTAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getSAAReturn()??]${ps.getSAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getInvestmentScore()??]${ps.getInvestmentScore()?string.percent}[#else]{"-"}[/#if]</td>
+						</tr>
+				[/#list]	
+			</tbody>
+		</table>
+			<!-- <br class="clear"/> -->
+                <br>
+		<!--
+			[#if planScoreTopList.size() > 10]
+				<div style="posistion:static" id="toprankingpager" class="pager">
+					<form>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/first.png" class="first"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/prev.png" class="prev"/>
+						<input type="text" class="pagedisplay"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/next.png" class="next"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/last.png" class="last"/>
+						<select class="pagesize">
+							<option selected="selected" value="10">10</option>
+							<option value="20">20</option>
+							[#if planScoreTopList.size()> 20 ]
+							<option value="30">30</option>
+							[/#if]
+							[#if planScoreTopList.size()> 30 ]
+							<option value="40">40</option>
+							[/#if]
+						</select>
+					</form>
+				</div>
+			[/#if]
+		<script type="text/javascript"> 
+		$(document).ready(function(){
+			$("#toprankingtable").tablesorter({
+				widthFixed: true, 
+				widgets: ['zebra']
+			})
+			[#if planScoreTopList.size() > 10]
+				.tablesorterPager({container: $("#toprankingpager")});
+			[/#if]
+			}); 
+		</script>
+		-->
+		<script type="text/javascript"> 
+			$(document).ready(function(){
+				$("#toprankingtable").tablesorter({
+					widthFixed: true, 
+					widgets: ['zebra']
+				})
+			}); 
+		</script>
+	[/#if]
+	
+        </div>
+        <div class="col-2" style="width:48%">
+	[#if planScoreBottomList??]
+		
+		<h1 align="center"><span id='bottomranking'>PlanRatingIQ Bottom 20 Plans</span></h1>
+		<br>
+		<table id ="bottomrankingtable" width='100%' class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+			<thead>
+				<tr>
+					<th alt="Plan Name" width="60px" class="header">Plan Name</th>
+					<th alt="TAA 5 Year Return" width="60px" class="header">TAA 5Yr Return</th>
+					<th alt="SAA 5 Year Return" width="60px" class="header">SAA 5Yr Return</th>
+					<th alt="Overall Rating" width="60px" class="header">Overall Rating</th>	
+				</tr>			
+			</thead>
+			<tbody>
+				[#list planScoreBottomList as ps]
+					[#if ps_index%2==0]
+						<tr class='odd'>
+					[/#if]
+					[#if ps_index%2==1]
+						<tr class='even'>
+					[/#if]
+							<td><a href="/LTISystem/f401k_view.action?ID=${ps.getPlanID()}">${ps.getPlanName()}</a></td>
+							<td width=60px>[#if ps.getTAAReturn()??]${ps.getTAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getSAAReturn()??]${ps.getSAAReturn()?string.percent}[#else]{"-"}[/#if]</td>
+							<td width=60px>[#if ps.getInvestmentScore()??]${ps.getInvestmentScore()?string.percent}[#else]{"-"}[/#if]</td>
+						</tr>
+				[/#list]	
+			</tbody>
+		</table>
+		<!--	<br class="clear"/> -->
+                <br>
+		<!--
+			[#if planScoreBottomList.size() > 10]
+				<div style="posistion:static" id="bottomrankingpager" class="pager">
+					<form>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/first.png" class="first"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/prev.png" class="prev"/>
+						<input type="text" class="pagedisplay"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/next.png" class="next"/>
+						<img src="../images/jquery.tablesorter/addons/pager/icons/last.png" class="last"/>
+						<select class="pagesize">
+							<option selected="selected" value="10">10</option>
+							<option value="20">20</option>
+							[#if planScoreBottomList.size()> 20 ]
+							<option value="30">30</option>
+							[/#if]
+							[#if planScoreBottomList.size()> 30 ]
+							<option value="40">40</option>
+							[/#if]
+						</select>
+					</form>
+				</div>
+			[/#if]
+		<script type="text/javascript"> 
+		$(document).ready(function(){
+			$("#bottomrankingtable").tablesorter({
+				widthFixed: true, 
+				widgets: ['zebra']
+			})
+			[#if planScoreBottomList.size() > 10]
+				.tablesorterPager({container: $("#bottomrankingpager")});
+			[/#if]
+			}); 
+		</script>
+		-->
+		<script type="text/javascript"> 
+			$(document).ready(function(){
+				$("#bottomrankingtable").tablesorter({
+					widthFixed: true, 
+					widgets: ['zebra']
+				})
+			}); 
+		</script>
+	[/#if]
+

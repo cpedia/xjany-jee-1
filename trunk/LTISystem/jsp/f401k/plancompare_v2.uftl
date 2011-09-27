@@ -1,0 +1,213 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ Subscription Plan Comparison</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="investment strategies in retirement plans 401(k), 403(b), self-directed IRAs, Variable Universal Life (VULs), taxable brokerage mutual fund and ETF investments based on tactical asset allocation, smart money (GURU) directed asset allocations and modern portfolio theory (MPT) based strategic asset allocations. Optimized (Mean Variance Optimization) efficient frontiers">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+
+</head>
+
+<body>
+	<script>
+		$(function() {
+			$('.tab').each(function(){
+				//$(this).click(function(){
+				//	$(this).children('.answer').toggle(
+				//	);
+				//});
+				$(this).children('.question').toggle(
+						function(){
+							$(this).parent().children('.answer').show();
+							$(this).parent().css({ background: '#fff url(/LTISystem/jsp/template/ed/images/faq_s.png) 0px 9px no-repeat' });
+						},
+						function(){
+							$(this).parent().children('.answer').hide();
+							$(this).parent().css({ background: '#fafafa url(/LTISystem/jsp/template/ed/images/faq_c.png) 0px 9px no-repeat' });
+						}
+				
+				);
+			});
+		});
+	</script>
+
+<div class="col-1">
+   
+   <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">Contact Us</div>
+	 <div class="sidebar_box_content">
+           <p>Email: <a href="mailto:support@MyPlanIQ.com">support@MyPlanIQ.com</a></p>
+           <p>Phone: 510-279-3131</p>
+         </div>
+   </div>
+    <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">More Info</div>
+	 <div class="sidebar_box_content">
+         <ul class="list">
+          <li><a href="/LTISystem/f401k__why.action">Why MyPlanIQ</a></li>
+          <li><a href="/LTISystem/UserFiles/Quickstart.pdf">Quick Start</a></li>
+          <li><a href="/LTISystem/UserFiles/tutorial.pdf">Tutorial</a></li>
+          <li><a href="/LTISystem/f401k__faqs.action">FAQs</a></li>
+          <li><a href="/LTISystem/f401k__glossary.action">Glossary</a></li>
+         </ul>
+         </div>
+    </div>
+<!--    <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">How It Work?</div>
+	 <div class="sidebar_box_content">
+           <p>See <a href="jsp/images/guide1/guide1.html">a tutorial</a></p>
+         </div>
+    </div>
+-->
+</div>
+<div class="col-2">
+    <h1 align="center">Subscription Plan Comparison</h1>
+
+	<table  class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+		<thead>
+			<tr>
+				<th class="header">
+						Plan
+				</th>	
+				<th class="header">
+						<a href="/LTISystem/jsp/strategy/View.action?ID=771"><span style="color:#FFFF00">SAA Portfolios</span></a>
+				</th>	
+				<th class="header">
+						<a href="/LTISystem/jsp/strategy/View.action?ID=1003"><span style="color:#FFFF00">TAA Portfolios</span></a>
+				</th>
+                                <th class="header">
+						Customize
+				</th>
+                                <th class="header">
+						Rebalance Emails
+				</th>	
+                                <th class="header">
+                                                Number of Plans (Portfolios)
+                                </th>
+                                <th class="header">
+                                                Create Your Own Plan
+                                </th>
+                                <th class="header">
+                                                Advanced Strategies
+                                </th>
+                                <th class="header">
+                                                Cost
+                                </th>
+			</tr>			
+		</thead>
+		<tbody>
+                        <tr class='odd' valign='top'>
+                               <td>
+                                <strong>Unregistered<br> User</strong>
+                               </td>
+                               <td>
+                                Two Months Delayed
+                               </td>
+                               <td>
+                                Two Months Delayed
+                               </td>
+                               <td>
+                                No
+                               </td>
+                               <td>
+                                No
+                               </td>
+                               <td> No</td>
+                               <td> No </td>
+                               <td> No </td>
+                               <td> NA </td>
+                       </tr>
+                        <tr class='even' valign='top'>
+                               <td>
+                                <strong>Registered<br> User</strong>
+                               </td>
+                               <td>
+                                Realtime
+                               </td>
+                               <td>
+                                Two Months Delayed
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                               <td>
+                                Yes (only for realtime SAA)
+                               </td>
+                               <td> 5(5)</td>
+                               <td> No</td>
+                               <td>Two Months Delayed</td>
+                               <td>NA</td>
+                               
+                       </tr>
+                       <tr class='odd' valign='top'>
+                               <td>
+                                <strong>Subscription Basic</strong>
+                               </td>
+                               <td>
+                                Realtime
+                               </td>
+                               <td>
+                                Realtime
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                               <td>5(5)</td>
+                               <td>No</td>
+                               <td>Two Months Delayed</td>
+                               <td>$14.95 Monthly ($149.5 Annual)
+                       </tr>
+                       <tr class='odd' valign='top'>
+                               <td>
+                                <strong>Subscription Expert</strong>
+                               </td>
+                               <td>
+                                Realtime
+                               </td>
+                               <td>
+                                Realtime
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                               <td>10(10)</td>
+                               <td>5</td>
+                               <td>Realtime</td>
+                               <td>$29.95 Monthly ($299.5 Annual)
+                       </tr>
+                       <tr class='odd' valign='top'>
+                               <td>
+                                <strong>Subscription Pro</strong>
+                               </td>
+                               <td>
+                                Realtime
+                               </td>
+                               <td>
+                                Realtime
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                               <td>
+                                Yes
+                               </td>
+                               <td>20(20)<sup>1</sup></td>
+                               <td>10<sup>1</sup></td>
+                               <td>Realtime</td>
+                               <td>$49.95 Monthly ($499.5 Annual)
+                       </tr>
+               </tbody>
+          </table>
+          <br><br><p><sup>1</sup>: Contact us for volume discount if more plans/portfolios are needed.</p>                 
+</div>
+</body>
+</html>

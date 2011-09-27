@@ -1,0 +1,30 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+<head>
+<script type="text/javascript">
+function execute(){
+	$("#executeform").submit();
+}
+</script>
+</head>
+<body>
+<p>
+ <form action="/LTISystem/article_report.action" method="post" id="executeform" enctype="multipart/form-data">
+ <table width="100%" style="margin:10px">
+   <tr>
+    <td>
+     <b>Upload File</b>
+    </td>
+    <td>
+    <input type="file" name="uploadFile" >
+    </td>
+   </tr>
+ </table>
+ </form>
+</p>
+  <p>
+   <input type="button" class="uiButton" value="Execute" onclick="execute()"> 
+  </p>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<div class="mp_head" style="  position: relative;">
+	<div id="mpiq_widget_${widgetName}_control_div" style="float: left;margin-left: 5px;margin-top: 5px;">
+<input type="button" id="mpiq_widget_${widgetName}_back_button" value="<" onclick="mpiq_widget_${widgetName}_his_back()">
+<input type="button" id="mpiq_widget_${widgetName}_forward_button" value=">" onclick="mpiq_widget_${widgetName}_his_forward()">
+</div>
+  <div class="mp_right">
+	<div class="search-filter"> <div id="mp_login" onclick="open_login()" style="cursor: pointer;float:left;margin-top: 3px;"><img src="http://${serverName}:${port}/LTISystem/jsp/template/ed/images/regSignin.png"/></div>
+	<strong><span>MyPlanIQ</span></strong> </div>
+  </div>
+</div>
+<div class="mp_container">
+	<div class="inner-boundary" style="float: left;width: 598px;">			    	
+	<div id="mp_pane1">
+			<div class="mp_search">
+			    <div id="search">
+					<input onkeyup='keyPress(event)' onblur="if(this.value=='')this.value='Start Searching ...'" onfocus="this.value=''"  id="mpiq_widget_${widgetName}_keyword" type="text" name="term" value="Start Searching ..." class="mp_input">
+				<button onclick='mpiq_widget_${widgetName}_search()' class="mp_sprite"></button>
+				</div>
+		    </div>
+		   
+			 <b><a href="javascript:void(0)" onclick="mpiq_widget_createplanwidget('mpiq_widget_${widgetName}_display_div','noparams')">Create a Plan</a></b>
+	</div>
+	<a class="mp_accordion2" style="background-color:#DFF1DF;cursor: pointer;display: block;">My Portfolios</a>
+	<div id="mp_pane2">
+			<div id="mp_myportf">
+			<div>
+				<table style="margin: 0 auto;">
+				<tr><td class="header" width=50%>Portfolios Name</td><td class="header">1Yr AR</td><td class="header">3Yr AR</td><td class="header">5Yr AR</td></tr>
+				<tbody class="appendthis"> 
+				</tbody>
+				</table>
+			</div>
+			</div>
+	<div class="mp_head1"></div>
+	</div>
+	<a class="mp_accordion3" style="background-color:#DFF1DF;cursor: pointer;display: block;">My Plan</a>
+	<div id="mp_pane2">
+			<div id="mp_myportf">
+			<div>
+				<table width=100%>
+				<tr><td class="header" width=50%>Plan Name</td><td class="header">Show Information</td><td class="header">Modify</td></tr>
+				<tbody class="planappendhere"> 
+				</tbody>
+				</table>
+			</div>
+			</div>
+	<div class="mp_head1"></div>
+	</div>
+<div id="mpiq_widget_${widgetName}_welcome_div" style="display:none">
+	<#assign names1=["MyPlanIQ Diversified Core Allocation ETF Plan "
+					,"TD Ameritrade Commission Free ETFs "
+					,"Six Core Asset ETFs "
+					,"Retirement Income ETFs"
+					,"Vanguard ETFs"]>
+	<#assign ids1=[1429,4863,1148,4904,714]>
+					
+	<#assign names2=["Schwab OneSource Select List Funds 	"
+					,"TD Ameritrade Premier List No Transaction Fee Mutual Fund Plan "
+					,"Etrade All Star Funds"
+					,"Fidelity Fund Picks "
+					,"TD Ameritrade No load No Transaction Fee Funds"]>
+	<#assign ids2=[724,679,1032,727,725]>
+			
+	<div id="mp_lista">
+	<a class="mp_accordion"><b>Featured ETF Plans</b></a>
+	<div>
+	
+		<table border=0 width=550>
+			<#list names1 as name>
+			<tr>
+				<td width=90%>${name}</td>
+				<td><button onclick="mpiq_widget_${widgetName}_view_plan(${ids1[name_index]?string.computer})">select</button></td>
+			</tr>
+			</#list>
+		</table>
+	
+	</div>
+			
+ 			
+ 	<a class="mp_accordion"><b>Featured Mutual Fund Plans</b></a>
+	<div>
+		
+		<table border=0 width=550>
+			<#list names2 as name>
+			<tr>
+				<td width=90%>${name}</td>
+				<td><button onclick="mpiq_widget_${widgetName}_view_plan(${ids2[name_index]?string.computer})">select</button></td>
+			</tr>
+			</#list>
+		</table>
+		
+	</div>		
+</div>
+</div>
+<div id="mpiq_widget_${widgetName}_nofound_div" style="display:none">
+<p><b>Cannot find your plan? May we suggest:</b></p>
+<p>
+<ul>
+	<li>
+	Check your keywords: 	Make sure you have the right keywords!
+	</li>
+	<li>
+	Email your brokerage plan request (investment options like brokerage suggested mutual funds): 	
+		<ul>
+				<li> Document(s) that have plan investment choices (ticker symbols preferred)</li>
+				<li> Screen shots of online rebalance choices</li>
+		</ul>
+	</li>
+</ul>
+</p>
+<p>
+<!-- <b><a href="javascript:void(0)" onclick="mpiq_widget_createplanwidget('mpiq_widget_${widgetName}_display_div','noparams')">Or click here to create a new plan</a></b> -->
+</p>
+</div>
+<div id="mpiq_widget_${widgetName}_display_div">
+</div>
+    </div>
+    
+    
+</div>
+
+<div id="mp_loading" style="position:absolute;"><div></div></div>
+<div id="mp_loading2" style="display:none;position:absolute;"><a onclick="cancel('mp_loading2')" class="close"></a>
+UserName:<input id="UserName" name="UserName" type="text" onkeydown="keyNext(event)" /><br>
+PassWord:<input id="PassWord" name="PassWord" type="password" onkeydown="keyLogin(event)"></input><br>
+<a href="#" onclick="open_register()">Sign up now  </a>
+<input type="submit" value="Login" onclick="mp_login()" /><br>
+</div>
+<div id="mp_register"><a onclick="cancel('mp_register')" class="close"></a>
+*Email:<br><input type="text" id="Email" name="Email" onkeydown="keyNext(event)" /><br>
+*UserName:<br><input type="text" id="RegisterUserName" name="RegisterUserName" onkeydown="keyNext(event)" /><br>
+*PassWord:<br><input type="password" id="RegisterPassWord" name="RegisterPassWord" onkeydown="keyNext(event)" /><br>
+*Confirm PassWord:<br><input type="password" id="ConfirmPassWord" name="ConfirmPassWord" onkeydown="keyNext(event)" /><br>
+Detailed Address:<br><textarea name="Address" cols="20" rows="2" id="Address" class="txtArea"></textarea><br>
+<button onclick="mp_register()">Register</button>
+<button onclick="return_login()">Return</button><br>
+</div>

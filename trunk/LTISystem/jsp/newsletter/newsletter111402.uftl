@@ -1,0 +1,742 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+	<title>MyPlanIQ Newsletter: February 14, 2011</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="A retirement plan and investing newsletter">
+<meta name="keywords" content="Finance, Investment, Retirement, IRA, 401K, stock, bonds, gold, real estate, savings, cash, mutual funds, ETF, Annuity, Life Insurance, Asset Allocation, Global, Tactical Asset Allocation, Strategic Asset Allocation">
+<script>
+$(document).ready(function() {
+	alignHeight();
+});
+</script>
+<style>
+.newsletter-box {
+<!--	height:545px; -->
+	overflow:hidden;
+	border: 8px solid #FAFAFA;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+}
+.newsletter-box .col-1 {
+	width:618px;
+	height: 545px;
+	overflow: hidden;
+}
+.newsletter-box .col-2 {
+	height: 545px;
+	overflow: hidden;
+	padding-left:10px;
+}
+
+</style>
+</head>
+<body>
+  <div class="borderGreen">
+  
+
+
+<!-- <STYLE>
+
+ .headerTop { background-color:#FFCC66; border-top:0px solid #000000; border-bottom:1px solid #FFFFFF; text-align:center; }
+
+ .adminText { font-size:10px; color:#996600; line-height:200%; font-family:verdana; text-decoration:none; }
+
+ .headerBar { background-color:#FFFFFF; border-top:0px solid #333333; border-bottom:10px solid #FFFFFF; }
+
+ .title { font-size:20px; font-weight:bold; color:#CC6600; font-family:arial; line-height:110%; }
+
+ .subTitle { font-size:11px; font-weight:normal; color:#666666; font-style:italic; font-family:arial; }
+
+ .defaultText { font-size:12px; color:#000000; line-height:150%; font-family:trebuchet ms; }
+
+ .footerRow { background-color:#FFFFCC; border-top:10px solid #FFFFFF; }
+
+ .footerText { font-size:10px; color:#996600; line-height:100%; font-family:verdana; }
+
+ a { color:#FF6600; color:#FF6600; color:#95b5c1; }
+
+</STYLE>
+
+-->
+
+<div class="newsletter-box">
+
+
+
+<table width="100%" cellpadding="10" cellspacing="0" class="backgroundTable" >
+
+<tr>
+
+<td valign="top" align="center">
+
+
+
+
+
+<table width="550" cellpadding="0" cellspacing="0">
+
+
+
+<tr>
+
+
+</tr>
+
+</table>
+
+
+
+
+
+<table width="550" cellpadding="20" cellspacing="0">
+
+<tr>
+
+<td valign="top" style="font-size:12px;color:#000000;line-height:150%;font-family:trebuchet ms;">
+
+
+
+<p>
+
+<table width="100%">
+  <tbody>
+    <tr>
+    </tr>
+    <tr>
+      <td>
+      <h2 align="center"><font color="#458f51">MyPlan</font><font
+ color="#95b5c1">IQ</font> <p> Investment Newsletter</h2>
+     <p style="text-align: center;"><strong>February 2011</strong></p>
+      </td>
+      <td align="right" width="6%"> <align="right"><a
+ href="http://www.myplaniq.com/LTISystem/newsletter__nllist.action"><strong><font
+ size="3">Archive</font></strong></a></strong> </td>
+    </tr>
+
+  </tbody>
+</table>
+<p>This is a biweekly newsletter with quantitative data from thousands of plans. 
+
+We believe that good asset allocation brings the best returns.</p><br>
+
+<p><span style="font-weight: bold;">Portfolio and Plan Focus</p>
+
+</span>
+
+We continue to work on cloning the <a target="_blank"
+ href="http://seekingalpha.com/article/247755-savvy-etf-investors-should-consider-cloning-morningstar-s-retirement-plan">
+Morningstar 401K plan</a>.  We have been reviewing US Equity ETF's to derive the best performers. 
+This week we have reviewed all of the sub-classes and the articles that outline this are listed below.
+<ul>
+
+<li>
+
+<a target="_blank"
+ href="http://seekingalpha.com/article/250872-large-cap-u-s-equity-ranking-of-asset-subclasses-to-boost-etf-portfolios">Introduction and US Large Cap Blend</a> 
+ </li><li>
+
+<a target="_blank"
+ href="http://seekingalpha.com/article/251007-u-s-large-cap-growth-etf-rankings-to-boost-etf-portfolios">Large Cap Growth Rankings</a> 
+</li><li>
+<a target="_blank"
+ href="http://seekingalpha.com/article/251067-u-s-large-cap-value-rankings-boost-etf-portfolios">Large Cap Value Rankings</a> 
+</li>
+<li>
+<a target="_blank"
+ href="http://seekingalpha.com/article/251240-u-s-mid-cap-blend-rankings-boost-etf-portfolios">Mid Cap Value Blend</a> 
+</li><li>
+<a target="_blank"
+ href="http://seekingalpha.com/article/251462-u-s-mid-cap-growth-etf-rankings">Mid Cap Growth Rankings</a> 
+</li><li>
+<a target="_blank"
+ href="http://seekingalpha.com/article/251648-u-s-mid-cap-value-etf-rankings">Mid Cap Value Rankings</a> 
+</li><li>
+<a target="_blank"
+ href="http://seekingalpha.com/article/251925-u-s-small-cap-growth-etf-rankings">Small Cap Blend Rankings</a> 
+</li><li>
+<a target="_blank"
+ href="http://seekingalpha.com/article/251925-u-s-small-cap-growth-etf-rankings">Small Cap Growth Rankings</a> 
+</li><li>
+<a target="_blank"
+ href="http://seekingalpha.com/article/251979-small-cap-value-etfs-round-off-u-s-equity-review">Small Cap Value Rankings</a> 
+</li>
+</ul>
+
+<p>From this analysis we created a top 10 list of US Equity ETF's</p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="662">
+<tbody>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>Style</div>
+</td>
+<td  valign="bottom" width="60" nowrap="nowrap">
+<div>Ticker</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>Description</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">&nbsp;5 Yr AR%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">3yr AR%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">1yr AR%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">MPIQ Score</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>MCG</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>IJK</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>iShares MidCap Growth</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">6%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">7%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">42%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">64.7%</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>SCG</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>VBK</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>Vanguard Small Cap Growth</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">5%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">7%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">43%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">64.6%</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>LCG</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>QQQQ</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>PowerShares QQQ</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">6%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">8%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">32%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">56.7%</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>MCB</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>MDY</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>SPDR S&amp;P MidCap 400</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">5%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">6%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">37%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">56.3%</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>SCG</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>IWO</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>iShares Russell 2K Growth</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">4%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">5%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">40%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">55.4%</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>MCB</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>IJH</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>iShares S&amp;P MidCap 400</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">4%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">6%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">37%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">54.0%</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>SCB</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>VB</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>Vanguard Small Cap ETF</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">4%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">5%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">37%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">53.2%</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>MCV</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>IJJ</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>iShares MidCap Value</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">3%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">5%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">32%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">45.5%</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>SCV</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>VBR</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>Vanguard Small Cap Value</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">3%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">3%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">32%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">42.2%</div>
+</td>
+</tr>
+<tr >
+<td  valign="bottom" width="65" nowrap="nowrap">
+<div>LCB</div>
+</td>
+<td  valign="bottom" width="48" nowrap="nowrap">
+<div>RSP</div>
+</td>
+<td  valign="bottom" width="213" nowrap="nowrap">
+<div>Rydex S&amp;P Equal Weight</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">3%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">4%</div>
+</td>
+<td  valign="bottom" width="90" nowrap="nowrap">
+<div align="center">27%</div>
+</td>
+<td  valign="bottom" width="85" nowrap="nowrap">
+<div align="center">39.7%</div>
+</td>
+</tr>
+</tbody>
+</table>
+
+<br><br>
+
+<p><span style="font-weight: bold;"><a target="_blank"
+ href="http://www.myplaniq.com/LTISystem/advanced__markets.action">February Dividend ETF Ratings</a></p></span style="font-weight: bold;">
+<p>
+We track the movement of dividend bearing ETFs. We believe that this is not only helpful for those who are investing for income, but 
+they enable you to invest in companies who are not just trying to grow, but are concerned with returning value to 
+the investor. We publish this report regularly on SeekingAlpha along with a commentary on some of the ETFs in the list.
+</p>
+<table style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;" cellspacing="10">
+<tbody style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<tr  style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<th style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;"
+align="left"><b
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">Assets
+Class</b></th>
+<th style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;"><b 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">Symbols</b></th>
+<th style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;"><b 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">02/09<br 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+Trend<br 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+Score</b></th>
+<th style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;"><b
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">02/02<br 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+Trend<br 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+Score</b></th>
+<th 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;"><b
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">Direction</b></th>
+</tr>
+<tr  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">iShares
+Dow
+Jones US Real Estate</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">IYR</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">13.94%</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">13.94%</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">SPDR
+S&amp;P
+500</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">SPY</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">12.19%</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">12.19%</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">iShares
+Dow
+Jones Intl Select Div Idx</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">IDV</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">11.43%</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">11.43%</td>
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td  
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">Vanguard
+High
+Dividend Yield Indx</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">VYM</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">10.62%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">10.62%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">Vanguard
+Dividend
+Appreciation</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">VIG</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">10.22%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">10.22%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">SPDR
+DJ
+Wilshire Intl Real Estate</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">RWX</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">9.59%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">9.59%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">iShares
+MSCI
+EAFE Index</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">EFA</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">9.54%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">9.54%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">iShares
+Dow
+Jones Select Dividend Index</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">DVY</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">9.23%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">9.23%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">PowerShares
+Intl
+Dividend Achievers</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">PID</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">8.89%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">8.89%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">First
+Trust
+Value Line Dividend Index</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">FVD</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">8.66%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">8.66%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">SPDR
+S&amp;P
+Dividend</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">SDY</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">8.11%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">8.11%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">PowerShares
+HighYield
+Dividend Achievers</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">PEY</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">7.03%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">7.03%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">iShares
+MSCI
+Emerging Markets Index</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">EEM</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">3.91%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">3.91%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">v</td>
+</tr>
+<tr 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">iShares
+S&amp;P
+U.S. Preferred Stock Index</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">PFF</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">3.71%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">2.7%</td>
+<td 
+style="padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">^</td>
+</tr>
+</tbody>
+</table>
+</span></span>
+<p>
+
+
+</span>
+
+
+<p><span style="font-weight: bold;">Articles of the week
+
+</span><br>
+
+</p>
+
+
+
+<ul>
+
+<li><a href="http://seekingalpha.com/article/251192-fixed-income-out-of-favor-risk-assets-buoyant"> Fixed income out of favor, risk assets buyoant</a></li>
+
+<li><a href="http://seekingalpha.com/article/251608-long-term-bond-etfs-can-your-coupons-keep-up-with-rising-rates-and-inflation"> Can long term bonds keep pace with inflation?</a></li>
+
+<li><a href="http://seekingalpha.com/article/252018-high-dividend-etfs-preferred-stocks-down-but-not-out">High dividend ETFs are down but not out</a>
+
+</ul>
+
+
+
+</div>
+
+<br>
+<div><a target="_blank" rel="nofollow"
+ href="http://www.myplaniq.com/jforum/rss/forumTopics/61.page">RSS Feed
+<img alt="[XML]"
+ src="http://www.myplaniq.com/jforum/templates/default/images/xml_button.gif"></a></div>
+<div>
+<br>
+<p><font size="-1"><b>Disclaimer:</b> </font></p>
+<p><font size="-1">Any investment in securities including mutual funds, 
+ETFs, closed end funds, stocks and any other securities could lose 
+money over any period of time. All investments involve risk. Losses may 
+exceed the principal invested. Past performance is not an indicator of 
+future performance. There is no guarantee for future results in your 
+investment and any other actions based on the information provided on 
+the website including, but not limited to, strategies, portfolios, 
+articles, performance data and results of any tools.</font></p>
+<p><font size="-1">All rights are reserved and enforced. By accessing 
+the website, you agree not to copy and redistribute the information 
+provided herein without the explicit consent from MyPlanIQ.</font></p>
+</div>
+</div>
+</div>
+<br>
+
+
+</td>
+
+</tr>
+
+
+
+
+</table>
+
+
+  </div>
+<div class="clearfloat"></div>
+</div>
+</body>
+</html>

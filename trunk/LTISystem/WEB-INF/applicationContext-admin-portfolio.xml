@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+
+	
+	<bean name="/jsp/admin/portfolio/Main" class="com.lti.action.admin.portfolio.MainAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>		
+	</bean>
+	<bean name="/jsp/admin/portfolio/MonitorMain" class="com.lti.action.admin.portfolio.MonitorMainAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+
+	</bean>
+	
+	<bean name="/jsp/admin/portfolio/ViewState" class="com.lti.action.admin.portfolio.ViewStateAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+
+	</bean>	
+	<bean name="/jsp/admin/portfolio/CheckPortfolio" class="com.lti.action.admin.portfolio.CheckPortfolioAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/Search" class="com.lti.action.admin.portfolio.SearchAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/RecoverPortfolio" class="com.lti.action.admin.portfolio.RecoverPortfolioAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>
+	
+	<bean name="/jsp/admin/portfolio/dailydata/Main" class="com.lti.action.admin.portfolio.dailydata.MainAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>
+
+	<bean name="/jsp/admin/portfolio/dailydata/Save" class="com.lti.action.admin.portfolio.dailydata.SaveAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/dailydata/Search" class="com.lti.action.admin.portfolio.dailydata.SearchAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>		
+
+
+	<bean name="/jsp/admin/portfolio/log/Save" class="com.lti.action.admin.portfolio.log.SaveAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/UpdateModeChange" class="com.lti.action.admin.portfolio.updatemode.SaveAction"
+		singleton="false">
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/log/Search" class="com.lti.action.admin.portfolio.log.SearchAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>		
+
+	<bean name="/jsp/admin/portfolio/log/Main" class="com.lti.action.admin.portfolio.log.MainAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>			
+	
+	<bean name="/jsp/admin/portfolio/transaction/Save" class="com.lti.action.admin.portfolio.transaction.SaveAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/transaction/Search" class="com.lti.action.admin.portfolio.transaction.SearchAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>		
+
+	<bean name="/jsp/admin/portfolio/transaction/Main" class="com.lti.action.admin.portfolio.transaction.MainAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>		
+
+	<bean name="/jsp/admin/portfolio/state/Save" class="com.lti.action.admin.portfolio.state.SaveAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/keyword/Save" class="com.lti.action.admin.portfolio.keywords.SaveAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>		
+
+	<bean name="/jsp/admin/portfolio/trashykeyword/Save" class="com.lti.action.admin.portfolio.trashykeywords.SaveAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/ExecutionState" class="com.lti.action.admin.portfolio.ExecutionStateAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>		
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/ExecuteCommand" class="com.lti.action.admin.portfolio.ExecuteCommandAction"
+		singleton="false">
+	</bean>	
+	
+	<bean name="/jsp/admin/portfolio/UserChange" class="com.lti.action.admin.portfolio.user.SaveAction"
+		singleton="false">
+		<property name="portfolioManager">
+			<ref bean="portfolioManager"/>
+		</property>	
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>		
+	</bean>			
+	
+	<bean name="/jsp/admin/portfolio/UploadExecutionBatchPlanFile" class="com.lti.action.admin.portfolio.UploadExecutionBatchPlanFileAction" singleton="false"/>
+	<bean name="/jsp/admin/portfolio/DownLoadExecutionBatchPlanFile" class="com.lti.action.admin.portfolio.DownLoadExecutionBatchPlanFileAction" singleton="false"/>	
+	<bean name="/jsp/admin/portfolio/DownLoadUnSendPortfolioIDFile" class="com.lti.action.admin.portfolio.DownLoadUnSendPortfolioIDFileAction" singleton="false"/>			
+</beans>

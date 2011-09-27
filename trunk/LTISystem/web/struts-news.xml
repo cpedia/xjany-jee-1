@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.news" namespace="/jsp/news"
+	extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="Portfolio" class="/jsp/news/Main" method="PortfolioNews">
+			<result name="success">/jsp/news/main.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Strategy" class="/jsp/news/Main" method="StrategyNews">
+			<result name="success">/jsp/news/main.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/news/{1}.uftl
+			</result>	
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>						
+		</action>			
+	</package>
+</struts>

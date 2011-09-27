@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Edit Parameters of Plan</title>
+	<link rel="stylesheet" type="text/css" href="/LTISystem/jsp/template/gpl/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/LTISystem/jsp/template/gpl/easyui/themes/icon.css">
+	<script type="text/javascript" src="/LTISystem/jsp/template/gpl/easyui/jquery.easyui.min.js"></script>
+	<script>
+		$(function(){
+			var lastIndex;
+			$('#parameters_table').datagrid({
+				title:'Parameters of Plan',
+				iconCls:'icon-edit',
+				width:650,
+				height:'auto',
+				singleSelect:true,
+				idField:'parameterid',
+				url:'f401k_ajaxgetparameters.action?includeHeader=false&ID=${Parameters.ID}',
+				pagination:false,
+				columns:[[
+					{field:'parameterid',title:'ID',width:150},
+					{field:'pre',title:'Name',width:150,editor:'text'},
+					{field:'post',title:'Value',width:150,editor:'text'}
+				]],
+				toolbar:[{
+					text:'append',
+					iconCls:'icon-add',
+					handler:function(){
+					$('#parameters_table').datagrid('endEdit', lastIndex);
+						$('#parameters_table').datagrid('appendRow',{
+							parameterid:'new',
+							pre:'',
+							post:''
+						});
+						var lastIndex = $('#parameters_table').datagrid('getRows').length-1;
+						$('#parameters_table').datagrid('beginEdit', lastIndex);
+					}
+				},'-',{
+					text:'delete',
+					iconCls:'icon-remove',
+					handler:function(){
+						var row = $('#parameters_table').datagrid('getSelected');
+						if (row){
+							var index = $('#parameters_table').datagrid('getRowIndex', row);
+							$('#parameters_table').datagrid('deleteRow', index);
+						}
+					}
+				},'-',{
+					text:'accept',
+					iconCls:'icon-save',
+					handler:function(){
+						$('#parameters_table').datagrid('acceptChanges');
+						var rows=$('#parameters_table').datagrid('getData').rows;
+						var val="";
+						for(var i=0;i<rows.length;i++){
+							val+="&attributes["+i+"].pre="+rows[i].pre;
+							val+="&attributes["+i+"].post="+rows[i].post;
+						}
+						//alert(val);
+						$.ajax({
+						   type: "Post",
+						   url: 'f401k_adminsaveparameters.action?includeHeader=false&ID=${Parameters.ID}',
+						   data:val,
+						   success: function(msg){
+						     window.location.reload();
+						   }
+						});//end ajax	
+					}
+				},'-',{
+					text:'reject',
+					iconCls:'icon-undo',
+					handler:function(){
+						$('#parameters_table').datagrid('rejectChanges');
+					}
+				},'-',{
+					text:'getChanges',
+					iconCls:'icon-search',
+					handler:function(){
+						var rows = $('#parameters_table').datagrid('getChanges');
+						alert('changed rows: ' + rows.length + ' lines');
+						
+					}
+				}],
+				onBeforeLoad:function(){
+					$(this).datagrid('rejectChanges');
+				},
+				onClickRow:function(rowIndex){
+					if (lastIndex != rowIndex){
+						$('#parameters_table').datagrid('endEdit', lastIndex);
+						$('#parameters_table').datagrid('beginEdit', rowIndex);
+					}
+					lastIndex = rowIndex;
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>Edit Parameters of ${Parameters.ID}</h1>
+	<form action="f401k_ajaxsaveparameters.action?ID=${Parameters.ID}" id="form_parameters">
+	<table id="parameters_table"></table>
+	</form>
+</body>
+</html>

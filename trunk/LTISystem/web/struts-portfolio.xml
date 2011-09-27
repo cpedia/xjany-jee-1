@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>	
+	<package name="com.lti.action.portfolio" namespace="/jsp/portfolio"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+			<result name="message" type="freemarker">
+					/jsp/message.uftl
+			</result>
+			<result name="input" type="freemarker">/jsp/input.uftl</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="OutputTL" class="/jsp/flash/result/OutputTL">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="Main" class="/jsp/portfolio/Main" method="view">
+			<result name="success">/jsp/portfolio/main.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="PortfolioTable" class="/jsp/portfolio/PortfolioTable">
+			<result name="success">/jsp/portfolio/portfoliotable.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="GetPortfolioTable" class="com.lti.action.portfolio.GetPortfolioTableAction">
+			<result name="success" type="freemarker">/jsp/portfolio/GetPortfolioTable.ftl</result>
+			<result name="html" type="freemarker">/jsp/portfolio/cache/${htmlname}</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="parseholding" class="com.lti.action.portfolio.ParseHoldingInfAction" method="parseholding">
+			<result name="success" type="freemarker">/jsp/portfolio/parseholding.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="formatholding" class="com.lti.action.portfolio.ParseHoldingInfAction" method="formatholding">
+			<result name="success" type="freemarker">/jsp/portfolio/formatholding.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		
+		<action name="OutputPdf" class="com.lti.action.portfolio.OutputPdfAction">
+			<result name="success" type="stream">  
+                 <param name="contentType">application/pdf;charset=utf8</param>  
+                 <param name="inputName">pdfStream</param>  
+                 <param name="contentDisposition">attachment;filename="${portfolioName}.pdf"</param>  
+                 <param name="bufferSize">2048</param>  
+            </result>  
+		</action>
+		
+		<action name="AccountUserByPortfolioID" class="com.lti.action.portfolio.AccountUserByPortfolioIDAction">
+			<result name="success" type="stream">  
+                <param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${portfolioName}"</param>
+				<param name="bufferSize">4096</param>
+            </result>  
+		</action>
+		
+		
+		<action name="ModelPortfolioOutput" class="/jsp/portfolio/Main" method="modelPortfolioOutput">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="PrivatePortfolioOutput" class="/jsp/portfolio/Main" method="privatePortfolioOutput">
+			<result name="success">/jsp/ajax/result.jsp</result>
+		</action>
+		<action name="ViewPortfolio" class="com.lti.action.portfolio.ViewPortfolioAction">
+			<result name="success" type="freemarker">/jsp/portfolio/ViewPortfolio.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="ViewPortfolio_transation" class="com.lti.action.portfolio.ViewPortfolioAction" method="transation">
+		      <result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="ViewPortfolio_getFundAssetClass" class="com.lti.action.portfolio.ViewPortfolioAction" method="getFundAssetClass">
+		      <result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="SaveGroups" class="com.lti.action.portfolio.EditAction" method="ajaxsavegroups">
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Edit" class="com.lti.action.portfolio.EditAction" method="edit">
+			<result name="success" type="freemarker">/jsp/portfolio/edit.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>	
+		<action name="EditHolding" class="com.lti.action.portfolio.EditAction" method="editholding">
+			<result name="success" type="freemarker">/jsp/portfolio/editholding.ftl</result>
+			<result name="simple" type="freemarker">/jsp/portfolio/simpleeditholding.ftl</result>
+			<result name="input" type="freemarker">/jsp/portfolio/editholding.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="edit_makepublic" class="com.lti.action.portfolio.EditAction" method="makepublic">
+		   <result name="error">/jsp/error.jsp</result>
+		</action>
+			
+		<action name="EditSimpleHolding" class="com.lti.action.portfolio.EditAction" method="editsimpleholding">
+			<result name="success" type="freemarker">/jsp/portfolio/editsimpleholding.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>	
+		<!-- Delete By Portfolio For Strategy Model Portfolio -->
+		<action name="Delete" class="com.lti.action.portfolio.EditAction" method="delete">
+			<result name="success" type="freemarker">/jsp/portfolio/delete.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>	
+		<action name="SaveHolding" class="com.lti.action.portfolio.EditAction" method="saveholding">
+			<result name="success" type="freemarker">/jsp/portfolio/saveholding.ftl</result>
+			<result name="error">/jsp/error.jsp</result>			
+		</action>	
+		<action name="EidtParameter" class="com.lti.action.portfolio.EditAction" method="editparameter">
+			<result name="success" type="freemarker">/jsp/portfolio/editparameter.ftl</result>
+			<result name="error">/jsp/error.jsp</result>			
+		</action>
+		<!-- Evaluate -->	
+		<!-- Evaluate -->	
+		<action name="confidenceLevelCheck" class="/jsp/portfolio/mpt/Main" method="confidenceLevelCheck">
+			<result name="success">/jsp/portfolio/viewConfidenceLevelCheck.jsp</result>
+		</action>
+		<action name="DailyDataMain" class="/jsp/portfolio/dailydata/Main">
+			<result name="success" >/jsp/portfolio/dailydata/main.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>	
+		<action name="TransactionMain" class="/jsp/portfolio/transaction/Main">
+			<result name="success" type="freemarker">/jsp/portfolio/transaction/main.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="LogMain" class="/jsp/portfolio/log/Main">
+			<result name="success">/jsp/portfolio/log/main.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="TailLogs" class="/jsp/portfolio/log/TailLogs">
+			<result name="success">/jsp/portfolio/log/taillogs.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="StateSave" class="/jsp/portfolio/state/Save">
+			<result name="success">/jsp/portfolio/state/save.jsp</result>
+			<result name="input">/jsp/portfolio/state/save.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>	
+		<action name="MPTMain" class="/jsp/portfolio/mpt/Main">
+			<result name="success">/jsp/portfolio/mpt/main.jsp</result>
+			<result name="basicunit">/jsp/portfolio/mpt/main_basicunit.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="TaxMPTMain" class="/jsp/portfolio/mpt/TaxMPT">
+			<result name="success">/jsp/portfolio/mpt/taxmptperformance.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		
+		<action name="ComparePortfolioMPT" class="/jsp/portfolio/mpt/ComparePortfolioMPT">
+			<result name="success"  type="freemarker">/jsp/portfolio/mpt/compareportfoliompt.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>	
+		
+		<action name="MPTDownload" class="/jsp/portfolio/mpt/Main" method="download">
+			<result name="success" type="stream">
+				<param name="inputName">fis</param>
+				<param name="contentType">application/vnd.ms-excel;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;fileName="${portfolioName}.csv"</param>
+				<param name="bufferSize">102400</param>  
+			</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>	
+		<action name="ScreeningMain" class="/jsp/portfolio/screening/Main" method="screeningmain">
+			<result name="success">/jsp/portfolio/screening/main.jsp</result>
+			<result name="input">/jsp/error.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>	
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/portfolio/{1}.uftl
+			</result>
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>							
+		</action>		
+		
+		<action name="OutputSchHolding" class="com.lti.action.portfolio.ViewHoldingCSVAction" method="outputSchHolding">
+			<result name="download" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>	
+		<action name="OutputActHolding" class="com.lti.action.portfolio.ViewHoldingCSVAction" method="outputActHolding">
+			<result name="download" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">4096</param>  
+			</result>
+		</action>		
+		
+		<action name="MakePublicPortfolio" class="com.lti.action.portfolio.MakePublicPortfolioAction">
+			<result name="message" type="freemarker">/jsp/message.uftl</result>
+		</action>								
+		<action name="ComparePortfolio" class="com.lti.action.portfolio.ComparePortfolioAction" method="compare">
+			<result name="success" type="freemarker">/jsp/portfolio/compareportfolio.uftl</result>
+		</action>
+		<action name="SearchPortfolio" class="com.lti.action.portfolio.ComparePortfolioAction" method="search">
+			<result name="message" type="freemarker">/jsp/message.uftl</result>
+		</action>
+		<action name="CompareMain" class="com.lti.action.portfolio.ComparePortfolioAction" method="main">
+			<result name="success" type="freemarker">/jsp/portfolio/compareportfolio.uftl</result>
+		</action>
+		<action name="FullCompare" class="com.lti.action.portfolio.ComparePortfolioAction" method="fullCompare">
+			<result name="success" type="freemarker">/jsp/portfolio/FullCompare.uftl</result>
+		</action>
+		<action name="PermissionState" class="com.lti.action.portfolio.PermissionStateAction">
+			<result name="message" type="freemarker">/jsp/message.uftl</result>
+		</action>
+		<action name="PermissionState_checkPublicState" class="com.lti.action.portfolio.PermissionStateAction" method="checkPublicState">
+			<result name="message" type="freemarker">/jsp/message.uftl</result>
+		</action>
+	</package>
+
+	
+	
+	<package name="com.lti.action.portfolio.ajax" namespace="/jsp/portfolio/ajax"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="SecuritySuggest" class="/jsp/portfolio/ajax/SecuritySuggest">
+			<result name="success">/jsp/portfolio/individual.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="StrategySuggest" class="/jsp/portfolio/ajax/StrategySuggest">
+			<result name="success">/jsp/portfolio/ajax/gettxt.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="StrategyParameter" class="/jsp/portfolio/ajax/StrategyParameter">
+			<result name="success">/jsp/portfolio/ajax/gettxt.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/portfolio/ajax/{1}.uftl
+			</result>		
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>					
+		</action>			
+	</package>
+				
+
+</struts>

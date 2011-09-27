@@ -1,0 +1,175 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+<head>
+
+<title>Customize Portfolio</title>
+<script src="/LTISystem/profile_js_customizeportfolio.action?includeHeader=false"></script>
+<link href="/LTISystem/jsp/profile/images/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+[#-- the three big buttons --]
+[#include "nav.uftl"]
+<form id='profile_form' action='profile_edit.action' method='post'  style='display:none'>
+	<input type='hidden' id='profile_portfolioid' name='profile.portfolioID' value='0'>
+	<input type='hidden' id='profile_portfolioname' name='profile.portfolioName' value='New Portfolio'>
+	<input type='hidden' id='strategyname' name='strategyName' value=''>
+	<input type='hidden' id='strategyid' name='strategyID' value='-1'>
+	<input type='hidden' id='frequency' name='frequency' value='monthly'>
+	<input type='hidden' id='profile_planid' name='profile.planID' value='0'>
+
+	<input type='hidden' id='profile_planname' name='profile.planName' value='STATIC'>
+	<input type='hidden' id='profile_risknumber' name='profile.riskNumber' value='18'>
+	<input type='hidden' id='profile_attitude' name='profile.attitude' value='Moderate'>						
+	<input type='hidden' id='profile_yearstoretire' name='profile.yearsToRetire' value='24'>
+	<input type='hidden' id='operation' name='operation' value='save'>
+</form>
+
+<div id='customize_portfolio_div'>
+	[#-- profile information table --]
+	<p>
+		<table border=0 width='100%'>
+			<tr height='30px'>
+				<td width='200px'>
+					<b>Your Risk Profile Number</b>
+				</td>
+				<td>
+					${profile.riskNumber!""}
+				</td>
+			</tr>
+	        <tr>
+	            <td colspan=2>
+	            	This means the target allocations in your portfolio are
+	            </td>
+	        </tr>
+			<tr height='30px'>
+				<td>
+					<b>Fixed Income Allocation</b>
+				</td>
+				<td>
+					${profile.riskNumber!""}%
+				</td>
+			</tr>
+			<tr height='30px'>
+				<td>
+					<b>Risky Asset Allocation</b>
+				</td>
+				<td>
+					[#if profile.riskNumber??]${100-profile.riskNumber}%[/#if]
+				</td>
+			</tr>
+		</table>
+	</p>
+	
+	<p>
+		[#-- selection table --]
+		<table border=0 width=100%>
+			<tr>
+				<td width='200px'>
+					<input type='button' value='+ Select a Plan' class='uiButton'  style="width:200px" id='btn_plan' >&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td valign='middle'>
+					<a href='' id='a_plan' target='_blank'></a>
+					<input type='hidden' id='t_planname' value=''>
+					<input type='hidden' id='t_planid' value='-1'>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2>
+					<div class="sidebar_box_noPadding roundHeadingBlue" id='div_plan' style='width:100%;display:none'>
+						<div class="sidebar_box_heading_white">Plans</div>
+						<div class="sidebar_box_content borderBottom_1px">
+							<p><input id='keyword_plan' class='edit_text' style='width:200px' ><input type='button' value='Search' onclick='searchplan()' class='btn' style='font-size:0.8em;width:40px;height:18px'></p>
+							<div id='div_plan_content'>
+							[@s.action name="profilehelp_pickplan" namespace="/" executeResult=true]
+								[@s.param name='includeHeader']false[/@s.param]
+								[@s.param name='size']20[/@s.param]
+							[/@s.action]
+						</div>
+						<div class="sidebar_box_content">
+		                    <a target="_blank" href="/LTISystem/profilehelp_pickplan.action?size=0&inner=true&title=Select%20Plans">More plans</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			[#-- slecte strategy button --]
+			<tr style='display:none' id='tr_strategy_1'>
+				<td>
+					<input type='button' value='+ Select a Strategy' class='uiButton' style="width:200px"  id='btn_strategy' >&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td valign='middle'>
+					<a href='' id='a_strategy' target='_blank'></a>
+					<input type='hidden' id='t_strategyname' value='' >
+					<input type='hidden' id='t_strategyid' value='-1'>
+				</td>
+			</tr>
+			[#-- strategy table --]
+			<tr style='display:none;' id='tr_strategy_2'>
+				<td colspan=2>
+					<div id='div_strategy' style='width:100%;min-height:100px;display:none'>
+					</div>
+				</td>
+			</tr>
+			[#-- portfolio name --]
+			<tr style='display:none' id='tr_portfolio_1'>
+				<td>
+					<b id='b_portfolioname'>New Portfolio Name</b>
+				</td>
+				<td>
+					<input type='text' value='' id='t_portfolioname' class='edit_text' style='width:350px'>
+				</td>
+			</tr>
+			<tr style='display:none' id='tr_portfolio_2'>
+				<td>
+					<b id='b_portfolioname'>Selected Portfolio</b>
+				</td>
+				<td>
+					<a href="" id="a_portfolio" target="_blank"></a>
+					<input type='hidden' value='-1' id='t_portfolioid'>
+				</td>
+			</tr>
+			[#-- parameters --]
+			<tr style='display:none' id='tr_parameter'>
+				<td>
+					<b>Parameters</b>
+				</td>
+				<td>
+					<table border=0 >
+						<tr>
+							<td width=150px>Risk Profile Number</td>
+							<td width=200px>
+								<input type='text' id='t_risknumber' class='edit_text' value='${profile.riskNumber}' style='width:98%'>
+							</td>
+							
+						</tr>
+						<tr>
+							<td width=150px>Frequency</td>
+							<td width=200px>
+								<input type='text' id='t_frequency' class='edit_text' value='monthly' style='width:98%'>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2'>
+					<input type='button' value='Generate' class='btn2' onclick='go();' id='btn_generate' style='display:none'>
+				</td>
+			</tr>
+			
+		</table>
+	</p>
+		
+    <br>
+    <div id='div_message'></div>
+	<br>
+	<br>
+
+	<h2 align="center">Your Current Model Portfolios</h2>
+	<div id='div_modelportfolios'>
+	</div>
+</div>
+</body>
+</html>

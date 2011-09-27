@@ -1,0 +1,358 @@
+[#ftl]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign ltiauthz=JspTaglibs["/WEB-INF/lti_authz.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+
+<script src="/LTISystem/jsp/template/gpl/jmtable.js"></script>
+
+<script src="/LTISystem/jsp/portfolio/images/jquery.timer.js" type="text/javascript"></script>
+
+<script>
+	$(function() {
+		$('#startingdate').datepicker();
+	});
+</script>
+<script>
+		//----------------------------------------------------------------
+		function moveOut(index,index2){
+			if(document.getElementById(index2).value!=""){
+				document.getElementById(index).checked = true;
+			}
+			if(document.getElementById(index2).value==""){
+				document.getElementById(index).checked = false;
+			}
+		}
+			var portfolioLength;
+			var portfolio_info = false;
+			function aggregatePortfolio(){
+			//获取该用户的portfolios
+			if(portfolio_info==false){
+				$('#btn_portfolio_info').val('- Aggregate Portfolios');
+				$('#createPortfolio_info').show();
+				//获取该用户的portfolios
+				$.ajax({
+					type: "get",
+					url: "f401k_getUserPortfolios.action?includeHeader=false",
+					datatype: "html",
+					success: function(result){
+						
+						var portfolios = result.trim().split("|");
+						portfolioLength = portfolios.length-1;
+						var add = "";
+						for(var i = 0;i<portfolios.length-1;i++){
+							var index = "portfolio_"+i+"_name";
+							var index2 = "portfolio_"+i+"_amount";
+							var strCheckBox = "<tr><td><input type='checkbox' width='30%' id="+index+" value='"+portfolios[i]+"'>"+portfolios[i]+"</td>";
+							var strText = "<td><input type='text' id=" + index2 + " value='' onblur='moveOut(\""+index+"\",\""+index2+"\");'></td></tr>";
+							var add = add + strCheckBox + strText;
+						}
+						var headStr = "<table><tr><th>My Portfolios</th><th>Amount</th></tr>"+add+"</table>";
+						$('#portfolio_info').append(headStr);
+					}
+				});//end of ajax
+				$('#portfolio_info').show();
+				portfolio_info = true;
+			}else{
+				$('#btn_portfolio_info').val('+ Aggregate Portfolios');
+				$('#portfolio_info').html("");
+				$('#portfolio_info').hide();
+				$('#createPortfolio_info').hide();
+				portfolio_info = false;
+			}
+		}
+</script>
+<script>
+	//----------------create portfolios------------
+		function createPortfolio(){
+			var name = $('#portfolioName').val();
+			if($.trim(name)==''||$.trim(name)=='Enter New Portfolio Name'){
+				alert("Please input your portfolio name.");
+				return;
+			}
+			//查看权限
+			$.ajax({
+				type: "get",
+				url: "f401k_checkCreatePortfolio.action?includeHeader=false",
+				datatype: "html",
+				success: function(result){
+					if($.trim(result).indexOf("true") == -1){
+						alert(result);
+					//	window.location.href = "/LTISystem/paypal_subscr.action";
+						return;
+					}else{
+					//检查重名
+					$.ajax({
+						type: "get",
+						url: "f401k_checkPortfolioName.action?includeHeader=false",
+						data: "name="+$('#portfolioName').val(),
+						datatype: "html",
+						success: function(result){
+							if($.trim(result).indexOf("true") == -1){
+								alert("The name of the portfolio has been used, please re-enter the name of the portfolio.");
+								return;
+							}else{
+								var pfNames="";
+								var amounts="";
+								for(var i = 0;i<portfolioLength;i++){
+									var idIndex = "portfolio_"+i+"_name";
+									var amountIndex = "portfolio_"+i+"_amount";
+									//alert(document.getElementById(idIndex).checked);
+									if(document.getElementById(idIndex).checked == true){
+										pfNames = pfNames + document.getElementById(idIndex).value+"|";
+										amounts = amounts + document.getElementById(amountIndex).value+"|";
+									}
+								}
+								
+								$.ajax({
+									type: "get",
+									url: "f401k_createPortfolio.action?includeHeader=false&turnView=true&pfNames="+pfNames+"&amounts="+amounts+"&startingdate="+document.getElementById("startingdate").value,
+									data: "name="+$('#portfolioName').val(),
+									datatype: "html",
+									success: function(result){
+										
+										window.location.href = "jsp/portfolio/EditHolding.action?operation=editbasic&ID="+result+"&compound=0";
+									},
+									error:function(){
+										alert("error");
+									}
+								});//end of ajax
+							}
+						},
+						error:function(){
+							alert("error");
+						}
+					});//end of ajax
+				}
+			},
+			error:function(){
+				alert("error");
+				}
+			});//end of ajax
+		}
+</script>
+[#if profiles?? && profiles?size >0]
+		<!-- ${lastUpdated?datetime} -->
+		<script>
+			$(document).ready(function(){ 
+			        	//$("#profiletable${currentTimeMillis?string.computer}").tablesorter({sorter:'num'});
+			        	//$("#managewindow").dialog({height:300,width:600,title:"Login",autoOpen:false,modal:true});
+			        } 
+			); 
+		</script>	
+			    
+		<script>
+			function getEvent() { 
+				if (document.all) return window.event;
+				func = getEvent.caller;
+				while (func != null) {
+					var arg0 = func.arguments[0];
+					if (arg0) {
+						if ((arg0.constructor == Event || arg0.constructor == MouseEvent)
+							|| (typeof (arg0) == "object" && arg0.preventDefault && arg0.stopPropagation)) {
+							return arg0;
+						}
+					}
+					func = func.caller;
+				}
+				return null;
+			} 
+			function remove2(portfolioId){
+				if(confirm("Are you sure to remove this portfolio?")){
+					
+					var url_s='/LTISystem/jsp/portfolio/SaveHolding.action?operation=delete&ID='+portfolioId;
+					$.ajax({
+				  	 	type: "Post",
+				   		url: url_s,
+				   		
+				   		success: function(msg){
+				     			//alert(msg );
+				     			window.location.reload();
+				   		}
+				 });
+				}
+			}
+			
+			function remove3(portfolioId,userId){
+				if(confirm("Are you sure to remove this portfolio?")){
+					
+					var url_s='getstarted_unfollow.action?portfolioID='+portfolioId+'&userID='+userId;;
+					$.ajax({
+				  	 	type: "Post",
+				   		url: url_s,
+				   		
+				   		success: function(msg){
+				     		//alert(msg );
+				     		window.location.reload();
+				     	}
+					 });
+				}
+			}
+			
+			function hide(){
+				$('#managewindow').hide();
+			}
+			function openmanagewindow(portfolioid,portfolioname){
+				$("#window_"+portfolioid).toggle();
+				if($("#title_"+portfolioid).css('font-weight')==400){
+					$("#title_"+portfolioid).css('font-weight',700);
+					$("#title_"+portfolioid).css('color','black');			
+				}else{
+					$("#title_"+portfolioid).css('font-weight',400);		
+					$("#title_"+portfolioid).css('color','#333333');			
+				}
+			}
+			
+			function setfollowdate(portfolioID, hasEndDate) {
+				if(hasEndDate == false){
+					alert("This portfolio has not been simulated. Please remove it and costomize a new portfolio.");
+					return;
+				}
+				$('#followDateStr_' + portfolioID).datepicker();
+				if($('#followdatestate_' + portfolioID).val() == "true"){
+					$("#followDateStr_" + portfolioID + "_div").show();
+					$('#followdatestate_' + portfolioID).val(false);
+				}else {
+					$("#followDateStr_" + portfolioID + "_div").hide();
+					$('#followdatestate_' + portfolioID).val(true);
+				}
+			}
+			
+			function changefollowdate(portfolioID) {
+				var pattern = /^((\d{1,2})\/(\d{1,2})\/(\d{4}))$/;  
+				var followdate = $('#followDateStr_' + portfolioID).val();
+				if(!pattern.test(followdate)){
+					alert( "Please input the follow date with format 'MM/dd/yyyy'.");
+					return;
+				}
+				$.ajax({
+				  	type: "Post",
+				   	url: "profile_changefollowdate.action?includeHeader=false&portfolioID=" + portfolioID,
+				   	data: $('#chanagefollowdateform_' + portfolioID).serialize(),
+				   	success: function(msg){
+				   		alert("set follow date successful.");
+				   		window.location.reload();
+				   	}
+				 });
+			}
+		</script>		
+		
+		[/#if]
+		
+		[#assign flag=false /]
+		[@ltiauthz.authorize ifAnyGranted="MPIQ_E,MPIQ_P,ROLE_SUPERVISOR"]
+		  [#assign flag=true /]
+		[/@ltiauthz.authorize]
+		
+     [#if flag || profiles?size >0]   
+	<div>
+		[#if title??]<span style="font-size:1.7em;">${title}</span><br>[/#if]
+		[#if description??]<span style="font-size:1.1em;">${description}</span><br>[/#if]
+		<div align="center">
+		<div id="sectionTitle"><div id="TitleContent">My Aggregate Portfolios(Beta)</div></div><br><br>
+		click on a <strong>portfolio name</strong> to see options to view or remove this portfolio and other parameters
+		<br>
+		<br>
+		</div>
+		<table id="profiletable${currentTimeMillis?string.computer}" class="tablesorter" border="0" cellpadding="0" cellspacing="1" width=100%>
+			<thead>
+				<tr>
+					<th class="header" width = "250px">
+						Portfolio Name
+					</th>
+					<th class="header" width = "100px">
+						Strategy
+					</th>
+					<th alt="One Years' Annualized Return" width="30px" class="header">
+						1Yr AR
+					</th>
+					<th alt="Three Years' Annualized Return" width="30px" class="header">
+						3Yr AR
+					</th>
+					<th alt="Five Years' Annualized" width="30px" class="header">
+						5Yr AR
+					</th>
+					<th class="header" width = "60px">
+						Permission
+					</th>
+				</tr>			
+			</thead>
+
+			<tbody>
+			[#if profiles?? && profiles?size >0]
+			[#list profiles as item]
+				[#if item.portfolioID==0 && item.planID==0]
+				[#else]
+					[#if item_index%2==0]
+						<tr class='odd' valign='top'>
+					[/#if]
+					[#if item_index%2==1]
+						<tr class='even' valign='top'>
+					[/#if]
+							<td>
+								[#-- jsp/portfolio/ViewPortfolio.action?ID=${item.portfolioID?string.computer} --]
+								<div id='title_${item.portfolioID?string.computer}' onclick="openmanagewindow(${item.portfolioID?string.computer},'')" style='cursor: pointer;'>
+									${item.portfolioName}
+								</div>
+							</td>
+							<td>
+								<a href="/LTISystem/jsp/strategy/View.action?ID=${item.strategyID}" target="_blank">${item.strategyName}</a>
+							</td>
+							<td width=30px>[#if item.AR1??]${item.AR1?string.percent}[/#if]</td>
+
+							<td width=30px>[#if item.AR3??]${item.AR3?string.percent}[/#if]</td>
+							
+							<td width=30px>[#if item.AR5??]${item.AR5?string.percent}[/#if]</td>
+							
+							<td>[#if item.public?? && item.public]Public[#else]Private[/#if]</td>
+						</tr>
+						<tr style='display:none' id='window_${item.portfolioID?string.computer}'>
+							<td colspan="7">
+								<div class="sidebar_box" >
+									<p>
+										<br>
+										<a href='jsp/portfolio/ViewPortfolio.action?ID=${item.portfolioID?string.computer}' target='_blank'>View this portfolio</a>
+										<br>
+										<br>
+										Follow Status[@lti.questionmark "'Follow' means that you want to see the realtime info and will receive rebalance email alerts of the portfolio." ""/]: true &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Follow Date: [#if item.startToFollowDate??] ${item.startToFollowDate}[#else] Null [/#if]&nbsp;&nbsp;<input type="button" class="uiButton" value="Set Follow Date" onclick="setfollowdate(${item.portfolioID?string.computer}, [#if item.endDate??]true[#else]false[/#if])"> [@lti.questionmark "It records the portfolio date when you start paying attention on this portfolio. By default, it is the date when you click 'Follow this portfolio' or customize the portfolio." ""/]
+										<input type="hidden" id="followdatestate_${item.portfolioID?string.computer}" value="true"/>
+										<div id="followDateStr_${item.portfolioID?string.computer}_div" style="display:none">
+											<form action="changefollowdate.action" id="chanagefollowdateform_${item.portfolioID?string.computer}" method="post">
+												<input id="followDateStr_${item.portfolioID?string.computer}" name="followDateStr" value=[#if item.endDate??]"${item.endDate?string('MM/dd/yyyy')}"[#else]""[/#if] class="ui-widget ui-corner-all" style="height:30px;width:250px"> &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" class="uiButton" value="Change" onclick="changefollowdate(${item.portfolioID?string.computer})">
+											</form>
+										</div>
+										<a href='javascript:void' onclick='remove3(${item.portfolioID?string.computer},${item.userID?string.computer})' >Remove this portfolio</a>
+									</p>
+								</div>
+							</td>
+						</tr>
+					[/#if]
+				[#if size?? && size!=0 && item_index == size][#break][/#if]
+			[/#list]
+        [/#if]
+		
+			</tbody>
+		</table>	
+		
+</div>
+
+
+<input type='button' id='btn_portfolio_info' class="uiButton" onclick='aggregatePortfolio()' style='width:180px;text-align:left' value='+ Aggregate Portfolios'>
+<div id="createPortfolio_info" style='display:none'>
+		<br>
+		<input type="text" id="portfolioName" value="Enter New Portfolio Name" onclick="if(this.value=='Enter New Portfolio Name')this.value=''" onblur="if(this.value=='')this.value='Enter New Portfolio Name'">
+		StartTime:
+		<input type="text" id="startingdate"  name="portfolio.startingDate" value="" >
+		<input type='button' id='btn_create_info' class="uiButton" onclick='createPortfolio()' style='width:180px;text-align:left' value='Create Aggregate Portfolios'>
+		<br>
+		<br>
+		<div id="portfolio_info" style='display:none'>
+		
+		</div>
+</div>
+<div class="sidebar_box_noPadding roundHeadingBlue" id='managewindow' style='display:none;background-color:White; z-index:0 '>
+	<div class="sidebar_box_heading_white">More Operations&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void" onclick='hide()'>Close</a></div>
+	<div class="sidebar_box_content" id="managewindow_content">
+	</div>
+</div>
+
+[/#if]

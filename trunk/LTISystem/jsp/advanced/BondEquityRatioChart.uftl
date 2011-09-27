@@ -1,0 +1,8 @@
+[#ftl]
+ [#import "/jsp/lti_library_ftl.jsp" as lti]
+<h1 style="text-align:center">Bond Equity Yield Ratio Chart</h1>
+<hr />
+<p></p>
+<li><a href="advanced__BondEquityRatioLargeChart.action?includeHeader=false&amp;host=www.myplaniq.com">Larger Chart</a></li>
+ [@lti.gchart "Bond Equity Yield Ratio" "BondEquityRatioList_4980.xml" "www.myplaniq.com"][/@lti.gchart]
+[@lti.gchart "Bond Yield (^TNX),Equity Yield(^GSPC)" "YieldData_4980.xml" "www.myplaniq.com"][/@lti.gchart]

@@ -1,0 +1,116 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<meta name="submenu" content="portfoliotable"/>
+<meta name="portfolios" content="vf_current" />
+<meta name="portfoliodesc" content="vf_current" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>Portfolio Main Page</title>
+<link rel="stylesheet" href="/LTISystem/jsp/images/vf.css" type="text/css" /> 
+
+<link rel="stylesheet" href="/LTISystem/jsp/images/jquery.ui.theme/redmond/jquery-ui-1.7.1.custom.css" type="text/css" />
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery.ui/1.7.1/ui.core.js"></script>
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery.ui/1.7.1/ui.dialog.js"></script>
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery.form/jquery.form.js"></script>
+
+
+</head>
+
+<body>
+<div id="vf_wrap">
+	<div id="vf_content-wrap">
+<!--		<div id="vf_sidebar">
+			[@lti.Articlesfeed2 "article"]
+
+		 	[/@lti.Articlesfeed2]
+		</div>
+-->
+		<div id="vf_contentright">
+			<h1 align=center><span class="green">ValidFi<sup style="color:red"><em>Beta</em></sup> Portfolios: </span>Intuitive yet Powerful</h1>
+			<hr/>
+                        <div>
+                         <p>
+                          <ul>
+                           <li>See a <a href="../customizepage/PortfolioOverviewDemo.action?includeHeader=false" target="_blank">demo</a> on how to use ValidFi's portfolio tool.</li>
+                           <li><a href="../customizepage/ModelPortfolios.action">ValidFi Model Portfolios:</a>
+                               <ul>
+                                   <li>Three risk levels: conservative, moderate and growth.</li>
+                                   <li>Examples of composite portfolios (portfolio of portfolios) for multiple strategies.</li>
+                               </ul>
+                           </li>
+                           <li><a href='/LTISystem/jsp/portfolio/Main.action?publicPortfolio=true'>Public Portfolios</a> are a collection of public portfolios that you could search or create your own.</li>
+                           <li><a href='/LTISystem/jsp/portfolio/Main.action?myPortfolio=true'>My Portfolios</a> are your own portfolios.</li>
+                         </ul>			
+                        </p>
+                       </div>
+			<div id ="vf_main">
+                        <h1>Portfolio Management</h1>
+                        <hr />
+                        <div class="vf_blockmain">
+                          <ul><h3>Historical Simulation and Tracking</h3>
+                           <li>Perform historical back testing up to date by using <strong>Monitor</strong> function. </li>
+                           <li>Or just want to evaluate such a portfolio for a period of time by using <strong>Evaluate</strong> function.</li>
+                           <li>Lively tracking a portfolio (i.e. ValidFi will update the portfolio everyday after market close) once you use <strong>Monitor</strong> function.</li> 
+                           <li>Get the realtime portfolio transaction (trade) signals through email notification (go to <em class="orange">Original Portfolio</em> page and click on <em class="orange">Email alert</em>): if there is a trade in this portfolio, you will receive an email for such a transaction on the same day. You can setup <em class="orange">Email alert</em> on multiple portfolios.</li>
+                           <li>Or simply use <em class="orange">Save as</em> to save a portfolio provided by ValidFi or others as a starting point for your own purpose.</li>
+                         </ul>
+                        </div> <!--- end of vf_blockmain --->
+
+                        <div class="vf_blockmain">
+                          <ul><h3>Portfolio Statistics and Charts</h3>
+                           <li><em class="orange">Detailed Statistics</em> provide various (year by year or since inception (start date) portfolio statistics including:
+                               <ul>
+                                <li><em class="orange">AR</em>: Annualized Return.</li>
+                                <li><em class="orange">Standard Deviation</em>: Portflio's volatility (or sometimes called 'risk').</li>
+                                <li><em class="orange">Sharpe Ratio</em>: Return per unit of standard deviation ('risk'). This is also called <em class="orange">Risk adjusted return</em>.</li>
+                                <li><em class="orange">Maximum Drawdown</em>: Biggest percentage of drop from a peak to a subsequent trough.</li>
+                                <li><em class="orange">Sortino Ratio</em>: Return per unit of semi standard deviation which only accounts for the downside fluctuation.</li>
+                                <li>and many others such as <em class="orange">Alpha, Beta, Treynor Ratio.</em></li>
+                               </ul>
+                           </li>
+                           <li><em class="orange">Flash Chart</em> feature includes:
+                             <ul>
+                              <li><em class="orange">Multiple time frames</em></li>
+                              <li>Labeled <em class="orange">Transactions</em></li>
+                              <li>Compare with another security's total return or even another portfolio's.</em></li>
+                             </ul>
+                           </li>
+                         </ul>
+                       </div> <!--- end of vf_blockmain --->
+               	     </div> <!--- end of vf_main -->
+                     <div id ="vf_rightbar">
+                        <h1>Portfolio Construction</h1>
+                        <hr />
+                        <div class="vf_blockright" style="min-height: 0;">
+                         <ul><h3>Assets and Asset Strategies</h3>
+                          <li><em class="orange">Asset Classes</em>: A portfolio consists of multiple assets. An asset such as "US Equity" is a first class citizen.</li>
+                          <li><em class="orange">Asset Strategy</em>: Users could designate a <em class="orange">Strategy</em> to an asset.</em></li>
+                          <li><em class="orange">Asset Securities</em>: An asset consists of several securities. These securities could be set as initial holdings in <em class="orange">Origianl Portfolio</em>.</li>
+                          <li><em class="orange">Target percentage</em>: The target allocation for this asset.</li>
+                         </ul>
+                        </div> <!--- end of vf_blockright --->
+                        <div class="vf_blockright" style="min-height: 0;">
+                         <ul><h3>Portfolio Level Strategies</h3>
+                          <li><em class="orange">Asset Allocation Strategy</em>: The overall asset allocation strategy for this portfolio. </li>
+                          <li><em class="orange">Rebalance Strategy</em>: To specify whether to rebalance a portfolio periodically or use some advanced rebalancing strategies. </li>
+                          <li><em class="orange">Cash Flow Strategy</em>: Strategy to withdraw and/or deposit cash. These include well known retirement spending strategies and <em class="orange">Dollar Cost Averaging</em> cash deposit strategy.</li>
+                         </ul>
+                        </div> <!--- end of vf_blockright --->
+                        <div class="vf_blockright" style="min-height: 0;">
+                         <ul><h3>Composite Portfolios or Multiple Strategies</h3>
+                          <li><em class="orange">Composite (Super) Portfolio</em>: ValidFi treats each portfolio as a 'normal' security such as a mutual fund or ETF. Thus, a portfolio could consist of other portfolios as its "securities". </li>
+                          <li><em class="orange">Multiple Strategies</em>: Portfolio of portfolios makes it possible to have mutliple strategies. </li>
+                          <li><em class="orange">Portfolio Optimization Tools</em>: Use advanced tools such as <a href='../mvo/input.action' target='_blank'>Mean Variance Optimization</a> for asset (strategy) allocation.</li>
+                         </ul>
+                        </div> <!--- end of vf_blockright --->
+                    </div> <!--- end of vf_rightbar --->
+ 	</div> <!--- end of contentright -->
+   </div>
+</div>
+</body>
+</html>

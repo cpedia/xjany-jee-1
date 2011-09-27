@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.fundcenter.mutualfund" namespace="/jsp/fundcenter"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="Performance" class="/jsp/fundcenter/performance" method="performance">
+			<result name="input" type="freemarker">/jsp/fundcenter/performance.ftl</result>
+			<result name="success" type="freemarker">/jsp/fundcenter/performance.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Return" class="/jsp/fundcenter/performance" method="allReturn">
+			<result name="input" type="freemarker">/jsp/fundcenter/performance.ftl</result>
+			<result name="success" type="freemarker">/jsp/fundcenter/performance.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Partial" class="/jsp/fundcenter/performance" method="partialPerformance">
+			<result name="input" type="freemarker">/jsp/fundcenter/performance.ftl</result>
+			<result name="success" type="freemarker">/jsp/fundcenter/performance.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Details" class="/jsp/fundcenter/details">
+			<result name="input" type="freemarker">/jsp/fundcenter/details.ftl</result>
+			<result name="success" type="freemarker">/jsp/fundcenter/details.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Strategies" class="/jsp/fundcenter/strategies">
+			<result name="input" type="freemarker">/jsp/fundcenter/strategies.ftl</result>
+			<result name="success" type="freemarker">/jsp/fundcenter/strategies.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="DetailPerformance" class="/jsp/fundcenter/performance" method="detailPerformance">
+			<result name="input" type="freemarker">/jsp/fundcenter/detailperformance.ftl</result>
+			<result name="success" type="freemarker">/jsp/fundcenter/detailperformance.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="CalculatePerformance" class="/jsp/fundcenter/performance" method="calculatePerformance">
+			<result name="input" type="freemarker">/jsp/fundcenter/calculateperformance.ftl</result>
+			<result name="success" type="freemarker">/jsp/fundcenter/calculateperformance.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="SecurityMPTChart" class="com.lti.action.fundcenter.SecurityMPTChartAction">
+			<result name="input" type="freemarker">/jsp/fundcenter/securitymptchart.ftl</result>
+			<result name="success" type="freemarker">/jsp/fundcenter/securitymptchart.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="SecurityTable" class="com.lti.action.fundcenter.SecurityTableAction">
+			<result name="input" type="freemarker">/jsp/fundcenter/securitytable.ftl</result>
+			<result name="success" type="freemarker">/jsp/fundcenter/securitytable.ftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="AATrend" class="com.lti.action.fundcenter.AATAction">
+			<result name="input" type="freemarker">/jsp/mutualfund/calculate.uftl</result>
+			<result name="success" type="freemarker">/jsp/mutualfund/calculate.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="BetaGain" class="com.lti.action.fundcenter.BetaGainAction">
+			<result name="input" type="freemarker">/jsp/betagain/calculate.uftl</result>
+			<result name="success" type="freemarker">/jsp/betagain/calculate.uftl</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">/jsp/fundcenter/{1}.uftl</result>	
+		</action>
+		<action name="View" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">/jsp/fundcenter/View.uftl</result>			
+		</action>
+	</package>
+
+</struts>

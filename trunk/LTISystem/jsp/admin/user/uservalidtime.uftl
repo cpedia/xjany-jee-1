@@ -1,0 +1,112 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+	<head>
+	<script type="text/javascript">
+	function timePeriod(tleft,tright,tableId,M){
+		if(M=="A"){
+		//alert("A");
+			var minDay  = parseInt(tleft.value);
+			var tright = document.getElementById(tright);
+			var maxDay = parseInt(tright.getAttribute("value"));
+		}
+		if(M=="B"){
+		//alert("B");
+			var tleft = document.getElementById(tleft);
+			var minDay = parseInt(tleft.getAttribute("value"));
+			var maxDay  = parseInt(tright.value);
+		}
+		var ua = navigator.userAgent.toLowerCase();
+		var table = document.getElementById(tableId);
+		if (ua.indexOf('msie') >= 0 && ua.indexOf('opera') < 0){
+			for(var i=1;i<table.rows.length;i++){
+				if(parseInt(table.rows[i].cells[8].innerHTML)>=minDay && parseInt(table.rows[i].cells[8].innerHTML)<=maxDay){			
+					table.rows[i].style.display = "inline";
+				} 
+				else{
+					table.rows[i].style.display = "none";
+				}
+			}
+		}
+		else{
+			for(var i=1;i<table.rows.length;i++){
+				if(parseInt(table.rows[i].cells[8].innerHTML)>=minDay && parseInt(table.rows[i].cells[8].innerHTML)<=maxDay){			
+					table.rows[i].style.display="";
+ 					table.rows[i].style.display = "table-row";
+				} 
+				else{
+					table.rows[i].style.display = "none";
+				}
+			}
+		}	
+	}
+	</script>
+	</head>
+	<body>
+	<br>
+	<table width="100%">
+	<tr><td>
+	<fieldset>
+	<legend>Criteria Area</legend>
+	<table id="criteria_rows" align="left" width="40%"align="middle" border="0" style="BORDER-RIGHT: #a6a398 1px solid; BORDER-TOP: #a6a398 1px solid; BORDER-LEFT: #a6a398 1px solid; BORDER-BOTTOM: #a6a398 1px solid">
+	  <tr>
+		<th width="25%"><b>Criteria</b></th>
+		<th width="20%"><b>Min(Day)</b></th>
+		
+		<th width="20%"><b>Max(Day)</b></th>
+	  </tr>
+	  <tr>
+	  <td>Remaining Time</td>
+	  [#if vCountPairs?? && vCountPairs[0]??]
+	  [#assign minDay=vCountPairs[0].getKey()]
+	  [/#if]
+	  <td><input value="${minDay!"0"}" id='RemainTime_left' maxlength="3" type="text" onkeyup="javascript:timePeriod(this,'RemainTime_right','valid_time','A')"></td>
+	  
+	  [#if vCountPairs??]
+	  [#assign length = vCountPairs?size]
+      [#if vCountPairs[length-1]??]
+	  [#assign maxDay=vCountPairs[length-1].getKey()]
+      [/#if]
+	  [/#if]
+	  <td><input value="${maxDay!"0"}" id='RemainTime_right' maxlength="3" type="text" onkeyup="javascript:timePeriod('RemainTime_left',this,'valid_time','B')"></td>
+	  </tr>
+	  </table>
+	 </td></tr>
+	 </fieldset>
+	 <tr><td>
+	 <fieldset>
+		<legend>Valid Time Area</legend>
+		<table id="valid_time" width="100%" align="left" border="0">
+		  <tr class="trheader">
+		  	 <th>UserID</th>
+	         <th>UserName</th>
+	         <th>Email</th>
+	         <th>SubscrId</th>
+	         <th>Itemname</th>
+	         <th>Profile StartDate</th>
+	         <th>Profile EndDate</th>
+	         <th>Time period</th>
+	         <th>Remaining  Time</th>
+	         <th>User Status</th>
+	      </tr>
+	     [#list validtimes as vs]
+	      <tr>
+	      	<td>${vs.userID}</td>
+	      	<td>${vs.userName}</td>
+	      	<td>${vs.payerEmail!""}</td>
+	      	<td>${vs.subscrId!""}</td>
+	      	<td>${vs.itemName!""}</td>
+	      	<td>${vs.paymentStartDate?string("yyyy/MM/dd")}</td>
+	      	<td>${vs.paymentEnddate?string("yyyy/MM/dd")}</td>
+	      	<td>${vs.timeperiod}</td>
+	      	<td>${vs.validtime}</td>
+	      	<td>${vs.userStatus!""}</td>
+	     </tr>
+	      [/#list]
+	   </table>
+	   </fieldset>
+	   </td></tr>
+	   </table>
+	</body>
+</html>

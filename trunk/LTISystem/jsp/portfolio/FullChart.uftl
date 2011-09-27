@@ -1,0 +1,41 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+
+<html>
+<head>
+<title>MyPlanIQ Net Value Chart of [portfolio name]</title>
+<meta  name="Description" content="The net value chart of the simulated MyPlanIQ portfolio is displayed on this page. Users can adjust the time horizon and display the portfolio transactions in the flash chart. ">
+<meta name="portfolios" content="vf_current" />
+<script type="text/javascript" src="/LTISystem/jsp/images/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" href="/LTISystem/jsp/images/vf.css" type="text/css" />
+<meta name="verify-v1" content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<title>${Parameters.name}</title>
+<script type="text/javascript">
+function showPic(img,width,height){
+window.open("data:image/jpeg;base64,"+img,"","width="+width+",height="+height+",resizable=1");
+}
+var address=document.location.hostname;
+var port=document.location.port;
+if(port=="")port='80';
+
+
+$(function() {
+var url='/LTISystem/jsp/flash/Main.action?portfolioID=${Parameters.ID}&portfolioName=${Parameters.name?url}&includeHeader=false';
+[#assign url="/LTISystem/jsp/flash/OutputXML.action?portfolioID=${Parameters.ID}"]
+url='/LTISystem/jsp/flash/flash.jsp?pn=${Parameters.name?url}&address='+address+'&port='+port+'&url=${url?url}';
+$('#chart').load(url);
+});
+//${url}
+</script>
+</head>
+<body>
+
+<p align-text="center"><h1>${Parameters.name}</h1></p>
+<!--- I would like to add a permission check here --->
+<div id="chart">
+
+</div>
+</body>
+</html>

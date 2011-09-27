@@ -1,0 +1,351 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<script src="/LTISystem/jsp/template/ed/js/mediaPlugin.js" type="text/javascript"></script>
+<script>
+	$(document).ready(function() {
+		setTimeout('logoRotator()', 4000);
+		
+		initTabs();
+		$("#signupemail").click(function(){
+       		if (isValidEmail($('#subemail').val())){
+       			
+       		}else{
+       			alert("Invalid email, please re-enter.");
+       			return;
+       		}
+			$.ajax({
+				url: '/LTISystem/jsp/register/FreeNewsletter.action?action=send&email='+$('#subemail').val(),
+				success: function(resulthtml){
+					alert("Thank you for signing up MyPlanIQ Newsletter.");
+				}
+			});
+		});
+		$('#flashdiv').append("<a class='mediaObject'></a>");
+		$('.mediaObject').media({ 
+				width:     618, 
+				height:    339, 
+				autoplay:  true, 
+				src:       "/LTISystem/jsp/template/ed/media/evergreen.swf"
+				//attrs:     { controller:  'true', "scale":"tofit", postdomevents:true},
+				//params:     { controller:  'true', "SCALE":"tofit", postdomevents:true}
+		}); 
+		
+		$("#flashwindow").dialog({height:369,width:638,title:"Learn More",position:"center",autoOpen:false,modal:true});
+
+		 
+		$('#slide4_tab').click(function(){
+			$("#flashwindow").dialog("open");
+		});
+	});
+	
+	function send(e){
+		var email = $('#subemail').val();
+		var k = window.event?window.event.keyCode:e.which;
+  		var src = window.event?window.event.srcElement:e.target;
+        if(k==13){
+        	if(email.trim()==''){
+				alert("Please input your email address.");
+				return;
+			}
+			else if(!isValidEmail(email)){
+				alert("Invalid email, please re-enter.");
+				return;
+			}
+        	$("#signupemail").trigger("click");
+        }
+	}
+	function isValidEmail(isText){
+		var reEmail = /^(?:\w+\.?)*\w+@(?:\w+\.?)*\w+$/;
+		return reEmail.test(isText);
+	}
+	
+ </script>
+ <script src="${lti.baseUrl}/jsp/template/ed/js/logos_v2.js" type="text/javascript"></script>
+ 
+ <title>MyPlanIQ Landing Page: Strategy Asset Allocation</title>
+ <meta  name="Description" content="Strategic asset allocation diversifies your investment to reduce risk and increase returns. It may add 1-2% to the long term return of your portfolio.">
+
+</head>
+<body>
+<div style="background-color:#FFFFFF;border-left: 1px solid #19411B;border-right: 1px solid #19411B;">
+<div id="getModelPortfolios" style="height: 115px;width: 890px;margin: 0px auto 0 25px;background: none repeat scroll 0 0 #EBFEED;">
+			<form action="/LTISystem/f401k__search.action" method="get" id="searchbox" style="margin-left: 100px;margin-top: 35px;color: black;">
+	        	<div class="input-wrap">
+	    			<input name="groupIDS" value="8" type="hidden"></input>
+			        <input name="includeHeader" value="true" type="hidden"></input>
+			        <input name="type" value="2" type="hidden"></input>
+	    	        <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	    	        <input style="float:left;font-size: 16pt !important;height: 40px !important;width:560px;" id="n401k_plansearch_text" name="q" 
+	    	        onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)this.value="Schwab"' size="15" type="text" value='${Parameters.q!"Company 401K, IRA, Brokerage or ETF/Mutual Fund"}'
+					size="15" type="text">
+			        <a onclick="submit_search(this); return false;" id="search-submit" href="#">Search</a>
+				</div>
+	
+	        	<br class="clear-both" style="clear:both;">
+	        	<div class="main_directory_listing">
+	            	<a style="font-size: 13px;" id="ratings-link" href="/LTISystem/getstarted_pickaplan.action">Find a <strong>plan</strong>&nbsp;|&nbsp;Pick/customize a <strong>portfolio</strong>&nbsp;|&nbsp;Study & Follow</a>
+	        	</div>
+	    	</form>
+</div>
+</div>
+<div class="landingbody">
+	<p align="center">Thank you for registration. Here are some helpful hints:</p>
+	<div id="landing_helpful">
+				<ul>
+				<li><span align="left">Browse the following topics to become familiar with what we offer.<br><br></span></li>
+				<li><span align="left">Follow/customize a portfolio: search for a plan or click on <a href="http://www.myplaniq.com/LTISystem/getstarted_pickaplan.action">Get Started Now</a></br><br></span></li>
+				<li><span align="left">Can't find a plan? try an ETF plan usable in any brokerage on <a href="http://www.myplaniq.com/LTISystem/f401k__ira_brokerage_intro.action">Brokerage Investment Plans</a> page. </br><br></span></li>
+				</ul>
+<!--- You can browse the following to get yourself familiar. </br><br>
+Once you logon, search for a plan in the search box or click on <a href="http://www.myplaniq.com/LTISystem/getstarted_pickaplan.action">Get Started Now</a> to build a model portfolio. </br><br>
+If you can't find a plan, try an ETF plan on <a href="http://www.myplaniq.com/LTISystem/f401k__ira_brokerage_intro.action">Brokerage Investment Plans</a> page. It can be used in any brokerage</br>
+--->
+	</div>
+</div>
+<div id="killzone">
+		<div class="slideArea" id="slideArea">
+			<div id="slide_3">
+				<div class="sld_title">The Only Application That Understands My IRA/401K Plans</div>
+				<div class="slideContents">
+					<div class="slideAcross"></div>
+					<div class="slideLeft width_270">
+						<!-- <p class="slide_displaytext margin_top_20">Plan Ratings and Rollover Assistance</p> -->
+                                                <p class="slide_displaytext margin_top_20">PlanRatingIQ </p>
+						<div class="horiz_divider_fade"></div>
+						<p class="slide_bullet_Item margin_bottom_5"><a href="/LTISystem/f401k_showplanscorelist.action">Rate My Plan's Investment Choices </a></p>
+						<!-- <p class="slide_displaytext_sml margin_bottom_5 margin_top_15">Help me roll over:</p> -->
+                                                <p class="slide_displaytext margin_bottom_5 margin_top_15">PlanRolloverIQ</p>
+
+						
+						<ul class="slide_bullet_ul">
+							<li class="slide_bullet_Item margin_bottom_5"><a href="/LTISystem/f401k_planrollover.action">From 401K to Another 401K/IRA</a></li>
+							<li class="slide_bullet_Item"><a href="/LTISystem/f401k_planrollover.action">From (IRA) Brokerage to Another
+								(IRA) Brokerage</a></li>
+						</ul>
+	
+						<div class="horiz_divider_fade"></div>
+					</div>
+					<div class="slideRight width_370">
+						<div class="slide2_graph margin_top_20" ><img src="${lti.baseUrl}/jsp/template/ed/images/slide3_logos.gif" alt="" width="318" height="196" /></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="bgright_lx" style="background-color:#fff;height:100%;margin-top:8px;margin-right: 5px;" >
+           <a href='/LTISystem/getstarted_pickaplan.action'>
+                       <img src='/LTISystem/jsp/template/ed/images/getstartlx.gif' width="310" height="63" style="outset #09A059;margin-top:10px">
+                       </a>
+				 <div id="promoTitle_lx"><div style="width:240px">
+                 <a href="/LTISystem/f401k__landingmc.action"> Premium strategy may add 4-6% over benchmark
+ </a></div>
+                 </div>                  <div id="promoTitle_lx"  >
+                 <a href="/LTISystem/f401k__landingmd.action">Available for 401K, IRA, Brokerage…
+ </a>
+                 </div> 
+                 <div id="promoTitle_lx"  >
+                 <a href="/LTISystem/f401k__landingme.action">Benefits of registration
+ </a>
+                 </div> 
+                 <div id="promoTitle_lx"  >
+                 <a href="/LTISystem/f401k__landingmf.action">Articles and education
+ </a>
+                 </div>
+                 <div id="promoTitle_lx"  >
+                 <a href="/LTISystem/f401k__landingmg.action">Analysis Center
+ </a>
+                 </div> 
+                 <div id="promoTitle_lx"  >
+                 <a href="/LTISystem/f401k__landingma.action">Back
+
+ </a>
+                 </div> 
+		</div>
+		
+		
+		
+	</div>
+<div id="kz_tab_overflow">	
+	<div id="kz_tabs">
+		<a id="slide1_tab" class="tab tabBorderRight activeTab">What We Do</a>
+		<a id="slide2_tab" class="tab tabBorderRight">Better Performance</a>
+		<a id="slide3_tab" class="tab tabBorderRight">Plan Rating &amp; Rollover</a>
+		<a id="slide5_tab" class="tab tabBorderRight" href="/LTISystem/f401k__landingma.action" style="text-decoration: none;">Site Overview</a>
+		<a id="slide4_tab" class="tab">Learn More</a>
+		<div class="clear"></div>
+	</div>
+</div>
+	<!-- CONTENT -->
+	
+
+<style>
+	#menu2{
+		margin:0 auto;
+	}
+		#menu2 ul{
+			list-style:none;
+		}
+			#menu2 li{
+				list-style:none;
+				display:block;
+				float:left;
+				line-height:51px;
+				border:solid #39A673;
+				border-width:0 2px 0 2px;				
+				background:url(/LTISystem/jsp/images/menu_005_bg.jpg) repeat-x;
+				height:51px;
+				margin:3px 1px 0 0;		
+										
+			}
+				#menu2 li a{
+					display:block;
+					float:left;
+					//color:#D3FF6C;
+                                        color:#FFFFFF;
+	
+					font-size:16px;
+					font-weight:bold;
+					text-decoration:none;
+					padding:0 25px;
+					height:51px;	
+					width:300px;				
+				}
+					#menu2 li a:hover{
+						color:#fff;
+						background:url(/LTISystem/jsp/images/menu_005_h.jpg) repeat-x;
+					}
+				#menu2 li a.current{
+					display:block;
+					float:left;
+					background:url(/LTISystem/jsp/images/menu_005_h.jpg) repeat-x;					
+					color:#fff;
+
+					font-size:11px;
+					font-weight:bold;
+					text-decoration:none;
+					padding:0 25px;	
+				}
+					#menu2 li a:hover.current{
+						color:#fff;
+					}
+
+
+
+</style>
+
+<div id="storage" style="display:none">
+	<div id="slide_1">
+		<div class="slideContents">
+			<div class="slideAcross">
+				<div id="getModelPortfolios">
+					<div class="floatleft margin_top_2"><strong>Get Asset Allocation Model Portfolios for My Plan</strong></div>
+					<div id="portfolioSearchbox">
+						<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+		            	    	<input name="groupIDS" value="8" type="hidden"></input>
+		            	        <input name="includeHeader" value="true" type="hidden"></input>
+		            	        <input name="type" value="2" type="hidden"></input>
+		            	        <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+		            	        <input id="n401k_plansearch_text" name="keyword" 
+		            	        onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)this.value="Hewlett Packard"' size="15" type="text" value='${Parameters.keyword!"Enter Keywords"}'
+								size="15" type="text">
+		            	        <input alt='Quote' class="submitSearchTop" type='submit' value=''/>
+		            	 </form>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="slideLeft">
+<table border=0>
+					<tr><td>
+				 <div id="menu2">
+					  <a href="http://www.myplaniq.com/LTISystem/jsp/strategy/View.action?ID=771"><img src="${lti.baseUrl}/jsp/template/ed/images/lxb.png" width="322" height="250"></img></a>
+						[#--
+								<p class="box1">Brokerage (IRA) ETF/Mutual Fund Plans</p>
+				                 <p class="box1">Retirement 401K, 403B, 457</p>
+				                 <p class="box1">Annuities, Variable Life Insurance</p>
+				                 <p class="box1">College Savings 529</p>
+				
+								<p class="box1"><i>Easy to Use, Free or Low Cost</i> 
+								<p class="slide_bullet_Item">�?Rebalance emails and brokerage linking</p>
+								</p>
+						--]
+				</div>
+</td>
+				
+				</tr>
+				</table>
+			</div>
+			<div class="piechart_lx2"><h1 style="line-height: 1.1em;">Standard (Strategic Asset Allocation)  may add 1-2%
+			</h1><br><p style="font:15px Arial;"><a href="/LTISystem/jsp/strategy/View.action?ID=771">Strategic asset allocation</a> diversifies your investment to reduce risk and increase returns. Strategic Asset Allocation doesn’t eliminate downside (2007/2008) but allows the investor to capture upside during a recovery. Simulated returns of a <a href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=31644&follow=true">simple diversified portfolio</a> using SAA against two benchmarks shows it consistently winning by 1% or more.
+					
+                                
+				<!--                                <p class="slide_displaytext">Smart Asset Allocation for higher returns<br />
+                                  and lower risk</p>
+                                <p class="slide_bullet_Item">�?Up to 8% annual returns improvement</p>
+                                <div class="horiz_divider_fade">
+                                  <p>&nbsp;</p>
+                                </div>
+-->
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div id="slide_2">
+		<div class="sld_title">Time Proven Investment Strategies Customized to My Plans</div>
+		<div class="slideContents">
+			<div class="slideAcross"></div>
+			<div class="slideLeft width_260">
+			
+				<a href="/LTISystem/jsp/strategy/View.action?ID=1003"><p class="slide_displaytext color7BB406 margin_top_20">Tactical Asset Allocation (TAA)</p></a>
+				<p class="slide_displaytext_sml color7BB406">�?Dynamically allocates assets</p>
+			
+				<div class="horiz_divider_fade height_15"></div>
+				
+				<a href="/LTISystem/jsp/strategy/View.action?ID=771"><p class="slide_displaytext colorE79115 ">Strategic Asset Allocation (SAA)</p></a>
+				<p class="slide_displaytext_sml colorE79115">�?Buy and Hold with preset risk profile</p>
+				
+				<div class="horiz_divider_fade height_20	"></div>
+				<p class="slide_displaytext_sml">Smart Asset Allocation Strategies</p>
+				
+				<ul class="slide_bullet_ul">
+				<li class="slide_bullet_Item margin_bottom_5"> Diversification - stocks,bonds,real
+					estate, commodities</li>
+				<li class="slide_bullet_Item margin_bottom_5">TAA avoids
+					big losses -- adds 4-6% annual return</li>
+				<li class="slide_bullet_Item">Good fund selection -- adds 1-2% annual return</li>
+				</ul>
+				
+				
+			</div>
+			<div class="slideRight width_370">
+				<div class="slide2_graph margin_top_20" > <img src="${lti.baseUrl}/jsp/template/ed/images/slide2_graph.gif" alt="" width="369" height="211" /></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<div style="display:none">
+	<div id="flashwindow">
+		<div id="flashdiv"></div>
+	</div>
+</div>
+<!-- Start Quantcast tag -->
+<script type="text/javascript">
+_qoptions={
+qacct:"p-1eBO57wiwyzVw"
+};
+</script>
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+<noscript>
+<img src="http://pixel.quantserve.com/pixel/p-1eBO57wiwyzVw.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+<!-- End Quantcast tag -->
+</body>
+</html>
+
+

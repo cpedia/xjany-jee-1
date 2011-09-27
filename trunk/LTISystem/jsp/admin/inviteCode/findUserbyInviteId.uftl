@@ -1,0 +1,76 @@
+[#ftl]
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="/LTISystem/jsp/admin/images/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../images/jquery-1.2.6.min.js"></script>
+<title>InviteCodeView</title>
+</head>
+<body>
+<script>
+var i=0;
+function showAllUser(){
+	if(i==0){
+		$(".alluser").fadeIn("slow"); 
+		$(".button").text("hide");
+		i=1;
+	}else {
+		$(".alluser").hide("slow");
+		$(".button").text("Click here show all user in this invite");
+		i=0;
+		}
+}
+</script>
+<a href="/LTISystem/jsp/register/addInviteCode.action?includeHeader=false">+Add InviteCode</a><br><br>
+<style>
+.trHeader {
+    background-color: #93CC6B;
+    color: #DCDCDC;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 22px;
+}
+</style>
+<div onclick="showAllUser()" class="button" style="cursor:pointer;background-color:#93CC6B;text-align:center">Click here show all user in this invite</div>
+<div class="alluser" style="display:none">
+<table width="100%" border="0">
+	[#if listUser?size=0]
+  <div style="text-align:center"><font color="#FF0000">0 user</font></div>
+  [#else]
+  <tr class="trHeader">
+    <th width="1%" scope="col">UserID</th>
+    <th width="3%" scope="col">UserName</th>
+    <th width="5%" scope="col">EMail</th>
+    <>
+  </tr>
+  [#list listUser as a]
+  <tr>
+    <td align="center">${a.ID}</td>
+    <td align="center">${a.userName}</td>
+    <td align="center">${a.EMail}</td>
+  </tr>
+  [/#list]
+  [/#if]
+</table>
+</div>
+<br><br><br><br>
+<div>There are <font color="#FF0000">${countPay}</font> user subscribe in this invitecode</div><br><br>
+
+<table width="100%" border="0">
+  <tr class="trHeader">
+    <th width="1%" scope="col">TransactionID</th>
+    <th width="3%" scope="col">RealName</th>
+    <th width="5%" scope="col">ItemName</th>
+    <>
+  </tr>
+  [#list utlist as a]
+  <tr>
+    <td align="center">${a.ID}</td>
+    <td align="center">${a.addressName}</td>
+    <td align="center">${a.itemName}</td>
+  </tr>
+  [/#list]
+</table>
+</body>
+</html>

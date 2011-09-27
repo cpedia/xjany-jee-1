@@ -1,0 +1,87 @@
+/* 表格 */
+table.ltitable caption{
+	text-align:center;
+	font-size:12pt;
+	font-weight:bold;
+}
+table.ltitable {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:1px 0pt 2px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+	border-collapse :  collapse;
+}
+table.ltitable thead tr th, table.ltitable tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #C1DAD7;
+	font-size: 8pt;
+	padding: 2px;
+}
+table.ltitable thead tr .header {
+	background-image: url(http://www.myplaniq.com/LTISystem/jsp/api/images/bg.png);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.ltitable tbody td {
+	color: #3D3D3D;
+	background-color: #FFF;
+	vertical-align: top;
+	padding: 2px;
+}
+
+table.ltitable tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+table.ltitable thead tr .headerSortUp {
+	background-image: url(http://www.myplaniq.com/LTISystem/jsp/api/images/asc.gif);
+}
+table.ltitable thead tr .headerSortDown {
+	background-image: url(http://www.myplaniq.com/LTISystem/jsp/api/images/desc.gif);
+}
+table.ltitable thead tr .headerSortDown, table.ltitable thead tr .headerSortUp {
+background-color: #8dbdd8;
+}
+
+
+
+
+
+table.ltitable tbody td {
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+	border: 1px solid #C1DAD7;
+}
+
+
+div.tablesorterPager {
+	padding: 10px 0 10px 0;
+	text-align: center;
+}
+div.tablesorterPager span {
+	padding: 0 5px 0 5px;
+}
+div.tablesorterPager input.prev {
+	width: auto;
+	margin-right: 10px;
+}
+div.tablesorterPager input.next {
+	width: auto;
+	margin-left: 10px;
+}
+div.tablesorterPager input {
+	font-size: 8pt;
+	width: 50px;
+	border: 1px solid #330000;
+	text-align: center;
+}
+
+
+
+
+.powerMessage{
+	font-size:70%;
+}

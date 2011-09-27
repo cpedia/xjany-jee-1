@@ -1,0 +1,301 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+
+<p>Retirement investing is a long term process. This report reviews <a rel="nofollow"href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=${plan.ID}">${plan.name} </a> plan. We will discuss the investment choices and present the plan rating by MyPlanIQ.
+ Current economic and market conditions are discussed in the context of the investment portfolios in the plan. We will then show how investors in 
+ <a rel="nofollow"href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=${plan.ID}">${plan.name} </a> can achieve reasonable investment results using asset allocation strategies. </p>
+
+<p><h2>Plan Review and Rating</h2></p>
+
+<p>${plan.description}</p>
+<p>${plan.name}'s 401K plan consists of[#if candidateFunds??] ${candidateFunds?size} [/#if]funds. 
+   These funds enable participants to gain exposure to [#if planMajorAssets??]${planMajorAssets?size}[/#if] major assets: 
+   [#if planMajorAssets??]
+     [#list planMajorAssets?keys as key]
+     [#if key?contains("us")]
+         [#if key_index < planMajorAssets?size-1]${key?replace("us equity","US Equity")},[#else]${key?replace("us equity","US Equity")}.[/#if]
+     [#elseif key?contains("reits")]
+           [#if key_index < planMajorAssets?size-1]${key?replace("reits","REITs")},[#else]${key?replace("reits","REITs")}.[/#if]
+     [#else]
+        [#if key_index < planMajorAssets?size-1]${key?capitalize},[#else]${key?capitalize}.[/#if]
+     [/#if]
+[#--       [#if key_index < planMajorAssets?size-1],[/#if]
+#--]
+     [/#list]
+   [/#if]
+
+ 
+ [#macro rankingmessage scorenum]
+  [#assign score=scorenum*100]
+      [#if score == 0]
+	    unrated
+      [#elseif score<10]
+	    poor
+	[#elseif score<35]
+		below average
+	[#elseif score< 65]
+		average
+	[#elseif score< 85]
+		above average
+	[#else]
+		great
+	[/#if]
+	[/#macro]
+	
+<p>
+  As of [#if portfolio??]${portfolio.endDate?date}[/#if], 
+  this plan investment choice is rated as 
+  [#if planScore??]<strong>[@rankingmessage planScore.investmentScore /]</strong>[/#if] 
+  based on MyPlanIQ <a rel="nofollow" href="http://www.myplaniq.com/LTISystem/f401k_showplanscorelist.action">Plan Rating methodology </a> that measures the effectiveness of a plan's available investment funds. It has the following detailed ratings:
+</p>
+<p><span style="font-size: small;"><strong>Diversification</strong> -- Rated as [#if planScore??]<strong>[@rankingmessage planScore.coverageScore /](${planScore.coverageScore?string.percent})</strong>[/#if]</span> <br />
+   <span style="font-size: small;"><strong>Fund Quality</strong> -- Rated as[#if planScore??] <strong>[@rankingmessage planScore.fundQualityScore /](${planScore.fundQualityScore?string.percent})</strong>[/#if]</span> <br />
+   <span style="font-size: small;"><strong>Portfolio Building</strong> -- Rated as [#if planScore??]<strong>[@rankingmessage planScore.capabilityScore /](${planScore.capabilityScore?string.percent})</strong>[/#if]</span> <br />
+   <span style="font-size: small;"><strong>Overall Rating: [#if planScore??][@rankingmessage planScore.investmentScore /](${planScore.investmentScore?string.percent})[/#if]</strong></span></p>
+
+<p><h2>Current Economic and Market Conditions</h2></p>
+<p>The first week of June has shown the continuously weakened stock markets reacted to a stream of bad economic news: the 9.1% unemployment rate, the disappointing ISM manufacturing survey and the double dip housing prices. Major risk asset prices were divergent, with U.S. stocks showing the major weakness. Fixed income markets continued to be strong.&nbsp;</p>
+<ul>
+<li>Among risk assets, commodities (DBC) (GLD) and international and U.S. REITs (RWX) (IYR) are still ranked at the top.&nbsp;</li>
+<li>Emerging market and developed market stocks (VWO) (EFA) actually edged out some gain.&nbsp;</li>
+<li>International treasury bond (BWX) is now ranked higher than both international and U.S. stocks now.&nbsp;</li>
+</ul>
+<p>Fundamentally, we believe major problems that caused the financial crisis have not been fixed. We are in a long period of re-adjustment. For a long term or retirement investor, it is thus important to adjust portfolios accordingly.</p>
+<table border="0" cellspacing="10">
+<tbody>
+<tr>
+<th align="left"><strong>Assets Class</strong></th> <th><strong>Symbols</strong></th> <th><strong>05/27<br />Trend<br /> Score</strong></th> <th><strong>05/20<br />Trend<br /> Score</strong></th> <th><strong>Direction</strong></th>
+</tr>
+<tr>
+<td>International REITs</td>
+<td>RWX</td>
+<td>11.77%</td>
+<td>10.82%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>Commodities</td>
+<td>DBC</td>
+<td>10.84%</td>
+<td>10.32%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>US Equity REITs</td>
+<td>VNQ</td>
+<td>10.77%</td>
+<td>10.41%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>Gold</td>
+<td>GLD</td>
+<td>9.42%</td>
+<td>10.06%</td>
+<td>v</td>
+</tr>
+<tr>
+<td>Emerging Market Stks</td>
+<td>VWO</td>
+<td>8.56%</td>
+<td>6.72%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>US Stocks</td>
+<td>VTI</td>
+<td>8.29%</td>
+<td>8.23%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>International Developed Stks</td>
+<td>EFA</td>
+<td>6.77%</td>
+<td>5.23%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>US High Yield Bonds</td>
+<td>JNK</td>
+<td>6.37%</td>
+<td>6.37%</td>
+<td>v</td>
+</tr>
+<tr>
+<td>International Treasury Bonds</td>
+<td>BWX</td>
+<td>5.96%</td>
+<td>4.66%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>Frontier Market Stks</td>
+<td>FRN</td>
+<td>4.05%</td>
+<td>4.27%</td>
+<td>v</td>
+</tr>
+<tr>
+<td>Emerging Mkt Bonds</td>
+<td>PCY</td>
+<td>3.57%</td>
+<td>4.27%</td>
+<td>v</td>
+</tr>
+<tr>
+<td>Intermediate Treasuries</td>
+<td>IEF</td>
+<td>2.71%</td>
+<td>2.39%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>US Credit Bonds</td>
+<td>CFT</td>
+<td>2.5%</td>
+<td>2.81%</td>
+<td>v</td>
+</tr>
+<tr>
+<td>Municipal Bonds</td>
+<td>MUB</td>
+<td>2.13%</td>
+<td>2.0%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>Total US Bonds</td>
+<td>BND</td>
+<td>1.99%</td>
+<td>1.92%</td>
+<td>^</td>
+</tr>
+<tr>
+<td>Mortgage Back Bonds</td>
+<td>MBB</td>
+<td>1.75%</td>
+<td>1.8%</td>
+<td>v</td>
+</tr>
+<tr>
+<td>Treasury Bills</td>
+<td>SHV</td>
+<td>0.07%</td>
+<td>0.02%</td>
+<td>^ &nbsp; &nbsp;&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+
+<p><h2>Portfolio Discussions</h2></p>
+<p>The chart and table below show the historical performance of moderate model portfolios employing strategic and tactical asset allocation strategies. For comparison purpose, we also include the moderate model portfolios of a typical [#if comparePlanMajorAssets??]${comparePlanMajorAssets?size}[/#if] asset <a rel="nofollow" href="http://www.myplaniq.com/LTISystem/f401k_view.action?ID=[#if sibPlan??]${sibPlan.ID}[/#if]">SIB (Simpler Is Better) plan </a>. 
+This SIB plan has the following candidate index funds and their ETFs equivalent:</p>
+<p>
+   [#if comparePlanMajorAssets??]
+     [#list  comparePlanMajorAssets?keys as key][#if key?contains("us")]${key?replace("us equity","US Equity")}[#elseif key?contains("reits")]${key?replace("reits","REITs")}[#else]${key?capitalize}[/#if]: [#list comparePlanMajorAssets[key] as etflists]${etflists}[#if etflists_index <  comparePlanMajorAssets[key]?size-1] or [/#if][/#list] 
+          <br>
+     [/#list]
+   [/#if]
+<br>
+Performance chart (as of  [#if portfolio??]${portfolio.endDate?date}[/#if])</p>
+<p>
+  [#assign portfolioids = ""  /]
+  	[#if portfolios??]
+  		[#list portfolios as pp]
+  			[#assign portfolioids=portfolioids+"${pp.ID?string.computer}"/]
+  			[#if pp_index < portfolios?size-1]
+  			[#assign portfolioids=portfolioids+","]	
+  			[/#if]
+  		[/#list]
+  	[/#if]
+
+  	
+  <a rel="lightbox" href="/LTISystem/article_viewchart.action?portfolioID=[#if portfolioids??]${portfolioids}[/#if][#if compareID??]&compareID=${compareID}[/#if]">
+  <img src="/LTISystem/article_viewchart.action?portfolioID=[#if portfolioids??]${portfolioids}[/#if][#if compareID??]&compareID=${compareID}[/#if]" alt="" hspace="6" vspace="6" /> </a>
+</p>
+<p>Performance table (as of  [#if portfolio??]${portfolio.endDate?date}[/#if])</p>
+
+[#if performanceItems??]
+	<div id="show_Port_div" style="display:block">
+	<table id="comparetablePort" class="tablesorter" style="width: 100%;" border="0" cellspacing="1" cellpadding="0">
+	<thead>
+	<tr>
+	<th class="header" width="40%">Portfolio Name</th><th class="header" width="10%">1Yr AR</th><th class="header" width="10%">1Yr Sharpe</th><th class="header" width="10%">3Yr AR</th><th class="header" width="10%">3Yr Sharpe</th><th class="header" width="10%">5Yr AR </th><th class="header" width="10%">5Yr Sharpe</th>
+	</tr>
+	</thead>
+	<tbody>
+	[#list performanceItems as item]
+	<tr>
+
+	<td><a href="http://www.myplaniq.com/LTISystem/jsp/portfolio/ViewPortfolio.action?ID=${item.portfolioID}"> ${item.portfolioName}</a></td>
+	<td>[#if item.AR1??]${item.AR1?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio1??]${item.sharpeRatio1?string.percent}[/#if]</td>
+	<td>[#if item.AR3??]${item.AR3?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio3??]${item.sharpeRatio3?string.percent}[/#if]</td>
+	<td>[#if item.AR5??]${item.AR5?string.percent}[/#if]</td>
+	<td>[#if item.sharpeRatio5??]${item.sharpeRatio5?string.percent}[/#if]</td>
+	</tr>
+	[/#list]
+	</tbody>
+	</table>
+	</div>
+[/#if]
+
+<p>
+Currently  
+[#if topMajorAssets??]
+  [#list topMajorAssets as major]
+   [#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index == topMajorAssets?size-2] 
+        and [/#if][#if major_index < topMajorAssets?size-2], [/#if]  
+  [/#list]
+[/#if]
+  are doing well.
+    [#if planTopMajorAssets??&&planTopMajorAssets?size==1]
+       Only 
+      [#list planTopMajorAssets as major]
+          [#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index == planTopMajorAssets?size-2] 
+            and [/#if][#if major_index < planTopMajorAssets?size-2], [/#if]   
+      [/#list]
+         is
+  [#elseif planTopMajorAssets??&&planTopMajorAssets?size==3]
+       These asset classes are
+  [#elseif planTopMajorAssets??&&planTopMajorAssets?size==2]
+     [#list planTopMajorAssets as major]
+         [#if major?contains("us")]${major?replace("us equity","US Equity")}[#elseif major?contains("reits")]${major?replace("reits","REITs")}[#else]${major?capitalize}[/#if][#if major_index == planTopMajorAssets?size-2] 
+         and [/#if][#if major_index < planTopMajorAssets?size-2], [/#if]   
+     [/#list]
+  [#else]
+   But these asset classes are not
+[/#if]
+  available to ${plan.name} participants.
+  
+<!--Currently, asset classes in 
+[#if portfolioMajorAssets?? ]
+    [#list portfolioMajorAssets?keys as key]
+        [#if key?contains("us")]
+         ${key?replace("us equity","US Equity")}
+         [#elseif key?contains("reits")]
+           ${key?replace("reits","REITs")}
+           [#else]
+        ${key?capitalize} 
+        [/#if]([#list portfolioMajorAssets[key] as etflists]${etflists}[#if etflists_index < portfolioMajorAssets[key]?size-1],[#else])[/#if][/#list][#if key_index ==portfolioMajorAssets?size-2] and [/#if][#if key_index < portfolioMajorAssets?size-2],[/#if]
+    [/#list] 
+[/#if]
+are doing relatively well. These asset classes are available to ${plan.name} participants.-->
+
+</p>
+
+<p>To summarize, investors adopting ${plan.name} plan can achieve reasonable investment returns by adopting asset allocation strategies that are tailored to their risk profiles. </p>
+
+<p>
+<strong>Symbols:</strong>[#if etfs??][#list etfs as etf]${etf}[#if etf_index < etfs?size-1], [/#if][/#list][/#if]
+<br><br>
+<strong>Exchange Tickers:</strong>
+ [#if etfs??][#list etfs as etf](${etf})[#if etf_index < etfs?size-1], [/#if]
+ [/#list]
+[/#if]
+</p>

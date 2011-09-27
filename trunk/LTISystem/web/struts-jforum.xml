@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.jforum" namespace="/jsp/jforum"
+	extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/jforum">
+			<result name="success">/jsp/jforum/main.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="getPost" class="/jsp/jforum/post">
+			<result name="success">/jsp/jforum/post.jsp</result>
+			<result name="false">/jsp/jforum/false.jsp</result>
+		</action>
+		<action name="*">
+		    <result>/{1}.jsp</result>
+		</action> 
+	</package>
+</struts>

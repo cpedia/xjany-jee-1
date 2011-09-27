@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping package="com.lti.service.bo">
+
+	<class
+		name="SecurityRanking"
+		table="ltisystem_securityranking"
+	>
+	
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+		
+		<property
+			name="Ranking"
+			column="RANKING"
+			type="java.lang.Integer"
+			not-null="false"
+		/>
+		
+		<property
+			name="Interval"
+			column="INTERVALDAY"
+			type="java.lang.Integer"
+			not-null="true"
+		/>
+		
+		<property
+			name="EndDate"
+			column="ENDDATE"
+			type="java.util.Date"
+			not-null="true"
+		/>
+		
+		<property
+			name="BetaGain"
+			column="BETAGAIN"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="AssetClassID"
+			column="ASSETCLASSID"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		
+		<property
+			name="Symbol"
+			column="SYMBOL"
+			type="java.lang.String"
+			not-null="true"
+		/>
+		
+		<property
+			name="SecurityID"
+			column="SECURITYID"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		
+		<property
+			name="SecondClassID"
+			column="SECONDCLASSID"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		</class>	
+</hibernate-mapping>

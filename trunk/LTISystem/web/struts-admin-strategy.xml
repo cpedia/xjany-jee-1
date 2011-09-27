@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.admin.strategy" namespace="/jsp/admin/strategy" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/strategy/Main">
+			<result name="success">/jsp/admin/strategy/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/strategy/Search">
+			<result name="success">/jsp/admin/strategy/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="SimilarIssues" class="/jsp/admin/strategy/SimilarIssues">
+			<result name="success">/jsp/admin/strategy/SimilarIssues.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="ConsumerPlans" class="com.lti.action.admin.strategy.ConsumerPlansAction">
+			<result name="success" type="freemarker">/jsp/admin/strategy/ConsumerPlans.ftl</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="AssignAdminPlanToUser" class="/jsp/admin/strategy/AssignAdminPlanToUser">
+			<result name="message" type="freemarker">/jsp/message.uftl</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+	
+	<package name="com.lti.action.admin.strategy.modelportfolio" namespace="/jsp/admin/strategy/modelportfolio" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/strategy/modelportfolio/Main">
+			<result name="success">/jsp/admin/strategy/modelportfolio/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+	</package>	
+	
+	<package name="com.lti.action.admin.strategy.user" namespace="/jsp/admin/strategy/user" extends="struts-default"> 
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="View" class="/jsp/admin/strategy/UserChange" method="view">
+			<result name="success">/jsp/admin/strategy/user/save.jsp</result>
+			<result name="error">/jsp/admin/strategy/user/save.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/strategy/UserChange" method="save">
+			<result name="success">/jsp/admin/strategy/user/save.jsp</result>
+			<result name="error">/jsp/admin/strategy/user/save.jsp</result>
+		</action>
+	</package>
+</struts>

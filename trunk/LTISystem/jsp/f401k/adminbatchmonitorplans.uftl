@@ -1,0 +1,16 @@
+[#ftl]
+
+<script>
+$(function () {
+			var timestamp=(new Date()).getTime();
+			var ip=document.location.hostname;
+			var port=document.location.port;
+			if(port=="")port='80';
+			
+			var execFrame=document.getElementById("execFrame"); 
+			//execFrame.src='http://'+ip+':8081/MultipleExecute?forceExecuting=true&executePlans=true&planIDs=${Parameters.planIDs}';
+			//here portfolioUpdate = 1 means force monitor
+			execFrame.src='http://'+ip+':8081/Dailystart?mode=1&forceMonitor=true&ids=${Parameters.planIDs}';
+});
+</script>
+<iframe src='' id='execFrame'></iframe>

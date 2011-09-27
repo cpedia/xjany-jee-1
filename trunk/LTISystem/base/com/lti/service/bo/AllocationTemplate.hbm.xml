@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+<class
+		name="AllocationTemplate"
+		table="ltisystem_allocationtemplate"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+		<property
+			name="TemplateName"
+			column="TEMPLATENAME"
+			type="java.lang.String"
+			not-null="true"
+		/>
+		<property 
+		 	name="AssetClassName"
+		 	column="ASSETCLASSNAME"
+		 	type="java.lang.String"
+		    not-null="true"
+		/>
+		<property 
+		 	name="AssetClassWeight"
+		 	column="ASSETCLASSWEIGHT"
+		 	type="java.lang.String"
+		    not-null="true"
+		/>
+		<property 
+		    name="Description"
+		    column="DESCRIPTION"
+		    type="java.lang.String"
+		    not-null="true"
+		/>
+	</class>	
+</hibernate-mapping>
+		

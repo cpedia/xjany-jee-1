@@ -1,0 +1,121 @@
+[#ftl] [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]] [#assign authz=JspTaglibs["/WEB-INF/authz.tld"]] [#import "/jsp/lti_library_ftl.jsp" as lti] [#assign pageTitle="ValidFi Mutual Funds, ETFs and Close End Funds"]    ValidFi Mutual Funds, ETFs and Close End Funds
+<div id="wrap" style="min-height: 910px; height: 910px; width: 910px;">
+<div id="content-wrap">
+<div id="content" style="width: 910px;">
+<p>&nbsp;</p>
+<h1><span class="green">ValidFi<sup style="color:red"><em>Beta</em></sup>:</span> Mutual Funds, ETFs, Closed End Funds Research</h1>
+<div class="clear">&nbsp;&nbsp;&nbsp;</div>
+<div id="main">
+<div class="bl">
+<div class="br">
+<div class="tl">
+<div class="tr">
+<div class="prop" style="height: 450px;"><!---  <img align="left" src="/LTISystem/UserFiles/Image/strategies.GIF" mce_src="../../../UserFiles/Image/strategies.GIF" alt="strategies">--->
+<h1><span>Fund Analysis</span></h1>
+<hr />
+<ul>
+<li>Study the total return (with dividend and distribution reinvested) and other factors (such as standard deviation, alpha etc.) for any period of time. </li>
+<li>Compare performance with other funds or even a portfolio.</li>
+<li>Analyze funds' exposure to stocks, bonds and other asset classes. </li>
+</ul>
+<form action="/LTISystem/jsp/security/Quote.action"> <input id="quote-search-field" name="symbol" type="text" /> <input type="submit" value="Fund Analysis" /> </form></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="rightbar" style="margin-right: 1em">
+<div class="bl">
+<div class="br">
+<div class="tl">
+<div class="tr">
+<div class="prop" style="height: 450px;"><a href="../ajax/CustomizePage.action?pageName=GuruAllocation&amp;includeHeader=true" target="_top">
+<h1>Guru Market Exposure Watch</h1>
+</a> 
+<hr />
+<p>Studies have shown asset allocation is the most important determinant factor in a mutual fund's performance. This is especially true during the tumultuous 2008. With <a href="../ajax/CustomizePage.action?pageName=GuruAllocation&amp;includeHeader=true" target="_top">ValidFi's Guru Asset Allocation services</a>, you</p>
+<ul>
+<li>Gain insights into great asset allocators' timely moves in stocks, bonds and other asset exposures. </li>
+<li>Monitor recent asset exposures of Gurus like Hussman Growth fund's John Hussman, GMO's Jeremy Grantham, Steve Leuthold, Ivy Asset Management, PIMCO's (Research Affiliated) Rob Arnott, etc. or even CGM's Ken Heebner's stock sector rotation. </li>
+<li>Follow ValidFi's <a href="../strategy/View.action?ID=544&amp;action=view" target="_top">Guru Asset Allocation Clone</a> strategy.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="content" style="width: 910px;">
+<p>&nbsp;</p>
+<h2><a href="../security/ScreeningMain.action" target="_top">Mutual Funds, Closed End Funds, ETFs and Portfolios Screener</a></h2>
+<hr />
+<p>&nbsp;</p>
+<div id="main" style="width: 46%;">
+<div class="bl">
+<div class="br">
+<div class="tl">
+<div class="tr">
+<div class="prop">
+<h2 style="padding:0;margin:5px 5px 5px 0">Top 10 Small Cap Value Funds</h2>
+<br class="clear" /> [@s.action name="SecurityTable" namespace="/jsp/fundcenter" executeResult=true] 									[@s.param name="chosenMPT"]1-sharpeRatio,1-AR[/@s.param] 									[@s.param name="sort"]1-sharpeRatio[/@s.param] 									[@s.param name="securityType"]MUTUAL FUND[/@s.param] 									[@s.param name="size"]10[/@s.param] 									[@s.param name="assetClass"]Small Value[/@s.param] 									[/@s.action]</div>
+</div>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+</div>
+<div id="rightbar" style="width: 46%; margin-right: 1em;">
+<div class="bl">
+<div class="br">
+<div class="tl">
+<div class="tr">
+<div class="prop">
+<h2 style="padding:0;margin:5px 5px 5px 0">Top 10 Multisector Bond Funds</h2>
+<br class="clear" /> [@s.action name="SecurityTable" namespace="/jsp/fundcenter" executeResult=true] 								[@s.param name="chosenMPT"]1-sharpeRatio,1-AR[/@s.param] 								[@s.param name="sort"]1-AR[/@s.param] 								[@s.param name="securityType"]MUTUAL FUND[/@s.param] 								[@s.param name="size"]10[/@s.param] 								[@s.param name="assetClass"]Multisector Bond[/@s.param] 								[/@s.action]</div>
+</div>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+</div>
+</div>
+[@authz.authorize ifAnyGranted="ROLE_SUPERVISOR"]
+<div id="content" style=" width:910px;">
+<p>&nbsp;</p>
+<h2>Validfi funds Beta Gain Ranking</h2>
+<hr />
+<p>&nbsp;</p>
+<form action="/LTISystem/jsp/betagainranking/GetRankingByAssetClass.action"> <input id="assetClassName" name="name" type="text" value="US EQUITY" /> <input id="assetClassID" name="assetClassID" type="text" value="8" /> <input type="submit" value="Asset Class Ranking" /> </form>
+<p>&nbsp;</p>
+<div id="main" style="width: 48%;">
+<div class="bl">
+<div class="br">
+<div class="tl">
+<div class="tr">
+<div class="prop">
+<h3 style="padding:0;margin:5px 5px 5px 0">Top 20 MODERATE ALLOCATION Funds</h3>
+<br class="clear" /> [@s.action name="SecurityRankingTable" namespace="/jsp/betagainranking" executeResult=true] 									[@s.param name="name"]MODERATE ALLOCATION[/@s.param] 									[@s.param name="size"]20[/@s.param] 									[/@s.action]</div>
+</div>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div id="rightbar" style="margin-right: 1em">
+<div class="bl">
+<div class="br">
+<div class="tl">
+<div class="tr">
+<div class="prop">
+<h3 style="padding:0;margin:5px 5px 5px 0">Top 20 INTERNATIONAL EQUITY Funds</h3>
+<br class="clear" /> [@s.action name="SecurityRankingTable" namespace="/jsp/betagainranking" executeResult=true] 								[@s.param name="name"]INTERNATIONAL EQUITY[/@s.param] 								[@s.param name="size"]20[/@s.param] 								[/@s.action]</div>
+</div>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+</div>
+[/@authz.authorize]</div>
+</div>

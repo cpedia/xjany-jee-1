@@ -1,0 +1,202 @@
+[#ftl] [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]] [#import
+"/jsp/lti_library_ftl.jsp" as lti]
+[#import "/jsp/mp_left_div.ftl" as left]
+<html>
+<head>
+<title>MyPlanIQ Articles on ${symbol}</title>
+<meta name="Blogs" content="n401k_current" />
+<meta name="jqueryui" content="smoothness">
+<meta name="verify-v1"
+	content="5p50UotfJnmCe0OpO/3NS0IcIE4Wi/ktqd6+Z/th2+Y=" />
+<script>
+	$(document).ready(function() {
+		$('li').addClass('liStyle');
+	});
+	$(function() {
+		$("#tabs").tabs();
+	});
+</script>
+<style>
+li.liStyle {
+	margin-left: 0px;
+	list-style-type: none;
+}
+
+#creditfooter {
+	display: none;
+}
+
+.feedTitle {
+	padding-left: 350px;
+	font-size: 20pt;
+	padding-bottom: 8px;
+	margin-bottom: 8px;
+}
+
+.feedTitle a {
+	text-decoration: none;
+}
+
+.headline a {
+	text-decoration: none;
+}
+
+.date {
+	font-size: 13px;
+	border-top-width: 1px;
+	border-top-style: dotted;
+	border-top-color: #8bac76;
+}
+
+.headline {
+	font-size: 14pt;
+}
+
+.edit_area {
+	margin-bottom: 10px;
+}
+
+.liStyle {
+	margin-top: 10px;
+}
+
+span {
+	color: #000000;
+}
+</style>
+</head>
+<body>
+	<div id="mpleft" style="float:left;width:250px;">
+				<div style="width:250px; margin-right:9px;">
+								<!--leftfirst-->
+								[@left.TopPlans /]
+								<script type="text/javascript"><!--
+								google_ad_client = "ca-pub-9404629437169860";
+								/* PlanPort_SmallSquare */
+								google_ad_slot = "8527794289";
+								google_ad_width = 200;
+								google_ad_height = 200;
+								//-->
+								</script>
+								<script type="text/javascript"
+								src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+								</script>
+								[@s.action  name="f401k_allblog" namespace="/" executeResult=true]
+									[@s.param  name="formusCategories"]Retirement Investing News and Articles[/@s.param]
+									[@s.param  name="setPageSize"]3[/@s.param]
+									[@s.param  name="isMain"]false[/@s.param]
+									[@s.param  name="isprePage"]true[/@s.param]
+								[/@s.action]
+								<script type="text/javascript"><!--
+google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_SmallSquare */
+google_ad_slot = "8527794289";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>  
+								
+								[@s.action  name="f401k_allblog" namespace="/" executeResult=true]
+									[@s.param  name="formusCategories"]News and Commentaries[/@s.param]
+									[@s.param  name="setPageSize"]20[/@s.param]
+									[@s.param  name="isMain"]false[/@s.param]
+									[@s.param  name="isprePage"]true[/@s.param]
+								[/@s.action]
+								<script type="text/javascript"><!--
+google_ad_client = "ca-pub-9404629437169860";
+/* PlanPort_Left_Skycraper */
+google_ad_slot = "7605014472";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+								
+								
+								<!--firstend-->
+				</div>		   
+			</div>
+			<!--mpleft end-->
+			<!--mpcenter-->
+			<div id="mpcenterright" style="margin- left:5px;float:left;width:651px;">
+				<div style="width:655px; margin-right:0;float:left;word- wrap:break-word" id="news">
+					<!-- content -->
+					[#if isSymbolList?? && isSymbolList==true] [#if symbols?? &&
+	symbols.items??] [#list symbols.items as var]
+	<div id="inner_li">
+		<a href="f401k_news.action?PID=${var.topicId?string.computer}">${var.title?string}</a>
+	</div>
+	[/#list] [/#if] [#else]
+	<h1 align="center" class="feedTitle">
+		<a href="f401k_symbols.action?symbol=${symbol}">Articles on
+			${symbol}</a>
+	</h1>
+	<div id="tabs">
+		<ul>
+			<li><a href="#tab1">News and Article</a>
+			</li>
+			<li><a href="#tab2">Regular Report</a>
+			</li>
+		</ul>
+		<div id="tab1">
+			<p>[#if symbols?? && symbols.items??]
+			<ul>
+				[#list symbols.items as var]
+				<li class="liStyle"><span class="headline"><a
+						href="f401k_news.action?PID=${var.topicId?string.computer}">${var.title?string}</a>
+				</span>
+					<p class="date">${var.time?string("MM/dd/yyyy")}</p> [#if
+					var.postText??] ${var.postText!''}
+					<p>
+						<a href="../jforum/posts/list/${var.topicId}.page">comments(${var.topicReplies?string.computer})</a>&nbsp;
+						<a class="a2a_dd" href="http://www.addtoany.com/share_save"><img
+							src="http://static.addtoany.com/buttons/share_save_171_16.png"
+							width="171" height="16" border="0" alt="Share/Bookmark" />
+						</a>
+						<script type="text/javascript"
+							src="http://static.addtoany.com/menu/page.js"></script>
+					</p> [/#if]</li> [/#list]
+			</ul>
+			[/#if] [#assign var1= "${symbol}"] [@lti.pagination symbols
+			"f401k_symbols.action" var1][/@lti.pagination]
+			</p>
+		</div>
+		<div id="tab2">
+			<p>[#if articles??]
+			<ul>
+				[#list articles as article]
+				<li class="liStyle">[#if article_index == 0] <span
+					class="headline"><a
+						href="/LTISystem/article_view.action?articleTitle=${article.articleTitle}"
+						target="_blank">${article.articleTitle}</a>
+				</span>
+					<p class="date">${article.date?string("MM/dd/yyyy")}</p>
+					${article.content} [#else] <span class="headline"><a
+						href="/LTISystem/article_view.action?articleTitle=${article.articleTitle}"
+						target="_blank" class="headline">${article.articleTitle}</a>
+				</span>
+					<p class="date">${article.date?string("MM/dd/yyyy")}</p> [/#if]</li>
+				[/#list]
+			</ul>
+			[/#if]
+
+			</p>
+		</div>
+	</div>
+	[/#if]
+					
+					<!-- end content -->
+				</div>
+			</div>
+			<!--mpcenter end-->
+			<!--mpright begining
+			<div id="mpright" style="width:130px;background- color:#357C38;float:right" >right</div>
+			mpright end-->
+			<div class="clearfloat"></div>
+
+<body>

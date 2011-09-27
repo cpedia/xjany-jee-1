@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.BLApp" namespace="/jsp/blapp" extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		<action name="BasicSetup" class="/jsp/blapp" method="CreateBasic">
+			<result name="success">/jsp/blapp/BLApp.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="BasicSave" class="/jsp/blapp" method="BLBasics">
+			<result name="input">/jsp/blapp/BLApp.jsp</result>
+			<result name="success" >/jsp/blapp/BLApp.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="ViewSave" class="/jsp/blapp" method="BLView">
+			<result name="success">/jsp/blapp/BLApp.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="Calculate" class="/jsp/blapp" method="Calculation">
+			<result name="success">/jsp/blapp/result.jsp</result>
+			<result name="error">/jsp/error.jsp</result>
+		</action>
+		<action name="*" class="com.lti.action.TemplateAction">
+			<result name="success" type="freemarker">
+				/jsp/blapp/{1}.uftl
+			</result>		
+			<result name="withheader" >
+				/jsp/withheader.jsp
+			</result>					
+		</action>	
+	</package>
+</struts>

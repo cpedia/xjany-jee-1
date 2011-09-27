@@ -1,0 +1,98 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<meta name="clonecenter" content="vf_current" />
+<title>Clone Center</title>
+<script type="text/javascript" src="../images/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" href="../images/jquery.tablesorter/style.css" type="text/css" />
+<script type="text/javascript" src="../images/jquery.tablesorter/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../images/jquery.tablesorter/jquery.tablesorter.pager.js"></script>
+<script>
+function loadroot(category){
+	$('#sub_category').hide();
+	loadresult(category);
+}
+
+function loadsub(category){
+	$('#sub_category').show();
+	$('#sub_category').html($('#'+category.replace(/ /g,'_')).html());
+	loadresult(category);
+}
+
+function loadresult(category){
+	$(':button').each(function(){
+		$(this).attr({"disabled":true});
+	});
+	$('#result').html('Please wait ... ');
+	 $.ajax({
+	   type: "POST",
+	   url: 'Performancetable.action',
+	   data: 'includeHeader=false&year=-1&mpt=ar,beta,alpha&categories='+category,
+	   success: function(msg){
+	   		$('#result').html(msg);
+	     	$(':button').each(function(){
+				$(this).attr({"disabled":false});
+			});
+	   }
+	 });
+	
+}
+function search(){
+	$(':button').each(function(){
+		$(this).attr({"disabled":true});
+	});
+	$('#result').html('Please wait ... ');
+	$.ajax({
+		   type: "POST",
+		   url: 'Performancetable.action',
+		   data: 'includeHeader=false&year=-1&mpt=ar,beta,alpha&keyword='+$('#keyword').val(),
+		   success: function(msg){
+		   		$('#result').html(msg);
+		     	$(':button').each(function(){
+					$(this).attr({"disabled":false});
+				});
+		   }
+	 });
+}
+$(function() {
+	loadresult("");
+});
+
+</script>
+<style type="text/css">
+  #vf_content-wrap {
+  padding-left: 10px;
+  padding-right: 10px;
+  min-height:580px;
+   }
+</style>
+
+</head>
+<body>
+<br>
+<div style="width:100%" id="root_category" align="left">
+	<input type="button"  onclick="loadroot('')" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value='All Funds'>
+	<input type="button"  onclick="loadroot('Value')" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value=Value>
+	<input type="button"  onclick="loadroot('quality growth')" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value="Quality Growth">
+	<input type="button"  onclick="loadroot('endowment')" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value=Endowment>
+	<input type="button"  onclick="loadroot('activist')" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value=Activist>
+	<input type="button"  onclick="loadroot('concentrated')" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value=Concentrated>
+	<input type="button"  onclick="loadroot('contrarian')" style="border: solid #b1c9d9 1px;background:#C4D8E7;font-size:18px" value=Contrarian>
+	
+</div>
+<br>		
+<div style="width:100%" id="sub_category" align="left">
+</div>
+<br>
+<div style="width:100%" id="search" align="left">
+	Search: <input type="text" id="keyword"/> <input type="button" onclick="search()" value="GO"/>
+</div>
+
+<div style="width:100%" id="result" align="left">
+</div>
+</body>
+</html>
+
+

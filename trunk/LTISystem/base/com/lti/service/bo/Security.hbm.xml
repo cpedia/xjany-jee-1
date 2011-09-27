@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="Security"
+		table="ltisystem_security"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="Name"
+			column="NAME"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="Symbol"
+			column="SYMBOL"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="SecurityType"
+			column="SECURITYTYPE"
+			type="integer"
+			not-null="false"
+			length="16"
+		/>
+		<property
+			name="Diversified"
+			column="ISDIVERSIFIED"
+			type="java.lang.Boolean"
+			not-null="false"
+		/>
+		<property
+			name="IsClosed"
+			column="IsClosed"
+			type="java.lang.Boolean"
+			not-null="false"
+		/>
+		<property
+			name="CurrentPrice"
+			column="CURRENTPRICE"
+			type="java.lang.Double"
+			not-null="false"
+			length="22"
+		/>
+		<property
+			name="ClassID"
+			column="ASSETCLASSID"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="Manual"
+			column="MANUAL"
+			type="java.lang.Integer"
+			not-null="false"
+		/>
+		<property
+			name="DividendLastDate"
+			column="DIVIDENDLASTDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		<property
+			name="PriceLastDate"
+			column="PRICELASTDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		<property
+			name="StartDate"
+			column="STARTDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		
+		<property
+			name="EndDate"
+			column="ENDDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		
+		<property
+			name="NavLastDate"
+			column="NAVLASTDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>		
+		<property
+			name="MptLastDate"
+			column="MptLASTDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		<property
+			name="NewDividendDate"
+			column="NEWDIVIDENDDATE"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		<property
+			name="Quality"
+			column="QUALITY"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="ARRating"
+			column="ARRating"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="AlphaRating"
+			column="AlphaRating"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="TreynorRating"
+			column="TreynorRating"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		
+		<property
+			name="NAVStartDate"
+			column="NAVStartDate"
+			type="java.util.Date"
+			not-null="false"
+		/>
+</class>	
+</hibernate-mapping>

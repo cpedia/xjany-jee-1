@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="InviteCode"
+		table="ltisystem_invitecode"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		
+		<property
+			name="InviteCode"
+			column="InviteCode"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="date"
+			column="date"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		<property
+			name="PriceItem"
+			column="PriceItem"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		<property
+			name="Type"
+			column="Type"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="MiddleMan"
+			column="MiddleMan"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="Url"
+			column="Url"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="InviteName"
+			column="InviteName"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+	</class>	
+</hibernate-mapping>

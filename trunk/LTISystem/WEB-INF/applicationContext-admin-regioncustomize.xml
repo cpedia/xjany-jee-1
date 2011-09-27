@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/admin/regioncustomize/Main" class="com.lti.action.admin.regioncustomize.MainAction"
+		singleton="false">
+		<property name="regionCustomizeManager">
+			<ref bean="regionCustomizeManager"/>
+		</property>
+	</bean>
+
+		
+	<bean name="/jsp/admin/regioncustomize/Save" class="com.lti.action.admin.regioncustomize.SaveAction"
+		singleton="false">
+		<property name="customizePageManager">
+		<ref bean="customizePageManager"/>
+		</property>
+		<property name="regionCustomizeManager">
+			<ref bean="regionCustomizeManager"/>
+		</property>
+		<property name="groupManager">
+		<ref bean="groupManager"/>
+		</property>
+	</bean>	
+	
+	
+	<bean name="/jsp/regioncustomize/Main" class="com.lti.action.regioncustomize.MainAction" singleton="false">
+	<property name="regionCustomizeManager">
+	<ref bean="regionCustomizeManager"/>
+	</property>
+	<property name="userManager">
+	<ref bean="userManager"/>
+	</property>
+	<property name="groupManager">
+	<ref bean="groupManager"/>
+	</property>
+	</bean>
+	
+</beans>

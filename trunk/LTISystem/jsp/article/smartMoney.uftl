@@ -1,0 +1,29 @@
+[#ftl]
+<p>
+<table border="0" cellspacing="10px">
+  <thead>
+  <tr>
+  <th align="left">Date</th>
+  [#if index??]
+     [#list index as key]
+       <th align="left">${key}</th>
+     [/#list]
+  [/#if]
+  </tr>
+  </thead>
+  <tbody>
+     [#if fridayBetas??]
+      [#list fridayBetas as beta]
+           <tr>
+        <td>${beta.date?string("MM/dd/yyyy")}</td>
+           [#list beta.betaList as item]
+			 <td>
+				${item}
+			 </td>
+			[/#list]
+     </tr>
+      [/#list]
+     [/#if]
+  </tbody>
+</table>
+</p>

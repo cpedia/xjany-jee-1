@@ -1,0 +1,5 @@
+[#ftl]
+[#assign keys = decodedMap?keys]   
+[#list keys as key]
+	${key} = ${decodedMap[key]};<br>
+[/#list]  

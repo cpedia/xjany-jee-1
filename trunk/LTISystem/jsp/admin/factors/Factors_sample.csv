@@ -1,0 +1,59 @@
+***** This is the Factors Files. *****,
+****** Factors START HERE ******,**** DO NOT MODIFY THIS LINE ****
+**Source Name,Status Type(price series:1 return series 0(Remember: French Fama Security's datas are always return series))**
+VIGRX,1
+VLACX,1
+VIMSX,1
+NAESX,1
+DFSCX,1
+VMVIX,1
+VMGIX,1
+VISVX,1
+VISGX,1
+VGTSX,1
+VDMIX,1
+VEIEX,1
+VEURX,1
+VPACX,1
+VBMFX,1
+VWITX,1
+VWLTX,1
+VWSTX,1
+VFICX,1
+VWEHX,1
+BEGBX,1
+VUSTX,1
+VFITX,1
+VFISX,1
+VMPXX,0
+VCVSX,1
+RWX,1
+DBC,1
+IUTIX,1
+VBINX,1
+VMNIX,1
+XHPSX,1
+CPHYX,1
+VTSMX,1
+***** Special Security Factors ******,**** DO NOT MODIFY THIS LINE ****,,,,
+**Security Name,Factor List,**,,,
+
+****** Assets' Factors *****,**** DO NOT MODIFY THIS LINE ****,,,,
+**Asset Type,sub Asset Type,sub2 Asset Type,sub3 Asset Type,Factor List,**
+Equity,,,,VTSMX,
+Equity,US Equity,,,VTSMX,
+Equity,US Equity,Mid cap,,VIMSX,
+Equity,US Equity,Mid cap,Growth,VMGIX,
+Equity,US Equity,Mid cap,Value,VMVIX,
+Equity,US Equity,micro cap,,DFSCX,
+Equity,International Equity,,,VGTSX,
+Fixed Income,,,,VBMFX,
+Fixed Income,US Municipal Bonds,,,VWITX,
+Fixed Income,US Municipal Bonds,Long Term,,VWLTX,
+Fixed Income,US Municipal Bonds,Middle Term,,VWITX,
+Fixed Income,US Municipal Bonds,Short Term,,VWSTX,
+Fixed Income,International Bonds,,,BEGBX,
+Fixed Income,US Treasury Bonds,,,IUTIX,
+Hybrid Assets,,,,VTSMX,VBMFX
+Hybrid Assets,Balance Fund,,,VTSMX,VBMFX
+Hybrid Assets,Balance Fund,Moderate Allocation,,VTSMX,VBMFX

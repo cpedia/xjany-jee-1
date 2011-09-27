@@ -1,0 +1,140 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+<html>
+<head>
+<title>VA Fund Table</title>
+
+
+	
+	
+<script  type="text/javascript">
+	
+	function setcategory(categorystr) {
+		company = document.getElementById('company');
+		category1 = document.getElementById('category1');
+		category2 = document.getElementById('category2');
+		category3 = document.getElementById('category3');
+		category1.length = 0;
+		category2.length = 0;
+		category3.length = 0;
+		var categorys = categorystr.trim().split("#");
+		category1.options.add(new Option("All","All"));
+		category1.options.add(new Option("",""));
+		category2.options.add(new Option("",""));
+		category3.options.add(new Option("",""));
+		for(var i=0;i<categorys.length;++i){
+			category1.options.add(new Option(categorys[i], categorys[i]));
+			category2.options.add(new Option(categorys[i], categorys[i]));
+			category3.options.add(new Option(categorys[i], categorys[i]));
+		}
+	}
+	
+	function changecategory(){
+		$.ajax({
+				type: "post",
+				url: "f401k_getcategorylist.action?includeHeader=false",
+				data: "company=" + $('#company').val(),
+				datatype: "html",
+				success: function(result){
+					setcategory(result);
+				},
+				error:function(){
+					alert("error");
+				}
+		});
+	}
+
+</script>
+</head>
+<body>
+
+	<div style="margin:10px">
+		<h3 align="center">Available Company And Category</h3>
+		<form action="f401k_companyfundtable.action">
+		Company: <select name="company" id="company" value="${company}" onchange="changecategory();">
+					<option value="All">All</option>
+					[#list companyList as c]
+					<option value="${c}" [#if company == c]selected[/#if]>${c}</option>
+					[/#list]
+				 </select>
+		Category: <select name="category1" id="category1" value="${category1}">
+					<option value="All">All</option>
+					<option value=""></option>
+					[#if categoryList??]
+						[#list categoryList as c1]
+						<option value="${c1}" [#if category1 == c1]selected[/#if]>${c1}</option>
+						[/#list]
+					[/#if]
+				  </select>
+		Category: <select name="category2" id="category2" value="${category2}">
+					<option value=""></option>
+					[#if categoryList??]
+						[#list categoryList as c2]
+						<option value="${c2}" [#if category2 == c2]selected[/#if]>${c2}</option>
+						[/#list]
+					[/#if]
+				  </select>
+		Category: <select name="category3" id="category3" value="${category3}">
+					<option value=""></option>
+					[#if categoryList??]
+						[#list categoryList as c3]
+						<option value="${c3}" [#if category3 == c3]selected[/#if]>${c3}</option>
+						[/#list]
+					[/#if]
+				  </select>
+		<br>
+		<br>
+		<p><input type='submit' class="uiButton" value='Get VA Fund Table'>
+		</form>
+	</div>
+	<div>
+		<table  class="tablesorter" border="0" cellpadding="0" cellspacing="1" width="95%" id="parametersTable"> <!-- variables table -->
+	 	 	<thead>
+	 	 	<tr>
+	 	 		<th class="header" width="10%">
+					<b>Ticker</b>
+				</th>
+				<th class="header" width="30%">
+					<b>Name</b>
+				</th>
+				<th class="header" width="40%">
+					<b>MSLink</b>
+				</th>
+				<th class="header" width="10%">
+					<b>Category</b>
+				</th>
+				<th class="header" width="10%">
+					<b>StartDate</b>
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+				[#if companyFundList?? && companyFundList?size > 0]
+					[#list companyFundList as cf]
+						<tr>
+							<td>
+								${cf.ticker!}
+							</td>
+							<td>
+								${cf.MSName!}
+							</td>
+							<td>
+								<a href="${cf.MSLink!}" target="_blank">${cf.MSLink!}</a>
+							</td>
+							<td>
+								${cf.category!}
+							</td>
+							<td>
+								[#if cf.startDate??]
+									${cf.startDate?string("yyyy-MM-dd")}
+								[/#if]
+							</td>
+						</tr>
+					[/#list]
+				[/#if]
+			</tbody>
+		</table>
+	</div>
+	
+</body>
+</html>

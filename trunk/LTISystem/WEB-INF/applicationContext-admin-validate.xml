@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-lazy-init="false" default-autowire="autodetect" default-dependency-check="none">
+	<bean name="/jsp/admin/validate/Main" class="com.lti.action.admin.validate.MainAction"	singleton="false"/>
+	<bean name="/jsp/admin/validate/DownloadTotalReturns" class="com.lti.action.admin.validate.DownloadTotalReturnsAction"	singleton="false"/>
+	<bean name="/jsp/admin/validate/CheckAllSecurity" class="com.lti.action.admin.validate.CheckAllSecurityAction"	singleton="false"/>
+	<bean name="/jsp/admin/validate/CheckSingleSecurity" class="com.lti.action.admin.validate.CheckSingleSecurityAction"	singleton="false"/>
+	<bean name="/jsp/admin/validate/ImportDataFile" class="com.lti.action.admin.validate.ImportDataFileAction"	singleton="false"/>
+	<bean name="/jsp/admin/validate/StorePortfolioInfor" class="com.lti.action.admin.validate.StorePortfolioInforAction"	singleton="false"/>
+	<bean name="/jsp/admin/validate/CheckPortfolio" class="com.lti.action.admin.validate.CheckPortfolioAction"	singleton="false"/>
+	<bean name="/jsp/admin/validate/CheckMptLog" class="com.lti.action.admin.validate.CheckMptLogAction"	singleton="false"/>
+		
+</beans>

@@ -1,0 +1,58 @@
+[#ftl]
+ [#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+ [#import "/jsp/lti_library_ftl.jsp" as lti]
+ [#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#setting url_escaping_charset='utf8']
+[#assign urlpre='f401k_view.action?ID=' /]
+ <html>
+ <head>
+ <title>Search for ${Parameters.keyword!"MyPlanIQ.com"} plans</title>
+<meta  name="Description" content="Admin users can search for private plans on this page.">
+</head>
+<body>
+<div class="sidebar_box">
+  	<div style="margin-bottom:8px"><span class="sidebar_heading"><strong>Search For A Plan</strong><span></div>
+  			<div class=" ">
+				
+				
+				<table border=0>
+				<tr>
+					<td width="35%">
+						<form action='/LTISystem/f401k__adminsearch.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+					    	<input name="admin" value="true" type="hidden"></input>
+					        <input name="includeHeader" value="true" type="hidden"></input>
+					        <input name="type" value="2" type="hidden"></input>
+					        <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+					        <input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)' size="18" type="text" value='${Parameters.symbolPlan!""}'>
+					        <input alt='Quote' class='submitSearch' type='submit' value=''/>
+					   </form><!-- end of form -->
+					   </span>
+					
+					</td>
+				        <td align="left">
+				           <ul>
+				             <li><h3>For 401(k)/403(b), Enter your company/organization name</h3></li>
+				             <li><h3>For brokerage ETFs and Mutual Funds portfolios, enter your brokerage name</h3></li>
+				             <li><h3>For others, enter keywords in your plan name</h3></li>
+				           </ul>
+				        </td>
+				</tr>
+				</table>
+		</div>
+	</div>
+
+ <h2><span>Search keyword: </span>${Parameters.keyword!"myplaniq.com"}</h2>
+
+
+
+
+[@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+	[@s.param name="includeHeader"]false[/@s.param]
+	[@s.param name="admin"]true[/@s.param]
+	[@s.param name="type"]2[/@s.param]
+	[@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+	[@s.param name="keyword"]${Parameters.keyword!"nothing"}[/@s.param]
+[/@s.action]
+ </body>
+ </html>
+

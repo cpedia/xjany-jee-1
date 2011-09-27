@@ -1,0 +1,50 @@
+[#ftl]
+[#if modelPortfoliosBeans?? && modelPortfoliosBeans?size >0]
+		<!-- ${lastUpdated?datetime} -->
+	<div class="sidebar_box_noPadding roundHeadingBlue">
+		<div class="sidebar_box_heading_white">Strategies and model portfolios</div>
+		<div class="sidebar_box_content">
+			<p>The following strategies are supported in this plan. Each strategy has three pre-configured model portfolios: conservative, moderate and growth. Select a strategy or just simply use a pre-configured model portfolio by clicking <i>Select This Portfolio</i> button. </p>
+				<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor='#DDDDDD'>
+					[#list modelPortfoliosBeans as item]
+						<tr bgcolor='#ffffff' style='' height=25px>
+							<td>
+								<h3><a href='jsp/strategy/View.action?ID=${item.strategyID}' target='_blank'>${item.strategyName}</a></h3>
+							</td>
+							<td alt="One Years' Annualized Return" width="30px">1Yr AR</td>
+							<td alt="One Years' Sharpe Ratio" width="30px">1Yr Sharpe</td>
+							<td alt="Three Years' Annualized Return" width="30px">3Yr AR</td>
+							<td alt="Three Years' Sharpe Ratio" width="30px">3Yr Sharpe</td>
+
+							<td alt="Five Years' Annualized" width="30px">5Yr AR</td>
+							<td alt="Five Years' Sharpe Ratio" width="30px">5Yr Sharpe</td>
+							<td width="120px" align='center'><input type='button' value='Select' class='btn' style='width:95%;height:80%' onclick='selectstrategy(${item.strategyID?string.computer},"${item.strategyName}")'></td>
+						</tr>
+						[#if item.modelPortfolios?? && item.modelPortfolios?size>0]
+							[#list item.modelPortfolios as iitem]
+							<tr bgcolor='#ffffff' height=25px>
+								<td style=''>
+									<a href='jsp/portfolio/ViewPortfolio.action?ID=${iitem.portfolioID}' target='_blank'>${iitem.portfolioName}</a>
+								</td>
+								<td width=30px>[#if iitem.AR1??]${iitem.AR1?string.percent}[/#if]</td>
+								<td width=30px>[#if iitem.sharpeRatio1??]${iitem.sharpeRatio1?string.percent}[/#if]</td>
+								<td width=30px>[#if iitem.AR3??]${iitem.AR3?string.percent}[/#if]</td>
+								<td width=30px>[#if iitem.sharpeRatio3??]${iitem.sharpeRatio3?string.percent}[/#if]</td>
+								<td width=30px>[#if iitem.AR5??]${iitem.AR5?string.percent}[/#if]</td>
+								<td width=30px>[#if iitem.sharpeRatio5??]${iitem.sharpeRatio5?string.percent}[/#if]</td>
+								<td width=120px align='center'><input type='button' value='Select this Portfolio' class='btn' style='width:95%;height:80%' onclick='selectpredefinedportfolio(${item.strategyID?string.computer},"${item.strategyName}",${iitem.portfolioID?string.computer},"${iitem.portfolioName}")'></td>
+							</tr>
+							[/#list]
+						[#else]
+						[/#if]
+						
+						[#if size?? && size!=0 && item_index == size][#break][/#if]
+					[/#list]
+				</table>
+		</div>
+	</div>	
+	<script>
+		$(".selectSButton").button();
+	</script>
+	
+[/#if]

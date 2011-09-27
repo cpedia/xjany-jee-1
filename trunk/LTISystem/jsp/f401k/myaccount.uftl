@@ -1,0 +1,87 @@
+[#ftl]
+<html>
+<head>
+<title>MyPlanIQ My Account</title>
+<meta name="description" content="investment strategies in retirement plans 401(k), 403(b), self-directed IRAs, Variable Universal Life (VULs), taxable brokerage mutual fund and ETF investments based on tactical asset allocation, smart money (GURU) directed asset allocations and modern portfolio theory (MPT) based strategic asset allocations. Optimized (Mean Variance Optimization) efficient frontiers">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+</head>
+<body>
+[#if profile??]
+<div id='view_window'  style='padding:10px' align='left'>
+		<span class="n401k_h1">My risk profile information</span><a href='profile_edit.action?planID=0&portfolioID=0'>edit</a>
+		<table border=0 width='100%' class='n401k_text1'>
+		<tr height='30px'>
+			<td width='200px'>
+				<b>Your Risk Porfile Number</b>
+			</td>
+			<td>
+				${profile.riskNumber!""}<!-- <span style='font-size:1.0em;color:#333333'>&nbsp;&nbsp;&nbsp;This means the target allocations in your portfolio are</span> -->
+			</td>
+		</tr>
+                <tr>
+                        <td width='400px'><span style='font-size:1.0em;color:#333333'>This means the target allocations in your portfolio are</span>
+                        </td>
+                </tr>
+		<tr height='30px'>
+			<td>
+				<b>Fixed Income Allocation</b>
+			</td>
+			<td>
+				[#if profile.riskNumber??]${profile.riskNumber}%[/#if]
+			</td>
+		</tr>
+		<tr height='30px'>
+			<td>
+				<b>Risky Asset Allocation</b>
+			</td>
+			<td>
+				[#if profile.riskNumber??]${100-profile.riskNumber}%[/#if]
+			</td>
+		</tr>
+	</table>
+</div>
+[#else]
+	<div  style='padding:10px'><a href='/LTISystem/profile__getstarted.action' class="n401k_h1">Create My Risk Profile</a></div>
+[/#if]
+
+[#if user??]
+<div id='user_window'  style='padding:10px' align='left'>
+		<span class="n401k_h1">My Account Information</span><a href='/LTISystem/jsp/register/ViewUserDetails.action'>edit</a>
+		<table border=0 height=150 style='font-size:1.2em;padding-left:10px' class='n401k_text1'>
+			<tr >
+				<td width=200 >
+					<b>My Account Name</b>
+				</td>
+				<td width=30>
+					${user.userName!""}
+				</td>
+			</tr>
+			<tr >
+				<td>
+					<b>My Email Addresss</b>
+				</td>
+				<td>
+					${user.EMail!""}
+				</td>
+			</tr>
+			<tr >
+				<td>
+					<b>My Telephone</b>
+				</td>
+				<td>
+					${user.telephone!""}%
+				</td>
+			</tr>
+			<tr >
+				<td>
+					<b>My Address</b>
+				</td>
+				<td>
+					${user.address!""}%
+				</td>
+			</tr>
+		</table>
+	</div>
+[/#if]
+</body>
+</html>

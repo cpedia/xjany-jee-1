@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="CustomizeRegion"
+		table="ltisystem_customize_region"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="org.hibernate.id.IncrementGenerator"/>
+		</id>
+
+		<property
+			name="PageName"
+			column="pageName"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="East"
+			column="east"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+
+		<property
+			name="West"
+			column="west"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		
+		<property
+			name="Center"
+			column="center"
+			type="java.lang.Long"
+			not-null="false"
+		/>
+
+		<property
+			name="South"
+			column="south"
+			type="java.lang.Long"
+			not-null="false"
+		/>		
+
+		<property
+			name="EastGroupID"
+			column="eastGroupID "
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="WestGroupID"
+			column="westGroupID "
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="SouthGroupID"
+			column="southGroupID "
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="EastTitle"
+			column="eastTitle"
+			type="string"
+			not-null="false"
+			length="100"
+		/>	
+		<property
+			name="WestTitle"
+			column="westTitle"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="SouthTitle"
+			column="southTitle"
+			type="string"
+			not-null="false"
+			length="100"
+		/>
+		<property
+			name="CenterTitle"
+			column="centerTitle"
+			type="string"
+			not-null="false"
+			length="100"
+		/>		
+		<property
+			name="PageID"
+			column="pageID "
+			type="java.lang.Long"
+			not-null="false"
+		/>
+		<property
+			name="SouthHeight"
+			column="southHeight"
+			type="java.lang.Double"
+			not-null="false"
+		/>	
+		<property
+			name="EastWidth"
+			column="eastWidth"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+		<property
+			name="WestWidth"
+			column="westWidth"
+			type="java.lang.Double"
+			not-null="false"
+		/>			
+		<property
+			name="CenterWidth"
+			column="centerWidth"
+			type="java.lang.Double"
+			not-null="false"
+		/>
+	</class>	
+</hibernate-mapping>

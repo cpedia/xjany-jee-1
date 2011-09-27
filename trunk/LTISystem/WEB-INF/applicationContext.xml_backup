@@ -1,0 +1,1081 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd"><beans default-lazy-init="false" default-autowire="no" default-dependency-check="none">
+	
+<import resource="applicationContext-verifycode.xml"/>	
+  
+  <import resource="applicationContext-acegi-security.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-assetclass.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-group.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-holiday.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-indicator.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-portfolio.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-news.xml"/>
+	
+	
+  <import resource="applicationContext-admin-header.xml"/>
+  
+  <import resource="applicationContext-admin-quartz.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-security.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-strategy.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-strategyclass.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-tradingdate.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-user.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-loaddata.xml"/>
+	
+	
+  
+  <import resource="applicationContext-example.xml"/>
+	
+	
+  
+  <import resource="applicationContext-flash.xml"/>
+	
+	 <import resource="applicationContext-help.xml"/>
+  
+  <import resource="applicationContext-indicator.xml"/>
+	
+	
+  
+  <import resource="applicationContext-mainpage.xml"/>
+	
+	
+  
+  <import resource="applicationContext-portfolio.xml"/>
+	
+	
+  
+  <import resource="applicationContext-commentary.xml"/>
+	
+  <import resource="applicationContext-mutualfund.xml"/>	
+  
+  <import resource="applicationContext-security.xml"/>
+	
+	
+  
+  <import resource="applicationContext-strategy.xml"/>
+	
+	
+  
+  <import resource="applicationContext-user.xml"/>
+	
+	
+  
+  <import resource="applicationContext-news.xml"/>
+	
+  <import resource="applicationContext-jforum.xml"/>
+  
+  <import resource="applicationContext-ajax.xml"/>
+	
+	
+  <import resource="applicationContext-blapp.xml"/>
+  
+  <import resource="applicationContext-register.xml"/>
+	
+<import resource="applicationContext-verifycode.xml"/>
+	
+  
+  <import resource="applicationContext-admin-customizepage.xml"/>
+	
+	
+  
+  <import resource="applicationContext-admin-regioncustomize.xml"/>
+	 <import resource="applicationContext-rmi.xml"/>
+	
+  <import resource="applicationContext-admin-customizeregion.xml"/>
+  
+  <import resource="applicationContext-customize-region.xml"/>
+  <import resource="applicationContext-mutualfund.xml"/>
+  <import resource="applicationContext-mvo.xml"/>
+	
+	
+  
+	
+	
+  
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="driverClassName">
+			
+			
+      
+      <value>com.mysql.jdbc.Driver</value>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="url" value="jdbc:mysql://127.0.0.1:3306/ltisystem?useUnicode=true&amp;characterEncoding=utf8"/>
+			
+			
+    
+    <property name="username">
+			
+			
+      
+      <value>root</value>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="password">
+			
+			
+      
+      <value>123456</value>
+			
+		
+    
+    </property>
+
+  
+  </bean>
+	
+	
+  
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="dataSource">
+			
+			
+      
+      <ref bean="dataSource"/>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="hibernateProperties">
+			
+			
+      
+      <props>
+				
+				
+        
+        <prop key="hibernate.dialect"> com.lti.service.bo.base.LTIMySQLDialect
+					</prop>
+				
+				
+        
+        <prop key="hibernate.show_sql"> false </prop>
+				
+      
+      </props>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="mappingResources">
+			
+			
+      
+      <list>
+				
+				
+        
+        <value>com/lti/service/bo/Asset.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/AssetClass.hbm.xml</value>
+				
+		<value>com/lti/service/bo/ConfidenceCheck.hbm.xml</value>		
+        
+        <value>com/lti/service/bo/SecurityItem.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/Portfolio.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/PortfolioDailyData.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/Security.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/SecurityDailyData.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/Strategy.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/StrategyClass.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/Transaction.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/User.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/Holiday.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/Indicator.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/Indicatordailydata.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/Group.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/GroupUser.hbm.xml</value>
+				
+        
+        
+        <value>com/lti/service/bo/Log.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/TradingDate.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/PortfolioState.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/PortfolioMPT.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/Action.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/GroupAction.hbm.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/CustomizePage.xml</value>
+				
+				
+        
+        <value>com/lti/service/bo/RegionCustomize.hbm.xml</value>
+				
+		
+		<value>com/lti/service/bo/CustomizeRegion.hbm.xml</value>
+		
+		<value>com/lti/service/bo/Pages.hbm.xml</value>
+		
+		<value>com/lti/service/bo/SecurityMPT.hbm.xml</value>
+      
+		  
+		<value>com/lti/service/bo/MutualFund.hbm.xml</value>
+		
+		<value>com/lti/service/bo/MutualFundDailyBeta.hbm.xml</value>
+		  <value>com/lti/service/bo/SystemLog.hbm.xml</value>
+		  		<value>com/lti/service/bo/SecurityType.hbm.xml</value>
+		  
+      </list>
+			
+		
+    
+    </property>
+		
+	
+  
+  </bean>
+	
+	
+  <!-- Quartz Job scheduling-->
+	
+	
+  
+  <!--updataDailyData -->
+	
+	
+  
+  <bean id="updataDailyData" class="com.lti.jobscheduler.UpdateDailyDataJob" lazy-init="default" autowire="default" dependency-check="default">
+	</bean>
+	
+	
+  
+  <bean id="updateDailyDataJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="targetObject">
+			
+			
+      
+      <ref bean="updataDailyData"/>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="targetMethod">
+			
+			
+      
+      <value>update</value>
+			
+		
+    
+    </property>
+		
+	
+  
+  </bean>
+
+	
+	
+  
+  <bean id="updateDailyDataTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="jobDetail" ref="updateDailyDataJobDetail"/>
+		
+		
+    
+    <property name="cronExpression" value="0 30 20 * * ?"/>
+		
+	
+  
+  </bean>
+	
+	
+  
+  <!--clearTempPortfolio -->
+	
+	
+  
+  <bean id="clearTempPortfolio" class="com.lti.jobscheduler.ClearTempPortfolioJob" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="portfolioManager">
+			
+			
+      
+      <ref bean="portfolioManager"/>
+			
+		
+    
+    </property>
+		
+	
+  
+  </bean>
+	
+	
+  
+  <bean id="clearTempPortfolioJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="targetObject">
+			
+			
+      
+      <ref bean="clearTempPortfolio"/>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="targetMethod">
+			
+			
+      
+      <value>clear</value>
+			
+		
+    
+    </property>
+		
+	
+  
+  </bean>
+	
+	
+  
+  <bean id="clearTempPortfolioTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="jobDetail" ref="clearTempPortfolioJobDetail"/>
+		
+		
+    
+    <property name="cronExpression" value="0 0 07 * * ?"/>
+		
+	
+  
+  </bean>
+	
+	
+  
+  <!--executeDailyStrategy -->
+	
+	
+  
+  <bean id="executeDailyStrategy" class="com.lti.jobscheduler.ExecuteDailyStrategyJob" lazy-init="default" autowire="default" dependency-check="default">
+	</bean>
+	
+	
+  
+  <bean id="executeDailyStrategyJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="targetObject">
+			
+			
+      
+      <ref bean="executeDailyStrategy"/>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="targetMethod">
+			
+			
+      
+      <value>execute</value>
+			
+		
+    
+    </property>
+		
+	
+  
+  </bean>
+	
+	
+  
+  <bean id="executeDailyStrategyTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="jobDetail" ref="executeDailyStrategyJobDetail"/>
+		
+		
+		   
+    <property name="cronExpression" value="0 48 19 * * ?"/>
+		
+	
+  
+  </bean>
+	
+	
+  
+  <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="triggers">
+			
+			
+      
+      <list>
+				
+				
+        
+        <ref local="clearTempPortfolioTrigger"/>
+				
+				
+        
+        <ref local="updateDailyDataTrigger"/>
+				
+				
+        
+        <ref local="executeDailyStrategyTrigger"/>
+				
+			
+      
+      </list>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="schedulerContextAsMap">
+			
+			
+      
+      <map>
+				
+			</map>
+			
+		
+    
+    </property>
+		
+	
+  
+  </bean>
+	
+  
+  
+  <!-- AssetClassManager -->
+	
+	
+  
+  <bean id="assetClassManager" class="com.lti.service.impl.AssetClassManagerImpl" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+    
+		
+    
+  </bean>
+	
+	
+  
+  <!-- BaseFormulaManager -->
+	
+	
+  
+  <bean id="baseFormulaManager" class="com.lti.service.impl.BaseFormulaManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+	</bean>
+	
+	
+  
+  <!-- IndicatorManager -->
+	
+	
+  
+  <bean id="indicatorManager" class="com.lti.service.impl.IndicatorManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+		
+	
+  
+  </bean>
+	
+	
+  
+  <!-- DataManager -->
+	
+	
+  
+  <bean id="dataManager" class="com.lti.service.impl.DataManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+
+	  
+    
+    <property name="securityManager">
+			
+			
+      
+      <ref local="securityManager"/>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="assetClassManager">
+			
+			
+      
+      <ref local="assetClassManager"/>
+			
+		
+    
+    </property>
+		
+		
+    
+    <property name="indicatorManager">
+			
+			
+      
+      <ref local="indicatorManager"/>
+			
+		
+    
+    </property>
+		
+	
+  
+  </bean>
+	
+	
+  
+  <!-- GroupManager -->
+	
+	
+  
+  <bean id="groupManager" class="com.lti.service.impl.GroupManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+	
+  
+  </bean>
+	
+	
+  
+  <!-- HolidayManager -->
+	
+	
+  
+  <bean id="holidayManager" class="com.lti.service.impl.HolidayManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+		
+	
+  
+  </bean>
+	
+	<bean id="mutualFundManager" class="com.lti.service.impl.MutualFundManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		<property name="sessionFactory">
+			
+			<ref local="sessionFactory"/>
+			
+		</property>
+		
+	</bean>
+	
+  
+  <!-- PortfolioManager -->
+	
+	
+  
+  <bean id="portfolioManager" class="com.lti.service.impl.PortfolioManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+    
+		
+		
+    
+    <property name="baseFormulaManager">
+			
+			
+      
+      <ref local="baseFormulaManager"/>
+			
+		
+    
+    </property>
+		
+	
+  
+  </bean>
+	
+	
+  
+  <!-- SecurityManager -->
+	
+	
+  
+  <bean id="securityManager" class="com.lti.service.impl.SecurityManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+    
+		
+		
+		
+	
+  
+  </bean>
+	
+	
+  
+	
+	
+  
+  <!-- StrategyClassManager -->
+	
+	
+  
+  <bean id="strategyClassManager" class="com.lti.service.impl.StrategyClassManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+    
+		
+	
+  
+  </bean>
+	
+	
+  
+	
+	
+  
+  <!-- UserManager -->
+	
+	
+  
+  <bean id="userManager" class="com.lti.service.impl.UserManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+    
+		
+	
+  
+  </bean>
+	
+	
+  
+  <!-- CustomizeManager -->
+	
+	
+  
+  <bean id="customizePageManager" class="com.lti.service.impl.CustomizePageManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+    
+		
+	
+  
+  </bean>
+	
+	
+  
+  <!-- StrategyManager -->
+	
+	
+  
+  <bean id="strategyManager" class="com.lti.service.impl.StrategyManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+    
+		
+	
+  
+  </bean>
+	
+	
+  
+  <!-- RegionCustomizeManager -->
+	
+	
+  
+  <bean id="regionCustomizeManager" class="com.lti.service.impl.RegionCustomizeManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+		
+	
+  
+  </bean>
+	
+	
+<!-- customize manager -->
+  <bean id="customizeRegionManager" class="com.lti.service.impl.CustomizeRegionManagerImpl" lazy-init="default" autowire="default" dependency-check="default" singleton="true">
+		
+		
+    
+    <property name="sessionFactory">
+			
+			
+      
+      <ref local="sessionFactory"/>
+			
+		
+    
+    </property>
+		
+		
+		
+	
+  
+  </bean>
+  
+  <!-- Main Page Configuration -->
+  <bean name="/jsp/main/Main" class="com.lti.action.main.MainAction" singleton="false" lazy-init="default" autowire="default" dependency-check="default">
+    <property name="strategyManager">
+      <ref bean="strategyManager"/>
+    </property>
+    <property name="portfolioManager">
+      <ref bean="portfolioManager"/>    
+    </property>    
+    <property name="strategyClassManager">
+      <ref bean="strategyClassManager"/>
+    </property>
+	<property name="userManager">
+		<ref bean="userManager"/>
+	</property>
+	<property name="customizeRegionManager">
+		<ref bean="customizeRegionManager"/>
+	</property>
+  </bean>
+	
+	
+  
+  <!-- permissionChecker -->
+	
+	
+  
+  <bean id="permissionChecker" class="com.lti.security.PermissionChecker" singleton="false" lazy-init="default" autowire="default" dependency-check="default">
+		
+		
+    
+    <property name="groupManager">
+			
+			
+      
+      <ref local="groupManager"/>
+			
+		
+    
+    </property>
+    </bean>
+    
+    
+    <bean name="AssetClassManagerService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" singleton="true">  
+        <property name="service">  
+            <ref bean="assetClassManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.AssetClassManager</value>  
+        </property> 
+    </bean>
+	<bean name="StrategyClassManagerService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" singleton="true">  
+        <property name="service">  
+            <ref bean="strategyClassManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.StrategyClassManager</value>  
+        </property> 
+    </bean>
+	<bean name="HolidayManagerService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" singleton="true">  
+        <property name="service">  
+            <ref bean="holidayManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.HolidayManager</value>  
+        </property> 
+    </bean>
+	<bean name="PortfolioManagerService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" singleton="true">  
+        <property name="service">  
+            <ref bean="portfolioManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.PortfolioManager</value>  
+        </property> 
+    </bean>
+	<bean name="IndicatorManagerService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" singleton="true">  
+        <property name="service">  
+            <ref bean="indicatorManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.IndicatorManager</value>  
+        </property> 
+    </bean>  
+	<bean name="SecurityManagerService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" singleton="true">  
+        <property name="service">  
+            <ref bean="securityManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.SecurityManager</value>  
+        </property> 
+    </bean>  
+	<bean name="StrategyManagerService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" singleton="true">  
+        <property name="service">  
+            <ref bean="strategyManager"/>  
+        </property>  
+        <property name="serviceInterface">  
+            <value>com.lti.service.StrategyManager</value>  
+        </property> 
+    </bean>  
+</beans>

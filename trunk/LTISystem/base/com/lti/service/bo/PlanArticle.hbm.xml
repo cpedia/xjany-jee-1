@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="PlanArticle"
+		table="ltisystem_plan_article"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="PlanID"
+			column="PLANID"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		<property
+			name="ArticleTitle"
+			column="ARTICLETITLE"
+			type="java.lang.String"
+			not-null="true"
+		/>
+		<property
+			name="Link"
+			column="LINK"
+			type="java.lang.String"
+			not-null="true"
+		/>
+	<property
+			name="Date"
+			column="DATE"
+			type="java.util.Date"
+			not-null="true"
+		/>
+		<property
+			name="Content"
+			column="CONTENT"
+			type="java.lang.String"
+			not-null="true"
+		/>
+		<property
+			name="Display"
+			column="DISPLAY"
+			type="java.lang.Boolean"
+			not-null="true"
+		/>
+		<property
+			name="Symbols"
+			column="SYMBOLS"
+			type="java.lang.String"
+			not-null="true"
+		/>
+	</class>	
+</hibernate-mapping>

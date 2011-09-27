@@ -1,0 +1,10 @@
+[#ftl]
+
+<h1>${Parameters.status}</h1><br>
+[#if Parameters.status=="normal"]
+ Your payment status is normal, if you want to cancel this subscription, please click <a href="paypal__howtocancel.action">here</a>.   [#elseif Parameters.status=="waiting"]
+ Please wait for a moment, we need some time to confirm the payment information from Paypal. If you still encounter a problem, please contact us. [#elseif Parameters.status=="locked"]
+ Looks like you have subscribed our free trial service before. Our policy is that your subscription will not be available until the free trial period runs out. In the meantime, if you would like to immediately begin your subscription, please cancel your free trail subscription and start your subscription without free trial instead.&nbsp; [#elseif Parameters.status=="expired"]
+ Your subscription already expired, please re-subscribe this service. [#elseif Parameters.status=="waiting_for_cancel"]
+ You have asked MyPlanIQ to cancel this service, please wait. [#else]
+ You have no subscriptions from us right now. [/#if]

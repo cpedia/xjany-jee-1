@@ -1,0 +1,318 @@
+[#ftl]
+<html>
+<head>
+<title>Decide Risk Profile</title>
+<script src="/LTISystem/jsp/template/ed/js/plugins/selectmenu/ui.selectmenu.js" type="text/javascript"></script>
+<link href="/LTISystem/jsp/template/ed/js/plugins/selectmenu/ui.selectmenu.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="jsp/profile/images/GooPieChart.css"/>
+<!--[if IE]><script  type="text/javascript" src="jsp/profile/images/excanvas.compiled.js"></script><![endif]-->
+<script  type="text/javascript" src="jsp/profile/images/GooFunc.js"></script>
+<script  type="text/javascript" src="jsp/profile/images/GooPieChart.js"></script>
+<script>
+var canvas;
+var property={
+	con_width:350,
+	con_height:300,
+	canvas_width:250,
+	canvas_height:250,
+	canvas_top:20,
+	canvas_left:40,
+	core_x:140,
+	core_y:140,
+	radius:110
+}
+//you can change the color of pie chart here
+var dataKind={
+	note_width:250,
+	note_height:40,
+	note_top:3,
+	note_left:5,
+	sort_type:"v",
+	text_color:"#",
+	items:[
+		{id:"c1",color:"#008800",label:"Fixed Income Target Allocation"},
+		{id:"c2",color:"#0099CC",label:"Risky Target Allocation"}
+	],
+	data:[]
+};
+  var data=[
+	{id:"c1",num:50},
+	{id:"c2",num:50}
+  ];
+  
+	function edit_text(element){
+    	if($(element).val()=='Click here'){
+    		$(element).val('');
+    	}
+		$(element).removeClass('show_text');
+		$(element).addClass('edit_text');
+	}
+	function out_text(element){
+		$(element).removeClass('edit_text');
+		$(element).addClass('show_text');
+	}
+	
+	var years=new Array(40,35,30,25,20,15,10,5,0,-5,-10,-12,-15);
+	var numbers=new Array(88,85,84,83,76,70,62,52,49,44,22,20,10);
+	function restore(){
+		var ytr=$('#ytr').val();
+		if(ytr==''||isNaN(ytr)){
+			ytr=40;
+			$('#ytr').val('40');
+		}
+		$('#profile_yearstoretire').val(ytr);
+		$('#profile_attitude').val($('#ay option:selected').text());
+		var factor=$('#ay option:selected').val();
+		var number=12;
+		var index=0;
+		if(ytr>=years[0])index=0;
+		else if(ytr<=years[years.length-1])index=years.length-1;
+		else{
+			for(var i=0;i<years.length;i++){
+				if(ytr==years[i]){
+					index=i;
+					break;
+				}
+				if(ytr<years[i]){
+					index=i;
+				}
+			}
+		}
+		
+		if(ytr==years[index])number=numbers[index];
+		else{
+			if(ytr>=years[0]||index==years.length-1)number=numbers[index];
+			else {
+				number=(numbers[index]-numbers[index+1])*1.0*(ytr-years[index+1])/(years[index]-years[index+1])  +numbers[index+1];
+				
+			}
+		}
+		number=100-number;
+		number=parseInt(number*factor);
+		if(number<0)number=0;
+		if(number>100)number=100;
+		$('#rta').val(number);
+		$('#profile_risknumber').val(number);
+		
+		plotchart();
+		
+	}
+	function afterchangern(){
+		$('#profile_risknumber').val($('#rta').val());
+		plotchart();
+	}
+	function plotchart(){
+		var risknumber=$('#profile_risknumber').val();
+		
+		var rta=$('#rta').val();
+		if(rta==''||isNaN(rta)){
+			$('#rta').val('');
+			return;
+		}
+		$("#mycanvas").html('');
+		canvas=$.createGooPieChart($("#mycanvas"),property);
+		canvas.setTitle("Risk Profile","%");
+		data[0]["num"]=rta*1;
+		data[1]["num"]=(100-rta)*1;
+		dataKind.data=data;
+		canvas.setDataKind(dataKind);
+		canvas.loadPieData(data,"num","");
+	}
+	function save(){
+		$('#profile_form').submit();
+	}
+	function next(){
+		$.ajax({
+			type: "post",
+			url: "/LTISystem/profile_edit.action",
+			data: $('#profile_form').serialize(),
+			datatype: "html", 
+			success: function(result){
+				//alert($.trim(result));
+				//location.reload() ;
+				window.location.href='profile_customizeportfolio.action';
+			},
+			error:function(){
+				alert("Please try again!");
+			}
+		});
+	}
+	function view(){
+		[#if operation=="create"]
+			alert("you don't created any profile before.");
+			return;
+		[#else]
+			$('#view_window').dialog('open');
+		[/#if]
+	}
+	var show_desc_div=0;
+	function learnmore(){
+		if(show_desc_div==0){
+			$('#desc_div').show();
+			show_desc_div=1;
+			$('#btn_desc').val('- Learn More on Risk Profile Number');
+		}else{
+			$('#desc_div').hide();
+			show_desc_div=0;
+			$('#btn_desc').val('+ Learn More on Risk Profile Number');
+		}
+		//$('#desc_div').toggle();
+	}
+	$(function() {
+	 	$('#view_window').dialog({height:200,weight:400,title:"Current Profile",autoOpen:false});
+	 	$('#desc_div').hide();
+	 	plotchart();
+	 	initSelects("styleSelect", 150);
+	 });
+</script>
+</head>
+
+<body>
+	
+	<div id='view_window' style='display:none' align='left'>
+		<table border=0 width='100%'>
+			<tr>
+				<td>
+					<b>Risk Number</b>
+				</td>
+				<td>
+					${profile.riskNumber!""}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Years To Retire</b>
+				</td>
+				<td>
+					${profile.yearsToRetire!""}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Stable Target Allocation</b>
+				</td>
+				<td>
+					${profile.riskNumber!""}%
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Risky Target Allocation</b>
+				</td>
+				<td>
+					[#if profile.riskNumber??]${100-profile.riskNumber}%[/#if]
+				</td>
+			</tr>
+		</table>
+	</div>
+	[#include "nav.uftl"]
+	<br>
+	<br>
+	
+		<div class="sidebar_box_noPadding roundHeadingBlue">
+			<div class="sidebar_box_heading_white">Decide Your Risk Profile</div>
+
+                           <input type='button' value='+ Learn More on Risk Profile Number' id='btn_desc' onclick='learnmore()' class='uiButton'>
+			<br>
+			<br>
+			<br>
+			<div class="sidebar_box_noPadding roundHeadingGreen" id="desc_div">
+					<div class="sidebar_box_heading_white"> Risk Profile</div>
+  					<div class="sidebar_box_content borderBottom_1px">
+								
+							<!--		<a href='#' onclick='view()'>Default Profile</a>&nbsp;
+									<a href='main__getstarted.action'>Go back to 'Get started'</a>
+							-->
+							<p>All assets are classified to two classes: risky assets and fixed income (stable) assets. Risky assets include the following assets:
+							<ul>
+							 <li><strong>Equities (stocks): </strong>US, international and emerging market stocks,</li>
+							 <li><strong>REITs: </strong>US and international Real Estate Investment Trusts,</li>
+							 <li><strong>Commodities: </strong>Industrial Metals, Gold, Oil, Agricultural, .. etc.,</li>
+							 <li><strong>High Yield (Junk) Bonds: </strong>Low grade corporate bonds </li>
+							</ul>
+							<p>Fixed income assets include</p>
+							<ul>
+							<li><strong>Government bonds: </strong>short, intermediate and long term treasury bonds and GNMA,</li>
+							<li><strong>Investment Grade bonds: </strong>short, intermediate and long term investment corporate bonds,</li>
+							<li><strong>International bonds: </strong>Sovereign and corporate investment grade bonds,</li>
+							<li><strong>Cash: </strong>Money markets</li>
+							</ul>
+							</p>
+							<p>The Risk Profile number represents the target percentage allocation of fixed income in your portfolio. For example, the default risk profile number is 18. That means 18% should be allocated to fixed income and 82% should be allocated to risky assets</p>
+							<p>Your Risk Profile is determined based on your expected years to retirement and risk tolerance. The risk tolerance could be one of the following:
+							<ul>
+							<li><strong>Very Conservative</strong></li>
+							<li><strong>Conservative</strong></li>
+							<li><strong>Moderatge</strong></li>
+							<li><strong>Aggressive</strong></li>
+							<li><strong>Very Aggressive</strong></li>
+							</ul>
+							<p>The more aggressive you are, the more will be allocated to risky assets. The longer you expect to retire, the more will be allocated to risky assets too.</p>
+							<p>Your risk profile number will be adjusted every year.</p>
+							<p>You could always overwrite the risk profile number when customizing a model portfolio.</p>
+							<p>The following chart illustrates the meaning of the risk profile number:
+											<br><br>
+											<img border=0 src='jsp/profile/images/barchart.png'>
+											<br>
+							</p>
+							<p>For more information on how to determine proper asset allocation, consult your financial adviser or use popular retirement planning tools provided by Fidelity, Vanguard or T.Rowe Price. Or you could find out more asset allocation information on target date funds such as <a href="http://personal.fidelity.com/products/funds/content/DesignYourPortfolio/freedomfunds.shtml.cvsr">Fidelity Freedom Target Date Funds</a>. 
+							</p> 
+							
+							<br>
+							<br>
+					</div>	
+					<div class="sidebar_box_content">
+						<input type='button' value='- Learn More on Risk Profile Number' onclick='learnmore()' class='uiButton'>
+					</div>
+					
+				</div>	
+                                          
+					<div class="sidebar_box_content">
+						<font size="2pt">What's <strong><em>the expected number of years to your retirement?</strong></em></font>
+						<input type='text' id='ytr' value='${profile.yearsToRetire!"40"}' class='edit_text' style="width:25px" onblur='restore()'>
+						<br><br>
+						
+						
+						<label class="styleSelectLabel" for="ay"><font size="2pt">What's <em><strong>your investment risk tolerance? </strong></em></font></label>
+						<select id='ay' name='ay' onchange='restore()' class="styleSelect">
+							<option value='1.2' [#if profile.attitude=="Very Conservative"]selected[/#if]>Very Conservative</option>
+							<option value='1.1' [#if profile.attitude=="Conservative"]selected[/#if]>Conservative</option>
+							<option value='1' [#if profile.attitude=="Moderate"]selected[/#if]>Moderate</option>
+							<option value='0.9' [#if profile.attitude=="Aggressive"]selected[/#if]>Aggressive</option>
+							<option value='0.8' [#if profile.attitude=="Very Aggressive"]selected[/#if]>Very Aggressive</option>
+						</select></span>
+						<br><br>
+						<font size="2pt"><span >Your <strong><em>Risk Profile Number</strong></em> is </span></font>
+						<input type='text' id='rta' value='${profile.riskNumber!"0"}' class='edit_text'  style="width:25px" onblur='afterchangern()'><font size="2pt"><span ><em> You could overwrite here</em></span></font>
+						<br><br><br>
+						<div style="margin-left:20px;margin-top:20px;width:400px"><div id="mycanvas"></div></div>
+						
+						<br><br>
+						
+					</div>
+				</div>
+				
+			<input type='button' value='Save' onclick='save()' class='uiButton'>
+			<input type="button" value="Next" class="uiButton" onclick="next()"/>
+			<form action='profile_edit.action' method='post' style='display:none'>
+				<input type='hidden' name='operation' value='create'>
+				<input type='submit' value='Create'>
+			</form>
+			<form action='profile_delete.action' method='post'  style='display:none'>
+				<input type='hidden' name='operation' value='delete'>
+						<input type='hidden' name='profile.portfolioID' value='${profile.portfolioID!""}'>
+						<input type='hidden' name='profile.userID' value='${profile.userID!""}'>
+						<input type='hidden' name='profile.planID' value='${profile.planID!""}'>
+				<input type='submit' value='Delete'>
+			</form>
+			<form id='profile_form' action='profile_edit.action' method='post'  style='display:none'>
+				<input type='hidden' id='profile_portfolioid' name='profile.portfolioID' value='${profile.portfolioID!"0"}'>
+				<input type='hidden' id='profile_planid' name='profile.planID' value='${profile.planID!"0"}'>
+				<input type='hidden' id='profile_risknumber' name='profile.riskNumber' value='${profile.riskNumber!""}'>
+				<input type='hidden' id='profile_attitude' name='profile.attitude' value='${profile.attitude!""}'>						
+				<input type='hidden' id='profile_yearstoretire' name='profile.yearsToRetire' value='${profile.yearsToRetire!"0"}'>
+				<input type='hidden' name='operation' value='save'>
+			</form>
+
+</body>
+</html>

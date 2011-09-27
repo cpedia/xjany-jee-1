@@ -1,0 +1,1 @@
+${symbol} has no beta gain information now.

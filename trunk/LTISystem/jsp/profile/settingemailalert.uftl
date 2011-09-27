@@ -1,0 +1,86 @@
+[#ftl]
+<html>
+<head>
+<title>Manage Rebalancing</title>
+<script type="text/javascript">
+$(function() {
+	$("#emailalert").click(function(){
+		var $alertbutton = $(this);
+		var notification = $("#notification").val();
+		
+		if(notification.indexOf(false) != -1){
+			$.ajax({
+				type: "get",
+				url: "jsp/ajax/Email.action",
+				data: "portfolioID=${Parameters.portfolioID }",
+				datatype: "html",
+				error:function(result){
+					alert('Error!');
+				},
+				success: function(result){
+					if(result.indexOf("fail") == -1){
+						$alertbutton.val("Remove Eamil Alert");
+						$("#notification").val(true);
+					}else{
+						alert('Failed!');
+					}
+				}
+			})
+		}
+		else{
+			$.ajax({
+				type:	"get",
+				url:	"jsp/ajax/EmailRemove.action",
+				data: "portfolioID=${Parameters.portfolioID}",
+				datatype: "html",
+				error:function(result){
+					alert('Error!');
+				},
+				success: function(result){
+					if(result.indexOf("fail") == -1){
+						$alertbutton.val("Transaction Email Alert");
+						$("#notification").val(false);
+					}else{
+						alert('Failed!');
+					}
+				}
+			})
+		}
+	});
+});
+</script>
+<style type="text/css">
+.btn {
+	font-family: Tahoma;
+	font-size: .69em;
+	color: #000000;
+	background-image: url(jsp/portfolio/images/grey-bg.gif);
+	border: 1px solid #999999;
+	cursor: pointer;
+	background-repeat: repeat;
+	padding: 2px;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-left: 2px;
+	width:130px;
+}
+</style>
+</head>
+<body>
+[#include "nav.uftl"]
+<div style='margin:10px'>
+	
+	Do you want the system to send you email when there are transactions of this portfolio?<br>
+
+
+
+	<input id='notification' type='hidden' name="emailNotification" value='${emailNotification?string}'>
+	[#if emailNotification?exists && emailNotification == true]
+		<input id="emailalert" class=btn style='font-weight: bold;' type="button" value="Remove Email Alert"/>
+	[#else]
+		<input id="emailalert" class=btn style='font-weight: bold;' type="button" value="Transaction Email Alert" />
+	[/#if]
+</div>
+</body>
+</html>

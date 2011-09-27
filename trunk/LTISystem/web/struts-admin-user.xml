@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="com.lti.action.admin.user" namespace="/jsp/admin/user"
+		extends="struts-default">
+		<global-results>
+			<result name="exception">/jsp/admin/exception.jsp</result>
+			<result name="message" type="freemarker">
+					/jsp/message.uftl
+				</result>  
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception">
+				</exception-mapping>
+		</global-exception-mappings>
+		<action name="Main" class="/jsp/admin/user/Main">
+			<result name="success">/jsp/admin/user/main.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Save" class="/jsp/admin/user/Save">
+			<result name="input">/jsp/admin/user/save.jsp</result>
+			<result name="success">/jsp/admin/info.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="Search" class="/jsp/admin/user/Search">
+			<result name="success">/jsp/admin/user/search.jsp</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		
+		<action name="UserDetail" class="com.lti.action.admin.user.GetUserDetailAction">
+			<result name="success" type="freemarker">/jsp/admin/user/userdetail.uftl</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		
+		<action name="operation_*" class="com.lti.action.admin.user.UserOperationAction" method="{1}">
+			<result name="success" type="freemarker"> /jsp/admin/user/operation_{1}.uftl </result>
+			<result name="error" type="freemarker"> /jsp/error.uftl </result>
+			<result name="message" type="freemarker"> /jsp/message.uftl </result>
+		</action>
+		<action name="UserProfile" class="com.lti.action.admin.user.UserProfileAction">
+			<result name="success" type="freemarker">/jsp/admin/user/userprofile.uftl</result>
+			<result name="payitem" type="freemarker">/jsp/admin/user/userpayitem.uftl</result>
+			<result name="validtime" type="freemarker">/jsp/admin/user/uservalidtime.uftl</result>
+			<result name="expired" type="freemarker">/jsp/admin/user/userexpired.uftl</result>
+			<result name="status" type="freemarker">/jsp/admin/user/usertrans.uftl</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="UserEmail_*" class="com.lti.action.admin.user.UserEmailAction" method="{1}">
+			<result name="success" type="freemarker">/jsp/admin/user/useremail_{1}.uftl</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="MarketEmail_*" class="com.lti.action.admin.user.MarketEmailAction" method="{1}">
+			<result name="success" type="freemarker">/jsp/admin/user/marketemail_{1}.uftl</result>
+			<result name="main" type="freemarker">/jsp/admin/user/marketemail_mainPage.uftl</result>
+			<result name="output" type="freemarker">/jsp/admin/user/result.uftl</result>
+			<result name="message">/jsp/admin/user/log.jsp</result>
+			<result name="input" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param> 
+				
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">2048</param>  
+			</result>
+			<result name="error">/jsp/admin/error.jsp</result>
+		</action>
+		<action name="UserQuota" class="com.lti.action.admin.user.UserQuotaAction">
+		  <result name="input" type="freemarker">/jsp/admin/user/userQuotaDetail.uftl</result>
+		  <result name="success" type="freemarker">/jsp/admin/user/userQuotaDetail.uftl</result>
+		</action>
+		<action name="UserQuota_modify" class="com.lti.action.admin.user.UserQuotaAction" method="modify">
+		   <result name="error" type="freemarker">/jsp/admin/error.jsp</result>
+		</action>
+	</package>
+</struts>

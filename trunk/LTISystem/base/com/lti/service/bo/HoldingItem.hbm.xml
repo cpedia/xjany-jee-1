@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.lti.service.bo">
+	<class
+		name="HoldingItem"
+		table="ltisystem_holdingitem"
+	>
+		<id
+			name="ID"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="portfolioID"
+			column="portfolioID"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		<property
+			name="securityID"
+			column="securityID"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		<property
+			name="assetName"
+			column="assetName"
+			type="string"
+			not-null="true"
+			length="50"
+		/>
+		<property
+			name="date"
+			column="date"
+			type="java.util.Date"
+			not-null="true"
+		/>
+		<property
+			name="share"
+			column="share"
+			type="java.lang.Double"
+			not-null="true"
+		/>
+		<property
+			name="lastDividendDate"
+			column="lastDividendDate"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		<property
+			name="price"
+			column="price"
+			type="java.lang.Double"
+			not-null="true"
+		/>
+		<property
+			name="reInvest"
+			column="reInvest"
+			type="java.lang.Boolean"
+			not-null="false"
+		/>
+		<property
+			name="symbol"
+			column="symbol"
+			type="string"
+			not-null="true"
+			length="50"
+		/>
+		<property
+			name="percentage"
+			column="percentage"
+			type="double"
+			not-null="true"
+		/>
+	</class>	
+</hibernate-mapping>

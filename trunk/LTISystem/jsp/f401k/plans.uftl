@@ -1,0 +1,197 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>401K, 403B, IRA, ETF Brokerage and Variable Annuity Plans</title>
+<meta name="home" content="vf_current" />
+<meta name="description" content="investment strategies in retirement plans 401(k), 403(b), self-directed IRAs, Variable Universal Life (VULs), taxable brokerage mutual fund and ETF investments based on tactical asset allocation, smart money (GURU) directed asset allocations and modern portfolio theory (MPT) based strategic asset allocations. Optimized (Mean Variance Optimization) efficient frontiers">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<script type="text/javascript" src="http://www.dillerdesign.com/experiment/DD_roundies/DD_roundies_0.0.2a-min.js"></script><script type="text/javascript">
+/* IE only */
+DD_roundies.addRule('.myBox', '20px');
+DD_roundies.addRule('.myBox1', '20px');
+DD_roundies.addRule('.myBox2', '20px');
+DD_roundies.addRule('.myBox3', '20px');
+DD_roundies.addRule('.myBox4', '20px');
+</script>
+<script type="text/javascript">
+[#assign groupid=1]
+[@authz.authorize ifNotGranted="ROLE_ANONYMOUS"]
+[#assign groupid=Session["groups"]]
+[/@authz.authorize]
+function searchByName(){
+		var name = $("#namefield").val();
+		name = escape(name);
+		if(name.length<3){
+			alert("keyword is too small to search.");
+			return;
+		}
+		$('#strategyClassTable').html('please wait for a moment.');
+		[#setting url_escaping_charset='utf8']
+		[#assign urlpre='/LTISystem/f401k_view.action?ID=' /]
+		var url = "/LTISystem/jsp/strategy/GetStrategyTable.action?includeHeader=false&groupIDs=${groupid}&type=2&urlPrefix=${urlpre?url}&keyword="+name;
+		$('#strategyClassTable').load(url);
+}
+</script>
+</head>
+<body>
+<div class=" ">
+<div class="sidebar_box">
+  	<div style="margin-bottom:8px"><span class="sidebar_heading"><strong>Search For A Plan and Its Model Portfolios</strong><span></div>
+  			<div class=" ">
+<script type="text/javascript">
+
+</script>
+
+<table border=0>
+<tr>
+	<td width="35%">
+		<form action='/LTISystem/f401k__search.action' id='vf_PlanSearch' name="vf_PlanSearch" method='post'>
+	    	<input name="groupIDs" value="${groupid}" type="hidden"></input>
+	        <input name="includeHeader" value="true" type="hidden"></input>
+	        <input name="type" value="2" type="hidden"></input>
+	        <input name="urlPrefix" value="/LTISystem/f401k_view.action?ID=" type="hidden"></input>
+	        <input id="n401k_plansearch_text" name="keyword" onfocus='this.value=&quot;&quot;' onblur='if(this.value==&quot;&quot;)' size="18" type="text" value='${Parameters.symbolPlan!""}'>
+	        <input alt='Quote' class='submitSearch' type='submit' value=''/>
+	   </form><!-- end of form -->
+	   </span>
+	
+	</td>
+        <td align="left">
+           <ul>
+             <li><h3>For 401(k)/403(b), Enter your company/organization name</h3></li>
+             <li><h3>For brokerage ETFs and Mutual Funds portfolios, enter your brokerage name</h3></li>
+             <li><h3>For others, enter keywords in your plan name</h3></li>
+           </ul>
+        </td>
+</tr>
+</table>
+</div>
+</div>
+
+<p>The available investment funds of a plan are obtained based on public filing information and users' input. If you can not find your plans or you think they need to be updated/corrected, please email us your plans investment options (a list of investment funds. They could be mutual funds (thus preferably their symbols), trusts and Separately Managed Accounts (SMAs)). You can find this information from your Summary Plan Descriptions (SPD) document (in 401K/403B cases) or through your online accounts. Other important information includes the redemption period for each fund. By default, we assume that funds (other than money market funds and ETFs) have a minimum three month (90 days) holding period to avoid redemption charge. </p>
+<p><strong><a href="mailto:support@myplaniq.com?subject=My company plan's investment options">Email your plan's investment options</a></strong></p>
+
+<p><a href="/LTISystem/f401k_showplanscorelist.action"><strong>PlanRatingIQ Investment Choices Ranking</strong><sup><i><font color="orange">new</font></i></sup></a></p>
+
+      <div style="width:100%">
+         <div class="col-1" style="width:48%">
+ 
+          <h2>401(k) Plans</h2>
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]false[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="ids"]880|673|688|690|920|774|1089|1079|1024|1028|715|716|817|723|791|676|1014|919|1119|990|686|708[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>
+          </div>
+
+          <h2>Universities 403(b), 457 Plans</h2>
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]false[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="ids"]1076|691|1081|685|692|1128|1075|1082|1077|1074|1134|1135|1136|1137|1112|1218|1224|1225|1226|1227|1228[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>
+          </div>
+         <p> <strong>... Search for more plans ...</strong></p>
+         </div>
+
+         <div class="col-2" style="width:48%">
+          <h2>IRA/Taxable ETF Plans</h2>
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]false[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="ids"]989|1026|1027|735|991|714|728|1094|1196|1210|1152|1148|1147|1169|1174|1175|1211|1172|1173|[/@s.param]
+          [@s.param name="width"]400[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>
+          </div>
+
+          <h2>Lazy Portfolios Plans</h2>
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]false[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="ids"]1147|1148|1151|1153|1157|1159|1160|1161|1162|1208[/@s.param]
+          [@s.param name="width"]400[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>
+          </div>
+
+          <h2>Brokerage No Load No Transaction Fee Plans</h2>
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]false[/@s.param]
+          [@s.param name="width"]400[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="ids"]725|727|724|1032|679[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>         
+          </div>
+
+          <h2>Variable Annuities and VULs Plans</h2>
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]false[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="width"]400[/@s.param]
+          [@s.param name="ids"]1025|1029|1030|1031|1505|1507|1058|1055|1508[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div>
+          </div>
+ 
+          <h2>College Savings 529 Plans</h2>
+          <div class="dividerTop">
+          <div id='strategyClassTable'>
+          [@s.action name="GetStrategyTable" namespace="/jsp/strategy" executeResult=true]
+          [@s.param name="includeCategory"]false[/@s.param]
+          [@s.param name="includeClass"]false[/@s.param]
+          [@s.param name="includePortfolio"]false[/@s.param]
+          [@s.param name="groupIDs"]${groupid}[/@s.param]
+          [@s.param name="width"]400[/@s.param]
+          [@s.param name="ids"]717[/@s.param]
+          [@s.param name="type"]2[/@s.param]
+          [@s.param name="urlPrefix"]/LTISystem/f401k_view.action?ID=[/@s.param]
+          [/@s.action] 
+          </div> 
+          </div>        
+       </div>
+    </div>
+</body>
+</html>

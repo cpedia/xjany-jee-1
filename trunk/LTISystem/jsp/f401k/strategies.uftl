@@ -1,0 +1,73 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#assign authz=JspTaglibs["/WEB-INF/authz.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+<head>
+<title>MyPlanIQ Asset Allocation Investment Strategies</title>
+
+<meta name="home" content="vf_current" />
+<meta  name="Description" content="MyPlanIQ provides Strategic and Tactical Asset Allocation strategies customized to your risk profile and your plan. The strategies are based on principles widely tested and adopted by academic research and wealth managers.">
+<meta name="keywords" content="401K, IRA, 403(b), SEP, SIMPLE, College Saving Plans 529, Variable Universal Life (VULs), Deferred Compensation Plans, Taxable Accounts, Brokerage, ETFs, Mutual Funds, Investment Strategies, Asset Allocation, Tactical Asset Allocation, Strategic Asset Allocation, Global Tactical Asset Allocation">
+<script src="jsp/images/jquery.tablesorter/jquery.tablesorter.js" type="text/javascript"></script>
+<script src="jsp/images/jquery.tablesorter/jquery.tablesorter.pager.js" type="text/javascript"></script>
+<style type="text/css">
+ p{color: black}
+</style>
+</head>
+<body>
+<div class="col-1">
+   
+   <div class="sidebar_box_noPadding roundHeadingGreen">
+	 <div class="sidebar_box_heading_white">Strategies</div>
+	 <div class="sidebar_box_content">
+           <p><a target="_blank" href="jsp/strategy/View.action?ID=771">Strategic Asset Allocation(SAA)</a></p>
+           <p><a target="_blank" href="jsp/strategy/View.action?ID=1003">Tactical Asset Allocation(TAA)</a></p>
+         </div>
+   </div>
+</div>
+<div class="col-2">
+<h1 align="center">Investment Strategies</h1>
+<p>MyPlanIQ provides Strategic and Tactical Asset Allocation strategies customized to your risk profile and a plan that usually consists of:  mutual funds, Separately Managed Accounts (SMAs), commingled funds, trusts or ETFs. </p>
+<p>The strategies are based on principles widely tested and adopted by academic research and wealth managers. The model portfolios have been monitored since March 2009 and have delivered outstanding risk-adjusted returns for the hundreds of plans supported by MyPlanIQ.</p>
+
+<table class="image">
+<caption align="bottom">The MyPlanIQ flow uses the personal risk profile to drive the asset allocation which is then mapped to the funds available in your plan. This results in a portfolio totally customized to your risk profile and plan</caption>
+<tr><td>
+<img width="566" height="410" style="border:3px outset #545565;" alt="" src="/LTISystem/UserFiles/Image/Alloc-diag.jpg" /></td></tr>
+</table>
+
+<h2 align="left">Asset Allocation</h2>
+<p><strong>Asset Allocation</strong> is the key to portfolio return and risk. In a study of hundreds of US pension funds by <a href="http://en.wikipedia.org/wiki/Asset_allocation">Gary Brinson, Randolph Hood and Gilbert Beebower</a>, it was found that asset allocation is responsible for over 90% of variations in portfolio return. MyPlanIQ provides two asset allocation strategies: <a target="_blank" href="jsp/strategy/View.action?ID=771">Strategic Asset Allocation (SAA)</a> and <a target="_blank" href="jsp/strategy/View.action?ID=1003">Tactical Asset Allocation(TAA)</a></p>
+
+<h2 align="left">Diversification and Risk Management</h2>
+<p>MyPlanIQ asset allocation strategies have two key features:
+<ul>
+<li><strong>Diversification: </strong>Allocating capital into a wide array of assets available in any given plan. Major assets include US equity (further decomposed into small, mid and large cap with value and growth styles), International equity, emerging market equity, domestic and international real estate investment trusts (REITs) , commodities and fixed income (US corporate bonds, treasury bonds, inflation protected treasury (TIPs), foreign and emerging market bonds).</li>
+<li><strong>Risk Management: </strong>Allocating capital based on personal risk tolerance. The strategies rigorously monitor portfolios and perform necessary rebalancing. Equities (stocks), commodities and certain fixed income funds such as high yield corporate bonds and long term treasury/corporate bonds are classified as risky assets. MyPlanIQ uses a <strong>RiskProfile</strong> number to control the allocation of risky assets.</li>
+</ul>
+</p>
+
+<h2 align="left">Fund Selection</h2>
+<p>Once an asset allocation is derived, MyPlanIQ applies a proprietary fund selection algorithm to pick the best funds in a plan for each asset class. Academic studies have shown that good fund selection can add an extra 1%-2% return. For example, in an <a href="http://www.palgrave-journals.com/jam/journal/v8/n1/pdf/2250056a.pdf">article</a> published in Journal of Asset Management (May, 2007), B. Arshanapalli , L. Switzer and K. Panju concluded that active multi-style rotation strategies can be devised to outperform the best performing buy-and-hold portfolio. Various articles have reached similar conclusions. </p>
+
+<h2 align="left">Strategic vs. Tactical Asset Allocation</h2>
+
+<ul>
+<li><a target="_blank" href="jsp/strategy/View.action?ID=771">Strategic Asset Allocation (SAA)</a> is based on widely practiced  <em>modern portfolio theory: </em>the portfolio diversification into an array of asset classes which are not strongly correlated. The allocation is based on your risk tolerance and the long term asset return characteristics. SAA periodically rebalances asset allocation based on present target allocation. It only makes major allocation change if a major life events such as retirement, marriage, college education occurs. </li>
+<li><a target="_blank" href="jsp/strategy/View.action?ID=1003">Tactical Asset Allocation (TAA)</a>is based on a key factor of asset price trends. Researchers have found that return (price) momentum in major assets can improve risk adjusted returns dramatically. TAA dynamically changes the asset allocation based on major asset trends while preserving the acceptable risk tolerance. It does not try to take advantage of minor assets, sectors or industries trends which are more unpredictable.</li>
+<!-- <li><a target="_blank" href="jsp/strategy/View.action?ID=746">Optimized Asset Allocation:</a> this strategy uses mathematical optimization  theory to derive an optimal asset allocation. Allocations into risky assets are  again decided by the risk tolerance. Expected returns of underlying assets in  funds available from your plan are based on past performance. Similar to  Tactical Asset Allocation, this is again a variation of momentum based  strategies. </li>
+<li><a target="_blank" href="jsp/strategy/View.action?ID=744">Guru Directed Asset Allocation:</a> this strategy derives periodical asset  allocations&nbsp;by following smart (top performing in turns of risk adjusted  returns) asset allocation managers&rsquo; decisions. </li>
+-->
+</ul><br>
+<p>SAA adheres to a preset allocation while TAA tries to take advantage of intermediate asset trends. In general, SAA works best in economic expansion cycles while TAA works best in economic cycles in which strong trends are present. TAA performs much better in market downturns.</p>
+
+<h2>Strategy Performance</h2>
+<p>From 12/31/2001 to 2010, with the emphasis of diversification and superior fund selection, SAA's moderate model portfolios delivered an extra 1-2% annualized return over a standard balance fund benchmark such as Vanguard Balance Fund Index (VBINX). During the same period, TAA adds an extra 4-6% annualized return over SAA. All of these are based on historical simulation over the hundreds of plans MyPlanIQ covers. Basic TAA has been on line and monitored daily since March 2009. </p>
+<p><img width="566" height="410" style="border:3px outset #545565;" alt="" src="/LTISystem/UserFiles/Image/returns-graph.jpg" /></p>
+
+<p>You are reminded that past performance does not guarantee the future return and these strategies should be followed with further research and consultation with experts. Please visit individual strategy pages for more information.</p>
+<br /> <br />
+</div>
+</body>
+</html>

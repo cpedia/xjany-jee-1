@@ -1,0 +1,46 @@
+<script src="/LTISystem/jsp/template/ed/js/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="/LTISystem/jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.js" type="text/javascript"></script>
+<link href="/LTISystem/jsp/portfolio/images/jquery.ajaxAutoComplete/jquery.suggest.css" rel="stylesheet" type="text/css" />
+
+<script>
+ $(function() {
+ 	var indexCount = 1;
+ 	
+ 	while(true){
+ 		$("#index" + indexCount).suggest("jsp/ajax/GetSecuritySuggestTxt.action",
+ 									 	{ 	haveSubTokens: true, 
+ 									 		onSelect: function(){}});
+ 		indexCount++;
+ 		if(indexCount>4)break;
+ 	}
+ 	$('#index1').val("VFINX");
+ 	$('#index2').val("VBINX");
+ 	
+ 	
+ });
+ function compare(){
+ 	 $.ajax({type: "post",  
+          url:'profile_getflashchart.action?includeHeader=false&portfolioID=${Parameters.portfolioID}',
+          data: $('#flash_chart_form').serialize(),
+          dataType: "html",  
+          success: function(result){
+          	$('#inner_flash_chart').html(result);
+          	$('#inner_flash_chart').css({height:'700px'});
+          }   
+      });
+ }
+</script>
+<h2>Historical Performance Chart</h2>
+
+<form id='flash_chart_form' action=''>
+Symbols: <input type="hidden" name="symbol" value="P_${Parameters.portfolioID}"></input>
+		<input type="hidden" name="symbolList[0]" value="P_${Parameters.portfolioID}" readonly/>
+		<input type="text" name="symbolList[1]" id="index1"/>
+		<input type="text" name="symbolList[2]" id="index2"/>
+		<input type="text" name="symbolList[3]" id="index3"/>
+		<input type="text" name="symbolList[4]" id="index4"/>
+		<input type="button" value="Compare" onclick='compare()' class='uiButton'/>
+	</form>
+
+	<div id='inner_flash_chart' class='expandcontent'>
+	</div>

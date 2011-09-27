@@ -1,0 +1,64 @@
+[#ftl]
+[#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]]
+[#import "/jsp/lti_library_ftl.jsp" as lti]
+<html>
+	<head>
+	<title>Fund Table Confugeration</title>
+	<SCRIPT src="../images/common.js" type=text/javascript></SCRIPT>
+	<link href="../images/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../images/jquery-1.2.6.min.js"></script>
+	</head>
+	<body>
+	<table class="nav" width="100%">
+			<td width="20%">
+				[@s.url action="Fundtable_main.action" id="url_tablemain" namespace="/jsp/admin/fundlist"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_tablemain}"]FundTable List Configeration[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="ExecutionFundTable.action" id="url_exetable" namespace="/jsp/admin/fundlist"  includeParams="none"]		
+				[/@s.url]	
+				[@s.a href="%{url_exetable}"]FundTable List Operation Statement[/@s.a]
+			</td>
+			<td width="20%">
+				[@s.url action="Main.action" id="url_main" namespace="/jsp/admin/fundlist"  includeParams="none"]
+				[/@s.url]
+				[@s.a href="%{url_main}"]Upload FundTable List[/@s.a]	
+			</td>
+		</table>	
+		<br>
+		<div>
+		<fieldset>
+			<legend>FundTable List Area</legend>
+		<form action="Fundtable_execute401kFile.action" method="post">
+			<input type="hidden" name="action" value="execute">
+			Start operating the fund table list:
+			<input type="submit" value="Execute">
+		</form>
+		<br>
+		<form action="Fundtable_execute401kFile.action" method="post">
+			<input type="hidden" name="action" value="stop">
+			Stop operating the fund table list:
+			<input type="submit" value="Stop">
+		</form>
+		FundTable List Execution Report: <a href="Fundtable_Load401kFile.action"><strong>401kFile_Report.csv</strong></a>
+		</fieldset>
+		<br>
+		<fieldset>
+			<legend>Ticker Search Area</legend>
+		<form action="Fundtable_executeTickerSearch.action" method="post">
+			<textarea id="id_string" name="idString"  cols="40" rows="5"></textarea><br>
+			Please input the plan's IDs like this: 1472,1485,1490,1488,1489,1490,1491,1492,1493,1496,1506,1507,1508,<br>
+			<strong>Start TickerSearch:</strong>
+			<input type="submit" value="Execute">
+		</form>
+		FundTable List Execution Report: <a href="Fundtable_LoadTickerFile.action"><strong>TickerSearch_Report.csv</strong></a>
+		</fieldset>
+		</div>
+	<div>
+		[#if message??]
+			${message}
+		[/#if]
+	</div>
+	</body>
+</html>

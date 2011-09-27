@@ -1,0 +1,402 @@
+.mpiq_show_text {width:auto;height:auto;font-size: 10px;border:0px solid #fff;background:#fff;width:98%}  
+.mpiq_edit_text {border:1px solid #369;background:#fff;;width:98%}  
+
+table.mpiq_table {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	text-align: left;
+}
+table.mpiq_table thead tr th, table.mpiq_table tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 8pt;
+	padding: 4px;
+}
+table.mpiq_table thead tr .header {
+	background-image: url('/LTISystem/jsp/template/ed/images/bg.png');
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.mpiq_table tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.mpiq_table tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+
+table.mpiq_fund_table {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	text-align: left;
+}
+table.mpiq_fund_table thead tr th, table.mpiq_fund_table tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 8pt;
+	padding: 4px;
+}
+table.mpiq_fund_table thead tr .header {
+	background-image: url('/LTISystem/jsp/template/ed/images/bg.png');
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.mpiq_fund_table tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.mpiq_fund_table tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+
+.appendthis a{
+    cursor: pointer;
+    display: block;
+}
+
+.appendthis a:hover{
+    cursor: pointer;
+    display: block;
+    background-color:#F0F0F6;
+}
+
+.planappendhere a{
+    cursor: pointer;
+    display: block;
+}
+
+.planappendhere a:hover{
+    cursor: pointer;
+    display: block;
+    background-color:#F0F0F6;
+}
+
+#mpiq_id123{
+font-family: Arial,Helvetica,sans-serif;
+}
+
+.mp_container{
+float: left;
+}
+
+#mp_plantable{
+	font-size: 13px;
+}
+
+.mp_assetTitle {
+    background: none repeat scroll 0 0 #FFEFD5;
+    font-weight: bold;
+}
+.mp_head {
+	background-color: #456892;
+	border-bottom: 1px solid #456892;
+	border-top: 1px solid #456892;
+	box-shadow: 0 2px 0 0 #456892, 0 -1px 0 0 #456892;
+	display: #456892;
+	margin-bottom: 2px;
+	height:30px;
+}
+.mp_head1 {
+	background-color: #BBBBBB;
+    border-top: 2px solid #BBBBBB;
+    display: block;
+}
+#search {
+	border-radius: 5px 5px 5px 5px;
+	display: inline-block;
+}
+.mp_search {
+	display: block;
+	position: relative;
+	text-align: center;
+}
+
+#mp_heardname{
+	margin: 10px;
+	font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+#create_mp_heardname{
+	margin: 10px;
+	font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.mp_input {
+	color: #7E7E7E;
+	font-family: Tahoma, sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+	padding: 3px 0 7px 10px;
+	width: 359px;
+	z-index: 4000;
+	margin-top: 10px;
+height: 26px;
+	margin-right: 10px;
+}
+.search-filter {
+	float: right;
+	display: inline-block;
+	line-height: 26px;
+}
+.search-filter strong {
+	background-color: #F5F5F5;
+	border-bottom-right-radius: 5px;
+	border-left: 1px solid #C1C1C1;
+	border-right: 1px solid #C1C1C1;
+	border-top-right-radius: 5px;
+	box-shadow: 0 -1px 0 0 #E1E1DF inset;
+	color: #7E7E7E;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 12px;
+	line-height: 16px;
+	padding: 7px 11px 7px 10px;
+	position: relative;
+	z-index: 4050;
+}
+.mp_sprite:hover {
+	background: url("/LTISystem/jsp/images/search_glass.png") no-repeat scroll center center;
+	border: 1px solid #444444;
+	border-radius: 4px 4px 4px 4px;
+	background-color: #328B32;
+	cursor: pointer;
+}
+.mp_sprite {
+	background: url("/LTISystem/jsp/images/search_glass.png") no-repeat scroll center center;
+	background-color: #214D21;
+	border: 1px solid #6C5233;
+	border-radius: 4px 4px 4px 4px;
+	height: 27px;
+	top: 0px;
+	width: 31px;
+	cursor: pointer;
+}
+.inner-boundary {
+    background-color: #F4F4F4;
+    background-repeat: repeat-x;
+    height: 700px;
+    overflow: auto;
+    border: 1px solid #BBBBBB;
+}
+#mp_myportf{
+	overflow: auto;height: 100px;
+	font-size: 12px;
+}
+
+#mp_myportf table{
+	font-size: 12px;
+}
+
+#mp_myportf .header{
+	background-color: #4D6E4F;
+	color: #FFFFFF;
+}
+ 
+#mp_lista a b{
+	background: url("/LTISystem/jsp/images/collapsed.gif") no-repeat scroll 3px 10px #5263AB;
+	cursor: pointer;
+    background-color: #BDB6B5;
+    border-bottom: 1px solid #999999;
+    border-top: 1px solid #FFFFFF;
+    display: block;
+    text-align: center; 
+    line-height: 2em;
+}
+
+#mp_lista .collArrow b{
+	background: url("/LTISystem/jsp/images/expanded.gif") no-repeat scroll 3px 10px #5263AB;
+    background-color:#317931;
+    color: #FFFFFF;
+}
+#mp_lista a b:hover {
+	
+    background-color: #317931;
+    color: #FFFFFF;
+}
+.mpiq_autocomplete *{
+	font-size:10pt;
+}
+.odd {
+	background: none repeat scroll 0 0 #E5E5E5;;
+}
+
+.even {
+	background: none repeat scroll 0 0 #FFFFFF;
+}
+.ui-accordion A{
+	zoom:0 !important
+}
+#mp_loadheard
+{
+  filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+ background: none repeat scroll 0 0 #FFFFFF;
+}
+#mp_loading {
+	display:none;
+	width:100px;
+	height:20px;
+	background:#008800;    /*A9A9A9*/
+	padding:5px;
+	position:fixed;
+	left: 200px;
+    top: 200px
+}
+
+#mp_createplan {
+	display:none;
+	width:auto;
+	height:auto;
+	background-color:#DFF1DF;
+	padding:5px;
+	position:fixed;
+	left: 200px;
+    top: 300px
+}
+
+#mp_getBenchMarks{
+	display:none;
+	width:540px;
+	height:auto;
+	background-color:#DFF1DF;
+	padding:5px;
+	position:absolute;
+	left: 30px;
+    top: 150px;
+    overflow: auto;
+}
+
+#mp_loading2 {
+	width:180px;
+	height:120px;
+	background:#DFF1DF;
+	padding:5px;
+	position:fixed;
+	left: 200px;
+    top: 200px
+}
+
+
+#mp_register {
+	display:none;
+	width:205px;
+	height:270px;
+	background:#DFF1DF;   /*214D21*/
+	position:absolute;
+	left: 200px;
+	resize: none;
+    top: 200px
+}
+.txtArea {
+	resize: none;
+}
+#mp_loading div {
+	width:1px;
+	height:20px;
+	background:#F1FF4D;
+}
+
+#mp_pane2{
+	background: none repeat scroll 0pt 0pt #DFF1DF;
+}
+#mp_pane1{
+	background: none repeat scroll 0pt 0pt #DFF1DF;
+}
+
+#mp_content{
+	font-size: 12px;
+}
+
+#mp_title{
+	font-size: 12px;
+}
+
+.close{
+	background: url("/LTISystem/jsp/images/icon.png") no-repeat scroll -185px -18px transparent;
+    float: right;
+    height: 15px;
+    overflow: hidden;
+    width: 15px;
+    cursor: pointer;
+}
+
+.expIco{
+	padding-left: 20px;
+	background: url(/LTISystem/jsp/images/plus.gif) no-repeat 0px 2px;
+}
+.collIco{
+	padding-left: 20px;
+	background: url(/LTISystem/jsp/images/minus.gif) no-repeat 0px 2px;
+}
+
+.mpiq_readtext{
+   background: none repeat scroll 0 0 #F4F4F4;
+   border: 0 solid #FFFFFF;
+   text-align:center;
+}
+
+.mpiq_customize_ui_widget{
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 0.8em;
+}
+
+.mpiq_greytext{
+  background: none repeat scroll 0 0 #D9D9D9;
+}
+
+#mp_detail{
+	display:none;
+	width:auto;
+	height:auto;
+	background:#DFF1DF;    /*A9A9A9*/
+	padding:5px;
+	position:fixed;
+	left: 200px;
+    top: 200px
+}
+#mp_customers
+{
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	width:100%;
+	border-collapse:collapse;
+}
+#mp_customers td, #mp_customers th 
+{
+	font-size:1em;
+	border:1px solid #98bf21;
+	padding:3px 7px 2px 7px;
+}
+
+#mp_customers th 
+{
+	font-size:1.1em;
+	text-align:left;
+	padding-top:5px;
+	padding-bottom:4px;
+	background-color:#A7C942;
+	color:#ffffff;
+}
+
+#mp_customers tr.mp_alt td 
+{
+	color:#000000;
+	background-color:#EAF2D3;
+}
+
+#mp_chrows{
+	overflow-y:hidden; height:auto;
+}

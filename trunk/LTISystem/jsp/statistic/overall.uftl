@@ -1,0 +1,147 @@
+[#ftl]
+<html>
+<head>
+<title>
+Statistic
+</title>
+</head>
+<body>
+[#if users?? && users?size>0]
+<p>
+	<h1>Registered Users (${users?size})</h1>
+	<table cellspacing="1" cellpadding="0" width="100%" bgcolor="#000000" border="0">
+		<tr bgcolor="#FFFFFF">
+			<td>Registered Time</td>
+			<td>User ID</td>
+			<td>User Name</td>
+		</tr>
+		[#list users as user]
+			<tr bgcolor="#FFFFFF">
+				<td>${user.createdDate?string("yyyy-MM-dd")}</td>
+				<td>${user.ID?string.computer}</td>
+				<td>${user.userName}</td>
+			</tr>
+		[/#list]
+	</table>
+</p>
+[/#if]
+
+
+
+[#if transactions?? && transactions?size>0]
+<p>
+	<h1>Payment Statistic (${transactions?size})</h1>
+	<table cellspacing="1" cellpadding="0" width="100%" bgcolor="#000000" border="0">
+		<tr bgcolor="#FFFFFF">
+			<td>Created Date</td>
+			<td>User Name</td>
+			<td>Payer Email</td>
+			<td>Payer Status</td>
+			<td>Item Name</td>
+			<td>Payment Gross</td>
+			<td>Payment Date</td>
+			<td>Payment Status</td>
+			<td>Transaction Type</td>
+			
+			
+		</tr>
+		[#list transactions as transaction]
+			<tr bgcolor="#FFFFFF">
+				<td>${transaction.timeCreated?string("yyyy-MM-dd")}</td>
+				<td>${transaction.userName!""}</td>
+				<td>${transaction.payerEmail!""}</td>
+				<td>${transaction.payerStatus!""}</td>
+				<td>${transaction.itemName!""}</td>
+				<td>${transaction.paymentGross!""}</td>
+				<td>[#if transaction.paymentDate??]${transaction.paymentDate?string("yyyy-MM-dd")}[/#if]</td>
+				<td>${transaction.paymentStatus!""}</td>
+				<td>${transaction.txnType!""}</td>
+				
+				
+			</tr>
+		[/#list]
+	</table>
+</p>
+[/#if]
+
+
+
+
+[#if portfolios?? && portfolios?size>0]
+<p>
+	<h1>Created Portfolios (${portfolios?size})</h1>
+	<table cellspacing="1" cellpadding="0" width="100%" bgcolor="#000000" border="0">
+		<tr bgcolor="#FFFFFF">
+			<td>Created Date</td>
+			<td>Created User</td>
+			<td>Portfolio ID</td>
+			<td>Portfolio Name</td>
+			<td>Have a Plan?</td>
+			
+			
+		</tr>
+		[#list portfolios as portfolio]
+			<tr bgcolor="#FFFFFF">
+				<td>${portfolio.createdDate?string("yyyy-MM-dd")}</td>
+				<td>${portfolio.userName}</td>
+				<td>${portfolio.ID?string.computer}</td>
+				<td>${portfolio.name}</td>
+				<td>${portfolio.attributes["planName"]!""}</td>
+				
+				
+			</tr>
+		[/#list]
+	</table>
+</p>
+[/#if]
+
+
+
+
+[#if strategies?? && strategies?size>0]
+<p>
+	<h1>Created Strategies (${strategies?size})</h1>
+	<table cellspacing="1" cellpadding="0" width="100%" bgcolor="#000000" border="0">
+		<tr bgcolor="#FFFFFF">
+			<td>Created Date</td>
+			<td>Created User</td>
+			<td>Strategy ID</td>
+			<td>Strategy Name</td>
+			<td>Plan Type</td>
+			<td>Status</td>
+			
+		</tr>
+		[#list strategies as strategy]
+			<tr bgcolor="#FFFFFF">
+				<td>${strategy.createdDate?string("yyyy-MM-dd")}</td>
+				<td>${strategy.userName}</td>
+				<td>${strategy.ID?string.computer}</td>
+				<td>${strategy.name}</td>
+				<td>
+					[#if strategy.planType == 0]0. Default[/#if]
+					[#if strategy.planType == 1]1. Retirement 401k Plan[/#if]
+					[#if strategy.planType == 2]2. Retirement 403b Plan[/#if]
+					[#if strategy.planType == 3]3. Retirement 457 Plan[/#if]
+					[#if strategy.planType == 4]4. IRA/Taxable ETF Plan[/#if]
+					[#if strategy.planType == 5]5. Brokerage Mutual Fund Plan[/#if]
+					[#if strategy.planType == 6]6. Lazy Portfolio Plan[/#if]
+					[#if strategy.planType == 7]7. Variable Annuities[/#if]
+					[#if strategy.planType == 8]8. Variable Universal Life Plan[/#if]
+					[#if strategy.planType == 9]9. College Savings 529 Plan[/#if]
+				</td>
+				<td>
+					[#if strategy.status == 0]0. Default[/#if]
+					[#if strategy.status == 1]1. No Options[/#if]
+					[#if strategy.status == 2]2. Unmatched[/#if]
+					[#if strategy.status == 3]3. Matched[/#if]
+					[#if strategy.status == 4]4. Ready to generate[/#if]
+					[#if strategy.status == 5]5. Live[/#if]
+				</td>
+			</tr>
+		[/#list]
+	</table>
+</p>
+[/#if]
+
+</body>
+</html>

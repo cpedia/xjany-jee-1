@@ -1,0 +1,18 @@
+<searchconfiguration>
+	<applicationkey>
+		<applicationKey>
+		ABQIAAAAhusOTcdSyROglnsb_CkDABRl_cBct8GRLzet8DutxYTyl-yR9BS8TcpQLesPoBtVWiYW7wM7jFW4Bw
+		</applicationKey>
+		<site>
+			Google
+		</site>
+	</applicationkey>
+	<searchsite>
+		<name>baidu</name>
+		<address>baidu.com</address>
+	</searchsite>
+	<searchsite>
+		<name>yahoo</name>
+		<address>www.yahoo.com</address>
+	</searchsite>
+</searchconfiguration>

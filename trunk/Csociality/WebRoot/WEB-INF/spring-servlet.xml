@@ -26,7 +26,7 @@
 				<prop key="datetime_format">yyyy-MM-dd</prop>
 				<prop key="date_format">yyyy-MM-dd</prop>
 				<prop key="number_format">#.##</prop>
-				<prop key="auto_import">/WEB-INF/ftl/pony/index.ftl as p,/WEB-INF/ftl/spring.ftl as s</prop>
+				<prop key="auto_import">/ftl/pony/index.ftl as p,/ftl/spring.ftl as s </prop>
 			</props>
 		</property>
 	</bean>

@@ -64,9 +64,16 @@ public class DistrictServiceImpl implements DistrictService
 		return districtDAO.getMaxLength();
 	}
 
-	public boolean checkDistrict(District district, List<District> propertyName, Object[] value)
-	{
-		return districtDAO.check(district, propertyName, value);
+	@Override
+	public boolean checkDistrict(District district,
+			List<District> propertyName, Object[] value) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+
+//	public boolean checkDistrict(District district, List<District> propertyName, Object[] value)
+//	{
+////		return districtDAO.check(district, propertyName, value);
+//	}
 
 }

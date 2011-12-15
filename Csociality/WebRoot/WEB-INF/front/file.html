@@ -40,8 +40,10 @@
 		alert("error")
 	</script>
 	</#if>
-	<a href="/file.do?upId=0">root</a> <#list filelist as file>
-	<!-- ${file.id!""} --><br>文件列表:<br>
+	<a href="/file.do?upId=0">root</a> 
+	<br>文件列表:<br>
+	<#list filelist as file>
+	<!-- ${file.id!""} -->
 	<a href="/file.do?upId=${file.id!''}">${file.name!""}</a>
 	<br> </#list>
 

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>文件管理系统</title>
+<script type="text/javascript" src="/include/jquery.js"></script>
+</head>
+<script language="javascript">
+   function getselectvalue()
+ {
+	
+    var sel=document.getElementById("rtl");
+    var index = sel.selectedIndex;   
+    var text = sel.options[index].value; 
+    if(text==1){
+    	$("#dir").css("display","block");
+    	$("#file").css("display","none");
+    }else{
+    	$("#dir").css("display","none");
+    	$("#file").css("display","block");
+    }
+ }
+ </script>
+<body>
+	<select name="path" onclick="getselectvalue()" id="rtl">
+		<option value="1">新建文件夹</option>
+		<option value="0">新建文件</option>
+	</select>
+	<form id="dir" action="fileAdd.do">
+		文件夹名: <input type="text" name="name" /> 
+				<input type="hidden" name="${file.id!''}" />
+				<input type="submit" value="新建文件夹" />
+	</form>
+	<form id="file" action="fileAdd.do" style="display:none">
+		文件名: <input type="text" name="name" /> 
+				<input type="hidden" name="${file.id!''}" />
+				<input type="submit" value="新建文件" />
+	</form>
+	<#if msg?? && msg == 'error'>
+	<script>
+		alert("error")
+	</script>
+	</#if>
+	<a href="/file.do?upId=0">root</a> <#list filelist as file>
+	<!-- ${file.id!""} --><br>文件列表:<br>
+	<a href="/file.do?upId=${file.id!''}">${file.name!""}</a>
+	<br> </#list>
+
+</body>
+</html>

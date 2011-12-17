@@ -24,16 +24,18 @@ import com.xjany.service.FileService;
 public class FileAction {
 	@Autowired
 	private FileService fileService;
-	
+
 	@RequestMapping(params = "method=add")
 	public String addFile(HttpServletRequest request, ModelMap model, File file)
 			throws Exception {
 		int upId = 0;
-		if (request.getParameter("upId") != null)
+		if (request.getParameter("upId") != null
+				&& !"".equals(request.getParameter("upId")))
 			upId = Integer.parseInt(request.getParameter("upId"));
 		fileService.addFile(file, upId);
 		List<File> list = fileService.findByUpId(upId);
 		model.addAttribute("upId2", upId);// request保存这个对象
+		model.addAttribute("id", upId);// request保存这个对象
 		model.addAttribute("filelist", list);// request保存这个对象
 		return "file";
 	}
@@ -42,23 +44,31 @@ public class FileAction {
 	public String getList(HttpServletRequest request, ModelMap model, File file)
 			throws Exception {
 		int upId = 0;
+		int id = 0;
 		if (request.getParameter("upId") != null)
 			upId = Integer.parseInt(request.getParameter("upId"));
 		List<File> list = fileService.findByUpId(upId);
+		try {
+			id = fileService.findById(upId).getUpId(); // 上级的UPID
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		model.addAttribute("upId2", upId);// request保存这个对象
+		model.addAttribute("id", id);// request保存这个对象
 		model.addAttribute("filelist", list);// request保存这个对象
 		return "file";
 	}
 
 	/**
-	 * 上传文件测试
+	 * 上传文件
 	 * 
 	 * @param request
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST, params = "method=upload")
-	public String upload(HttpServletRequest request, ModelMap model,File fileUpload) {
+	public String upload(HttpServletRequest request, ModelMap model,
+			File fileUpload) {
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		/** 构建图片保存的目录 **/
@@ -72,22 +82,25 @@ public class FileAction {
 			logoSaveFile.mkdirs();
 		/** 页面控件的文件流 **/
 		MultipartFile multipartFile = multipartRequest.getFile("file");
-		/** 获取文件的后缀 **/
-		String suffix = multipartFile.getOriginalFilename().substring(
-				multipartFile.getOriginalFilename().lastIndexOf("."));
+
+		// /** 获取文件的后缀 **/
+		// String suffix =
+		// multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
 		// /**使用UUID生成文件名称**/
 		// String logImageName = UUID.randomUUID().toString()+ suffix;//构建文件名称
-		String logImageName="";
+
+		String logImageName = "";
 		try {
-			logImageName = new String(multipartFile.getOriginalFilename().getBytes("ISO8859-1"),"UTF-8");
+			logImageName = new String(multipartFile.getOriginalFilename()
+					.getBytes("ISO8859-1"), "UTF-8"); // 处理字符问题
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		/** 拼成完整的文件保存路径加文件 **/
-		String fileName = logoRealPathDir + java.io.File.separator + logImageName;
+		String fileName = logoRealPathDir + java.io.File.separator
+				+ logImageName;
 		java.io.File file = new java.io.File(fileName);
-		
+
 		try {
 			multipartFile.transferTo(file);
 			int upId = 0;

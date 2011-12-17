@@ -22,7 +22,7 @@ public class FileDAOImpl extends GeneriDAOImpl<File, Integer> implements FileDAO
 	@Transactional(readOnly = true)
 	public List<File> findByUpId(int upId) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery( "from File as a where a.upId="+upId);
+		Query query = session.createQuery( "from File as a where a.upId="+upId +" order by path");
 		List<File> list = query.list();
 		return list;
 	}

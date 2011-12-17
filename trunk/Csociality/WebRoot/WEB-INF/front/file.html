@@ -23,28 +23,35 @@
 <body>
 	<select name="path" onclick="getselectvalue()" id="rtl">
 		<option value="1">新建文件夹</option>
-		<option value="0">新建文件</option>
+		<option value="0">上传文件</option>
 	</select>
-	<form id="dir" action="fileAdd.do">
+	<form id="dir" action="file.do" >
 		文件夹名: <input type="text" name="name" /> 
-				<input type="hidden" name="${file.id!''}" />
+				<input type="hidden" name="method" value="add"/>
+				<input type="hidden" name="path" value="0"/>
+				<input type="hidden" name="upId" value="${upId2!''}" />
 				<input type="submit" value="新建文件夹" />
 	</form>
-	<form id="file" action="fileAdd.do" style="display:none">
-		文件名: <input type="text" name="name" /> 
-				<input type="hidden" name="${file.id!''}" />
-				<input type="submit" value="新建文件" />
+	<form id="file" action="file.do" method="post" style="display:none" enctype="multipart/form-data">
+		文件名: <input type="file" name="file" /> 
+				<input type="hidden" name="method" value="upload"/>
+				<input type="hidden" name="path" value="1"/>
+				<input type="hidden" name="upId" value="${upId2!''}" />
+				<input type="submit" value="上传文件" />
 	</form>
 	<#if msg?? && msg == 'error'>
 	<script>
 		alert("error")
 	</script>
 	</#if>
-	<a href="/file.do?upId=0">root</a> 
+	<a href="/file.do?method=list&upId=0">root</a> 
 	<br>文件列表:<br>
+	<a href="/file.do?method=list&upId=0"><img src="/image/dir.ico">...</a> 
 	<#list filelist as file>
 	<!-- ${file.id!""} -->
-	<a href="/file.do?upId=${file.id!''}">${file.name!""}</a>
+	<#if file.path??&&file.path=='0'><a href="/file.do?method=list&upId=${file.id!''}"><img src="/image/dir.ico">${file.name!""}</a>
+	<#else><a href="/uploadFiles/${file.name!""}">${file.name!""}</a>
+	</#if>
 	<br> </#list>
 
 </body>

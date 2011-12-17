@@ -22,7 +22,7 @@ public class File {
 	{
 		this.id = id;
 	}
-	@Column(length = 10)
+	@Column(length = 50)
 	public String getName()
 	{
 		return name;

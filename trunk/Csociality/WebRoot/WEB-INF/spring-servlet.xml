@@ -22,6 +22,8 @@
 		<property name="freemarkerSettings">
 			<props>
 				<prop key="template_update_delay">0</prop>
+				<prop key="tag_syntax">square_bracket</prop><!-- ||auto_detect []或者<>标记形式配置-->
+				<prop key="classic_compatible">true</prop><!-- 可以满足一般需要。默认情况变量为null则替换为空字符串，如果需要自定义，写上${empty!"EmptyValue of fbysss"}的形式即可  -->
 				<prop key="locale">zh_CN</prop>
 				<prop key="datetime_format">yyyy-MM-dd</prop>
 				<prop key="date_format">yyyy-MM-dd</prop>

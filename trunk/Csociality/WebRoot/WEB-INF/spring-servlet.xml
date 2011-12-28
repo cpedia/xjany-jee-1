@@ -17,7 +17,7 @@
 	<!-- freemarker的配置 -->
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="/WEB-INF/front/" />
+		<property name="templateLoaderPath" value="/" />
 		<property name="defaultEncoding" value="utf-8" />
 		<property name="freemarkerSettings">
 			<props>
@@ -36,7 +36,8 @@
 
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
-
+		
+		<property name="prefix" value="/WEB-INF/front/" />
 		<property name="suffix" value=".html"/>
 		<property name="contentType" value="text/html;charset=utf-8" />
 		<property name="exposeRequestAttributes" value="true" />

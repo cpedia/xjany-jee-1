@@ -49,8 +49,8 @@
 	<a href="/file.do?method=list&upId=${id!''}"><img src="/image/dir.ico">...</a> <br>
 	[#list filelist as file]
 	<!-- ${file.id!""} -->
-	[#if file.path??&&file.path=='0']<a href="/file.do?method=list&upId=${file.id!''}"><img src="/image/dir.ico">${file.name!""}</a>
-	[#else]<a href="/uploadFiles/${file.name!""}">${file.name!""}</a>
+	[#if file.path??&&file.path=='0']<a href="/file.do?method=list&upId=${file.id!''}"><img src="/image/dir.ico">${file.name}</a>
+	[#else]<a href="/uploadFiles/${file.name}">${file.name}</a>
 	[/#if]
 	<br> [/#list]
 

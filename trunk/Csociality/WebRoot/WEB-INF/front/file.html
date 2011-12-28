@@ -39,20 +39,20 @@
 				<input type="hidden" name="upId" value="${upId2!''}" />
 				<input type="submit" value="上传文件" />
 	</form>
-	<#if msg?? && msg == 'error'>
+	[#if msg?? && msg == 'error']
 	<script>
 		alert("error")
 	</script>
-	</#if>
+	[/#if]
 	<a href="/file.do?method=list&upId=0">root</a> 
 	<br>文件列表:<br>
 	<a href="/file.do?method=list&upId=${id!''}"><img src="/image/dir.ico">...</a> <br>
-	<#list filelist as file>
+	[#list filelist as file]
 	<!-- ${file.id!""} -->
-	<#if file.path??&&file.path=='0'><a href="/file.do?method=list&upId=${file.id!''}"><img src="/image/dir.ico">${file.name!""}</a>
-	<#else><a href="/uploadFiles/${file.name!""}">${file.name!""}</a>
-	</#if>
-	<br> </#list>
+	[#if file.path??&&file.path=='0']<a href="/file.do?method=list&upId=${file.id!''}"><img src="/image/dir.ico">${file.name!""}</a>
+	[#else]<a href="/uploadFiles/${file.name!""}">${file.name!""}</a>
+	[/#if]
+	<br> [/#list]
 
 </body>
 </html>

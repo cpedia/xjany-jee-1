@@ -23,6 +23,7 @@ public class FileDAOImpl extends GeneriDAOImpl<File, Integer> implements FileDAO
 	public List<File> findByUpId(int upId) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery( "from File as a where a.upId= ? order by path");
+//		Query query = session.createQuery( "from File as a where a.upId= :upId order by path").setString("upId", "upId");
 		query.setParameter(0, upId);
 		List<File> list = query.list();
 		return list;

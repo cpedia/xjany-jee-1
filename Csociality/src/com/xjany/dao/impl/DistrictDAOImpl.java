@@ -1,5 +1,6 @@
 package com.xjany.dao.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -31,5 +32,30 @@ public class DistrictDAOImpl extends GeneriDAOImpl<District, Integer> implements
 
 	public int getMaxLength() {
 		return this.findAll().size();
+	}
+	public boolean recycle(Serializable... id)
+	{
+		try{
+			District d = this.findById(id);
+			//d.setName(1);
+			this.update(d);
+			if(id.length -1 > 0)
+			{
+				for (int i = 0; i < id.length; i++)
+				{
+					d = new District();
+					d = this.findById(id[i+1]);
+					//d.setName(1);
+					this.update(d);
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally{
+			if(sessionFactory != null)
+			sessionFactory.close();
+		}
 	}
 }

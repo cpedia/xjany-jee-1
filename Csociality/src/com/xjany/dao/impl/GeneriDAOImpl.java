@@ -36,7 +36,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	public List<T> findAll() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from " + clazz.getName());
-		List list = query.list();
+		List<T> list = query.list();
 		return list;
 	}
 
@@ -57,7 +57,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		session.update(entity);
 	}
 	
-	public boolean delete(Serializable[] id){
+	public boolean delete(Serializable... id){
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			T t = (T) session.get(clazz, id[0]);
@@ -79,7 +79,6 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 				sessionFactory.close();
 		}
 	}
-	
 	
 	public boolean check(T entity, List<T> propertyName, String[] value) {
 		Query query = null;
@@ -106,6 +105,5 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		String queryString = "from "+clazz.getName()+" as a where a." + propertyName + "= ?";
 		return (List<T>) sessionFactory.getCurrentSession().createQuery(queryString).setParameter(0, value).list();
 	}
-
 
 }

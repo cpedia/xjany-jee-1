@@ -35,83 +35,83 @@ drop table if exists file;
 /*==============================================================*/
 create table all_user
 (
-   userId               int not null auto_increment comment 'ÓÃ»§ID',
+   userId               int not null auto_increment comment 'ç”¨æˆ·ID',
    cms_userId           int,
    bbs_userId           int,
-   userName             varchar(30) not null comment 'ÓÃ»§Ãû',
-   userPsw              varchar(30) not null comment 'ÃÜ Âë',
-   userSex              int not null default 1 comment 'ÓÃ»§ĞÔ±ğ(0¡¢ÄĞ 1¡¢Å®)',
-   userEmail            varchar(50) not null comment 'ÓÃ»§E-mail',
-   userRegTime          datetime not null comment '×¢²áÊ±¼ä',
-   userIp               varchar(30) not null comment '×¢²áIP',
-   userLoad             int not null default 0 comment 'ÓÃ»§µÇÂ½´ÎÊı',
-   userLastTime         datetime not null comment '×îºóµÇÂ½Ê±¼ä',
-   userState            int not null default 1 comment 'ÓÃ»§×´Ì¬ 0¡¢ÀëÏß 1¡¢ÔÚÏß',
+   userName             varchar(30) not null comment 'ç”¨æˆ·å',
+   userPsw              varchar(30) not null comment 'å¯† ç ',
+   userSex              int not null default 1 comment 'ç”¨æˆ·æ€§åˆ«(0ã€ç”· 1ã€å¥³)',
+   userEmail            varchar(50) not null comment 'ç”¨æˆ·E-mail',
+   userRegTime          datetime not null comment 'æ³¨å†Œæ—¶é—´',
+   userIp               varchar(30) not null comment 'æ³¨å†ŒIP',
+   userLoad             int not null default 0 comment 'ç”¨æˆ·ç™»é™†æ¬¡æ•°',
+   userLastTime         datetime not null comment 'æœ€åç™»é™†æ—¶é—´',
+   userState            int not null default 1 comment 'ç”¨æˆ·çŠ¶æ€ 0ã€ç¦»çº¿ 1ã€åœ¨çº¿',
    cms_del              int default 0,
    primary key (userId)
 );
 
-alter table all_user comment 'È«¾ÖÓÃ»§¹«¹²ĞÅÏ¢';
+alter table all_user comment 'å…¨å±€ç”¨æˆ·å…¬å…±ä¿¡æ¯';
 
 /*==============================================================*/
 /* Table: bbs_bbslink                                           */
 /*==============================================================*/
 create table bbs_bbslink
 (
-   linkId               int not null comment 'ÓÑÇéÂÛÌ³ID',
-   linkName             varchar(50) not null comment 'ÓÑÇéÂÛÌ³Ãû³Æ',
-   linkLogo             varchar(50) not null comment 'ÓÑÇéÂÛÌ³Í¼±ê',
-   linkUrl              varchar(50) not null comment 'ÓÑÇéÂÛÌ³URLµØÖ·',
+   linkId               int not null comment 'å‹æƒ…è®ºå›ID',
+   linkName             varchar(50) not null comment 'å‹æƒ…è®ºå›åç§°',
+   linkLogo             varchar(50) not null comment 'å‹æƒ…è®ºå›å›¾æ ‡',
+   linkUrl              varchar(50) not null comment 'å‹æƒ…è®ºå›URLåœ°å€',
    cms_del              int,
    primary key (linkId)
 );
 
-alter table bbs_bbslink comment 'ÓÑÇéÂÛÌ³±í(bbslink)';
+alter table bbs_bbslink comment 'å‹æƒ…è®ºå›è¡¨(bbslink)';
 
 /*==============================================================*/
 /* Table: bbs_board                                             */
 /*==============================================================*/
 create table bbs_board
 (
-   boaId                int not null auto_increment comment '¸¸°æ¿éID£¬Ö÷¼ü£¬×Ô¶¯Ôö³¤',
-   boaName              varchar(30) not null comment '°æ¿éÃû³Æ',
-   boaMaster            varchar(20) comment '³¬¼¶°æÖ÷',
+   boaId                int not null auto_increment comment 'çˆ¶ç‰ˆå—IDï¼Œä¸»é”®ï¼Œè‡ªåŠ¨å¢é•¿',
+   boaName              varchar(30) not null comment 'ç‰ˆå—åç§°',
+   boaMaster            varchar(20) comment 'è¶…çº§ç‰ˆä¸»',
    cms_del              int,
    primary key (boaId)
 );
 
-alter table bbs_board comment '¸¸°æ¿é±í';
+alter table bbs_board comment 'çˆ¶ç‰ˆå—è¡¨';
 
 /*==============================================================*/
 /* Table: bbs_degree                                            */
 /*==============================================================*/
 create table bbs_degree
 (
-   degreeId             int not null auto_increment comment 'µÈ¼¶ID',
-   degreeName           varchar(50) comment 'µÈ¼¶Ãû',
+   degreeId             int not null auto_increment comment 'ç­‰çº§ID',
+   degreeName           varchar(50) comment 'ç­‰çº§å',
    cms_del              int,
    primary key (degreeId)
 );
 
-alter table bbs_degree comment 'ÓÃ»§µÈ¼¶±í(degree)';
+alter table bbs_degree comment 'ç”¨æˆ·ç­‰çº§è¡¨(degree)';
 
 /*==============================================================*/
 /* Table: bbs_message                                           */
 /*==============================================================*/
 create table bbs_message
 (
-   mesId                int not null auto_increment comment '¶ÌÏûÏ¢ID',
-   mesOwn               varchar(30) not null comment '¶ÌÏûÏ¢ËùÊôµÄÓÃ»§',
-   mesTitle             varchar(100) not null comment '¶ÌÏûÏ¢±êÌâ',
-   mesContent           varchar(500) not null comment '¶ÌÏûÏ¢ÄÚÈİ',
-   mesPost              varchar(30) not null comment '¶ÌÏûÏ¢·¢²¼ÈË',
-   mesTime              datetime not null comment '¶ÌÏûÏ¢·¢±íµÄÊ±¼ä',
-   mesIsRead            int not null default 1 comment '¶ÌÏûÏ¢ÊÇ·ñÒÑ¶Á 0¡¢·ñ 1¡¢ÊÇ',
+   mesId                int not null auto_increment comment 'çŸ­æ¶ˆæ¯ID',
+   mesOwn               varchar(30) not null comment 'çŸ­æ¶ˆæ¯æ‰€å±çš„ç”¨æˆ·',
+   mesTitle             varchar(100) not null comment 'çŸ­æ¶ˆæ¯æ ‡é¢˜',
+   mesContent           varchar(500) not null comment 'çŸ­æ¶ˆæ¯å†…å®¹',
+   mesPost              varchar(30) not null comment 'çŸ­æ¶ˆæ¯å‘å¸ƒäºº',
+   mesTime              datetime not null comment 'çŸ­æ¶ˆæ¯å‘è¡¨çš„æ—¶é—´',
+   mesIsRead            int not null default 1 comment 'çŸ­æ¶ˆæ¯æ˜¯å¦å·²è¯» 0ã€å¦ 1ã€æ˜¯',
    cms_del              int,
    primary key (mesId)
 );
 
-alter table bbs_message comment '¶ÌÏûÏ¢±í(message)';
+alter table bbs_message comment 'çŸ­æ¶ˆæ¯è¡¨(message)';
 
 /*==============================================================*/
 /* Table: bbs_online                                            */
@@ -129,7 +129,7 @@ create table bbs_online
    primary key (onId)
 );
 
-alter table bbs_online comment 'µ±Ç°ÔÚÏßÓÃ»§¼ÇÂ¼±í(online)';
+alter table bbs_online comment 'å½“å‰åœ¨çº¿ç”¨æˆ·è®°å½•è¡¨(online)';
 
 /*==============================================================*/
 /* Table: bbs_reply                                             */
@@ -137,7 +137,7 @@ alter table bbs_online comment 'µ±Ç°ÔÚÏßÓÃ»§¼ÇÂ¼±í(online)';
 create table bbs_reply
 (
    repId                int not null auto_increment,
-   repTopicId           int not null comment 'Á¥ÊôµÄÖ÷ÌâID',
+   repTopicId           int not null comment 'éš¶å±çš„ä¸»é¢˜ID',
    repUser              varchar(30) not null,
    repContent           varchar(4000) not null,
    repTime              datetime not null,
@@ -146,53 +146,53 @@ create table bbs_reply
    primary key (repId)
 );
 
-alter table bbs_reply comment 'Ìû×Ó»Ø¸´±í(reply)';
+alter table bbs_reply comment 'å¸–å­å›å¤è¡¨(reply)';
 
 /*==============================================================*/
 /* Table: bbs_sub_board                                         */
 /*==============================================================*/
 create table bbs_sub_board
 (
-   subId                int not null auto_increment comment '×Ó°æ¿éID£¬Ö÷¼ü£¬×Ô¶¯Ôö³¤',
-   subBoaId             int comment '¸¸°æ¿éID£¬Ö÷¼ü£¬×Ô¶¯Ôö³¤',
-   subName              varchar(30) not null comment '°æ¿éÃû³Æ',
-   subImg               varchar(20) comment '°æ¿éÍ¼±ê',
-   subInfo              varchar(200) comment '°æ¿é½éÉÜ',
-   subMaster            varchar(20) comment '°æÖ÷',
-   subTopicNum          int comment '°æ¿éÖ÷Ìâ×ÜÊı',
-   subReNum             int comment '°æ¿é»Ø¸´×ÜÊı',
-   subLastUser          varchar(20) comment '×îºó·¢±í£¨Ö÷Ìâ»ò»Ø¸´£©ÈË',
-   subLastTopic         varchar(50) comment '×îºó·ÃÎÊ£¨·¢±í»ò»Ø¸´£©Ö÷ÌâµÄÃû³Æ',
+   subId                int not null auto_increment comment 'å­ç‰ˆå—IDï¼Œä¸»é”®ï¼Œè‡ªåŠ¨å¢é•¿',
+   subBoaId             int comment 'çˆ¶ç‰ˆå—IDï¼Œä¸»é”®ï¼Œè‡ªåŠ¨å¢é•¿',
+   subName              varchar(30) not null comment 'ç‰ˆå—åç§°',
+   subImg               varchar(20) comment 'ç‰ˆå—å›¾æ ‡',
+   subInfo              varchar(200) comment 'ç‰ˆå—ä»‹ç»',
+   subMaster            varchar(20) comment 'ç‰ˆä¸»',
+   subTopicNum          int comment 'ç‰ˆå—ä¸»é¢˜æ€»æ•°',
+   subReNum             int comment 'ç‰ˆå—å›å¤æ€»æ•°',
+   subLastUser          varchar(20) comment 'æœ€åå‘è¡¨ï¼ˆä¸»é¢˜æˆ–å›å¤ï¼‰äºº',
+   subLastTopic         varchar(50) comment 'æœ€åè®¿é—®ï¼ˆå‘è¡¨æˆ–å›å¤ï¼‰ä¸»é¢˜çš„åç§°',
    cms_del              int,
    primary key (subId)
 );
 
-alter table bbs_sub_board comment '×Ó°æ¿é±í';
+alter table bbs_sub_board comment 'å­ç‰ˆå—è¡¨';
 
 /*==============================================================*/
 /* Table: bbs_topic                                             */
 /*==============================================================*/
 create table bbs_topic
 (
-   topicId              int not null auto_increment comment 'Ö÷ÌâID£¬Ö÷¼ü£¬×Ô¶¯Ôö³¤',
-   topicTitle           varchar(50) not null comment 'Ö÷ÌâÃû',
-   topicContent         varchar(4000) not null comment 'Ö÷ÌâÄÚÈİ',
-   topicUser            varchar(30) comment 'Ö÷Ìâ·¢±íÕß(ÂÛÌ³Ìû×Ó·¢±íÈË)',
-   topicIp              varchar(30) comment '·¢±íÈËµÄIP',
-   topicTime            datetime not null comment 'Ö÷Ìâ±»´´½¨Ê±¼ä',
-   topicSubId           int not null comment 'Ö÷ÌâÊôÓÚÂÛÌ³ÄÄ¸ö×Ó°æ¿é',
+   topicId              int not null auto_increment comment 'ä¸»é¢˜IDï¼Œä¸»é”®ï¼Œè‡ªåŠ¨å¢é•¿',
+   topicTitle           varchar(50) not null comment 'ä¸»é¢˜å',
+   topicContent         varchar(4000) not null comment 'ä¸»é¢˜å†…å®¹',
+   topicUser            varchar(30) comment 'ä¸»é¢˜å‘è¡¨è€…(è®ºå›å¸–å­å‘è¡¨äºº)',
+   topicIp              varchar(30) comment 'å‘è¡¨äººçš„IP',
+   topicTime            datetime not null comment 'ä¸»é¢˜è¢«åˆ›å»ºæ—¶é—´',
+   topicSubId           int not null comment 'ä¸»é¢˜å±äºè®ºå›å“ªä¸ªå­ç‰ˆå—',
    topicHits            int,
-   topicReply           int default 0 comment 'Ö÷Ìâ»Ø¸´Êı',
-   isNews               int default 1 comment 'ÊÇ·ñÎª¹«¸æ 0¡¢·ñ 1¡¢ÊÇ',
-   topicElite           int default 1 comment 'ÊÇ·ñÎª¾«»ªÌû×Ó 0¡¢·ñ 1¡¢ÊÇ',
-   topicTop             int default 1 comment 'ÊÇ·ñÖÃ¶¥Ö÷Ìâ 0¡¢·ñ 1¡¢ÊÇ',
-   topicLastUser        varchar(30) comment 'Ö÷Ìâ×îºó»Ø¸´ÈË',
-   topicLastTime        datetime not null comment 'Ö÷Ìâ×îºó»Ø¸´Ê±¼ä',
+   topicReply           int default 0 comment 'ä¸»é¢˜å›å¤æ•°',
+   isNews               int default 1 comment 'æ˜¯å¦ä¸ºå…¬å‘Š 0ã€å¦ 1ã€æ˜¯',
+   topicElite           int default 1 comment 'æ˜¯å¦ä¸ºç²¾åå¸–å­ 0ã€å¦ 1ã€æ˜¯',
+   topicTop             int default 1 comment 'æ˜¯å¦ç½®é¡¶ä¸»é¢˜ 0ã€å¦ 1ã€æ˜¯',
+   topicLastUser        varchar(30) comment 'ä¸»é¢˜æœ€åå›å¤äºº',
+   topicLastTime        datetime not null comment 'ä¸»é¢˜æœ€åå›å¤æ—¶é—´',
    cms_del              int,
    primary key (topicId)
 );
 
-alter table bbs_topic comment 'Ìû×Ó±í(topic)';
+alter table bbs_topic comment 'å¸–å­è¡¨(topic)';
 
 /*==============================================================*/
 /* Table: bbs_user_profile                                      */
@@ -201,37 +201,37 @@ create table bbs_user_profile
 (
    bbs_userId           int not null,
    userId               int,
-   roleId               int comment '½ÇÉ«ID',
-   userRoleId           int comment 'ÓÃ»§´ÓÊôÓÚµÄ½ÇÉ«ID',
-   userBirthDay         varchar(10) comment 'ÓÃ»§ÉúÈÕ',
-   userFace             varchar(30) comment 'ÓÃ»§Í·Ïñ',
+   roleId               int comment 'è§’è‰²ID',
+   userRoleId           int comment 'ç”¨æˆ·ä»å±äºçš„è§’è‰²ID',
+   userBirthDay         varchar(10) comment 'ç”¨æˆ·ç”Ÿæ—¥',
+   userFace             varchar(30) comment 'ç”¨æˆ·å¤´åƒ',
    userQicq             varchar(10) comment 'Qicq',
-   userIntro            varchar(500) comment 'ÓÃ»§Ç©Ãûµµ',
-   userAddr             varchar(30) comment 'ÓÃ»§µØÖ·',
-   userCareer           varchar(30) comment 'Ö°Òµ½éÉÜ',
-   userWealth           int default 0 comment 'ÓÃ»§»ı·Ö,Ã¿·¢1Ìû»ı1·Ö(°üÀ¨»Ø¸´)£¬¼Ó¾«»ı5·Ö',
-   userDegree           int default 0 comment 'ÓÃ»§µÈ¼¶',
-   userTopic            int default 0 comment 'ÓÃ»§·¢±íµÄÖ÷ÌâÊı×ÜºÍ',
-   userReply            int default 0 comment 'ÓÃ»§µÄ»Ø¸´Êı×ÜºÍ',
-   userDelTopic         int default 0 comment 'ÓÃ»§±»É¾³ıµÄÌû×Ó×ÜºÍ',
-   userEliteTopic       int default 0 comment 'ÓÃ»§±»ÍÆ¼öµÄ¾«»ªÌû×ÜºÍ',
+   userIntro            varchar(500) comment 'ç”¨æˆ·ç­¾åæ¡£',
+   userAddr             varchar(30) comment 'ç”¨æˆ·åœ°å€',
+   userCareer           varchar(30) comment 'èŒä¸šä»‹ç»',
+   userWealth           int default 0 comment 'ç”¨æˆ·ç§¯åˆ†,æ¯å‘1å¸–ç§¯1åˆ†(åŒ…æ‹¬å›å¤)ï¼ŒåŠ ç²¾ç§¯5åˆ†',
+   userDegree           int default 0 comment 'ç”¨æˆ·ç­‰çº§',
+   userTopic            int default 0 comment 'ç”¨æˆ·å‘è¡¨çš„ä¸»é¢˜æ•°æ€»å’Œ',
+   userReply            int default 0 comment 'ç”¨æˆ·çš„å›å¤æ•°æ€»å’Œ',
+   userDelTopic         int default 0 comment 'ç”¨æˆ·è¢«åˆ é™¤çš„å¸–å­æ€»å’Œ',
+   userEliteTopic       int default 0 comment 'ç”¨æˆ·è¢«æ¨èçš„ç²¾åå¸–æ€»å’Œ',
    primary key (bbs_userId)
 );
 
-alter table bbs_user_profile comment ' ÓÃ»§±í(user)';
+alter table bbs_user_profile comment ' ç”¨æˆ·è¡¨(user)';
 
 /*==============================================================*/
 /* Table: bbs_user_role                                         */
 /*==============================================================*/
 create table bbs_user_role
 (
-   roleId               int not null auto_increment comment '½ÇÉ«ID',
-   roleName             varchar(50) not null comment '½ÇÉ«Ãû',
+   roleId               int not null auto_increment comment 'è§’è‰²ID',
+   roleName             varchar(50) not null comment 'è§’è‰²å',
    cms_del              int,
    primary key (roleId)
 );
 
-alter table bbs_user_role comment 'ÓÃ»§½ÇÉ«±í(role)';
+alter table bbs_user_role comment 'ç”¨æˆ·è§’è‰²è¡¨(role)';
 
 /*==============================================================*/
 /* Table: district                                              */

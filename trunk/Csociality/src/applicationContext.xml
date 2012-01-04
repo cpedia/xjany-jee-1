@@ -39,7 +39,7 @@
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>com.xjany.entity</value><!-- 扫描实体类，也就是平时所说的model -->
+				<value>com.xjany.bbs.entity</value><!-- 扫描实体类，也就是平时所说的model -->
 			</list>
 		</property>
 	</bean>

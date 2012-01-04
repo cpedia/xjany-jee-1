@@ -37,7 +37,7 @@ public class DistrictDAOImpl extends GeneriDAOImpl<District, Integer> implements
 	{
 		try{
 			District d = this.findById(id);
-			//d.setName(1);
+			d.setRemove(1);
 			this.update(d);
 			if(id.length -1 > 0)
 			{
@@ -45,7 +45,7 @@ public class DistrictDAOImpl extends GeneriDAOImpl<District, Integer> implements
 				{
 					d = new District();
 					d = this.findById(id[i+1]);
-					//d.setName(1);
+					d.setRemove(1);
 					this.update(d);
 				}
 			}

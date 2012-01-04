@@ -10,6 +10,7 @@
 	<context:annotation-config />
 	<!-- 把标记了@Controller注解的类转换为bean -->
 	<context:component-scan base-package="com.xjany.action" />
+	<context:component-scan base-package="com.xjany.bbs.action" />
 	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
@@ -28,7 +29,7 @@
 				<prop key="datetime_format">yyyy-MM-dd</prop>
 				<prop key="date_format">yyyy-MM-dd</prop>
 				<prop key="number_format">#.##</prop>
-				<prop key="auto_import">/ftl/pony/index.ftl as p,/ftl/spring.xj as s</prop>
+				<prop key="auto_import"><!-- /ftl/pony/index.ftl as p,/ftl/spring.xj as s --></prop>
 			</props>
 		</property>
 	</bean>

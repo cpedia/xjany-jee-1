@@ -11,6 +11,8 @@ public class District
 	private Integer id;
 	private String name;
 	private String province;
+	private int remove;
+	
 	@Id
 	@GeneratedValue
 	public Integer getId()
@@ -38,5 +40,12 @@ public class District
 	public void setProvince(String province)
 	{
 		this.province = province;
+	}
+	@Column(length = 4)
+	public int getRemove() {
+		return remove;
+	}
+	public void setRemove(int remove) {
+		this.remove = remove;
 	}
 }

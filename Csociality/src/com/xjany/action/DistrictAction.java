@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.xjany.entity.District;
-import com.xjany.service.DistrictService;
+
+import com.xjany.bbs.entity.District;
+import com.xjany.bbs.service.DistrictService;
+
 
 @Controller
 /**

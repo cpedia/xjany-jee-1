@@ -46,10 +46,10 @@ public class FileAction {
 		if (request.getParameter("upId") != null)
 			upId = Integer.parseInt(request.getParameter("upId"));
 		List<File> list = fileService.findByUpId(upId);
+		System.out.println(list.get(0).toString());
 		try {
 			id = fileService.findById(upId).getUpId(); // 上级的UPID
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		model.addAttribute("upId2", upId);// request保存这个对象
 		model.addAttribute("id", id);// request保存这个对象

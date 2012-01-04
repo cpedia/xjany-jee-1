@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.xjany.entity.File;
+import com.xjany.bbs.entity.File;
 import java.io.*;
 
-import com.xjany.service.FileService;
+import com.xjany.bbs.service.FileService;
 
 @Controller
 @RequestMapping("/file.do")

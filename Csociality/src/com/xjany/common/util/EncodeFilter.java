@@ -1,4 +1,4 @@
-package com.xjany.util;
+package com.xjany.common.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xjany.bbs.dao.GenericDAO;
-import com.xjany.bbs.entity.base.InterGeneric;
+import com.xjany.bbs.entity.InterGeneric;
 
 /**
  * @param 一个通用的dao层

@@ -16,7 +16,7 @@ public class IndexAction {
 	@Autowired
 	private FileService fileService;
 
-	@RequestMapping("/index.html")
+	@RequestMapping("/index.jhtml")
 	public String showIndex(HttpServletRequest request, ModelMap model)
 			throws Exception {
 		return "index";

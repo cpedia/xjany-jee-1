@@ -122,7 +122,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	/**
 	 * 回收站
 	 * @param isRecycle 是否放到回收站
-	 * @return
+	 * @return 设置是否成功
 	 */
 	public boolean recycle(T entity,boolean isRecycle)
 	{

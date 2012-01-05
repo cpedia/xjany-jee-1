@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xjany.bbs.dao.GenericDAO;
-import com.xjany.bbs.entity.base.AbstractGeneric;
+import com.xjany.bbs.entity.base.InterGeneric;
 
 /**
  * @param 一个通用的dao层
@@ -127,7 +127,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	public boolean recycle(T entity,boolean isRecycle)
 	{
 		try{
-			((AbstractGeneric) entity).recycle(isRecycle);
+			((InterGeneric) entity).recycle(isRecycle);
 			this.update(entity);
 			return true;
 		} catch (Exception e) {

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import com.xjany.bbs.entity.BbsTopic;
+import com.xjany.bbs.entity.InterGeneric;
 
 /**
  * AbstractBbsReply entity provides the base persistence definition of the

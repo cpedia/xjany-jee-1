@@ -6,6 +6,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.xjany.bbs.entity.InterGeneric;
+
 /**
  * AbstractDistrict entity provides the base persistence definition of the
  * District entity. @author LiXiang

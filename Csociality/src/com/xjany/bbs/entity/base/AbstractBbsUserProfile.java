@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 
 import com.xjany.bbs.entity.AllUser;
 import com.xjany.bbs.entity.BbsUserRole;
+import com.xjany.bbs.entity.InterGeneric;
 
 /**
  * AbstractBbsUserProfile entity provides the base persistence definition of the

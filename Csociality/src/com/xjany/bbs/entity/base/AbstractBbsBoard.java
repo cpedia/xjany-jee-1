@@ -12,6 +12,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import com.xjany.bbs.entity.BbsSubBoard;
+import com.xjany.bbs.entity.InterGeneric;
 
 /**
  * AbstractBbsBoard entity provides the base persistence definition of the

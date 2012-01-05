@@ -18,7 +18,7 @@ import com.xjany.bbs.entity.BbsUserProfile;
  * BbsUserRole entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractBbsUserRole implements java.io.Serializable {
+public abstract class AbstractBbsUserRole implements java.io.Serializable, AbstractGeneric {
 
 	// Fields
 

@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
  * BbsDegree entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractBbsDegree implements java.io.Serializable {
+public abstract class AbstractBbsDegree implements java.io.Serializable, AbstractGeneric {
 
 	// Fields
 

@@ -21,7 +21,7 @@ import com.xjany.bbs.entity.BbsUserProfile;
  * AllUser entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractAllUser implements java.io.Serializable {
+public abstract class AbstractAllUser implements java.io.Serializable, AbstractGeneric {
 
 	// Fields
 

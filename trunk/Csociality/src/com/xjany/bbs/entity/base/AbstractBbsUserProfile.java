@@ -21,7 +21,7 @@ import com.xjany.bbs.entity.BbsUserRole;
  * BbsUserProfile entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractBbsUserProfile implements java.io.Serializable {
+public abstract class AbstractBbsUserProfile implements java.io.Serializable, AbstractGeneric {
 
 	// Fields
 
@@ -41,6 +41,7 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 	private Integer userReply;
 	private Integer userDelTopic;
 	private Integer userEliteTopic;
+	private Integer cmsDel;
 	private Set<AllUser> allUsers = new HashSet<AllUser>(0);
 
 	// Constructors
@@ -221,6 +222,15 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 
 	public void setUserEliteTopic(Integer userEliteTopic) {
 		this.userEliteTopic = userEliteTopic;
+	}
+	
+	@Column(name = "cms_del")
+	public Integer getCmsDel() {
+		return this.cmsDel;
+	}
+
+	public void setCmsDel(Integer cmsDel) {
+		this.cmsDel = cmsDel;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bbsUserProfile")

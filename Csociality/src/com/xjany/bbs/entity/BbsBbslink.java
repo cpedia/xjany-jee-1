@@ -29,5 +29,12 @@ public class BbsBbslink extends AbstractBbsBbslink implements
 			Integer cmsDel) {
 		super(linkName, linkLogo, linkUrl, cmsDel);
 	}
-
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

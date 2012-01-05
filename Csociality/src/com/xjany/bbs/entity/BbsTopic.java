@@ -37,5 +37,13 @@ public class BbsTopic extends AbstractBbsTopic implements java.io.Serializable {
 				topicTime, topicHits, topicReply, isNews, topicElite, topicTop,
 				topicLastUser, topicLastTime, cmsDel, bbsReplies);
 	}
-
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

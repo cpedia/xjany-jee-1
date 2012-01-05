@@ -39,4 +39,13 @@ public class AllUser extends AbstractAllUser implements java.io.Serializable {
 				bbsUserProfiles);
 	}
 
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
+
 }

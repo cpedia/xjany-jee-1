@@ -30,5 +30,14 @@ public class BbsUserRole extends AbstractBbsUserRole implements
 			Set<BbsUserProfile> bbsUserProfiles) {
 		super(roleName, cmsDel, bbsUserProfiles);
 	}
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 
 }

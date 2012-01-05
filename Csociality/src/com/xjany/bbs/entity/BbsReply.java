@@ -30,5 +30,13 @@ public class BbsReply extends AbstractBbsReply implements java.io.Serializable {
 			Timestamp repTime, String repIp, Integer cmsDel) {
 		super(bbsTopic, repUser, repContent, repTime, repIp, cmsDel);
 	}
-
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

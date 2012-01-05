@@ -31,5 +31,13 @@ public class BbsOnline extends AbstractBbsOnline implements
 			String onBrowser, String onLocate, Timestamp onTime, Integer cmsDel) {
 		super(onName, onRole, onIp, onBrowser, onLocate, onTime, cmsDel);
 	}
-
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

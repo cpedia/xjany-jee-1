@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
  * entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractFile implements java.io.Serializable {
+public abstract class AbstractFile implements java.io.Serializable, AbstractGeneric {
 
 	// Fields
 

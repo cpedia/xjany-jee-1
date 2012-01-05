@@ -8,22 +8,41 @@
 	</welcome-file-list>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext*.xml</param-value>
+		<param-value>
+			/config/applicationContext*.xml
+		</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>spring</servlet-name>
+		<servlet-name>XjanyFront</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/config/XjanyFront-servlet.xml</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>XjanyAdmin</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/config/XjanyFront-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
 	<servlet-mapping>
-		<servlet-name>spring</servlet-name>
+		<servlet-name>XjanyAdmin</servlet-name>
+		<url-pattern>/xjanyadmin/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>XjanyFront</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>spring</servlet-name>
+		<servlet-name>XjanyFront</servlet-name>
 		<url-pattern>*.jhtml</url-pattern>
 	</servlet-mapping>
 	<filter>

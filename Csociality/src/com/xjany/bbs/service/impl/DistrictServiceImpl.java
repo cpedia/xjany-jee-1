@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.acegisecurity.providers.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,9 @@ public class DistrictServiceImpl implements DistrictService
 
 	public void addDistrict(District district)
 	{
+		//Md5PasswordEncoder md5 = new Md5PasswordEncoder();
+		//String dbpassword = user.getPassword();
+		//curPassword = md5.encodePassword(curPassword, null);
 		districtDAO.save(district);
 	}
 

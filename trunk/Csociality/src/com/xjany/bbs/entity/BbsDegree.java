@@ -23,5 +23,13 @@ public class BbsDegree extends AbstractBbsDegree implements
 	public BbsDegree(String degreeName, Integer cmsDel) {
 		super(degreeName, cmsDel);
 	}
-
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

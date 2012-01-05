@@ -23,5 +23,13 @@ public class File extends AbstractFile implements java.io.Serializable {
 			Integer cmsDel) {
 		super(downId, name, path, upId, cmsDel);
 	}
-
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

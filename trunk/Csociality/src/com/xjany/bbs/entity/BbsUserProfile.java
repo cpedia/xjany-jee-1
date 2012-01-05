@@ -32,5 +32,13 @@ public class BbsUserProfile extends AbstractBbsUserProfile implements
 				userDegree, userTopic, userReply, userDelTopic, userEliteTopic,
 				allUsers);
 	}
-
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

@@ -29,5 +29,13 @@ public class BbsBoard extends AbstractBbsBoard implements java.io.Serializable {
 			Set<BbsSubBoard> bbsSubBoards) {
 		super(boaName, boaMaster, cmsDel, bbsSubBoards);
 	}
-
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

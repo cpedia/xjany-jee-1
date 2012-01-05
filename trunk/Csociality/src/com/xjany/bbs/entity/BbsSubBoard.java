@@ -33,5 +33,13 @@ public class BbsSubBoard extends AbstractBbsSubBoard implements
 		super(bbsBoard, subName, subImg, subInfo, subMaster, subTopicNum,
 				subReNum, subLastUser, subLastTopic, cmsDel, bbsTopics);
 	}
-
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

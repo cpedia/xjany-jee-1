@@ -31,5 +31,13 @@ public class BbsMessage extends AbstractBbsMessage implements
 			String mesPost, Timestamp mesTime, Integer mesIsRead, Integer cmsDel) {
 		super(mesOwn, mesTitle, mesContent, mesPost, mesTime, mesIsRead, cmsDel);
 	}
-
+	
+	@Override
+	public void recycle(boolean isRecycle) {
+		// TODO Auto-generated method stub
+		if(isRecycle)
+			this.setCmsDel(1);
+		else 
+			this.setCmsDel(0);
+	}
 }

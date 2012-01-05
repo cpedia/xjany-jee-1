@@ -1,55 +1,27 @@
 package com.xjany.bbs.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Table;
 
+import com.xjany.bbs.entity.base.AbstractFile;
+
+/**
+ * File entity. @author LiXiang
+ */
 @Entity
-public class File {
-	private Integer id;
-	private Integer upId;
-	private Integer downId;
-	private String name;
-	private String path;
-	@Id
-	@GeneratedValue
-	public Integer getId()
-	{
-		return id;
+@Table(name = "file", catalog = "cs_xjany")
+public class File extends AbstractFile implements java.io.Serializable {
+
+	// Constructors
+
+	/** default constructor */
+	public File() {
 	}
-	public void setId(Integer id)
-	{
-		this.id = id;
+
+	/** full constructor */
+	public File(Integer downId, String name, String path, Integer upId,
+			Integer cmsDel) {
+		super(downId, name, path, upId, cmsDel);
 	}
-	@Column(length = 50)
-	public String getName()
-	{
-		return name;
-	}
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	@Column(length = 10)
-	public String getPath() {
-		return path;
-	}
-	public void setPath(String path) {
-		this.path = path;
-	}
-	@Column(length = 10)
-	public Integer getUpId() {
-		return upId;
-	}
-	public void setUpId(Integer upId) {
-		this.upId = upId;
-	}
-	@Column(length = 10)
-	public Integer getDownId() {
-		return downId;
-	}
-	public void setDownId(Integer downId) {
-		this.downId = downId;
-	}
+
 }

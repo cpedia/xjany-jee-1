@@ -1,6 +1,5 @@
 package com.xjany.bbs.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.xjany.bbs.entity.District;

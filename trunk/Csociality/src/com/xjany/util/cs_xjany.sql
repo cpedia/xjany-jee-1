@@ -47,7 +47,7 @@ create table all_user
    userLoad             int not null default 0 comment '用户登陆次数',
    userLastTime         datetime not null comment '最后登陆时间',
    userState            int not null default 1 comment '用户状态 0、离线 1、在线',
-   cms_del              int default 0,
+   cms_del              int(2) default 0,
    primary key (userId)
 );
 
@@ -62,7 +62,7 @@ create table bbs_bbslink
    linkName             varchar(50) not null comment '友情论坛名称',
    linkLogo             varchar(50) not null comment '友情论坛图标',
    linkUrl              varchar(50) not null comment '友情论坛URL地址',
-   cms_del              int,
+   cms_del              int(2) default 0,
    primary key (linkId)
 );
 
@@ -76,7 +76,7 @@ create table bbs_board
    boaId                int not null auto_increment comment '父版块ID，主键，自动增长',
    boaName              varchar(30) not null comment '版块名称',
    boaMaster            varchar(20) comment '超级版主',
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (boaId)
 );
 
@@ -89,7 +89,7 @@ create table bbs_degree
 (
    degreeId             int not null auto_increment comment '等级ID',
    degreeName           varchar(50) comment '等级名',
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (degreeId)
 );
 
@@ -107,7 +107,7 @@ create table bbs_message
    mesPost              varchar(30) not null comment '短消息发布人',
    mesTime              datetime not null comment '短消息发表的时间',
    mesIsRead            int not null default 1 comment '短消息是否已读 0、否 1、是',
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (mesId)
 );
 
@@ -125,7 +125,7 @@ create table bbs_online
    onBrowser            varchar(30) not null,
    onLocate             varchar(100) not null,
    onTime               datetime not null,
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (onId)
 );
 
@@ -142,7 +142,7 @@ create table bbs_reply
    repContent           varchar(4000) not null,
    repTime              datetime not null,
    repIp                varchar(30) not null,
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (repId)
 );
 
@@ -163,7 +163,7 @@ create table bbs_sub_board
    subReNum             int comment '版块回复总数',
    subLastUser          varchar(20) comment '最后发表（主题或回复）人',
    subLastTopic         varchar(50) comment '最后访问（发表或回复）主题的名称',
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (subId)
 );
 
@@ -188,7 +188,7 @@ create table bbs_topic
    topicTop             int default 1 comment '是否置顶主题 0、否 1、是',
    topicLastUser        varchar(30) comment '主题最后回复人',
    topicLastTime        datetime not null comment '主题最后回复时间',
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (topicId)
 );
 
@@ -227,7 +227,7 @@ create table bbs_user_role
 (
    roleId               int not null auto_increment comment '角色ID',
    roleName             varchar(50) not null comment '角色名',
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (roleId)
 );
 
@@ -241,7 +241,7 @@ create table district
    id                   int(11) not null auto_increment,
    name                 national varchar(10),
    province             national varchar(10),
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (id)
 );
 
@@ -255,7 +255,7 @@ create table file
    name                 national varchar(50),
    path                 national varchar(10),
    upId                 int(11),
-   cms_del              int,
+   cms_del              int(2)  default 0,
    primary key (id)
 );
 

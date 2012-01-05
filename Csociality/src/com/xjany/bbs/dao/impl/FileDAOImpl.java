@@ -19,6 +19,7 @@ public class FileDAOImpl extends GeneriDAOImpl<File, Integer> implements FileDAO
 		session.save(file);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<File> findByUpId(int upId) {
 		Session session = sessionFactory.getCurrentSession();

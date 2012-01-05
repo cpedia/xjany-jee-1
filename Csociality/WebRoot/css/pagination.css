@@ -1,0 +1,90 @@
+body {
+	font: 12px/1.75 "宋体", arial, sans-serif;
+} 
+/*common-pagination*/ //分页的css
+.common-pagination {
+	width: auto;
+	float: right;
+	padding-top: 8px;
+	margin-right: 10px;
+	display: inline
+}
+
+.common-pagination a {
+	float: left;
+	height: 21px;
+	background: url(../image/onOver.png) left top no-repeat;
+	padding-left: 6px;
+	color: #000;
+	line-height: 21px;
+	margin-left: 3px;
+	display: inline;
+	font-family: "Arial";
+	text-decoration: none;
+	text-align: center
+}
+
+.common-pagination a span {
+	display: inline-block;
+	height: 21px;
+	line-height: 21px;
+	background: url(../image/onOver.png) right top no-repeat;
+	padding-right: 6px;
+	font-family: "Arial";
+}
+
+.common-pagination a.sm {
+	padding-left: 4px;
+	margin-left: 2px
+}
+
+.common-pagination a span.sm {
+	padding: 0 4px 0 0;
+}
+
+.common-pagination a.disable {
+	cursor: auto;
+	font-family: "宋体";
+	color: #C4C4C4;
+}
+
+.common-pagination a.enable {
+	font-family: "宋体";
+}
+
+.common-pagination a:hover,.common-pagination a.current {
+	background: url(../image/onOver.png) left bottom no-repeat;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer
+}
+
+.common-pagination a:hover span,.common-pagination a.current span {
+	background: url(../image/onOver.png) right bottom no-repeat;
+}
+
+.common-pagination a.disable:hover {
+	background: url(../image/onOver.png) left top no-repeat;
+	color: #C4C4C4;
+}
+
+.common-pagination a.disable:hover span {
+	background: url(../image/onOver.png) right top no-repeat;
+}
+
+.common-pagination span.points {
+	float: left;
+	line-height: 11px;
+	padding: 5px 6px;
+	margin-left: 3px;
+	display: inline;
+	font-family: "Arial";
+	text-align: center;
+	border: 0px;
+	color: #000;
+}
+
+.common-pagination span.sm {
+	padding: 4px 4px;
+	margin-left: 2px
+}

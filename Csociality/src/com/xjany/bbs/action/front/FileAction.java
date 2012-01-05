@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.xjany.bbs.dao.impl.GeneriDAOImpl;
 import com.xjany.bbs.entity.File;
 import java.io.*;
 
@@ -115,6 +116,12 @@ public class FileAction {
 		}
 		model.put("fileName", fileName);
 		return "file";
-
+	}
+	
+	@RequestMapping(params = "method=recycle")
+	public String recycle(HttpServletRequest request, ModelMap model, File file)
+			throws Exception {
+		fileService.recycle(file, true);
+		return "file";
 	}
 }

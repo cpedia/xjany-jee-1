@@ -15,6 +15,7 @@ public interface GenericDAO<T,Pk extends Serializable> {
 	public void update(T entity);
 	public void delete(T entity);
 	public void save(T entity);
+	public boolean recycle(T entity,boolean isRecycle);
 	public boolean delete(Serializable... id);
 	public boolean check(T entity, List<T> propertyName, String[] value);
 }

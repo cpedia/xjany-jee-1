@@ -58,4 +58,10 @@ public class FileServiceImpl implements FileService {
 		return fileDAO.findByUpId(upId);
 	}
 
+	@Override
+	public boolean recycle(File file,boolean isRecycle) {
+		 return fileDAO.recycle(file,isRecycle);
+		
+	}
+
 }

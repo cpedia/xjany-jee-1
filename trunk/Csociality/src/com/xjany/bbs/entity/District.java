@@ -1,51 +1,26 @@
 package com.xjany.bbs.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Table;
 
+import com.xjany.bbs.entity.base.AbstractDistrict;
+
+/**
+ * District entity. @author LiXiang
+ */
 @Entity
-public class District
-{
-	private Integer id;
-	private String name;
-	private String province;
-	private int remove;
-	
-	@Id
-	@GeneratedValue
-	public Integer getId()
-	{
-		return id;
+@Table(name = "district", catalog = "cs_xjany")
+public class District extends AbstractDistrict implements java.io.Serializable {
+
+	// Constructors
+
+	/** default constructor */
+	public District() {
 	}
-	public void setId(Integer id)
-	{
-		this.id = id;
+
+	/** full constructor */
+	public District(String name, String province, Integer cmsDel) {
+		super(name, province, cmsDel);
 	}
-	@Column(length = 10)
-	public String getName()
-	{
-		return name;
-	}
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	@Column(length = 10)
-	public String getProvince()
-	{
-		return province;
-	}
-	public void setProvince(String province)
-	{
-		this.province = province;
-	}
-	@Column(length = 4)
-	public int getRemove() {
-		return remove;
-	}
-	public void setRemove(int remove) {
-		this.remove = remove;
-	}
+
 }

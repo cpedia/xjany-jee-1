@@ -17,7 +17,7 @@ import com.xjany.bbs.entity.BbsTopic;
  * BbsReply entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractBbsReply implements java.io.Serializable, AbstractGeneric {
+public abstract class AbstractBbsReply implements java.io.Serializable, InterGeneric {
 
 	// Fields
 

@@ -12,8 +12,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xjany.bbs.dao.GenericDAO;
+import com.xjany.bbs.entity.base.AbstractGeneric;
 
-/*
+/**
  * @param 一个通用的dao层
  */
 
@@ -23,6 +24,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	protected SessionFactory sessionFactory;
 
 	private Class<T> clazz;
+	@SuppressWarnings("unchecked")
 	public GeneriDAOImpl() {
 		clazz = (Class<T>)((ParameterizedType)getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
@@ -33,6 +35,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		session.delete(entity);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from " + clazz.getName());
@@ -40,6 +43,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	public T findById(Serializable id) {
 		Session session = sessionFactory.getCurrentSession();
 		T t = (T) session.get(clazz, id);
@@ -57,6 +61,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		session.update(entity);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean delete(Serializable... id){
 		try {
 			Session session = sessionFactory.getCurrentSession();
@@ -101,9 +106,37 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 				sessionFactory.close();
 		}
 	}
+	
+	/**
+	 * 根据属性查找对象
+	 * @param propertyName 属性名称
+	 * @param value 属性对应的值
+	 * @return 对象列表
+	 */
+	@SuppressWarnings("unchecked")
 	public List<T> findByProperty(Object propertyName, String value) {
 		String queryString = "from "+clazz.getName()+" as a where a." + propertyName + "= ?";
 		return (List<T>) sessionFactory.getCurrentSession().createQuery(queryString).setParameter(0, value).list();
+	}
+	
+	/**
+	 * 回收站
+	 * @param isRecycle 是否放到回收站
+	 * @return
+	 */
+	public boolean recycle(T entity,boolean isRecycle)
+	{
+		try{
+			((AbstractGeneric) entity).recycle(isRecycle);
+			this.update(entity);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally{
+			if(sessionFactory != null)
+			sessionFactory.close();
+		}
 	}
 
 }

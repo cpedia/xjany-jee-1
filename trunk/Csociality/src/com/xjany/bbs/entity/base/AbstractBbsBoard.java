@@ -18,7 +18,7 @@ import com.xjany.bbs.entity.BbsSubBoard;
  * BbsBoard entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractBbsBoard implements java.io.Serializable, AbstractGeneric {
+public abstract class AbstractBbsBoard implements java.io.Serializable, InterGeneric {
 
 	// Fields
 

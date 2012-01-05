@@ -12,7 +12,7 @@ import javax.persistence.MappedSuperclass;
  * BbsMessage entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractBbsMessage implements java.io.Serializable, AbstractGeneric {
+public abstract class AbstractBbsMessage implements java.io.Serializable, InterGeneric {
 
 	// Fields
 

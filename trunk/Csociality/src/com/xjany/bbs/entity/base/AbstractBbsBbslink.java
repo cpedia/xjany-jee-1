@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
  * BbsBbslink entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractBbsBbslink implements java.io.Serializable, AbstractGeneric {
+public abstract class AbstractBbsBbslink implements java.io.Serializable, InterGeneric {
 
 	// Fields
 

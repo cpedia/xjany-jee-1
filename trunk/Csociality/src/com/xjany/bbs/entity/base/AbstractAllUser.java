@@ -21,10 +21,14 @@ import com.xjany.bbs.entity.BbsUserProfile;
  * AllUser entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractAllUser implements java.io.Serializable, AbstractGeneric {
+public abstract class AbstractAllUser implements java.io.Serializable, InterGeneric {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer userId;
 	private BbsUserProfile bbsUserProfile;
 	private Integer cmsUserId;

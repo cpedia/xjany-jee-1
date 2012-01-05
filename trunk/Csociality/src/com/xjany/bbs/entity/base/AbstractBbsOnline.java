@@ -12,7 +12,7 @@ import javax.persistence.MappedSuperclass;
  * BbsOnline entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractBbsOnline implements java.io.Serializable, AbstractGeneric {
+public abstract class AbstractBbsOnline implements java.io.Serializable, InterGeneric {
 
 	// Fields
 

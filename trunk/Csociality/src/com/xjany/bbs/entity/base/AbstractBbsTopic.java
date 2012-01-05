@@ -22,7 +22,7 @@ import com.xjany.bbs.entity.BbsSubBoard;
  * BbsTopic entity. @author LiXiang
  */
 @MappedSuperclass
-public abstract class AbstractBbsTopic implements java.io.Serializable, AbstractGeneric {
+public abstract class AbstractBbsTopic implements java.io.Serializable, InterGeneric {
 
 	// Fields
 

@@ -9,8 +9,7 @@
 
 	<context:annotation-config />
 	<!-- 把标记了@Controller注解的类转换为bean -->
-	<context:component-scan base-package="com.xjany.action" />
-	<context:component-scan base-package="com.xjany.bbs.action" />
+	<context:component-scan base-package="com.xjany.bbs.action.front" />
 	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
@@ -40,7 +39,7 @@
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 
 		<property name="viewClass"
-			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
+			value="com.xjany.common.springmvc.XjanyFreeMarkerView"></property>
 
 		<property name="prefix" value="/WEB-INF/front/" />
 		<property name="suffix" value=".html" />

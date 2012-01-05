@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 
 import com.xjany.bbs.entity.BbsReply;
 import com.xjany.bbs.entity.BbsSubBoard;
+import com.xjany.bbs.entity.InterGeneric;
 
 /**
  * AbstractBbsTopic entity provides the base persistence definition of the

@@ -7,6 +7,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.xjany.bbs.entity.InterGeneric;
+
 /**
  * AbstractBbsMessage entity provides the base persistence definition of the
  * BbsMessage entity. @author LiXiang

@@ -15,6 +15,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import com.xjany.bbs.entity.BbsUserProfile;
+import com.xjany.bbs.entity.InterGeneric;
 
 /**
  * AbstractAllUser entity provides the base persistence definition of the

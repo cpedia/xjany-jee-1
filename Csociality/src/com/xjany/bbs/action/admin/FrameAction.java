@@ -13,12 +13,34 @@ import java.io.*;
 
 @Controller
 public class FrameAction {
-	@Autowired
-	private FileService fileService;
 
-	@RequestMapping("/index.jhtml")
-	public String showIndex(HttpServletRequest request, ModelMap model)
-			throws Exception {
-		return "index";
+	/**
+	 * 通用的拦截器  所有以  *.do的 都返回到 *.html页面
+	 * @param request
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/*.do")
+	public String genricDo(HttpServletRequest request, ModelMap model)
+	throws Exception {
+		String   path   =   (String)   request.getRequestURI();
+		path = path.replaceAll("\\/xjanyadmin\\/", "").replaceAll("\\.do", "");
+		return path;
+	}
+	
+	/**
+	 * 通用的拦截器  所有以  *.jhtml的 都返回到 *.html页面
+	 * @param request
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/*.jhtml")
+	public String genricJhtml(HttpServletRequest request, ModelMap model)
+	throws Exception {
+		String   path   =   (String)   request.getRequestURI();
+		path = path.replaceAll("\\/xjanyadmin\\/", "").replaceAll("\\.jhtml", "");
+		return path;
 	}
 }

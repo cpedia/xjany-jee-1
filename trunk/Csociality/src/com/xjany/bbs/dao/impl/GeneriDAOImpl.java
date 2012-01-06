@@ -30,9 +30,22 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 	
-	public void delete(T entity) {
+	public boolean delete(T entity) {
 		Session session = sessionFactory.getCurrentSession();
-		session.delete(entity);
+			try {
+			session.delete(entity);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally{
+			if(session != null){
+				session.clear();
+				session.close();
+			}
+			if(sessionFactory != null)
+				sessionFactory.close();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -51,20 +64,46 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 	
 
-	public void save(T entity) {
+	public boolean save(T entity) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(entity);
+		try {
+			session.save(entity);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(session != null){
+				session.clear();
+				session.close();
+			}
+			if(sessionFactory != null)
+				sessionFactory.close();
+		}
 	}
 
-	public void update(T entity) {
+	public boolean update(T entity) {
 		Session session = sessionFactory.getCurrentSession();
-		session.update(entity);
+		try {
+			session.update(entity);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(session != null){
+				session.clear();
+				session.close();
+			}
+			if(sessionFactory != null)
+				sessionFactory.close();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public boolean delete(Serializable... id){
+		Session session = sessionFactory.getCurrentSession();
 		try {
-			Session session = sessionFactory.getCurrentSession();
 			T t = (T) session.get(clazz, id[0]);
 			session.delete(t);
 			if(id.length -1 > 0)
@@ -80,6 +119,10 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 			e.printStackTrace();
 			return false;
 		}finally{
+			if(session != null){
+				session.clear();
+				session.close();
+			}
 			if(sessionFactory != null)
 				sessionFactory.close();
 		}

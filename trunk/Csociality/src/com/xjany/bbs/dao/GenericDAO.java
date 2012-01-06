@@ -12,9 +12,9 @@ public interface GenericDAO<T,Pk extends Serializable> {
 	public List<T> findAll();
 	public T findById(Pk id);
 	public List<T> findByProperty(Object propertyName, String value);
-	public void update(T entity);
-	public void delete(T entity);
-	public void save(T entity);
+	public boolean update(T entity);
+	public boolean delete(T entity);
+	public boolean save(T entity);
 	public boolean recycle(T entity,boolean isRecycle);
 	public boolean delete(Serializable... id);
 	public boolean check(T entity, List<T> propertyName, String[] value);

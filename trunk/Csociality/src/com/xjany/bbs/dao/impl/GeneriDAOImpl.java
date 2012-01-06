@@ -42,6 +42,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
 	public List<T> findAll() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from " + clazz.getName());
@@ -50,6 +51,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
 	public T findById(Serializable id) {
 		Session session = sessionFactory.getCurrentSession();
 		T t = (T) session.get(clazz, id);
@@ -99,7 +101,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 			return false;
 		}
 	}
-	
+	@Transactional(readOnly = true)
 	public boolean check(T entity, List<T> propertyName, String[] value) {
 		Query query = null;
 		try {
@@ -129,6 +131,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	 * @return 对象列表
 	 */
 	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
 	public List<T> findByProperty(Object propertyName, String value) {
 		String queryString = "from "+clazz.getName()+" as a where a." + propertyName + "= ?";
 		return (List<T>) sessionFactory.getCurrentSession().createQuery(queryString).setParameter(0, value).list();

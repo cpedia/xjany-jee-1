@@ -13,6 +13,18 @@
 	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	
+	<!-- 异常页面 -->
+	<bean class="com.xjany.common.springmvc.ExceptionHandler">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.web.bind.MissingServletRequestParameterException">/error/requiredParameter</prop>
+				<prop key="org.springframework.beans.TypeMismatchException">/error/mismatchParameter</prop>
+				<prop key="org.springframework.web.bind.ServletRequestBindingException">/error/bindException</prop>
+				<prop key="org.springframework.dao.DataIntegrityViolationException">/error/integrityViolation</prop>
+			</props>
+		</property>
+	</bean>
 		
 	<!-- freemarker的配置 -->
 	<bean id="freemarkerConfig"

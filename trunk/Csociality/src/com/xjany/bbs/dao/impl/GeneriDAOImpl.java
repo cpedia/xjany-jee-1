@@ -106,9 +106,12 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		Query query = null;
 		try {
 			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where a."+ propertyName.get(0) +"="+ value[0]);
-			for(int i = 0; i < propertyName.size(); i++)
+			if(propertyName.size() > 1)
 			{
-				sql.append(" and a."+ propertyName.get(i+1) +"="+value[i+1]);
+				for(int i = 0; i < propertyName.size(); i++)
+				{
+					sql.append(" and a."+ propertyName.get(i+1) +"="+value[i+1]);
+				}
 			}
 				query = sessionFactory.getCurrentSession().createQuery(sql.toString());
 				if(query.list().size() > 0)

@@ -45,7 +45,9 @@ public class UserServiceImpl implements UserService{
 
 	public boolean check(AllUser entity, List<AllUser> propertyName,
 			String[] value) {
-		return userDAO.check(entity, propertyName, value);
+		String[] md5Value = new String[1];
+		md5Value[0] = (com.xjany.common.util.MyMD5Util.MD5(value[0]));
+		return userDAO.check(entity, propertyName, md5Value);
 	}
 
 	public boolean update(AllUser entity) {

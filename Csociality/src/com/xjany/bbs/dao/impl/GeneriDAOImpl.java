@@ -102,7 +102,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		}
 	}
 	@Transactional(readOnly = true)
-	public boolean check(T entity, List<T> propertyName, String[] value) {
+	public boolean check(T entity, List<T> propertyName, String... value) {
 		Query query = null;
 		try {
 			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where a."+ propertyName.get(0) +"="+ value[0]);

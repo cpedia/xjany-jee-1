@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>jeecms-left</title>
-<#include "/admin/head.html"/>
+[#include "/WEB-INF/admin/head.html"/]
 <script type="text/javascript">
 $(function(){
 	Cms.lmenu('lmenu');
@@ -12,10 +12,8 @@ $(function(){
 </head>
 <body class="lbody">
 <ul id="lmenu">
-<li><a href="right.do" target="rightFrame"><@s.m "global.admin.index"/></a></li>
-<@cms_perm url="/personal/v_profile.do">
-<li><a href="personal/v_profile.do" target="rightFrame"><@s.m "cmsPersonal.function"/></a></li>
-</@cms_perm>
+<li><a href="right.do" target="rightFrame"><!-- [@s.m "global.admin.index"/] --></a></li>
+<li><a href="personal/v_profile.do" target="rightFrame">[@s.m "cmsPersonal.function"/]</a></li>
 </ul>
 </body>
 </html>

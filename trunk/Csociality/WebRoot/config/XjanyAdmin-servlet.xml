@@ -13,6 +13,29 @@
 	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	
+	<!-- 国际化配置 -->	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="cacheSeconds" value="-1"/>
+		<property name="basenames">
+			<list>
+				<value>/config/languages/cms_global/messages</value>
+				<value>/config/languages/bbs_admin/messages</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 异常页面 -->
+	<bean class="com.xjany.common.springmvc.ExceptionHandler">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.web.bind.MissingServletRequestParameterException">/error/requiredParameter</prop>
+				<prop key="org.springframework.beans.TypeMismatchException">/error/mismatchParameter</prop>
+				<prop key="org.springframework.web.bind.ServletRequestBindingException">/error/bindException</prop>
+				<prop key="org.springframework.dao.DataIntegrityViolationException">/error/integrityViolation</prop>
+			</props>
+		</property>
+	</bean>
 
 	<!-- freemarker的配置 -->
 	<bean id="freemarkerConfig"
@@ -29,8 +52,7 @@
 				<prop key="datetime_format">yyyy-MM-dd</prop>
 				<prop key="date_format">yyyy-MM-dd</prop>
 				<prop key="number_format">#.##</prop>
-				<prop key="auto_import"><!-- /ftl/pony/index.ftl as p,/ftl/spring.xj as s -->
-				</prop>
+				<prop key="auto_import">/ftl/pony/index.ftl as p,/ftl/spring.ftl as s </prop>
 			</props>
 		</property>
 	</bean>

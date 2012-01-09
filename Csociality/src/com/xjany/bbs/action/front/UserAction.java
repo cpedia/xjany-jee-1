@@ -7,12 +7,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.xjany.bbs.service.FileService;
+import com.xjany.bbs.entity.AllUser;
+import com.xjany.bbs.service.UserService;
 @Controller
 public class UserAction {
 	@Autowired
-	private FileService fileService;
+	private UserService userSerive;
+	
+	public UserService getUserSerive() {
+		return userSerive;
+	}
 
+	public void setUserSerive(UserService userSerive) {
+		this.userSerive = userSerive;
+	}
+	
+	private AllUser user;
+	
 	@RequestMapping("/login.jhtml")
 	public String showIndex(HttpServletRequest request, ModelMap model)
 			throws Exception {

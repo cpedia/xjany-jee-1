@@ -34,6 +34,7 @@ import com.xjany.bbs.service.FileService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"file:WebRoot/config/XjanyFront-servlet.xml",
+		"file:WebRoot/config/XjanyAdmin-servlet.xml",
 		"file:WebRoot/config/applicationContext.xml" })
 public class JUnitBase {
 	private static HandlerMapping handlerMapping;

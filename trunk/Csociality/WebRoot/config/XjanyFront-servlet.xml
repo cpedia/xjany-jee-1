@@ -6,7 +6,7 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-
+	
 	<context:annotation-config />
 	<!-- 把标记了@Controller注解的类转换为bean -->
 	<context:component-scan base-package="com.xjany.bbs.action.front" />
@@ -16,14 +16,14 @@
 	
 	<!-- 异常页面 -->
 	<bean class="com.xjany.common.springmvc.ExceptionHandler">
-		<property name="exceptionMappings">
+		<!-- <property name="exceptionMappings">
 			<props>
 				<prop key="org.springframework.web.bind.MissingServletRequestParameterException">/error/requiredParameter</prop>
 				<prop key="org.springframework.beans.TypeMismatchException">/error/mismatchParameter</prop>
 				<prop key="org.springframework.web.bind.ServletRequestBindingException">/error/bindException</prop>
 				<prop key="org.springframework.dao.DataIntegrityViolationException">/error/integrityViolation</prop>
 			</props>
-		</property>
+		</property> -->
 	</bean>
 		
 	<!-- freemarker的配置 -->

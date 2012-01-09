@@ -263,7 +263,7 @@ function pwStrength(pwd) {
     <tr>
       <td width="70" align="right" valign="bottom" class="font1">用户名：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
       <td width="2" rowspan="9" class="font2"></td>
-      <td width="440" class="font2"> <input name="username" id="username" type="text teat1_1"  class="teat1" size="15"    onChange="usercheck('check')" onBlur="usercheck('check')" value=""  > </td>
+      <td width="440" class="font2"> <input name="user.userName" id="username" type="text teat1_1"  class="teat1" size="15"    onChange="usercheck('check')" onBlur="usercheck('check')" value=""  > </td>
 
     </tr>
     <tr>
@@ -273,11 +273,11 @@ function pwStrength(pwd) {
     <tr>
       <td align="right" valign="bottom" class="font1">邮箱：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
 
-      <td class="font2"><input name="email" id="email" type="text" class="teat1" onChange="mailcheck('eml')" onBlur="mailcheck('eml')"  value=""><input type="hidden" name="emailexist" id="emailexist"   value="0"/><input type="hidden" name="usernameexist" id="usernameexist"   value="0"/><input type="hidden" name="yanzhengexsit" id="yanzhengexsit"   value="0"/></td>
+      <td class="font2"><input name="user.userEmail" id="email" type="text" class="teat1" onChange="mailcheck('eml')" onBlur="mailcheck('eml')"  value=""><input type="hidden" name="emailexist" id="emailexist"   value="0"/><input type="hidden" name="usernameexist" id="usernameexist"   value="0"/><input type="hidden" name="yanzhengexsit" id="yanzhengexsit"   value="0"/></td>
     </tr>
     <tr>
       <td align="right" valign="bottom" class="font1">&nbsp;</td>
-      <td height="30" valign="top" class="font2"><span id="eml">请填写有效邮箱，以确保收到激活信。推荐使用163、sina、sohu、qq邮箱。</span></td>
+      <td height="30" valign="top" class="font2"><span id="eml">请填写有效邮箱，以确保收到激活信。推荐使用163、sina、sohu。</span></td>
     </tr>
 	
 	<tr>
@@ -295,7 +295,7 @@ function pwStrength(pwd) {
 	
     <tr>
       <td align="right" valign="bottom" class="font1">密码：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
-      <td class="font2"><input name="userpwd" onkeyup="pwStrength(this.value)"  type="password" class="teat1" id="userpwd" onBlur="pwdcheck('pwd')" onChange="pwdcheck('pwd')" size="15"  value=""></td>
+      <td class="font2"><input name="user.userPsw" onkeyup="pwStrength(this.value)"  type="password" class="teat1" id="userpwd" onBlur="pwdcheck('pwd')" onChange="pwdcheck('pwd')" size="15"  value=""></td>
 	</tr>
     <tr>
       <td align="right" valign="bottom" class="font1">&nbsp;</td>

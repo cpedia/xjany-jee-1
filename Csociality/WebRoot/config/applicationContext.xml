@@ -15,7 +15,7 @@
 	<context:component-scan base-package="com.xjany" />  <!-- 自动扫描所有注解该路径 -->
 	<aop:aspectj-autoproxy />
 
-	<context:property-placeholder location="file:WebRoot/config/hibernate.properties" />
+	<context:property-placeholder location="classpath:hibernate.properties" />
 	
 	<bean id="multipartResolver"  
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  

@@ -56,7 +56,34 @@ public class FrameAction {
 	public String genricJhtml(HttpServletRequest request, ModelMap model)
 	throws Exception {
 		String   path   =   (String)   request.getRequestURI();
-		path = path.replaceAll("\\/xjanyadmin\\/", "").replaceAll("\\.jhtml", "");
+		//path = path.replaceAll("\\/xjanyadmin\\/", "").replaceAll("\\.jhtml", "");
+		path = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf("."));
 		return path;
+	}
+	
+	/**
+	 * 通用的拦截器 
+	 * @param request
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/*.*")
+	public String genricSuffix(HttpServletRequest request, ModelMap model)
+			throws Exception {
+		String path = (String)request.getRequestURI();
+		path = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf("."));
+//		if(path.endsWith(".jhtml"))
+//			path = path.replaceAll("\\/xjanyadmin\\/", "").replaceAll("\\.jhtml", "");
+//		else if(path.endsWith(".do"))
+//			path = path.replaceAll("\\/xjanyadmin\\/", "").replaceAll("\\.do", "");
+		return path;
+	}
+	
+	public static void main(String[] agrs)
+	{
+		String a = "/xjanyadmin/dd/cc/login.do";
+		a = a.substring(a.lastIndexOf("/") + 1, a.lastIndexOf("."));
+		System.out.println(a);
 	}
 }

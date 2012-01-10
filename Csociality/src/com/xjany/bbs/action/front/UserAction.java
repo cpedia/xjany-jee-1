@@ -29,8 +29,13 @@ public class UserAction {
 			throws Exception {
 		return "login";
 	}
+	@RequestMapping("/register.do")
+	public String showRegisterDo(HttpServletRequest request, ModelMap model)
+			throws Exception {
+		return "register";
+	}
 	@RequestMapping("/register.jhtml")
-	public String showRegister(HttpServletRequest request, ModelMap model)
+	public String showRegisterJhtml(HttpServletRequest request, ModelMap model)
 			throws Exception {
 		return "register";
 	}

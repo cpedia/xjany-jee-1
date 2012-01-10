@@ -13,6 +13,7 @@ import com.xjany.bbs.service.UserService;
 public class UserAction {
 	@Autowired
 	private UserService userSerive;
+	private AllUser user;
 	
 	public UserService getUserSerive() {
 		return userSerive;
@@ -22,7 +23,6 @@ public class UserAction {
 		this.userSerive = userSerive;
 	}
 	
-	private AllUser user;
 	
 	@RequestMapping("/login.jhtml")
 	public String showLogin(HttpServletRequest request, ModelMap model)

@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#--
 label：有label代表需要创建td和tr。
 colspan：有colspan代表不需要创建tr。

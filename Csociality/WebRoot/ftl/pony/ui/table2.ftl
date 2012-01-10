@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#macro otable cols normalOperate=[] batchOperate=[] wholeOptName="" wholeOptAction="" keepParams=[] gotoPageAction="Com_list"
   actionSuffix=".do" keyId="id" batchId="ids" wholeId="wids" value=pagination isPagination=true rowIndex=true operateCol="操作" checkRight="true"
   width="100%">

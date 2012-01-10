@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#--
 <textarea name="textarea"></textarea>
 -->

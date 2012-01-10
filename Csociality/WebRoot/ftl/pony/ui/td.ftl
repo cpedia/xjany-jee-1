@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#--
 构建一个没有内容的label，或者没有label的行。
 用于自定义内容和无label的行。

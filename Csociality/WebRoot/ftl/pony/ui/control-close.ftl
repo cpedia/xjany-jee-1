@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#if help!='' && helpPosition=='2'>
  <span class="pn-fhelp"><@s.mt code=help text=help/></span><#rt/>
 <#elseif help!='' && helpPosition=='3'>

@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#--
 root：树对象。
 	treeName：节点名称；

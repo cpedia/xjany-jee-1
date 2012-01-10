@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#if (batchOperate?size > 0)>
 <div class="pn-lbopt">
   <#list batchOperate as operate>  

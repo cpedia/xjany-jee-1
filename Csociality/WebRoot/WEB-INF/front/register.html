@@ -4,19 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>51cto用户注册</title>
 <meta http-equiv="x-ua-compatible" content="ie=7" /> 
-<link href="http://ucenter.51cto.com/css/master.css" rel="stylesheet" type="text/css" />
-<!--<link href="css/master_top760.css" rel="stylesheet" type="text/css" />-->
-<link type="text/css" rel="stylesheet" href="http://ucenter.51cto.com/css/header_master_top.css">
-<script src="http://ucenter.51cto.com/js/index1.js"></script>
-<script type="text/javascript" src="http://ucenter.51cto.com/lib/base64/utf8.js"></script>
-<script type="text/javascript" src="http://ucenter.51cto.com/lib/base64/edcode.js"></script>
-<script type="text/javascript" src="http://ucenter.51cto.com/js/hangye.js"></script>
-
-<script type="text/javascript" src="http://ucenter.51cto.com/js/guanzhu.js"></script>
-<script type="text/javascript" src="http://ucenter.51cto.com/js/user.js"></script>
-<script type="text/javascript" src="http://ucenter.51cto.com/js/zhiwei.js"></script>
-<SCRIPT type="text/javascript" src="http://ucenter.51cto.com/js/ajaxreg.js"></SCRIPT>
-<Script language="JavaScript" src="http://www.51cto.com/mail.js"></script> 
+<link href="/css/bbs/front/master.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="/css/bbs/front/header_master_top.css">
+<script src="/include/bbs/front/index1.js"></script>
+<script type="text/javascript" src="/include/bbs/front/utf8.js"></script>
+<script type="text/javascript" src="/include/bbs/front/edcode.js"></script>
+<script type="text/javascript" src="/include/bbs/front/hangye.js"></script>
+<!--
+<script type="text/javascript" src="http://ucenter.51cto.com/lib/base64/utf8.js"></script> 
+ -->
+<script type="text/javascript" src="/include/bbs/front/guanzhu.js"></script>
+<script type="text/javascript" src="/include/bbs/front/user.js"></script>
+<script type="text/javascript" src="/include/bbs/front/zhiwei.js"></script>
+<SCRIPT type="text/javascript" src="/include/bbs/front/ajaxreg.js"></SCRIPT>
+<Script language="JavaScript" src="/include/bbs/front/mail.js"></script> 
 
 <script LANGUAGE = "JavaScript">
 function checkuser(){
@@ -57,7 +58,7 @@ function check_data(){
 	var pattern = new RegExp(nostr,"gi");
 	
 	if(document.getElementById('agree2').checked==true){
-	   alert("请选择同意《51CTO服务条款》。"); 
+	   alert("请选择同意《xjany服务条款》。"); 
 	   document.getElementById('agree1').focus();
 	   return false;
 	}
@@ -241,7 +242,7 @@ function pwStrength(pwd) {
 <script src="js/header.js"></script>
 <div id="warp">
 <span class="blank24"></span>
-<div class="tag"></div>
+<div class="tag"><img src="/image/bbs/front/tag_bg1.gif" alt=""></img></div>
 <span class="blank16"></span>
 <div id="container">
 <form name="reg" action="" method="post" id="reg" onSubmit="return check_data()">
@@ -326,23 +327,23 @@ function pwStrength(pwd) {
     <tr>
       <td width="71" align="right" class="font1" style="width:100px;">关注领域：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
        
-      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('guanzhu',0)"><tr><td width="372"><div id="guanzhu_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden; color:#785B00;"></div><input  type="hidden" id="guanzhu_hid" name="gzly"  value=""><input type="hidden" id="guanzhu_hid_other" name="gzly_other" value=""></td><td width="12"><img src="images/ico1.gif" width="21" height="26" /></td></tr></table></td>
+      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('guanzhu',0)"><tr><td width="372"><div id="guanzhu_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden; color:#785B00;"></div><input  type="hidden" id="guanzhu_hid" name="gzly"  value=""><input type="hidden" id="guanzhu_hid_other" name="gzly_other" value=""></td><td width="12"><img src="image/bbs/front/ico1.gif" width="21" height="26" /></td></tr></table></td>
 
     </tr>
     <tr>
       <td align="right" class="font1" style="width:100px;">所属行业：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
-      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('hangye',0)"><tr><td width="372"><div id="hangye_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden;color:#785B00; "></div><input type="hidden" id="hangye_hid" name="sshy" value=""><input type="hidden" id="hangye_hid_other" name="sshy_other" value=""></td><td width="12"><img src="images/ico1.gif" width="21" height="26"  /></td></tr></table></td>
+      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('hangye',0)"><tr><td width="372"><div id="hangye_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden;color:#785B00; "></div><input type="hidden" id="hangye_hid" name="sshy" value=""><input type="hidden" id="hangye_hid_other" name="sshy_other" value=""></td><td width="12"><img src="image/bbs/front/ico1.gif" width="21" height="26"  /></td></tr></table></td>
     </tr>
 	
 	<tr>
       <td align="right" class="font1">职位：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
 
-      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('zhiwei',0)"><tr><td width="372"><div id="zhiwei_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden; color:#785B00;"></div><input type="hidden" id="zhiwei_hid" name="zw"   value=""><input type="hidden" id="zhiwei_hid_other" name="zw_other"  value=""></td><td width="12"><img src="images/ico1.gif" width="21" height="26"  /></td></tr></table></td>
+      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('zhiwei',0)"><tr><td width="372"><div id="zhiwei_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden; color:#785B00;"></div><input type="hidden" id="zhiwei_hid" name="zw"   value=""><input type="hidden" id="zhiwei_hid_other" name="zw_other"  value=""></td><td width="12"><img src="image/bbs/front/ico1.gif" width="21" height="26"  /></td></tr></table></td>
     </tr>
 	<tr>
       <td align="right" class="font1" style="width:80px;">公司规模：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
       <td height="42" colspan="3" class="font2"> <select  name="companysize" class="teat7"  id="companysize">
- <option value='' selected></option>														<option value="1"  >50人以下</option>
+ <option value='' selected></option>														<option value="1">50人以下</option>
 
 																												<option value="2"  >50－499人</option>
 																												<option value="3"  >500－999人</option>
@@ -393,6 +394,6 @@ function pwStrength(pwd) {
 
 </div><br class="dle"/>
 </div>
-<script src="http://ucenter.51cto.com/js/footer.js"></script>
+<script src="/include/bbs/front/footer.js"></script>
 </body>
 </html>

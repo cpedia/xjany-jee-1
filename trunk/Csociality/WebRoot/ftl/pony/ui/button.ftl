@@ -10,8 +10,8 @@
 <input type="button"<#rt/>
 <#if value!=""> value="${value}"<#elseif code!=""> value="<@s.m code/>"</#if><#rt/>
 <#if id!=""> id="${id}"</#if><#rt/>
-<#include "common-attributes.ftl"/><#rt/>
-<#include "scripting-events.ftl"/><#rt/>
+<#include "/ftl/pony/ui/common-attributes.ftl"/><#rt/>
+<#include "/ftl/pony/ui/scripting-events.ftl"/><#rt/>
 /><#rt/>
 </#macro>
 
@@ -26,8 +26,8 @@
 <input type="submit"<#rt/>
 <#if value!=""> value="${value}"<#elseif code!=""> value="<@s.m code/>"</#if><#rt/>
 <#if id!=""> id="${id}"</#if><#rt/>
-<#include "common-attributes.ftl"/><#rt/>
-<#include "scripting-events.ftl"/><#rt/>
+<#include "/ftl/pony/ui/common-attributes.ftl"/><#rt/>
+<#include "/ftl/pony/ui/scripting-events.ftl"/><#rt/>
 /><#rt/>
 </#macro>
 
@@ -42,7 +42,7 @@
 <input type="reset"<#rt/>
 <#if value!=""> value="${value}"<#elseif code!=""> value="<@s.m code/>"</#if><#rt/>
 <#if id!=""> id="${id}"</#if><#rt/>
-<#include "common-attributes.ftl"/><#rt/>
-<#include "scripting-events.ftl"/><#rt/>
+<#include "/ftl/pony/ui/common-attributes.ftl"/><#rt/>
+<#include "/ftl/pony/ui/scripting-events.ftl"/><#rt/>
 /><#rt/>
 </#macro>

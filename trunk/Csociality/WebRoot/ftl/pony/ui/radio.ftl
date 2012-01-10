@@ -8,7 +8,7 @@
 	id="" name="" class="" style="" size="" title="" disabled="" tabindex="" accesskey=""
 	onclick="" ondblclick="" onmousedown="" onmouseup="" onmouseover="" onmousemove="" onmouseout="" onfocus="" onblur="" onkeypress="" onkeydown="" onkeyup="" onselect="" onchange=""
 	>
-<#include "control.ftl"/><#rt/>
+<#include "/ftl/pony/ui/control.ftl"/><#rt/>
 <#if list?is_sequence>
 	<#if listKey!="" && listValue!="">
 		<#list list as item>
@@ -36,6 +36,6 @@
 		<#include "radio-item.ftl"><#t/>
 	</#list>
 </#if>
-<#include "control-close.ftl"/>
+<#include "/ftl/pony/ui/control-close.ftl"/>
 
 </#macro>

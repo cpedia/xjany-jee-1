@@ -128,7 +128,7 @@ function _validateBatch() {
 	<div class="clear"></div>
 </div>
 </#if>
-<#include "table-batchoperate.ftl" />
+<#include "/ftl/pony/ui/table-batchoperate.ftl" />
 </#if>
 </form>
 </#macro>

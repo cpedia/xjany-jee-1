@@ -2,19 +2,18 @@
 <#--
 <select><option></option></select>
 -->
-<#macro select
-	list value="" multiple="" headerKey="" headerValue="" listKey="" listValue="" listDeep="" headerButtom="false"
+<#macro select list value="" multiple="" headerKey="" headerValue="" listKey="" listValue="" listDeep="" headerButtom="false"
 	label="" noHeight="false" required="false" colspan="" width="100" help="" helpPosition="2" colon=":" hasColon="true"
 	id="" name="" class="" style="" size="" title="" disabled="" tabindex="" accesskey=""
 	vld=""
 	onclick="" ondblclick="" onmousedown="" onmouseup="" onmouseover="" onmousemove="" onmouseout="" onfocus="" onblur="" onkeypress="" onkeydown="" onkeyup="" onselect="" onchange=""
 	>
-<#include "control.ftl"/><#rt/>
+<#include "/ftl/pony/ui/control.ftl"/><#rt/>
 <select<#rt/>
 <#if id!=""> id="${id}"</#if><#rt/>
 <#if multiple!=""> multiple="${multiple}"</#if><#rt/>
-<#include "common-attributes.ftl"/><#rt/>
-<#include "scripting-events.ftl"/><#rt/>
+<#include "/ftl/pony/ui/common-attributes.ftl"/><#rt/>
+<#include "/ftl/pony/ui/scripting-events.ftl"/><#rt/>
 ><#rt/>
 <#if headerButtom=="false">
 <#if headerKey!="" || headerValue!="">
@@ -43,5 +42,5 @@
 </#if>
 </#if>
 </select>
-<#include "control-close.ftl"/><#rt/>
+<#include "/ftl/pony/ui/control-close.ftl"/><#rt/>
 </#macro>

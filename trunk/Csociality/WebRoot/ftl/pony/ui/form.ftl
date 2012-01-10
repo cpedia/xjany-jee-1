@@ -16,7 +16,7 @@
 <#if enctype!=""> enctype="${enctype}"</#if><#rt/>
 <#if onsubmit!=""> onsubmit="${onsubmit}"</#if><#rt/>
 <#if acceptCharset!=""> accept-charset="${acceptCharset}"</#if><#rt/>
-<#include "common-attributes.ftl"/><#rt/>
+<#include "/ftl/pony/ui/common-attributes.ftl"/><#rt/>
 >
 <#if theme!="simple">
 <#assign labelWidth=labelWidth/>

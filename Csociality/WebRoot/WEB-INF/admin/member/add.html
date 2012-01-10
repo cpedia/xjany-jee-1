@@ -22,7 +22,7 @@ $(function() {
 <#assign usernameExist><@s.m "error.usernameExist"/></#assign>
 [@p.form id="jvForm" action="o_save.do" labelWidth="12"]
 [@p.text width="50" colspan="1" label="cmsUser.username" name="username" required="true" maxlength="100" vld="{required:true,username:true,remote:'v_check_username.do',messages:{remote:'${usernameExist}'}}"/]
-[@p.text width="50" colspan="1" label="cmsUser.email" name="email" size="30" class="email"/>[@p.tr/]
+[@p.text width="50" colspan="1" label="cmsUser.email" name="email" size="30" class="email"/][@p.tr/]
 [@p.password width="50" colspan="1" label="cmsUser.password" id="password" name="password" maxlength="100" required="true" class="required"/]
 [@p.password width="50" colspan="1" label="cmsUser.pwdAgain" required="true" equalTo="#password"/>[@p.tr/]
 [@p.select colspan="2" label="cmsUser.group" name="groupId" list=groupList listKey="id" listValue="name" required="true"/][@p.tr/]
@@ -37,7 +37,7 @@ $(function() {
 [@p.text colspan="2" label="cmsUser.comefrom" name="comefrom" maxlength="150" size="70"/][@p.tr/]
 [@p.textarea colspan="2" label="cmsUser.intro" name="intro" maxlength="255" cols="70" rows="5"/][@p.tr/]
 [@p.td colspan="2"][@p.submit code="global.submit"/] &nbsp; [@p.reset code="global.reset"/][/@p.td]
-[/@p.form>
+[/@p.form]
 </div>
 </body>
 </html>

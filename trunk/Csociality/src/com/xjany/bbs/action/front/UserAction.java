@@ -25,8 +25,13 @@ public class UserAction {
 	private AllUser user;
 	
 	@RequestMapping("/login.jhtml")
-	public String showIndex(HttpServletRequest request, ModelMap model)
+	public String showLogin(HttpServletRequest request, ModelMap model)
 			throws Exception {
 		return "login";
+	}
+	@RequestMapping("/register.jhtml")
+	public String showRegister(HttpServletRequest request, ModelMap model)
+			throws Exception {
+		return "register";
 	}
 }

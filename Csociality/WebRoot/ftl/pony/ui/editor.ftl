@@ -9,7 +9,7 @@
 	maxlength="65535"
 	onclick="" ondblclick="" onmousedown="" onmouseup="" onmouseover="" onmousemove="" onmouseout="" onfocus="" onblur="" onkeypress="" onkeydown="" onkeyup="" onselect="" onchange=""
 	>
-<#include "control.ftl"/><#rt/>
+<#include "/ftl/pony/ui/control.ftl"/><#rt/>
 <script type="text/javascript">
 <#local editorBasePath="${base}/thirdparty/fckeditor/" filemanager="${editorBasePath}editor/filemanager/browser/default/browser.html"/>
 var ${name} = new FCKeditor("${name}");
@@ -44,5 +44,5 @@ ${name}.Height=${height};
 ${name}.Value="${value!?js_string}";
 ${name}.Create();
 </script>
-<#include "control-close.ftl"/><#rt/>
+<#include "/ftl/pony/ui/control-close.ftl"/><#rt/>
 </#macro>

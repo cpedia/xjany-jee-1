@@ -80,10 +80,4 @@ public class FrameAction {
 		return path;
 	}
 	
-	public static void main(String[] agrs)
-	{
-		String a = "/xjanyadmin/dd/cc/login.do";
-		a = a.substring(a.lastIndexOf("/") + 1, a.lastIndexOf("."));
-		System.out.println(a);
-	}
 }

@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#--
 表格标签：用于显示列表数据。
 	value：列表数据，可以是Pagination也可以是List。

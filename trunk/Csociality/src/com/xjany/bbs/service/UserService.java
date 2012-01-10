@@ -3,6 +3,7 @@ package com.xjany.bbs.service;
 import java.util.List;
 
 import com.xjany.bbs.entity.AllUser;
+import com.xjany.common.page.Pagination;
 
 public interface UserService {
 	public List<AllUser> findAll();
@@ -14,4 +15,7 @@ public interface UserService {
 	public boolean recycle(AllUser entity,boolean isRecycle);
 	public boolean delete(int... id);
 	public boolean check(AllUser entity, List<AllUser> propertyName, String... value);
+	public Pagination getPage(String username, String email, Integer siteId,
+			Integer groupId, Boolean disabled, Boolean admin, Integer rank,
+			int pageNo, int pageSize);
 }

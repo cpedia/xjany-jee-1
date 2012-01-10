@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#if name!=""> name="${name}"</#if><#rt/>
 <#if class!=""> class="${class}"</#if><#rt/>
 <#if style!=""> style="${style}"</#if><#rt/>

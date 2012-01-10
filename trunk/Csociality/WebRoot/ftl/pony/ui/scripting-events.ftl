@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#if onclick!=""> onclick="${onclick}"</#if><#rt/>
 <#if ondblclick!=""> ondblclick="${ondblclick}"</#if><#rt/>
 <#if onmousedown!=""> onmousedown="${onmousedown}"</#if><#rt/>

@@ -2,6 +2,7 @@ package com.xjany.bbs.dao.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xjany.bbs.dao.GenericDAO;
 import com.xjany.bbs.entity.InterGeneric;
+import com.xjany.common.page.Finder;
+import com.xjany.common.page.Pagination;
 
 /**
  * @param 一个通用的dao层
@@ -155,6 +158,52 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	/**
+	 * 通过Finder获得分页数据
+	 * 
+	 * @param finder
+	 *            Finder对象
+	 * @param pageNo
+	 *            页码
+	 * @param pageSize
+	 *            每页条数
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected Pagination find(Finder finder, int pageNo, int pageSize) {
+		int totalCount = countQueryResult(finder);
+		Pagination p = new Pagination(pageNo, pageSize, totalCount);
+		if (totalCount < 1) {
+			p.setList(new ArrayList());
+			return p;
+		}
+		Query query = sessionFactory.getCurrentSession().createQuery(finder.getOrigHql());
+		finder.setParamsToQuery(query);
+		query.setFirstResult(p.getFirstResult());
+		query.setMaxResults(p.getPageSize());
+		if (finder.isCacheable()) {
+			query.setCacheable(true);
+		}
+		List list = query.list();
+		p.setList(list);
+		return p;
+	}
+	
+	/**
+	 * 获得Finder的记录总数
+	 * 
+	 * @param finder
+	 * @return
+	 */
+	protected int countQueryResult(Finder finder) {
+		Query query = sessionFactory.getCurrentSession().createQuery(finder.getRowCountHql());
+		finder.setParamsToQuery(query);
+		if (finder.isCacheable()) {
+			query.setCacheable(true);
+		}
+		return ((Number) query.iterate().next()).intValue();
 	}
 
 }

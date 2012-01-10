@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xjany.bbs.dao.UserDAO;
 import com.xjany.bbs.entity.AllUser;
 import com.xjany.bbs.service.UserService;
+import com.xjany.common.page.Pagination;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
@@ -59,5 +60,13 @@ public class UserServiceImpl implements UserService{
 	public boolean save(AllUser entity) {
 		entity.setUserPsw(com.xjany.common.util.MyMD5Util.MD5(entity.getUserPsw()));
 		return userDAO.save(entity);
+	}
+	
+	public Pagination getPage(String username, String email, Integer siteId,
+			Integer groupId, Boolean disabled, Boolean admin, Integer rank,
+			int pageNo, int pageSize){
+		Pagination page = userDAO.getPage(username, email, siteId, groupId,
+				disabled, admin, rank, pageNo, pageSize);
+		return page;
 	}
 }

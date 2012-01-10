@@ -1,3 +1,4 @@
+<#ftl strip_whitespace=true>
 <#--
 表格列标签：展示数据列。
 	title：标题（列头）。直接显示字符串。默认""。

@@ -6,6 +6,8 @@
 
 drop table if exists all_user;
 
+drop table if exists all_user_group;
+
 drop table if exists bbs_bbslink;
 
 drop table if exists bbs_board;
@@ -40,6 +42,7 @@ create table all_user
    bbs_userId           int,
    userName             varchar(30) not null comment '用户名',
    userPsw              varchar(30) not null comment '密 码',
+   groupId              int comment '组ID',
    userSex              int not null default 1 comment '用户性别(0、男 1、女)',
    userEmail            varchar(50) not null comment '用户E-mail',
    userRegTime          datetime not null comment '注册时间',
@@ -234,6 +237,19 @@ create table bbs_user_role
 alter table bbs_user_role comment '用户角色表(role)';
 
 /*==============================================================*/
+/* Table: all_user_group                                         */
+/*==============================================================*/
+create table all_user_group
+(
+   groupId               int not null auto_increment comment '组ID',
+   groupName             varchar(50) not null comment '组名',
+   cms_del              int(2)  default 0,
+   primary key (groupId)
+);
+
+alter table all_user_group comment '用户组表(group)';
+
+/*==============================================================*/
 /* Table: district                                              */
 /*==============================================================*/
 create table district
@@ -276,4 +292,7 @@ alter table bbs_user_profile add constraint FK_Reference_4 foreign key (userId)
 
 alter table bbs_user_profile add constraint FK_Reference_6 foreign key (roleId)
       references bbs_user_role (roleId) on delete restrict on update restrict;
+      
+alter table all_user add constraint FK_Reference_7 foreign key (groupId)
+      references all_user_group (groupId) on delete restrict on update restrict;
 

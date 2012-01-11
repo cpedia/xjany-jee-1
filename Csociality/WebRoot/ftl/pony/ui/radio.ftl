@@ -16,7 +16,7 @@
 			<#local rvalue=item[listValue]>
 			<#local index=item_index>
 			<#local hasNext=item_has_next>
-			<#include "radio-item.ftl"><#t/>
+			<#include "/ftl/pony/ui/radio-item.ftl"><#t/>
 		</#list>
 	<#else>
 		<#list list as item>
@@ -24,7 +24,7 @@
 			<#local rvalue=item>
 			<#local index=item_index>
 			<#local hasNext=item_has_next>
-			<#include "radio-item.ftl"><#t/>
+			<#include "/ftl/pony/ui/radio-item.ftl"><#t/>
 		</#list>
 	</#if>
 <#else>
@@ -33,7 +33,7 @@
 		<#local rvalue=list[key]/>
 		<#local index=key_index>
 		<#local hasNext=key_has_next>
-		<#include "radio-item.ftl"><#t/>
+		<#include "/ftl/pony/ui/radio-item.ftl"><#t/>
 	</#list>
 </#if>
 <#include "/ftl/pony/ui/control-close.ftl"/>

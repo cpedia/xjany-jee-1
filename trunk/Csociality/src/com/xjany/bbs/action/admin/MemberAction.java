@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.xjany.bbs.entity.AllUser;
+import com.xjany.bbs.entity.BbsUserProfile;
+import com.xjany.bbs.service.BbsUserProfileService;
 import com.xjany.bbs.service.FileService;
 import com.xjany.bbs.service.GroupService;
 import com.xjany.bbs.service.UserService;
@@ -28,6 +31,9 @@ public class MemberAction{
 	
 	@Autowired
 	private GroupService groupService;
+	
+	@Autowired
+	private BbsUserProfileService bbsUserProfileService;
 
 	@RequestMapping("/member/v_list.do")
 	public String v_list(Integer pageNo,HttpServletRequest request, ModelMap model) {
@@ -46,7 +52,14 @@ public class MemberAction{
 	}
 	
 	@RequestMapping("/member/v_edit.do")
-	public String v_edit(Integer pageNo,HttpServletRequest request, ModelMap model) {
+	public String v_edit(HttpServletRequest request, ModelMap model) {
 		return "/member/edit";
+	}
+	
+	@RequestMapping("/member/o_save.do")
+	public String o_save(BbsUserProfile bbsUserProfile,AllUser allUser,HttpServletRequest request, ModelMap model) {
+		allUser.setBbsUserProfile(bbsUserProfile);
+		userService.save(allUser);
+		return "redirect:v_list.do";
 	}
 }

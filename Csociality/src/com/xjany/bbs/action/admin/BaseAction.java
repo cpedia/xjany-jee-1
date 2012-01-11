@@ -18,7 +18,7 @@ public class BaseAction {
 	public String genricDo(HttpServletRequest request, ModelMap model)
 	throws Exception {
 		String   path   =   (String)   request.getRequestURI();
-		path = path.replaceAll("\\/xjanyadmin\\/", "").replaceAll("\\.do", "");
+		path = path.substring(path.indexOf("/xjanyadmin")).replaceAll("\\.do", "");
 		return path;
 	}
 	

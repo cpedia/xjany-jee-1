@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import com.xjany.bbs.entity.base.AbstractAllUser;
 
 /**
- * AllUser entity. @author LiXiang
+ * AllUser entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "all_user", catalog = "cs_xjany")
@@ -29,23 +29,15 @@ public class AllUser extends AbstractAllUser implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AllUser(BbsUserProfile bbsUserProfile, Integer cmsUserId,
-			String userName, String userPsw, Integer userSex, String userEmail,
-			Timestamp userRegTime, String userIp, Integer userLoad,
-			Timestamp userLastTime, Integer userState, Integer cmsDel,
+	public AllUser(AllUserGroup allUserGroup, BbsUserProfile bbsUserProfile,
+			Integer cmsUserId, String userName, String userPsw,
+			Integer userSex, String userEmail, Timestamp userRegTime,
+			String userIp, Integer userLoad, Timestamp userLastTime,
+			Integer userState, Integer cmsDel,
 			Set<BbsUserProfile> bbsUserProfiles) {
-		super(bbsUserProfile, cmsUserId, userName, userPsw, userSex, userEmail,
-				userRegTime, userIp, userLoad, userLastTime, userState, cmsDel,
-				bbsUserProfiles);
-	}
-
-	@Override
-	public void recycle(boolean isRecycle) {
-		// TODO Auto-generated method stub
-		if(isRecycle)
-			this.setCmsDel(1);
-		else 
-			this.setCmsDel(0);
+		super(allUserGroup, bbsUserProfile, cmsUserId, userName, userPsw,
+				userSex, userEmail, userRegTime, userIp, userLoad,
+				userLastTime, userState, cmsDel, bbsUserProfiles);
 	}
 
 }

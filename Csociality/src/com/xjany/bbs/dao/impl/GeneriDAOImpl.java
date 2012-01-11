@@ -205,5 +205,15 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		}
 		return ((Number) query.iterate().next()).intValue();
 	}
+	
+	/**
+	 * 通过sql查找
+	 * @param sql
+	 */
+	public List findBySql(String sql){
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		List list = query.list();
+		return list;
+	}
 
 }

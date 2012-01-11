@@ -14,23 +14,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
+import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.entity.BbsUserProfile;
-import com.xjany.bbs.entity.InterGeneric;
 
 /**
  * AbstractAllUser entity provides the base persistence definition of the
- * AllUser entity. @author LiXiang
+ * AllUser entity. @author MyEclipse Persistence Tools
  */
 @MappedSuperclass
-public abstract class AbstractAllUser implements java.io.Serializable, InterGeneric {
+public abstract class AbstractAllUser implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer userId;
+	private AllUserGroup allUserGroup;
 	private BbsUserProfile bbsUserProfile;
 	private Integer cmsUserId;
 	private String userName;
@@ -67,11 +64,13 @@ public abstract class AbstractAllUser implements java.io.Serializable, InterGene
 	}
 
 	/** full constructor */
-	public AbstractAllUser(BbsUserProfile bbsUserProfile, Integer cmsUserId,
-			String userName, String userPsw, Integer userSex, String userEmail,
+	public AbstractAllUser(AllUserGroup allUserGroup,
+			BbsUserProfile bbsUserProfile, Integer cmsUserId, String userName,
+			String userPsw, Integer userSex, String userEmail,
 			Timestamp userRegTime, String userIp, Integer userLoad,
 			Timestamp userLastTime, Integer userState, Integer cmsDel,
 			Set<BbsUserProfile> bbsUserProfiles) {
+		this.allUserGroup = allUserGroup;
 		this.bbsUserProfile = bbsUserProfile;
 		this.cmsUserId = cmsUserId;
 		this.userName = userName;
@@ -97,6 +96,16 @@ public abstract class AbstractAllUser implements java.io.Serializable, InterGene
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "groupId")
+	public AllUserGroup getAllUserGroup() {
+		return this.allUserGroup;
+	}
+
+	public void setAllUserGroup(AllUserGroup allUserGroup) {
+		this.allUserGroup = allUserGroup;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

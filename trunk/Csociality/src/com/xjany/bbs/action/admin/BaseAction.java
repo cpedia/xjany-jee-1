@@ -33,7 +33,7 @@ public class BaseAction {
 	public String genricJhtml(HttpServletRequest request, ModelMap model)
 	throws Exception {
 		String   path   =   (String)   request.getRequestURI();
-		path = path.replaceAll("\\/xjanyadmin\\/", "").replaceAll("\\.jhtml", "");
+		path = path.substring(path.indexOf("/xjanyadmin")).replaceAll("\\.jhtml", "");
 		return path;
 	}
 }

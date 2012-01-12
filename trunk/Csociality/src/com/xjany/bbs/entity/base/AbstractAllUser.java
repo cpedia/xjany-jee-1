@@ -92,7 +92,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.allUserGroup = allUserGroup;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "bbs_userId")
 	public BbsUserProfile getBbsUserProfile() {
 		return this.bbsUserProfile;

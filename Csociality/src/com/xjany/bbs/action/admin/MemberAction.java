@@ -60,4 +60,10 @@ public class MemberAction{
 		userService.save(allUser,bbsUserProfile);
 		return "redirect:v_list.do";
 	}
+	
+	@RequestMapping("/member/o_delete.do")
+	public String o_delete(String ids,HttpServletRequest request, ModelMap model) {
+		userService.delete(Integer.valueOf(ids));
+		return "redirect:v_list.do";
+	}
 }

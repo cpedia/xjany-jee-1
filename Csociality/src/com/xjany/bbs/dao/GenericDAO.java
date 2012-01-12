@@ -10,13 +10,13 @@ import java.util.List;
  */
 public interface GenericDAO<T,Pk extends Serializable> {
 	public List<T> findAll();
-	public T findById(Pk id);
+	public T findById(int id);
 	public List<T> findByProperty(Object propertyName, String value);
 	public boolean update(T entity);
 	public boolean delete(T entity);
 	public int save(T entity);
 	public boolean recycle(T entity,boolean isRecycle);
-	public boolean delete(Serializable... id);
+	public boolean delete(int ... id);
 	public boolean check(T entity, List<T> propertyName, String... value);
 	public List findBySql(String sql);
 }

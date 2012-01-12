@@ -55,7 +55,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
-	public T findById(Serializable id) {
+	public T findById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		T t = (T) session.get(clazz, id);
 		return t;
@@ -85,7 +85,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 	
 	@SuppressWarnings("unchecked")
-	public boolean delete(Serializable... id){
+	public boolean delete(int ... id){
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			T t = (T) session.get(clazz, id[0]);

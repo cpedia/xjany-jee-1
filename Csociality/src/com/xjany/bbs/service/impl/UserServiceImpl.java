@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xjany.bbs.dao.BbsUserProfileDAO;
 import com.xjany.bbs.dao.UserDAO;
 import com.xjany.bbs.entity.AllUser;
+import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.UserService;
 import com.xjany.common.page.Pagination;
 @Service
@@ -22,6 +24,16 @@ public class UserServiceImpl implements UserService{
 	@Resource
 	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
+	}
+	
+	BbsUserProfileDAO bbsUserProfileDAO;
+	
+	public BbsUserProfileDAO getBbsUserProfileDAO() {
+		return bbsUserProfileDAO;
+	}
+	@Resource
+	public void setBbsUserProfileDAO(BbsUserProfileDAO bbsUserProfileDAO) {
+		this.bbsUserProfileDAO = bbsUserProfileDAO;
 	}
 
 	public List<AllUser> findAll() {
@@ -57,8 +69,11 @@ public class UserServiceImpl implements UserService{
 		return userDAO.delete(entity);
 	}
 
-	public int save(AllUser entity) {
-//		entity.setUserPsw(com.xjany.common.util.MyMD5Util.MD5(entity.getUserPsw()));
+	public int save(AllUser entity,BbsUserProfile bbsUserProfile) {
+		entity.setUserPsw(com.xjany.common.util.MyMD5Util.MD5(entity.getUserPsw()));
+		int d = bbsUserProfileDAO.save(bbsUserProfile);
+		BbsUserProfile bup = bbsUserProfileDAO.findById(d);
+		entity.setBbsUserProfile(bup);
 		return userDAO.save(entity);
 	}
 	

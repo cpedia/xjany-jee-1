@@ -18,7 +18,7 @@ public class BaseAction {
 	public String genricDo(HttpServletRequest request, ModelMap model)
 	throws Exception {
 		String   path   =   (String)   request.getRequestURI();
-		path = path.substring(path.indexOf("/xjanyadmin")).replaceAll("\\.do", "");
+		path = path.substring(path.indexOf("/xjanyadmin")+12).replaceAll("\\.do", "");
 		return path;
 	}
 	
@@ -33,7 +33,7 @@ public class BaseAction {
 	public String genricJhtml(HttpServletRequest request, ModelMap model)
 	throws Exception {
 		String   path   =   (String)   request.getRequestURI();
-		path = path.substring(path.indexOf("/xjanyadmin")).replaceAll("\\.jhtml", "");
+		path = path.substring(path.indexOf("/xjanyadmin")+12).replaceAll("\\.jhtml", "");
 		return path;
 	}
 }

@@ -52,8 +52,10 @@ public class UserServiceImpl implements UserService{
 		return userDAO.recycle(entity, isRecycle);
 	}
 
-	public boolean delete(int... id) {
-		return userDAO.delete(id);
+	public boolean delete(int id) {
+		AllUser allUser = userDAO.findById(id);
+		bbsUserProfileDAO.delete(allUser.getBbsUserProfile()); //删除allUser之前先删除bbsUserProfile
+		return userDAO.delete(allUser);
 	}
 
 	public boolean check(AllUser entity, List<AllUser> propertyName,

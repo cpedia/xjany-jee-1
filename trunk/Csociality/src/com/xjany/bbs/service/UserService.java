@@ -14,7 +14,7 @@ public interface UserService {
 	public boolean delete(AllUser entity);
 	public int save(AllUser entity,BbsUserProfile bbsUserProfile);
 	public boolean recycle(AllUser entity,boolean isRecycle);
-	public boolean delete(int... id);
+	public boolean delete(int id);
 	public boolean check(AllUser entity, List<AllUser> propertyName, String... value);
 	public Pagination getPage(String username, String email, Integer siteId,
 			Integer groupId, Boolean disabled, Boolean admin, Integer rank,

@@ -58,8 +58,7 @@ public class MemberAction{
 	
 	@RequestMapping("/member/o_save.do")
 	public String o_save(BbsUserProfile bbsUserProfile,AllUser allUser,HttpServletRequest request, ModelMap model) {
-		allUser.setBbsUserProfile(bbsUserProfile);
-		userService.save(allUser);
+		userService.save(allUser,bbsUserProfile);
 		return "redirect:v_list.do";
 	}
 }

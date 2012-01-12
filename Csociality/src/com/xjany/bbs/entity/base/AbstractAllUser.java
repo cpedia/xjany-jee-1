@@ -1,9 +1,6 @@
 package com.xjany.bbs.entity.base;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
 import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.entity.BbsUserProfile;
@@ -25,23 +21,7 @@ import com.xjany.bbs.entity.BbsUserProfile;
 public abstract class AbstractAllUser implements java.io.Serializable {
 
 	// Fields
-//	   userId               int not null auto_increment comment '用户ID',
-//	   cms_userId           int,
-//	   bbs_userId           int,
-//	   userName             varchar(30) not null comment '用户名',
-//	   userPsw              varchar(30) not null comment '密 码',
-//	   groupId              int comment '组ID',
-//	   userSex              int default 1 comment '用户性别(0、男 1、女)',
-//	   userEmail            varchar(50) comment '用户E-mail',
-//	   userRegTime          datetime comment '注册时间',
-//	   userIp               varchar(30) comment '注册IP',
-//	   userLoad             int default 0 comment '用户登陆次数',
-//	   userLastTime         datetime comment '最后登陆时间',
-//	   userState            int default 1 comment '用户状态 0、离线 1、在线',
-//	   cms_del              int(2) default 0,
-//	   primary key (userId)
-	
-	
+
 	private Integer userId;
 	private AllUserGroup allUserGroup;
 	private BbsUserProfile bbsUserProfile;
@@ -56,7 +36,6 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 	private Timestamp userLastTime;
 	private Integer userState;
 	private Integer cmsDel;
-	private Set<BbsUserProfile> bbsUserProfiles = new HashSet<BbsUserProfile>(0);
 
 	// Constructors
 
@@ -65,18 +44,9 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AbstractAllUser(String userName, String userPsw, Integer userSex,
-			String userEmail, Timestamp userRegTime, String userIp,
-			Integer userLoad, Timestamp userLastTime, Integer userState) {
+	public AbstractAllUser(String userName, String userPsw) {
 		this.userName = userName;
 		this.userPsw = userPsw;
-		this.userSex = userSex;
-		this.userEmail = userEmail;
-		this.userRegTime = userRegTime;
-		this.userIp = userIp;
-		this.userLoad = userLoad;
-		this.userLastTime = userLastTime;
-		this.userState = userState;
 	}
 
 	/** full constructor */
@@ -84,8 +54,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 			BbsUserProfile bbsUserProfile, Integer cmsUserId, String userName,
 			String userPsw, Integer userSex, String userEmail,
 			Timestamp userRegTime, String userIp, Integer userLoad,
-			Timestamp userLastTime, Integer userState, Integer cmsDel,
-			Set<BbsUserProfile> bbsUserProfiles) {
+			Timestamp userLastTime, Integer userState, Integer cmsDel) {
 		this.allUserGroup = allUserGroup;
 		this.bbsUserProfile = bbsUserProfile;
 		this.cmsUserId = cmsUserId;
@@ -99,7 +68,6 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userLastTime = userLastTime;
 		this.userState = userState;
 		this.cmsDel = cmsDel;
-		this.bbsUserProfiles = bbsUserProfiles;
 	}
 
 	// Property accessors
@@ -161,7 +129,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userPsw = userPsw;
 	}
 
-	@Column(name = "userSex", nullable = false)
+	@Column(name = "userSex")
 	public Integer getUserSex() {
 		return this.userSex;
 	}
@@ -170,7 +138,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userSex = userSex;
 	}
 
-	@Column(name = "userEmail", nullable = false, length = 50)
+	@Column(name = "userEmail", length = 50)
 	public String getUserEmail() {
 		return this.userEmail;
 	}
@@ -179,7 +147,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userEmail = userEmail;
 	}
 
-	@Column(name = "userRegTime", nullable = false, length = 19)
+	@Column(name = "userRegTime", length = 19)
 	public Timestamp getUserRegTime() {
 		return this.userRegTime;
 	}
@@ -188,7 +156,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userRegTime = userRegTime;
 	}
 
-	@Column(name = "userIp", nullable = false, length = 30)
+	@Column(name = "userIp", length = 30)
 	public String getUserIp() {
 		return this.userIp;
 	}
@@ -197,7 +165,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userIp = userIp;
 	}
 
-	@Column(name = "userLoad", nullable = false)
+	@Column(name = "userLoad")
 	public Integer getUserLoad() {
 		return this.userLoad;
 	}
@@ -206,7 +174,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userLoad = userLoad;
 	}
 
-	@Column(name = "userLastTime", nullable = false, length = 19)
+	@Column(name = "userLastTime", length = 19)
 	public Timestamp getUserLastTime() {
 		return this.userLastTime;
 	}
@@ -215,7 +183,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userLastTime = userLastTime;
 	}
 
-	@Column(name = "userState", nullable = false)
+	@Column(name = "userState")
 	public Integer getUserState() {
 		return this.userState;
 	}
@@ -231,15 +199,6 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 
 	public void setCmsDel(Integer cmsDel) {
 		this.cmsDel = cmsDel;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "allUser")
-	public Set<BbsUserProfile> getBbsUserProfiles() {
-		return this.bbsUserProfiles;
-	}
-
-	public void setBbsUserProfiles(Set<BbsUserProfile> bbsUserProfiles) {
-		this.bbsUserProfiles = bbsUserProfiles;
 	}
 
 }

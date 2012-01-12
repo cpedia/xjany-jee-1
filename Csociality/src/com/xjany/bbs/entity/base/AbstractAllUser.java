@@ -25,7 +25,23 @@ import com.xjany.bbs.entity.BbsUserProfile;
 public abstract class AbstractAllUser implements java.io.Serializable {
 
 	// Fields
-
+//	   userId               int not null auto_increment comment '用户ID',
+//	   cms_userId           int,
+//	   bbs_userId           int,
+//	   userName             varchar(30) not null comment '用户名',
+//	   userPsw              varchar(30) not null comment '密 码',
+//	   groupId              int comment '组ID',
+//	   userSex              int default 1 comment '用户性别(0、男 1、女)',
+//	   userEmail            varchar(50) comment '用户E-mail',
+//	   userRegTime          datetime comment '注册时间',
+//	   userIp               varchar(30) comment '注册IP',
+//	   userLoad             int default 0 comment '用户登陆次数',
+//	   userLastTime         datetime comment '最后登陆时间',
+//	   userState            int default 1 comment '用户状态 0、离线 1、在线',
+//	   cms_del              int(2) default 0,
+//	   primary key (userId)
+	
+	
 	private Integer userId;
 	private AllUserGroup allUserGroup;
 	private BbsUserProfile bbsUserProfile;

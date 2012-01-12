@@ -62,14 +62,14 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 	
 
-	public boolean save(T entity) {
+	public int save(T entity) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.save(entity);
-			return true;
+			int d = (Integer) session.save(entity);
+			return d;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
 	}
 

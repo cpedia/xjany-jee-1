@@ -120,7 +120,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userName = userName;
 	}
 
-	@Column(name = "userPsw", nullable = false, length = 30)
+	@Column(name = "userPsw", nullable = false, length = 100)
 	public String getUserPsw() {
 		return this.userPsw;
 	}

@@ -211,7 +211,7 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 		this.userEliteTopic = userEliteTopic;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bbsUserProfile")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bbsUserProfile")
 	public Set<AllUser> getAllUsers() {
 		return this.allUsers;
 	}

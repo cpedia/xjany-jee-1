@@ -11,7 +11,7 @@ public interface UserService {
 	public List<AllUser> findByProperty(Object propertyName, String value);
 	public boolean update(AllUser entity);
 	public boolean delete(AllUser entity);
-	public boolean save(AllUser entity);
+	public int save(AllUser entity);
 	public boolean recycle(AllUser entity,boolean isRecycle);
 	public boolean delete(int... id);
 	public boolean check(AllUser entity, List<AllUser> propertyName, String... value);

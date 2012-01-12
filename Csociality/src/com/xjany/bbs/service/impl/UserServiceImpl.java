@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService{
 		return userDAO.delete(entity);
 	}
 
-	public boolean save(AllUser entity) {
+	public int save(AllUser entity) {
 //		entity.setUserPsw(com.xjany.common.util.MyMD5Util.MD5(entity.getUserPsw()));
 		return userDAO.save(entity);
 	}

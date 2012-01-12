@@ -61,7 +61,7 @@ alter table all_user comment '全局用户公共信息';
 /*==============================================================*/
 create table bbs_bbslink
 (
-   linkId               int not null comment '友情论坛ID',
+   linkId               int not null auto_increment comment '友情论坛ID',
    linkName             varchar(50) not null comment '友情论坛名称',
    linkLogo             varchar(50) not null comment '友情论坛图标',
    linkUrl              varchar(50) not null comment '友情论坛URL地址',
@@ -202,7 +202,7 @@ alter table bbs_topic comment '帖子表(topic)';
 /*==============================================================*/
 create table bbs_user_profile
 (
-   bbs_userId           int not null,
+   bbs_userId           int not null auto_increment,
    userId               int,
    roleId               int comment '角色ID',
    userRoleId           int comment '用户从属于的角色ID',

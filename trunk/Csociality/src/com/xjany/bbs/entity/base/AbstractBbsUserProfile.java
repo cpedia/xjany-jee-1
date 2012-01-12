@@ -15,39 +15,17 @@ import javax.persistence.OneToMany;
 
 import com.xjany.bbs.entity.AllUser;
 import com.xjany.bbs.entity.BbsUserRole;
-import com.xjany.bbs.entity.InterGeneric;
 
 /**
  * AbstractBbsUserProfile entity provides the base persistence definition of the
- * BbsUserProfile entity. @author LiXiang
+ * BbsUserProfile entity. @author MyEclipse Persistence Tools
  */
 @MappedSuperclass
-public abstract class AbstractBbsUserProfile implements java.io.Serializable, InterGeneric {
+public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	// Fields
-//	   bbs_userId           int not null,
-//	   userId               int,
-//	   roleId               int comment '角色ID',
-//	   userRoleId           int comment '用户从属于的角色ID',
-//	   userBirthDay         varchar(10) comment '用户生日',
-//	   userFace             varchar(30) comment '用户头像',
-//	   userQicq             varchar(10) comment 'Qicq',
-//	   userIntro            varchar(500) comment '用户签名档',
-//	   userAddr             varchar(30) comment '用户地址',
-//	   userCareer           varchar(30) comment '职业介绍',
-//	   userWealth           int default 0 comment '用户积分,每发1帖积1分(包括回复)，加精积5分',
-//	   userDegree           int default 0 comment '用户等级',
-//	   userTopic            int default 0 comment '用户发表的主题数总和',
-//	   userReply            int default 0 comment '用户的回复数总和',
-//	   userDelTopic         int default 0 comment '用户被删除的帖子总和',
-//	   userEliteTopic       int default 0 comment '用户被推荐的精华帖总和',
-//	   primary key (bbs_userId)
+
 	private Integer bbsUserId;
-	private AllUser allUser;
 	private BbsUserRole bbsUserRole;
 	private Integer userRoleId;
 	private String userBirthDay;
@@ -62,7 +40,6 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable, In
 	private Integer userReply;
 	private Integer userDelTopic;
 	private Integer userEliteTopic;
-	private Integer cmsDel;
 	private Set<AllUser> allUsers = new HashSet<AllUser>(0);
 
 	// Constructors
@@ -72,13 +49,12 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable, In
 	}
 
 	/** full constructor */
-	public AbstractBbsUserProfile(AllUser allUser, BbsUserRole bbsUserRole,
-			Integer userRoleId, String userBirthDay, String userFace,
-			String userQicq, String userIntro, String userAddr,
-			String userCareer, Integer userWealth, Integer userDegree,
-			Integer userTopic, Integer userReply, Integer userDelTopic,
-			Integer userEliteTopic, Set<AllUser> allUsers) {
-		this.allUser = allUser;
+	public AbstractBbsUserProfile(BbsUserRole bbsUserRole, Integer userRoleId,
+			String userBirthDay, String userFace, String userQicq,
+			String userIntro, String userAddr, String userCareer,
+			Integer userWealth, Integer userDegree, Integer userTopic,
+			Integer userReply, Integer userDelTopic, Integer userEliteTopic,
+			Set<AllUser> allUsers) {
 		this.bbsUserRole = bbsUserRole;
 		this.userRoleId = userRoleId;
 		this.userBirthDay = userBirthDay;
@@ -106,16 +82,6 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable, In
 
 	public void setBbsUserId(Integer bbsUserId) {
 		this.bbsUserId = bbsUserId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId")
-	public AllUser getAllUser() {
-		return this.allUser;
-	}
-
-	public void setAllUser(AllUser allUser) {
-		this.allUser = allUser;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -243,15 +209,6 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable, In
 
 	public void setUserEliteTopic(Integer userEliteTopic) {
 		this.userEliteTopic = userEliteTopic;
-	}
-	
-	@Column(name = "cms_del")
-	public Integer getCmsDel() {
-		return this.cmsDel;
-	}
-
-	public void setCmsDel(Integer cmsDel) {
-		this.cmsDel = cmsDel;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bbsUserProfile")

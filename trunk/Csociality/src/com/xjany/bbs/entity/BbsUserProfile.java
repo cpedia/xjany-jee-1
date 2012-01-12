@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import com.xjany.bbs.entity.base.AbstractBbsUserProfile;
 
 /**
- * BbsUserProfile entity. @author LiXiang
+ * BbsUserProfile entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "bbs_user_profile", catalog = "cs_xjany")
@@ -21,24 +21,15 @@ public class BbsUserProfile extends AbstractBbsUserProfile implements
 	}
 
 	/** full constructor */
-	public BbsUserProfile(AllUser allUser, BbsUserRole bbsUserRole,
-			Integer userRoleId, String userBirthDay, String userFace,
-			String userQicq, String userIntro, String userAddr,
-			String userCareer, Integer userWealth, Integer userDegree,
-			Integer userTopic, Integer userReply, Integer userDelTopic,
-			Integer userEliteTopic, Set<AllUser> allUsers) {
-		super(allUser, bbsUserRole, userRoleId, userBirthDay, userFace,
-				userQicq, userIntro, userAddr, userCareer, userWealth,
-				userDegree, userTopic, userReply, userDelTopic, userEliteTopic,
-				allUsers);
+	public BbsUserProfile(BbsUserRole bbsUserRole, Integer userRoleId,
+			String userBirthDay, String userFace, String userQicq,
+			String userIntro, String userAddr, String userCareer,
+			Integer userWealth, Integer userDegree, Integer userTopic,
+			Integer userReply, Integer userDelTopic, Integer userEliteTopic,
+			Set<AllUser> allUsers) {
+		super(bbsUserRole, userRoleId, userBirthDay, userFace, userQicq,
+				userIntro, userAddr, userCareer, userWealth, userDegree,
+				userTopic, userReply, userDelTopic, userEliteTopic, allUsers);
 	}
-	
-	@Override
-	public void recycle(boolean isRecycle) {
-		// TODO Auto-generated method stub
-		if(isRecycle)
-			this.setCmsDel(1);
-		else 
-			this.setCmsDel(0);
-	}
+
 }

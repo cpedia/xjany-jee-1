@@ -1,7 +1,6 @@
 package com.xjany.bbs.entity;
 
 import java.sql.Timestamp;
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -21,11 +20,8 @@ public class AllUser extends AbstractAllUser implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AllUser(String userName, String userPsw, Integer userSex,
-			String userEmail, Timestamp userRegTime, String userIp,
-			Integer userLoad, Timestamp userLastTime, Integer userState) {
-		super(userName, userPsw, userSex, userEmail, userRegTime, userIp,
-				userLoad, userLastTime, userState);
+	public AllUser(String userName, String userPsw) {
+		super(userName, userPsw);
 	}
 
 	/** full constructor */
@@ -33,11 +29,10 @@ public class AllUser extends AbstractAllUser implements java.io.Serializable {
 			Integer cmsUserId, String userName, String userPsw,
 			Integer userSex, String userEmail, Timestamp userRegTime,
 			String userIp, Integer userLoad, Timestamp userLastTime,
-			Integer userState, Integer cmsDel,
-			Set<BbsUserProfile> bbsUserProfiles) {
+			Integer userState, Integer cmsDel) {
 		super(allUserGroup, bbsUserProfile, cmsUserId, userName, userPsw,
 				userSex, userEmail, userRegTime, userIp, userLoad,
-				userLastTime, userState, cmsDel, bbsUserProfiles);
+				userLastTime, userState, cmsDel);
 	}
 
 }

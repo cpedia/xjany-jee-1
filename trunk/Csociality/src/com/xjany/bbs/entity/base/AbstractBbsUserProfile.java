@@ -24,8 +24,28 @@ import com.xjany.bbs.entity.InterGeneric;
 @MappedSuperclass
 public abstract class AbstractBbsUserProfile implements java.io.Serializable, InterGeneric {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
-
+//	   bbs_userId           int not null,
+//	   userId               int,
+//	   roleId               int comment '角色ID',
+//	   userRoleId           int comment '用户从属于的角色ID',
+//	   userBirthDay         varchar(10) comment '用户生日',
+//	   userFace             varchar(30) comment '用户头像',
+//	   userQicq             varchar(10) comment 'Qicq',
+//	   userIntro            varchar(500) comment '用户签名档',
+//	   userAddr             varchar(30) comment '用户地址',
+//	   userCareer           varchar(30) comment '职业介绍',
+//	   userWealth           int default 0 comment '用户积分,每发1帖积1分(包括回复)，加精积5分',
+//	   userDegree           int default 0 comment '用户等级',
+//	   userTopic            int default 0 comment '用户发表的主题数总和',
+//	   userReply            int default 0 comment '用户的回复数总和',
+//	   userDelTopic         int default 0 comment '用户被删除的帖子总和',
+//	   userEliteTopic       int default 0 comment '用户被推荐的精华帖总和',
+//	   primary key (bbs_userId)
 	private Integer bbsUserId;
 	private AllUser allUser;
 	private BbsUserRole bbsUserRole;

@@ -41,7 +41,7 @@ create table all_user
    cms_userId           int,
    bbs_userId           int,
    userName             varchar(30) not null comment '用户名',
-   userPsw              varchar(30) not null comment '密 码',
+   userPsw              varchar(100) not null comment '密 码',
    groupId              int comment '组ID',
    userSex              int default 1 comment '用户性别(0、男 1、女)',
    userEmail            varchar(50) comment '用户E-mail',

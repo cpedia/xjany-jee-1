@@ -14,7 +14,16 @@ public class UserAction {
 	@Autowired
 	private UserService userSerive;
 	private AllUser user;
+	private String message;
 	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public UserService getUserSerive() {
 		return userSerive;
 	}
@@ -39,9 +48,11 @@ public class UserAction {
 		return "register";
 	}
 	
-	public String checkUserName()
-	{
+	@RequestMapping("/checkUser.do")
+	public String check(HttpServletRequest request, ModelMap model) {
 		userSerive.check(user);
-		return "register";
+		message = "success";
+		model.addAttribute("message", message);
+		return "common/message";
 	}
 }

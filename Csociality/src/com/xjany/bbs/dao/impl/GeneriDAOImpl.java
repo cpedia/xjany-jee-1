@@ -118,7 +118,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 			Set<Map.Entry<String, String>> set = property.entrySet();
 	        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {
 	            Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
-	            sql.append(" and a."+ entry.getKey() +"="+entry.getValue());
+	            sql.append(" and a."+ entry.getKey() +"='"+entry.getValue()+"'");
 	        }
 			query = sessionFactory.getCurrentSession().createQuery(sql.toString());
 			if(query.list().size() > 0)

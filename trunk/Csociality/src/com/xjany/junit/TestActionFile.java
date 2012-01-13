@@ -13,7 +13,7 @@ public class TestActionFile extends JUnitBase{
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 
-		request.setServletPath("/member/v_edit.do");
+		request.setServletPath("/checkUser.do");
 		request.addParameter("id", "5");   
 		request.setMethod("get");
 

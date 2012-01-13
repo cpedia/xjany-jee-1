@@ -62,18 +62,12 @@ public class UserServiceImpl implements UserService{
 		return userDAO.delete(allUser);
 	}
 
-	public boolean check(Map<String, String> property) {
-		AllUser entity = new AllUser();
-
-			Set<Map.Entry<String, String>> set = property.entrySet();
-	        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {
-	            Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
-	            if("userPsw".equals(entry.getKey()))
-	            {
-	            	entry.setValue(com.xjany.common.util.MyMD5Util.MD5(entry.getValue()));
-	            }
-	        }
-				return userDAO.check(entity, property);
+	public boolean check(AllUser user) {
+		Map<String, String> property = new HashMap<String, String>();
+		property.put("userName", user.getUserName());
+		if(!"".equals(user.getUserPsw()) && user.getUserPsw() != null)
+		property.put("userPsw", com.xjany.common.util.MyMD5Util.MD5(user.getUserPsw()));
+		return userDAO.check(user, property);
 	}
 
 	public boolean update(AllUser entity) {

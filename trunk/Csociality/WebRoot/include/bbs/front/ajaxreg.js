@@ -92,7 +92,7 @@ function checkStrLen(string){
 
 //验证username
 function usercheck(obj){
-	var userAgent = navigator.userAgent.toLowerCase();
+	var userAgent = navigator.userAgent.toLowerCase(); //查看什么浏览器
     var is_opera = userAgent.indexOf('opera') != -1 && opera.version();
     var is_moz = (navigator.product == 'Gecko') && userAgent.substr(userAgent.indexOf('firefox') + 8, 3);
     var isie = (userAgent.indexOf('msie') != -1 && !is_opera) && userAgent.substr(userAgent.indexOf('msie') + 5, 3);
@@ -128,8 +128,15 @@ function usercheck(obj){
 	}else{
 		document.getElementById(obj).innerHTML="正在读取数据...";
 		reobj=obj;
-		
-		send_request('checkuser.php?username='+uservalue+"&is_ie="+is_ie);
+		$.ajax({
+			type: "post",
+			url: "/checkUser.do?user.userName="+uservalue,
+			datatype: "html",
+			success: function(data){
+				document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该用户名可用</span>";
+			},
+	});
+//		send_request('checkuser.php?username='+uservalue+"&is_ie="+is_ie);
 		
 	}
 }

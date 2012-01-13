@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>51cto用户注册</title>
+<title>xjany用户注册</title>
 <meta http-equiv="x-ua-compatible" content="ie=7" /> 
 <link href="/css/bbs/front/master.css" rel="stylesheet" type="text/css" />
 <link type="text/css" rel="stylesheet" href="/css/bbs/front/header_master_top.css">
@@ -13,6 +13,7 @@
 <!--
 <script type="text/javascript" src="http://ucenter.51cto.com/lib/base64/utf8.js"></script> 
  -->
+<script type="text/javascript" src="/include/jquery.js"></script>
 <script type="text/javascript" src="/include/bbs/front/guanzhu.js"></script>
 <script type="text/javascript" src="/include/bbs/front/user.js"></script>
 <script type="text/javascript" src="/include/bbs/front/zhiwei.js"></script>
@@ -274,7 +275,7 @@ function pwStrength(pwd) {
     <tr>
       <td align="right" valign="bottom" class="font1">邮箱：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
 
-      <td class="font2"><input name="user.userEmail" id="email" type="text" class="teat1" onChange="mailcheck('eml')" onBlur="mailcheck('eml')"  value=""><input type="hidden" name="emailexist" id="emailexist"   value="0"/><input type="hidden" name="usernameexist" id="usernameexist"   value="0"/><input type="hidden" name="yanzhengexsit" id="yanzhengexsit"   value="0"/></td>
+      <td class="font2"><input name="userEmail" id="email" type="text" class="teat1" onChange="mailcheck('eml')" onBlur="mailcheck('eml')"  value=""><input type="hidden" name="emailexist" id="emailexist"   value="0"/><input type="hidden" name="usernameexist" id="usernameexist"   value="0"/><input type="hidden" name="yanzhengexsit" id="yanzhengexsit"   value="0"/></td>
     </tr>
     <tr>
       <td align="right" valign="bottom" class="font1">&nbsp;</td>
@@ -366,7 +367,7 @@ function pwStrength(pwd) {
   <table width="520" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
       <td width="13" height="42" class="font1">&nbsp;</td>
-      <td width="507" class="font1">您是否同意<a href="http://ucenter.51cto.com//service.htm" target="_blank">《51CTO服务条款》</a>
+      <td width="507" class="font1">您是否同意<a href="#" target="_blank">《XJANY服务条款》</a>
         <input type="radio"  name="agree" id="agree1" value="1"  checked="checked"/>
 同意
 <input type="radio" name="agree" id="agree2" value="0"  />
@@ -384,7 +385,7 @@ function pwStrength(pwd) {
     </tr>
 
     <tr>
-      <td colspan="2" align="center"><input type="image" src="images/ico_tijiao.gif" width="84" height="36" />&nbsp; <img src="images/ico_quxiao.gif" width="84" height="36"  onclick="javascript:document.all.reg.reset();"/></td>
+      <td colspan="2" align="center"><input type="image" src="image/bbs/front/ico_tijiao.gif" width="84" height="36" />&nbsp; <img src="image/bbs/front/ico_quxiao.gif" width="84" height="36"  onclick="javascript:document.all.reg.reset();"/></td>
     </tr>
     <tr>
       <td height="22" colspan="2">&nbsp;</td>

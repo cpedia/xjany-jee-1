@@ -31,7 +31,8 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 	private Integer userSex;
 	private String userEmail;
 	private Timestamp userRegTime;
-	private String userIp;
+	private String userRegIp;
+	private String userLastIp;
 	private Integer userLoad;
 	private Timestamp userLastTime;
 	private Integer userState;
@@ -63,7 +64,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userSex = userSex;
 		this.userEmail = userEmail;
 		this.userRegTime = userRegTime;
-		this.userIp = userIp;
+		this.userRegIp = userIp;
 		this.userLoad = userLoad;
 		this.userLastTime = userLastTime;
 		this.userState = userState;
@@ -156,13 +157,22 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userRegTime = userRegTime;
 	}
 
-	@Column(name = "userIp", length = 30)
-	public String getUserIp() {
-		return this.userIp;
+	@Column(name = "userRegIp", length = 30)
+	public String getUserRegIp() {
+		return this.userRegIp;
 	}
 
-	public void setUserIp(String userIp) {
-		this.userIp = userIp;
+	public void setUserRegIp(String userRegIp) {
+		this.userRegIp = userRegIp;
+	}
+	
+	@Column(name = "userLastIp", length = 30)
+	public String getUserLastIp() {
+		return this.userLastIp;
+	}
+	
+	public void setUserLastIp(String userLastIp) {
+		this.userLastIp = userLastIp;
 	}
 
 	@Column(name = "userLoad")

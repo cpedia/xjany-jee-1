@@ -1,6 +1,10 @@
 package com.xjany.bbs.service.impl;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -58,9 +62,18 @@ public class UserServiceImpl implements UserService{
 		return userDAO.delete(allUser);
 	}
 
-	public boolean check(AllUser entity, List<AllUser> propertyName,
-			String... value) {
-		return userDAO.check(entity, propertyName, com.xjany.common.util.MyMD5Util.MD5(value[0]));
+	public boolean check(Map<String, String> property) {
+		AllUser entity = new AllUser();
+
+			Set<Map.Entry<String, String>> set = property.entrySet();
+	        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {
+	            Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
+	            if("userPsw".equals(entry.getKey()))
+	            {
+	            	entry.setValue(com.xjany.common.util.MyMD5Util.MD5(entry.getValue()));
+	            }
+	        }
+				return userDAO.check(entity, property);
 	}
 
 	public boolean update(AllUser entity) {

@@ -32,5 +32,10 @@ public class GroupServiceImpl implements GroupService {
 		List list = groupDAO.findBySql(sql);
 		return list;
 	}
+	@Override
+	public List<AllUserGroup> findById(int id) {
+		List<AllUserGroup> list = (List<AllUserGroup>) groupDAO.findById(id);
+		return list;
+	}
 
 }

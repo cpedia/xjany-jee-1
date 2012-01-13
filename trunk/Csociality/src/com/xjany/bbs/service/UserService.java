@@ -16,7 +16,7 @@ public interface UserService {
 	public int save(AllUser entity,BbsUserProfile bbsUserProfile);
 	public boolean recycle(AllUser entity,boolean isRecycle);
 	public boolean delete(int id);
-	public boolean check(Map<String, String> property);
+	public boolean check(AllUser user);
 	public Pagination getPage(String username, String email, Integer siteId,
 			Integer groupId, Boolean disabled, Boolean admin, Integer rank,
 			int pageNo, int pageSize);

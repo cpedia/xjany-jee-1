@@ -60,18 +60,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public boolean check(AllUser user) {
-		boolean isCheck = false;
 		Map<String, String> property = new HashMap<String, String>();
 		if(!"".equals(user.getUserEmail()) && user.getUserEmail() != null)
 		{
 			property.put("userEmail", user.getUserEmail());
-			isCheck = true;
-		} else if(!"".equals(user.getUserName()) && user.getUserName() != null && isCheck == false)
+		} else if(!"".equals(user.getUserName()) && user.getUserName() != null)
 		{
 			property.put("userName", user.getUserName());
 			if(!"".equals(user.getUserPsw()) && user.getUserPsw() != null)
 				property.put("userPsw", com.xjany.common.util.MyMD5Util.MD5(user.getUserPsw()));
-			isCheck = true;
 		} 
 		return userDAO.check(user, property);
 	}

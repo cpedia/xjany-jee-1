@@ -37,9 +37,10 @@ public class GroupAction{
 	}
 	
 	@RequestMapping("/group/v_list.do")
-	public String v_list(Integer id,HttpServletRequest request, ModelMap model) {
-		List<AllUserGroup> list = groupService.findById(id);
-		model.addAttribute("groupList", list);
+	public String v_list(Integer pageNo,HttpServletRequest request, ModelMap model) {
+		Pagination pagination = groupService.getPage(SimplePage.cpn(pageNo),
+				CookieUtils.getPageSize(request));
+		model.addAttribute("pagination", pagination);
 		return "group/list";
 	}
 }

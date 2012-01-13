@@ -13,6 +13,7 @@ import com.xjany.bbs.dao.GroupDAO;
 import com.xjany.bbs.dao.UserDAO;
 import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.service.GroupService;
+import com.xjany.common.page.Pagination;
 @Service
 @Transactional
 public class GroupServiceImpl implements GroupService {
@@ -36,6 +37,11 @@ public class GroupServiceImpl implements GroupService {
 	public List<AllUserGroup> findById(int id) {
 		List<AllUserGroup> list = (List<AllUserGroup>) groupDAO.findById(id);
 		return list;
+	}
+	@Override
+	public Pagination getPage(int pageNo, int pageSize) {
+		Pagination pagination = groupDAO.getPage(pageNo, pageSize);
+		return pagination;
 	}
 
 }

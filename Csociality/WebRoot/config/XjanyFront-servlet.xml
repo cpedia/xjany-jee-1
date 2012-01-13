@@ -45,7 +45,7 @@
 				<prop key="datetime_format">yyyy-MM-dd</prop>
 				<prop key="date_format">yyyy-MM-dd</prop>
 				<prop key="number_format">#.##</prop>
-				<prop key="auto_import"><!-- /ftl/pony/index.ftl as p,/ftl/spring.xj as s -->
+				<prop key="auto_import">/ftl/pony/index.ftl as p,/ftl/spring.ftl as s 
 				</prop>
 			</props>
 		</property>

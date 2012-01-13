@@ -1,5 +1,10 @@
 package com.xjany.bbs.action.front;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +28,7 @@ public class UserAction {
 		this.userSerive = userSerive;
 	}
 	
-	
-	@RequestMapping("/login.jhtml")
+	@RequestMapping("/login.do")
 	public String showLogin(HttpServletRequest request, ModelMap model)
 			throws Exception {
 		return "login";
@@ -37,6 +41,12 @@ public class UserAction {
 	@RequestMapping("/register.jhtml")
 	public String showRegisterJhtml(HttpServletRequest request, ModelMap model)
 			throws Exception {
+		return "register";
+	}
+	
+	public String checkUserName()
+	{
+		userSerive.check(user);
 		return "register";
 	}
 }

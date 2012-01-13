@@ -47,6 +47,7 @@ create table all_user
    userEmail            varchar(50) comment '用户E-mail',
    userRegTime          datetime comment '注册时间',
    userRegIp            varchar(30) comment '注册IP',
+   userRealName         varchar(30) comment '真实姓名',
    userLoad             int default 0 comment '用户登陆次数',
    userLastTime         datetime comment '最后登陆时间',
    userLastIp           varchar(30) comment '最后登陆Ip',

@@ -133,7 +133,12 @@ function usercheck(obj){
 			url: "/checkUser.do?userName="+uservalue,
 			datatype: "html",
 			success: function(data){
-				document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该用户名可用</span>";
+				if(data == "false")
+					document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该用户名可用</span>";
+				else if(data == "true")
+					document.getElementById(obj).innerHTML="<span class='font_red12'>用户名已被使用</span>";
+				else
+					document.getElementById(obj).innerHTML="<span class='font_red12'>无效</span>";
 			},
 	});
 //		send_request('checkuser.php?username='+uservalue+"&is_ie="+is_ie);

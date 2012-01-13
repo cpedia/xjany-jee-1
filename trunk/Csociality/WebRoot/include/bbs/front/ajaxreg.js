@@ -130,7 +130,7 @@ function usercheck(obj){
 		reobj=obj;
 		$.ajax({
 			type: "post",
-			url: "/checkUser.do?user.userName="+uservalue,
+			url: "/checkUser.do?userName="+uservalue,
 			datatype: "html",
 			success: function(data){
 				document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该用户名可用</span>";
@@ -385,7 +385,15 @@ function mailcheck(obj){
  	}else{
    		document.getElementById(obj).innerHTML="正在读取数据...";
 		reobj=obj;
-		send_request('checkemails.php?email='+mailvalue);
+		$.ajax({
+			type: "post",
+			url: "/checkUser.do?userEmail="+mailvalue,
+			datatype: "html",
+			success: function(data){
+				document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该邮箱可用</span>";
+			},
+	});
+		//send_request('checkemails.php?email='+mailvalue);
 		
  	}
 }

@@ -2,11 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<script type="text/javascript" src="/include/jquery.js"></script>
 <title>jeecms-left</title>
 [#include "/WEB-INF/admin/head.html"/]
 </head>
 <body>
+<script>
+function testAjax(){
+	$.ajax({
+		type: "post",
+		url: "/xjanyadmin/group/testAjax.do",
+		datatype: "html",
+		success: function(data){
+			alert(data);
+		},
+});
+}
+</script>
 <div class="body-box">
+<button onclick="testAjax()">testAjax</button>
 <div class="rhead">
 	<div class="rpos">[@s.m "global.position"/]: [@s.m "global.admin.home"/] - [@s.m "global.admin.index"/]</div>
 	<div class="clear"></div>

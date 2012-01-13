@@ -46,9 +46,10 @@ create table all_user
    userSex              int default 1 comment '用户性别(0、男 1、女)',
    userEmail            varchar(50) comment '用户E-mail',
    userRegTime          datetime comment '注册时间',
-   userIp               varchar(30) comment '注册IP',
+   userRegIp            varchar(30) comment '注册IP',
    userLoad             int default 0 comment '用户登陆次数',
    userLastTime         datetime comment '最后登陆时间',
+   userLastIp           varchar(30) comment '最后登陆Ip',
    userState            int default 1 comment '用户状态 0、离线 1、在线',
    cms_del              int(2) default 0,
    primary key (userId)

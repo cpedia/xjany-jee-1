@@ -49,8 +49,9 @@ public class MemberAction{
 	}
 	
 	@RequestMapping("member/v_edit.do")
-	public String v_edit(HttpServletRequest request, ModelMap model) {
-		
+	public String v_edit(String id,HttpServletRequest request, ModelMap model) {
+		AllUser allUser = userService.findById(Integer.valueOf(id));
+		model.addAttribute("allUser", allUser);
 		return "member/edit";
 	}
 	
@@ -63,8 +64,8 @@ public class MemberAction{
 	}
 	
 	@RequestMapping("/member/o_delete.do")
-	public String o_delete(String ids,HttpServletRequest request, ModelMap model) {
-		userService.delete(Integer.valueOf(ids));
+	public String o_delete(String id,HttpServletRequest request, ModelMap model) {
+		userService.delete(Integer.valueOf(id));
 		return "redirect:v_list.do";
 	}
 }

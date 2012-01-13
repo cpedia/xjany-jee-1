@@ -113,7 +113,6 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	public boolean check(T entity, Map<String, String> property) {
 		Query query = null;
 		try {
-
 			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where 1=1 ");
 			Set<Map.Entry<String, String>> set = property.entrySet();
 	        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {

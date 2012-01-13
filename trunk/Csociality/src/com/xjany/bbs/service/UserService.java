@@ -1,6 +1,7 @@
 package com.xjany.bbs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.xjany.bbs.entity.AllUser;
 import com.xjany.bbs.entity.BbsUserProfile;
@@ -15,7 +16,7 @@ public interface UserService {
 	public int save(AllUser entity,BbsUserProfile bbsUserProfile);
 	public boolean recycle(AllUser entity,boolean isRecycle);
 	public boolean delete(int id);
-	public boolean check(AllUser entity, List<AllUser> propertyName, String... value);
+	public boolean check(Map<String, String> property);
 	public Pagination getPage(String username, String email, Integer siteId,
 			Integer groupId, Boolean disabled, Boolean admin, Integer rank,
 			int pageNo, int pageSize);

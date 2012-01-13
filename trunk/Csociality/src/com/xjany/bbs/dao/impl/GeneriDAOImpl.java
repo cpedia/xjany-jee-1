@@ -3,7 +3,11 @@ package com.xjany.bbs.dao.impl;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -22,7 +26,8 @@ import com.xjany.common.page.Pagination;
  */
 
 @Transactional
-public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, Pk>{
+public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, Pk>
+{
 	@Resource(name = "sessionFactory")
 	protected SessionFactory sessionFactory;
 
@@ -105,22 +110,21 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		}
 	}
 	@Transactional(readOnly = true)
-	public boolean check(T entity, List<T> propertyName, String... value) {
+	public boolean check(T entity, Map<String, String> property) {
 		Query query = null;
 		try {
-			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where a."+ propertyName.get(0) +"="+ value[0]);
-			if(propertyName.size() > 1)
-			{
-				for(int i = 1; i < propertyName.size(); i++)
-				{
-					sql.append(" and a."+ propertyName.get(i) +"="+value[i]);
-				}
-			}
-				query = sessionFactory.getCurrentSession().createQuery(sql.toString());
-				if(query.list().size() > 0)
-					return true;
-				else 
-					return false;
+
+			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where 1=1 ");
+			Set<Map.Entry<String, String>> set = property.entrySet();
+	        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {
+	            Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
+	            sql.append(" and a."+ entry.getKey() +"="+entry.getValue());
+	        }
+			query = sessionFactory.getCurrentSession().createQuery(sql.toString());
+			if(query.list().size() > 0)
+				return true;
+			else 
+				return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

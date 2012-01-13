@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xjany.bbs.entity.AllUser;
+import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.GroupService;
 import com.xjany.bbs.service.UserService;
@@ -33,5 +34,12 @@ public class GroupAction{
 	public String testAjax(HttpServletRequest request, ModelMap model) {
 		model.addAttribute("message", "test");
 		return "../common/message";
+	}
+	
+	@RequestMapping("/group/v_list.do")
+	public String v_list(Integer id,HttpServletRequest request, ModelMap model) {
+		List<AllUserGroup> list = groupService.findById(id);
+		model.addAttribute("groupList", list);
+		return "group/list";
 	}
 }

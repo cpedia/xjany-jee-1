@@ -19,7 +19,6 @@ import com.xjany.common.page.Pagination;
 @Transactional
 public class UserServiceImpl implements UserService{
 	UserDAO userDAO;
-
 	public UserDAO getUserDAO() {
 		return userDAO;
 	}
@@ -61,11 +60,19 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public boolean check(AllUser user) {
+		boolean isCheck = false;
 		Map<String, String> property = new HashMap<String, String>();
-		if(!"".equals(user.getUserName()) && user.getUserName() != null)
+		if(!"".equals(user.getUserEmail()) && user.getUserEmail() != null)
+		{
+			property.put("userEmail", user.getUserEmail());
+			isCheck = true;
+		} else if(!"".equals(user.getUserName()) && user.getUserName() != null && isCheck == false)
+		{
 			property.put("userName", user.getUserName());
-		if(!"".equals(user.getUserPsw()) && user.getUserPsw() != null)
-			property.put("userPsw", com.xjany.common.util.MyMD5Util.MD5(user.getUserPsw()));
+			if(!"".equals(user.getUserPsw()) && user.getUserPsw() != null)
+				property.put("userPsw", com.xjany.common.util.MyMD5Util.MD5(user.getUserPsw()));
+			isCheck = true;
+		} 
 		return userDAO.check(user, property);
 	}
 

@@ -13,10 +13,8 @@ public class TestActionFile extends JUnitBase{
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 
-		request.setServletPath("/login.jhtml");
-		request.setAttribute("dd", 5);
-		request.addParameter("id", "1002");   
-		request.addParameter("date", "2010-12-30");
+		request.setServletPath("/member/v_edit.do");
+		request.addParameter("id", "5");   
 		request.setMethod("get");
 
 		// HandlerAdapter

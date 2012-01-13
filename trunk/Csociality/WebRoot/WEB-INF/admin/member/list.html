@@ -45,7 +45,7 @@ function optDelete() {
 	[@p.column code="cmsUser.disabled" align="center"][#if allUser.userState]<span style="color:red">[@s.m "global.true"/]</span>[#else][@s.m "global.false"/][/#if][/@p.column][#t/]
 	[@p.column code="global.operate" align="center"]
 		<a href="v_edit.do?id=${allUser.userId}&pageNo=${pageNo!}" class="pn-opt">[@s.m "global.edit"/]</a> | [#rt/]
-		<a href="o_delete.do?ids=${allUser.userId}&pageNo=${pageNo!}" onclick="if(!confirm('[@s.m "global.confirm.delete"/]')) {return false;}" class="pn-opt">[@s.m "global.delete"/]</a>[#t/]
+		<a href="o_delete.do?id=${allUser.userId}&pageNo=${pageNo!}" onclick="if(!confirm('[@s.m "global.confirm.delete"/]')) {return false;}" class="pn-opt">[@s.m "global.delete"/]</a>[#t/]
 	[/@p.column][#t/]
 [/@p.table]
 <div><input type="button" value="删除" onclick="optDelete();"/></div>

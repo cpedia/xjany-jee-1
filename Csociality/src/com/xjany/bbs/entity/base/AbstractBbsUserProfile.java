@@ -38,6 +38,7 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 	private Integer userDegree;
 	private Integer userTopic;
 	private Integer userReply;
+	private Integer userDisable;
 	private Integer userDelTopic;
 	private Integer userEliteTopic;
 	private Set<AllUser> allUsers = new HashSet<AllUser>(0);
@@ -191,6 +192,15 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 
 	public void setUserReply(Integer userReply) {
 		this.userReply = userReply;
+	}
+	
+	@Column(name = "userDisable")
+	public Integer getUserDisable() {
+		return this.userDisable;
+	}
+	
+	public void setUserDisable(Integer userDisable) {
+		this.userDisable = userDisable;
 	}
 
 	@Column(name = "userDelTopic")

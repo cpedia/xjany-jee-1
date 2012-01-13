@@ -51,13 +51,18 @@ public class MemberAction{
 	@RequestMapping("member/v_edit.do")
 	public String v_edit(String id,HttpServletRequest request, ModelMap model) {
 		AllUser allUser = userService.findById(Integer.valueOf(id));
+		List list = groupService.findGroupBySql();
+		model.addAttribute("groupList", list);
 		model.addAttribute("allUser", allUser);
 		return "member/edit";
 	}
 	
 	@RequestMapping("/member/o_save.do")
 	public String o_save(BbsUserProfile bbsUserProfile,AllUser allUser,HttpServletRequest request, ModelMap model) {
+		allUser.setUserLoad(0);
 		allUser.setUserRegIp(RequestUtils.getIpAddr(request));
+		allUser.setUserRegTime(new Timestamp(new Date().getTime()));
+		allUser.setUserLastIp(RequestUtils.getIpAddr(request));
 		allUser.setUserLastTime(new Timestamp(new Date().getTime()));
 		userService.save(allUser,bbsUserProfile);
 		return "redirect:v_list.do";

@@ -13,7 +13,7 @@ import com.xjany.bbs.service.UserService;
 public class UserAction {
 	@Autowired
 	private UserService userSerive;
-	private AllUser user;
+	
 	private String message;
 	
 	public String getMessage() {
@@ -49,10 +49,15 @@ public class UserAction {
 	}
 	
 	@RequestMapping("/checkUser.do")
-	public String check(HttpServletRequest request, ModelMap model) {
-		userSerive.check(user);
-		message = "success";
+	public String check(AllUser user, HttpServletRequest request, ModelMap model) {
+		try {
+			userSerive.check(user);
+			message = "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "error";
+		}
 		model.addAttribute("message", message);
-		return "common/message";
+		return "../common/message";
 	}
 }

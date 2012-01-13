@@ -29,6 +29,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 	private String userName;
 	private String userPsw;
 	private Integer userSex;
+	private String userRealName;
 	private String userEmail;
 	private Timestamp userRegTime;
 	private String userRegIp;
@@ -146,6 +147,15 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
+	}
+	
+	@Column(name = "userRealName", length = 30)
+	public String getUserRealName() {
+		return this.userRealName;
+	}
+	
+	public void setUserRealName(String userRealName) {
+		this.userRealName = userRealName;
 	}
 
 	@Column(name = "userRegTime", length = 19)

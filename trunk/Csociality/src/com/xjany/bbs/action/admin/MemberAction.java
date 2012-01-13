@@ -50,12 +50,13 @@ public class MemberAction{
 	
 	@RequestMapping("member/v_edit.do")
 	public String v_edit(HttpServletRequest request, ModelMap model) {
+		
 		return "member/edit";
 	}
 	
 	@RequestMapping("/member/o_save.do")
 	public String o_save(BbsUserProfile bbsUserProfile,AllUser allUser,HttpServletRequest request, ModelMap model) {
-		allUser.setUserIp(RequestUtils.getIpAddr(request));
+		allUser.setUserRegIp(RequestUtils.getIpAddr(request));
 		allUser.setUserLastTime(new Timestamp(new Date().getTime()));
 		userService.save(allUser,bbsUserProfile);
 		return "redirect:v_list.do";

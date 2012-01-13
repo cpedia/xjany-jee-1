@@ -218,6 +218,7 @@ create table bbs_user_profile
    userReply            int default 0 comment '用户的回复数总和',
    userDelTopic         int default 0 comment '用户被删除的帖子总和',
    userEliteTopic       int default 0 comment '用户被推荐的精华帖总和',
+   userDisable          int default 0 comment '用户锁定 0未锁,1锁定',
    primary key (bbs_userId)
 );
 

@@ -41,7 +41,7 @@ function optDelete() {
 	[@p.column code="cmsUser.username"]${allUser.userName}[/@p.column][#t/]
 	[@p.column code="cmsUser.email"]${allUser.userEmail}[/@p.column][#t/]
 	[@p.column code="cmsUser.lastLogin" align="center"]${allUser.userLastTime?string('yyyy-MM-dd HH:mm:ss')}<br/>${allUser.userIp}[/@p.column>[#t/]
-	[@p.column code="cmsUser.loginCountForList" align="right"]${allUser.userLoad}[/@p.column][#t/]
+	[@p.column code="cmsUser.qq" align="right"]${allUser.bbsUserProfile.userQicq}[/@p.column][#t/]
 	[@p.column code="cmsUser.disabled" align="center"][#if allUser.userState]<span style="color:red">[@s.m "global.true"/]</span>[#else][@s.m "global.false"/][/#if][/@p.column][#t/]
 	[@p.column code="global.operate" align="center"]
 		<a href="v_edit.do?id=${allUser.userId}&pageNo=${pageNo!}" class="pn-opt">[@s.m "global.edit"/]</a> | [#rt/]
@@ -51,6 +51,5 @@ function optDelete() {
 <div><input type="button" value="删除" onclick="optDelete();"/></div>
 </form>
 </div>
-<#include "/common/alert_message.html"/>
 </body>
 </html>

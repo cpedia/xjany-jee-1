@@ -21,7 +21,7 @@ public abstract class AbstractBbsBbslink implements java.io.Serializable, InterG
 	private String linkName;
 	private String linkLogo;
 	private String linkUrl;
-	private Integer cmsDel = 0;
+	private Integer cmsDel;
 
 	// Constructors
 

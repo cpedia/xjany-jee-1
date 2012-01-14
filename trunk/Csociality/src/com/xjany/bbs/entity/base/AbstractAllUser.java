@@ -22,7 +22,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 
 	// Fields
 
-	private Integer userId;
+	private Integer userId; //主键
 	private AllUserGroup allUserGroup;
 	private BbsUserProfile bbsUserProfile;
 	private Integer cmsUserId;

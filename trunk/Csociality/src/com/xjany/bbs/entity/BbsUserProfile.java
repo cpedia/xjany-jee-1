@@ -23,12 +23,12 @@ public class BbsUserProfile extends AbstractBbsUserProfile implements
 	/** full constructor */
 	public BbsUserProfile(BbsUserRole bbsUserRole, Integer userRoleId,
 			String userBirthDay, String userFace, String userQicq,
-			String userIntro, String userAddr, String userCareer,
+			String userIntro, String userAddr, String userCareer,String userPosition, String userCompany,
 			Integer userWealth, Integer userDegree, Integer userTopic,
 			Integer userReply, Integer userDelTopic, Integer userEliteTopic,
 			Set<AllUser> allUsers) {
 		super(bbsUserRole, userRoleId, userBirthDay, userFace, userQicq,
-				userIntro, userAddr, userCareer, userWealth, userDegree,
+				userIntro, userAddr, userCareer, userPosition, userCompany, userWealth, userDegree,
 				userTopic, userReply, userDelTopic, userEliteTopic, allUsers);
 	}
 

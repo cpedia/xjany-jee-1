@@ -4,16 +4,9 @@ package com.xjany.bbs.action.admin;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.xjany.bbs.service.FileService;
-import com.xjany.bbs.service.UserService;
-import com.xjany.common.page.Pagination;
-import com.xjany.common.page.SimplePage;
-import com.xjany.common.util.CookieUtils;
 
 import java.util.Properties;
 

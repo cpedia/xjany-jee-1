@@ -55,7 +55,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 	public AbstractAllUser(AllUserGroup allUserGroup,
 			BbsUserProfile bbsUserProfile, Integer cmsUserId, String userName,
 			String userPsw, Integer userSex, String userEmail,
-			Timestamp userRegTime, String userIp, Integer userLoad,
+			Timestamp userRegTime, String userRegIp, Integer userLoad,
 			Timestamp userLastTime, Integer userState, Integer cmsDel) {
 		this.allUserGroup = allUserGroup;
 		this.bbsUserProfile = bbsUserProfile;
@@ -65,7 +65,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 		this.userSex = userSex;
 		this.userEmail = userEmail;
 		this.userRegTime = userRegTime;
-		this.userRegIp = userIp;
+		this.userRegIp = userRegIp;
 		this.userLoad = userLoad;
 		this.userLastTime = userLastTime;
 		this.userState = userState;

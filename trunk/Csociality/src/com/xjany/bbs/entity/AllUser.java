@@ -28,10 +28,10 @@ public class AllUser extends AbstractAllUser implements java.io.Serializable {
 	public AllUser(AllUserGroup allUserGroup, BbsUserProfile bbsUserProfile,
 			Integer cmsUserId, String userName, String userPsw,
 			Integer userSex, String userEmail, Timestamp userRegTime,
-			String userIp, Integer userLoad, Timestamp userLastTime,
+			String userRegIp, Integer userLoad, Timestamp userLastTime,
 			Integer userState, Integer cmsDel) {
 		super(allUserGroup, bbsUserProfile, cmsUserId, userName, userPsw,
-				userSex, userEmail, userRegTime, userIp, userLoad,
+				userSex, userEmail, userRegTime, userRegIp, userLoad,
 				userLastTime, userState, cmsDel);
 	}
 

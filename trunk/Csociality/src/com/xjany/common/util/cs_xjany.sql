@@ -214,6 +214,8 @@ create table bbs_user_profile
    userIntro            varchar(500) comment '用户签名档',
    userAddr             varchar(30) comment '用户地址',
    userCareer           varchar(30) comment '职业介绍',
+   userPosition         varchar(30) comment '职位',
+   userCompany          varchar(30) comment '企业',
    userWealth           int default 0 comment '用户积分,每发1帖积1分(包括回复)，加精积5分',
    userDegree           int default 0 comment '用户等级',
    userTopic            int default 0 comment '用户发表的主题数总和',

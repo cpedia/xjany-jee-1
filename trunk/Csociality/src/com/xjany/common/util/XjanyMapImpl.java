@@ -51,7 +51,17 @@ public class XjanyMapImpl<K,V> implements XjanyMap<K,V> {
 			XjanyMapEntry<String,String> e_ = e.next();
 			System.out.println( e_.getKey() +" ------ "+ e_.getValue());
 		}
+		
+		try {
+			Class c = Class.forName("");
+			//c.
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
+	
 	
 	public void remove(int i)
 	{		

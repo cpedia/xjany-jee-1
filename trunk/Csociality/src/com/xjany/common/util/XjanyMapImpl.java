@@ -1,12 +1,12 @@
 package com.xjany.common.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
 public class XjanyMapImpl<K,V> implements XjanyMap<K,V> {
 	private List<XjanyMapEntry<K,V>> tentry;
-	private int index = 0;
 	private int number = 0;
 	public XjanyMapImpl()
 	{
@@ -19,8 +19,8 @@ public class XjanyMapImpl<K,V> implements XjanyMap<K,V> {
 		XjanyMapEntry<K,V> t2 = new XjanyMapEntry<K,V>();
 		t2.setKey(key) ;
 		t2.setValue(value);
-		t2.setNumber(number);
-		number ++ ;
+		t2.setNumber(number);		
+		number ++ ;		
 		tentry.add(t2);
 	}
 	
@@ -33,6 +33,12 @@ public class XjanyMapImpl<K,V> implements XjanyMap<K,V> {
 		
 		return tentry.size();
 	}
+	
+	
+	public Iterator<XjanyMapEntry<K,V>> iterator()
+	{
+		return tentry.iterator();
+	}
 	public static void main(String[] args)
 	{
 		XjanyMapImpl<String,String> t = new XjanyMapImpl<String,String>();
@@ -42,14 +48,15 @@ public class XjanyMapImpl<K,V> implements XjanyMap<K,V> {
 		t.put("key4", "value4");
 		t.put("key5", "value5");
 
-/*		for( int i = 0 ; i< t.size() ;i++ )
-		{
-			System.out.println(t.get(i).getKey() +"  --- "+ t.get(i).getValue());
-		}*/
+//		for( int i = 0 ; i< t.size() ;i++ )
+//		{
+//			System.out.println(t.get(i).getKey() +"  --- "+ t.get(i).getValue());
+//		}
 		
-		for(XjanyMapEntry<String,String> e = t.next(); t.hasNext(); )
+		for(Iterator<XjanyMapEntry<String,String>> e = t.iterator() ; e.hasNext();)
 		{
-			System.out.println( e.getKey() +" ------ "+ e.getValue());
+			XjanyMapEntry<String,String> e_ = e.next();
+			System.out.println( e_.getKey() +" ------ "+ e_.getValue());
 		}
 	}
 	
@@ -61,22 +68,4 @@ public class XjanyMapImpl<K,V> implements XjanyMap<K,V> {
 	{		
 		tentry.clear();
 	}
-	public boolean hasNext()
-	{
-		System.out.println(index + " hasnext ");
-		if(index >= tentry.size())
-		{
-			index = 0 ;
-			return false;
-		}
-		index ++ ;
-		return true;
-	}
-	
-	public XjanyMapEntry<K,V> next()
-	{
-		System.out.println(index + " next ");
-		return tentry.get(index);
-	}
-
 }

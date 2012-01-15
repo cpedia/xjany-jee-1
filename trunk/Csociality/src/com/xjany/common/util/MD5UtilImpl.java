@@ -48,7 +48,18 @@ public class MD5UtilImpl implements MD5Util{
 	public String decryption(String password) {
 		return password.substring(0, 11) + password.substring(17, password.length());
 	}
-	
+	public String randFour()
+	{
+		String randTemp = "";
+		for(int i = 0; i < 4; i++)
+		{
+			if(i/2 != 0)
+				randTemp += String.valueOf((char)(Math.random() * 25 + 97));
+			else
+				randTemp += String.valueOf(Math.round(Math.random() * 9));
+		}
+		return randTemp;
+	}
 //	public static void main(String[] args)
 //	{
 //		MyMD5UtilImpl md5 = new MyMD5UtilImpl();

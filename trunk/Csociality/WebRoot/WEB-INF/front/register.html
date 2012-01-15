@@ -17,6 +17,7 @@
 <script type="text/javascript" src="/include/bbs/front/guanzhu.js"></script>
 <script type="text/javascript" src="/include/bbs/front/user.js"></script>
 <script type="text/javascript" src="/include/bbs/front/zhiwei.js"></script>
+<script type="text/javascript" src="/include/bbs/front/zhiye.js"></script>
 <SCRIPT type="text/javascript" src="/include/bbs/front/ajaxreg.js"></SCRIPT>
 <Script language="JavaScript" src="/include/bbs/front/mail.js"></script> 
 
@@ -132,32 +133,36 @@ function check_data(){
 		document.getElementById('checkpwd').value = "1";
 	}
 	
-    if(document.getElementById('guanzhu_hid').value==""  && document.getElementById('guanzhu_hid_other').value==""){
-        alert("请选择您所关注领域。"); 
+//    if(document.getElementById('guanzhu_hid').value==""  && document.getElementById('guanzhu_hid_other').value==""){
+//        alert("请选择您所关注领域。"); 
 	   	
-		return false;
-    }
+//		return false;
+//    }
 	
 	if(document.getElementById('hangye_hid').value=="" && document.getElementById('hangye_hid_other').value==""){
         alert("请选择您所属行业。"); 
 		return false;
     }
 	
+	if(document.getElementById('zhiye_hid').value=="" && document.getElementById('zhiye_hid_other').value==""){
+        alert("请选择您的职业。"); 
+		return false;
+    }
 	if(document.getElementById('zhiwei_hid').value=="" && document.getElementById('zhiwei_hid_other').value==""){
         alert("请选择您的职位。"); 
 		return false;
     }
 	
-	if(document.getElementById('companysize').value==""){
-        alert("请选择您所在公司规模。"); 
-		return false;
-    }
+	//	if(document.getElementById('companysize').value==""){
+//        alert("请选择您所在公司规模。"); 
+//		return false;
+ //   }
 	
-	if(document.getElementById('code').value==""){
-       alert("验证码不能为空。"); 
-       document.getElementById('code').focus();	
-	   return false;
-    }
+//	if(document.getElementById('code').value==""){
+//       alert("验证码不能为空。"); 
+//       document.getElementById('code').focus();	
+//	   return false;
+//    }
 	
 	return true;
 }
@@ -246,7 +251,7 @@ function pwStrength(pwd) {
 <div class="tag"><img src="/image/bbs/front/tag_bg1.gif" alt=""></img></div>
 <span class="blank16"></span>
 <div id="container">
-<form name="reg" action="" method="post" id="reg" onSubmit="return check_data()">
+<form name="reg" action="/addBbsUserInfo.do" method="post" id="reg" onSubmit="return check_data()">
 	<input type="hidden" name="reback" value="http%3A%2F%2Fbbs.51cto.com%2Findex.php%3Fframeon%3Dno">
 	<input type="hidden" name="fromuid" value="">
 
@@ -265,7 +270,7 @@ function pwStrength(pwd) {
     <tr>
       <td width="70" align="right" valign="bottom" class="font1">用户名：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
       <td width="2" rowspan="9" class="font2"></td>
-      <td width="440" class="font2"> <input name="user.userName" id="username" type="text teat1_1"  class="teat1" size="15"    onChange="usercheck('check')" onBlur="usercheck('check')" value=""  > </td>
+      <td width="440" class="font2"> <input name="userName" id="username" type="text teat1_1"  class="teat1" size="15"    onChange="usercheck('check')" onBlur="usercheck('check')" value=""  > </td>
 
     </tr>
     <tr>
@@ -325,22 +330,30 @@ function pwStrength(pwd) {
     <tr>
       <td height="18" colspan="5">&nbsp;</td>
     </tr>
+    <!-- 
     <tr>
       <td width="71" align="right" class="font1" style="width:100px;">关注领域：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
        
       <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('guanzhu',0)"><tr><td width="372"><div id="guanzhu_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden; color:#785B00;"></div><input  type="hidden" id="guanzhu_hid" name="gzly"  value=""><input type="hidden" id="guanzhu_hid_other" name="gzly_other" value=""></td><td width="12"><img src="image/bbs/front/ico1.gif" width="21" height="26" /></td></tr></table></td>
 
     </tr>
+     -->
     <tr>
       <td align="right" class="font1" style="width:100px;">所属行业：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
-      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('hangye',0)"><tr><td width="372"><div id="hangye_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden;color:#785B00; "></div><input type="hidden" id="hangye_hid" name="sshy" value=""><input type="hidden" id="hangye_hid_other" name="sshy_other" value=""></td><td width="12"><img src="image/bbs/front/ico1.gif" width="21" height="26"  /></td></tr></table></td>
+      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('hangye',0)"><tr><td width="372"><div id="hangye_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden;color:#785B00; "></div><input type="hidden" id="hangye_hid" name="userCompany" value=""><input type="hidden" id="hangye_hid_other" name="sshy_other" value=""></td><td width="12"><img src="image/bbs/front/ico1.gif" width="21" height="26"  /></td></tr></table></td>
     </tr>
 	
 	<tr>
+      <td align="right" class="font1">职业：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
+
+      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('zhiye',0)"><tr><td width="372"><div id="zhiye_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden; color:#785B00;"></div><input type="hidden" id="zhiye_hid" name="userPosition"   value=""><input type="hidden" id="zhiye_hid_other" name="zy_other"  value=""></td><td width="12"><img src="image/bbs/front/ico1.gif" width="21" height="26"  /></td></tr></table></td>
+    </tr>
+	<tr>
       <td align="right" class="font1">职位：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
 
-      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('zhiwei',0)"><tr><td width="372"><div id="zhiwei_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden; color:#785B00;"></div><input type="hidden" id="zhiwei_hid" name="zw"   value=""><input type="hidden" id="zhiwei_hid_other" name="zw_other"  value=""></td><td width="12"><img src="image/bbs/front/ico1.gif" width="21" height="26"  /></td></tr></table></td>
+      <td height="42" colspan="3" class="font2"><table height="12" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #D6D6D6" onclick="Demo('zhiwei',0)"><tr><td width="372"><div id="zhiwei_txt" style="width:372px;word-break:break-all;word-wrap:break-word;overflow: hidden; color:#785B00;"></div><input type="hidden" id="zhiwei_hid" name="userCareer"   value=""><input type="hidden" id="zhiwei_hid_other" name="zw_other"  value=""></td><td width="12"><img src="image/bbs/front/ico1.gif" width="21" height="26"  /></td></tr></table></td>
     </tr>
+    <!-- 
 	<tr>
       <td align="right" class="font1" style="width:80px;">公司规模：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
       <td height="42" colspan="3" class="font2"> <select  name="companysize" class="teat7"  id="companysize">
@@ -353,10 +366,10 @@ function pwStrength(pwd) {
 														                </select></td>
     </tr>
     
+     -->
     <tr>
-
       <td align="right" class="font1">验证码：&nbsp;<span  style=" color:#FF0000">*</span>&nbsp;</td>
-      <td width="99" height="42" class="font2"> <input name="code" id="code" class="teat2" size="15" onChange="codecheck('cde')" onBlur="codecheck('cde')" /></td>
+      <td width="99" height="42" class="font2"> <input type="text" readonly="readonly" name="code" id="code" class="teat2" size="15" onChange="codecheck('cde')" onBlur="codecheck('cde')" /></td>
       <td width="147" class="font2"><img name="yangimg" id="yangimg" style="cursor : pointer;" onclick="refimg();" width="90" height="30"></td>
       <td width="201" class="font2" id="cde">(如果看不清请点击图片进行更换.)</td>
       </tr>

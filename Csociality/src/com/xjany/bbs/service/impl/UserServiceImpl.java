@@ -89,8 +89,8 @@ public class UserServiceImpl implements UserService{
 
 	public int save(AllUser entity,BbsUserProfile bbsUserProfile) {
 		entity.setUserPsw(md5.encryption(entity.getUserPsw(),entity.getUserName()));
-		bbsUserProfileDAO.save(bbsUserProfile);
-		int d = bbsUserProfile.getBbsUserId();
+		int d = bbsUserProfileDAO.save(bbsUserProfile);
+		//int d = bbsUserProfile.getBbsUserId();
 		BbsUserProfile bup = bbsUserProfileDAO.findById(d);
 		entity.setBbsUserProfile(bup);
 		return userDAO.save(entity);

@@ -130,9 +130,11 @@ function Demo(type,n){
 		DialogShow(guanzhu,560,200,560,100);
 	 }else if(type=="hangye"){
 		DialogShow(hangye,560,200,560,100);
-	 }else{
+	 }else if((type=="zhiye")){
+		DialogShow(zhiye,650,400,560,40);
+	}else{
 		DialogShow(zhiwei,650,400,560,40);
-	 }
+	}
 	 if(document.getElementById(type+"_hid").value && document.getElementById(type+"_hid").value!="00"){
 		var string = document.getElementById(type+"_hid").value;
 		var myArray=string.split(",");

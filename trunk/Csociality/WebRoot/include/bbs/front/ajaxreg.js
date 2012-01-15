@@ -140,7 +140,7 @@ function usercheck(obj){
 				else
 					document.getElementById(obj).innerHTML="<span class='font_red12'>无效</span>";
 			},
-	});
+		});
 //		send_request('checkuser.php?username='+uservalue+"&is_ie="+is_ie);
 		
 	}
@@ -488,8 +488,21 @@ function codecheck(obj){
  	}else{
    		document.getElementById(obj).innerHTML="正在读取数据...";
 		reobj = obj;
+		$.ajax({
+			type: "post",
+			url: "/verification.do?codevalue="+codevalue,
+			datatype: "html",
+			success: function(data){
+				if(data == "false")
+					document.getElementById(obj).innerHTML="<span class='font_green12'>验证成功</span>";
+				else if(data == "true")
+					document.getElementById(obj).innerHTML="<span class='font_red12'>输入无效</span>";
+				else
+					document.getElementById(obj).innerHTML="<span class='font_red12'>输入出错</span>";
+			},
+		});
 		//codevalue = base64encode(utf8ToUnicode(codevalue));
-		send_request('checkyanzheng.php?code='+codevalue);
+		//send_request('checkyanzheng.php?code='+codevalue);
  	}
 }
 

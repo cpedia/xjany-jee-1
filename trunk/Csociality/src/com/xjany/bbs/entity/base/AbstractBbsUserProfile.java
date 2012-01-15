@@ -34,6 +34,8 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 	private String userIntro;
 	private String userAddr;
 	private String userCareer;
+	private String userPosition;
+	private String userCompany;
 	private Integer userWealth;
 	private Integer userDegree;
 	private Integer userTopic;
@@ -41,6 +43,7 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 	private Integer userDisable;
 	private Integer userDelTopic;
 	private Integer userEliteTopic;
+	
 	private Set<AllUser> allUsers = new HashSet<AllUser>(0);
 
 	// Constructors
@@ -52,7 +55,7 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 	/** full constructor */
 	public AbstractBbsUserProfile(BbsUserRole bbsUserRole, Integer userRoleId,
 			String userBirthDay, String userFace, String userQicq,
-			String userIntro, String userAddr, String userCareer,
+			String userIntro, String userAddr, String userCareer,String userProfession, String userPosition,
 			Integer userWealth, Integer userDegree, Integer userTopic,
 			Integer userReply, Integer userDelTopic, Integer userEliteTopic,
 			Set<AllUser> allUsers) {
@@ -70,6 +73,8 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 		this.userReply = userReply;
 		this.userDelTopic = userDelTopic;
 		this.userEliteTopic = userEliteTopic;
+		this.userPosition = userPosition;
+		this.userCompany = userCompany;
 		this.allUsers = allUsers;
 	}
 
@@ -152,6 +157,23 @@ public abstract class AbstractBbsUserProfile implements java.io.Serializable {
 	@Column(name = "userCareer", length = 30)
 	public String getUserCareer() {
 		return this.userCareer;
+	}
+	@Column(name = "userPosition", length = 30)
+	public String getUserPosition() {
+		return userPosition;
+	}
+
+	public void setUserPosition(String userPosition) {
+		this.userPosition = userPosition;
+	}
+
+	@Column(name = "userCompany", length = 30)
+	public String getUserCompany() {
+		return userCompany;
+	}
+
+	public void setUserCompany(String userCompany) {
+		this.userCompany = userCompany;
 	}
 
 	public void setUserCareer(String userCareer) {

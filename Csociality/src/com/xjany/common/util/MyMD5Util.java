@@ -29,10 +29,6 @@ public class MyMD5Util {
 		}
 		return md5.encodePassword(sTemp, password);
 	}
-	public static void main(String[] args)
-	{
-		System.out.println(MD5("aaa","abc"));
-	}
 }
 // Md5PasswordEncoder md5 = new Md5PasswordEncoder();
 // String dbpassword = user.getPassword();

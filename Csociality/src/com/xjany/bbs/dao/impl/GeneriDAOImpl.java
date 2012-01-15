@@ -3,11 +3,9 @@ package com.xjany.bbs.dao.impl;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -20,6 +18,8 @@ import com.xjany.bbs.dao.GenericDAO;
 import com.xjany.bbs.entity.InterGeneric;
 import com.xjany.common.page.Finder;
 import com.xjany.common.page.Pagination;
+import com.xjany.common.util.XjanyMap;
+import com.xjany.common.util.XjanyMapEntry;
 
 /**
  * @param 一个通用的dao层
@@ -110,15 +110,20 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		}
 	}
 	@Transactional(readOnly = true)
-	public boolean check(T entity, Map<String, String> property) {
+	public boolean check(T entity, XjanyMap<String, String> property) {
 		Query query = null;
 		try {
 			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where 1=1 ");
-			Set<Map.Entry<String, String>> set = property.entrySet();
-	        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {
-	            Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
-	            sql.append(" and a."+ entry.getKey() +"='"+entry.getValue()+"'");
-	        }
+//			Set<Map.Entry<String, String>> set = property.entrySet();
+//	        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {
+//	            Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
+//	            sql.append(" and a."+ entry.getKey() +"='"+entry.getValue()+"'");
+//	        }
+			for(Iterator<XjanyMapEntry<String,String>> e = property.iterator() ; e.hasNext();)
+			{
+				XjanyMapEntry<String,String> e_ = e.next();
+				sql.append(" and a."+ e_.getKey() +"='"+e_.getValue()+"'");
+			}
 			query = sessionFactory.getCurrentSession().createQuery(sql.toString());
 			if(query.list().size() > 0)
 				return true;

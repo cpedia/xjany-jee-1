@@ -23,6 +23,4 @@ public class XjanyMapEntry<K,V>{
 		this.number = number;
 	}
 	
-
-	
 }

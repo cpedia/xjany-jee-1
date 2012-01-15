@@ -8,12 +8,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xjany.bbs.entity.AllUser;
+import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.UserService;
+import com.xjany.common.MD5Util;
+import com.xjany.common.util.MD5UtilImpl;
 @Controller
 public class UserAction {
 	@Autowired
 	private UserService userSerive;
-
+	private MD5Util verification = new MD5UtilImpl();
 	public UserService getUserSerive() {
 		return userSerive;
 	}
@@ -44,4 +47,20 @@ public class UserAction {
 		model.addAttribute("message", String.valueOf(result));
 		return "../common/message";
 	}
+	@RequestMapping("/verification.do")
+	public String verification(String codevalue, HttpServletRequest request, ModelMap model) {
+		boolean result = (codevalue == verification.randFour());
+		model.addAttribute("message",String.valueOf(result));
+		return "../common/message";
+	}
+	@RequestMapping("/addBbsUserInfo.do")
+	public String addBbsUserInfo(AllUser user,BbsUserProfile bbsUserProfile, HttpServletRequest request, ModelMap model) {
+		user.setUserRegIp("127.0.0.1");
+		java.sql.Timestamp t = new java.sql.Timestamp(System.currentTimeMillis());
+		user.setUserRegTime(t);
+		int result = userSerive.save(user, bbsUserProfile);
+		model.addAttribute("message",String.valueOf(result));
+		return "../common/message";
+	}
+	
 }

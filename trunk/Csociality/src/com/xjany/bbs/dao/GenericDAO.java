@@ -2,7 +2,8 @@ package com.xjany.bbs.dao;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
+
+import com.xjany.common.util.XjanyMap;
 
 
 /*
@@ -18,6 +19,6 @@ public interface GenericDAO<T,Pk extends Serializable> {
 	public int save(T entity);
 	public boolean recycle(T entity,boolean isRecycle);
 	public boolean delete(int ... id);
-	public boolean check(T entity, Map<String, String> property);
+	public boolean check(T entity, XjanyMap<String, String> property);
 	public List findBySql(String sql);
 }

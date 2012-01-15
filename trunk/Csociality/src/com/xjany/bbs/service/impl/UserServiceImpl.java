@@ -14,11 +14,17 @@ import com.xjany.bbs.dao.UserDAO;
 import com.xjany.bbs.entity.AllUser;
 import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.UserService;
+import com.xjany.common.MD5Util;
 import com.xjany.common.page.Pagination;
+import com.xjany.common.util.MD5UtilImpl;
+import com.xjany.common.util.XjanyMap;
+import com.xjany.common.util.XjanyMapEntry;
+import com.xjany.common.util.XjanyMapImpl;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
-	UserDAO userDAO;
+	private UserDAO userDAO;
+	private MD5Util md5 = new MD5UtilImpl();
 	public UserDAO getUserDAO() {
 		return userDAO;
 	}
@@ -60,7 +66,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public boolean check(AllUser user) {
-		Map<String, String> property = new HashMap<String, String>();
+		XjanyMap<String, String> property = new XjanyMapImpl<String, String>();
 		if(!"".equals(user.getUserEmail()) && user.getUserEmail() != null)
 		{
 			property.put("userEmail", user.getUserEmail());
@@ -68,7 +74,7 @@ public class UserServiceImpl implements UserService{
 		{
 			property.put("userName", user.getUserName());
 			if(!"".equals(user.getUserPsw()) && user.getUserPsw() != null)
-				property.put("userPsw", com.xjany.common.util.MyMD5Util.MD5(user.getUserPsw()));
+				property.put("userPsw", md5.encryption(user.getUserPsw(),user.getUserName()));
 		} 
 		return userDAO.check(user, property);
 	}
@@ -82,7 +88,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public int save(AllUser entity,BbsUserProfile bbsUserProfile) {
-		entity.setUserPsw(com.xjany.common.util.MyMD5Util.MD5(entity.getUserPsw()));
+		entity.setUserPsw(md5.encryption(entity.getUserPsw(),entity.getUserName()));
 		int d = bbsUserProfileDAO.save(bbsUserProfile);
 		BbsUserProfile bup = bbsUserProfileDAO.findById(d);
 		entity.setBbsUserProfile(bup);

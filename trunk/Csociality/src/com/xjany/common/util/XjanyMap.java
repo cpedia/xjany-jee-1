@@ -10,4 +10,6 @@ public interface XjanyMap<K,V> {
 	public Iterator<XjanyMapEntry<K,V>> iterator();
 	public void remove(int i);
 	public void clear();
+	public int size();
+	
 }

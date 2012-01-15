@@ -15,7 +15,6 @@ public class XjanyMapImpl<K,V> implements XjanyMap<K,V> {
 
 	public void put(K key ,V value)
 	{
-
 		XjanyMapEntry<K,V> t2 = new XjanyMapEntry<K,V>();
 		t2.setKey(key) ;
 		t2.setValue(value);
@@ -34,7 +33,6 @@ public class XjanyMapImpl<K,V> implements XjanyMap<K,V> {
 		return tentry.size();
 	}
 	
-	
 	public Iterator<XjanyMapEntry<K,V>> iterator()
 	{
 		return tentry.iterator();
@@ -48,11 +46,6 @@ public class XjanyMapImpl<K,V> implements XjanyMap<K,V> {
 		t.put("key4", "value4");
 		t.put("key5", "value5");
 
-//		for( int i = 0 ; i< t.size() ;i++ )
-//		{
-//			System.out.println(t.get(i).getKey() +"  --- "+ t.get(i).getValue());
-//		}
-		
 		for(Iterator<XjanyMapEntry<String,String>> e = t.iterator() ; e.hasNext();)
 		{
 			XjanyMapEntry<String,String> e_ = e.next();

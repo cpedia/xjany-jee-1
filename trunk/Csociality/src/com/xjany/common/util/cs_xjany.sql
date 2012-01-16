@@ -32,6 +32,8 @@ drop table if exists district;
 
 drop table if exists file;
 
+drop table if exists resource_lib;
+
 /*==============================================================*/
 /* Table: all_user                                              */
 /*==============================================================*/
@@ -279,6 +281,21 @@ create table file
    cms_del              int(2)  default 0,
    primary key (id)
 );
+
+/*==============================================================*/
+/* Table: resource_lib                                          */
+/*==============================================================*/
+
+CREATE TABLE `resource_lib` (
+  `libId` int(11) NOT NULL auto_increment,
+  `bbs_category` int(11) default NULL,
+  `cmsDel` int(11) default NULL,
+  `bbs_name` varchar(255) default NULL,
+  `bbs_parentId` int(11) default NULL,
+  PRIMARY KEY  (`libId`),
+  UNIQUE KEY `libId` (`libId`),
+  UNIQUE KEY `bbs_category` (`bbs_category`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 alter table all_user add constraint FK_Reference_5 foreign key (bbs_userId)
       references bbs_user_profile (bbs_userId) on delete restrict on update restrict;

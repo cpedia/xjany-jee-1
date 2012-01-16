@@ -54,13 +54,19 @@ public class UserAction {
 		model.addAttribute("message",String.valueOf(result));
 		return "../common/message";
 	}
+	
 	@RequestMapping("/addBbsUserInfo.do")
 	public String addBbsUserInfo(AllUser user,BbsUserProfile bbsUserProfile, HttpServletRequest request, ModelMap model) {
-		user.setUserRegIp(RequestUtils.getIpAddr(request));
+        user.setUserRegIp(verification.getIp(request));
 		user.setUserRegTime(new java.sql.Timestamp(System.currentTimeMillis()));
 		AllUser result = userSerive.save(user, bbsUserProfile, null);
 		model.addAttribute("message",String.valueOf(result));
+		if(result != null)
+			return "index";
 		return "../common/message";
+		
+		//PrintWriter out = response.getWriter();
+		//out.println("<script language='JavaScript'>alert(\"success\");location.replace('/index.jsp');</script>");
 	}
 	
 }

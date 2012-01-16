@@ -14,10 +14,10 @@ public interface GenericDAO<T,Pk extends Serializable> {
 	public List<T> findAll();
 	public T findById(int id);
 	public List<T> findByProperty(Object propertyName, String value);
-	public boolean update(T entity);
-	public boolean delete(T entity);
-	public int save(T entity);
-	public boolean recycle(T entity,boolean isRecycle);
+	public T update(T entity);
+	public T delete(T entity);
+	public T save(T entity);
+	public T recycle(T entity,boolean isRecycle);
 	public boolean delete(int ... id);
 	public boolean check(T entity, XjanyMap<String, String> property);
 	public List findBySql(String sql);

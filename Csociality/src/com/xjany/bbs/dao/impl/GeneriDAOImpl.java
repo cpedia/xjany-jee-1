@@ -38,15 +38,10 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 	
-	public boolean delete(T entity) {
-		try {
-			Session session = sessionFactory.getCurrentSession();
-			session.delete(entity);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+	public T delete(T entity) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(entity);
+		return entity;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -67,26 +62,16 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 	
 
-	public int save(T entity) {
-		try {
-			Session session = sessionFactory.getCurrentSession();
-			int d = (Integer) session.save(entity);
-			return d;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		}
+	public T save(T entity) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(entity);
+		return entity;
 	}
 
-	public boolean update(T entity) {
-		try {
-			Session session = sessionFactory.getCurrentSession();
-			session.update(entity);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+	public T update(T entity) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(entity);
+		return entity;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -156,16 +141,11 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	 * @param isRecycle 是否放到回收站
 	 * @return 设置是否成功
 	 */
-	public boolean recycle(T entity,boolean isRecycle)
+	public T recycle(T entity,boolean isRecycle)
 	{
-		try{
-			((InterGeneric) entity).recycle(isRecycle);
-			this.update(entity);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		((InterGeneric) entity).recycle(isRecycle);
+		this.update(entity);
+		return entity;
 	}
 	
 	/**

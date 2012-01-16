@@ -59,7 +59,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public boolean recycle(File file,boolean isRecycle) {
+	public File recycle(File file,boolean isRecycle) {
 		 return fileDAO.recycle(file,isRecycle);
 		
 	}

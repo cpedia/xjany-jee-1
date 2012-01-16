@@ -24,7 +24,7 @@ public class BbsUserProfileServiceImpl implements BbsUserProfileService {
 	}
 	
 	@Override
-	public int save(BbsUserProfile entity)
+	public BbsUserProfile save(BbsUserProfile entity)
 	{
 		return bbsUserProfileDAO.save(entity);
 	}

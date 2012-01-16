@@ -53,11 +53,11 @@ public class UserServiceImpl implements UserService{
 		return userDAO.findByProperty(propertyName, value);
 	}
 
-	public boolean recycle(AllUser entity, boolean isRecycle) {
+	public AllUser recycle(AllUser entity, boolean isRecycle) {
 		return userDAO.recycle(entity, isRecycle);
 	}
 
-	public boolean delete(int id) {
+	public AllUser delete(int id) {
 		AllUser allUser = userDAO.findById(id);
 		bbsUserProfileDAO.delete(allUser.getBbsUserProfile()); //删除allUser之前先删除bbsUserProfile
 		return userDAO.delete(allUser);
@@ -77,18 +77,17 @@ public class UserServiceImpl implements UserService{
 		return userDAO.check(user, property);
 	}
 
-	public boolean update(AllUser entity) {
+	public AllUser update(AllUser entity) {
 		return userDAO.update(entity);
 	}
 
-	public boolean delete(AllUser entity) {
+	public AllUser delete(AllUser entity) {
 		return userDAO.delete(entity);
 	}
 
-	public int save(AllUser entity,BbsUserProfile bbsUserProfile,AllUserGroup allUserGroup) {
+	public AllUser save(AllUser entity,BbsUserProfile bbsUserProfile,AllUserGroup allUserGroup) {
 		entity.setUserPsw(md5.encryption(entity.getUserPsw(),entity.getUserName()));
-		int d = bbsUserProfileDAO.save(bbsUserProfile);
-		BbsUserProfile bup = bbsUserProfileDAO.findById(d);
+		BbsUserProfile bup = bbsUserProfileDAO.save(bbsUserProfile);
 		entity.setBbsUserProfile(bup);
 		if(allUserGroup!=null)
 			entity.setAllUserGroup(allUserGroup);

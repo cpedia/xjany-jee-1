@@ -12,6 +12,6 @@ public interface FileService
 	public List<File> findByUpId(int id);
 	public void updateFile(File file);
 	public void delFile(File file);
-	public boolean recycle(File file,boolean isRecycle);
+	public File recycle(File file,boolean isRecycle);
 	public boolean checkFile(File file, List<File> propertyName, Object[] value);
 }

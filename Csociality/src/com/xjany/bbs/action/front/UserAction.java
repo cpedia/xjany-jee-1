@@ -58,7 +58,7 @@ public class UserAction {
 	public String addBbsUserInfo(AllUser user,BbsUserProfile bbsUserProfile, HttpServletRequest request, ModelMap model) {
 		user.setUserRegIp(RequestUtils.getIpAddr(request));
 		user.setUserRegTime(new java.sql.Timestamp(System.currentTimeMillis()));
-		int result = userSerive.save(user, bbsUserProfile, null);
+		AllUser result = userSerive.save(user, bbsUserProfile, null);
 		model.addAttribute("message",String.valueOf(result));
 		return "../common/message";
 	}

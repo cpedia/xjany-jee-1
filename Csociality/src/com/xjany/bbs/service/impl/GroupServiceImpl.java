@@ -34,14 +34,17 @@ public class GroupServiceImpl implements GroupService {
 		return list;
 	}
 	@Override
-	public List<AllUserGroup> findById(int id) {
-		List<AllUserGroup> list = (List<AllUserGroup>) groupDAO.findById(id);
-		return list;
+	public AllUserGroup findById(int id) {
+		return groupDAO.findById(id);
 	}
 	@Override
 	public Pagination getPage(int pageNo, int pageSize) {
 		Pagination pagination = groupDAO.getPage(pageNo, pageSize);
 		return pagination;
+	}
+	@Override
+	public void save(AllUserGroup allUserGroup) {
+		groupDAO.save(allUserGroup);
 	}
 
 }

@@ -24,6 +24,7 @@ public abstract class AbstractAllUserGroup implements java.io.Serializable {
 
 	private Integer groupId;
 	private String groupName;
+	private String groupIntro;
 	private Integer cmsDel = 0;
 	private Set<AllUser> allUsers = new HashSet<AllUser>(0);
 
@@ -58,13 +59,22 @@ public abstract class AbstractAllUserGroup implements java.io.Serializable {
 		this.groupId = groupId;
 	}
 
-	@Column(name = "groupName", nullable = false, length = 50)
+	@Column(name = "groupName", length = 50)
 	public String getGroupName() {
 		return this.groupName;
 	}
 
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
+	}
+	
+	@Column(name = "groupIntro", length = 400)
+	public String getGroupIntro() {
+		return this.groupIntro;
+	}
+	
+	public void setGroupIntro(String groupIntro) {
+		this.groupIntro = groupIntro;
 	}
 
 	@Column(name = "cms_del")

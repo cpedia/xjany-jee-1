@@ -8,6 +8,7 @@ import com.xjany.common.page.Pagination;
 
 public interface GroupService {
 	public List findGroupBySql();
-	public List<AllUserGroup> findById(int id );
+	public AllUserGroup findById(int id);
+	public void save(AllUserGroup allUserGroup);
 	public Pagination getPage(int pageNo, int pageSize) ;
 }

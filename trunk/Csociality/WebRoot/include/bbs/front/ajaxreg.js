@@ -134,11 +134,20 @@ function usercheck(obj){
 			datatype: "html",
 			success: function(data){
 				if(data == "false")
+				{
 					document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该用户名可用</span>";
+					document.getElementById("usernameexist").value=0;
+				}
 				else if(data == "true")
+				{
 					document.getElementById(obj).innerHTML="<span class='font_red12'>用户名已被使用</span>";
+					document.getElementById("usernameexist").value=1;
+				}
 				else
+				{
 					document.getElementById(obj).innerHTML="<span class='font_red12'>无效</span>";
+					document.getElementById("usernameexist").value=1;
+				}
 			},
 		});
 //		send_request('checkuser.php?username='+uservalue+"&is_ie="+is_ie);
@@ -395,7 +404,22 @@ function mailcheck(obj){
 			url: "/checkUser.do?userEmail="+mailvalue,
 			datatype: "html",
 			success: function(data){
-				document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该邮箱可用</span>";
+				if(data == "false")
+				{
+					document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该用户名可用</span>";
+					document.getElementById("checkemail").value=0;
+				}
+				else if(data == "true")
+				{
+					document.getElementById(obj).innerHTML="<span class='font_red12'>该邮箱已被使用</span>";
+					document.getElementById("checkemail").value=1;
+				}
+				else
+				{
+					document.getElementById(obj).innerHTML="<span class='font_red12'>无效</span>";
+					document.getElementById("checkemail").value=1;
+					
+				}
 			},
 	});
 		//send_request('checkemails.php?email='+mailvalue);

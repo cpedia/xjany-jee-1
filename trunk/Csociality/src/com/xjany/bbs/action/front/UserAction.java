@@ -1,5 +1,8 @@
 package com.xjany.bbs.action.front;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.UserService;
 import com.xjany.common.MD5Util;
 import com.xjany.common.util.MD5UtilImpl;
+import com.xjany.common.util.RequestUtils;
 @Controller
 public class UserAction {
 	@Autowired
@@ -55,9 +59,9 @@ public class UserAction {
 	}
 	@RequestMapping("/addBbsUserInfo.do")
 	public String addBbsUserInfo(AllUser user,BbsUserProfile bbsUserProfile, HttpServletRequest request, ModelMap model) {
-		user.setUserRegIp("127.0.0.1");
-		java.sql.Timestamp t = new java.sql.Timestamp(System.currentTimeMillis());
-		user.setUserRegTime(t);
+		user.setUserLoad(0);
+		user.setUserRegIp(RequestUtils.getIpAddr(request));
+		user.setUserRegTime(new java.sql.Timestamp(System.currentTimeMillis()));
 		int result = userSerive.save(user, bbsUserProfile);
 		model.addAttribute("message",String.valueOf(result));
 		return "../common/message";

@@ -2,6 +2,8 @@ package com.xjany.common.util;
 
 import java.io.UnsupportedEncodingException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.acegisecurity.providers.encoding.Md5PasswordEncoder;
 
 import com.xjany.common.MD5Util;
@@ -60,6 +62,19 @@ public class MD5UtilImpl implements MD5Util{
 		}
 		return randTemp;
 	}
+	public String getIp(HttpServletRequest request) {  
+        String ip = request.getHeader("x-forwarded-for");  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("WL-Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getRemoteAddr();  
+        }  
+        return ip;  
+    }  
 //	public static void main(String[] args)
 //	{
 //		MyMD5UtilImpl md5 = new MyMD5UtilImpl();

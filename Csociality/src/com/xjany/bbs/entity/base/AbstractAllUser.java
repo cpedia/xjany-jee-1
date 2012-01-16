@@ -36,7 +36,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 	private Timestamp userRegTime;
 	private String userRegIp;
 	private String userLastIp;
-	private Integer userLoad;
+	private Integer userLoad=0;
 	private Timestamp userLastTime;
 	private Integer userState;
 	private Integer cmsDel = 0;

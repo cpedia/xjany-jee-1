@@ -24,7 +24,7 @@ public abstract class AbstractAllUserGroup implements java.io.Serializable {
 
 	private Integer groupId;
 	private String groupName;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 	private Set<AllUser> allUsers = new HashSet<AllUser>(0);
 
 	// Constructors

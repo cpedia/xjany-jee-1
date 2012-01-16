@@ -26,7 +26,7 @@ public abstract class AbstractBbsBoard implements java.io.Serializable, InterGen
 	private Integer boaId;
 	private String boaName;
 	private String boaMaster;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 	private Set<BbsSubBoard> bbsSubBoards = new HashSet<BbsSubBoard>(0);
 
 	// Constructors

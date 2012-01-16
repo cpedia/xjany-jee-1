@@ -56,7 +56,6 @@ public class UserAction {
 	}
 	@RequestMapping("/addBbsUserInfo.do")
 	public String addBbsUserInfo(AllUser user,BbsUserProfile bbsUserProfile, HttpServletRequest request, ModelMap model) {
-		user.setUserLoad(0);
 		user.setUserRegIp(RequestUtils.getIpAddr(request));
 		user.setUserRegTime(new java.sql.Timestamp(System.currentTimeMillis()));
 		int result = userSerive.save(user, bbsUserProfile, null);

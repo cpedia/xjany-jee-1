@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xjany.bbs.entity.AllUser;
+import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.GroupService;
 import com.xjany.bbs.service.UserService;
@@ -43,7 +44,7 @@ public class MemberAction{
 	
 	@RequestMapping("/member/v_add.do")
 	public String v_add(Integer pageNo,HttpServletRequest request, ModelMap model) {
-		List list = groupService.findGroupBySql();
+		List list = groupService.findAll();
 		model.addAttribute("groupList", list);
 		return "member/add";
 	}
@@ -58,10 +59,10 @@ public class MemberAction{
 	}
 	
 	@RequestMapping("/member/o_save.do")
-	public String o_save(BbsUserProfile bbsUserProfile,AllUser allUser,HttpServletRequest request, ModelMap model) {
+	public String o_save(BbsUserProfile bbsUserProfile,AllUser allUser,AllUserGroup allUserGroup,HttpServletRequest request, ModelMap model) {
 		allUser.setUserRegIp(RequestUtils.getIpAddr(request));
 		allUser.setUserRegTime(new Timestamp(new Date().getTime()));
-		userService.save(allUser,bbsUserProfile);
+		userService.save(allUser,bbsUserProfile,allUserGroup);
 		return "redirect:v_list.do";
 	}
 	

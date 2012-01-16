@@ -43,8 +43,8 @@ public class GroupServiceImpl implements GroupService {
 		return pagination;
 	}
 	@Override
-	public void save(AllUserGroup allUserGroup) {
-		groupDAO.save(allUserGroup);
+	public AllUserGroup save(AllUserGroup allUserGroup) {
+		return groupDAO.save(allUserGroup);
 	}
 	@Override
 	public List<AllUserGroup> findAll() {

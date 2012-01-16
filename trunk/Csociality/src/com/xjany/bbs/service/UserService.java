@@ -12,11 +12,11 @@ public interface UserService {
 	public List<AllUser> findAll();
 	public AllUser findById(int id);
 	public List<AllUser> findByProperty(Object propertyName, String value);
-	public boolean update(AllUser entity);
-	public boolean delete(AllUser entity);
-	public int save(AllUser entity,BbsUserProfile bbsUserProfile,AllUserGroup allUserGroup);
-	public boolean recycle(AllUser entity,boolean isRecycle);
-	public boolean delete(int id);
+	public AllUser update(AllUser entity);
+	public AllUser delete(AllUser entity);
+	public AllUser save(AllUser entity,BbsUserProfile bbsUserProfile,AllUserGroup allUserGroup);
+	public AllUser recycle(AllUser entity,boolean isRecycle);
+	public AllUser delete(int id);
 	public boolean check(AllUser user);
 	public Pagination getPage(String username, String email, Integer siteId,
 			Integer groupId, Boolean disabled, Boolean admin, Integer rank,

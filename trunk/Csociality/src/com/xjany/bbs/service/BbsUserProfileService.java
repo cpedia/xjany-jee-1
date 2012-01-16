@@ -5,5 +5,5 @@ import com.xjany.bbs.entity.BbsUserProfile;
 
 public interface BbsUserProfileService {
 	
-	public int save(BbsUserProfile entiy);
+	public BbsUserProfile save(BbsUserProfile entiy);
 }

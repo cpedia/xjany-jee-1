@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xjany.bbs.dao.GenericDAO;
 import com.xjany.bbs.entity.InterGeneric;
+import com.xjany.common.exception.DaoException;
 import com.xjany.common.page.Finder;
 import com.xjany.common.page.Pagination;
 import com.xjany.common.util.XjanyMap;
@@ -75,23 +76,17 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 	
 	@SuppressWarnings("unchecked")
-	public boolean delete(int ... id){
-		try {
-			Session session = sessionFactory.getCurrentSession();
-			T t = (T) session.get(clazz, id[0]);
-			session.delete(t);
-			if(id.length -1 > 0)
+	public void delete(int ... id) throws DaoException{
+		Session session = sessionFactory.getCurrentSession();
+		T t = (T) session.get(clazz, id[0]);
+		session.delete(t);
+		if(id.length -1 > 0)
+		{
+			for (int i = 0; i < id.length; i++)
 			{
-				for (int i = 0; i < id.length; i++)
-				{
-					t = (T) session.get(clazz, id[i+1]);
-					session.delete(t);
-				}
+				t = (T) session.get(clazz, id[i+1]);
+				session.delete(t);
 			}
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
 		}
 	}
 	@Transactional(readOnly = true)

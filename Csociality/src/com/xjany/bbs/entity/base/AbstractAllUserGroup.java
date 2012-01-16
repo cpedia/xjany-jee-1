@@ -86,7 +86,7 @@ public abstract class AbstractAllUserGroup implements java.io.Serializable {
 		this.cmsDel = cmsDel;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "allUserGroup")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "allUserGroup")
 	public Set<AllUser> getAllUsers() {
 		return this.allUsers;
 	}

@@ -13,6 +13,8 @@ import com.xjany.bbs.dao.GroupDAO;
 import com.xjany.bbs.dao.UserDAO;
 import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.service.GroupService;
+import com.xjany.common.exception.DaoException;
+import com.xjany.common.exception.ServiceException;
 import com.xjany.common.page.Pagination;
 @Service
 @Transactional
@@ -49,6 +51,11 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public List<AllUserGroup> findAll() {
 		return groupDAO.findAll();
+	}
+	@Override
+	public AllUserGroup deleteById(int id) throws DaoException{
+		groupDAO.delete(id);
+		return null;
 	}
 
 }

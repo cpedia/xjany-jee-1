@@ -1,8 +1,6 @@
 package com.xjany.bbs.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -18,7 +16,6 @@ import com.xjany.common.MD5Util;
 import com.xjany.common.page.Pagination;
 import com.xjany.common.util.MD5UtilImpl;
 import com.xjany.common.util.XjanyMap;
-import com.xjany.common.util.XjanyMapEntry;
 import com.xjany.common.util.XjanyMapImpl;
 @Service
 @Transactional
@@ -90,7 +87,6 @@ public class UserServiceImpl implements UserService{
 	public int save(AllUser entity,BbsUserProfile bbsUserProfile) {
 		entity.setUserPsw(md5.encryption(entity.getUserPsw(),entity.getUserName()));
 		int d = bbsUserProfileDAO.save(bbsUserProfile);
-		//int d = bbsUserProfile.getBbsUserId();
 		BbsUserProfile bup = bbsUserProfileDAO.findById(d);
 		entity.setBbsUserProfile(bup);
 		return userDAO.save(entity);

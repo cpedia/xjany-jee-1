@@ -249,7 +249,8 @@ alter table bbs_user_role comment '用户角色表(role)';
 create table all_user_group
 (
    groupId               int not null auto_increment comment '组ID',
-   groupName             varchar(50) not null comment '组名',
+   groupName             varchar(50) comment '组名',
+   groupIntro             varchar(400) comment '描述',
    cms_del              int(2)  default 0,
    primary key (groupId)
 );

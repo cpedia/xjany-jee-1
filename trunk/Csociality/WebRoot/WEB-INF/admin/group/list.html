@@ -33,12 +33,13 @@ function optDelete() {
 </div>
 <form id="tableForm" method="post">
 <input type="hidden" name="pageNo" value="${pageNo!}"/>
-[@p.table value=pagination;allallUserGroup,i,has_next][#rt/]
+[@p.table value=pagination;allUserGroup,i,has_next][#rt/]
 	[@p.column title="<input type='checkbox' onclick='Pn.checkbox(\"ids\",this.checked)'/>" width="20"]
 		<input type='checkbox' name='ids' value='${allUserGroup.userId}'/>[#t/]
 	[/@p.column][#t/]
 	[@p.column title="ID"]${allUserGroup.groupId}[/@p.column][#t/]
-	[@p.column code="cmsUser.username"]${allUserGroup.groupName}[/@p.column][#t/]
+	[@p.column code="用户组名"]${allUserGroup.groupName}[/@p.column][#t/]
+	[@p.column code="描述"]${allUserGroup.groupIntro}[/@p.column][#t/]
 	[@p.column code="global.operate" align="center"]
 		<a href="v_edit.do?id=${allUserGroup.groupId}&pageNo=${pageNo!}" class="pn-opt">[@s.m "global.edit"/]</a> | [#rt/]
 		<a href="o_delete.do?id=${allUserGroup.groupId}&pageNo=${pageNo!}" onclick="if(!confirm('[@s.m "global.confirm.delete"/]')) {return false;}" class="pn-opt">[@s.m "global.delete"/]</a>[#t/]

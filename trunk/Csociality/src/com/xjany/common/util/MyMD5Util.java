@@ -13,7 +13,7 @@ public class MyMD5Util {
 		byte[] usnByteTemp = new byte[5];
 		String sTemp = "";
 
-		password += "jany";
+		password += "wjany";
 		username += username.substring(1, 3) + "x";
 		try {
 			pswByteTemp = password.getBytes("gbk");

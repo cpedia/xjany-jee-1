@@ -22,7 +22,7 @@ public abstract class AbstractFile implements java.io.Serializable, InterGeneric
 	private String name;
 	private String path;
 	private Integer upId;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 
 	// Constructors
 

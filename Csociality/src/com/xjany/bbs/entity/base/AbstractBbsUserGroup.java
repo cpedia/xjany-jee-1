@@ -26,7 +26,7 @@ public abstract class AbstractBbsUserGroup implements java.io.Serializable, Inte
 
 	private Integer groupId;
 	private String groupName;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 	private Set<AllUser> allUser = new HashSet<AllUser>(0);
 
 	// Constructors

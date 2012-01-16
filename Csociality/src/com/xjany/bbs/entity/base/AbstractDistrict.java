@@ -20,7 +20,7 @@ public abstract class AbstractDistrict implements java.io.Serializable, InterGen
 	private Integer id;
 	private String name;
 	private String province;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 
 	// Constructors
 

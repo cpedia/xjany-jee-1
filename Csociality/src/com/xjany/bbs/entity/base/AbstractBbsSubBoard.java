@@ -36,7 +36,7 @@ public abstract class AbstractBbsSubBoard implements java.io.Serializable, Inter
 	private Integer subReNum;
 	private String subLastUser;
 	private String subLastTopic;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 	private Set<BbsTopic> bbsTopics = new HashSet<BbsTopic>(0);
 
 	// Constructors

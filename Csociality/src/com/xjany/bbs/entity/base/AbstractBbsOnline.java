@@ -25,7 +25,7 @@ public abstract class AbstractBbsOnline implements java.io.Serializable, InterGe
 	private String onBrowser;
 	private String onLocate;
 	private Timestamp onTime;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 
 	// Constructors
 

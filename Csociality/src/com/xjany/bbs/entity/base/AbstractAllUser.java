@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.entity.BbsUserProfile;
 
@@ -37,7 +39,7 @@ public abstract class AbstractAllUser implements java.io.Serializable {
 	private Integer userLoad;
 	private Timestamp userLastTime;
 	private Integer userState;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 
 	// Constructors
 

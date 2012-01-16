@@ -28,7 +28,7 @@ public abstract class AbstractBbsReply implements java.io.Serializable, InterGen
 	private String repContent;
 	private Timestamp repTime;
 	private String repIp;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 
 	// Constructors
 

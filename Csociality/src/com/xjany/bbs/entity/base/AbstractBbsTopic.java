@@ -41,7 +41,7 @@ public abstract class AbstractBbsTopic implements java.io.Serializable, InterGen
 	private Integer topicTop;
 	private String topicLastUser;
 	private Timestamp topicLastTime;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 	private Set<BbsReply> bbsReplies = new HashSet<BbsReply>(0);
 
 	// Constructors

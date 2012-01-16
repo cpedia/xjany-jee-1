@@ -19,7 +19,7 @@ public abstract class AbstractBbsDegree implements java.io.Serializable, InterGe
 
 	private Integer degreeId;
 	private String degreeName;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 
 	// Constructors
 

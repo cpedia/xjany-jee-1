@@ -25,7 +25,7 @@ public abstract class AbstractBbsUserRole implements java.io.Serializable, Inter
 
 	private Integer roleId;
 	private String roleName;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 	private Set<BbsUserProfile> bbsUserProfiles = new HashSet<BbsUserProfile>(0);
 
 	// Constructors

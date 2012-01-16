@@ -25,7 +25,7 @@ public abstract class AbstractBbsMessage implements java.io.Serializable, InterG
 	private String mesPost;
 	private Timestamp mesTime;
 	private Integer mesIsRead;
-	private Integer cmsDel;
+	private Integer cmsDel = 0;
 
 	// Constructors
 

@@ -46,5 +46,9 @@ public class GroupServiceImpl implements GroupService {
 	public void save(AllUserGroup allUserGroup) {
 		groupDAO.save(allUserGroup);
 	}
+	@Override
+	public List<AllUserGroup> findAll() {
+		return groupDAO.findAll();
+	}
 
 }

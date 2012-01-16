@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xjany.bbs.dao.BbsUserProfileDAO;
 import com.xjany.bbs.dao.UserDAO;
 import com.xjany.bbs.entity.AllUser;
+import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.UserService;
 import com.xjany.common.MD5Util;
@@ -84,11 +85,13 @@ public class UserServiceImpl implements UserService{
 		return userDAO.delete(entity);
 	}
 
-	public int save(AllUser entity,BbsUserProfile bbsUserProfile) {
+	public int save(AllUser entity,BbsUserProfile bbsUserProfile,AllUserGroup allUserGroup) {
 		entity.setUserPsw(md5.encryption(entity.getUserPsw(),entity.getUserName()));
 		int d = bbsUserProfileDAO.save(bbsUserProfile);
 		BbsUserProfile bup = bbsUserProfileDAO.findById(d);
 		entity.setBbsUserProfile(bup);
+		if(allUserGroup!=null)
+			entity.setAllUserGroup(allUserGroup);
 		return userDAO.save(entity);
 	}
 	

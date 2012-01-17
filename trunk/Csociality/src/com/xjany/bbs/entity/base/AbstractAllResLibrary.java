@@ -19,6 +19,7 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 
 	private int libId; //主键
 	private int parentId;
+	private int isNote=0;//是否有叶子,.0没有,1有
 	private String name;
 	private int category;
 	private int cmsDel = 0;
@@ -60,6 +61,15 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
+	}
+	
+	@Column(name = "isNote")
+	public int getIsNote() {
+		return isNote;
+	}
+	
+	public void setIsNote(int isNote) {
+		this.isNote = isNote;
 	}
 	@Column(name = "bbs_name")
 	public String getName() {

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+[#include "/WEB-INF/admin/head.html"/]
+<script type="text/javascript">
+	function getTableForm() {
+		return document.getElementById('tableForm');
+	}
+	function optDelete() {
+		if (Pn.checkedCount('ids') <= 0) {
+			alert("<@s.m 'error.checkRecord'/>");
+			return;
+		}
+		if (!confirm("<@s.m 'global.confirm.delete'/>")) {
+			return;
+		}
+		var f = getTableForm();
+		f.action = "o_delete.do";
+		f.submit();
+	}
+
+	function getselectvalue() {
+		$("#dir").css("display", "block");
+	}
+</script>
+</head>
+<body>
+<div class="body-box">
+<div class="rhead">
+	<div class="rpos"></div>
+	<div class="ropt">
+		<button onclick="getselectvalue()">增加</button>
+	</div>
+	<div class="clear"></div>
+</div>
+
+	<form id="dir" action="o_add.do" style="display:none">
+		资源名: <input type="text" name="name" /> 
+				<input type="hidden" name="parentId" value="${parentId2!''}" />
+				<input type="submit" value="增加" />
+	</form>
+	
+<a href="v_list.do?parentId=0">root</a> 
+	<br>资源列表:<br>
+	<a href="v_list.do?parentId=${parentId!''}"><img src="/image/dir.ico">...</a> <br>
+	[#list list as res]
+	<!-- ${res.id!""} -->
+	[#if res.isNote??&&res.isNote=='1']<a href="v_list.do?parentId=${res.libId!''}"><img src="/image/dir.ico">${res.name}</a>
+	[#else]<a href="v_list.do?parentId=${res.libId!''}">${res.name}</a>
+	[/#if]
+	<br> [/#list]
+	
+	
+</div>
+</body>
+</html>

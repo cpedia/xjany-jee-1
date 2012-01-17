@@ -47,4 +47,19 @@ public class FrameAction extends BaseAction{
 		return "/frame/user_right";
 	}
 	
+	@RequestMapping("/frame/res_main.do")
+	public String res_main(HttpServletRequest request, ModelMap model) {
+		return "/frame/res_main";
+	}
+	
+	@RequestMapping("/frame/res_left.do")
+	public String res_left(HttpServletRequest request, ModelMap model) {
+		return "/frame/res_left";
+	}
+	
+	@RequestMapping("/frame/res_right.do")
+	public String res_right(HttpServletRequest request, ModelMap model) {
+		return "/frame/res_right";
+	}
+	
 }

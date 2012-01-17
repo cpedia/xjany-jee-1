@@ -17,12 +17,12 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 
 	// Fields
 
-	private int libId; //主键
-	private int parentId;
-	private int isNote=0;//是否有叶子,.0没有,1有
+	private Integer libId; //主键
+	private Integer parentId;
+	private Integer isNote=0;//是否有叶子,.0没有,1有
 	private String name;
-	private int category;
-	private int cmsDel = 0;
+	private Integer category;
+	private Integer cmsDel = 0;
 
 	// Constructors
 
@@ -44,34 +44,37 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 		this.category = category;
 		this.cmsDel = cmsDel;
 	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "libId", unique = true, nullable = false)
-	public int getLibId() {
+	public Integer getLibId() {
 		return libId;
 	}
 
-	public void setLibId(int libId) {
+	public void setLibId(Integer libId) {
 		this.libId = libId;
 	}
-	@Column(name = "bbs_parentId")
-	public int getParentId() {
+	
+	@Column(name = "parentId")
+	public Integer getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(int parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
-	
+
 	@Column(name = "isNote")
-	public int getIsNote() {
+	public Integer getIsNote() {
 		return isNote;
 	}
-	
-	public void setIsNote(int isNote) {
+
+	public void setIsNote(Integer isNote) {
 		this.isNote = isNote;
 	}
-	@Column(name = "bbs_name")
+
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -79,21 +82,22 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@Column(name = "bbs_category", unique = true)
-	public int getCategory() {
+
+	@Column(name = "category")
+	public Integer getCategory() {
 		return category;
 	}
 
-	public void setCategory(int category) {
+	public void setCategory(Integer category) {
 		this.category = category;
 	}
+
 	@Column(name = "cmsDel")
-	public int getCmsDel() {
+	public Integer getCmsDel() {
 		return cmsDel;
 	}
 
-	public void setCmsDel(int cmsDel) {
+	public void setCmsDel(Integer cmsDel) {
 		this.cmsDel = cmsDel;
 	}
-
 }

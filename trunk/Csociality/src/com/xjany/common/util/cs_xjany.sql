@@ -32,7 +32,7 @@ drop table if exists district;
 
 drop table if exists file;
 
-drop table if exists resource_lib;
+drop table if exists all_res_lib;
 
 /*==============================================================*/
 /* Table: all_user                                              */
@@ -284,10 +284,10 @@ create table file
 );
 
 /*==============================================================*/
-/* Table: resource_lib                                          */
+/* Table: all_res_lib                                          */
 /*==============================================================*/
 
-CREATE TABLE `resource_lib` (
+CREATE TABLE `all_res_lib` (
   `libId` int(11) NOT NULL auto_increment,
   `bbs_category` int(11) default NULL,
   `cmsDel` int(11) default NULL,

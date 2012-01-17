@@ -16,18 +16,7 @@ import com.xjany.bbs.service.ResourceService;
 public class ResourceAction {
 	@Autowired
 	private ResourceService resourceService;
-	
-	@RequestMapping("/resource/o_add.do")
-	public String o_add(HttpServletRequest request, ModelMap model, AllResLibrary allResLibrary)
-			throws Exception {
-		int parentId = 0;
-		if (request.getParameter("parentId") != null
-				&& !"".equals(request.getParameter("parentId")))
-			parentId = Integer.parseInt(request.getParameter("parentId"));
-		resourceService.save(allResLibrary, parentId);
-		List<AllResLibrary> list = resourceService.listAllResLibrary(parentId);
-		return "redirect:v_list.do";
-	}
+
 
 	@RequestMapping("/resource/v_list.do")
 	public String v_list(HttpServletRequest request, ModelMap model, AllResLibrary allResLibrary)
@@ -45,5 +34,24 @@ public class ResourceAction {
 		model.addAttribute("id", id);// request保存这个对象
 		model.addAttribute("list", list);// request保存这个对象
 		return "/resource/list";
+	}
+	
+	
+	@RequestMapping("/resource/o_add.do")
+	public String o_add(HttpServletRequest request, ModelMap model, AllResLibrary allResLibrary)
+			throws Exception {
+		int parentId = 0;
+		if (request.getParameter("parentId") != null
+				&& !"".equals(request.getParameter("parentId")))
+			parentId = Integer.parseInt(request.getParameter("parentId"));
+		resourceService.save(allResLibrary, parentId);
+		List<AllResLibrary> list = resourceService.listAllResLibrary(parentId);
+		return "redirect:v_list.do";
+	}
+	
+	@RequestMapping("/resource/o_delete.do")
+	public String o_delete(HttpServletRequest request, ModelMap model, Integer id) throws Exception {
+		resourceService.deleteById(id);
+		return "redirect:v_list.do";
 	}
 }

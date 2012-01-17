@@ -25,8 +25,10 @@ public class ResourceServiceImpl implements ResourceService {
 	@Override
 	public AllResLibrary save(AllResLibrary allResLibrary, int parentId) {
 		AllResLibrary parentResLib = resourceDAO.findById(parentId);
-		parentResLib.setIsNote(1);
-		resourceDAO.update(parentResLib);//设置父级有子叶
+		if(parentResLib!=null){
+			parentResLib.setIsNote(1);
+			resourceDAO.update(parentResLib);//设置父级有子叶
+		}
 		return resourceDAO.save(allResLibrary, parentId);
 	}
 
@@ -46,16 +48,16 @@ public class ResourceServiceImpl implements ResourceService {
 		return null;
 	}
 	
-	private int deleteHelp(int id){
+	/**
+	 * 删除节点下的所有子节点
+	 * @param id
+	 */
+	private void deleteHelp(int id){
 		List ids = resourceDAO.findBySql("select bean.libId from all_res_lib bean where parentId = "+id);
-		if(ids.size()<1) {
-			resourceDAO.delete(id);
-			return 1;
-		}
+		resourceDAO.delete(id);
 		for(int i=0;i<ids.size();i++){
 			deleteHelp((Integer) ids.get(i));
 		}
-		return 0;
 	}
 
 }

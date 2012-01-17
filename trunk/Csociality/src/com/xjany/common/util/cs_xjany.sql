@@ -289,11 +289,11 @@ create table file
 
 CREATE TABLE `all_res_lib` (
   `libId` int(11) NOT NULL auto_increment,
-  `bbs_category` int(11) default NULL,
-  `cmsDel` int(2) default 0,
-  `bbs_name` varchar(255) default NULL,
-  `bbs_parentId` int(11) default null,
+  `category` int(11) default NULL,
+  `name` varchar(255) default NULL,
+  `parentId` int(11) default null,
   `isNote` int(2) default 0,
+  `cmsDel` int(2) default 0,
   PRIMARY KEY  (`libId`),
   UNIQUE KEY `libId` (`libId`),
   UNIQUE KEY `bbs_category` (`bbs_category`)

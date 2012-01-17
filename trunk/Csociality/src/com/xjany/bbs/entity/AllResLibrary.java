@@ -9,7 +9,7 @@ import com.xjany.bbs.entity.base.AbstractAllResLibrary;
  * AllUser entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "resource_lib", catalog = "cs_xjany")
+@Table(name = "all_res_lib", catalog = "cs_xjany")
 public class AllResLibrary extends AbstractAllResLibrary implements java.io.Serializable {
 
 	/**

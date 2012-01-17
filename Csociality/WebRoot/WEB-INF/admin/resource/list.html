@@ -44,13 +44,27 @@
 	
 <a href="v_list.do?parentId=0">root</a> 
 	<br>资源列表:<br>
-	<a href="v_list.do?parentId=${parentId!''}"><img src="/image/dir.ico">...</a> <br>
+	<a href="v_list.do?parentId=${id!''}"><img src="/image/dir.ico">...</a> <br>
+	<table class="pn-ltable" width="30%" cellspacing="1" cellpadding="0" border="0">
+	<thead class="pn-lthead">
+	<tr><th>职业</th><th width="20%">操作选项</th></tr>
+	</thead>
+	<tbody class="pn-ltbody">
 	[#list list as res]
 	<!-- ${res.id!""} -->
-	[#if res.isNote??&&res.isNote=='1']<a href="v_list.do?parentId=${res.libId!''}"><img src="/image/dir.ico">${res.name}</a>
-	[#else]<a href="v_list.do?parentId=${res.libId!''}">${res.name}</a>
+	[#if res.isNote??&&res.isNote=='1']
+	<tr><td><a href="v_list.do?parentId=${res.libId!''}"><img src="/image/dir.ico">${res.name}</a></td><td><a class="pn-opt" href="v_edit.do?id=10&pageNo=">修改</a>
+|
+<a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="o_delete.do?id=${res.libId}">删除</a></td></tr>
+	[#else]
+	<tr><td><a href="v_list.do?parentId=${res.libId!''}">${res.name}</a></td><td><a class="pn-opt" href="v_edit.do?id=10&pageNo=">修改</a>
+|
+<a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="o_delete.do?id=${res.libId}">删除</a></td></tr>
 	[/#if]
-	<br> [/#list]
+	[/#list]
+	</tbody>
+	</table>
+	
 	
 	
 </div>

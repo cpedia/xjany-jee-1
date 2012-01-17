@@ -3,14 +3,14 @@ package com.xjany.bbs.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.xjany.bbs.entity.base.AbstractResourceLibrary;
+import com.xjany.bbs.entity.base.AbstractAllResLibrary;
 
 /**
  * AllUser entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "resource_lib", catalog = "cs_xjany")
-public class ResourceLibrary extends AbstractResourceLibrary implements java.io.Serializable {
+public class AllResLibrary extends AbstractAllResLibrary implements java.io.Serializable {
 
 	/**
 	 * 
@@ -20,16 +20,16 @@ public class ResourceLibrary extends AbstractResourceLibrary implements java.io.
 	// Constructors
 
 	/** default constructor */
-	public ResourceLibrary() {
+	public AllResLibrary() {
 	}
 
 	/** minimal constructor */
-	public ResourceLibrary(String name,int category) {
+	public AllResLibrary(String name,int category) {
 		super(name, category);
 	}
 
 	/** full constructor */
-	public ResourceLibrary(int libId, int parentId, String name, int category, int cmsDel) {
+	public AllResLibrary(int libId, int parentId, String name, int category, int cmsDel) {
 		super(libId, parentId, name, category, cmsDel);
 	}
 

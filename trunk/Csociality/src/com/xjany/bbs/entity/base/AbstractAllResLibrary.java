@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
  * AllUser entity. @author MyEclipse Persistence Tools
  */
 @MappedSuperclass
-public abstract class AbstractResourceLibrary implements java.io.Serializable {
+public abstract class AbstractAllResLibrary implements java.io.Serializable {
 
 	// Fields
 
@@ -26,17 +26,17 @@ public abstract class AbstractResourceLibrary implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public AbstractResourceLibrary() {
+	public AbstractAllResLibrary() {
 	}
 
 	/** minimal constructor */
-	public AbstractResourceLibrary(String name,int category) {
+	public AbstractAllResLibrary(String name,int category) {
 		this.name = name;
 		this.category = category;
 	}
 
 	/** full constructor */
-	public AbstractResourceLibrary(int libId, int parentId, String name, int category, int cmsDel) {
+	public AbstractAllResLibrary(int libId, int parentId, String name, int category, int cmsDel) {
 		this.libId = libId;
 		this.parentId = parentId;
 		this.name = name;

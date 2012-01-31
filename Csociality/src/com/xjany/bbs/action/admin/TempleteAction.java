@@ -56,6 +56,16 @@ public class TempleteAction {
 		}
 		
 		File file = new File(System.getProperty("user.dir"),"WebRoot/common/templete/test.txt");
+		if (!file.exists())
+		{
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		try {
 			FileOutputStream fos = new FileOutputStream(file);
 			byte[] b = new byte[1024];

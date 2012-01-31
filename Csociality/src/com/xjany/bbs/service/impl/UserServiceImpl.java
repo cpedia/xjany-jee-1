@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
 		if(!"".equals(user.getUserEmail()) && user.getUserEmail() != null)
 		{
 			property.put("userEmail", user.getUserEmail());
-		} else if(!"".equals(user.getUserName()) && user.getUserName() != null)
+		} if(!"".equals(user.getUserName()) && user.getUserName() != null)
 		{
 			property.put("userName", user.getUserName());
 			if(!"".equals(user.getUserPsw()) && user.getUserPsw() != null)

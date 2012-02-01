@@ -28,6 +28,7 @@ public class GrenricUtil {
 			Configuration conf=new Configuration();
 			conf.setDirectoryForTemplateLoading(new File(System.getProperty("user.dir"),templetPath));
 			conf.setTagSyntax(0);
+			conf.setDefaultEncoding("utf-8");
 			Template t = conf.getTemplate(inFileName);
 			t.process(objs, sw);
 		} catch (IOException e) {

@@ -1,8 +1,10 @@
 <table>
-[#list tr as tr]
-<tr>
-<td>
-</td>
+[#list table?keys as tr]
+<tr class=${table?keys}>
+[#assign td = table[tr]]   
+[#list td?keys as tdkey]
+   <td class=${td?keys}>${td[tdkey]}</td>
+[/#list]
 </tr>
 [/#list]
 </table>

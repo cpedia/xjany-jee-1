@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.service.GroupService;
 import com.xjany.common.exception.DaoException;
-import com.xjany.common.exception.ServiceException;
 import com.xjany.common.page.Pagination;
 import com.xjany.common.page.SimplePage;
 import com.xjany.common.util.CookieUtils;

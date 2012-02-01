@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -21,12 +23,13 @@ public class GrenricUtil {
 	 * @param outFileName 生成文件的文件名
 	 * @return
 	 */
-	public static void _get_code(Map<String,Object> objs,String greneriPath,String templetPath,String inFileName,String outFileName){
+	public static void _get_code(HttpServletRequest request,Map<String,Object> objs,String greneriPath,String templetPath,String inFileName,String outFileName){
 		StringWriter sw = null;
 		try {
 			sw=new StringWriter();
 			Configuration conf=new Configuration();
-			conf.setDirectoryForTemplateLoading(new File(System.getProperty("user.dir"),templetPath));
+			conf.setServletContextForTemplateLoading(request.getSession().getServletContext(),templetPath);
+//			conf.setDirectoryForTemplateLoading(new File(System.getProperty("user.dir"),templetPath));
 			conf.setTagSyntax(0);
 			conf.setDefaultEncoding("utf-8");
 			Template t = conf.getTemplate(inFileName);
@@ -37,7 +40,7 @@ public class GrenricUtil {
 			e.printStackTrace();
 		}
 		
-		File file = new File(System.getProperty("user.dir"),greneriPath+outFileName);
+		File file = new File(GrenricUtil.class.getClassLoader().getResource("")+greneriPath+outFileName);
 		if (!file.exists())
 		{
 			try {

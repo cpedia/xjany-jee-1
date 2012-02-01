@@ -40,7 +40,7 @@ public class GrenricUtil {
 			e.printStackTrace();
 		}
 		
-		File file = new File(GrenricUtil.class.getClassLoader().getResource("")+greneriPath+outFileName);
+		File file = FilePathUtil.getFileByRelativePath(greneriPath+outFileName);
 		if (!file.exists())
 		{
 			try {

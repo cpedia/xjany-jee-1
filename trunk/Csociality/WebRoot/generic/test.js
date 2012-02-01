@@ -1,10 +1,6 @@
 <table>
 <tr>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-</td>
+   <td>学号</td>
+   <td>姓名</td>
 </tr>
 </table>

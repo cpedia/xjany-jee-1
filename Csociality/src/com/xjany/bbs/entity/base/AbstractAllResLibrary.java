@@ -33,6 +33,7 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 	private Integer cmsDel = 0;
 	private String cssName;
 	private String cssId;
+	private AllResLibrary allResLibrary;
 
 	// Constructors
 
@@ -125,5 +126,13 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 
 	public void setCssId(String cssId) {
 		this.cssId = cssId;
+	}
+
+	public AllResLibrary getAllResLibrary() {
+		return allResLibrary;
+	}
+
+	public void setAllResLibrary(AllResLibrary allResLibrary) {
+		this.allResLibrary = allResLibrary;
 	}
 }

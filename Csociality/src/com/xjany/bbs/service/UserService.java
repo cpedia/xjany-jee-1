@@ -1,7 +1,6 @@
 package com.xjany.bbs.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.xjany.bbs.entity.AllUser;
 import com.xjany.bbs.entity.AllUserGroup;

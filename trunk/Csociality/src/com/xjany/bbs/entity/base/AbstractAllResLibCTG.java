@@ -73,7 +73,7 @@ public abstract class AbstractAllResLibCTG implements java.io.Serializable {
 		this.cmsDel = cmsDel;
 	}
 	
-	@OneToMany(mappedBy = "allResLibrary")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "allResLibrary")
 	public Set<AllResLibrary> getAllResLibrary() {
 		return allResLibrary;
 	}

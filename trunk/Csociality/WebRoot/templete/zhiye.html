@@ -21,10 +21,11 @@ zhiye += "      </tr>";
 zhiye += "    </table>";
 zhiye += "      <table width=\"530\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">";
  zhiye += "       <tr>";
-zhiye += "          <td width=\"132\" height=\"28\" valign=\"bottom\" class=\"font5\" style=\"font-weight:bold;\">IT管理</td>";
-zhiye += "          <td width=\"132\" valign=\"bottom\"><span class=\"font5\" style=\"font-weight:bold;\">IT技术</span></td>";
-zhiye += "          <td width=\"134\" valign=\"bottom\"><span class=\"font5\" style=\"font-weight:bold;\">非IT业务</span></td>";
-zhiye += "          <td width=\"132\" valign=\"bottom\"><span class=\"font5\" style=\"font-weight:bold;\">其他</span></td>";
+ 
+ [#list resList as res]
+	zhiye += "          <td width=\"132\" height=\"28\" valign=\"bottom\" class=\"font5\" style=\"font-weight:bold;\">${res.name}</td>";
+ [/#list]
+ 
 zhiye += "        </tr>";
 zhiye += "      </table>";
 
@@ -33,7 +34,7 @@ zhiye += "      </table>";
 
 zhiye += "      <table width=\"530\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">";
 
-
+[#list resList as res]
 zhiye += "        <tr>";
 zhiye += "          <td width=\"100\" height=\"26\"><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_0\" value=\"CIO/CTO\" />";
 zhiye += "          CIO/CTO</td>";
@@ -44,31 +45,8 @@ zhiye += "          CEO/VP</td>";
 zhiye += "          <td width=\"125\"><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_32\" value=\"学生\" />";
 zhiye += "学生</td>";
 zhiye += "        </tr>";
-
-
-[list resList as list]
-zhiye += "        <tr>";
-zhiye += "          <td height=\"26\"><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_1\" value=\"技术总监\" />";
-zhiye += "          技术总监</td>";
-zhiye += "          <td><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_6\" value=\"分析师\" />";
-zhiye += "          分析师</td>";
-zhiye += "          <td><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_22\" value=\"财务主管\" />";
-zhiye += "          财务主管</td>";
-zhiye += "          <td><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_33\" value=\"技术爱好者\" />";
-zhiye += "技术爱好者</td>";
-zhiye += "        </tr>";
 [/#list]
 
-zhiye += "        <tr>";
-zhiye += "          <td height=\"26\"><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_2\" value=\"技术经理\" />";
-zhiye += "          技术经理<br /></td>";
-zhiye += "          <td><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_7\"value=\"数据库开发工程师\" />";
-zhiye += "          数据库开发工程师<br /></td>";
-zhiye += "          <td><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_23\" value=\"产品主管/业务主管\" />";
-zhiye += "          产品主管/业务主管<br /></td>";
-zhiye += "          <td><input type=\"checkbox\" name=\"zhiye\" id=\"zhiye_34\" value=\"媒体人员\" />";
-zhiye += "媒体人员</td>";
-zhiye += "        </tr>";
 
 
 zhiye += "      </table>";

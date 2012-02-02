@@ -66,7 +66,7 @@ public class ResourceServiceImpl implements ResourceService {
 	 * @param id
 	 */
 	private void deleteHelp(int id){
-		List ids = resourceDAO.findBySql("select bean.libId from all_res_lib bean where parentId = "+id);
+		List<?> ids = resourceDAO.findBySql("select bean.libId from all_res_lib bean where parentId = "+id);
 		resourceDAO.delete(id);
 		for(int i=0;i<ids.size();i++){
 			deleteHelp((Integer) ids.get(i));

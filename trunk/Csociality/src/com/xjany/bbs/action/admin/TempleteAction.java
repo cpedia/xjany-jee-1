@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 
 
-import com.xjany.common.XjanyConstants;
 import com.xjany.common.util.GrenricUtil;
 import com.xjany.common.util.XjanyMap;
 import com.xjany.common.util.XjanyMapImpl;

@@ -7,7 +7,7 @@ import com.xjany.common.page.Pagination;
 
 
 public interface GroupService {
-	public List findGroupBySql();
+	public List<?> findGroupBySql();
 	public AllUserGroup findById(int id);
 	public AllUserGroup deleteById(int id);
 	public List<AllUserGroup> findAll();

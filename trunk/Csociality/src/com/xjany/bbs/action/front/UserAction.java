@@ -12,7 +12,6 @@ import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.UserService;
 import com.xjany.common.MD5Util;
 import com.xjany.common.util.MD5UtilImpl;
-import com.xjany.common.util.RequestUtils;
 @Controller
 public class UserAction {
 	@Autowired

@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xjany.bbs.dao.ResourceDAO;
+import com.xjany.bbs.entity.AllResLibCTG;
 import com.xjany.bbs.entity.AllResLibrary;
 import com.xjany.bbs.service.ResourceService;
 
@@ -33,7 +36,7 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public List<AllResLibrary> listAllResLibrary(int parentId) {
+	public List<AllResLibrary> findByParentId(int parentId) {
 		return resourceDAO.findByParentId(parentId);
 	}
 
@@ -46,6 +49,16 @@ public class ResourceServiceImpl implements ResourceService {
 	public AllResLibrary deleteById(int id) {
 		deleteHelp(id);
 		return null;
+	}
+	
+	@Override
+	public AllResLibCTG findCTGById(int id){
+		return resourceDAO.findCTGById(id);
+	}
+	
+	@Override
+	public List<AllResLibCTG> findAllCTG(){
+		return resourceDAO.findAllCTG();
 	}
 	
 	/**

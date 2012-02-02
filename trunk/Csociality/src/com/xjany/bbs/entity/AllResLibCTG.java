@@ -9,7 +9,7 @@ import com.xjany.bbs.entity.base.AbstractAllResLibCTG;
  * AllUser entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "all_res_lib", catalog = "cs_xjany")
+@Table(name = "all_res_lib_ctg", catalog = "cs_xjany")
 public class AllResLibCTG extends AbstractAllResLibCTG implements java.io.Serializable {
 
 	/**

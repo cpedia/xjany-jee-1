@@ -5,13 +5,10 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.xjany.bbs.dao.GroupDAO;
 import com.xjany.bbs.dao.ResourceDAO;
+import com.xjany.bbs.entity.AllResLibCTG;
 import com.xjany.bbs.entity.AllResLibrary;
-import com.xjany.bbs.entity.AllUserGroup;
-import com.xjany.bbs.entity.File;
 import com.xjany.common.page.Finder;
 import com.xjany.common.page.Pagination;
 
@@ -35,7 +32,22 @@ public class ResourceDAOImpl extends GeneriDAOImpl<AllResLibrary, Integer> imple
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery( "from AllResLibrary as bean where bean.parentId= ?");
 		query.setParameter(0, parentId);
+		@SuppressWarnings("unchecked")
 		List<AllResLibrary> list = query.list();
+		return list;
+	}
+	
+	public AllResLibCTG findCTGById(int id){
+		Session session = sessionFactory.getCurrentSession();
+		AllResLibCTG allResLibCTG = (AllResLibCTG) session.createQuery("from AllResLibCTG bean where bean.id = ?").setParameter(0, id);
+		return allResLibCTG;
+	}
+	
+	public List<AllResLibCTG> findAllCTG(){
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from AllResLibCTG");
+		@SuppressWarnings("unchecked")
+		List<AllResLibCTG> list = query.list();
 		return list;
 	}
 }

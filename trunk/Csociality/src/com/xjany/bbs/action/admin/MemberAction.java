@@ -44,7 +44,7 @@ public class MemberAction{
 	
 	@RequestMapping("/member/v_add.do")
 	public String v_add(Integer pageNo,HttpServletRequest request, ModelMap model) {
-		List list = groupService.findAll();
+		List<AllUserGroup> list = groupService.findAll();
 		model.addAttribute("groupList", list);
 		return "member/add";
 	}
@@ -52,7 +52,7 @@ public class MemberAction{
 	@RequestMapping("member/v_edit.do")
 	public String v_edit(String id,HttpServletRequest request, ModelMap model) {
 		AllUser allUser = userService.findById(Integer.valueOf(id));
-		List list = groupService.findGroupBySql();
+		List<?> list = groupService.findGroupBySql();
 		model.addAttribute("groupList", list);
 		model.addAttribute("allUser", allUser);
 		return "member/edit";

@@ -3,7 +3,6 @@ package com.xjany.bbs.dao.impl;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -154,7 +153,6 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	 *            每页条数
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	protected Pagination find(Finder finder, int pageNo, int pageSize) {
 		int totalCount = countQueryResult(finder);
 		Pagination p = new Pagination(pageNo, pageSize, totalCount);

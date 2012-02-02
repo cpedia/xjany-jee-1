@@ -49,7 +49,6 @@ public class ResourceAction {
 				&& !"".equals(request.getParameter("parentId")))
 			parentId = Integer.parseInt(request.getParameter("parentId"));
 		resourceService.save(allResLibrary, parentId);
-		List<AllResLibrary> list = resourceService.listAllResLibrary(parentId);
 		return "redirect:v_list.do";
 	}
 	

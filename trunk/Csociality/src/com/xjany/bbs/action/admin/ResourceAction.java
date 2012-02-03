@@ -1,9 +1,6 @@
 package com.xjany.bbs.action.admin;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xjany.bbs.entity.AllResLibrary;
 import com.xjany.bbs.service.ResourceService;
-import com.xjany.common.frame.XjanyConstants;
-import com.xjany.common.util.GrenricUtil;
 
 @Controller
 public class ResourceAction {

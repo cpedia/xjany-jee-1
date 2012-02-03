@@ -1,6 +1,7 @@
 package com.xjany.bbs.action.admin;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xjany.bbs.entity.AllResLibrary;
 import com.xjany.bbs.service.ResourceService;
-import com.xjany.common.XjanyConstants;
+import com.xjany.common.frame.XjanyConstants;
 import com.xjany.common.util.GrenricUtil;
 
 @Controller
@@ -29,7 +30,7 @@ public class ResourceAction {
 		int id = 0;
 		if (request.getParameter("parentId") != null)
 			parentId = Integer.parseInt(request.getParameter("parentId"));
-		List<AllResLibrary> list = resourceService.listAllResLibrary(parentId);
+		List<AllResLibrary> list = resourceService.findByParentId(parentId);
 		try {
 			id = resourceService.findById(parentId).getParentId(); // 上级的UPID
 		} catch (Exception e) {
@@ -58,13 +59,16 @@ public class ResourceAction {
 		return "redirect:v_list.do";
 	}
 	
-	@RequestMapping("/resource/o_generic.do")
-	public String o_generic(HttpServletRequest request, ModelMap model, Integer id) throws Exception {
-		List<AllResLibrary> list = resourceService.listAllResLibrary(0);
-		
-		Map<String,Object> objs=new HashMap<String, Object>();
-		objs.put("resList", list);
-		GrenricUtil._get_code(request,objs,XjanyConstants.GRENERIPATH,XjanyConstants.TEMPLETPATH, "zhiye.html","zhiye.js");
-		return "redirect:v_list.do";
-	}
+//	@RequestMapping("/resource/o_generic.do")
+//	public String o_generic(HttpServletRequest request, ModelMap model, Integer id) throws Exception {
+//		List<AllResLibrary> list = resourceService.findByParentId(0);  //所有根(职业大类)
+//		for(int i=0;i<list.size();i++){
+//			list.get(i).setAllResLibrary(new HashSet<AllResLibrary>(resourceService.findByParentId(list.get(i).getLibId())));
+//		}
+//		
+//		Map<String,Object> objs=new HashMap<String, Object>();
+//		objs.put("resList", list);
+//		GrenricUtil._get_code(request,objs,XjanyConstants.GRENERIPATH,XjanyConstants.TEMPLETPATH, "zhiye.html","zhiye.js");
+//		return "redirect:v_list.do";
+//	}
 }

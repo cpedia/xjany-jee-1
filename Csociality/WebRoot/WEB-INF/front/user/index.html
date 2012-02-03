@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>lixiang8103的个人主页-51CTO技术家园</title>
+<link rel="shortcut icon" href="http://home.51cto.com/public/themes/blue/favicon.ico" />
+<meta name="keywords" content="51CTO技术家园" />
+<meta name="description" content="51CTO技术家园" />
+<script type="text/javascript"> 
+<!--
+//指定当前组模块URL地址
+var	URL		=	'/index.php?s=/Space';
+var	APP		=	'/index.php?s=';
+var	PUBLIC	=	'http://home.51cto.com/public';
+var	ROOT	=	'http://home.51cto.com';
+var TS		=	'http://home.51cto.com/index.php?s=';
+var MID		=	'1572884';
+var NEED_LOGIN	=	'1';
+var expire  = 3600;
+var TPIS = '1';
+ 
+//-->
+</script>
+<!-- 全局风格CSS -->
+<link href="http://home.51cto.com/public/themes/blue/layout.css" rel="stylesheet" type="text/css" />
+ 
+<script type="text/javascript" src="http://home.51cto.com/public/js/jquery.js"></script>
+<script type="text/javascript" src="http://home.51cto.com/public/js/json.js"></script>
+<!-- 弹窗部分 -->
+<script type="text/javascript" src="http://home.51cto.com/public/js/ymPrompt/ymPrompt.js"></script>
+ 
+<!-- 无忧币信息回填 -->
+<script type="text/javascript" src="http://home.51cto.com/public/js/sign_info.js"></script>
+ 
+<script> 
+var Alert	= ymPrompt.alert;
+var Confirm = ymPrompt.confirmInfo;
+var Success = ymPrompt.succeedInfo;
+var Error   = ymPrompt.errorInfo;
+var Win     = ymPrompt.win;
+</script>
+<script type="text/javascript" src="http://home.51cto.com/public/js/popup/jquery.popup.js"></script>
+<link href="http://home.51cto.com/public/js/popup/jquery.popup.css" rel="stylesheet" type="text/css" />
+ 
+</head>
+<body>
+<!-- 全站导航 开始-->
+<link href="http://home.51cto.com/public/themes/blue/header_master_top.css" rel="stylesheet" type="text/css" />
+<div id="home_top">
+    <div class="top_nav">
+        <div class="left">
+<a href="http://www.51cto.com" target="_blank">51CTO首页</a>
+<img src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" align="absmiddle" width="16" height="25" style="padding-top:2px; " />
+<a onmouseover="show(1,this);" onmouseout="popupClose();" href="http://www.51cto.com/col/35/" target="_blank">技术频道<img src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" align="absmiddle" style="padding-left:4px;" /></a>
+<img src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" align="absmiddle" width="16" height="25" />
+<a onmouseover="show(2,this);" onmouseout="popupClose();" href="http://www.51cto.com" target="_blank">51CTO旗下网站<img src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" align="absmiddle"  style="padding-left:4px;"/></a>
+<img src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" align="absmiddle" width="16" height="25" />
+<a href="http://www.51cto.com/about/map.htm" target="_blank">地图</a>
+        </div>
+        <div class="right" style="width:540px;">
+            <div class="more">
+<img src="http://home.51cto.com/public/themes/blue/images/top_shequ.gif" align="absmiddle" width="27" height="16" />社区：
+<a href="http://bbs.51cto.com" target="_blank">论坛</a>
+<a href="http://blog.51cto.com" target="_blank">博客</a>
+<a href="http://down.51cto.com" target="_blank">下载</a>
+<a href="http://book.51cto.com/" target="_blank">读书</a>
+<a onmouseover="show(3,this)" onmouseout="popupClose()" href="javascript:viod(0);">
+更多<img src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" align="absmiddle"  style="padding-left:4px;" />
+</a>
+            </div>
+            <div class="login2">
+ 
+<div style="float:right; padding-top:8px"><a href="http://home.51cto.com/index.php?s=/space/1572884" style="float:left;margin-top:-1px;text-decoration:none">lixiang8103</a>
+ 
+ 
+<a style="float:left;margin-top:-3px;background:none" href="http://home.51cto.com/index.php?s=/Home/index" id="sign_info"></a>
+ 
+	<div style="float:left">
+ 
+		<span id="home_view" style="display:none;">
+			<a href="http://home.51cto.com/index.php?s=/home">去家园</a><a href="http://home.51cto.com/index.php?s=/Notify/inbox">短消息</a>
+		</span>
+		<span id="msg_view" style="display:none; margin-left:5px;">
+		<img src="http://home.51cto.com/public/themes/blue/images/top_newmsg.gif" align="absmiddle" />
+		<a id="msg_top_num" href="http://home.51cto.com/index.php?s=/Notify/inbox" style="color:#CC0000;"></a>
+		</span>
+		<a style="text-decoration: none;" href="http://home.51cto.com/index.php?s=/Index/logout">[退出]</a>
+	</div>
+</div>
+<div style="float:right;"><a href="http://home.51cto.com/index.php?s=/space/1572884"><img src="http://ucenter.51cto.com/avatar.php?uid=1572884&size=small&random=0.409139" align="absmiddle" width="24" height="24" style="border: 2px solid #D5D5D5; margin-top:4px;margin-right:4px;" /></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<div class="subMenu1" id="s1" onmouseover="popupNoClose();" onmouseout="popupClose();">
+<ul>
+<li><a href="http://network.51cto.com" target="_blank">组网</a></li>
+<li><a href="http://netsecurity.51cto.com" target="_blank">安全</a></li>
+<li><a href="http://developer.51cto.com" target="_blank">开发</a></li>
+<li><a href="http://database.51cto.com" target="_blank">数据库</a></li>
+<li><a href="http://server.51cto.com" target="_blank">服务器</a></li>
+<li><a href="http://os.51cto.com" target="_blank">系统</a></li>
+<li><a href="http://virtual.51cto.com" target="_blank">虚拟化</a></li>
+<li><a href="http://cloud.51cto.com" target="_blank">云计算</a></li>
+<li><a href="http://developer.51cto.com/embed/" target="_blank">嵌入式</a></li>
+<li><a href="http://mobile.51cto.com/" target="_blank">移动开发</a></li>
+</ul>
+</div>
+ 
+<div class="subMenu2" id="s2" onmouseover="popupNoClose()" onmouseout="popupClose()">
+<ul>
+<li><a title="中国领先的IT技术网站" href="http://www.51cto.com" target="_blank">51CTO.COM</a></li>
+<li><a title="中国首个专门服务于CIO的专业网站" href="http://www.cioage.com" target="_blank">CIOage.com</a></li>
+<li><a title="领先的中文存储网络媒体" href="http://www.watchstor.com/" target="_blank">WatchStor.com</a></li>
+<li><a title="中国首家专注于数字医疗及医疗信息化的专业网站" href="http://www.hc3i.cn/" target="_blank">HC3i.cn</a></li>
+<li><a title="移动互联网生活门户" href="http://www.linkphone.cn/" target="_blank">灵客风LinkPhone</a></li>
+</ul>
+</div>
+ 
+<div class="subMenu3" id="s3" onmouseover="popupNoClose()" onmouseout="popupClose()">
+<ul>
+<li><a href="http://home.51cto.com" target="_blank">家园</a></li>
+<li><a href="http://t.51cto.com" target="_blank">微博</a></li>
+<li><a href="http://blog.51cto.com" target="_blank">博客</a></li>
+<li><a href="http://bbs.51cto.com" target="_blank">论坛</a></li>
+<li><a href="http://down.51cto.com" target="_blank">下载</a></li>
+<li><a href="http://selftest.51cto.com" target="_blank">自测</a></li>
+<li><a href="http://doctor.51cto.com" target="_blank">门诊</a></li>
+<li><a href="http://blog.51cto.com/newsletter/" target="_blank">周刊</a></li>
+<li><a href="http://book.51cto.com" target="_blank">读书</a></li>
+<li><a href="http://g.51cto.com" target="_blank">技术圈</a></li>
+<li><a href="http://zhidao.51cto.com" target="_blank">知道</a></li>
+</ul>
+</div>
+<!-- 简导航js -->
+<script type="text/javascript" src="http://home.51cto.com/public/js/header_index_down.js"></script>
+<!-- 全站导航 结束-->
+ 
+ 
+<div class="header">
+<!-- 头部 begin -->
+<div class="logo"><a href="http://home.51cto.com/index.php?s=">&nbsp;</a></div>
+ 
+<div class="nav">
+<ul>
+<li><a href="http://home.51cto.com/index.php?s=/Home" class="fb14 ">首 页</a></li>
+<!--  <li class="on"> -->
+<li><a href="http://home.51cto.com/index.php?s=/space/1572884" class="fb14 on">个人主页</a>
+<!-- <div class="dropmenu"><a href="#">修改资料</a><a href="#">换头像</a><a href="#">我的留言板</a></div> --></li>
+    <li onMouseOut="$(this).removeClass('on');" onmouseover="$(this).addClass('on');"><a href="http://home.51cto.com/index.php?s=/Friend/index" class="ico_arrow fb14">好友</a><div class="dropmenu"><a href="http://home.51cto.com/index.php?s=/Friend/index">我的好友</a><a href="http://home.51cto.com/index.php?s=/Friend/find">查找朋友</a><a href="http://home.51cto.com/index.php?s=/Invite/index
+">邀请好友</a><a href="http://home.51cto.com/index.php?s=/Friend/homepopular">猜你想认识</a><a href="http://home.51cto.com/index.php?s=/Friend/ping">好友屏蔽</a><a href="http://home.51cto.com/index.php?s=/Friend/track">访问脚印</a></div></li>
+ 
+<li><a href="http://home.51cto.com/index.php?s=/Home/network" class="fb14 " style="padding: 0px 13px 0px 26px;">随便看看</a></li>
+		
+ 
+ 
+    <li onMouseOut="$(this).removeClass('on');" onmouseover="$(this).addClass('on');"><a href="http://home.51cto.com/index.php?s=/Notify/inbox" class="ico_arrow fb14">消息</a><div class="dropmenu">
+<a href="http://home.51cto.com/index.php?s=/Notify/inbox">短消息<span class="cRed fB" id='message1572884' ></span></a>
+<a href="http://home.51cto.com/index.php?s=/Notify/index">通知<span class="cRed fB" id='notification1572884'></span></a>
+<a href="http://home.51cto.com/index.php?s=/Notify/allrquest">请求<span class="cRed fB" id='friend1572884'></span></a>
+</div>
+<div class="msg_top" id='msg_top' style='display:none'><a href="" id='msg_top_href'></a></div>
+ 
+</li>
+ 
+</ul>
+</div>
+ 
+<input type="hidden" id="js_token" value="">
+ 
+<div class="nav_sub">
+<div class="img" style="margin-right:5px;"><a href="http://home.51cto.com/index.php?s=/space/1572884"><img src="http://ucenter.51cto.com/avatar.php?uid=1572884&size=small&random=0.825594" width="36" height="36" /></a>
+<!--提醒开始-->
+<div class="remind_msg" style="display:none;">
+<span class="arrow"></span>
+<a style="color:#c00;" href="http://51ctohome.blog.51cto.com/1805422/598365" target="_blank"><span style="color:#f00">签到领无忧币</span> <span style="color:#666">上线</span></a> 
+<a href="javascript:void(0);" onclick="$('.remind_msg').hide();" class="close"><img src="http://home.51cto.com/public/themes/blue/images/msgClose.gif" /></a>
+</div><!--提醒结束-->
+ 
+</div>
+<a href="http://home.51cto.com/index.php?s=/space/1572884"><font color="Yellow">lixiang8103</font></a>&nbsp;┆&nbsp;<a href="http://blog.51cto.com/blog.php?uid=1572884" target="_blank">我的博客</a>
+<ul>
+<li><a href="http://home.51cto.com/index.php?s=/Friend/find">找高手</a>&nbsp;┆&nbsp;<a href="http://51ctohome.blog.51cto.com/1805422/363960" target="_blank">提意见</a>&nbsp;┆&nbsp;<a href="http://51ctohome.blog.51cto.com/all/1805422/3" target="_blank">帮助</a></li>
+<li onMouseOut="this.className='#'" onmouseover="this.className='on'"><a href="http://home.51cto.com/index.php?s=/Info" class="ico_arrow sz122">设置</a>
+ 
+<div class="dropmenu">
+<a href="http://home.51cto.com/index.php?s=/Info">个人设置</a>
+<a href="http://home.51cto.com/index.php?s=/Privacy">隐私设置</a>
+<a href="http://home.51cto.com/index.php?s=/Subscribe/emailRemind">订阅设置</a>
+<a href="http://home.51cto.com/pay.php">充值中心</a>
+</div>
+<div class="msg_top" id='msg_top' style='display:none'><a href="" id='msg_top_href'></a></div>
+</li>
+</ul>
+</div>
+ 
+</div><!-- 头部 end -->
+<link href="http://home.51cto.com/thinksns/Tpl/default/Public/space.css" rel="stylesheet" type="text/css" />
+ 
+<script> 
+var MID = '1572884';
+</script>
+ 
+<style> 
+.ta_wqfw {
+    background:transparent url(http://home.51cto.com/thinksns/Tpl/default/Public/images/privacy_bg.gif) no-repeat scroll center top;
+    font-size:14px;
+    height:60px;
+    overflow:hidden;
+    padding:25px 0 0 75px;
+}
+</style>
+ 
+<div class="content"><!-- 内容 begin  -->
+<div class="user_app"><!-- 用户组件列表 begin -->
+<div class="user_app_top"></div>
+<div class="user_app_list">
+<ul>
+    <li>
+        <a href="http://t.51cto.com/index.php?m=index" class="a14" target="_blank"><img src="http://home.51cto.com/apps/mini/appinfo/ico_app04.gif" />微博</a>
+        <span style="color: red; right: 40px;"><img src="http://home.51cto.com/public/images/new.gif" border="0" /></span>                </li><li>
+        <a href="http://home.51cto.com/apps/bbs/index.php?s=" class="a14" ><img src="http://home.51cto.com/public/images/bbs.gif" />论坛</a>
+                        <span><a href="http://bbs.51cto.com" target="_blank">去首页</a></span>
+                </li><li>
+        <a href="http://home.51cto.com/apps/blog/index.php?s=" class="a14" ><img src="http://home.51cto.com/apps/blog/appinfo/ico_app01.gif" />博客</a>
+                        <span><a href="http://blog.51cto.com/" target="_blank">去首页</a></span>
+                </li><li>
+        <a href="http://home.51cto.com/apps/download/index.php?s=" class="a14" ><img src="http://home.51cto.com/public/images/down.gif" />下载</a>
+                        <span><a href="http://down.51cto.com" target="_blank">去首页</a></span>
+                </li><li>
+        <a href="http://home.51cto.com/apps/zhidao/index.php?s=" class="a14" ><img src="http://home.51cto.com/apps/zhidao/appinfo/ico_app.gif" />知道</a>
+                        </li><li>
+        <a href="http://home.51cto.com/apps/group/index.php?s=" class="a14" ><img src="http://home.51cto.com/public/images/group.gif" />技术圈</a>
+                        </li><li>
+        <a href="http://home.51cto.com/apps/selftest/index.php?s=" class="a14" ><img src="http://home.51cto.com/public/images/mytest.gif" />技术自测</a>
+                        </li><li>
+        <a href="http://doctor.51cto.com/" class="a14" target="_blank"><img src="http://home.51cto.com/public/images/doctor.gif" />技术门诊</a>
+                        </li><li>
+        <a href="http://home.51cto.com/apps/book/index.php?s=/Index/good" class="a14" ><img src="http://home.51cto.com/apps/book/appinfo/ico_app.gif" />读书</a>
+        <span style="color: red; right: 40px;"><img src="http://home.51cto.com/public/images/new.gif" border="0" /></span>                </li><li>
+        <a href="http://home.51cto.com/apps/favorite/index.php?s=/Index/friends" class="a14" ><img src="http://home.51cto.com/apps/favorite/appinfo/ico_app.gif" />收藏</a>
+                        </li><li>
+        <a href="http://home.51cto.com/apps/photo/index.php?s=" class="a14" ><img src="http://home.51cto.com/apps/photo/appinfo/ico_app02.gif" />相册</a>
+                        <span><a href="http://home.51cto.com/apps/photo/index.php?s=/Upload/flash" target="_blank">上传</a></span>
+                </li><li>
+        <a href="http://home.51cto.com/apps/vote/index.php?s=" class="a14" ><img src="http://home.51cto.com/apps/vote/appinfo/ico_app06.gif" />投票</a>
+                        <span><a href="http://home.51cto.com/apps/vote/index.php?s=/Index/addPoll" target="_blank">发起</a></span>
+                </li><li>
+        <a href="http://home.51cto.com/apps/event/index.php?s=/Index/my" class="a14" ><img src="http://home.51cto.com/apps/event/appinfo/ico_app07.gif" />活动</a>
+                        <span><a href="http://home.51cto.com/apps/event/index.php?s=/Index/addEvent" target="_blank">发起</a></span>
+                </li><li>
+        <a href="http://home.51cto.com/apps/gift/index.php?s=" class="a14" ><img src="http://home.51cto.com/apps/gift/appinfo/ico_apply.gif" />礼物</a>
+                        </li><li>
+        <a href="http://bbs.51cto.com/medal/" class="a14" target="_blank"><img src="http://home.51cto.com/public/images/medal.gif" />勋章</a>
+                        </li>		
+</ul>
+<div class="ad_app"><p><a href="http://bbs.51cto.com/mission/" target="_blank"><img alt="" src="/data/uploads/attached/20110415100409_47058.jpg" border="0" />
+</a></p>
+<p><a href="http://blog.51cto.com/dell/" target="_blank"><img alt="" src="/data/uploads/attached/20110415100442_98602.jpg" border="0" /></a></p><p><a href="http://bbs.51cto.com/h3c/" target="_blank"><img src="/data/uploads/attached/20110516090509_92141.jpg" alt="" border="0" /></a><a href="http://blog.51cto.com/dell/" target="_blank">
+</a></p></div>
+</div><!-- 用户组件列表 end -->
+<div class="user_app_btm"></div>
+</div>
+ 
+<div class="main">
+<!-- 右侧内容 begin  -->
+ 
+<div class="cr"><!-- cr begin  -->
+ 
+<!-- 社区头衔 begin  -->
+<!-- 社区头衔 end  -->
+ 
+ 
+<!-- 最近来访 begin  -->
+ 
+ 
+ 
+ 
+<div class="UserList">
+<div class="tit">
+<span class="right"><a href="/index.php?s=/Friend/index/uid/1572884" class="cGray2">更多&gt;&gt;</a></span>
+我的好友<span>（0）</span></div>
+<div class="ListBox">
+<ul>
+</ul>
+</div>
+<div class="btm"></div>
+</div>
+ 
+<!-- 搜索用户 begin  -->
+<div class="UserList">
+<form action="/index.php?s=" method="get"  id="list_fri" class="form_validator">
+<input type="hidden" name="s" value="/Friend/findbyexact" >
+<input type="hidden" name="type" value="search" id="sub_type">
+<div class="tit">找高手</div>
+<div class="ListBox">
+<div ><div style="float:left; width:170px; padding-left:10px;">
+        <input name="uname" class="TextH20" style="width:165px; margin-right:5px;" type="text" onblur="this.className='TextH20'" onfocus="this.className='Text2'" />
+    </div>
+    <div style="float:left;" >
+        <input type="submit" class="btn_b hander" value="找 人" style="cursor:pointer"/>
+    </div>
+</div><br />
+<div class="txt"><a href="/index.php?s=/Friend/find">高级搜索</a> | <a href="/index.php?s=/Friend/ctorecommend">推荐高手</a> | <a href="/index.php?s=/Invite">邀请好友</a></div>
+</div>
+<div class="btm"></div>
+</form>
+</div>
+<!-- 搜索用户 end  -->
+ 
+</div><!-- cr end  -->
+ 
+<!-- 右侧内容 end  -->
+<div class="cc">
+<!-- 用户资料 begin  -->
+<div class="user_info">
+    <div class="user_img">
+        <div class="img">
+            <table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <td align="center"><img src="http://ucenter.51cto.com/avatar.php?uid=1572884&size=middle&random=0.979763" /></td>
+            </tr>
+            </table>
+        </div>
+        <div id="my_face" style="display:none">
+            <img src="http://ucenter.51cto.com/avatar.php?uid=1572884&size=small" />
+        </div>
+        <div class="menu">
+                    <a href="/index.php?s=/Info/face" title="更改头像">更改头像</a>
+            <a href="/index.php?s=/Info" title="修改资料">修改资料</a>
+            <a href="/index.php?s=/Account/score" title="我的积分">我的积分</a>
+            <a href="/index.php?s=/Info/attentiontec" title="关注技术">关注技术</a>
+                    <div class="c"></div>
+        </div>
+            </div>
+    <div class="Linfo">
+        <div class="info">
+            <h2 id="host_name">
+<img src="http://home.51cto.com/public/themes/blue/images/ico_zx.gif" alt="在线" title="在线" width="11" height="8" border="0" /> lixiang8103<span id="space_fri_remark" class="cGray2" style="font-size: 12px; font-weight: normal;">
+</span>
+&nbsp;<a href="javascript:copy_space_url(1572884);"><img src="http://home.51cto.com/public/themes/blue/images/copyspace.gif" alt="复制主页地址" /></a>
+&nbsp;&nbsp;<span style="font-size:12px;font-weight:normal;">有 4 人次访问</span>
+            </h2>
+            <h2 id="my_name" style="display:none">lixiang8103</h2>
+            <p>
+                        </p>
+            <!--隐私控制-->
+                            <div style=" margin-left:50px; color:#999999;">
+                    积分：<span style="color:#005FAB; margin-right:20px;"><a href="http://home.51cto.com/index.php?s=/Account/score">109</a></span>                    等级：<span style="color:#005FAB; margin-right:10px;"><a href="http://home.51cto.com/index.php?s=/Account/score">1级午饭</a></span>
+                    <a href="http://home.51cto.com/index.php?s=/Account/score"><img src="http://home.51cto.com/public/themes/blue/images/group/dengji_1.gif" alt="1级午饭" align="absmiddle" style=" padding-bottom:5px; line-height:16px; vertical-align:middle;" /></a>
+                </div>
+                                                                <ul>
+                                <li><span class="l cGray2">关注领域：</span><span class="r">管理软件，服务器，项目管理</span></li>                                <li><span class="l cGray2">所属行业：</span><span class="r">电信/通讯，政府部门</span></li>                                                                                                <li><span class="l cGray2">职位：</span><span class="r">学生</span></li>                                <li><span class="l cGray2">PC数量：</span><span class="r">500－999台</span></li>                                <li><span class="l cGray2">公司规模：</span><span class="r">5000人以上</span></li>                                                </ul>
+ 
+            <!--隐私控制end--> 
+        </div>
+    </div>
+</div>
+<!-- 用户资料 end  -->
+ 
+<!--用户应用-->
+<!--隐私控制-->
+<div class="system_info">
+        <span><img src="http://home.51cto.com/apps/mini/appinfo/ico_app04.gif" /><a href="javascript:jpAlert('您好，该用户的微博暂未升级，无法查看。')">我的微博 (0)</a></span>    <span><img src="http://home.51cto.com/public/images/bbs.gif" /><a href="http://home.51cto.com/apps/bbs/index.php?s=/Index/index/uid/1572884">我的论坛 (0)</a></span>    <span><img src="http://home.51cto.com/apps/blog/appinfo/ico_app01.gif" /><a href="http://home.51cto.com/apps/blog/index.php?s=/Index/personal/uid/1572884">我的博客 (0)</a></span>    <span><img src="http://home.51cto.com/public/images/down.gif" /><a href="http://home.51cto.com/apps/download/index.php?s=/Index/index/uid/1572884">我的下载 (20)</a></span>    <span><img src="http://home.51cto.com/apps/zhidao/appinfo/ico_app.gif" /><a href="http://home.51cto.com/apps/zhidao/index.php?s=/Index/personal/uid/1572884">我的知道 (0)</a></span>    <span><img src="http://home.51cto.com/public/images/group.gif" /><a href="http://home.51cto.com/apps/group/index.php?s=/Index/index/uid/1572884">我的技术圈 (0)</a></span>    <span><img src="http://home.51cto.com/public/images/mytest.gif" /><a href="http://home.51cto.com/apps/selftest/index.php?s=/Index/personal/uid/1572884">我的技术自测 (0)</a></span>    <span><img src="http://home.51cto.com/public/images/doctor.gif" /><a href="http://doctor.51cto.com/index.php?uid=1572884">我的技术门诊 (0)</a></span>    <span><img src="http://home.51cto.com/apps/book/appinfo/ico_app.gif" /><a href="http://home.51cto.com/apps/book/index.php?s=/Index/personal/uid/1572884">我的读书 (0)</a></span>    <span><img src="http://home.51cto.com/apps/favorite/appinfo/ico_app.gif" /><a href="http://home.51cto.com/apps/favorite/index.php?s=/Index/personal/uid/1572884">我的收藏 (0)</a></span>    <span><img src="http://home.51cto.com/apps/photo/appinfo/ico_app02.gif" /><a href="http://home.51cto.com/apps/photo/index.php?s=/Index/photos/uid/1572884">我的照片 (0)</a></span>    <span><img src="http://home.51cto.com/apps/vote/appinfo/ico_app06.gif" /><a href="http://home.51cto.com/apps/vote/index.php?s=/Index/personal/action/add/uid/1572884">我的投票 (0)</a></span>    <span><img src="http://home.51cto.com/apps/event/appinfo/ico_app07.gif" /><a href="http://home.51cto.com/apps/event/index.php?s=/Index/personal/action/admin/uid/1572884">我的活动 (0)</a></span>    <span><img src="http://home.51cto.com/apps/gift/appinfo/ico_apply.gif" /><a href="http://home.51cto.com/apps/gift/index.php?s=/Index/personal/uid/1572884">我的礼物 (0)</a></span>    <span><img src="http://home.51cto.com/public/images/medal.gif" /><a href="http://bbs.51cto.com/medal/index.php?uid=1572884">我的勋章 (0)</a></span></div>
+<!--用户应用end-->
+ 
+ 
+<!--隐私控制-->
+<div class="Feed"><!-- 个人动态 begin  -->
+    <div class="tab-menu"><!-- 切换标签 begin  -->
+        <div class="right lh35">
+            <a href='/index.php?s=/Home/allFeed/type/all/uid/1572884'>查看全部动态</a>
+        </div>
+        <ul>
+            <li><a class="on feed_item" ><span>我的动态</span></a></li>
+        </ul>
+    </div><!-- 切换标签 end  -->
+    <div class="FList">
+    <div class="cGray2 lh35 alC f14px" style="margin:20px 0">今天没有动态</div>
+<input type='hidden' id='feed_type' value="">
+<script type="text/javascript"> 
+$(function() {
+    var ERRORMAP2 = {
+            '1020808': '你不能关注自己。',
+            '1020801': '关注的用户不存在。',
+            '1020800': '关注失败',
+            '1020805': '已关注该用户',
+            '1050000': '操作失败，重新试试看？',
+            '1020806': '你使用的帐号或IP关注过于频繁，今日将无法再进行同类操作，请谅解！',
+            '3010003' : '您还没有开通微博，请开通后再试',
+            '1040016' : '出错啦，该网站调用API次数已超过限制，请联系站长解决！'		
+    };
+    var sina_uid = [];
+    var html = ['<span class="followed-btn">已关注</span>', '<a href="javascript:void(0);" class="addfollow-btn">加关注</a>'];
+    $('.xwb_follow').each(function() {
+        var rel = $(this).attr('rel')
+        if ($.inArray(rel, sina_uid) == '-1') {
+            sina_uid.push(rel);
+        }
+    });
+    $.post(TS + '/Xweibo/isFollowed', {sina_uid:sina_uid.join(',')}, function(txt) {
+        $('.xwb_follow').each(function() {
+            var rel = $(this).attr('rel');
+            if (txt[rel] == 1) {
+                $(this).html(html[0]);
+            } else {
+                $(this).html(html[1]);
+                var self = this;
+                $(this).children('a').click(function() {
+                    $.post(TS + '/Xweibo/createFriendship', {sina_uid:rel}, function(data) {
+                        if (data.errno == 0) {
+                            $(self).html(html[0]);
+                        } else {
+                            var err = ERRORMAP2[data.errno] || ('系统不给力，请稍后再试试吧。');
+                            jpError(err);
+                        }
+                        
+                    }, 'json');
+                });
+            }
+        });
+    }, 'json');
+});
+</script>
+ 
+ 
+    </div>
+    <div class="alR lh35"><a href='/index.php?s=/Home/allFeed/type/all/uid/1572884'>查看全部动态</a></div>
+</div><!-- 个人动态 end  -->
+ 
+<!-- 送他礼物 begin  -->
+<div class="GiftList">
+    <div class="tit">
+        <div style="float:left;">礼物</div>
+        <div style="float:right; padding-right:10px; color:#CCCCCC; ">
+            <a href="http://home.51cto.com/apps/gift/index.php?s=/Index/index/uid/1572884" style="color:#999999; text-decoration:underline;">送我礼物</a>
+        </div>
+    </div>
+    <div class="ListBox">
+        <ul>
+                </ul>
+        <div style="text-align:right; height:10px; padding-top:20px;padding-bottom:10px;width:120px; float:right; padding-right:20px;clear:both;">
+            <a href="http://home.51cto.com/apps/gift/index.php?s=/Index/personal/uid/1572884" style="color:#999999; text-decoration:underline;">我收到的所有礼物&gt;&gt;</a>
+        </div>
+        <div class="c"></div>
+    </div>
+<div class="c"></div>
+</div>
+ 
+<div class="Guestbook2" id="wall"><!-- 留言板 begin  -->
+	<a name="message"></a>
+    <div class="tit"><span class="pl5">留言板</span></div>
+    <div class="GB_box">
+        <textarea name="textarea2" cols="" id="wall_con"></textarea>
+        <input type="button" class="btn_b" value="留 言" id="sub_button" onclick="wall()"/>
+        (每条最多2000字)     
+        <label><input type="checkbox" name="privacy" id="wall_privacy" value="1"/>悄悄话</label>
+        <input type="hidden" name="uid" id="space_uid" value="1572884">
+        <input type="hidden" id="my_name2" value="lixiang8103">
+        <span style="display:none" id="my_face2"><img src="http://ucenter.51cto.com/avatar.php?uid=1572884&size=middle" /></span>
+    </div>
+</div>
+<div class="GBList" id="list_wall">
+ 
+</div>
+<!-- 留言板 end  -->
+ <!--隐私控制end-->
+</div>
+<div class="c"></div>
+</div>
+ 
+<div class="c"></div>
+</div><!-- 内容 end -->
+<script  type="text/javascript"> 
+function set_fri_remark(fuid, val) {
+    jpConfirm({text:'<br />备注名字：<input type="text" id="fri_remark" value="' + val + '" />',title:'添加好友备注',height:150,type:0,autoClose:false},function() {
+        var v=$('#fri_remark').val();
+        if (v == '') {
+            alert('请输入备注名字！');
+        } else if(v.length > 8) {
+            alert('备注名字不能找过8个字符');
+        } else {
+			$.post(APP+"/Friend/setRemark",{fuid:fuid,remark:v},function(txt){
+                if (txt == '-1') {
+                    alert('请输入备注名字！');
+                } else if(txt == '-2') {
+                    alert('备注名字不能超过8个字符');
+                } else if(txt == 1) {
+                    jpClose();
+                    $('#set_fri_remark').attr('href', 'javascript:set_fri_remark(\'' + fuid + '\', \'' + v + '\');').text('修改好友备注');
+                    $('#space_fri_remark').html(' （' + v + '）');
+                } else {
+                    jpAlert('添加失败!');
+                    setTimeout(jpClose,1000);
+				}
+            });
+        }
+    });
+}
+</script>
+<script type="text/javascript" src="http://home.51cto.com/thinksns/Tpl/default/Public/space_index.js"></script>
+<script type="text/javascript" src="http://home.51cto.com/thinksns/Tpl/default/Public/feed.js"></script>
+<script type="text/javascript" src="http://home.51cto.com/public/js/jquery.scrollTo.js"></script>
+<script type="text/javascript" src="http://home.51cto.com/public/js/jquery.caretInsert.js"></script>
+ 
+<div class="app_bbg" style="display:none;"></div>
+<div style="height:15px;"></div>
+<div class="footer_bg">
+<div class="footer">
+  Copyright By <a target="_blank" href="http://www.51cto.com">51CTO.COM</a> 版权所有
+
+ 
+<div style="display:none;">
+<link rel="stylesheet" id='skin' type="text/css" href="http://home.51cto.com/public/js/ymPrompt/skin/qq/ymPrompt.css" />
+ 
+<!-- 页面向下滑动,出现TOP按钮 -->
+<script type="text/javascript" src="http://home.51cto.com/public/js/scrolltotop/scrolltopcontrol.js"></script>
+<script type="text/javascript" src="http://home.51cto.com/public/js/jquery.hotkeys.min.js"></script>
+<script type="text/javascript" src="http://home.51cto.com/public/js/shortcuts.js"></script>
+<!-- 全局公共JS -->
+<script type="text/javascript" src="http://home.51cto.com/public/js/ts_common.js"></script>
+ 
+<script type="text/javascript" src="http://home.51cto.com/public/js/tip/jquery.cluetip.js"></script>
+<link rel="stylesheet" id='skin' type="text/css" href="http://home.51cto.com/public/js/tip/jquery.cluetip.css" />
+
+ 
+</div>
+<script src="http://logs.51cto.com/rizhi/count/count.js"></script>
+<iframe frameborder="0" scrolling="no" width="0" height="0" src="http://log.51cto.com/pageview.php?frompos=www_art"></iframe>
+</body>
+</html>

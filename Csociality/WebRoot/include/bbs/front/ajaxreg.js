@@ -1,5 +1,5 @@
 var http_request=false;
- 
+
 //初始化，指定处理函数，发送请求的函数
 function send_request(url){
 	http_request=false;
@@ -130,7 +130,7 @@ function usercheck(obj){
 		reobj=obj;
 		$.ajax({
 			type: "post",
-			url: "/checkUser.do?userName="+uservalue,
+			url: "/checkRegister.do?userName="+uservalue,
 			datatype: "html",
 			success: function(data){
 				if(data == "false")
@@ -401,12 +401,12 @@ function mailcheck(obj){
 		reobj=obj;
 		$.ajax({
 			type: "post",
-			url: "/checkUser.do?userEmail="+mailvalue,
+			url: "/checkRegister.do?userEmail="+mailvalue,
 			datatype: "html",
 			success: function(data){
 				if(data == "false")
 				{
-					document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该用户名可用</span>";
+					document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该邮箱可用</span>";
 					document.getElementById("checkemail").value=0;
 				}
 				else if(data == "true")
@@ -418,7 +418,6 @@ function mailcheck(obj){
 				{
 					document.getElementById(obj).innerHTML="<span class='font_red12'>无效</span>";
 					document.getElementById("checkemail").value=1;
-					
 				}
 			},
 	});

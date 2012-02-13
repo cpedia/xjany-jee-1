@@ -24,7 +24,7 @@
 function toLogin(){
 	$.ajax({
 			type: "post",
-			url: "/user/checkLogin.do",
+			url: "/user/check.do",
 			datatype: "html",
 			data: $('#login').serialize(),
 			success: function(data){

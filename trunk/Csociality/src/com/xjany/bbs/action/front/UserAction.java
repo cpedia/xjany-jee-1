@@ -25,6 +25,11 @@ public class UserAction {
 		this.userSerive = userSerive;
 	}
 	
+	@RequestMapping("/user/index.do")
+	public String showIndex(HttpServletRequest request, ModelMap model)
+			throws Exception {
+		return "user/index";
+	}
 	@RequestMapping("/user/login.do")
 	public String showLogin(HttpServletRequest request, ModelMap model)
 			throws Exception {

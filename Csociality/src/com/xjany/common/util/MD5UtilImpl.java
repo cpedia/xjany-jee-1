@@ -28,6 +28,8 @@ public class MD5UtilImpl implements MD5Util{
 //		}
 
 		password += "jany";
+		if(username.length() < 3)
+			username += "jan";
 		username += username.substring(1, 3) + "x";
 		try {
 			pswByteTemp = password.getBytes("gbk");

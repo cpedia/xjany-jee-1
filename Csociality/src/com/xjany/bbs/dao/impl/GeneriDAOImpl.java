@@ -111,10 +111,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		} finally {
-			if (sessionFactory != null)
-				sessionFactory.close();
-		}
+		} 
 	}
 	
 	/**

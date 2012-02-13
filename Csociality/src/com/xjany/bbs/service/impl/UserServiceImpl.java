@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService{
 		return userDAO.delete(allUser);
 	}
 
-	public boolean check(AllUser user) {
+	public AllUser check(AllUser user) {
 		XjanyMap<String, String> property = new XjanyMapImpl<String, String>();
 		if(!"".equals(user.getUserEmail()) && user.getUserEmail() != null)
 		{

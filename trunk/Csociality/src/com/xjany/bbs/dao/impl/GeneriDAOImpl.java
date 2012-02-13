@@ -91,7 +91,6 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	@Transactional(readOnly = true)
 	public T check(T entity, XjanyMap<String, String> property) {
 		Query query = null;
-		try {
 			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where 1=1 ");
 //			Set<Map.Entry<String, String>> set = property.entrySet();
 //	        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {
@@ -104,11 +103,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 				sql.append(" and a."+ e_.getKey() +"='"+e_.getValue()+"'");
 			}
 			query = sessionFactory.getCurrentSession().createQuery(sql.toString());
-				return entity;
-		} catch (Exception e) {
-			e.printStackTrace();
 			return entity;
-		} 
 	}
 	
 	/**

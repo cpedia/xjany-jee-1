@@ -12,24 +12,25 @@ import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.UserService;
 import com.xjany.common.MD5Util;
 import com.xjany.common.util.MD5UtilImpl;
+
 @Controller
 public class UserAction {
 	@Autowired
-	private UserService userSerive;
+	private UserService userService;
 	private MD5Util verification = new MD5UtilImpl();
-	public UserService getUserSerive() {
-		return userSerive;
-	}
-
-	public void setUserSerive(UserService userSerive) {
-		this.userSerive = userSerive;
-	}
 	
+	public UserService getUserService() {
+		return userService;
+	}
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 	@RequestMapping("/user/index.do")
 	public String showIndex(HttpServletRequest request, ModelMap model)
 			throws Exception {
 		return "user/index";
 	}
+	
 	@RequestMapping("/user/login.do")
 	public String showLogin(HttpServletRequest request, ModelMap model)
 			throws Exception {
@@ -46,16 +47,11 @@ public class UserAction {
 		return "register";
 	}
 	
-	@RequestMapping("/checkRegister.do")
-	public String checkRegister(AllUser user, HttpServletRequest request, ModelMap model) {
-		boolean result = userSerive.check(user);
-		model.addAttribute("message", String.valueOf(result));
-		return "../common/message";
-	}
-	@RequestMapping("/user/checkLogin.do")
-	public String checkLogin(AllUser user, HttpServletRequest request, ModelMap model) {
-		boolean result = userSerive.check(user);
-		model.addAttribute("message", String.valueOf(result));
+	@RequestMapping("/user/check.do")
+	public String check(AllUser user, HttpServletRequest request, ModelMap model) {
+		AllUser result = userService.check(user);
+		model.addAttribute("message", result);
+		
 		return "../common/message";
 	}
 	@RequestMapping("/verification.do")
@@ -69,10 +65,10 @@ public class UserAction {
 	public String addBbsUserInfo(AllUser user,BbsUserProfile bbsUserProfile, HttpServletRequest request, ModelMap model) {
         user.setUserRegIp(verification.getIp(request));
 		user.setUserRegTime(new java.sql.Timestamp(System.currentTimeMillis()));
-		AllUser result = userSerive.save(user, bbsUserProfile, null);
-		model.addAttribute("message",String.valueOf(result));
+		AllUser result = userService.save(user, bbsUserProfile, null);
+		model.addAttribute("message",result);
 		if(result != null)
-			return "index";
+			return "user/index";
 		return "../common/message";
 		
 		//PrintWriter out = response.getWriter();

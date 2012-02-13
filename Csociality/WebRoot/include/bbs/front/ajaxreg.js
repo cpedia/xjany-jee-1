@@ -130,7 +130,7 @@ function usercheck(obj){
 		reobj=obj;
 		$.ajax({
 			type: "post",
-			url: "/checkRegister.do?userName="+uservalue,
+			url: "/check.do?userName="+uservalue,
 			datatype: "html",
 			success: function(data){
 				if(data == "false")
@@ -401,7 +401,7 @@ function mailcheck(obj){
 		reobj=obj;
 		$.ajax({
 			type: "post",
-			url: "/checkRegister.do?userEmail="+mailvalue,
+			url: "/check.do?userEmail="+mailvalue,
 			datatype: "html",
 			success: function(data){
 				if(data == "false")

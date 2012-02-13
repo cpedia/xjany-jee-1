@@ -89,7 +89,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		}
 	}
 	@Transactional(readOnly = true)
-	public boolean check(T entity, XjanyMap<String, String> property) {
+	public T check(T entity, XjanyMap<String, String> property) {
 		Query query = null;
 		try {
 			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where 1=1 ");
@@ -105,12 +105,12 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 			}
 			query = sessionFactory.getCurrentSession().createQuery(sql.toString());
 			if(query.list().size() > 0)
-				return true;
+				return entity;
 			else 
-				return false;
+				return entity;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return entity;
 		} 
 	}
 	

@@ -19,6 +19,6 @@ public interface GenericDAO<T,Pk extends Serializable> {
 	public T save(T entity);
 	public T recycle(T entity,boolean isRecycle);
 	public void delete(int ... id);
-	public boolean check(T entity, XjanyMap<String, String> property);
+	public T check(T entity, XjanyMap<String, String> property);
 	public List findBySql(String sql);
 }

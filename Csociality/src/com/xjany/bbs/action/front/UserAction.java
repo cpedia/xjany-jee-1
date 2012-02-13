@@ -25,10 +25,10 @@ public class UserAction {
 		this.userSerive = userSerive;
 	}
 	
-	@RequestMapping("/login.do")
+	@RequestMapping("/user/login.do")
 	public String showLogin(HttpServletRequest request, ModelMap model)
 			throws Exception {
-		return "login";
+		return "user/login";
 	}
 	@RequestMapping("/register.do")
 	public String showRegisterDo(HttpServletRequest request, ModelMap model)
@@ -41,11 +41,19 @@ public class UserAction {
 		return "register";
 	}
 	
-	@RequestMapping("/checkUser.do")
-	public String check(AllUser user, HttpServletRequest request, ModelMap model) {
+	@RequestMapping("/checkRegister.do")
+	public String checkRegister(AllUser user, HttpServletRequest request, ModelMap model) {
 		boolean result = userSerive.check(user);
 		model.addAttribute("message", String.valueOf(result));
 		return "../common/message";
+	}
+	@RequestMapping("/user/checkLogin.do")
+	public String checkLogin(AllUser user, HttpServletRequest request, ModelMap model) {
+		boolean result = userSerive.check(user);
+		model.addAttribute("message", String.valueOf(result));
+		if(result == true)
+			return "user/index";
+		return "user/login";
 	}
 	@RequestMapping("/verification.do")
 	public String verification(String codevalue, HttpServletRequest request, ModelMap model) {

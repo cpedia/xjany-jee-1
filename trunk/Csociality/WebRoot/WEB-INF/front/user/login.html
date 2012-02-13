@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>51CTO技术家园</title>
+
+<link rel="shortcut icon" href="http://home.51cto.com/public/themes/blue/favicon.ico" />
+<meta name="keywords" content="51CTO技术家园" />
+<meta name="description" content="51CTO技术家园" />
+<script type="text/javascript">
+<!--
+	//指定当前组模块URL地址
+	var	URL			=	'/index.php?s=/Index';
+	var	APP			=	'/index.php?s=';
+	var	PUBLIC		=	'http://home.51cto.com/public';
+	var	ROOT		=	'http://home.51cto.com';
+	var TS			=	'http://home.51cto.com/index.php?s=';
+	var MID			=	'0';
+	var NEED_LOGIN	=	'0';
+	var expire		=	'3600';
+//-->
+</script>
+<!-- 全局风格CSS -->
+
+<link href="http://home.51cto.com/public/themes/blue/layout.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://home.51cto.com/public/js/jquery.js"></script>
+
+<script type="text/javascript" src="http://home.51cto.com/public/js/json.js"></script>
+<!-- 弹窗部分 -->
+<script type="text/javascript" src="http://home.51cto.com/public/js/popup/jquery.popup.js"></script>
+<link href="http://home.51cto.com/public/js/popup/jquery.popup.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<link href="http://home.51cto.com/public/themes/blue/header_master_login.css" rel="stylesheet" type="text/css" />
+<!-- 全站导航 开始-->
+<link href="http://home.51cto.com/public/themes/blue/header_master_top.css" rel="stylesheet" type="text/css" />
+<div id="home_top">
+    <div class="top_nav">
+        <div class="left">
+
+<a href="http://www.51cto.com" target="_blank">51CTO首页</a>
+<img src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" align="absmiddle" width="16" height="25" style="padding-top:2px; " />
+<a onmouseover="show(1,this);" onmouseout="popupClose();" href="http://www.51cto.com/col/35/" target="_blank">技术频道<img src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" align="absmiddle" style="padding-left:4px;" /></a>
+<img src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" align="absmiddle" width="16" height="25" />
+<a onmouseover="show(2,this);" onmouseout="popupClose();" href="http://www.51cto.com" target="_blank">51CTO旗下网站<img src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" align="absmiddle"  style="padding-left:4px;"/></a>
+<img src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" align="absmiddle" width="16" height="25" />
+<a href="http://www.51cto.com/about/map.htm" target="_blank">地图</a>
+        </div>
+        <div class="right" style="width:540px;">
+            <div class="more">
+
+<img src="http://home.51cto.com/public/themes/blue/images/top_shequ.gif" align="absmiddle" width="27" height="16" />社区：
+<a href="http://bbs.51cto.com" target="_blank">论坛</a>
+<a href="http://blog.51cto.com" target="_blank">博客</a>
+<a href="http://down.51cto.com" target="_blank">下载</a>
+<a href="http://book.51cto.com/" target="_blank">读书</a>
+<a onmouseover="show(3,this)" onmouseout="popupClose()" href="javascript:viod(0);">
+更多<img src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" align="absmiddle"  style="padding-left:4px;" />
+</a>
+            </div>
+            <div class="login" style="padding-top:8px; text-align:right;">
+
+<a href="http://home.51cto.com">登录</a>
+<a href="/register.html">注册</a>
+            </div>
+                    </div>
+    </div>
+</div>
+
+<div class="subMenu1" id="s1" onmouseover="popupNoClose();" onmouseout="popupClose();">
+<ul>
+<li><a href="http://network.51cto.com" target="_blank">组网</a></li>
+<li><a href="http://netsecurity.51cto.com" target="_blank">安全</a></li>
+
+<li><a href="http://developer.51cto.com" target="_blank">开发</a></li>
+<li><a href="http://database.51cto.com" target="_blank">数据库</a></li>
+<li><a href="http://server.51cto.com" target="_blank">服务器</a></li>
+<li><a href="http://os.51cto.com" target="_blank">系统</a></li>
+<li><a href="http://virtual.51cto.com" target="_blank">虚拟化</a></li>
+<li><a href="http://cloud.51cto.com" target="_blank">云计算</a></li>
+<li><a href="http://developer.51cto.com/embed/" target="_blank">嵌入式</a></li>
+<li><a href="http://mobile.51cto.com/" target="_blank">移动开发</a></li>
+</ul>
+
+</div>
+
+<div class="subMenu2" id="s2" onmouseover="popupNoClose()" onmouseout="popupClose()">
+<ul>
+<li><a title="中国领先的IT技术网站" href="http://www.51cto.com" target="_blank">51CTO.COM</a></li>
+<li><a title="中国首个专门服务于CIO的专业网站" href="http://www.cioage.com" target="_blank">CIOage.com</a></li>
+<li><a title="领先的中文存储网络媒体" href="http://www.watchstor.com/" target="_blank">WatchStor.com</a></li>
+<li><a title="中国首家专注于数字医疗及医疗信息化的专业网站" href="http://www.hc3i.cn/" target="_blank">HC3i.cn</a></li>
+<li><a title="移动互联网生活门户" href="http://www.linkphone.cn/" target="_blank">灵客风LinkPhone</a></li>
+</ul>
+</div>
+
+<div class="subMenu3" id="s3" onmouseover="popupNoClose()" onmouseout="popupClose()">
+<ul>
+<li><a href="http://home.51cto.com" target="_blank">家园</a></li>
+<li><a href="http://t.51cto.com" target="_blank">微博</a></li>
+<li><a href="http://blog.51cto.com" target="_blank">博客</a></li>
+<li><a href="http://bbs.51cto.com" target="_blank">论坛</a></li>
+<li><a href="http://down.51cto.com" target="_blank">下载</a></li>
+<li><a href="http://selftest.51cto.com" target="_blank">自测</a></li>
+<li><a href="http://doctor.51cto.com" target="_blank">门诊</a></li>
+<li><a href="http://blog.51cto.com/newsletter/" target="_blank">周刊</a></li>
+
+<li><a href="http://book.51cto.com" target="_blank">读书</a></li>
+<li><a href="http://g.51cto.com" target="_blank">技术圈</a></li>
+<li><a href="http://zhidao.51cto.com" target="_blank">知道</a></li>
+</ul>
+</div>
+<!-- 简导航js -->
+<script type="text/javascript" src="http://home.51cto.com/public/js/header_index_down.js"></script>
+<!-- 全站导航 结束-->
+
+<!-- 全站PNG图片透明 开始-->
+<script type="text/javascript" src="http://home.51cto.com/public/js/header_master_png.js"></script>
+
+<div id="warp_login">
+<div class="dengl">
+<table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td width="30">&nbsp;</td>
+<td valign="top">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td height="30"> </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-bottom:45px;">
+<tr>
+
+<td class="font_15blue">技术成就梦想，51CTO致力于为IT人提供最专业，最贴心的服务平台！</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-bottom:46px;">
+<tr>
+<td width="58"><a href="http://bbs.51cto.com" target="_blank"><img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_bbs.png" align="absmiddle" /></a></td>
+<td width="159">
+<ul>
+<li class="font_14white"><a href="http://bbs.51cto.com" target="_blank"><b>技术论坛</b></a></li>
+<li class="font_12white">热情友善，午饭亲如一家<br />
+  BBS，最经典的交流方式</li>
+
+</ul></td>
+<td width="58"><a href="http://blog.51cto.com" target="_blank"><img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_blog.png" align="absmiddle" /></a></td>
+<td width="156">
+<ul>
+<li class="font_14white"><a href="http://blog.51cto.com" target="_blank"><b>技术博客</b></a></li>
+<li class="font_12white">谈技术，聊职场，秀生活<br />
+  百万IT人，不再漂“博”</li>
+</ul></td>
+<td width="58"><a href="http://down.51cto.com" target="_blank"><img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_down.png" align="absmiddle" /></a></td>
+<td>
+<ul>
+<li class="font_14white"><a href="http://down.51cto.com" target="_blank"><b>下载中心</b></a></li>
+
+<li class="font_12white">最新最全的IT技术资源<br />绿色安全，分享无极限</li>
+</ul></td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-bottom:60px;">
+<tr>
+<td width="58"><a href="http://g.51cto.com" target="_blank"><img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_group.png" align="absmiddle" /></a></td>
+<td width="159">
+<ul>
+<li class="font_14white"><a href="http://g.51cto.com" target="_blank"><b>技术圈</b></a></li>
+<li class="font_12white">寻觅、相遇、结伴前行<br />
+  圈子，相逢的人再相逢</li>
+
+</ul>
+</td>
+<td width="58"><a href="http://doctor.51cto.com" target="_blank"><img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_doctor.png" align="absmiddle" /></a></td>
+<td width="156">
+<ul>
+<li class="font_14white"><a href="http://doctor.51cto.com" target="_blank"><b>技术门诊</b></a></li>
+<li class="font_12white">每周一位专家，倾囊相授<br />
+  七天一个话题，深度剖析</li>
+</ul>
+</td>
+<td width="58"><a href="http://selftest.51cto.com" target="_blank"><img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_selftest.png" align="absmiddle" /></a></td>
+<td>
+<ul>
+
+<li class="font_14white"><a href="http://selftest.51cto.com" target="_blank"><b>技术自测</b></a></li>
+<li class="font_12white">学海无涯，修炼无止境<br />边学边测，越测越开心</li>
+</ul>
+</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+<tr>
+<td width="5">&nbsp;</td>
+<td valign="top">
+<p class="font_14blue2" style="margin-bottom:10px;"><img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_004.gif" width="12" height="12" align="absmiddle" style="margin-right:5px;" />热点活动：</p>
+<p style="line-height:20px; padding-left:17px;">
+
+        <a href="http://down.51cto.com/data/314738" target="_blank" class="cRed">2012年1月IT桌面壁纸-世界末日？</a>
+    </p>
+<p style="line-height:20px; padding-left:17px;">
+        <a href="http://51ctodown.blog.51cto.com/948211/754022" target="_blank" >【有奖】下载中心新版分享达人排行赛</a>
+    </p>
+<p style="line-height:20px; padding-left:17px;">
+        <a href="http://bbs.51cto.com/thread-909142-1.html" target="_blank" >51CTO论坛年度十大杰出版主评选</a>
+    </p>
+
+<p style="line-height:20px; padding-left:17px;">
+        <a href="http://51ctohome.blog.51cto.com/1805422/751426" target="_blank" >【有奖】微博晒签到截图，家园送好礼！</a>
+    </p>
+<p style="line-height:20px; padding-left:17px;">
+        <a href="http://51ctotopic.blog.51cto.com/2009463/742668" target="_blank" >【有奖】跨年度有奖征文：项目回忆录 </a>
+    </p>
+<p style="line-height:20px; padding-left:17px;">
+        <a href="http://bbs.51cto.com/viewthread.php?tid=829566" target="_blank" class="cRed">【活动汇总】51CTO社区有奖活动汇总</a>
+    </p>
+
+</td>
+<td width="50">&nbsp;</td>
+<td valign="top">
+<p class="font_14blue2" style="margin-bottom:10px;"><img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_004.gif" width="12" height="12" align="absmiddle" style="margin-right:5px;" />我们每天都在进步...</p>
+<p style="line-height:20px; padding-left:17px;">
+        <span class="cGray2">12月30日，下载资源页新增117个分享工具</span>
+    </p>
+<p style="line-height:20px; padding-left:17px;">
+        <a href="http://bbs.51cto.com/" target="_blank" >12月16日，技术论坛首页改版上线</a>
+    </p>
+
+<p style="line-height:20px; padding-left:17px;">
+        <span class="cGray2">12月1日，家园短消息每页显示更多内容</span>
+    </p>
+<p style="line-height:20px; padding-left:17px;">
+        <a href="http://51ctoblog.blog.51cto.com/26414/703648" target="_blank" >11月1日，技术博客首页改版上线</a>
+    </p>
+<p style="line-height:20px; padding-left:17px;">
+        <span class="cGray2">10月16日，下载中心新增我的下载豆记录</span>
+    </p>
+
+<p style="line-height:20px; padding-left:17px;">
+        <span class="cGray2">9月23日，下载导航“搜索”新增下拉列表</span>
+    </p>
+<p style="line-height:20px; padding-left:17px;">
+        <span class="cGray2">9月7日，下载中心上传多个附件即时计数</span>
+    </p>
+<p style="line-height:20px; padding-left:17px;">
+        <span class="cGray2">9月6日，下载专题新增按技术分类搜索</span>
+    </p>
+
+<p style="line-height:20px; padding-left:17px;">
+        <a href="http://51ctodown.blog.51cto.com/948211/648803" target="_blank" >8月31日，下载新增分享资源奖豆功能</a>
+    </p>
+</td>
+</tr>
+</table>
+
+</td>
+<td width="260" valign="top" bgcolor="#FFFFFF" class="log huibian">
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" style="border-bottom: 1px solid #89B8D8; margin-top:10px;">
+<tr>
+<td width="45" height="40" align="center"><img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_001.gif" width="22" height="22" /></td>
+<td class="font_blue">欢迎登录51CTO</td>
+
+</tr>
+</table>
+
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td height="8"></td>
+</tr>
+</table>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td width="60" height="22"></td>
+<td>
+    <span style="color:#FF0000;">
+    </span>
+</td>
+
+</tr>
+</table>
+<form action="/user/checkLogin.do" method="post">
+<table width="90%" height="113" border="0" align="center" cellpadding="0" cellspacing="0" class="login_xuxian">
+<tr>
+<td width="60" height="36" align="right" class="font_black">账　号：</td>
+<td colspan="2" align="left">
+    <input name="userName" type="text" class="login_shuru1" onfocus="this.className='login_shuru2';if (this.value=='用户名/注册邮箱') {this.value=''}" onblur="this.className='login_shuru1';if (this.value=='') {this.value='用户名/注册邮箱'}" value="用户名/注册邮箱" />
+</td>
+</tr>
+<tr>
+<td width="60" height="36" align="right" class="font_black">密　码：</td>
+<td colspan="2" align="left">
+    <input name="userPsw" type="password" class="login_shuru1" onfocus="this.className='login_shuru2'" onblur="this.className='login_shuru1'" />
+
+</td>
+</tr>
+
+<tr>
+	<td></td>
+	<td><input type="checkbox" name="autologin" />30天内自动登录</td>
+</tr>
+
+<tr>
+	<td></td>
+	<td height="50" align="left">
+		<input name="reback" type="hidden" value="http%3A%2F%2Fbbs.51cto.com%2Findex.php%3Fframeon%3Dno" />
+
+		<input style="margin-right:10px;" name="button" type="image" src="http://home.51cto.com/public/themes/blue/images/index_login_denglu.gif" />
+		<a href="http://ucenter.51cto.com/getpass.php?reback=http%3A%2F%2Fhome.51cto.com">找回密码</a>
+	</td>
+</tr>
+</table>
+</form>
+
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="login_xuxian">
+<tr>
+<td height="50" align="center" >·<span class="font_14blue"><a href="http://ucenter.51cto.com/reg_01.php?reback=http%3A%2F%2Fhome.51cto.com/">立即注册</a></span><span class="font_12black">赶快加入51CTO！</span></td>
+
+</tr>
+</table>
+
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td height="60" colspan="2" align="center" class="login_12blue">
+<img src="http://home.51cto.com/public/themes/blue/images/index_login_icon_005.gif" width="18" height="20" align="absmiddle" style="margin-right:10px;" /><a href="http://51ctohome.blog.51cto.com/1805422/749585" target="_blank">51CTO用户密码安全提醒</a>
+</td>
+</tr>
+</table>
+
+<!-- get t end -->
+
+</td>
+<td width="30">&nbsp;</td>
+</tr>
+</table>
+
+
+<table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td width="30">&nbsp;</td>
+<td>&nbsp;</td>
+<td width="280" class="bottom">&nbsp;</td>
+<td width="30">&nbsp;</td>
+</tr>
+
+</table>
+<div class="dle"></div>
+</div>
+
+
+<div class="foot">
+<a target="_blank" href="http://www.51cto.com/about/aboutus.html">关于我们</a>
+|
+<a target="_blank" href="http://www.51cto.com/about/zhaopin.html">诚聘英才</a>
+|
+<a target="_blank" href="http://www.51cto.com/about/contactus.html">联系我们</a>
+
+|
+<a target="_blank" href="http://www.51cto.com/about/history.html">网站大事</a>
+|
+<a target="_blank" href="http://www.51cto.com/php/guestbook/">意见反馈</a>
+|
+<a target="_blank" href="http://www.51cto.com/about/map.htm">网站地图</a>
+<br />Copyright &copy; 2005-2010 <a target="_blank" href="Http://www.51cto.com">51CTO.COM</a> 版权所有
+
+</div>
+
+<div style="display:none;">
+</div>
+</body>
+</html>

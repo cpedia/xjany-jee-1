@@ -7,19 +7,8 @@
 <link rel="shortcut icon" href="http://home.51cto.com/public/themes/blue/favicon.ico" />
 <meta name="keywords" content="51CTO技术家园" />
 <meta name="description" content="51CTO技术家园" />
-<script type="text/javascript">
-<!--
-	//指定当前组模块URL地址
-	var	URL			=	'/index.php?s=/Index';
-	var	APP			=	'/index.php?s=';
-	var	PUBLIC		=	'http://home.51cto.com/public';
-	var	ROOT		=	'http://home.51cto.com';
-	var TS			=	'http://home.51cto.com/index.php?s=';
-	var MID			=	'0';
-	var NEED_LOGIN	=	'0';
-	var expire		=	'3600';
-//-->
-</script>
+<!-- head -->
+[#include "head.html"/]
 <script>
 function toLogin(){
 	$.ajax({
@@ -38,104 +27,13 @@ function toLogin(){
 }
 </script>
 
-<!-- 全局风格CSS -->
-
-<link href="http://home.51cto.com/public/themes/blue/layout.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="http://home.51cto.com/public/js/jquery.js"></script>
-
-<script type="text/javascript" src="http://home.51cto.com/public/js/json.js"></script>
-<!-- 弹窗部分 -->
-<script type="text/javascript" src="http://home.51cto.com/public/js/popup/jquery.popup.js"></script>
-<link href="http://home.51cto.com/public/js/popup/jquery.popup.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
 
 <link href="http://home.51cto.com/public/themes/blue/header_master_login.css" rel="stylesheet" type="text/css" />
 <!-- 全站导航 开始-->
-<link href="http://home.51cto.com/public/themes/blue/header_master_top.css" rel="stylesheet" type="text/css" />
-<div id="home_top">
-    <div class="top_nav">
-        <div class="left">
-
-<a href="http://www.51cto.com" target="_blank">51CTO首页</a>
-<img src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" align="absmiddle" width="16" height="25" style="padding-top:2px; " />
-<a onmouseover="show(1,this);" onmouseout="popupClose();" href="http://www.51cto.com/col/35/" target="_blank">技术频道<img src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" align="absmiddle" style="padding-left:4px;" /></a>
-<img src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" align="absmiddle" width="16" height="25" />
-<a onmouseover="show(2,this);" onmouseout="popupClose();" href="http://www.51cto.com" target="_blank">51CTO旗下网站<img src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" align="absmiddle"  style="padding-left:4px;"/></a>
-<img src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" align="absmiddle" width="16" height="25" />
-<a href="http://www.51cto.com/about/map.htm" target="_blank">地图</a>
-        </div>
-        <div class="right" style="width:540px;">
-            <div class="more">
-
-<img src="http://home.51cto.com/public/themes/blue/images/top_shequ.gif" align="absmiddle" width="27" height="16" />社区：
-<a href="http://bbs.51cto.com" target="_blank">论坛</a>
-<a href="http://blog.51cto.com" target="_blank">博客</a>
-<a href="http://down.51cto.com" target="_blank">下载</a>
-<a href="http://book.51cto.com/" target="_blank">读书</a>
-<a onmouseover="show(3,this)" onmouseout="popupClose()" href="javascript:viod(0);">
-更多<img src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" align="absmiddle"  style="padding-left:4px;" />
-</a>
-            </div>
-            <div class="login" style="padding-top:8px; text-align:right;">
-
-<a href="http://home.51cto.com">登录</a>
-<a href="/register.html">注册</a>
-            </div>
-                    </div>
-    </div>
-</div>
-
-<div class="subMenu1" id="s1" onmouseover="popupNoClose();" onmouseout="popupClose();">
-<ul>
-<li><a href="http://network.51cto.com" target="_blank">组网</a></li>
-<li><a href="http://netsecurity.51cto.com" target="_blank">安全</a></li>
-
-<li><a href="http://developer.51cto.com" target="_blank">开发</a></li>
-<li><a href="http://database.51cto.com" target="_blank">数据库</a></li>
-<li><a href="http://server.51cto.com" target="_blank">服务器</a></li>
-<li><a href="http://os.51cto.com" target="_blank">系统</a></li>
-<li><a href="http://virtual.51cto.com" target="_blank">虚拟化</a></li>
-<li><a href="http://cloud.51cto.com" target="_blank">云计算</a></li>
-<li><a href="http://developer.51cto.com/embed/" target="_blank">嵌入式</a></li>
-<li><a href="http://mobile.51cto.com/" target="_blank">移动开发</a></li>
-</ul>
-
-</div>
-
-<div class="subMenu2" id="s2" onmouseover="popupNoClose()" onmouseout="popupClose()">
-<ul>
-<li><a title="中国领先的IT技术网站" href="http://www.51cto.com" target="_blank">51CTO.COM</a></li>
-<li><a title="中国首个专门服务于CIO的专业网站" href="http://www.cioage.com" target="_blank">CIOage.com</a></li>
-<li><a title="领先的中文存储网络媒体" href="http://www.watchstor.com/" target="_blank">WatchStor.com</a></li>
-<li><a title="中国首家专注于数字医疗及医疗信息化的专业网站" href="http://www.hc3i.cn/" target="_blank">HC3i.cn</a></li>
-<li><a title="移动互联网生活门户" href="http://www.linkphone.cn/" target="_blank">灵客风LinkPhone</a></li>
-</ul>
-</div>
-
-<div class="subMenu3" id="s3" onmouseover="popupNoClose()" onmouseout="popupClose()">
-<ul>
-<li><a href="http://home.51cto.com" target="_blank">家园</a></li>
-<li><a href="http://t.51cto.com" target="_blank">微博</a></li>
-<li><a href="http://blog.51cto.com" target="_blank">博客</a></li>
-<li><a href="http://bbs.51cto.com" target="_blank">论坛</a></li>
-<li><a href="http://down.51cto.com" target="_blank">下载</a></li>
-<li><a href="http://selftest.51cto.com" target="_blank">自测</a></li>
-<li><a href="http://doctor.51cto.com" target="_blank">门诊</a></li>
-<li><a href="http://blog.51cto.com/newsletter/" target="_blank">周刊</a></li>
-
-<li><a href="http://book.51cto.com" target="_blank">读书</a></li>
-<li><a href="http://g.51cto.com" target="_blank">技术圈</a></li>
-<li><a href="http://zhidao.51cto.com" target="_blank">知道</a></li>
-</ul>
-</div>
-<!-- 简导航js -->
-<script type="text/javascript" src="http://home.51cto.com/public/js/header_index_down.js"></script>
-<!-- 全站导航 结束-->
-
-<!-- 全站PNG图片透明 开始-->
-<script type="text/javascript" src="http://home.51cto.com/public/js/header_master_png.js"></script>
+[#include "daohan.html"/]
 
 <div id="warp_login">
 <div class="dengl">

@@ -51,9 +51,7 @@ public class UserAction {
 	public String checkLogin(AllUser user, HttpServletRequest request, ModelMap model) {
 		boolean result = userSerive.check(user);
 		model.addAttribute("message", String.valueOf(result));
-		if(result == true)
-			return "user/index";
-		return "user/login";
+		return "../common/message";
 	}
 	@RequestMapping("/verification.do")
 	public String verification(String codevalue, HttpServletRequest request, ModelMap model) {

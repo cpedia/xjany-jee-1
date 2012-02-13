@@ -20,6 +20,20 @@
 	var expire		=	'3600';
 //-->
 </script>
+<script>
+function toLogin(){
+	$.ajax({
+			type: "post",
+			url: "/user/checkLogin.do",
+			datatype: "html",
+			data: $('#login').serialize(),
+			success: function(data){
+				alert(data);
+			},
+		});	
+}
+</script>
+
 <!-- 全局风格CSS -->
 
 <link href="http://home.51cto.com/public/themes/blue/layout.css" rel="stylesheet" type="text/css" />
@@ -285,7 +299,7 @@
 
 </tr>
 </table>
-<form action="/user/checkLogin.do" method="post">
+<form id="login">
 <table width="90%" height="113" border="0" align="center" cellpadding="0" cellspacing="0" class="login_xuxian">
 <tr>
 <td width="60" height="36" align="right" class="font_black">账　号：</td>
@@ -311,7 +325,7 @@
 	<td height="50" align="left">
 		<input name="reback" type="hidden" value="http%3A%2F%2Fbbs.51cto.com%2Findex.php%3Fframeon%3Dno" />
 
-		<input style="margin-right:10px;" name="button" type="image" src="http://home.51cto.com/public/themes/blue/images/index_login_denglu.gif" />
+		<input style="margin-right:10px;" name="button" onclick="toLogin()" type="image" src="http://home.51cto.com/public/themes/blue/images/index_login_denglu.gif" />
 		<a href="http://ucenter.51cto.com/getpass.php?reback=http%3A%2F%2Fhome.51cto.com">找回密码</a>
 	</td>
 </tr>

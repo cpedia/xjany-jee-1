@@ -1,5 +1,5 @@
 var http_request=false;
-
+ 
 //初始化，指定处理函数，发送请求的函数
 function send_request(url){
 	http_request=false;

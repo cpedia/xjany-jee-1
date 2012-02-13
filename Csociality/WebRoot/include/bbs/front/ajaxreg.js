@@ -130,7 +130,7 @@ function usercheck(obj){
 		reobj=obj;
 		$.ajax({
 			type: "post",
-			url: "/check.do?userName="+uservalue,
+			url: "/user/check.do?userName="+uservalue,
 			datatype: "html",
 			success: function(data){
 				if(data == "false")
@@ -401,16 +401,14 @@ function mailcheck(obj){
 		reobj=obj;
 		$.ajax({
 			type: "post",
-			url: "/check.do?userEmail="+mailvalue,
+			url: "/user/check.do?userEmail="+mailvalue,
 			datatype: "html",
 			success: function(data){
-				if(data == "false")
-				{
+				if(data == "false"){
 					document.getElementById(obj).innerHTML="<span class='font_green12'>恭喜，该邮箱可用</span>";
 					document.getElementById("checkemail").value=0;
 				}
-				else if(data == "true")
-				{
+				else if(data == "true"){
 					document.getElementById(obj).innerHTML="<span class='font_red12'>该邮箱已被使用</span>";
 					document.getElementById("checkemail").value=1;
 				}

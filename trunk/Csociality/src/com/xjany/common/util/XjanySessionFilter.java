@@ -46,7 +46,6 @@ public class XjanySessionFilter implements Filter {
 		// * request.getRequestURL()： http://127.0.0.1:8080/webApp/home.jsp
 		// * request.getContextPath()： /webApp
 		// * request.getServletPath()：/home.jsp
-		.chain.
 		// * request.getRequestURI()：/webApp/home.jsp
 		// * request.getQueryString()：a=1&b=2
 		HttpServletRequest request = (HttpServletRequest) req;

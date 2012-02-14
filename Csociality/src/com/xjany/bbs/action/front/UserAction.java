@@ -12,11 +12,16 @@ import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.UserService;
 import com.xjany.common.MD5Util;
 import com.xjany.common.util.MD5UtilImpl;
+import com.xjany.common.web.session.SessionProvider;
 
 @Controller
 public class UserAction {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SessionProvider sessionProvider;
+	
 	private MD5Util verification = new MD5UtilImpl();
 	
 	public UserService getUserService() {
@@ -24,6 +29,12 @@ public class UserAction {
 	}
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	public SessionProvider getSessionProvider() {
+		return sessionProvider;
+	}
+	public void setSessionProvider(SessionProvider sessionProvider) {
+		this.sessionProvider = sessionProvider;
 	}
 	@RequestMapping("/user/index.do")
 	public String showIndex(HttpServletRequest request, ModelMap model)
@@ -51,7 +62,6 @@ public class UserAction {
 	public String check(AllUser user, HttpServletRequest request, ModelMap model) {
 		AllUser result = userService.check(user);
 		model.addAttribute("message", result);
-		
 		return "../common/message";
 	}
 	@RequestMapping("/verification.do")

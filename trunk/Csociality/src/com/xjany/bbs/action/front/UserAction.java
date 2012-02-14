@@ -1,6 +1,7 @@
 package com.xjany.bbs.action.front;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class UserAction {
 	private UserService userService;
 	
 	@Autowired
-	private SessionProvider sessionProvider;
+	private SessionProvider session;
 	
 	private MD5Util verification = new MD5UtilImpl();
 	
@@ -30,11 +31,11 @@ public class UserAction {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	public SessionProvider getSessionProvider() {
-		return sessionProvider;
+	public SessionProvider getSession() {
+		return session;
 	}
-	public void setSessionProvider(SessionProvider sessionProvider) {
-		this.sessionProvider = sessionProvider;
+	public void setSession(SessionProvider session) {
+		this.session = session;
 	}
 	@RequestMapping("/user/index.do")
 	public String showIndex(HttpServletRequest request, ModelMap model)
@@ -59,8 +60,8 @@ public class UserAction {
 	}
 	
 	@RequestMapping("/user/check.do")
-	public String check(AllUser user, HttpServletRequest request, ModelMap model) {
-		AllUser result = userService.check(user);
+	public String check(AllUser user, HttpServletRequest request,HttpServletResponse response, ModelMap model) {
+		AllUser result = userService.check(user,session,request,response);
 		model.addAttribute("message", result);
 		return "../common/message";
 	}

@@ -3,6 +3,8 @@ package com.xjany.bbs.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,9 @@ import com.xjany.common.page.Pagination;
 import com.xjany.common.util.MD5UtilImpl;
 import com.xjany.common.util.XjanyMap;
 import com.xjany.common.util.XjanyMapImpl;
+import com.xjany.common.web.session.SessionProvider;
+
+import static com.xjany.common.frame.XjanyConstants.SESSIONNAME;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
@@ -63,7 +68,7 @@ public class UserServiceImpl implements UserService{
 		return userDAO.delete(allUser);
 	}
 
-	public AllUser check(AllUser user) {
+	public AllUser check(AllUser user,SessionProvider session,HttpServletRequest request, HttpServletResponse response) {
 		XjanyMap<String, String> property = new XjanyMapImpl<String, String>();
 		if(!"".equals(user.getUserEmail()) && user.getUserEmail() != null)
 		{
@@ -74,6 +79,10 @@ public class UserServiceImpl implements UserService{
 			if(!"".equals(user.getUserPsw()) && user.getUserPsw() != null)
 				property.put("userPsw", md5.encryption(user.getUserPsw(),user.getUserName()));
 		} 
+		AllUser allUser = userDAO.check(user, property);
+		if(allUser!=null){
+			session.setAttribute(request, response, SESSIONNAME, allUser.getUserId());
+		}
 		return userDAO.check(user, property);
 	}
 

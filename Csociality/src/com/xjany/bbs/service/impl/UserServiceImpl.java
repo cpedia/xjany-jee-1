@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService{
 		if(allUser!=null){
 			session.setAttribute(request, response, SESSIONNAME, allUser.getUserId());
 		}
-		return userDAO.check(user, property);
+		return allUser;
 	}
 
 	public AllUser update(AllUser entity) {

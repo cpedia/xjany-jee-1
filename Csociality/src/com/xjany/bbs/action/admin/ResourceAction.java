@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.xjany.bbs.entity.AllResLibCTG;
 import com.xjany.bbs.entity.AllResLibrary;
 import com.xjany.bbs.service.ResourceService;
 
@@ -35,7 +36,6 @@ public class ResourceAction {
 		model.addAttribute("list", list);// request保存这个对象
 		return "/resource/list";
 	}
-	
 	
 	@RequestMapping("/resource/o_add.do")
 	public String o_add(HttpServletRequest request, ModelMap model, AllResLibrary allResLibrary)
@@ -66,4 +66,16 @@ public class ResourceAction {
 //		GrenricUtil._get_code(request,objs,XjanyConstants.GRENERIPATH,XjanyConstants.TEMPLETPATH, "zhiye.html","zhiye.js");
 //		return "redirect:v_list.do";
 //	}
+	
+	/*
+	 * 以下是ctg的action
+	 */
+
+	@RequestMapping("/resource/v_list_ctg.do")
+	public String vListCtg(HttpServletRequest request, ModelMap model, AllResLibCTG allResLibCTG)
+	throws Exception {
+		List<AllResLibCTG> list = resourceService.findAllCTG();
+		model.addAttribute("list", list);
+		return "/rescatgory/list";
+	}
 }

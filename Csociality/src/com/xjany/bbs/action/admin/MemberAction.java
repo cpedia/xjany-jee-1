@@ -16,8 +16,8 @@ import com.xjany.bbs.service.GroupService;
 import com.xjany.bbs.service.UserService;
 import com.xjany.common.page.Pagination;
 import com.xjany.common.page.SimplePage;
-import com.xjany.common.util.CookieUtils;
-import com.xjany.common.util.RequestUtils;
+import com.xjany.common.web.CookieUtils;
+import com.xjany.common.web.RequestUtils;
 
 import java.sql.Timestamp;
 import java.util.Date;

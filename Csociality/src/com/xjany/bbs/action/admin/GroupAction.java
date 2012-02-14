@@ -12,7 +12,7 @@ import com.xjany.bbs.service.GroupService;
 import com.xjany.common.exception.DaoException;
 import com.xjany.common.page.Pagination;
 import com.xjany.common.page.SimplePage;
-import com.xjany.common.util.CookieUtils;
+import com.xjany.common.web.CookieUtils;
 
 @Controller
 public class GroupAction {

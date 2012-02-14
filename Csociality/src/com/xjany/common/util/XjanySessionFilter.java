@@ -15,7 +15,7 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * * 用于检查用户是否登录了系统的过滤器<br>
- * * 创建日期：2012-01-09 * @author <a href="mailto:hemingwang0902@126.com">何明旺</a>
+ * * 创建日期：2012-02-14 
  */
 public class XjanySessionFilter implements Filter {
 	/** 要检查的 session 的名称 */

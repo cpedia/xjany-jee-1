@@ -13,11 +13,11 @@
 function toLogin(){
 	$.ajax({
 			type: "post",
-			url: "/user/check.do",
+			url: "/user/loginCheck.do",
 			datatype: "html",
 			data: $('#login').serialize(),
 			success: function(data){
-				if(data == "true"){
+				if(data != null && "" != data){
 					window.location="/user/index.do";
 				}else{
 					$("#wrongUser").html("账号或密码错误");

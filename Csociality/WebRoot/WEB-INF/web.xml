@@ -81,11 +81,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>SessionFilter</filter-name>
-		<url-pattern>/user/*.do</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>SessionFilter</filter-name>
-		<url-pattern>/user/*.jhtml</url-pattern>
+		<url-pattern>/user/</url-pattern>
 	</filter-mapping>
 	<!--  检查用户是否登录了系统的过滤器配置  结束 -->
 

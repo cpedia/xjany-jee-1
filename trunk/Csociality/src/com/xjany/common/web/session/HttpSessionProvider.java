@@ -6,12 +6,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  * HttpSession提供类
  * 
  * @author liufang
  * 
  */
+@Service
+@Transactional
 public class HttpSessionProvider implements SessionProvider {
 
 	public Serializable getAttribute(HttpServletRequest request, String name) {

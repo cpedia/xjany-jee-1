@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.entity.BbsUserProfile;
 import com.xjany.bbs.service.UserService;
 import com.xjany.common.MD5Util;
+import com.xjany.common.exception.DaoException;
 import com.xjany.common.page.Pagination;
 import com.xjany.common.util.MD5UtilImpl;
 import com.xjany.common.util.XjanyMap;
@@ -79,7 +81,12 @@ public class UserServiceImpl implements UserService{
 		{
 			property.put("userName", user.getUserName());
 		} 
-		AllUser allUser = userDAO.check(user, property);
+		AllUser allUser = null;
+		try {
+			allUser = userDAO.check(user, property);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
 		return allUser;
 	}
 
@@ -93,7 +100,12 @@ public class UserServiceImpl implements UserService{
 		else
 			property.put("userName", user.getUserName());
 		property.put("userPsw", md5.encryption(user.getUserPsw(),"xjany"));
-		AllUser allUser = userDAO.check(user, property);
+		AllUser allUser = null;
+		try {
+			allUser = userDAO.check(user, property);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
 		if(allUser!=null){
 			session.setAttribute(request, response, SESSIONNAME, allUser.getUserId());
 		}

@@ -8,7 +8,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,7 @@ import static com.xjany.common.frame.XjanyConstants.SESSIONNAME;
 @Transactional
 public class UserServiceImpl implements UserService{
 	private UserDAO userDAO;
+	private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	private MD5Util md5 = new MD5UtilImpl();
 	public UserDAO getUserDAO() {
 		return userDAO;
@@ -85,6 +87,7 @@ public class UserServiceImpl implements UserService{
 		try {
 			allUser = userDAO.check(user, property);
 		} catch (DaoException e) {
+			log.info("未找到用户异常");
 			e.printStackTrace();
 		}
 		return allUser;

@@ -103,6 +103,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 				sql.append(" and a."+ e_.getKey() +"='"+e_.getValue()+"'");
 			}
 			query = sessionFactory.getCurrentSession().createQuery(sql.toString());
+			entity = (T)query.list().get(0);
 			return entity;
 	}
 	

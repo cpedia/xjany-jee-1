@@ -48,20 +48,27 @@ public class UserAction {
 			throws Exception {
 		return "user/login";
 	}
-	@RequestMapping("/register.do")
+	@RequestMapping("/user/register.do")
 	public String showRegisterDo(HttpServletRequest request, ModelMap model)
 			throws Exception {
-		return "register";
+		return "user/register";
 	}
-	@RequestMapping("/register.jhtml")
+	@RequestMapping("/user/register.jhtml")
 	public String showRegisterJhtml(HttpServletRequest request, ModelMap model)
 			throws Exception {
-		return "register";
+		return "user/register";
 	}
 	
 	@RequestMapping("/user/check.do")
 	public String check(AllUser user, HttpServletRequest request,HttpServletResponse response, ModelMap model) {
-		AllUser result = userService.check(user,session,request,response);
+		AllUser result = userService.check(user);
+		model.addAttribute("message", result);
+		return "../common/message";
+	}
+	@RequestMapping("/user/loginCheck.do")
+	public String login(AllUser user, HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) {
+		AllUser result = userService.loginCheck(user, session, request, response);
 		model.addAttribute("message", result);
 		return "../common/message";
 	}

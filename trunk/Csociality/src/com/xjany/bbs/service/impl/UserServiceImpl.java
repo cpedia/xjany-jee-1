@@ -1,6 +1,8 @@
 package com.xjany.bbs.service.impl;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -68,7 +70,7 @@ public class UserServiceImpl implements UserService{
 		return userDAO.delete(allUser);
 	}
 
-	public AllUser check(AllUser user,SessionProvider session,HttpServletRequest request, HttpServletResponse response) {
+	public AllUser check(AllUser user) {
 		XjanyMap<String, String> property = new XjanyMapImpl<String, String>();
 		if(!"".equals(user.getUserEmail()) && user.getUserEmail() != null)
 		{
@@ -76,16 +78,27 @@ public class UserServiceImpl implements UserService{
 		} if(!"".equals(user.getUserName()) && user.getUserName() != null)
 		{
 			property.put("userName", user.getUserName());
-			if(!"".equals(user.getUserPsw()) && user.getUserPsw() != null)
-				property.put("userPsw", md5.encryption(user.getUserPsw(),user.getUserName()));
 		} 
+		AllUser allUser = userDAO.check(user, property);
+		return allUser;
+	}
+
+	public AllUser loginCheck(AllUser user,SessionProvider session,HttpServletRequest request, HttpServletResponse response){
+		XjanyMap<String, String> property = new XjanyMapImpl<String, String>();
+		String _email = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+		Pattern p = Pattern.compile(_email);
+		Matcher m = p.matcher(user.getUserName());
+		if(m.find())
+			property.put("userEmail", user.getUserName());
+		else
+			property.put("userName", user.getUserName());
+		property.put("userPsw", md5.encryption(user.getUserPsw(),"xjany"));
 		AllUser allUser = userDAO.check(user, property);
 		if(allUser!=null){
 			session.setAttribute(request, response, SESSIONNAME, allUser.getUserId());
 		}
 		return allUser;
 	}
-
 	public AllUser update(AllUser entity) {
 		return userDAO.update(entity);
 	}
@@ -95,7 +108,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public AllUser save(AllUser entity,BbsUserProfile bbsUserProfile,AllUserGroup allUserGroup) {
-		entity.setUserPsw(md5.encryption(entity.getUserPsw(),entity.getUserName()));
+		entity.setUserPsw(md5.encryption(entity.getUserPsw(),"xjany"));
 		BbsUserProfile bup = bbsUserProfileDAO.save(bbsUserProfile);
 		entity.setBbsUserProfile(bup);
 		if(allUserGroup!=null)

@@ -20,7 +20,8 @@ public interface UserService {
 	public AllUser save(AllUser entity,BbsUserProfile bbsUserProfile,AllUserGroup allUserGroup);
 	public AllUser recycle(AllUser entity,boolean isRecycle);
 	public AllUser delete(int id);
-	public AllUser check(AllUser user,SessionProvider session,HttpServletRequest request, HttpServletResponse response);
+	public AllUser check(AllUser user);
+	public AllUser loginCheck(AllUser user,SessionProvider session,HttpServletRequest request, HttpServletResponse response);
 	public Pagination getPage(String username, String email, Integer siteId,
 			Integer groupId, Boolean disabled, Boolean admin, Integer rank,
 			int pageNo, int pageSize);

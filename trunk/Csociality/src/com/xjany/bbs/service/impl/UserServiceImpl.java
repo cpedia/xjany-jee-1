@@ -107,6 +107,7 @@ public class UserServiceImpl implements UserService{
 		try {
 			allUser = userDAO.check(user, property);
 		} catch (DaoException e) {
+			log.info("未找到用户异常");
 			e.printStackTrace();
 		}
 		if(allUser!=null){

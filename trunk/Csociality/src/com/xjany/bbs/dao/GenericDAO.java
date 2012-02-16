@@ -3,6 +3,7 @@ package com.xjany.bbs.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import com.xjany.common.exception.DaoException;
 import com.xjany.common.util.XjanyMap;
 
 
@@ -19,6 +20,6 @@ public interface GenericDAO<T,Pk extends Serializable> {
 	public T save(T entity);
 	public T recycle(T entity,boolean isRecycle);
 	public void delete(int ... id);
-	public T check(T entity, XjanyMap<String, String> property);
+	public T check(T entity, XjanyMap<String, String> property) throws DaoException;
 	public List findBySql(String sql);
 }

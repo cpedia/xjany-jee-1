@@ -75,7 +75,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void delete(int ... id) throws DaoException{
+	public void delete(int ... id){
 		Session session = sessionFactory.getCurrentSession();
 		T t = (T) session.get(clazz, id[0]);
 		session.delete(t);
@@ -89,7 +89,7 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 		}
 	}
 	@Transactional(readOnly = true)
-	public T check(T entity, XjanyMap<String, String> property) {
+	public T check(T entity, XjanyMap<String, String> property) throws DaoException{
 		Query query = null;
 			StringBuffer sql = new StringBuffer("from "+clazz.getName()+" a where 1=1 ");
 //			Set<Map.Entry<String, String>> set = property.entrySet();
@@ -103,7 +103,12 @@ public class GeneriDAOImpl<T,Pk extends Serializable> implements GenericDAO<T, P
 				sql.append(" and a."+ e_.getKey() +"='"+e_.getValue()+"'");
 			}
 			query = sessionFactory.getCurrentSession().createQuery(sql.toString());
-			entity = (T)query.list().get(0);
+			try {
+				entity = (T)query.list().get(0);
+			} catch (Exception e) {
+				throw new DaoException("未找到用户异常");
+			}
+
 			return entity;
 	}
 	

@@ -49,7 +49,7 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.findAll();
 	}
 	@Override
-	public AllUserGroup deleteById(int id) throws DaoException{
+	public AllUserGroup deleteById(int id){
 		groupDAO.delete(id);
 		return null;
 	}

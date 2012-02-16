@@ -1,6 +1,6 @@
 package com.xjany.common.exception;
 
-public class BaseException extends RuntimeException{
+public class BaseException extends Exception{
 	private static final long serialVersionUID = 828976064126144450L;
 
 	public BaseException() {

@@ -54,10 +54,7 @@ public class GroupAction {
 	
 	@RequestMapping("/group/o_delete.do")
 	public String o_delete(Integer id,HttpServletRequest request, ModelMap model) {
-		try {
-			groupService.deleteById(id);
-		} catch (DaoException e) {
-		}
+		groupService.deleteById(id);
 		return "redirect:v_list.do";
 	}
 }

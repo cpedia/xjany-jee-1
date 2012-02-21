@@ -79,7 +79,7 @@ public class UserAction {
 		return "../common/message";
 	}
 	
-	@RequestMapping("/addBbsUserInfo.do")
+	@RequestMapping("/user/addBbsUserInfo.do")
 	public String addBbsUserInfo(AllUser user,BbsUserProfile bbsUserProfile, HttpServletRequest request, ModelMap model) {
         user.setUserRegIp(verification.getIp(request));
 		user.setUserRegTime(new java.sql.Timestamp(System.currentTimeMillis()));

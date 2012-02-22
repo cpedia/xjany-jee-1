@@ -78,6 +78,10 @@ public class UserAction {
 		model.addAttribute("message",String.valueOf(result));
 		return "../common/message";
 	}
+	@RequestMapping("/user/personalInfo.do")
+	public String personalInfo(String codevalue, HttpServletRequest request, ModelMap model) {
+		return "user/personalInfo";
+	}
 	
 	@RequestMapping("/user/addBbsUserInfo.do")
 	public String addBbsUserInfo(AllUser user,BbsUserProfile bbsUserProfile, HttpServletRequest request, ModelMap model) {

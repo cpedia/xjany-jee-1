@@ -14,7 +14,7 @@ public class BoardDAOImpl extends GeneriDAOImpl<BbsBoard, Integer> implements Bo
 	public Pagination getPage(int pageNo, int pageSize) {
 		Finder f = Finder.create("select bean from BbsBoard bean");
 		f.append(" where 1=1");
-		f.append(" order by bean.groupId desc");
+		f.append(" order by bean.boaId desc");
 		return find(f, pageNo, pageSize);
 	}
 }

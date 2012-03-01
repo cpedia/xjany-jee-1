@@ -7,7 +7,7 @@ import com.xjany.common.exception.DaoException;
 import com.xjany.common.util.XjanyMap;
 
 
-/*
+/**
  * @param 一个通用的dao层接口
  * 一些的基本处理(增，删，改，查)
  */

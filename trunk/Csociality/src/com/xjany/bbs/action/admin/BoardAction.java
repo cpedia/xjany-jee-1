@@ -44,11 +44,10 @@ public class BoardAction {
 		return "redirect:v_list.do";
 	}
 
-	@RequestMapping("/board/o_edit.do")
-	public String o_edit(Integer id,HttpServletRequest request, ModelMap model) {
-		BbsBoard bbsBoard = boardService.findById(id);
-		model.addAttribute("bbsBoard",bbsBoard);
-		return "board/edit";
+	@RequestMapping("/board/o_update.do")
+	public String o_update(BbsBoard bbsBoard,HttpServletRequest request, ModelMap model) {
+		boardService.update(bbsBoard);
+		return "redirect:v_list.do";
 	}
 	
 	@RequestMapping("/board/o_delete.do")

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xjany.bbs.dao.BoardDAO;
 import com.xjany.bbs.dao.GroupDAO;
+import com.xjany.bbs.dao.SubBoardDAO;
 import com.xjany.bbs.entity.AllUserGroup;
 import com.xjany.bbs.entity.BbsBoard;
 import com.xjany.bbs.service.BoardService;
@@ -20,13 +21,23 @@ import com.xjany.common.page.Pagination;
 public class BoardServiceImpl implements BoardService {
 	
 	private BoardDAO boardDAO;
+	private SubBoardDAO subBoardDAO;
 
-	public BoardDAO getGroupDAO() {
+	public BoardDAO getBoardDAO() {
 		return boardDAO;
 	}
 	@Resource
-	public void setGroupDAO(BoardDAO boardDAO) {
+	public void setBoardDAO(BoardDAO boardDAO) {
 		this.boardDAO = boardDAO;
+	}
+	
+	public SubBoardDAO getSubBoardDAO() {
+		return subBoardDAO;
+	}
+	
+	@Resource
+	public void setSubBoardDAO(SubBoardDAO subBoardDAO) {
+		this.subBoardDAO = subBoardDAO;
 	}
 	@Override
 	public BbsBoard findById(int id) {

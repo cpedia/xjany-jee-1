@@ -50,5 +50,10 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.delete(id);
 		return null;
 	}
+	@Override
+	public BbsBoard update(int id) {
+		boardDAO.update(boardDAO.findById(id));
+		return null;
+	}
 
 }

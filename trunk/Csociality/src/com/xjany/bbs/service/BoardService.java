@@ -9,6 +9,7 @@ import com.xjany.common.page.Pagination;
 
 public interface BoardService {
 	public BbsBoard findById(int id);
+	public BbsBoard update(int id);
 	public BbsBoard deleteById(int id);
 	public List<BbsBoard> findAll();
 	public BbsBoard save(BbsBoard bbsGroup);

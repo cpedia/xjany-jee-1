@@ -1,0 +1,851 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+[#include "/WEB-INF/front/createweb/head.html"/]
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		Cufon.now();
+		Cufon.replace('.btnHelp', {
+			textShadow : '1px 1px #0d1e63'
+		});
+
+	})
+</script>
+<title>SM 3.0 Design</title>
+<script type="text/javascript">
+	var templateId = 5;
+	var design = {
+		14 : [ {
+			id : 6,
+			title : 'Bryllup',
+			isDefault : 'false'
+		}, {
+			id : 8,
+			title : 'Familie',
+			isDefault : 'false'
+		}, {
+			id : 18,
+			title : 'Familie Online',
+			isDefault : 'false'
+		}, {
+			id : 20,
+			title : 'Green Day',
+			isDefault : 'false'
+		}, {
+			id : 17,
+			title : 'I Sepia',
+			isDefault : 'false'
+		}, {
+			id : 19,
+			title : 'Old Fashion',
+			isDefault : 'false'
+		}, {
+			id : 21,
+			title : 'Sunburst',
+			isDefault : 'false'
+		} ],
+		22 : [ {
+			id : 2,
+			title : 'Action Committee',
+			isDefault : 'false'
+		}, {
+			id : 13,
+			title : 'Foundation',
+			isDefault : 'false'
+		}, {
+			id : 24,
+			title : 'I lufthavnen',
+			isDefault : 'false'
+		}, {
+			id : 23,
+			title : 'Orange Notes',
+			isDefault : 'false'
+		} ],
+		1 : [ {
+			id : 7,
+			title : 'Club / Samfund',
+			isDefault : 'false'
+		}, {
+			id : 5,
+			title : 'Firma',
+			isDefault : 'true'
+		}, {
+			id : 25,
+			title : 'Fresh Start',
+			isDefault : 'false'
+		}, {
+			id : 9,
+			title : 'Hobby',
+			isDefault : 'false'
+		}, {
+			id : 11,
+			title : 'In Memoriam',
+			isDefault : 'false'
+		}, {
+			id : 10,
+			title : 'Pet',
+			isDefault : 'false'
+		} ],
+		45 : [ {
+			id : 3,
+			title : 'Baby (dreng)',
+			isDefault : 'false'
+		}, {
+			id : 4,
+			title : 'Baby (pige)',
+			isDefault : 'false'
+		}, {
+			id : 46,
+			title : 'Nyfødt',
+			isDefault : 'false'
+		} ],
+		40 : [ {
+			id : 41,
+			title : 'Mørkhårede skønhed',
+			isDefault : 'false'
+		}, {
+			id : 43,
+			title : 'Natur Kosmetik',
+			isDefault : 'false'
+		}, {
+			id : 42,
+			title : 'Spa',
+			isDefault : 'false'
+		} ],
+		54 : [ {
+			id : 57,
+			title : 'Blå',
+			isDefault : 'false'
+		}, {
+			id : 55,
+			title : 'Grøn',
+			isDefault : 'false'
+		}, {
+			id : 56,
+			title : 'Orange',
+			isDefault : 'false'
+		}, {
+			id : 58,
+			title : 'Pink',
+			isDefault : 'false'
+		}, {
+			id : 59,
+			title : 'Vintage',
+			isDefault : 'false'
+		} ],
+		30 : [ {
+			id : 44,
+			title : 'Mechanic',
+			isDefault : 'false'
+		}, {
+			id : 38,
+			title : 'Mediaman',
+			isDefault : 'false'
+		}, {
+			id : 31,
+			title : 'Stålemner',
+			isDefault : 'false'
+		}, {
+			id : 34,
+			title : 'Tandlæger',
+			isDefault : 'false'
+		} ],
+		28 : [ {
+			id : 29,
+			title : 'Besked om bord',
+			isDefault : 'false'
+		}, {
+			id : 35,
+			title : 'Flytning til stranden',
+			isDefault : 'false'
+		}, {
+			id : 32,
+			title : 'Into the Mystic',
+			isDefault : 'false'
+		}, {
+			id : 12,
+			title : 'Rejser',
+			isDefault : 'false'
+		} ],
+		26 : [ {
+			id : 39,
+			title : 'EURO2012',
+			isDefault : 'false'
+		}, {
+			id : 27,
+			title : 'Fireball',
+			isDefault : 'false'
+		}, {
+			id : 36,
+			title : 'Golden Soccer',
+			isDefault : 'false'
+		}, {
+			id : 33,
+			title : 'Skate i Pink',
+			isDefault : 'false'
+		} ],
+		47 : [ {
+			id : 48,
+			title : 'Eksempel 1',
+			isDefault : 'false'
+		}, {
+			id : 49,
+			title : 'Eksempel 2',
+			isDefault : 'false'
+		}, {
+			id : 50,
+			title : 'Eksempel 3',
+			isDefault : 'false'
+		}, {
+			id : 52,
+			title : 'Eksempel 4',
+			isDefault : 'false'
+		}, {
+			id : 53,
+			title : 'Eksempel 5',
+			isDefault : 'false'
+		} ]
+	};
+	$(document).ready(
+			function() {
+				resizeIframe();
+				for ( var i in design) {
+					for ( var j in design[i]) {
+						if (isSelected(design[i][j])) {
+							$('#designCategory option[value=' + i + ']').attr(
+									'selected', true);
+							changeDesignCategory();
+						}
+					}
+				}
+
+				Cufon.now();
+
+				Cufon.replace('.nextBtn', {
+					fontFamily : 'Rockwell Extra Bold'
+				});
+
+			});
+
+	function resizeIframe() {
+		if ($('input[name=wider]').val() == 'true') {
+			$('#site_preview').addClass('sitePreviewIframeWider');// width(1300).height(930).css('zoom','49%');
+		}
+		if (navigator.userAgent.indexOf('MSIE 8') != -1) {
+			$('#site_preview').width(1810).height(1280).css;
+		}
+		if ((navigator.userAgent.indexOf('MSIE 8') != -1)
+				&& ($('input[name=wider]').val() == 'true')) {
+			$('#site_preview').width(2440).height(1580).css;
+
+		}
+		if (navigator.userAgent.indexOf('Chrome') > -1
+				|| navigator.userAgent.indexOf('Safari') > -1) {
+			var width_ = 1100;
+			var height_ = 720;
+			if (($('input[name=wider]').val() == 'true')) {
+				width_ = 1250;
+				height_ = 900;
+			}
+			$('#site_preview').width(width_).height(height_)
+					.css('zoom', '100%');
+		}
+	}
+
+	function setWider(obj) {
+		var widerObj = $('input[name=wider]');
+		if ($(widerObj).val() == 'true') {
+			$(obj).find('img').attr('src', '/image/front/choose.png');
+			$(widerObj).val('false');
+		} else {
+			$(obj).find('img').attr('src', '/image/front/chooser.png');
+			$(widerObj).val('true');
+		}
+		changeDesignTemplate();
+	}
+
+	function changeDesignCategory(isChangeTemplate) {
+		$('#templateId option').each(function() {
+			$(this).remove();
+		});
+		var catId = $('#designCategory option:selected').val();
+		var templates = design[catId];
+		for (i = 0; i < templates.length; i++) {
+			$('#templateId').append(
+					'<option value="' + templates[i].id + '">'
+							+ templates[i].title + '</option>');
+			if (isSelected(templates[i])) {
+				$('#templateId option:last').attr('selected', true);
+				$('#templateText').html(templates[i].title);
+
+			}
+		}
+		if (templates.length > 0 && isChangeTemplate) {
+			changeDesignTemplate();
+		}
+	}
+	function isSelected(obj) {
+		return obj.isDefault == 'true';
+	}
+
+	function changeDesignTemplate() {
+		if (document.forms["operateForm"]) {
+			$('form[name=operateForm]').find(
+					'input[name=isChangeDesignTemplate]').val('true');
+			templateId = 0;
+			var catId = $('#designCategory option:selected').val();
+			var templates = design[catId];
+			for (i = 0; i < templates.length; i++) {
+				if (templates[i].id == $('#templateId option:selected').val()) {
+					$('#templateText').html(templates[i].title);
+					templates[i].isDefault = 'true';
+				} else {
+					templates[i].isDefault = 'false';
+				}
+			}
+			$
+					.ajax({
+						type : "POST",
+						url : "/wizard.html",
+						data : $(document.forms["operateForm"]).serialize(),
+						dataType : "html",
+						success : function(html, stat) {
+							var parent = $('#site_preview').parent();
+							$('#site_preview')
+									.slideUp(
+											"slow",
+											function() {
+												$('#site_preview').remove();
+												$('#indicator_bar').css(
+														'display', '');
+												$(parent, ':last')
+														.append(
+																'<iframe id="site_preview" class="sitePreviewIframe" src="/wizard.html?go=site_preview&iframe=true" width="1080" height="765" onload="showIframe()" style="display: none"></iframe>');
+												resizeIframe();
+											});
+						},
+						error : function(html, stat) {
+							alert('Internal server error');
+						}
+					});
+		}
+	}
+
+	function showIframe() {
+		$('#indicator_bar').css('display', 'none');
+		$('#site_preview').slideDown();
+	}
+</script>
+
+</head>
+
+<body>
+	<div class="container">
+
+
+
+
+
+		<!-- ONLY FOR SHORTLY MODE: BEGIN -->
+
+
+
+
+
+
+
+		<!-- ONLY FOR SHORTLY MODE: END -->
+		<script type="text/javascript">
+			function isMSIE(version) {
+				return (navigator.userAgent.indexOf('MSIE ' + version) != -1)
+			}
+
+			function changeLanguage(el) {
+				$("body")
+						.append(
+								'<form method="get" id="change_language" name="change_language"><input type="hidden" name="language"/></form>');
+				$('#change_language input[name=language]').val(
+						$(el, "option:selected").val());
+				document.forms['change_language'].submit();
+			}
+
+			function checkCoupon(flag) {
+				$("body")
+						.append(
+								'<form method="post" id="checkCoupon" name="checkCoupon"><input type="hidden" name="act" value="'
+										+ (flag ? 'checkCoupon'
+												: 'removeCoupon')
+										+ '"/><input type="hidden" id="couponNumberId" name="couponNumber"/></form>');
+				$('#couponNumberId').val($("#couponNumber").val());
+				document.forms['checkCoupon'].submit();
+			}
+
+			function alertCoupon() {
+				var COUPON_ALERT = "Coupon alert";
+				var dialog = $("<DIV id='COUPON_ALERT' title='"+COUPON_ALERT+"'></DIV>");
+				$(dialog).append(
+						$('#error_coupon').clone(true).css('display', 'block'));
+				$(dialog).dialog({
+					width : 200,
+					height : 50,
+					modal : true,
+					open : function() {
+						var dialog = this;
+						$('#COUPON_ALERT').css('height', '50px')
+					},
+					buttons : [ {
+						text : "< OK >",
+						click : function() {
+							$(this).remove();
+						}
+					} ],
+					close : function() {
+						$(this).remove();
+					}
+				});
+			}
+		</script>
+
+
+		<script>
+			function openPreview() {
+				var previewPath = "/wizard.html?go=site_preview";
+				var previewAttr = "top=20,left=20,width=1195,height=780,scrollbars=yes,dialog=yes,minimizable=yes,modal=no,dialog=yes,resizable=yes";
+				var win = window.open(previewPath, "preview_window"
+						+ new Date().getTime(), previewAttr);
+				if (!win) {
+					alert("Your browser has blocked pop-up window. Please, allow it to open pop-ups from our site");
+				} else {
+					win.focus();
+				}
+			}
+		</script>
+
+		<div class="head">
+			<div class="logo">
+				<a href="http://www.sitementrix.com" onfocus="blur()"> <img
+					src="/image/front/smLogo.jpg" border="0" width="316" height="100"
+					alt="SiteMentrix" hspace="0" vspace="0" align="left" /> </a>
+			</div>
+
+			<div class="languages">
+
+				<a href="#" class="languageBoxTitle"><span>Choose your
+						language</span> <img class="languageBoxGlobe" src="/image/front/globe.png"
+					alt="" /> </a>
+				<div class="languageBox">
+
+
+
+
+
+
+
+					<a href="#" langCode="da" selected="selected"> Danske (da)
+					</a> <a href="#" langCode="de"> Deutsch (de) </a> <a
+						href="#" langCode="en"> English (en) </a> <a
+						href="#" langCode="es"> Español (es) </a> <a
+						href="#" langCode="fr"> Français (fr) </a> <a
+						href="#" langCode="it"> Italiano (it) </a> <a
+						href="#" langCode="nl"> Nederlands (nl) </a> <a
+						href="#" langCode="pl"> Polska (pl) </a> <a
+						href="#" langCode="ru"> Русский (ru) </a> <a
+						href="#" langCode="sv"> Svenska (sv) </a>
+
+
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="menuBlock">
+
+
+
+			<script type="text/javascript">
+				function goStep(num) {
+					//				  debugger;
+					if (document.forms["operateForm"]) {
+						if (typeof (document.forms["operateForm"].logon) != "undefined"
+								&& document.forms["operateForm"].logon != null) {
+							if (document.forms["operateForm"].logon.value == 'true') {
+								$(document.forms["operateForm"]).find(
+										'input.inputDomain[defValue]').each(
+										function(e) {
+											if ($(this).val() == $(this).attr(
+													'defValue'))
+												$(this).val('').css('color',
+														'#0b0b0b');
+										});
+							}
+						}
+						document.forms["operateForm"].action = "?go=step&step="
+								+ num;
+						document.forms["operateForm"].submit();
+					} else {
+						window.location.href = "/wizard.html?go=step&step="
+								+ num;
+					}
+				}
+			</script>
+			<ul class="menu" id="menu">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<li id="" class="stepPrev"><a
+					href="javascript:goStep(0);" style="cursor: pointer; cursor: hand;"
+					onfocus="blur()"> <img src="images/preview.png" width="29"
+						height="29" alt="previous" /> previous </a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<li><a href="javascript:goStep(0)" onfocus="blur()"
+					title="Domain name"> <span>1</span> Domain name <img
+						src="images/spacer.gif" width="24" height="10" alt="" /> </a></li>
+
+
+
+
+
+
+				<li class="item_selected"><a href="#" onfocus="blur()"
+					title="Design"> <span>2</span> Design <img
+						src="images/spacer.gif" width="24" height="10" alt="" /> </a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<li><a href="javascript:goStep(2)" onfocus="blur()"
+					title="Login"> <span>3</span> Login <img
+						src="images/spacer.gif" width="24" height="10" alt="" /> </a>
+					</td>
+
+
+
+
+
+
+
+
+
+
+
+					<li><a href="javascript:goStep(3)" onfocus="blur()"
+						title="Pay and Go Live!"> <span>4</span> Pay and Go Live! <img
+							src="images/spacer.gif" width="24" height="10" alt="" /> </a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<li id="" class="stepNext"><a
+						href="javascript:goStep(2)" style="cursor: pointer; cursor: hand;"
+						onfocus="blur()"> next <img src="images/next.png" width="29"
+							height="29" alt="next" /> </a></li>
+			</ul>
+			<script type="text/javascript">
+				negesoMenu('menu');
+			</script>
+
+
+		</div>
+
+
+
+
+		<div class="contentBlock contentBig">
+			<div class="content">
+				<h1 class="title">
+					<span>Design:</span> The looks of your website (step 2 of 4)
+				</h1>
+				<div class="contentStyle">
+
+					<form name="operateForm" method="post" action="">
+						<table cellpadding="0" cellspacing="0" border="0" align="center"
+							class="chooseTemplate" style="margin-right: 50px;">
+							<tr>
+								<th>Please choose your design category</th>
+								<td><input type="hidden" name="isChangeDesignTemplate"
+									value="false" /> <input type="hidden" name="go" value="step" />
+									<input type="hidden" name="step" value="1" />
+									<div style="position: relative;">
+
+										<div class="customSelectText" style="width: 160px;">
+											<img src="images/select-choose.gif" width="27" height="28"
+												alt="" vspace="0" hspace="0" />
+											<div>General</div>
+										</div>
+										<select id="designCategory"
+											onchange="setCustomSelectText(this.options[this.selectedIndex].text,this);changeDesignCategory(true)"
+											style="width: 150px; cursor: hend; cursor: pointer;"
+											class="customSelect"
+											style="width:160px; cursor: hend; cursor: pointer;">
+
+											<option value="14">Familie</option>
+
+											<option value="22">Forretning</option>
+
+
+											<option value="1" selected="true">General</option>
+
+											<option value="45">Kids</option>
+
+											<option value="40">Mode
+												og skønhed</option>
+
+											<option value="54">Plain
+												farver</option>
+
+											<option value="30">Professionel</option>
+
+											<option value="28">Rejser</option>
+
+
+											<option value="26">Sport</option>
+
+											<option value="47">Visitkort</option>
+
+										</select>
+									</div></td>
+								<th>Template</th>
+								<td>
+
+									<div style="position: relative;">
+										<div class="customSelectText" style="width: 160px;">
+											<img src="images/select-choose.gif" width="27" height="28"
+												alt="" vspace="0" hspace="0" />
+											<div id="templateText"></div>
+										</div>
+										<select id="templateId" name="templateId"
+											onchange="javascript:setCustomSelectText(this.options[this.selectedIndex].text,this);changeDesignTemplate()"
+											class="customSelect"
+											style="width: 160px; cursor: hend; cursor: pointer;"></select>
+									</div></td>
+								<th>Wide screen website</th>
+
+								<th><input type="hidden" name="wider" value="false" /> <a
+									style="cursor: pointer; cursor: hand; text-decoration: none;"
+									onfocus="blur()" onclick="javascript:setWider(this)"> <img
+										src="/image/front/choose.png" width="24" height="24" alt=""
+										hspace="5" style="float: left;" /> </a></th>
+							</tr>
+						</table>
+					</form>
+					<div class="clear"></div>
+
+					<div class="btnVisualizeLeft">
+						<div class="btnVisualize"
+							onClick="window.location.href='slogan.html'">
+							<div class="customerBtnGrey">
+								<span class="wBtnVizual">Edit slogan</span>
+							</div>
+							<img src="/image/front/arrow-left1.png" width="82" height="38"
+								alt="Edit site slogan" class="arrow" style="margin-top: 15px;" />
+						</div>
+
+						<div class="btnVisualize"
+							onClick="window.location.href='menu.html'">
+							<div class="customerBtnGrey">
+
+								<span class="wBtnVizual">Select menu</span>
+							</div>
+							<img src="/image/front/arrow-left1.png" width="82" height="38"
+								alt="Select site menu" class="arrow" />
+						</div>
+
+						<div class="btnVisualize"
+							onClick="window.location.href='text_properties.html'">
+							<div class="customerBtnGrey">
+								<span class="wBtnVizual">Select text properties</span>
+							</div>
+							<img src="/image/front/arrow-left1.png" width="82" height="38"
+								alt="Configure text colors" class="arrow" />
+						</div>
+
+
+						<div class="btnVisualize"
+							onClick="window.location.href='copyrights.html'">
+							<div class="customerBtnGrey">
+								<span class="wBtnVizual">Edit copyrights</span>
+							</div>
+							<img src="/image/front/arrow-left2.png" width="82" height="38"
+								alt="Select site footer" class="arrow" />
+						</div>
+					</div>
+					<div class="visualizeTemplate"
+						title="Preview of your website. Click here.">
+
+						<img src="/image/front/0.gif" width="100%" height="115" alt=""
+							onclick="javascript:openPreview()"
+							style="position: absolute; z-index: 2; cursor: pointer; cursor: hand;"
+							alt="Preview of your website. Click here."
+							title="Preview of your website. Click here." /> <img
+							src="/image/front/0.gif" width="100%" height="100%" alt=""
+							onclick="javascript:openPreview()"
+							style="position: absolute; z-index: 2; top: 150px; cursor: pointer; cursor: hand;"
+							alt="Preview of your website. Click here."
+							title="Preview of your website. Click here." />
+						<iframe id="site_preview" class="sitePreviewIframe"
+							src="/wizard.html?go=site_preview&iframe=true" width="1080"
+							height="765"></iframe>
+						<img id="indicator_bar" src="/image/front/indicator_bar.gif"
+							style="display: none; margin-left: 310px; margin-top: 200px;"></img>
+					</div>
+					<div class="btnVisualizeRight">
+						<div class="btnVisualize"
+							onClick="window.location.href='header_logo.html'">
+							<img src="/image/front/arrow-right2.png" width="82" height="38"
+								alt="Choose header and logo" class="arrow arrowRight1"
+								style="margin-top: 15px;" />
+							<div class="customerBtnGrey">
+
+								<span class="wBtnVizual">Select header and logo</span>
+							</div>
+						</div>
+
+						<div class="btnVisualize"
+							onClick="window.location.href='contact_info.html'">
+							<img src="/image/front/arrow-right1.png" width="82" height="38"
+								alt="Edit contact info" class="arrow arrowRight1" />
+							<div class="customerBtnGrey">
+								<span class="wBtnVizual">Edit contact info</span>
+							</div>
+
+						</div>
+
+						<div class="btnVisualize" onClick="window.location.href='bg.html'">
+							<img src="/image/front/arrow-right3.png" width="89" height="31"
+								alt="Select site background" class="arrow arrowRight1"
+								style="position: absolute; top: 65px; left: 45px;" />
+							<div class="customerBtnGrey">
+								<span class="wBtnVizual">Select background</span>
+							</div>
+						</div>
+
+						<div class="btnVisualize"
+							onClick="window.location.href='footer.html'">
+							<img src="/image/front/arrow-right1.png" width="82" height="38"
+								alt="Select site footer" class="arrow arrowRight1" />
+
+							<div class="customerBtnGrey">
+								<span class="wBtnVizual">Select footer</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="nextBtn">
+						<a style="cursor: pointer; cursor: hand;" onfocus="blur()"
+							href="javascript:goStep(2)">
+							next </a>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pusher"></div>
+	<div class="footerBlock">
+		<div class="footer">
+
+			<div class="footerLink">
+
+				<a href="http://www.sitementrix.com/index_en.html" target="_blank">©
+					2012 SiteMentrix</a><span>|</span> <a
+					href="http://portal.sitementrix.com/privacy_en.html"
+					target="_blank">Privacy Statement</a><span>|</span> <a
+					href="http://portal.sitementrix.com/disclaimer_en.html"
+					target="_blank">Disclaimer</a>
+			</div>
+			<div class="support">
+				<a href="mailto:support@sitementrix.com" onFocus="blur()"> <img
+					src="images/support.gif" width="23" height="21" alt="" /> Support
+					and feedback </a>
+			</div>
+			<div class="byNegeso">
+				<a href="http://www.sitementrix.com/" target="_blank"
+					onFocus="blur()" style="text-decoration: underline;"> Read more
+					about SiteMentrix </a>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

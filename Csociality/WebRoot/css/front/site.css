@@ -2,13 +2,13 @@
 html{color:#000}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;vertical-align:top;}*/table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var,optgroup{font-style:inherit;font-weight:inherit;}del,ins{text-decoration:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}legend{color:#000;}input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}input,button,textarea,select{*font-size:100%;}
 
 html,body{
-	background:#ffffff url(../images/bg-body.jpg) 0 0 repeat-x;
+	background:#ffffff url(/image/front/bg-body.jpg) 0 0 repeat-x;
 	width:100%;
 	height:100%;
 }
 
 body.visualize{
-	background:#ffffff url(../images/bg-body-sm.jpg) 0 0 repeat-x;
+	background:#ffffff url(/image/front/bg-body-sm.jpg) 0 0 repeat-x;
 }
 *{margin:0; padding:0;}
 
@@ -74,7 +74,7 @@ a:hover {
 	height:100px;
 }
 .btnHelp{
-	background:url(../images/bg-help.png) 0 0 no-repeat;
+	background:url(/image/front/bg-help.png) 0 0 no-repeat;
 	float:right;
 	width:102px;
 	height:54px;
@@ -118,7 +118,7 @@ a:hover {
 }
 
 .btnSave{
-	background:url(../images/bg-save.png) 0 0 no-repeat;
+	background:url(/image/front/bg-save.png) 0 0 no-repeat;
 	float:left;
 	width:123px;
 	height:65px;
@@ -166,7 +166,7 @@ a:hover {
 	font:11px Verdana, Geneva, sans-serif;
 }
 .loginInput{
-	background:url(../images/bg-login.gif) 0 0 no-repeat;
+	background:url(/image/front/bg-login.gif) 0 0 no-repeat;
 	width:147px;
 	height:30px;
 	padding:0 0 0 5px;
@@ -183,7 +183,7 @@ a:hover {
 	color:#343434;
 }
 .login .loginBtn{
-	background: url(../images/btn-login.gif) 0 0 no-repeat;
+	background: url(/image/front/btn-login.gif) 0 0 no-repeat;
 	border:0 none;
 	width:75px;
 	height:30px;
@@ -206,13 +206,13 @@ a:hover {
 }
 
 div.next{
-	background:url(../images/point-pink.png) top right no-repeat;
+	background:url(/image/front/point-pink.png) top right no-repeat;
 	float:right;
 	height:29px;
 	font:14px Verdana, Geneva, sans-serif;
 }
 div.next:hover{
-	background:url(../images/point-blue.png) top right no-repeat;
+	background:url(/image/front/point-blue.png) top right no-repeat;
 }
 div.next a{
 	display: block;
@@ -308,7 +308,7 @@ img.choose, img.chooseIframe{
 	padding:0 15px 0 0;
 }
 .chooseDomain{
-	background:url(../images/bg_block.png) 0 0 no-repeat;
+	background:url(/image/front/bg_block.png) 0 0 no-repeat;
 	position:relative;
 	float:left;
 	width:457px;
@@ -321,15 +321,15 @@ img.choose, img.chooseIframe{
 	color:#010101;
 }
 .chooseDomain img.icon{
-	background:url(../images/inactive_icon.png) 0 0 no-repeat;
+	background:url(/image/front/inactive_icon.png) 0 0 no-repeat;
 	float:left;
 	margin:6px 15px 0 10px;
 }
 .chooseDomainAvtive, .chooseDomain:hover{
-	background:url(../images/bg_block_active.png) 0 0 no-repeat;
+	background:url(/image/front/bg_block_active.png) 0 0 no-repeat;
 }
 .chooseDomainAvtive img.icon, .chooseDomain:hover img.icon{
-	background:url(../images/active_icon.png) 0 0 no-repeat;
+	background:url(/image/front/active_icon.png) 0 0 no-repeat;
 }
 .chooseDomain h1.title{
 	width:350px;
@@ -355,7 +355,7 @@ img.choose, img.chooseIframe{
 }
 .customSelectText{
 	position:relative;
-	background:url(../images/bg-input.gif) 0 0 no-repeat;
+	background:url(/image/front/bg-input.gif) 0 0 no-repeat;
 	float:left;	
 	height:28px;
 	padding:0 0 0 4px;
@@ -387,7 +387,7 @@ img.choose, img.chooseIframe{
 	color:#0b0b0b;
 }
 div.customCheckbox{
-	background:url(../images/chechbox.gif) 0 0 no-repeat;
+	background:url(/image/front/chechbox.gif) 0 0 no-repeat;
 	width:20px;
 	height:20px;
 	cursor:pointer;
@@ -429,7 +429,7 @@ div.customCheckbox{
 	color:#302e2f;
 }
 .nextBtn{
-	background:url(../images/bg_next.png) 0 0 no-repeat;
+	background:url(/image/front/bg_next.png) 0 0 no-repeat;
 	float:right;
 	width:164px;
 	height:61px;
@@ -471,7 +471,7 @@ table.chooseTemplate a, table.chooseTemplate a:hover{
 	text-decoration:none;
 }
 .tableLogon {
-	background:#f1f1f1 url(../images/tableLogon-bot.gif) left bottom no-repeat;
+	background:#f1f1f1 url(/image/front/tableLogon-bot.gif) left bottom no-repeat;
 	width:523px;
 	
 }
@@ -498,7 +498,7 @@ table.chooseTemplate a, table.chooseTemplate a:hover{
 	color:#6b6b6b;
 }
 .kindOfPayment{
-	background:url(../images/bg-step4.gif) 0 0 no-repeat;
+	background:url(/image/front/bg-step4.gif) 0 0 no-repeat;
 	position:relative;
 	width:550px;
 	height:auto;
@@ -507,7 +507,7 @@ table.chooseTemplate a, table.chooseTemplate a:hover{
 }
 
 .errorPurpleBlock{
-	background:url(../images/bg-errorPurpleBlock.png) 0 0 no-repeat;
+	background:url(/image/front/bg-errorPurpleBlock.png) 0 0 no-repeat;
 	color:#FFF;
 	padding:7px 10px 9px 15px;
 	font:12px Verdana, Geneva, sans-serif;
@@ -518,14 +518,14 @@ table.chooseTemplate a, table.chooseTemplate a:hover{
 }
 
 /*.btnPink{
-	background:url(../images/button_pink.png) 0 0 no-repeat;
+	background:url(/image/front/button_pink.png) 0 0 no-repeat;
 	width:85px;
 	height:28px;
 }*/
 
 
 .frame, .frameBig {
-	background:#FFF url(../images/frame-body.gif) 0 0 repeat-y;
+	background:#FFF url(/image/front/frame-body.gif) 0 0 repeat-y;
 	position:relative;
 	float:left;
 	width:242px;
@@ -533,7 +533,7 @@ table.chooseTemplate a, table.chooseTemplate a:hover{
 	min-height:100px;
 }
 .frameBig{
-	background:url(../images/frame-body-big.gif) 0 0 repeat-y;
+	background:url(/image/front/frame-body-big.gif) 0 0 repeat-y;
 	width:900px;
 	xfloat:none;
 	padding-bottom:5px;
@@ -607,7 +607,7 @@ img.choose, img.chooseIframe{
 	height: 50px;
 }
 .footerBlock{
-	background:url(../images/bg-footer.gif) 0 0 repeat-x;
+	background:url(/image/front/bg-footer.gif) 0 0 repeat-x;
 	position: absolute;
 	bottom: 0;
 	min-width: 1180px;
@@ -673,7 +673,7 @@ img.choose, img.chooseIframe{
 }
 /**/
 .upMax{
-	background:url(../images/up-pink.gif) top right no-repeat;
+	background:url(/image/front/up-pink.gif) top right no-repeat;
 	height:30px;
 	padding:7px 35px 0 0;
 	font:14px Arial, Helvetica, sans-serif;
@@ -682,10 +682,10 @@ img.choose, img.chooseIframe{
 	cursor: hand; 
 }
 .upMax:hover{
-	background:url(../images/up-blue.gif) top right no-repeat;
+	background:url(/image/front/up-blue.gif) top right no-repeat;
 }
 .downMax{
-	background:url(../images/down-pink.gif) top right no-repeat;
+	background:url(/image/front/down-pink.gif) top right no-repeat;
 	height:30px;
 	padding:7px 35px 0 0;
 	font:14px Arial, Helvetica, sans-serif;
@@ -694,7 +694,7 @@ img.choose, img.chooseIframe{
 	cursor: hand; 
 }
 .downMax:hover{
-	background:url(../images/down-blue.gif) top right no-repeat;
+	background:url(/image/front/down-blue.gif) top right no-repeat;
 }
 
 
@@ -705,7 +705,7 @@ body.smFrameBody{
 
 
 .smFrame{
-	background:url(../images/iframe/background.png) 50px 50px no-repeat;
+	background:url(/image/front/iframe/background.png) 50px 50px no-repeat;
 	position:relative;
 	float:left;
 	width:1150px;
@@ -747,7 +747,7 @@ body.smFrameBody{
 }
 .selectSrtategyText{
 	position:relative;
-	background:url(../images/iframe/bg-select-big.gif) 0 0 no-repeat;
+	background:url(/image/front/iframe/bg-select-big.gif) 0 0 no-repeat;
 	width:362px;
 	height:28px;
 	margin:0;
@@ -799,7 +799,7 @@ body.smFrameBody{
 }
 
 .contentStyle input.inputCustom{
-	background:url(../images/iframe/bg-input.gif) 0 0 no-repeat;
+	background:url(/image/front/iframe/bg-input.gif) 0 0 no-repeat;
 	width:198px;
 	height:28px;
 	border:0 none;
@@ -813,7 +813,7 @@ body.smFrameBody{
 
 .smFrame .selectCustomText{
 	position:absolute;
-	background:url(../images/iframe/bg-select-sm.gif) 0 0 no-repeat;
+	background:url(/image/front/iframe/bg-select-sm.gif) 0 0 no-repeat;
 	width:145px;
 	height:28px;
 	margin-top:1px;
@@ -869,7 +869,7 @@ body.smFrameBody{
 	text-align:center;
 }
 .smGo table td{
-	background:url(../images/iframe/sm-go.png) 0 0 no-repeat;
+	background:url(/image/front/iframe/sm-go.png) 0 0 no-repeat;
 	width:258px;
 	height:94px;
 	text-align:center;
@@ -883,13 +883,13 @@ body.smFrameBody{
 
 }
 .contentStyle .smGo table td:hover{
-	background:url(../images/iframe/sm-go-hover.png) 0 0 no-repeat;
+	background:url(/image/front/iframe/sm-go-hover.png) 0 0 no-repeat;
 }
 .contentStyle .smGo table td:focus,.contentStyle .smGo table td:active{
-	background:url(../images/iframe/sm-go-active.png) 0 0 no-repeat;
+	background:url(/image/front/iframe/sm-go-active.png) 0 0 no-repeat;
 }
 .smToolTip{
-	background:url(../images/tooltip.gif) top right no-repeat;
+	background:url(/image/front/tooltip.gif) top right no-repeat;
 	float:right;
 	width:auto;
 	display:none;
@@ -914,7 +914,7 @@ body.smFrameBody{
 
 .smFrameSmall .selectCustomText{
 	position:absolute;
-	background:url(../images/sm-select.gif) 0 0 no-repeat;
+	background:url(/image/front/sm-select.gif) 0 0 no-repeat;
 	width:133px;
 	height:31px;
 	padding:9px 0 0 7px;
@@ -961,14 +961,14 @@ body.smFrameBody{
 }
 .smFrameSmall .smFrameSmallTop div,
 .smFrameSmall .smFrameSmallBot div{
-	background:url(../images/sm-frame-top-bg.png) 0 0 no-repeat;
+	background:url(/image/front/sm-frame-top-bg.png) 0 0 no-repeat;
 	float:left;
 	width:762px;
 	height:17px;
 }
 
 .smFrameSmall .smFrameSmallBot div{
-	background:url(../images/sm-frame-bot-bg.png) 0 0 no-repeat!important;
+	background:url(/image/front/sm-frame-bot-bg.png) 0 0 no-repeat!important;
 }
 .smFrameSmall .smFrameSmallBot img{
 	float:right;
@@ -979,14 +979,14 @@ body.smFrameBody{
 	float:right;
 }
 .smFrameSmallContentBg{
-	background:url(../images/sm-frame-body-bg-right.png) top right repeat-y;
+	background:url(/image/front/sm-frame-body-bg-right.png) top right repeat-y;
 	float:left;
 	width:778px;
 	height:auto;
 }
 .smFrameSmallContent{
-	background:url(../images/sm-frame-body-bg.png) 0 0 repeat-y;
-	xbackground:url(../images/sm-frame-body-bg-right.png) top right repeat-y;
+	background:url(/image/front/sm-frame-body-bg.png) 0 0 repeat-y;
+	xbackground:url(/image/front/sm-frame-body-bg-right.png) top right repeat-y;
 	float:left;
 	width:768px;
 	height:auto;
@@ -1036,7 +1036,7 @@ body.smFrameBody{
 }
 
 .contentStyle input.inputCustomSmall{
-	background:url(../images/sm-input.gif) 0 0 no-repeat;
+	background:url(/image/front/sm-input.gif) 0 0 no-repeat;
 	width:210px;
 	height:31px;
 	border:0 none;
@@ -1067,7 +1067,7 @@ body.smFrameBody{
 }
 .smGoSmall{
 	position:relative;
-	background:url(../images/sm-go.gif) 0 0 repeat-x;
+	background:url(/image/front/sm-go.gif) 0 0 repeat-x;
 	width:400px;
 	height:54px;
 	margin:0;
@@ -1090,12 +1090,12 @@ body.smFrameBody{
 	z-index:1;
 }
 .smGoSmall .goBtn{
-	background:url(../images/sm-go-left.gif) 0 0 repeat-x;
+	background:url(/image/front/sm-go-left.gif) 0 0 repeat-x;
 	width:160px;
 	height:54px;
 }
 .smGoSmall .goBtn div{
-	background:url(../images/sm-go-right.gif) top right no-repeat;	
+	background:url(/image/front/sm-go-right.gif) top right no-repeat;	
 	float:right;	
 	height:54px;
 	padding:18px 15px 0 15px;
@@ -1115,7 +1115,7 @@ body.smFrameBody{
 }
 
 .stepBG
-{background:url(../images/step_bg.png) 0 0 no-repeat;
+{background:url(/image/front/step_bg.png) 0 0 no-repeat;
 width:740px;
 height:40px;
 margin-bottom:10px;
@@ -1136,7 +1136,7 @@ ul.menuSmall
 }
 ul.menuSmall li
 {
-	background:url(../images/point-grey.png) 0 0 no-repeat;
+	background:url(/image/front/point-grey.png) 0 0 no-repeat;
 	display: block;
 	position:relative;
 	float:left;
@@ -1149,11 +1149,11 @@ ul.menuSmall li
 
 ul.menuSmall li:hover
 {
-	background:url(../images/point-pink.png) 0 0 no-repeat;
+	background:url(/image/front/point-pink.png) 0 0 no-repeat;
 }
 ul.menuSmall li:first-child 
 {
-background:url(../images/point-pink.png) 0 0 no-repeat;
+background:url(/image/front/point-pink.png) 0 0 no-repeat;
 }
 
 ul.menuSmall li a{
@@ -1173,7 +1173,7 @@ ul.menuSmall li a img{
 }
 ul.menuSmall li:hover a img
 {
-	background:url(../images/arrow.gif) 0 0 no-repeat;
+	background:url(/image/front/arrow.gif) 0 0 no-repeat;
 }
 
 ul.menuSmall li a span{

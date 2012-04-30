@@ -1,4 +1,4 @@
-package com.xjany.bbs.action.admin;
+package com.xjany.action.admin;
 
 import javax.servlet.http.HttpServletRequest;
 

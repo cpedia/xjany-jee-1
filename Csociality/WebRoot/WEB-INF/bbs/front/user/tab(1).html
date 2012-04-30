@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Tab</title>
+<style type="text/css">
+<!--
+body {
+	padding: 0;
+	font: 12px "宋体";
+}
+
+#lib_Tab1 {
+	width: 95%;;
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 15px;
+}
+
+.lib_tabborder {
+	border: 1px solid #95C9E1;
+}
+
+.lib_Menubox {
+	height: 28px;
+	line-height: 28px;
+	position: relative;
+}
+
+.lib_Menubox ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	position: absolute;
+	top: 3px;
+	left: 0;
+	margin-left: 10px;
+	height: 25px;
+	text-align: center;
+}
+
+.lib_Menubox li {
+	float: left;
+	display: block;
+	cursor: pointer;
+	width: 114px;
+	color: #949694;
+	font-weight: bold;
+	margin-right: 2px;
+	height: 25px;
+	line-height: 25px;
+	background-color: #E4F2FD
+}
+.lib_Menubox li.hover {
+	padding: 0px;
+	background: #fff;
+	width: 116px;
+	border-left: 1px solid #95C9E1;
+	border-top: 1px solid #95C9E1;
+	border-right: 1px solid #95C9E1;
+	color: #739242;
+	height: 25px;
+	line-height: 25px;
+}
+
+.lib_Contentbox {
+	clear: both;
+	margin-top: 0px;
+	border-top: none;
+	height: 181px;
+	text-align: center;
+	padding-top: 8px;
+}
+-->
+</style>
+<script>
+<!--
+	function setTab(name, cursel) {
+		for (i = 1; i <= 4; i++) {
+			var menu = document.getElementById(name + i);
+			var con = document.getElementById("con_" + name + "_" + i);
+			menu.className = i == cursel ? "hover" : "";
+			con.style.display = i == cursel ? "block" : "none";
+		}
+	}
+//-->
+</script>
+</head>
+<body>
+
+	<div id="lib_Tab1">
+		<div class="lib_Menubox lib_tabborder">
+			<ul>
+				<li id="one1" onclick="setTab('one',1)" class="hover">水泥</li>
+				<li id="one2" onclick="setTab('one',2)">掺合料</li>
+				<li id="one3" onclick="setTab('one',3)">外加剂</li>
+				<li id="one4" onclick="setTab('one',4)">其他</li>
+			</ul>
+		</div>
+		<div class="lib_Contentbox lib_tabborder">
+			<div id="con_one_1">
+			<table border="1" bordercolor="#CCCCCC" width="90%">
+				<tr id="liebiao1">
+				    <td width="43" class="tableRow1">选择</td>
+				    <td colspan="2" class="tableRow1">原材料类型</td>
+				    <td class="tableRow1">复验报告编号</td>
+				    <td width="49" class="tableRow1">进货日期</td>
+				    <td width="49" class="tableRow1">存放罐号</td>
+				    <td colspan="2" class="tableRow1">品种名称</td>
+				    <td width="48" class="tableRow1">品种规格</td>
+				    <td width="43" class="tableRow1">产地</td>
+				    <td width="47" class="tableRow1">厂牌</td>
+				    <td class="tableRow1">每立方米用量（公斤）</td>
+  				</tr>
+  				<tr id="liebiao1">
+				    <td><input type="checkbox"></input></td>
+				    <td>水泥</td>
+				    <td><input type="text"></input></td>
+				    <td><input type="text"></input></td>
+				    <td>普通</td>
+				    <td>42.5</td>
+				    <td></td>
+				    <td></td>
+				    <td><input type="text"></input></td>
+				    <td><input type="text"></input></td>
+  				</tr>
+  				
+			</table>
+
+
+
+            </div>
+		 	<div id="con_one_2" style="display: none">掺合料</div>
+			<div id="con_one_3" style="display: none">外加剂</div>
+			<div id="con_one_4" style="display: none">其他</div>
+		</div>
+	</div>
+</body>
+</html>

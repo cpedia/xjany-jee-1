@@ -1,6 +1,6 @@
 body { margin:0;}
 img{border: medium none;}
-#home_top { margin:auto;height:35px; background-image:url(../images/top_bg_new.gif); font-size:12px;}
+#home_top { margin:auto;height:35px; background-image:url(/image/front/top_bg_new.gif); font-size:12px;}
 #home_top .top_nav { margin:auto;width:960px; height:35px; font-size:12px;}
 #home_top .top_nav .left { width:310px; float:left; text-align:left; color:#696969; margin-top:5px;}
 #home_top .top_nav .left a{ padding:2px;color:#696969;text-decoration: none;}

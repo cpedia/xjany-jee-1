@@ -139,7 +139,7 @@ a.red_link:hover {
 
 
 .searchPanel input.form_submit {
-    background:Transparent url(../images/form-submit_sm.png) top left no-repeat;    
+    background:Transparent url(/image/front/form-submit_sm.png) top left no-repeat;    
 	   font: 11px Arial, Verdana, Helvetica, sans-serif;
 	   color: #fff;
 	   border: 0px none; 	   
@@ -282,13 +282,13 @@ padding:15px 5px 10px 5px;
 }
 
 .contentStyle .searchOrange{
-   background: url(../images/search_bg.jpg) 0 0 repeat-x;
+   background: url(/image/front/search_bg.jpg) 0 0 repeat-x;
    height:45px;
    
 }
 
 .contentStyle .searchOrangeTDR{	
-   background: url(../images/search_bgr.png) 0 0 no-repeat;
+   background: url(/image/front/search_bgr.png) 0 0 no-repeat;
     border:none;
    	padding: 0;  
 	text-align:center;
@@ -297,7 +297,7 @@ padding:15px 5px 10px 5px;
 }
 
 .contentStyle .searchOrangeTDL{	
-background: url(../images/search_bgl.png) 0 0 no-repeat;
+background: url(/image/front/search_bgl.png) 0 0 no-repeat;
    border:none;
    	padding: 0;  
 	text-align:center;
@@ -316,7 +316,7 @@ background: url(../images/search_bgl.png) 0 0 no-repeat;
 	}
 
 .contentStyle .searchButton input{
-	 background: url(../images/search_circle.png) no-repeat;
+	 background: url(/image/front/search_circle.png) no-repeat;
 	height:24px !important;
 	 width:24px;
 	 font-size:1px !important;
@@ -332,7 +332,7 @@ background: url(../images/search_bgl.png) 0 0 no-repeat;
 	padding-top:3px;}
 
 .movie{
-    background: url(../images/tv_bg.png) top center no-repeat;
+    background: url(/image/front/tv_bg.png) top center no-repeat;
     width: 599px;
     height: 428px;
     vertical-align: top;

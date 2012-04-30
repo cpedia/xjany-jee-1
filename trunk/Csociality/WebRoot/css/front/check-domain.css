@@ -33,7 +33,7 @@ div.dLink{
   padding:20px;
 }
 #dialog .dHeader {
-  background:url(../images/check-domain/header_bg.png) no-repeat 0 0 transparent; 
+  background:url(/image/front/check-domain/header_bg.png) no-repeat 0 0 transparent; 
   width:399px; 
   height:21px;
   padding:0;
@@ -49,7 +49,7 @@ color:#F00;
 margin-bottom:10px;
 }
 #dialog .close {
- background:url(../images/check-domain/close.png) no-repeat 0 0 transparent;  
+ background:url(/image/front/check-domain/close.png) no-repeat 0 0 transparent;  
  float:right;
  position:absolute;
  margin: -3px 0 0 373px;
@@ -58,7 +58,7 @@ margin-bottom:10px;
   width:27px;
 }
 #dialog .buyBtn {
- background:url(../images/check-domain/buy_btn.jpg) no-repeat 0 0 transparent;  
+ background:url(/image/front/check-domain/buy_btn.jpg) no-repeat 0 0 transparent;  
  float:right;
  position:absolute;
  margin: -25px 0 0 18px;
@@ -82,7 +82,7 @@ margin-bottom:10px;
  display:none;	
 	}	
 #dialog .moreBtn {
- background:url(../images/check-domain/buy_btn.jpg) no-repeat 0 0 transparent;  
+ background:url(/image/front/check-domain/buy_btn.jpg) no-repeat 0 0 transparent;  
  float:right;
  position:absolute;
   margin: 10px 0 0 33px;
@@ -96,13 +96,13 @@ margin-bottom:10px;
 }
 #dialog .dBlank {
   float:left;
-  background:url(../images/check-domain/box_center.png) 0 0 repeat-y transparent;  
+  background:url(/image/front/check-domain/box_center.png) 0 0 repeat-y transparent;  
   width:399px;  
   padding:5px 5px 0 0;
   
 }
 #dialog .dBottom {
-  background:url(../images/check-domain/box_bottom.png) no-repeat 0 0 transparent; 
+  background:url(/image/front/check-domain/box_bottom.png) no-repeat 0 0 transparent; 
   float:left;
   width:399px; 
   height:15px;
@@ -110,7 +110,7 @@ margin-bottom:10px;
 
 #dialog .dLine
 {
-	  background:url(../images/check-domain/line.jpg) no-repeat 0 0 transparent; 
+	  background:url(/image/front/check-domain/line.jpg) no-repeat 0 0 transparent; 
   
   width:385px; 
   height:2px;}

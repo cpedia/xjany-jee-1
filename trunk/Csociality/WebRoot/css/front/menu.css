@@ -194,12 +194,12 @@ background:none;
 
 .second-level li{
     padding: 4px 12px 5px 18px;
-    background: Transparent url(../images/bg_menu_12.png) 0px 5px no-repeat;    
+    background: Transparent url(/image/front/bg_menu_12.png) 0px 5px no-repeat;    
 }
 
 .second-level li.item_over,
 .second-level li.item_selected{    
-    background-image: url(../images/bg_menu_l2_active.png);
+    background-image: url(/image/front/bg_menu_l2_active.png);
 }
 
 .second-level li a{    

@@ -9,7 +9,7 @@ html,body{
 	height:100%;
 }
 body{
-  	background:#f1f1f1 url('../../images/body_bg.png') center top repeat-y; 
+  	background:#f1f1f1 url('..//image/front/body_bg.png') center top repeat-y; 
 	margin:0;
 	padding:0;
 	font: 11px Verdana, sans-serif;		
@@ -30,7 +30,7 @@ table.admMain {
 }
 
 .dialogSmall{
-  	background:#f1f1f1 url('../../images/body_bg_small.png') center top repeat-y; 
+  	background:#f1f1f1 url('..//image/front/body_bg_small.png') center top repeat-y; 
 }
 .dialogSmall .admTable .admNavPanelInp{
     padding-left:0;
@@ -50,26 +50,26 @@ a{
     color:#000;
  }     
 td.admTopBtn { 
-	background:#f1f1f1 url('../../images/table_bg_top.gif') bottom repeat-x; 
+	background:#f1f1f1 url('..//image/front/table_bg_top.gif') bottom repeat-x; 
 }
   
 table.admMain td.admMainLeft { 
-	background: url('../../images/table_bg_left.gif') bottom repeat-y; 
+	background: url('..//image/front/table_bg_left.gif') bottom repeat-y; 
 	width:18px;
 	vertical-align:bottom;  
 }
 td.admMaiRight { 
-	background: url('../../images/table_bg_right.gif') bottom repeat-y; 
+	background: url('..//image/front/table_bg_right.gif') bottom repeat-y; 
 	width:18px;
 	vertical-align:bottom;
 }	
 td.admConnerLeft {
-	background:#f1f1f1 url('../../images/table_conner_left.gif') bottom no-repeat;
+	background:#f1f1f1 url('..//image/front/table_conner_left.gif') bottom no-repeat;
 	width:18px;
 	height:13px;
 }
 td.admConnerRight {
-	background:#f1f1f1 url('../../images/table_conner_right.gif') bottom no-repeat;
+	background:#f1f1f1 url('..//image/front/table_conner_right.gif') bottom no-repeat;
 	width:18px;
 	height:13px;
 }
@@ -88,14 +88,14 @@ table.admMenu img.admFolder{
 	cursor:hand;
 }
 table.admTable {
-	background: #f8f8f8 url('../../images/table_bg.png') bottom right repeat-x;
+	background: #f8f8f8 url('..//image/front/table_bg.png') bottom right repeat-x;
 	width:764px; 	
 	word-wrap:break-word;
 	color:#484848;
 }
 
 .admTableTD,.admTableTDLast{	
-	background:url('../../images/td_bg.png') bottom right repeat-x;
+	background:url('..//image/front/td_bg.png') bottom right repeat-x;
 	border-top:1px solid #fff;
 	min-height:41px;
 	padding:10px 5px 5px 3px; 
@@ -163,7 +163,7 @@ a.admTableTDlink,a.admTableTDlink:hover {
  }
   
 .admNavPanel,.admNavPanelFont {
-  background:url('../../images/titles_bg.png') bottom no-repeat;  
+  background:url('..//image/front/titles_bg.png') bottom no-repeat;  
   width:auto;
   height:51px;
   margin:0;
@@ -246,7 +246,7 @@ a.admBtnLink,a.admBtnLink:hover {
 }
 
 .admNavPanelInp div{
-	background:url('../../images/bluebtl_mid.png') repeat-x;
+	background:url('..//image/front/bluebtl_mid.png') repeat-x;
 	height:36px;
 	float:left;
 	width:auto;
@@ -256,12 +256,12 @@ a.admBtnLink,a.admBtnLink:hover {
 	padding:0;	
 }
 .admNavPanelInp div.imgL{
-  background:url('../../images/bluebtl_left.png') no-repeat;
+  background:url('..//image/front/bluebtl_left.png') no-repeat;
   height:36px;
   width:9px;  
 }
 .admNavPanelInp div.imgR{
-  background:url('../../images/bluebtl_right.png') no-repeat;
+  background:url('..//image/front/bluebtl_right.png') no-repeat;
   height:36px;
   width:9px;
 }
@@ -301,7 +301,7 @@ background:transparent;
 	
 }
 .admNavPanelGrey div{
-	background:url('../../images/greybtl_mid.png') repeat-x;
+	background:url('..//image/front/greybtl_mid.png') repeat-x;
 	height:36px;
 	float:left;
 	width:auto;
@@ -311,12 +311,12 @@ background:transparent;
 	padding:0;	
 }
 .admNavPanelGrey div.imgL{
-  background:url('../../images/greybtl_left.png') no-repeat;
+  background:url('..//image/front/greybtl_left.png') no-repeat;
   height:36px;
   width:9px;  
 }
 .admNavPanelGrey div.imgR{
-  background:url('../../images/greybtl_right.png') no-repeat;
+  background:url('..//image/front/greybtl_right.png') no-repeat;
   height:36px;
   width:9px;
 }
@@ -339,7 +339,7 @@ background:transparent;
 }
 
 .admNavChoose div{
-	background:url('../../images/btnsmall.png') no-repeat;
+	background:url('..//image/front/btnsmall.png') no-repeat;
 	height:29px;	
 	width:32px;   	
     vertical-align:middle;
@@ -382,7 +382,7 @@ button.admNavChoose {
 	padding:0 20px 0 0;
 }
 .admBtnGreen div{
-	background:url('../../images/gbutton_mid.png') repeat-x;
+	background:url('..//image/front/gbutton_mid.png') repeat-x;
 	float:left;
 	height:36px;
     margin:0;	
@@ -392,24 +392,24 @@ button.admNavChoose {
     color:#FFF;
 }
 .admBtnGreen div.imgL{
-  background:url('../../images/gbutton_left.png') no-repeat;
+  background:url('..//image/front/gbutton_left.png') no-repeat;
   height:36px;
   width:13px;
 }
 .admBtnGreen div.imgR{
-  background:url('../../images/gbutton_right.png') top right no-repeat;
+  background:url('..//image/front/gbutton_right.png') top right no-repeat;
   height:36px;
   width:9px;
 }
 .admBtnBlue div{
-  background:url('../../images/bbutton_mid.png') repeat-x;
+  background:url('..//image/front/bbutton_mid.png') repeat-x;
   height:36px;
 }
 .admBtnBlue div.imgL{
-  background:url('../../images/bbutton_left.png') no-repeat;
+  background:url('..//image/front/bbutton_left.png') no-repeat;
 }
 .admBtnBlue div.imgR{
-  background:url('../../images/bbutton_right.png') no-repeat;
+  background:url('..//image/front/bbutton_right.png') no-repeat;
 }
 
 
@@ -426,7 +426,7 @@ button.admNavChoose {
 	padding:0 20px 0 0;
 }
 .admBtnGreenb div{
-	background:url('../../images/gbutton_midb.png') repeat-x;
+	background:url('..//image/front/gbutton_midb.png') repeat-x;
 	position:relative;
 	float:left;
 	height:36px;
@@ -448,34 +448,34 @@ button.admNavChoose {
 }
 
 .admBtnGreenb div.imgL{
-  background:url('../../images/gbutton_leftb.png') no-repeat;
+  background:url('..//image/front/gbutton_leftb.png') no-repeat;
   height:36px;
   width:13px;
 }
 .admBtnGreenb div.imgR{
-  background:url('../../images/gbutton_rightb.png') no-repeat;
+  background:url('..//image/front/gbutton_rightb.png') no-repeat;
   height:36px;
   width:13px;
 }
 .admBtnBlueb div{
-  background:url('../../images/bbutton_midb.png') repeat-x;
+  background:url('..//image/front/bbutton_midb.png') repeat-x;
 }
 .admBtnBlueb div.imgL{
-  background:url('../../images/bbutton_leftb.png') no-repeat;
+  background:url('..//image/front/bbutton_leftb.png') no-repeat;
 }
 .admBtnBlueb div.imgR{
-  background:url('../../images/bbutton_rightb.png') no-repeat;
+  background:url('..//image/front/bbutton_rightb.png') no-repeat;
 }
 
 /* Disabled Btn*/
 .admBtnGreyb div{
-  background:url('../../images/greybutton_midb.png') repeat-x;
+  background:url('..//image/front/greybutton_midb.png') repeat-x;
 }
 .admBtnGreyb div.imgL{
-  background:url('../../images/greybutton_leftb.png') no-repeat;
+  background:url('..//image/front/greybutton_leftb.png') no-repeat;
 }
 .admBtnGreyb div.imgR{
-  background:url('../../images/greybutton_rightb.png') no-repeat;
+  background:url('..//image/front/greybutton_rightb.png') no-repeat;
 }
 
 /* SELECT section*/
@@ -662,7 +662,7 @@ table.admLogo .admBtnBlack input{
 	
 }
 .admBtnBlack div{
-	background:url('../../images/blackbtl_mid.png') repeat-x;
+	background:url('..//image/front/blackbtl_mid.png') repeat-x;
 	height:27px;
 	float:left;
 	width:auto;
@@ -672,12 +672,12 @@ table.admLogo .admBtnBlack input{
 	padding:0;	
 }
 .admBtnBlack div.imgL{
-  background:url('../../images/blackbtl_left.png') no-repeat;
+  background:url('..//image/front/blackbtl_left.png') no-repeat;
   height:27px;
   width:6px;  
 }
 .admBtnBlack div.imgR{
-  background:url('../../images/blackbtl_right.png') no-repeat;
+  background:url('..//image/front/blackbtl_right.png') no-repeat;
   height:27px;
   width:6px;
 }
@@ -738,7 +738,7 @@ form {
 
 /* TITLE section*/
 .admTitleLeft{
-	background: #7FB577 url('../../images/titleLeft.gif');
+	background: #7FB577 url('..//image/front/titleLeft.gif');
 	text-align:left;
 	bertical-align:top;
 	repeat: no-repeat; 
@@ -746,7 +746,7 @@ form {
 	height: 25px
 }
 .admTitleright{
-	background: #7FB577 url('../../images/titleRight.gif');
+	background: #7FB577 url('..//image/front/titleRight.gif');
 	text-align: right;
 	vertical-align: top;
 	repaet: no-repeat; 

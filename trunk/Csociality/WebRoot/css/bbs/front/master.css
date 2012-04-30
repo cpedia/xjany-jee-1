@@ -1,5 +1,5 @@
 /* ȫCSS */
-body{font-family:;margin:0 auto;padding:0;font-size:12px;color:#000; background:#F0F6FA url(../images/bg.gif) no-repeat top center;}
+body{font-family:;margin:0 auto;padding:0;font-size:12px;color:#000; background:#F0F6FA url(/image/front/bg.gif) no-repeat top center;}
 
 body > div{margin:0 auto;} 
 div,form,ul,ol,li,span,p{margin:0;padding:0;border:0;}
@@ -57,29 +57,29 @@ a:hover{ color:#c00; text-decoration:underline;}
 #warp { width:780px; margin:0 auto; padding-bottom:10px;}
 #warp .blank16 {clear:both;display:block;height:16px;overflow:hidden;}
 #warp .blank24 {clear:both;display:block;height:24px;overflow:hidden;}
-#warp .tag { height:51px; background:url(../images/tag_bg1.gif) no-repeat;}
-#warp .tag1 { height:51px; background:url(../images/tag_bg2.gif) no-repeat;}
-#warp .tag2 { height:51px; background:url(../images/tag_bg3.gif) no-repeat;}
+#warp .tag { height:51px; background:url(/image/front/tag_bg1.gif) no-repeat;}
+#warp .tag1 { height:51px; background:url(/image/front/tag_bg2.gif) no-repeat;}
+#warp .tag2 { height:51px; background:url(/image/front/tag_bg3.gif) no-repeat;}
 
 #warp #container { width:780px; margin:0 auto; border:1px solid #D6D6D6; background-color:#FFF; padding:0;}
 
 #warp #container .left { width:207px; float:left; border:1px solid #BFDAF8;}
-#warp #container .left .tit { height:32px; background:url(../images/tit_bg1.gif) no-repeat;}
+#warp #container .left .tit { height:32px; background:url(/image/front/tit_bg1.gif) no-repeat;}
 #warp #container .left .tit h2 { font-weight:bold; color:#444; padding:12px 0 0 12px;}
 #warp #container .left .list { padding:6px 12px 8px 12px;}
-#warp #container .left .list .tool1 { height:19px; padding:11px 0 0 28px; background:url(../images/tit_bg2_1.gif) no-repeat; color:#4779B1;}
+#warp #container .left .list .tool1 { height:19px; padding:11px 0 0 28px; background:url(/image/front/tit_bg2_1.gif) no-repeat; color:#4779B1;}
 #warp #container .left .list .tool1 a{ color:#4779B1;text-decoration: none;}
 #warp #container .left .list .tool1 a:hover{text-decoration:underline; color:#c00;}
-#warp #container .left .list .tool2 { height:19px; padding:11px 0 0 28px; background:url(../images/tit_bg2_2.gif) no-repeat; color:#666;}
+#warp #container .left .list .tool2 { height:19px; padding:11px 0 0 28px; background:url(/image/front/tit_bg2_2.gif) no-repeat; color:#666;}
 #warp #container .left .list .tool2 a{ color:#666;text-decoration: none;}
 #warp #container .left .list .tool2 a:hover{text-decoration:underline; color:#c00;}
-#warp #container .left .list .tool3 { height:101px; padding:10px 0 0 12px; line-height:24px; background:url(../images/tit_bg2_3.gif) no-repeat; color:#666;}
+#warp #container .left .list .tool3 { height:101px; padding:10px 0 0 12px; line-height:24px; background:url(/image/front/tit_bg2_3.gif) no-repeat; color:#666;}
 #warp #container .left .list .tool3 span { color:#4779B1;}
 #warp #container .right { width:554px; float:right; border:1px solid #EBEBEB; background-color:#FFF;}
 
-#warp #container .left1 { width:212px; float:left; background:#FFF url(../images/left_bg1.gif) left top no-repeat;}
+#warp #container .left1 { width:212px; float:left; background:#FFF url(/image/front/left_bg1.gif) left top no-repeat;}
 #warp #container .left1 .tit { height:35px; padding:26px 0 0 82px; font-size:14px; font-weight:bold; color:#003055;}
-#warp #container .left1 .list { height:366px; background:url(../images/left_bg2.gif) left top no-repeat; padding:12px 0 0 36px;}
+#warp #container .left1 .list { height:366px; background:url(/image/front/left_bg2.gif) left top no-repeat; padding:12px 0 0 36px;}
 #warp #container .left1 .list a{ color:#266392;text-decoration: none; font-weight:bold;}
 #warp #container .left1 .list a:hover{text-decoration:underline; color:#FF6000;}
 #warp #container .left1 .list .con1 { height:41px; line-height:18px; color:#868686; padding-top:9px;}
@@ -88,7 +88,7 @@ a:hover{ color:#c00; text-decoration:underline;}
 #warp #container .tiaok { line-height:24px; color:#666;}
 #warp #container .tiaok p { padding:14px 0; border-bottom:1px dashed #D4D4D4;}
 #warp #container .tiaok span { font-weight:bold; color:#444;}
-#warp .dengl { height:239px; border:1px solid #EBEBEB; background:url(../images/dengl_bg.gif);}
+#warp .dengl { height:239px; border:1px solid #EBEBEB; background:url(/image/front/dengl_bg.gif);}
 
 
 .foot { width:780px; margin:0 auto; border-top:1px solid #D4D4D4; line-height:24px; color:#444; text-align:center; padding:8px 0 6px 0;}

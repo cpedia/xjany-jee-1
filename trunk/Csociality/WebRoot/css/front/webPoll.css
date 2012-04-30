@@ -17,7 +17,7 @@
   padding:20px;
 }
 #webPolldialog .webPollTop {
-  background:url(../images/webpoll_top.png) no-repeat 0 0 transparent; 
+  background:url(/image/front/webpoll_top.png) no-repeat 0 0 transparent; 
   width:800px; 
   height:21px;
   padding:0;
@@ -33,7 +33,7 @@ color:#F00;
 margin-bottom:10px;
 }
 #webPolldialog .webPollclose {
- background:url(../images/close.png) no-repeat 0 0 transparent;  
+ background:url(/image/front/close.png) no-repeat 0 0 transparent;  
  float:right;
  position:absolute;
  margin: -3px 0 0 777px;
@@ -42,7 +42,7 @@ margin-bottom:10px;
   width:27px;
 }
 #webPolldialog .webPollbuyBtn {
- background:url(../images/buy_btn.jpg) no-repeat 0 0 transparent;  
+ background:url(/image/front/buy_btn.jpg) no-repeat 0 0 transparent;  
  float:right;
  position:absolute;
  margin: -30px 0 0 295px;
@@ -54,12 +54,12 @@ margin-bottom:10px;
 }
 #webPolldialog .webPollmMiddle {
   float:left;
-  background:url(../images/webpoll_center.png) 0 0 repeat-y transparent;  
+  background:url(/image/front/webpoll_center.png) 0 0 repeat-y transparent;  
   width:800px;  
   padding:0 0 0 40px;
 }
 #webPolldialog .webPollBottom {
-  background:url(../images/webpoll_bottom.png) no-repeat 0 0 transparent; 
+  background:url(/image/front/webpoll_bottom.png) no-repeat 0 0 transparent; 
   float:left;
   width:800px; 
   height:15px;
@@ -88,7 +88,7 @@ margin-bottom:10px;
 	}	
 
 #webPolldialog .webPollNoBtn {
- background:url(../images/buy_btn.jpg) repeat-x 0 0 transparent; 
+ background:url(/image/front/buy_btn.jpg) repeat-x 0 0 transparent; 
   border:none;
   height:31px !important;
   width:150px;
@@ -96,7 +96,7 @@ margin-bottom:10px;
   color:#FFF;
 }
 #webPolldialog .webPollYesBtn {
- background:url(../images/yes_btn.png) repeat-x 0 0 transparent; 
+ background:url(/image/front/yes_btn.png) repeat-x 0 0 transparent; 
   border:none;
   height:31px !important;
   width:190px;
@@ -104,7 +104,7 @@ margin-bottom:10px;
   color:#FFF;
 }
 #webPolldialog .SendBtn {
-  background:url(../images/buy_btn.jpg) repeat-x 0 0 transparent;  
+  background:url(/image/front/buy_btn.jpg) repeat-x 0 0 transparent;  
   border:none;
   height:23px !important;
   width:67px;

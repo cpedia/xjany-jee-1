@@ -16,12 +16,14 @@ import com.xjany.common.util.MD5UtilImpl;
 import com.xjany.common.web.session.SessionProvider;
 
 @Controller
+@RequestMapping("bbs/front/user")
 public class UserAction {
 	@Autowired
 	private UserService userService;
 	
 	@Autowired
 	private SessionProvider session;
+	
 	
 	private MD5Util verification = new MD5UtilImpl();
 	
@@ -37,35 +39,30 @@ public class UserAction {
 	public void setSession(SessionProvider session) {
 		this.session = session;
 	}
-	@RequestMapping("/user/index.do")
-	public String showIndex(HttpServletRequest request, ModelMap model)
-			throws Exception {
-		return "user/index";
-	}
 	
-	@RequestMapping("/user/login.do")
+	@RequestMapping("/login.do")
 	public String showLogin(HttpServletRequest request, ModelMap model)
 			throws Exception {
-		return "user/login";
+		return "/login";
 	}
-	@RequestMapping("/user/register.do")
+	@RequestMapping("/register.do")
 	public String showRegisterDo(HttpServletRequest request, ModelMap model)
 			throws Exception {
-		return "user/register";
+		return "/register";
 	}
-	@RequestMapping("/user/register.jhtml")
+	@RequestMapping("/register.jhtml")
 	public String showRegisterJhtml(HttpServletRequest request, ModelMap model)
 			throws Exception {
-		return "user/register";
+		return "/register";
 	}
 	
-	@RequestMapping("/user/check.do")
+	@RequestMapping("/check.do")
 	public String check(AllUser user, HttpServletRequest request,HttpServletResponse response, ModelMap model) {
 		AllUser result = userService.check(user);
 		model.addAttribute("message", result);
 		return "../common/message";
 	}
-	@RequestMapping("/user/loginCheck.do")
+	@RequestMapping("/loginCheck.do")
 	public String login(AllUser user, HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
 		AllUser result = userService.loginCheck(user, session, request, response);
@@ -78,19 +75,19 @@ public class UserAction {
 		model.addAttribute("message",String.valueOf(result));
 		return "../common/message";
 	}
-	@RequestMapping("/user/personalInfo.do")
+	@RequestMapping("/personalInfo.do")
 	public String personalInfo(String codevalue, HttpServletRequest request, ModelMap model) {
-		return "user/personalInfo";
+		return "/personalInfo";
 	}
 	
-	@RequestMapping("/user/addBbsUserInfo.do")
+	@RequestMapping("/addBbsUserInfo.do")
 	public String addBbsUserInfo(AllUser user,BbsUserProfile bbsUserProfile, HttpServletRequest request, ModelMap model) {
         user.setUserRegIp(verification.getIp(request));
 		user.setUserRegTime(new java.sql.Timestamp(System.currentTimeMillis()));
 		AllUser result = userService.save(user, bbsUserProfile, null);
 		model.addAttribute("message",result);
 		if(result != null)
-			return "user/index";
+			return "/index";
 		return "../common/message";
 		
 		//PrintWriter out = response.getWriter();

@@ -1,4 +1,4 @@
-package com.xjany.bbs.action.front;
+package com.xjany.xijie.action;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,13 +11,14 @@ import com.xjany.bbs.service.FileService;
 
 
 @Controller
+@RequestMapping("/")
 public class IndexAction {
 	@Autowired
-	private FileService fileService;
+	private FileService fileService;		
 
-	@RequestMapping("/index.jhtml")
+	@RequestMapping("/index.do")
 	public String showIndex(HttpServletRequest request, ModelMap model)
 			throws Exception {
-		return "index";
-	}
+		return "/index";
+	}		
 }

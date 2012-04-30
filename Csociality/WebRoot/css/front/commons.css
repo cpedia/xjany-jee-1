@@ -430,25 +430,25 @@ tr.blue_line td {
 /*dark blue dotted border-top*/
 .dbdbt {
 	/*border-top: 1px dotted #004370;*/
-	background: transparent url(../images/dots.gif) left top repeat-x;
+	background: transparent url(/image/front/dots.gif) left top repeat-x;
 }
 
 /*dark blue dotted border-bottom*/
 .dbdbb {
 	/*border-top: 1px dotted #004370;*/
-	background: transparent url(../images/dots.gif) left bottom repeat-x;
+	background: transparent url(/image/front/dots.gif) left bottom repeat-x;
 }
 
 /*dark blue dotted border-left*/
 .dbdbl {
 	/*border-left: 1px dotted #004370;*/
-	background: transparent url(../images/dots.gif) left top repeat-y;
+	background: transparent url(/image/front/dots.gif) left top repeat-y;
 }
 
 /*dark blue dotted border-right*/
 .dbdbr {
 	/*border-right: 1px dotted #004370;*/
-	background: transparent url(../images/dots.gif) right top repeat-y;
+	background: transparent url(/image/front/dots.gif) right top repeat-y;
 }
 
 .text26 {

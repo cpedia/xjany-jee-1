@@ -1,0 +1,219 @@
+/*
+                                    Title: CSS classes for menu.
+                                    Author: Rostislav Brizgunov, 2008
+
+======================================= Classes Architecture ===============================================
+.negeso_menu
+  |
+  +---li (different for TOP-level and others, may be for 2nd something special too)
+  |     |
+  |     +----li.item_over (simple menu item HOVER, me be different for each submenu-level)
+  |     |
+  |     +----li.item_selected (selected menu item. Style may be the same as HOVER-style. 
+  |                            Also, hovering selected item is the same as for any other item.
+  |                            .item_selected and .item_over - works together)
+  |
+  +----li.item_first (first items in list)
+  |     |
+  |     +----li.item_first_over     (HOVER for first items in list)
+  |     |
+  |     +----li.item_first_selected (selected first item in each sub-menu. May be different for TOP-level and others.
+  |                                  .item_first_selected and .item_first_over - works together)
+  |
+  +----li.item_last (last items in list)
+  |     |
+  |     +----li.item_last_over     (HOVER for last items in list)
+  |     |
+  |     +----li.item_last_selected (selected last item in each sub-menu. May be different for TOP-level and others.
+  |                                .item_last_selected and .item_last_over - works together)
+  |
+  +----li.item_single (single items in list)
+        |
+        +----li.item_single_over     (HOVER for single items in list)
+        |
+        +----li.item_single_selected (selected single item in each sub-menu. May be different for TOP-level and others.
+                                    .item_single_selected and .item_single_over - works together)
+============================================================================================================
+
+Remember, that each CSS class, described upwards, may vary for top-level, second-level, etc.
+*/
+
+/*--------------------------------------------------- One deprecated class from past menu: begin */
+.b-menu{	
+	height: 43px;
+	z-index:200;
+}
+/*--------------------------------------------------- One deprecated class from past menu: end */
+
+/*=================================================== NEGESO MENU -- BEGIN ===================================================*/
+
+.negeso_menu {	
+	width: auto;
+	float:right;
+	margin: 0;
+	padding: 0;
+	display: block;
+	list-style: none;
+	z-index:200;
+}
+
+.negeso_menu li ul {	
+	left: 0;
+	top: 46px;
+	margin: 0;
+	padding: 0;
+	z-index: 100;
+	list-style: none;
+	display: none;
+}
+
+.negeso_menu li ul li ul {
+	left: 211px;
+	top: 0;	
+}
+
+/*--------------------------------------------------- Middle item: begin ---------------------------------------------------*/
+
+/*--------------------------------- Top level: begin ---------------------------------*/
+.negeso_menu li {
+	background: transparent url(/site/core/images/separator.png) bottom right no-repeat;		
+	float: left;
+	margin: 0;
+	padding: 0 30px;
+	position: relative;
+	cursor: pointer;
+	height: 43px;
+	line-height: 43px;
+	color: black;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align: left;
+	}
+
+.negeso_menu li.item_over,
+.negeso_menu li.item_selected {
+	background: transparent url(/site/core/images/separator.png) bottom right no-repeat;
+	color: #FFF;
+}
+/*--------------------------------- Top level: end ---------------------------------*/
+
+/*--------------------------------- Other levels: begin ---------------------------------*/
+.negeso_menu li ul {	
+position:absolute;
+	background: #FFFFFF url(/site/core/images/menu_bg.jpg) bottom repeat;	
+	text-align: left;
+	border-right: 1px solid #000;	
+	border-left: 1px solid #000;
+	z-index:200;
+}
+
+.negeso_menu li ul li {
+	background:none;
+	padding: 0 12px 0 12px;	
+	color:#FFF;	
+	float: none;	
+	height: 29px;
+	line-height: 29px;
+	color: black;
+	font-size: 12px;
+	font-weight: normal;
+	text-align: left;
+	
+}
+
+.negeso_menu li ul li.item_over,
+.negeso_menu li ul li.item_selected  {	
+background:none;
+	text-decoration:none;
+	color: white;		
+}
+/*--------------------------------- Other levels: end ---------------------------------*/
+
+/*--------------------------------------------------- Middle item: end ---------------------------------------------------*/
+
+/* Next adds (till end of this file) are special for Internet Explorer, because of it's don't understand "color: inherit;" 
+   
+   Correct solution in this case:
+   .negeso_menu li a { color: inherit; text-decoration: none; }
+   
+   ...That's all. But IE 7- doesn't recognize "inherit". thus I'd used hardcode.
+   
+   Hardcoded for 5 levels :-(
+   
+*/
+.negeso_menu li a,
+.negeso_menu li.item_selected li a,
+.negeso_menu li.item_over li a,
+.negeso_menu li.item_selected li.item_selected li a,
+.negeso_menu li.item_over li.item_over li a,
+.negeso_menu li.item_selected li.item_selected li.item_selected li a,
+.negeso_menu li.item_over li.item_over li.item_over li a,
+.negeso_menu li.item_selected li.item_selected li.item_selected li.item_selected li a,
+.negeso_menu li.item_over li.item_over li.item_over li.item_over li a {
+	color: #ffffff;
+	text-decoration: none;
+	white-space:nowrap;
+}
+
+.negeso_menu li.item_selected a,
+.negeso_menu li.item_over a,
+.negeso_menu li.item_selected li.item_selected a,
+.negeso_menu li.item_over li.item_over a,
+.negeso_menu li.item_selected li.item_selected li.item_selected a,
+.negeso_menu li.item_over li.item_over li.item_over a,
+.negeso_menu li.item_selected li.item_selected li.item_selected li.item_selected a,
+.negeso_menu li.item_over li.item_over li.item_over li.item_over a,
+.negeso_menu li.item_selected li.item_selected li.item_selected li.item_selected li.item_selected a,
+.negeso_menu li.item_over li.item_over li.item_over li.item_over li.item_over a {
+	color: #d50366;
+	text-decoration: none;
+	white-space:nowrap;
+}@charset "utf-8";
+/* CSS Document */
+
+
+/*--------------------------------- Second level menu: begin ------------------------*/
+
+.menu-second-level{    
+    width: 200px;
+    color:#4A4A4C;
+    font:13px Tahoma;        
+    overflow:hidden;
+    float:left;
+    margin-bottom: 30px;
+}
+
+.second-level {
+    width: 200px;
+    margin: 0;
+    padding: 5px 0 0 0;
+    display: block;
+    list-style: none;    
+}
+
+.second-level li{
+    padding: 4px 12px 5px 18px;
+    background: Transparent url(../images/bg_menu_12.png) 0px 5px no-repeat;    
+}
+
+.second-level li.item_over,
+.second-level li.item_selected{    
+    background-image: url(../images/bg_menu_l2_active.png);
+}
+
+.second-level li a{    
+    color:#000;
+    text-decoration:none;
+}
+
+.second-level li a:hover,
+.second-level li.item_over a,
+.second-level li.item_selected a,
+.second-level li.item_last_over a,
+.second-level li.item_last_selected a{    
+    text-decoration:underline;
+    color: #CC0066;    
+}
+
+/*--------------------------------- Second level menu: end --------------------------*/

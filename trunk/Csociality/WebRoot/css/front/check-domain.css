@@ -1,0 +1,129 @@
+
+div.dLink{
+	position:absolute;
+	float:right;
+	width:200px;
+	
+    white-space:nowrap;
+    height:22px;
+    line-height:22px;   
+    z-index:1;    
+    margin:11px 300px 0 0 ;        
+	}
+	
+.dLink a {color:#F60; text-decoration:none}
+.dLink a:hover {color:#F60; text-decoration:underline;}
+
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:1000;
+  background-color:#999;
+  display:none;
+}  
+#boxes .window {
+  position:fixed;
+  left:0;
+  top:200px;
+  width:440px;
+  height:200px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+#dialog .dHeader {
+  background:url(../images/check-domain/header_bg.png) no-repeat 0 0 transparent; 
+  width:399px; 
+  height:21px;
+  padding:0;
+  font:12px Arial;
+  color:#000;
+  margin:0;
+}
+#dialog .dHeader h1 {
+font:18px Arial;
+border:none;
+padding:20px 0 0 0;
+color:#F00;
+margin-bottom:10px;
+}
+#dialog .close {
+ background:url(../images/check-domain/close.png) no-repeat 0 0 transparent;  
+ float:right;
+ position:absolute;
+ margin: -3px 0 0 373px;
+  border:none;
+  height:27px !important;
+  width:27px;
+}
+#dialog .buyBtn {
+ background:url(../images/check-domain/buy_btn.jpg) no-repeat 0 0 transparent;  
+ float:right;
+ position:absolute;
+ margin: -25px 0 0 18px;
+  border:none;
+  height:31px !important;
+  width:77px;
+  font:bold 12px Arial;
+  color:#FFF;
+}
+
+#dialog .buyBtnD{
+ float:right !important;
+ position:absolute;
+ margin: -50px 0 0 265px;
+}
+	
+#dialog .wait_buy{
+ float:right !important;
+ position:absolute;
+ margin:-20px 0 0 0;
+ display:none;	
+	}	
+#dialog .moreBtn {
+ background:url(../images/check-domain/buy_btn.jpg) no-repeat 0 0 transparent;  
+ float:right;
+ position:absolute;
+  margin: 10px 0 0 33px;
+  border:none;
+  height:31px !important;
+  width:77px;
+  font:bold 12px Arial;
+  color:#FFF;
+  text-decoration:none;
+  padding:0 0 0 6px;
+}
+#dialog .dBlank {
+  float:left;
+  background:url(../images/check-domain/box_center.png) 0 0 repeat-y transparent;  
+  width:399px;  
+  padding:5px 5px 0 0;
+  
+}
+#dialog .dBottom {
+  background:url(../images/check-domain/box_bottom.png) no-repeat 0 0 transparent; 
+  float:left;
+  width:399px; 
+  height:15px;
+}
+
+#dialog .dLine
+{
+	  background:url(../images/check-domain/line.jpg) no-repeat 0 0 transparent; 
+  
+  width:385px; 
+  height:2px;}
+
+.dBlank input{
+	width:auto;
+	height:auto;
+}
+.dBlank td{
+	padding:5px 0 0 15px;}
+
+.domBlue {
+	padding:5px 5px 0 0;
+	color:#1464f5;
+	text-decoration:underline;
+}

@@ -1,0 +1,125 @@
+#webPollmask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:1000;
+  background-color:#999;
+  display:none;
+}  
+#webPollboxes .window {
+  position:absolute;
+  left:0;
+  top:200px;
+  width:800px;
+  height:200px;
+  display:none;
+  z-index:2000;
+  padding:20px;
+}
+#webPolldialog .webPollTop {
+  background:url(../images/webpoll_top.png) no-repeat 0 0 transparent; 
+  width:800px; 
+  height:21px;
+  padding:0;
+  font:12px Arial;
+  color:#000;
+  margin:0;
+}
+#webPolldialog .webPollTop h1 {
+font:18px Arial;
+border:none;
+padding:20px 0 0 0;
+color:#F00;
+margin-bottom:10px;
+}
+#webPolldialog .webPollclose {
+ background:url(../images/close.png) no-repeat 0 0 transparent;  
+ float:right;
+ position:absolute;
+ margin: -3px 0 0 777px;
+  border:none;
+  height:27px !important;
+  width:27px;
+}
+#webPolldialog .webPollbuyBtn {
+ background:url(../images/buy_btn.jpg) no-repeat 0 0 transparent;  
+ float:right;
+ position:absolute;
+ margin: -30px 0 0 295px;
+  border:none;
+  height:31px !important;
+  width:77px;
+    font:bold 12px Arial;
+  color:#FFF;
+}
+#webPolldialog .webPollmMiddle {
+  float:left;
+  background:url(../images/webpoll_center.png) 0 0 repeat-y transparent;  
+  width:800px;  
+  padding:0 0 0 40px;
+}
+#webPolldialog .webPollBottom {
+  background:url(../images/webpoll_bottom.png) no-repeat 0 0 transparent; 
+  float:left;
+  width:800px; 
+  height:15px;
+}
+.webPolldialog input{
+	width:auto;
+	height:auto;
+}
+
+
+#webPolldialog td{
+  color:#000;
+  font: 13px Arial, Helvetica, sans-serif; 
+  padding:10px 0 10px 0;
+}
+
+#webPolldialog p{
+	color:#000;
+    font: 13px Arial, Helvetica, sans-serif; 
+	line-height:20px;	
+	}
+	
+#webPolldialog .webPollinp {	
+	width:300px;	
+	height:20px;
+	}	
+
+#webPolldialog .webPollNoBtn {
+ background:url(../images/buy_btn.jpg) repeat-x 0 0 transparent; 
+  border:none;
+  height:31px !important;
+  width:150px;
+  font:bold 12px Arial;
+  color:#FFF;
+}
+#webPolldialog .webPollYesBtn {
+ background:url(../images/yes_btn.png) repeat-x 0 0 transparent; 
+  border:none;
+  height:31px !important;
+  width:190px;
+  font:bold 12px Arial;
+  color:#FFF;
+}
+#webPolldialog .SendBtn {
+  background:url(../images/buy_btn.jpg) repeat-x 0 0 transparent;  
+  border:none;
+  height:23px !important;
+  width:67px;
+  font:bold 12px Arial;
+  color:#FFF;
+}
+#webPolldialog .coupontext{
+	color:#000;
+    font: 11px Arial, Helvetica, sans-serif; 	
+	}
+#webPolldialog .couponinp {	
+	width:150px;	
+	height:20px;
+	}
+	
+
+	
+

@@ -76,7 +76,7 @@ Remember, that each CSS class, described upwards, may vary for top-level, second
 
 /*--------------------------------- Top level: begin ---------------------------------*/
 .negeso_menu li {
-	background: transparent url(/site/core/images/separator.png) bottom right no-repeat;		
+	background: transparent url(/image/front/separator.png) bottom right no-repeat;		
 	float: left;
 	margin: 0;
 	padding: 0 30px;
@@ -93,7 +93,7 @@ Remember, that each CSS class, described upwards, may vary for top-level, second
 
 .negeso_menu li.item_over,
 .negeso_menu li.item_selected {
-	background: transparent url(/site/core/images/separator.png) bottom right no-repeat;
+	background: transparent url(/image/front/separator.png) bottom right no-repeat;
 	color: #FFF;
 }
 /*--------------------------------- Top level: end ---------------------------------*/
@@ -101,7 +101,7 @@ Remember, that each CSS class, described upwards, may vary for top-level, second
 /*--------------------------------- Other levels: begin ---------------------------------*/
 .negeso_menu li ul {	
 position:absolute;
-	background: #FFFFFF url(/site/core/images/menu_bg.jpg) bottom repeat;	
+	background: #FFFFFF url(/image/front/menu_bg.jpg) bottom repeat;	
 	text-align: left;
 	border-right: 1px solid #000;	
 	border-left: 1px solid #000;

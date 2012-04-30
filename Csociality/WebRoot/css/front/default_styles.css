@@ -191,7 +191,7 @@ a.red_link:hover {
 .contentStyle .submit,
 .contentStyle input.submit,
 .contentStyle .form_submit {
-    background:#dfdfdf url(/site/core/images/btn_bg.gif) 0 0 repeat-x;
+    background:#dfdfdf url(/image/front/btn_bg.gif) 0 0 repeat-x;
 	height: 21px;
 	border: 3px  double #bebebe; 
 	cursor: pointer;
@@ -204,7 +204,7 @@ a.red_link:hover {
 
 .contentStyle .submit_disable, 
 .contentStyle input.submit_disable {
-	background:#dfdfdf url(/site/core/images/btn_bg.gif) 0 0 repeat-x;
+	background:#dfdfdf url(/image/front/btn_bg.gif) 0 0 repeat-x;
 	height: 21px;
 	border: 3px  double #bebebe; 
 	cursor: pointer;
@@ -216,7 +216,7 @@ a.red_link:hover {
 }
 
 .contentStyle .blue_btn{
-background:#FFF url(/site/core/images/blue_btn.png) no-repeat;
+background:#FFF url(/image/front/blue_btn.png) no-repeat;
 background-position:bottom;
 width: 118px;
 height: 31px;
@@ -226,7 +226,7 @@ font: bold 13px Arial, Helvetica, sans-serif;
 color: #ffffff;
 }
 .contentStyle .pink_btn{
-background:#FFF url(/site/core/images/pink_btn.png) no-repeat;
+background:#FFF url(/image/front/pink_btn.png) no-repeat;
 background-position:bottom;
 width: 118px;
 height: 31px;

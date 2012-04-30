@@ -16,7 +16,7 @@ background-color:none;
 /* Global styles */
 body {
 	
-	background:#ffffff url(/site/core/images/body_bg.jpg) top center repeat-x !important;
+	background:#ffffff url(/image/front/body_bg.jpg) top center repeat-x !important;
 	margin: 0;
 	padding: 0;	
 	width:auto!important;
@@ -101,7 +101,7 @@ float:right;
 }
 
 .resizeWin{
-background:#ffffff url(/site/core/images/body_bg.jpg) top center repeat-x !important;
+background:#ffffff url(/image/front/body_bg.jpg) top center repeat-x !important;
 	height:auto !important;
 	height:100%;
 	min-height:100%;	
@@ -172,7 +172,7 @@ width: 32px !important;
 }
 
 .googleBtn{	
-    background:transparent url(../images/google_btn.png) top left no-repeat;
+    background:transparent url(/image/front/google_btn.png) top left no-repeat;
 	width: 225px;
 	height:36px;	
 	float:left;	
@@ -243,7 +243,7 @@ width: 32px !important;
 	}
 
 .b-rightColumnCenter{	
-background:#ffffff url(../images/right_column_center.jpg) top center repeat-y;
+background:#ffffff url(/image/front/right_column_center.jpg) top center repeat-y;
 	width: 242px;
 	overflow-x:hidden;
 	vertical-align:top;	
@@ -251,12 +251,12 @@ background:#ffffff url(../images/right_column_center.jpg) top center repeat-y;
 }
 
 .b-rightColumnTop{
-background:#ffffff url(../images/right_column_top.jpg) top center no-repeat;
+background:#ffffff url(/image/front/right_column_top.jpg) top center no-repeat;
 	width: 242px;
 	height: 20px;
 	}
 .b-rightColumnBot{
-background:#ffffff url(../images/right_column_bot.jpg) top center no-repeat;
+background:#ffffff url(/image/front/right_column_bot.jpg) top center no-repeat;
 	width: 242px;
 	height: 28px;
 	}
@@ -286,10 +286,10 @@ font:  13px Arial, Helvetica, sans-serif;
 	float:left;
 	width:40px;
 }
-.langEn{background:url(../images/flag-en.gif) 0 0 no-repeat;}
-.langEn:hover,.b-langEnSelect{background:url(../images/flag-enr.gif) 0 0 no-repeat;}
-.langNl{background:url(../images/flag-nl.gif) 0 0 no-repeat;}
-.langNl:hover,.b-langNlSelect{background:url(../images/flag-nlr.gif) 0 0 no-repeat;}
+.langEn{background:url(/image/front/flag-en.gif) 0 0 no-repeat;}
+.langEn:hover,.b-langEnSelect{background:url(/image/front/flag-enr.gif) 0 0 no-repeat;}
+.langNl{background:url(/image/front/flag-nl.gif) 0 0 no-repeat;}
+.langNl:hover,.b-langNlSelect{background:url(/image/front/flag-nlr.gif) 0 0 no-repeat;}
 .langEnSelect,.b-langNlSelect{cursor:default;}
 .noneLink{
 	cursor:default;
@@ -335,7 +335,7 @@ font:  13px Arial, Helvetica, sans-serif;
 }
 /* ======  Footer  ====== */
 .footer{
-	background:#eeeeee url(../images/footer_bg.jpg) top center repeat-x;
+	background:#eeeeee url(/image/front/footer_bg.jpg) top center repeat-x;
 	width:100%;
 	height:45px;
 	position:relative;	
@@ -438,14 +438,14 @@ font-size:20px;
 	}
 
 div.available{	
- background:#FFF url(../images/available.png) bottom left no-repeat;
+ background:#FFF url(/image/front/available.png) bottom left no-repeat;
  width:13px;
  height:12px;		
 }
 
 
 div.notavailable{	
- background:#FFF url(../images/notavailable.png) bottom left no-repeat;
+ background:#FFF url(/image/front/notavailable.png) bottom left no-repeat;
  width:11px;
  height:11px;
 	
@@ -498,7 +498,7 @@ div.notavailable{
 /***tickertape***/
 .tickertape{
   position:relative;
-  xbackground: url(../images/tickertape.png)  0 0 repeat;
+  xbackground: url(/image/front/tickertape.png)  0 0 repeat;
   background-color:#e3e3e3;
   text-align:center; 
    width:100%;

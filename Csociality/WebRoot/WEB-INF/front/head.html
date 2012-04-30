@@ -1,0 +1,273 @@
+<script src="http://www.sitementrix.com/http://www.sitementrix.com/script/jquery-1.6.4.js"
+	type="text/javascript"></script>
+<script src="http://www.sitementrix.com/script/jquery-ui.custom.min.js" type="text/javascript"></script>
+<link href="http://www.sitementrix.com/css/jquery-ui.custom.css" type="text/css" rel="stylesheet">
+<script src="http://www.sitementrix.com/site/core/script/common.js" type="text/javascript"></script>
+<link href="http://www.sitementrix.com/site/core/css/default_styles.css" type="text/css"
+	rel="stylesheet">
+<link href="http://www.sitementrix.com/site/core/css/menu.css" type="text/css" rel="stylesheet">
+<script src="http://www.sitementrix.com/site/core/script/menu.js" type="text/javascript">
+	/**/
+</script>
+<link href="http://www.sitementrix.com/site/core/css/languageBox.css" type="text/css"
+	rel="stylesheet">
+<script src="http://www.sitementrix.com/site/core/script/languageBox.js" type="text/javascript">
+	/**/
+</script>
+<link href="http://www.sitementrix.com/site/core/css/webPoll.css" type="text/css" rel="stylesheet">
+<script src="http://www.sitementrix.com/site/core/script/webPoll.js" type="text/javascript">
+	/**/
+</script>
+<link href="http://www.sitementrix.com/css/check-domain.css" type="text/css" rel="stylesheet">
+<script src="http://www.sitementrix.com/script/check-domain.js" type="text/javascript">
+	/**/
+</script>
+<link type="text/css" rel="stylesheet" href="http://www.sitementrix.com/site/core/css/page.css">
+<link type="text/css" rel="stylesheet" href="http://www.sitementrix.com/css/admin_style.css">
+<script type="text/javascript" src="http://www.sitementrix.com/script/md5.js"
+	language="JavaScript1.2"></script>
+<script language="JavaScript1.2" src="http://www.sitementrix.com/script/prng4.js"
+	type="text/javascript"></script>
+<script language="JavaScript1.2" src="http://www.sitementrix.com/script/jsnb.js"
+	type="text/javascript"></script>
+<script language="JavaScript1.2" src="http://www.sitementrix.com/script/rnb.js"
+	type="text/javascript"></script>
+<script language="JavaScript1.2" src="http://www.sitementrix.com/script/rsa.js"
+	type="text/javascript"></script>
+<script type="text/javascript">
+	ScrollSpeed = 400
+	ScrollChars = 1
+	function ScrollMarquee() {
+		window.setTimeout('ScrollMarquee()', ScrollSpeed);
+
+		try {
+			var msg = document.marquee1.text.value;
+			document.marquee1.text.value = msg.substring(ScrollChars)
+					+ msg.substring(0, ScrollChars);
+		} catch (e) {
+		}
+
+	}
+	ScrollMarquee()
+</script>
+<script type="text/javascript">
+	function changeLanguage(el) {
+		window.location.href = "/index_" + $(el).find("option:selected").val()
+				+ ".html";
+	}
+
+	var lang = "en";
+	var pfConfigurator = null;
+
+	pfConfigurator = {
+		pictures : [
+
+		{
+			src : 'media/banners/en_banner_1.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_2.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_3.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_4.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_5.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/banners6_en_new.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_7.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_8.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_9.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_10.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_11.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_12.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_13.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_14.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}, {
+			src : 'media/banners/en_banner_15.jpg',
+			link : '',
+			target : '',
+			alt : ''
+		}
+
+		],
+		delay : 3000,
+		step : 0.05,
+		speedOfAnimation : 500,
+		typeOfAnimation : 'opacity',
+		frame : ''
+	}
+</script>
+<script src="http://www.sitementrix.com/site/core/script/change_font/change_font.js"
+	type="text/javascript">
+	/**/
+</script>
+<script src="http://www.sitementrix.com/site/modules/print_module/script/print_module.js"
+	type="text/javascript">
+	/**/
+</script>
+<script src="http://www.sitementrix.com/http://widgets.twimg.com/j/2/widget.js"></script>
+<script type="text/javascript">
+	$(".searchDomain:focus").each(function() {
+		$(".searchDomain").addClass("focus");
+	});
+	$('.negesoTwitterWidget').each(function() {
+		var account = $(this).attr('id');
+		var twtr_rpp = $(this).attr('twtr_rpp');
+		if (!twtr_rpp || twtr_rpp == '') {
+			twtr_rpp = 0;
+		}
+		var twtr_height = $(this).attr('twtr_height');
+		var twtr_width = $(this).attr('twtr_width');
+		var shell_background = $(this).attr('twtr_shell_background');
+		var shell_color = $(this).attr('twtr_shell_color');
+		var tweets_background = $(this).attr('tweets_background');
+		var tweets_color = $(this).attr('tweets_color');
+		var tweets_links = $(this).attr('tweets_links');
+		$(this).html('<div id="'+ account + '_"></div>');
+
+		new TWTR.Widget({
+			version : 2,
+			type : 'profile',
+			rpp : twtr_rpp,
+			interval : 12000,
+			width : twtr_width,
+			height : twtr_height,
+			id : account + '_',
+			theme : {
+				shell : {
+					background : shell_background,
+					color : shell_color
+				},
+				tweets : {
+					background : tweets_background,
+					color : tweets_color,
+					links : tweets_links
+				}
+			},
+			features : {
+				scrollbar : true,
+				loop : false,
+				live : false,
+				hashtags : true,
+				timestamp : true,
+				avatars : false,
+				behavior : 'all'
+			}
+		}).render().setUser(account).start();
+
+	});
+</script>
+<script src="http://www.sitementrix.com/script/common_functions.js" type="text/javascript">
+	/**/
+</script>
+<script src="http://www.sitementrix.com/site/core/script/validation.js" type="text/javascript">
+	/**/
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push([ '_setAccount', 'UA-12236573-12' ]);
+	_gaq.push([ '_setDomainName', 'none' ]);
+	_gaq.push([ '_setAllowLinker', true ]);
+	_gaq.push([ '_trackPageview' ]);
+
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<script type="text/javascript">
+	nn = (document.layers) ? true : false;
+	ie = (document.all) ? true : false;
+	function keyDown(e) {
+		var evt = (e) ? e : (window.event) ? window.event : null;
+		if (evt) {
+			var key = (evt.charCode) ? evt.charCode
+					: ((evt.keyCode) ? evt.keyCode : ((evt.which) ? evt.which
+							: 0));
+			if (key == "13") {
+
+				$(".searchDomain:focus").each(function() {
+					$('.searchDomainNew').removeClass("focus");
+					$(this).addClass("focus");
+					checkDomain();
+				});
+				$(".searchDomainNew:focus").each(function() {
+					$('.searchDomain').removeClass("focus");
+					$(this).addClass("focus");
+					checkDomainNew();
+				});
+
+			}
+		}
+	}
+
+	document.onkeydown = keyDown;
+	if (nn)
+		document.captureEvents(Event.KEYDOWN);
+
+	function btnSearchDomian() {
+		if ($("input.focus").hasClass("searchDomain")) {
+			checkDomain();
+		}
+	}
+</script>
+<script type="text/javascript" src="http://www.sitementrix.com/script/fix_flash_ie.js"
+	language="javascript">
+	/**/
+</script>

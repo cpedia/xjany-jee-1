@@ -16,4 +16,9 @@ public class WizardAction {
 			throws Exception {
 		return "createweb/wizard";
 	}
+	@RequestMapping("/wizardtwo.do")
+	public String wizardtwo(HttpServletRequest request, ModelMap model)
+			throws Exception {
+		return "createweb/wizardtwo";
+	}
 }

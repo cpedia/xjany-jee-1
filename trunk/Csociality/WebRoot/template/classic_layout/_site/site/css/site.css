@@ -1,0 +1,307 @@
+body {
+	margin: 0px;
+	font: normal 12px "Arial", "Tahoma", "sans-serif";	
+	vertical-align: top;
+	background-position: top left;
+	background-repeat: no-repeat;
+	background-repeat: repeat-x;
+}
+
+p {
+	margin: 0px;
+	padding: 0px;
+}
+
+a, a:hover {
+	text-decoration: underline;
+	cursor: hand;
+}
+img {border:0 none;}
+
+table.topTbl {
+	float: center;
+	margin: 0px;
+	overflow: hidden;
+}
+
+img.sitemap {
+	margin: 24px 14px 0px 0px;
+}
+
+img.mail {
+	margin: 28px 13px 0px 0px;
+}
+
+img.lang1 {
+	margin: 21px 4px 0px 0px;
+}
+
+img.lang2 {
+	margin: 21px 10px 0px 0px;
+}
+/* footer text - Begin */
+
+table.footer{
+}
+table.footer td{
+    vertical-align:top;
+}
+table.footer img {
+	margin: 5px 0px 0px 0px;
+}
+
+table.footer tr td, table.footer tr td a, table.footer tr td a:hover {
+	font-family: "Arial", "Tahoma", "sans-serif";
+	font-size: 10px;
+	font-weight: normal;
+	line-height: 23px;
+	height:auto;
+	padding:3px 0 7px 0;
+}
+
+table.footer sup {
+	font-size: 12px;
+}
+                     
+span.byNegeso {
+	width: 200px;
+	text-align: right;
+}
+.logout{
+	position:relative;	
+	float:right;
+	width:100px;
+	height:30px;
+	margin:10px 10px -30px 0;
+	text-align:right;
+	z-index:20;
+}
+
+.byNegeso a {
+	text-decoration : none;
+}
+/* footer text - End */
+
+div.company {
+	margin: 20px 10px 60px 12px;
+	width: 193px;
+	overflow: hidden;
+}
+div.companyHor {
+	margin: 20px 50px 5px 12px;
+	overflow: hidden;
+}
+
+div.areaMargins {
+	width: 100%;
+	height: 376px;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+div.areaMarginsH {
+	width: 100%;
+	height: 376px;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+div.areaMarginsHSmall{
+	width:700px;
+	float:left;
+}
+.artHorTop{
+	float:right;
+	width:180px;
+	padding:40px 20px 20px 0;
+}
+
+
+div.areaContent {
+	margin: 15px 15px 50px 12px;
+	height: auto;
+	overflow: visible;
+	text-align: left;
+	vertical-align: top;
+}
+
+
+/* =============== popup window - BEGIN =================== */
+.popup {
+	width: 100%;
+	height: 100%;
+	background-color: #AE9D83;
+}
+
+.popupArea {
+	vertical-align: top;
+	padding: 5px 5px 5px 15px;
+}
+
+td.statusbarP {
+	height: 16px;
+	font: normal 12px "Arial", "Tahoma", "sans-serif";
+	color: #7D1111;
+	vertical-align: top;
+	text-align: left;
+	nowrap: true;
+	white-space: nowrap;
+}
+
+td.statusbarP a, td.statusbarP a:hover {
+	font: normal 12px "Arial", "Tahoma", "sans-serif";
+	color: #2F2B23;
+}
+
+/* =============== popup window - END =================== */
+
+/* =================NEWS STYLES=====================*/
+.newsmodule {
+	width: 423px;
+	height: 277px;
+	overflow: auto;
+	text-align: left;
+	vertical-align: top;
+}
+
+.tableNews {
+        padding: 5px;
+	color:#0E4A9E;
+	height: 277px;
+}
+
+.newsContent {
+	height: 289px;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+.newsContent td {
+	vertical-align: top;
+}
+
+.edit_world {
+	
+	
+	background-color: #B20022;
+	
+	
+}
+
+.edit_techno {
+	background-color: transparent;
+}
+
+.worldTitle {
+	background-color: #B20022;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	text-align: left;
+}
+
+.wTitleText {
+	padding-left: 10px;
+	background-color: #B20022;
+	font: bold 12px "Arial", "Tahoma", "sans-serif";
+	color: #ffffff;
+}
+
+.tTitleText {
+	margin-left: 5px;
+	font: bold 12px "Arial", "Tahoma", "sans-serif";
+	color: #7D0E0E;
+}
+
+.worldMore {
+	text-align: right;
+	padding-right: 8px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	background-color: #B20022;
+}
+
+.worldMore a {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.wMoreText {
+	font: 11px "Arial", "Tahoma", "sans-serif";
+	padding-left: 5px;
+	padding-right: 5px;
+	vertical-align: middle;
+	background-color: #B20022;
+}
+
+.technoDescr {
+	padding-top: 17px;
+	padding-left: 7px;
+	padding-right: 7px;
+	background-color: transparent;
+	table-layout: fixed;
+}
+
+.techno {
+	background-color: transparent;
+	vertical-align: top;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.techno img {
+	margin: 0 5 0 1;
+}
+
+.technoSpacer {
+	line-height: 1px;
+	padding-bottom: 16px;
+}
+
+.descrTitle {
+	font: bold 11px "Arial", "Tahoma", "sans-serif";
+}
+
+.descrTitle a, .descrTitle a:hover {
+	color: #7D0E0E;
+}
+
+.descrText {
+	font: 11px "Arial", "Tahoma", "sans-serif";
+}
+
+.descrText a, .descrText a:hover {
+	color: #7D0E0E;
+}
+
+a.nodecor {
+	text-decoration: none;
+}
+
+.technoLinks {
+	background-color: transparent;
+}
+
+.technoLinks a {
+	font: 12px "Arial", "Tahoma", "sans-serif";
+}
+
+.technoItem {
+	vertical-align: middle;
+	padding-left: 5px;
+}
+
+.technoItem a, .technoItem a:hover {
+	font: bold 12px "Arial", "Tahoma", "sans-serif";
+	color: #7D0E0E;
+}
+
+.technoItemSpacer {
+	line-height: 1px;
+	padding-bottom: 4px;
+}
+
+.albumName {
+	font: bold 12px "Arial", "Tahoma", "sans-serif";
+	color: #7D0E0E;
+	padding-bottom: 5px;
+}
+
+/* =================NEWS STYLES=====================*/

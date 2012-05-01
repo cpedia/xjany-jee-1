@@ -1,0 +1,572 @@
+<html xmlns:negeso="http://negeso.com/2003/Framework">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>Welcome</title>
+
+<!--	This website is designed, built and hosted by Negeso			-->
+<!--	This website is based on the Negeso W/CMS				-->
+<!--	For more information about Negeso look at our website www.negeso.com 	-->
+
+<meta content="" name="description">
+<meta content="" name="keywords">
+<meta content="" name="title">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link href="/template/classic_layout/_site/site/css/static_styles.css"
+	rel="stylesheet" type="text/css">
+<link href="/template/classic_layout/_site/site/css/content_styles.css"
+	rel="stylesheet" type="text/css">
+<link href="/template/classic_layout/_site/site/css/site.css"
+	rel="stylesheet" type="text/css">
+<link href="/template/classic_layout/_site/site/css/album.css"
+	rel="stylesheet" type="text/css">
+<link href="/css/widget.css" rel="stylesheet" type="text/css">
+<link href="/template/classic_layout/_site/site/css/menu_hor.css"
+	rel="stylesheet" type="text/css">
+<style>
+td.header {
+	background-color: #FFFFFF;
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+td.header div.bgHeader {
+	position: absolute;
+	top: 0;
+	width: 950px;
+	height: 189px;
+	overflow: hidden;
+	z-index: 1;
+}
+
+td.header div.bgHeaderSmall {
+	position: absolute;
+	top: 0;
+	width: 735px;
+	height: 189px;
+	overflow: hidden;
+	z-index: 1;
+}
+
+div.slogan {
+	position: relative;
+	z-index: 2;
+	width: 900px;
+	height: 160px;
+	overflow: hidden;
+	margin: 10px;
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 24px;
+	font-family: "Arial", "Helvetica", "sans-serif";
+	text-align: left;
+	vertical-align: middle;
+}
+
+.company {
+	font-weight: normal;
+	font-size: 10px;
+	font-family: Arial;
+}
+
+div.areaMargins {
+	background-color: #FFFFFF;
+}
+
+div.areaMarginsH {
+	background-color: #FFFFFF;
+}
+
+.areaContent {
+	color: #000000;
+	font-weight: normal;
+	font-size: 14px;
+	font-family: Arial;
+}
+
+.areaContent a,.areaContent a:hover {
+	color: #0000FF;
+}
+
+.footerleftTextColor,.footerleftTextColor a,.footerleftTextColor a:hover
+	{
+	color: #ffffff;
+}
+
+.footerleftStyle,.footerleftStyle a,.footerleftStyle a:hover {fl48;
+	
+}
+
+table.footer td.footerleftImageLeft {
+	padding: 0;
+}
+
+table.footer td.footerleftImageLeft img {
+	float: left;
+	margin: 0;
+}
+
+.footerBgImage {
+	background-image:
+		url(/template/classic_layout/_footer_left/fl48/fl48_bg.png);
+	background-repeat: repeat-x;
+	width: 100%;
+}
+
+ul.menu {
+	width: 950px;
+	margin: 10px 0px 5px 0px;
+	font-size: 10px;
+	font-family: Arial;
+}
+
+ul.menu {
+	background-image: url(/template/classic_layout/_menu/hmenu28/spacer.gif);
+}
+
+ul.menu li.separator {
+	color: #FFFFFF;
+}
+
+ul.menu li.separator span {
+	
+}
+
+ul.menu li {
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_menu_li.gif);
+	background-repeat: repeat-x;
+	text-align: center;
+	margin: 0px 0px 0px 0px;
+	width: auto;
+	height: 37px;
+	font: normal 15px Arial, Verdana, sans-serif;
+}
+
+ul.menu li.item_first {
+	
+}
+
+ul.menu li.item_last {
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_menu_li.gif);
+	background-position: top right;
+	overflow: hidden;
+}
+
+ul.menu li.item_over,ul.menu li.item_selected {
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_menu_li_current.gif);
+}
+
+ul.menu li.item_first_selected,ul.menu li.item_first_over {
+	
+}
+
+ul.menu li.item_last_selected,ul.menu li.item_last_over {
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_menu_li_current.gif);
+}
+
+ul.menu li a,ul.menu li span {
+	display: block;
+	color: #FFFFFF;
+	padding: 10px 20px 0px 20px;
+	overflow: hidden;
+}
+
+ul.menu li.item_over a,ul.menu li.item_selected a,ul.menu li.item_first_selected a,ul.menu li.item_first_over a,ul.menu li.item_last_selected a,ul.menu li.item_last_over a
+	{
+	color: #FFFFFF;
+}
+
+ul.menu li.lastImage {
+	background: none;
+}
+
+ul.menu li.home a,ul.menu li.lastImage span {
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+ul.menu li ul {
+	margin: 0px;
+	top: 37px;
+	overflow: hidden;
+}
+
+ul.menu li ul li {
+	width: 180px;
+	marging: 0;
+	background-color: transparent;
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_sub_li.png);
+	background-position: 0 0;
+	border: 0 none;
+	width: 155px;
+	height: 27px;
+	overflow: hidden;
+}
+
+ul.menu li ul li.item_first {
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_sub_li.png);
+	overflow: hidden;
+}
+
+ul.menu li ul li.item_last {
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_sub_li.png);
+	background-position: 0 0;
+	overflow: hidden;
+}
+
+ul.menu li ul li.item_over,ul.menu li ul li.item_selected,ul.menu li ul li.item_first_selected,ul.menu li ul li.item_first_over,ul.menu li ul li.item_last_selected,ul.menu li ul li.item_last_over
+	{
+	background-color: transparent;
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_sub_li.png);
+}
+
+ul.menu li ul li.item_first_selected,ul.menu li ul li.item_first_over {
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_sub_li.png);
+}
+
+ul.menu li ul li.item_last_selected,ul.menu li ul li.item_last_over {
+	background-image:
+		url(/template/classic_layout/_menu/hmenu28/m28_bg_sub_li.png);
+}
+
+ul.menu li ul li.separator {
+	top: 0;
+	width: auto;
+	height: 2px;
+	padding: 0;
+}
+
+ul.menu li ul li.separator img {
+	float: left;
+}
+
+ul.menu li ul li a {
+	padding: 0;
+	padding: 5px 0 0 15px;
+	font: normal 13px Arial, Verdana, sans-serif;
+}
+
+ul.menu li.item_over ul li a,ul.menu li.item_selected ul li a,ul.menu li.item_first_selected ul li a,ul.menu li.item_first_over ul li a,ul.menu li.item_last_selected ul li a,ul.menu li.item_last_over ul li a
+	{
+	color: #FFFFFF;
+}
+
+ul.menu li ul li.item_over a,ul.menu li ul li.item_selected a
+ul.menu li ul li.item_first_selected a,ul.menu li ul li.item_first_over a,ul.menu li ul li.item_last_selected a,ul.menu li ul li.item_last_over a
+	{
+	color: #FFFFFF;
+}
+</style>
+<script>				
+		var lang = 'en';
+	</script>
+<script src="/include/jquery.js" type="text/javascript"></script>
+<script src="/template/classic_layout/_site/site/script/menu.js"
+	type="text/javascript"></script>
+<script src="/script/conf.js" type="text/javascript"></script>
+<script type="text/javascript">
+        function autoHeightScrollContent(){                       
+            
+                    var newHeight = $(window).height() - $('table.footer').height() - 189 - $('#site_menu').parent().height() ;
+                    if(newHeight &gt; 200){
+                        $('div.areaMarginsH').css('height', newHeight);
+                    }
+                            
+        }
+        $(document).ready(autoHeightScrollContent);
+        $(window).resize(autoHeightScrollContent);
+
+    </script>
+<script src="/script/RTE_Adapter.js" type="text/javascript"></script>
+<script type="text/javascript">
+			RTE_DEFAULT_SAVE_MODE = 3;
+	</script>
+<script src="/script/dhtml.js" type="text/javascript"></script>
+<script type="text/javascript">
+			 $(document).ready(function(){				
+				    $('.negesoTwitterWidget').each(function(){
+					       var account = $(this).attr('id');
+					       var twtr_rpp = $(this).attr('twtr_rpp');
+					       if(!twtr_rpp || twtr_rpp == ''){
+						          twtr_rpp = 0;
+					       }
+					       var twtr_height = $(this).attr('twtr_height');
+					       var twtr_width = $(this).attr('twtr_width');
+					       var shell_background = $(this).attr('twtr_shell_background');
+					       var shell_color = $(this).attr('twtr_shell_color');
+					       var tweets_background = $(this).attr('tweets_background');
+					       var tweets_color = $(this).attr('tweets_color');
+					       var tweets_links = $(this).attr('tweets_links');
+					       $(this).html('&lt;div id="'+ account + '_"&gt;&lt;/div&gt;');
+
+
+              new TWTR.Widget({
+              version: 2,
+              type: 'profile',
+              rpp: twtr_rpp,
+              interval: 12000,
+              width: twtr_width,
+              height: twtr_height,
+              id: account + '_',
+              theme: {
+              shell: {
+              background: shell_background,
+              color: shell_color
+              },
+              tweets: {
+              background: tweets_background,
+              color: tweets_color,
+              links: tweets_links
+              }
+              },
+              features: {
+              scrollbar: true,
+              loop: false,
+              live: false,
+              hashtags: true,
+              timestamp: true,
+              avatars: false,
+              behavior: 'all'
+              }
+              }).render().setUser(account).start();
+
+              });
+              });
+          </script>
+</head>
+<body bgcolor="#f2f2f2"
+	background="/template/classic_layout/_bg/bg65/bg65.jpg">
+	<table align="center" width="100%" cellspacing="0" cellpadding="0"
+		border="0" class="topTbl">
+		<tbody>
+			<tr valign="top">
+				<td width="*">&nbsp;</td>
+				<td align="center" width="950"><table width="950"
+						cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr valign="top" height="189">
+								<td align="left" width="950" class="header" colspan="2"><div
+										class="slogan"></div>
+									<div class="bgHeader">
+										<img width="950" alt=""
+											src="/template/classic_layout/business/_header/category.business.description66/category.business.description66.jpg">
+									</div>
+								</td>
+							</tr>
+							<tr height="39">
+								<td align="left" bgcolor="#ffffff" colspan="2"><ul
+										class="menu" id="site_menu">
+										<li class=""><a title="Home" href="#" onfocus="blur()">Home</a>
+										</li>
+										<li class="separator" style="cursor: default;"><img
+											alt=""
+											src="/template/classic_layout/_menu/hmenu28/separator.gif">
+										</li>
+										<li><a title="Goals" href="#" onfocus="blur()">Goals</a>
+										</li>
+										<li class="separator" style="cursor: default;"><img
+											alt=""
+											src="/template/classic_layout/_menu/hmenu28/separator.gif">
+										</li>
+										<li><a title="Agenda and actions" href="#"
+											onfocus="blur()">Agenda and actions</a>
+										</li>
+										<li class="separator" style="cursor: default;"><img
+											alt=""
+											src="/template/classic_layout/_menu/hmenu28/separator.gif">
+										</li>
+										<li class="item_over"><a title="Media" href="#"
+											onfocus="blur()">Media</a>
+										<ul style="display: block;">
+												<li class="item_first"><a title="Opinions" href="#"
+													onfocus="blur()">Opinions</a>
+												</li>
+												<li class="separator" style="cursor: default;"><img
+													alt=""
+													src="/template/classic_layout/_menu/hmenu28/m28_bg_sub_spacer.png">
+												</li>
+												<li><a title="Media articles" href="#" onfocus="blur()">Media
+														articles</a>
+												</li>
+												<li class="separator" style="cursor: default;"><img
+													alt=""
+													src="/template/classic_layout/_menu/hmenu28/m28_bg_sub_spacer.png">
+												</li>
+												<li><a title="Press releases" href="#" onfocus="blur()">Press
+														releases</a>
+												</li>
+												<li class="separator" style="cursor: default;"><img
+													alt=""
+													src="/template/classic_layout/_menu/hmenu28/m28_bg_sub_spacer.png">
+												</li>
+												<li><a title="In the press" href="#" onfocus="blur()">In
+														the press</a>
+												</li>
+												<li class="separator" style="cursor: default;"><img
+													alt=""
+													src="/template/classic_layout/_menu/hmenu28/m28_bg_sub_spacer.png">
+												</li>
+												<li class="item_last"><a title="Knowledge base"
+													href="#" onfocus="blur()">Knowledge base</a>
+												</li>
+											</ul>
+										</li>
+										<li class="separator" style="cursor: default;"><img
+											alt=""
+											src="/template/classic_layout/_menu/hmenu28/separator.gif">
+										</li>
+										<li><a title="Support us!" href="#" onfocus="blur()">Support
+												us!</a>
+										</li>
+										<li class="separator" style="cursor: default;"><img
+											alt=""
+											src="/template/classic_layout/_menu/hmenu28/separator.gif">
+										</li>
+										<li class="item_last"><a title="Join in!" href="#"
+											onfocus="blur()">Join in!</a>
+										</li>
+									</ul>
+									<script type="text/javascript">
+            negesoMenu('site_menu');
+        </script>
+								</td>
+							</tr>
+							<tr>
+								<td align="left" valign="top" colspan="2"
+									style="vertical-align: top;"><div
+										style="margin-bottom: 3px; height: 468px;"
+										class="contentStyle areaMarginsH">
+										<div class="areaContent">
+											<div align="center"></div>
+											<div id="article_text">
+												<p>This is a preview of the site that you have
+													configured. You can change the layout easily by closing
+													this window and return to the Builder.There are many
+													Quick-Start website templates to choose from to build your
+													website. You will be able to customize your chosen web
+													design with over 100,000 style combinations to suit your
+													taste. You can also upload your own banner and logo in the
+													website Builder.</p>
+												<br>
+												<table width="880px" cellspacing="3" cellpadding="3">
+													<tbody>
+														<tr>
+															<td
+																style="font: bold 18px 'Trebuchet MS', Arial, Helvetica, sans-serif">HOME
+																BOX 1</td>
+															<td
+																style="font: bold 18px 'Trebuchet MS', Arial, Helvetica, sans-serif">HOME
+																BOX 2</td>
+															<td
+																style="font: bold 18px 'Trebuchet MS', Arial, Helvetica, sans-serif">
+																HOME BOX 3</td>
+														</tr>
+														<tr>
+															<td><img width="277px" height="124px"
+																src="../images/img1.png"></td>
+															<td><img width="277px" height="124px"
+																src="../images/img2.png"></td>
+															<td><img width="277px" height="124px"
+																src="../images/img3.png"></td>
+														</tr>
+														<tr>
+															<td><p
+																	style="font: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold;">This
+																	is a preview of the site that you have configured. You
+																	can change the layout easily by closing this window and
+																	return to the Builder.</p> <br>
+															<p
+																	style="font: 'Trebuchet MS', Arial, Helvetica, sans-serif; font: 13px; font-weight: bold; color: #ff5a00;">Read
+																	more &gt;&gt;&gt;</p></td>
+															<td><p
+																	style="font: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold;">This
+																	is a preview of the site that you have configured. You
+																	can change the layout easily by closing this window and
+																	return to the Builder.</p> <br>
+															<p
+																	style="font: 'Trebuchet MS', Arial, Helvetica, sans-serif; font: 13px; font-weight: bold; color: #ff5a00;">Read
+																	more &gt;&gt;&gt;</p></td>
+															<td><p
+																	style="font: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold;">This
+																	is a preview of the site that you have configured. You
+																	can change the layout easily by closing this window and
+																	return to the Builder.</p> <br>
+															<p
+																	style="font: 'Trebuchet MS', Arial, Helvetica, sans-serif; font: 13px; font-weight: bold; color: #ff5a00;">Read
+																	more &gt;&gt;&gt;</p></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="companyHor footerleftTextColor contentStyle"
+											style="background-color: transparent; color: #000;"></div>
+									</div>
+								</td>
+							</tr>
+							<tr valign="top">
+								<td align="left" colspan="2"><table width="950"
+										cellspacing="0" cellpadding="0" border="0" class="footer">
+										<tbody>
+											<tr valign="top">
+												<td nowrap="nowrap" class="footerleftImageLeft"><img
+													alt=""
+													src="/template/classic_layout/_footer_left/fl48/fl48_bg_left.png">
+												</td>
+												<td width="100%" nowrap="nowrap" class="footerBgImage"><table
+														width="100%" cellspacing="0" cellpadding="0" border="0">
+														<tbody>
+															<tr>
+																<td align="left" class="footerleftTextColor"
+																	style="padding: 10px 0 0 0">&nbsp;&nbsp;&nbsp;</td>
+																<td align="right" width="250"
+																	class="byNegeso footerleftTextColor"
+																	style="padding: 10px 10px 0 0"><span
+																	style="font-size: 8px"><a
+																		href="http://www.sitementrix.com" target="_blank"
+																		title="Webdesign"> Webdesign </a> &nbsp;&amp;&nbsp; <a
+																		href="http://www.sitementrix.com" target="_blank"
+																		title="CMS"> CMS </a> &nbsp;by&nbsp; <a
+																		href="http://www.sitementrix.com" target="_blank"
+																		title="SiteMentrix"> SiteMentrix </a> &nbsp; <a
+																		href="http://www.sitementrix.com" target="_blank"
+																		title="Make website"><img align="top" width="31"
+																			hspace="0" height="15" border="0" alt=""
+																			src="/template/classic_layout/_site/site/images/bysitementrix.gif"
+																			style="margin-top: 2px;">
+																	</a>
+																</span>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+												<td nowrap="nowrap" class="footerleftImageLeft"><img
+													alt=""
+													src="/template/classic_layout/_footer_left/fl48/fl48_bg_right.png">
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+				<td width="*">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+	<script language="javascript" src="/script/fix_flash_ie.js"
+		type="text/javascript">/**/</script>
+</body>
+</html>

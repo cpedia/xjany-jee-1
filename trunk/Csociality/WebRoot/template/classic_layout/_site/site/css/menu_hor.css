@@ -1,0 +1,133 @@
+ul.menu li.separator {	
+	overflow: hidden;
+	position: relative;	
+	margin: 0px 0px 0px 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	background: none;	
+	vertical-align: top;
+	text-align: left;
+	cursor: default;
+}
+
+/*First level menu start*/
+ul.menu, ul.menu ul {
+	display: block;
+	position: relative;
+	float:left;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.menu {
+    background-repeat:repeat-x;
+	text-align: left;	
+	height: auto;	
+	font-weight: normal;
+}
+
+ul.menu li {
+	left: 30px;
+	height: 39px;
+	display: inline;
+	position: relative;
+	margin: 0px;
+	background-color: transparent;
+	cursor: hand;
+	cursor: pointer;
+	float: left;
+	font: bold 12px Arial, Verdana, sans-serif;
+}
+ul.menu li.home{
+    padding:0;
+    margin:0;
+}
+
+ul.menu li a {	
+	text-decoration: none;
+	color: #ffffff;
+	display: block;
+}
+
+ul.menu li.item_selected a, ul.menu li.item_over a{
+	color: #ff0000;
+}
+
+/*First level menu end*/
+
+
+/*Second level menu start*/
+ul.menu ul {
+	display: none;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+/*	width: 170px;	*/
+}
+
+ul.menu li ul li {
+	left: 0px;
+	float: left;
+	clear: left;
+	width: 170px;
+	height: 20px;
+	overflow: hidden;
+	display: block;
+	margin: 0;
+	background-image: none;	
+}
+
+ul.menu li ul li.item_over {
+	background: none;
+/*	background-color: darkgreen;*/
+}
+
+ul.menu li ul li a {
+	display: block;
+	text-align: left;
+	line-height: 16px;	
+}
+
+
+ul.menu li.item_selected ul li a, ul.menu li.item_over ul li a{
+	color: #000000;
+}
+
+ul.menu li ul li.item_selected a, ul.menu li ul li.item_over a{
+	color: #ff0000;
+}
+/*Second level menu end*/
+
+
+
+/*Third level menu start*/
+ul.menu li ul li ul {
+
+}
+
+ul.menu ul li ul, ul.menu li ul li ul {
+	display: none;
+	left: 170px;
+	top: 0px;
+}
+
+ul.menu li ul li ul{
+	display: block;
+}
+
+ul.menu li ul li {
+}
+
+ul.menu li ul li a {
+}
+
+
+ul.menu li ul li.item_selected ul li a, ul.menu li ul li.item_over ul li a{
+	color: #000000;
+}
+
+ul.menu li ul li ul li.item_selected a, ul.menu li ul li ul li.item_over a{
+	color: #ff0000;
+}
+/*Third level menu end*/

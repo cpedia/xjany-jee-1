@@ -21,4 +21,9 @@ public class WizardAction {
 			throws Exception {
 		return "createweb/wizardtwo";
 	}
+	@RequestMapping("/preview.do")
+	public String preview(HttpServletRequest request, ModelMap model)
+			throws Exception {
+		return "createweb/preview";
+	}
 }

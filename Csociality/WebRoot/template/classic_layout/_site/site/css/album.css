@@ -1,0 +1,277 @@
+ul.menuSecond{
+	display: block;
+	xlist-style: circle;
+	margin: 0 0 5px 0;
+	padding:5px 0 0 15px;
+	font:13px Arial, Helvetica, sans-serif;
+	line-height:22px;
+	text-align:left;
+}
+ul.menuSecond li {
+	margin: 0;
+	padding:0;
+	cursor: pointer;
+	cursor: hand;
+}
+ul.menuSecond li.item_selected, 
+ul.menuSecond li.item_over{
+}
+ul.menuSecond li a {
+	color:#000;
+	text-decoration: none;	
+}
+ul.menuSecond li.item_over a, 
+ul.menuSecond li.item_selected a,
+ul.menuSecond li a:hover{
+	color:#000;
+	text-decoration: underline;
+}
+ul.menuSecond li.selected  a{
+	color:#092b88;
+	text-decoration: none;
+}
+ul.menuPhoto{
+	border-top:1px solid #ddd;
+	margin-top:5px;
+	padding-top:5px;
+}
+
+
+ul.paCat{
+	border-top:1px solid #F0B1AD;
+	margin:0;
+	padding:5px 0 7px 0;
+
+}
+ul.paCat li{
+	list-style:disc;
+	margin:0 0 2px 0;
+	padding:4px 0 5px 18px;
+	color: #CC0000;
+	font-size:12px;
+	xfont-weight:bold;
+}
+ul.paCat li a{
+	color: #363e4e;
+}
+ul.paCat li a:hover{
+	color: #CC0000;
+	xtext-decoration:none;
+}
+
+.paContainer{
+	float:left;
+	width:100%;
+	height:auto;
+	border-top:1px solid #ddd;
+	margin:0;
+	padding:10px 0 0 8px;
+}
+.paItemContainer {
+	float: left;
+	width: 134px;
+	height: 130px;
+	margin: 0 7px 0 0;
+	text-align: center;
+	line-height:18px;
+}
+
+.paPhoto{
+	background:#FFFFFF url(../images/photo-frame.gif) 0 0 no-repeat;
+	width:102px;
+	height: 79px;
+	margin:auto;
+	overflow: hidden;
+	text-align: center;
+	overflow:hidden;
+}
+.paPhoto:hover {
+	background:#FFFFFF url(../images/photo-frame.gif) 0 0 no-repeat;
+}
+.paPhoto a{
+	display:block;
+	width:100px;
+	height:75px;
+}
+.paPhoto img {
+	display: block;
+	height:75px;
+	margin:auto;
+	padding-top:1px;
+}
+.paTitle{
+	color:#666666;
+	text-align: center;
+}
+.paDescription{
+	padding-bottom:7px;
+	color:#666666;
+	font-weight: bold;
+	text-align:left;
+}
+
+.paCategory {
+	width: 147px;
+	height: 115px;
+	background-image: url(../../../../../site/modules/photo_album/images/photoCatBg.html);
+	background-repeat: no-repeat;
+	background-position: left top;
+	border-top: solid 1px #ffffff;
+	text-align: center;
+}
+
+.paCategory img {
+	display: block;
+	margin: 24px auto 0px;
+	border: solid 1px white;
+
+}
+
+/* JQUERY */
+
+/**
+ * jQuery lightBox plugin
+ * This jQuery plugin was inspired and based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/lightbox2/)
+ * and adapted to me for use like a plugin from jQuery.
+ * @name jquery-lightbox-0.5.css
+ * @author Leandro Vieira Pinho - http://leandrovieira.com
+ * @version 0.5
+ * @date April 11, 2008
+ * @category jQuery plugin
+ * @copyright (c) 2008 Leandro Vieira Pinho (leandrovieira.com)
+ * @license CC Attribution-No Derivative Works 2.5 Brazil - http://creativecommons.org/licenses/by-nd/2.5/br/deed.en_US
+ * @example Visit http://leandrovieira.com/projects/jquery/lightbox/ for more informations about this jQuery plugin
+ */
+#jquery-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 90;
+	width: 100%;
+	height: 100%;
+}
+#jquery-lightbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
+	text-align: center;
+	line-height: 0;
+}
+#jquery-lightbox a img { border: none; }
+#lightbox-container-image-box {
+	position: relative;
+	background-color: #fff;
+	width: 250px;
+	height: 250px;
+	margin: 0 auto;
+}
+#lightbox-container-image { padding: 10px; }
+#lightbox-loading {
+	position: absolute;
+	top: 40%;
+	left: 0%;
+	height: 25%;
+	width: 100%;
+	text-align: center;
+	line-height: 0;
+}
+#lightbox-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 10;
+}
+#lightbox-container-image-box > #lightbox-nav { left: 0; }
+#lightbox-nav a { outline: none;}
+#lightbox-nav-btnPrev, #lightbox-nav-btnNext {
+	width: 49%;
+	height: 100%;
+	zoom: 1;
+	display: block;
+}
+#lightbox-nav-btnPrev { 
+	left: 0; 
+	float: left;
+}
+#lightbox-nav-btnNext { 
+	right: 0; 
+	float: right;
+}
+#lightbox-container-image-data-box {
+	font: 13px Arial, Helvetica, sans-serif;
+	background-color: #fff;
+	margin: 0 auto;
+	line-height: 1.4em;
+	overflow: hidden;
+	width: 100%;
+	padding: 0 10px 0;
+}
+#lightbox-container-image-data {
+	padding: 0 10px; 
+	color: #666; 
+}
+#lightbox-container-image-data #lightbox-image-details { 
+	width: 50%; 
+	float: left; 
+	text-align: left; 
+}	
+#lightbox-image-details-caption {
+	display:block;
+	float:none;
+	 font-weight: bold; }
+#lightbox-image-details-text { 
+	display:block;
+	float:none;
+	margin: 0 0 10px 0;
+	color:#000;
+
+}
+#lightbox-image-details-currentNumber {
+	display: block; 
+	clear: left; 
+	padding-bottom: 1.0em;	
+}			
+#lightbox-secNav{
+	position:absolute;
+	top:-15px;
+	right:-15px;	
+	z-index:100;
+}
+#lightbox-secNav-btnClose {
+	width: 30px; 
+	float: right;
+	padding-bottom: 0.7em;	
+}
+
+#lightbox-navigation{
+	width:50%;
+	float:right;
+}
+#lightbox-navigation a{
+	display:block;
+	float:right;
+	border-right:1px solid #092b88;
+	padding:0 5px 0 6px;
+	font:13px Arial, Helvetica, sans-serif;
+	color:#092b88;
+	text-decoration:none;
+}
+#lightbox-navigation a:hover{
+	text-decoration:underline;
+}
+#lightbox-navigation a#slider,
+#lightbox-navigation #sliderStop{
+	border:0 none;
+	padding:0 0 0 6px;
+}
+#lightbox-navigation #next,
+#lightbox-navigation #prev, 
+#lightbox-navigation #first,
+#lightbox-navigation #last,
+#lightbox-navigation #sliderStop{
+	display:none;
+}

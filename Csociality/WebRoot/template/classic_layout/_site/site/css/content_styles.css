@@ -1,0 +1,53 @@
+.contentStyle, .contentStyle table {
+	background-color: transparent;
+	margin: 0px 0px 0px 0px;
+	font-family: "Arial", "Tahoma", "sans-serif";
+	font-weight: normal;
+	font-size: 13px;
+	color: #000000;
+	text-align: left;
+}
+
+.contentStyle p {
+	margin: 0px;
+	padding: 0px;
+}
+
+.contentStyle a, .contentStyle a:hover {
+	color: #FF0000;
+	text-decoration: underline;
+}
+
+.contentStyle input {
+	width: 175px;
+}
+
+.contentStyle select {
+	width: 175px;
+}
+
+.contentStyle textarea {
+	width: 175px;
+}
+
+.contentStyle input.form_checkbox, .contentStyle input.form_radio {
+	width: 18px;
+	border: 0;
+	cursor: hand;
+	background-color: transparent;
+}
+
+.contentStyle button, .contentStyle input.form_submit {
+	width: 100px;
+	font-weight: bold;
+	height: 21px;
+}
+
+.contentStyle ol,.contentStyle ul {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.contentStyle ol li,.contentStyle ul li {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}

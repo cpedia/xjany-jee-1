@@ -33,7 +33,7 @@ function optDelete() {
 </div>
 <form id="tableForm" method="post">
 <input type="hidden" name="pageNo" value="${pageNo!}"/>
-[@p.table value=pagination;bbsBoard,i,has_next][#rt/]
+[@p.table value=pagination;bbsBoard][#rt/]
 	[@p.column title="<input type='checkbox' onclick='Pn.checkbox(\"ids\",this.checked)'/>" width="20"]
 		<input type='checkbox' name='ids' value='${bbsBoard.boaId}'/>[#t/]
 	[/@p.column][#t/]
@@ -41,10 +41,14 @@ function optDelete() {
 	[@p.column code="版块名"]${bbsBoard.boaName}[/@p.column][#t/]
 	[@p.column code="版主"]${bbsBoard.boaMaster}[/@p.column][#t/]
 	[@p.column code="global.operate" align="center"]
+		<a href="v_addsub.do?id=${bbsBoard.boaId}&pageNo=${pageNo!}" class="pn-opt">增加分版</a> | [#rt/]
 		<a href="v_edit.do?id=${bbsBoard.boaId}&pageNo=${pageNo!}" class="pn-opt">[@s.m "global.edit"/]</a> | [#rt/]
 		<a href="o_delete.do?id=${bbsBoard.boaId}&pageNo=${pageNo!}" onclick="if(!confirm('[@s.m "global.confirm.delete"/]')) {return false;}" class="pn-opt">[@s.m "global.delete"/]</a>[#t/]
 	[/@p.column][#t/]
 [/@p.table]
+
+
+
 <div><input type="button" value="删除" onclick="optDelete();"/></div>
 </form>
 </div>

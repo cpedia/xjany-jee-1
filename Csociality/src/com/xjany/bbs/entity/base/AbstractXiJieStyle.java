@@ -2,17 +2,16 @@ package com.xjany.bbs.entity.base;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
-import com.xjany.bbs.entity.AllResLibrary;
+import com.xjany.bbs.entity.XiJieTemplate;
 
 
 /**
@@ -20,26 +19,27 @@ import com.xjany.bbs.entity.AllResLibrary;
  * AllUser entity. @author MyEclipse Persistence Tools
  */
 @MappedSuperclass
-public abstract class AbstractAllResLibCTG implements java.io.Serializable {
+public abstract class AbstractXiJieStyle implements java.io.Serializable {
 
 	// Fields
 
 	//表字段
 	private Integer id; //主键
 	private String name;
+	private String code;
+	private String type;
+	private String path;
+	private XiJieTemplate xiJieTemplate;
 	private Integer cmsDel = 0;
-	private String cssName;
-	private String cssId;
-	private Set<AllResLibrary> allResLibrary = new HashSet<AllResLibrary>(0);
 
 	// Constructors
 
 	/** default constructor */
-	public AbstractAllResLibCTG() {
+	public AbstractXiJieStyle() {
 	}
 
 	/** minimal constructor */
-	public AbstractAllResLibCTG(String name,int category) {
+	public AbstractXiJieStyle(String name,int category) {
 		this.name = name;
 	}
 
@@ -72,29 +72,38 @@ public abstract class AbstractAllResLibCTG implements java.io.Serializable {
 	public void setCmsDel(Integer cmsDel) {
 		this.cmsDel = cmsDel;
 	}
+	@Column(name = "code")
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	@Column(name = "type")
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	@Column(name = "path")
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "allResCtg")
-	public Set<AllResLibrary> getAllResLibrary() {
-		return allResLibrary;
+	@OneToOne(mappedBy="xiJieStyle")
+	public XiJieTemplate getXiJieTemplate() {
+		return xiJieTemplate;
 	}
 
-	public void setAllResLibrary(Set<AllResLibrary> allResLibrary) {
-		this.allResLibrary = allResLibrary;
+	public void setXiJieTemplate(XiJieTemplate xiJieTemplate) {
+		this.xiJieTemplate = xiJieTemplate;
 	}
-
-	public String getCssName() {
-		return cssName;
-	}
-
-	public void setCssName(String cssName) {
-		this.cssName = cssName;
-	}
-
-	public String getCssId() {
-		return cssId;
-	}
-
-	public void setCssId(String cssId) {
-		this.cssId = cssId;
-	}
+	
 }

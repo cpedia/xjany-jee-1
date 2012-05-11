@@ -2,18 +2,16 @@ package com.xjany.bbs.entity.base;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
-import com.xjany.bbs.entity.AllResLibrary;
-
+import com.xjany.bbs.entity.AllResLibCTG;
 
 /**
  * AbstractAllUser entity provides the base persistence definition of the
@@ -24,16 +22,19 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//表字段
 	private Integer libId; //主键
 	private Integer parentId;
 	private Integer isNote=0;//是否有叶子,.0没有,1有
 	private String name;
-	private Integer category;
 	private Integer cmsDel = 0;
 	private String cssName;
 	private String cssId;
-	private AllResLibrary allResLibrary;
+	private AllResLibCTG allResCtg;
 
 	// Constructors
 
@@ -42,17 +43,15 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AbstractAllResLibrary(String name,int category) {
+	public AbstractAllResLibrary(String name) {
 		this.name = name;
-		this.category = category;
 	}
 
 	/** full constructor */
-	public AbstractAllResLibrary(int libId, int parentId, String name, int category, int cmsDel) {
+	public AbstractAllResLibrary(int libId, int parentId, String name, int cmsDel) {
 		this.libId = libId;
 		this.parentId = parentId;
 		this.name = name;
-		this.category = category;
 		this.cmsDel = cmsDel;
 	}
 
@@ -94,15 +93,6 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "category")
-	public Integer getCategory() {
-		return category;
-	}
-
-	public void setCategory(Integer category) {
-		this.category = category;
-	}
-
 	@Column(name = "cmsDel")
 	public Integer getCmsDel() {
 		return cmsDel;
@@ -127,12 +117,14 @@ public abstract class AbstractAllResLibrary implements java.io.Serializable {
 	public void setCssId(String cssId) {
 		this.cssId = cssId;
 	}
-
-	public AllResLibrary getAllResLibrary() {
-		return allResLibrary;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "categoryId")
+	public AllResLibCTG getAllResCtg() {
+		return allResCtg;
 	}
 
-	public void setAllResLibrary(AllResLibrary allResLibrary) {
-		this.allResLibrary = allResLibrary;
+	public void setAllResCtg(AllResLibCTG allResCtg) {
+		this.allResCtg = allResCtg;
 	}
+
 }

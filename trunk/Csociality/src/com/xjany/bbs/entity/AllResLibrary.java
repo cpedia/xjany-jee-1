@@ -24,13 +24,13 @@ public class AllResLibrary extends AbstractAllResLibrary implements java.io.Seri
 	}
 
 	/** minimal constructor */
-	public AllResLibrary(String name,int category) {
-		super(name, category);
+	public AllResLibrary(String name) {
+		super(name);
 	}
 
 	/** full constructor */
-	public AllResLibrary(int libId, int parentId, String name, int category, int cmsDel) {
-		super(libId, parentId, name, category, cmsDel);
+	public AllResLibrary(int libId, int parentId, String name, int cmsDel) {
+		super(libId, parentId, name, cmsDel);
 	}
 
 }

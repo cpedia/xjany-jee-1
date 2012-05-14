@@ -77,4 +77,19 @@ public class FrameAction extends BaseAction{
 		return "/frame/board_right";
 	}
 	
+	@RequestMapping("/frame/createstyle_main.do")
+	public String createstyle_main(HttpServletRequest request, ModelMap model) {
+		return "/frame/createstyle_main";
+	}
+	
+	@RequestMapping("/frame/createstyle_left.do")
+	public String createstyle_left(HttpServletRequest request, ModelMap model) {
+		return "/frame/createstyle_left";
+	}
+	
+	@RequestMapping("/frame/createstyle_right.do")
+	public String createstyle_right(HttpServletRequest request, ModelMap model) {
+		return "/frame/createstyle_right";
+	}
+	
 }

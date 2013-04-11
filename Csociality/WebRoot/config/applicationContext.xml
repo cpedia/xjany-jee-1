@@ -57,6 +57,10 @@
 		<property name="username" value="${dataSource.username}" />
 		<property name="password" value="${dataSource.password}" />
 	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+			<property name="dataSource" ref="dataSource" />
+	</bean>
 	<!-- Dao的实现
 	<bean id="entityDao" class="com.mvc.dao.EntityDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
